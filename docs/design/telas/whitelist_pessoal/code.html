@@ -1,0 +1,251 @@
+<!DOCTYPE html><html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Whitelist Pessoal - Ultrathink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#d8e3fb",
+                    "surface-container-low": "#111c2d",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-primary-container": "#00285d",
+                    "on-primary-fixed": "#001a42",
+                    "tertiary-fixed-dim": "#bec6e0",
+                    "on-secondary": "#213145",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#3a4a5f",
+                    "surface-bright": "#2f3a4c",
+                    "surface-container-highest": "#2a3548",
+                    "surface-container-high": "#1f2a3c",
+                    "outline-variant": "#424754",
+                    "surface-container-lowest": "#040e1f",
+                    "surface-container": "#152031",
+                    "surface-variant": "#2a3548",
+                    "surface-dim": "#081425",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-error": "#690005",
+                    "background": "#081425",
+                    "on-secondary-fixed": "#0b1c30",
+                    "primary": "#adc6ff",
+                    "outline": "#8c909f",
+                    "on-tertiary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#131b2e",
+                    "on-surface": "#d8e3fb",
+                    "surface": "#081425",
+                    "inverse-primary": "#005ac2",
+                    "primary-fixed": "#d8e2ff",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#22293d",
+                    "primary-container": "#4d8eff",
+                    "on-primary": "#002e6a",
+                    "on-secondary-container": "#a9bad3",
+                    "tertiary": "#bec6e0",
+                    "tertiary-fixed": "#dae2fd",
+                    "inverse-surface": "#d8e3fb",
+                    "on-surface-variant": "#c2c6d6",
+                    "inverse-on-surface": "#263143",
+                    "surface-tint": "#adc6ff",
+                    "on-tertiary": "#283044",
+                    "secondary": "#b7c8e1",
+                    "error-container": "#93000a",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-container": "#8990a8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "24px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "gutter": "8px",
+                    "sm": "8px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Geist"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Geist"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #081425;
+            color: #d8e3fb;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl flex justify-between items-center h-16 px-margin-mobile w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg text-on-surface">Sentinela</h1>
+</div>
+<button class="hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+</header>
+<main class="pt-20 pb-32 px-margin-mobile max-w-2xl mx-auto">
+<!-- Search Bar -->
+<div class="mb-6 relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" placeholder="Buscar contatos ou números..." type="text">
+</div>
+<!-- Section Title -->
+<div class="flex justify-between items-center mb-4 px-2">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Números Permitidos (2)</h2>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">format_image_left</span>
+</div>
+<!-- Whitelist List -->
+<div class="space-y-2">
+<!-- Item 1 -->
+<div class="bg-surface-container rounded-xl p-4 flex items-center justify-between border border-outline-variant/30 hover:bg-surface-container-high transition-all active:scale-[0.99] group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-lg">
+                        JS
+                    </div>
+<div>
+<p class="font-title-lg text-body-lg text-on-surface">João Silva</p>
+<p class="text-on-surface-variant font-label-md text-label-md">+55 11 91234-5678</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container rounded-xl p-4 flex items-center justify-between border border-outline-variant/30 hover:bg-surface-container-high transition-all active:scale-[0.99] group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div>
+<p class="font-title-lg text-body-lg text-on-surface">Consultório Médico</p>
+<p class="text-on-surface-variant font-label-md text-label-md">+55 11 3212-4433</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Info Card (Visual Interest) -->
+<div class="mt-8 p-6 rounded-2xl bg-gradient-to-br from-surface-container-high to-surface-container-highest border border-outline-variant/20">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h3 class="font-title-lg text-on-surface mb-1">Sobre a Whitelist</h3>
+<p class="text-on-surface-variant font-body-md">Números nesta lista nunca serão bloqueados ou silenciados pelo Ultrathink, garantindo que comunicações importantes sempre cheguem até você.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-40 group">
+<span class="material-symbols-outlined text-3xl">add</span>
+<span class="absolute right-16 bg-surface-container-highest text-on-surface px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg border border-outline-variant/30">Adicionar Número</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-2 bg-surface-container dark:bg-surface-container-high shadow-lg z-50 rounded-t-xl">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">verified_user</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Whitelist (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">format_list_bulleted</span>
+<span class="font-label-md text-label-md">Whitelist</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<!-- Decorative Atmospheric Background element -->
+<div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<script>
+        // Simple micro-interaction for list items
+        document.querySelectorAll('.bg-surface-container').forEach(item => {
+            item.addEventListener('touchstart', () => {
+                item.style.backgroundColor = 'var(--tw-surface-container-highest)';
+            });
+            item.addEventListener('touchend', () => {
+                item.style.backgroundColor = '';
+            });
+        });
+    </script>
+
+
+</body></html>

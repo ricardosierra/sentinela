@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuração da Whitelist - Ultrathink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "surface-container-high": "#1f2a3c",
+                    "secondary": "#b7c8e1",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-tertiary-container": "#22293d",
+                    "on-secondary": "#213145",
+                    "secondary-fixed": "#d3e4fe",
+                    "surface-container": "#152031",
+                    "on-primary": "#002e6a",
+                    "on-error-container": "#ffdad6",
+                    "primary": "#adc6ff",
+                    "tertiary-fixed": "#dae2fd",
+                    "surface-container-lowest": "#040e1f",
+                    "background": "#081425",
+                    "surface-dim": "#081425",
+                    "surface-container-highest": "#2a3548",
+                    "surface-bright": "#2f3a4c",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "surface": "#081425",
+                    "primary-container": "#4d8eff",
+                    "tertiary-container": "#8990a8",
+                    "on-tertiary-fixed": "#131b2e",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#a9bad3",
+                    "on-primary-fixed": "#001a42",
+                    "surface-variant": "#2a3548",
+                    "tertiary": "#bec6e0",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#111c2d",
+                    "on-background": "#d8e3fb",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "secondary-container": "#3a4a5f",
+                    "on-primary-container": "#00285d",
+                    "inverse-on-surface": "#263143",
+                    "inverse-surface": "#d8e3fb",
+                    "tertiary-fixed-dim": "#bec6e0",
+                    "primary-fixed": "#d8e2ff",
+                    "outline-variant": "#424754",
+                    "outline": "#8c909f",
+                    "on-surface": "#d8e3fb",
+                    "surface-tint": "#adc6ff",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-tertiary": "#283044",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-surface-variant": "#c2c6d6",
+                    "inverse-primary": "#005ac2",
+                    "on-tertiary-fixed-variant": "#3f465c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "gutter": "8px",
+                    "lg": "24px",
+                    "margin-tablet": "24px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Geist"],
+                    "title-lg": ["Inter"],
+                    "label-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #081425;
+            color: #d8e3fb;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px #adc6ff;
+        }
+        .glass-card {
+            background: rgba(21, 32, 49, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(140, 144, 159, 0.2);
+        }
+        .option-transition {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col items-center justify-start pb-20">
+<!-- Top Navigation Bar (Simplified for Onboarding) -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl flex justify-between items-center h-16 px-margin-mobile">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md">shield</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Ultrathink</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest ml-1"></div>
+<div class="w-6 h-2 rounded-full bg-primary ml-1"></div>
+</div>
+</header>
+<main class="mt-24 px-margin-mobile w-full max-w-md flex flex-col gap-8">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">Passo 3 de 3</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Configuração da Whitelist Pessoal</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Defina como o Ultrathink deve agir quando receber chamadas dos contatos que você confia.
+            </p>
+</section>
+<!-- Illustration/Visual Context -->
+<div class="relative w-full aspect-square rounded-xl overflow-hidden glass-card flex items-center justify-center">
+<div class="absolute inset-0 opacity-20">
+<div class="w-full h-full bg-cover bg-center" data-alt="A sophisticated dark-themed digital interface visualization showing a clean list of verified contact names. The visual uses a deep slate and navy blue color palette with glowing light blue accents to represent security and trust. Minimalist geometric patterns and soft blurred lights create a professional corporate security tool atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOWAheHEM-VmL8LvF0CIyuoFweHXRLbOnyZsu3Faqfs7LRGRAqUjG98oll0TcUwqWRNaUcm9wPZ-iz8DTH6PLxQStJZ6AhTJJCLQWBhOVCdDLiPewD56iX_vYJAw6qS2sUhv8i5yP_oJ6nNRx-5MWW6AqjeuxGpsemVznQ_4gH37k6HLXUYJWZooUN-nKKQJewiw9lx3DFDuyYaWcYn-QLJE98SFlYnpL31RD4uH1JafCsx2gMNWf6YZi3FZm-U71v3khTpWsnRQE')"></div>
+</div>
+<div class="z-10 flex flex-col items-center gap-4 text-center p-6">
+<div class="w-20 h-20 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-xl">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">O que é a Whitelist?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+                        A Whitelist consiste nos números que você adicionou manualmente ou marcou como seguros dentro do aplicativo.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Selection Form -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-lg text-label-lg text-on-surface-variant px-1">Como tratar sua Whitelist Pessoal?</h2>
+<div class="grid grid-cols-1 gap-3" id="options-container">
+<!-- Option 1: Default -->
+<button class="option-transition glass-card rounded-xl p-4 flex items-center justify-between text-left group active-ring" data-value="never_silence" onclick="selectOption(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Nunca Silenciar</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Padrão do sistema</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<!-- Option 2 -->
+<button class="option-transition glass-card rounded-xl p-4 flex items-center justify-between text-left group border border-transparent" data-value="ring" onclick="selectOption(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">volume_up</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Tocar</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Sempre emitir som</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0">circle</span>
+</button>
+<!-- Option 3 -->
+<button class="option-transition glass-card rounded-xl p-4 flex items-center justify-between text-left group border border-transparent" data-value="block" onclick="selectOption(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">block</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Bloquear</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Rejeitar automaticamente</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0">circle</span>
+</button>
+<!-- Option 4 -->
+<button class="option-transition glass-card rounded-xl p-4 flex items-center justify-between text-left group border border-transparent" data-value="silence" onclick="selectOption(this)">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">notifications_off</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Silenciar</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Apenas notificação visual</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0">circle</span>
+</button>
+</div>
+</section>
+<!-- Final Action -->
+<footer class="mt-8 mb-12 flex flex-col gap-4">
+<button class="w-full h-14 bg-primary text-on-primary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg">
+                Finalizar Configuração
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full h-12 bg-transparent text-primary font-label-lg text-label-lg rounded-full flex items-center justify-center hover:bg-surface-container-low transition-all">
+                Voltar
+            </button>
+</footer>
+</main>
+<!-- Contextual Information Snackbar (Implicit) -->
+<div class="fixed bottom-6 left-margin-mobile right-margin-mobile p-4 rounded-xl glass-card border-primary/30 flex items-start gap-3 transform translate-y-32 transition-transform duration-500 shadow-2xl z-[100]" id="hint-box">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="font-body-md text-body-md text-on-surface">
+            Você poderá alterar estas configurações e adicionar novos números a qualquer momento no menu Whitelist.
+        </p>
+</div>
+<script>
+        function selectOption(element) {
+            // Get all buttons
+            const buttons = document.querySelectorAll('#options-container button');
+            
+            // Reset all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('active-ring');
+                btn.classList.remove('bg-surface-container-high');
+                
+                const iconContainer = btn.querySelector('.rounded-full');
+                iconContainer.classList.add('bg-surface-container-highest');
+                iconContainer.classList.remove('bg-secondary-container');
+                iconContainer.classList.remove('text-on-secondary-container');
+                
+                const checkIcon = btn.querySelector('.material-symbols-outlined:last-child');
+                checkIcon.innerText = 'circle';
+                checkIcon.style.fontVariationSettings = "'FILL' 0";
+                checkIcon.classList.add('text-outline');
+                checkIcon.classList.remove('text-primary');
+                checkIcon.classList.add('opacity-0');
+            });
+
+            // Set active state to clicked element
+            element.classList.add('active-ring');
+            element.classList.add('bg-surface-container-high');
+            
+            const iconContainer = element.querySelector('.rounded-full');
+            iconContainer.classList.remove('bg-surface-container-highest');
+            iconContainer.classList.add('bg-secondary-container');
+            iconContainer.classList.add('text-on-secondary-container');
+
+            const checkIcon = element.querySelector('.material-symbols-outlined:last-child');
+            checkIcon.innerText = 'check_circle';
+            checkIcon.style.fontVariationSettings = "'FILL' 1";
+            checkIcon.classList.remove('text-outline');
+            checkIcon.classList.add('text-primary');
+            checkIcon.classList.remove('opacity-0');
+        }
+
+        // Show the hint box after a short delay
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('hint-box').classList.remove('translate-y-32');
+            }, 1000);
+        }
+    </script>
+</body></html>

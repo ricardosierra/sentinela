@@ -1,0 +1,321 @@
+<!DOCTYPE html><html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ultrathink - Histórico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#d8e3fb",
+                    "surface-container-low": "#111c2d",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-primary-container": "#00285d",
+                    "on-primary-fixed": "#001a42",
+                    "tertiary-fixed-dim": "#bec6e0",
+                    "on-secondary": "#213145",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#3a4a5f",
+                    "surface-bright": "#2f3a4c",
+                    "surface-container-highest": "#2a3548",
+                    "surface-container-high": "#1f2a3c",
+                    "outline-variant": "#424754",
+                    "surface-container-lowest": "#040e1f",
+                    "surface-container": "#152031",
+                    "surface-variant": "#2a3548",
+                    "surface-dim": "#081425",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-error": "#690005",
+                    "background": "#081425",
+                    "on-secondary-fixed": "#0b1c30",
+                    "primary": "#adc6ff",
+                    "outline": "#8c909f",
+                    "on-tertiary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#131b2e",
+                    "on-surface": "#d8e3fb",
+                    "surface": "#081425",
+                    "inverse-primary": "#005ac2",
+                    "primary-fixed": "#d8e2ff",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#22293d",
+                    "primary-container": "#4d8eff",
+                    "on-primary": "#002e6a",
+                    "on-secondary-container": "#a9bad3",
+                    "tertiary": "#bec6e0",
+                    "tertiary-fixed": "#dae2fd",
+                    "inverse-surface": "#d8e3fb",
+                    "on-surface-variant": "#c2c6d6",
+                    "inverse-on-surface": "#263143",
+                    "surface-tint": "#adc6ff",
+                    "on-tertiary": "#283044",
+                    "secondary": "#b7c8e1",
+                    "error-container": "#93000a",
+                    "secondary-fixed": "#d3e4fe",
+                    "tertiary-container": "#8990a8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "24px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "gutter": "8px",
+                    "sm": "8px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "label-lg": ["Geist"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Geist"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-chip {
+            background-color: #adc6ff;
+            color: #00285d;
+        }
+        .swipe-container {
+            overflow-x: hidden;
+            position: relative;
+        }
+        .swipe-actions {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .swipe-container:active .swipe-actions,
+        .swipe-container.swiped .swipe-actions {
+            transform: translateX(0);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl flex justify-between items-center h-16 px-margin-mobile">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-headline-md" style="font-variation-settings: 'FILL' 1;">shield</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Histórico do Sentinela</h1>
+</div>
+<button class="hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95" title="Limpar tudo">
+<span class="material-symbols-outlined text-on-surface-variant">delete_sweep</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-20 pb-32 px-margin-mobile max-w-lg mx-auto">
+<!-- Filter Chips -->
+<section class="flex gap-2 mb-6 overflow-x-auto no-scrollbar py-2">
+<button class="active-chip px-5 py-2 rounded-full font-label-lg text-label-lg transition-all shadow-sm">Hoje</button>
+<button class="bg-surface-container text-on-surface-variant px-5 py-2 rounded-full font-label-lg text-label-lg hover:bg-surface-container-high transition-all">7 dias</button>
+<button class="bg-surface-container text-on-surface-variant px-5 py-2 rounded-full font-label-lg text-label-lg hover:bg-surface-container-high transition-all">30 dias</button>
+</section>
+<!-- Call History List -->
+<div class="space-y-3">
+<!-- List Item 1 -->
+<div class="swipe-container group bg-surface-container rounded-xl overflow-hidden relative border border-outline-variant/20">
+<div class="p-md flex items-center gap-4 transition-transform group-active:-translate-x-24">
+<div class="w-12 h-12 rounded-full bg-error-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">block</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-lg text-body-lg text-on-surface truncate">Número Desconhecido</p>
+<p class="font-body-md text-on-surface-variant truncate">+55 21 9****-8822</p>
+<p class="font-label-md text-on-surface-variant/70 mt-1">Hoje, 14:30</p>
+</div>
+<button class="p-2 text-on-surface-variant" onclick="toggleMenu(this)">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Desktop/Hover Menu (Simplified as swipe for mobile feel) -->
+<div class="absolute right-0 top-0 bottom-0 flex h-full translate-x-full group-hover:translate-x-0 transition-transform duration-300">
+<button class="bg-secondary-container text-on-secondary-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">check_circle</span>
+                        Permitir
+                    </button>
+<button class="bg-error-container text-on-error-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">delete</span>
+                        Excluir
+                    </button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="swipe-container group bg-surface-container rounded-xl overflow-hidden relative border border-outline-variant/20">
+<div class="p-md flex items-center gap-4 transition-transform group-active:-translate-x-24">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1;">visibility_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-lg text-body-lg text-on-surface truncate">Privado</p>
+<p class="font-body-md text-on-surface-variant truncate">ID Oculto</p>
+<p class="font-label-md text-on-surface-variant/70 mt-1">Hoje, 11:15</p>
+</div>
+<button class="p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="absolute right-0 top-0 bottom-0 flex h-full translate-x-full group-hover:translate-x-0 transition-transform duration-300">
+<button class="bg-secondary-container text-on-secondary-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">check_circle</span>
+                        Permitir
+                    </button>
+<button class="bg-error-container text-on-error-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">delete</span>
+                        Excluir
+                    </button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="swipe-container group bg-surface-container rounded-xl overflow-hidden relative border border-outline-variant/20">
+<div class="p-md flex items-center gap-4 transition-transform group-active:-translate-x-24">
+<div class="w-12 h-12 rounded-full bg-error-container/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<p class="font-title-lg text-body-lg text-error truncate">Spam Provável</p>
+<span class="bg-error-container/30 text-error text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Alto Risco</span>
+</div>
+<p class="font-body-md text-on-surface-variant truncate">+55 11 9****-0011</p>
+<p class="font-label-md text-on-surface-variant/70 mt-1">Ontem, 09:20</p>
+</div>
+<button class="p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="absolute right-0 top-0 bottom-0 flex h-full translate-x-full group-hover:translate-x-0 transition-transform duration-300">
+<button class="bg-secondary-container text-on-secondary-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">check_circle</span>
+                        Permitir
+                    </button>
+<button class="bg-error-container text-on-error-container px-4 h-full flex flex-col items-center justify-center gap-1 font-label-md">
+<span class="material-symbols-outlined">delete</span>
+                        Excluir
+                    </button>
+</div>
+</div>
+<!-- Empty State Illustration Placeholder (Subtle) -->
+<div class="py-xl flex flex-col items-center justify-center opacity-30 grayscale pointer-events-none">
+<span class="material-symbols-outlined text-[64px] mb-4">history_toggle_off</span>
+<p class="font-label-lg text-label-lg">Fim do histórico recente</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-2 bg-surface-container shadow-lg rounded-t-xl z-50">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:bg-surface-bright transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">verified_user</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Whitelist -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:bg-surface-bright transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">format_list_bulleted</span>
+<span class="font-label-md text-label-md">Whitelist</span>
+</a>
+<!-- History (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:bg-surface-bright transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for chips
+        const chips = document.querySelectorAll('button[class*="rounded-full"]');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('active-chip');
+                    c.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                chip.classList.add('active-chip');
+                chip.classList.remove('bg-surface-container', 'text-on-surface-variant');
+            });
+        });
+
+        // Swipe logic for touch devices (visual simulation)
+        let touchstartX = 0;
+        let touchendX = 0;
+        const containers = document.querySelectorAll('.swipe-container');
+
+        containers.forEach(container => {
+            container.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            });
+
+            container.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                handleGesture(container);
+            });
+        });
+
+        function handleGesture(el) {
+            if (touchstartX - touchendX > 50) {
+                // Swiped left
+                el.classList.add('swiped');
+            }
+            if (touchendX - touchstartX > 50) {
+                // Swiped right
+                el.classList.remove('swiped');
+            }
+        }
+    </script>
+
+
+</body></html>

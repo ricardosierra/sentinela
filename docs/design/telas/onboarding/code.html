@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ultrathink - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#d8e3fb",
+                        "surface-container-low": "#111c2d",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary-container": "#00285d",
+                        "on-primary-fixed": "#001a42",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-secondary": "#213145",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#3a4a5f",
+                        "surface-bright": "#2f3a4c",
+                        "surface-container-highest": "#2a3548",
+                        "surface-container-high": "#1f2a3c",
+                        "outline-variant": "#424754",
+                        "surface-container-lowest": "#040e1f",
+                        "surface-container": "#152031",
+                        "surface-variant": "#2a3548",
+                        "surface-dim": "#081425",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-error": "#690005",
+                        "background": "#081425",
+                        "on-secondary-fixed": "#0b1c30",
+                        "primary": "#adc6ff",
+                        "outline": "#8c909f",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-surface": "#d8e3fb",
+                        "surface": "#081425",
+                        "inverse-primary": "#005ac2",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#22293d",
+                        "primary-container": "#4d8eff",
+                        "on-primary": "#002e6a",
+                        "on-secondary-container": "#a9bad3",
+                        "tertiary": "#bec6e0",
+                        "tertiary-fixed": "#dae2fd",
+                        "inverse-surface": "#d8e3fb",
+                        "on-surface-variant": "#c2c6d6",
+                        "inverse-on-surface": "#263143",
+                        "surface-tint": "#adc6ff",
+                        "on-tertiary": "#283044",
+                        "secondary": "#b7c8e1",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#d3e4fe",
+                        "tertiary-container": "#8990a8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "margin-tablet": "24px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "8px",
+                        "sm": "8px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-lg": ["Geist"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #081425;
+            color: #d8e3fb;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .bento-item-large {
+            grid-column: span 2;
+        }
+        .glossy-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- Subtle Atmospheric Background -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-container/20 blur-[120px] rounded-full"></div>
+</div>
+<!-- Onboarding Navigation Suppressed (Transactional Page) -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile relative z-10 py-xl max-w-lg mx-auto w-full">
+<!-- Hero Section -->
+<div class="flex flex-col items-center text-center mb-xl w-full">
+<div class="w-24 h-24 bg-primary-container/20 rounded-full flex items-center justify-center mb-lg animate-float">
+<span class="material-symbols-outlined text-[64px] text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile mb-md text-on-surface tracking-tight">
+                Bem-vindo ao Ultrathink.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[85%]">
+                Sua privacidade é nossa prioridade. Bloqueie chamadas indesejadas de forma nativa e silenciosa.
+            </p>
+</div>
+<!-- Features Bento Grid -->
+<div class="bento-grid w-full mb-xl">
+<!-- Feature 1: Bloqueio Local -->
+<div class="bento-item-large glossy-card p-md rounded-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div>
+<h3 class="font-title-lg text-body-lg font-bold text-on-surface">Bloqueio Local</h3>
+<p class="font-body-md text-label-md text-on-surface-variant">Processamento direto no aparelho.</p>
+</div>
+</div>
+<!-- Feature 2: Silencioso -->
+<div class="glossy-card p-md rounded-xl flex flex-col items-start gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">notifications_off</span>
+</div>
+<div>
+<h3 class="font-label-lg font-bold text-on-surface">Silencioso</h3>
+<p class="text-[11px] leading-tight text-on-surface-variant">Sem toques ou vibrações indesejadas.</p>
+</div>
+</div>
+<!-- Feature 3: Sem Internet -->
+<div class="glossy-card p-md rounded-xl flex flex-col items-start gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">cloud_off</span>
+</div>
+<div>
+<h3 class="font-label-lg font-bold text-on-surface">Sem Internet</h3>
+<p class="text-[11px] leading-tight text-on-surface-variant">Privacidade total offline.</p>
+</div>
+</div>
+</div>
+<!-- Visual Context Image (System Integration Feel) -->
+<div class="w-full h-40 rounded-2xl overflow-hidden mb-xl relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A macro shot of a sleek smartphone screen displaying a secure incoming call interface with a professional dark mode aesthetic. The background features soft blue ambient lighting that matches the corporate security theme of Ultrathink. The lighting is focused and clean, emphasizing a high-tech, minimalist environment for call protection and data privacy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNvi_A41H66u32V5tqEVBRP39pgtaV4cac4weq7-lUgNvQ_9AluwoYWcGqHZQoih4W1d6LljjG5M8IuM9EgFlELVUdeqXim8wMf1fccKHvC4V8BeCeEwbk6GQl9jq05dDjfDVkHJ97JXI9xv719D1cNXYov3O1IqFw91RqvHnlNRl7Gwmlg9hqkKrYtfg-cXatM3Gv5n0u4b0p8Qk1EtU7W0UOmff4YbZc7O5PovQWK-LFRgHblJ00ZOPQzD-n5bFkkswtrf-A5-s"/>
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span class="font-label-md text-label-md text-primary">Integração Nativa</span>
+</div>
+</div>
+<!-- Call to Action Area -->
+<div class="w-full flex flex-col gap-md">
+<button class="w-full bg-primary-container text-on-primary-container h-14 rounded-full font-title-lg text-body-lg font-bold flex items-center justify-center gap-sm active:scale-95 transition-all shadow-lg hover:brightness-110">
+                Configurar Agora
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="font-body-md text-label-md text-on-surface-variant text-center px-sm leading-relaxed">
+                Ao configurar, você concede a permissão de <span class="text-on-surface font-semibold italic">Call Screening</span>. O Ultrathink identificará e filtrará chamadas suspeitas automaticamente sem nunca enviar seus dados para a nuvem.
+            </p>
+</div>
+</main>
+<!-- Footer / Bottom Branding (Subtle) -->
+<footer class="pb-xl flex justify-center opacity-40">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-md text-label-md tracking-widest uppercase">Ultrathink Guardian</span>
+</div>
+</footer>
+<!-- Interaction Script -->
+<script>
+        document.querySelector('button').addEventListener('click', function() {
+            // Simulate interaction effect
+            const btn = this;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Solicitando permissão...';
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                // Return to original (simulating a system dialog popup)
+                btn.innerHTML = 'Configurar Agora <span class="material-symbols-outlined">arrow_forward</span>';
+                btn.classList.remove('opacity-80');
+            }, 2000);
+        });
+    </script>
+</body></html>
