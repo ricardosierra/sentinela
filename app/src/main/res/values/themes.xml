@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema base pré-Compose (janela/splash). O tema real do app é Compose/Material 3. -->
+    <style name="Theme.Sentinela" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/sentinela_surface</item>
+        <item name="android:statusBarColor">@color/sentinela_surface</item>
+        <item name="android:navigationBarColor">@color/sentinela_surface</item>
+    </style>
+</resources>

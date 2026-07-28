@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Idioma padrão do app: pt-BR. Nenhum texto de UI é hardcoded em Kotlin. -->
+<resources>
+    <string name="app_name">Sentinela</string>
+
+    <!-- Boas-vindas -->
+    <string name="welcome_headline">Sua primeira linha de defesa contra spam.</string>
+    <string name="welcome_subtitle">O Sentinela bloqueia chamadas de números desconhecidos antes mesmo do seu telefone tocar.</string>
+    <string name="welcome_feature_local_title">Bloqueio Local</string>
+    <string name="welcome_feature_local_desc">Processamento direto no aparelho.</string>
+    <string name="welcome_feature_silent_title">Silencioso</string>
+    <string name="welcome_feature_silent_desc">Sem toques ou vibrações indesejadas.</string>
+    <string name="welcome_feature_offline_title">Sem Internet</string>
+    <string name="welcome_feature_offline_desc">Privacidade total offline.</string>
+    <string name="welcome_badge_native">Integração Nativa</string>
+    <string name="welcome_cta">Começar Configuração</string>
+    <string name="welcome_cta_hint">Leva menos de 2 minutos.</string>
+
+    <!-- Onboarding: papel de Call Screening -->
+    <string name="onboarding_role_disclaimer">Ao configurar, você concede a permissão de Call Screening. O Sentinela filtrará chamadas de números desconhecidos localmente, sem nunca enviar seus dados para fora do aparelho.</string>
+    <string name="onboarding_role_cta">Configurar Agora</string>
+    <string name="onboarding_role_requesting">Solicitando permissão…</string>
+    <string name="onboarding_step_indicator">Passo %1$d de %2$d</string>
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_back">Voltar</string>
+    <string name="onboarding_finish">Finalizar Configuração</string>
+    <string name="onboarding_change_later">Você pode alterar esta configuração a qualquer momento.</string>
+
+    <!-- Onboarding: números desconhecidos -->
+    <string name="unknown_title">Chamadas Desconhecidas</string>
+    <string name="unknown_question">Como o Sentinela deve lidar com números que não estão em seus contatos?</string>
+    <string name="unknown_option_block">Bloquear</string>
+    <string name="unknown_option_block_desc">Recusa a chamada instantaneamente.</string>
+    <string name="unknown_option_silence">Silenciar</string>
+    <string name="unknown_option_silence_desc">Encaminha em silêncio para a caixa postal.</string>
+    <string name="unknown_option_allow">Permitir</string>
+    <string name="unknown_option_allow_desc">Recebe chamadas normalmente.</string>
+
+    <!-- Onboarding: contatos (informativo — contatos sempre tocam; ver docs/LIMITACOES.md) -->
+    <string name="contacts_title">E as pessoas da sua lista de contatos?</string>
+    <string name="contacts_explainer">Quem está na sua agenda continua ligando normalmente. O Sentinela não lê seus contatos: o próprio Android só encaminha para o filtro as chamadas de números fora da agenda.</string>
+
+    <!-- Onboarding: whitelist -->
+    <string name="whitelist_setup_title">Configuração da Whitelist Pessoal</string>
+    <string name="whitelist_setup_what_title">O que é a Whitelist?</string>
+    <string name="whitelist_setup_what_desc">A Whitelist consiste nos números que você adicionou manualmente ou marcou como seguros dentro do aplicativo. Eles nunca são bloqueados.</string>
+    <string name="whitelist_setup_hint">Você poderá alterar estas configurações e adicionar novos números a qualquer momento no menu Permitidos.</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_protection_active">Proteção Ativa</string>
+    <string name="dashboard_protection_inactive">Proteção desativada</string>
+    <string name="dashboard_monitoring">Monitoramento em tempo real</string>
+    <string name="dashboard_device_safe">Seu dispositivo está protegido contra chamadas de números desconhecidos.</string>
+    <string name="dashboard_role_missing">O Sentinela não é o filtro de chamadas padrão.</string>
+    <string name="dashboard_fix_configuration">Corrigir configuração</string>
+    <string name="dashboard_total_blocked">Total Bloqueado</string>
+    <string name="dashboard_blocked_today">Hoje</string>
+    <string name="dashboard_last_blocked">Última chamada bloqueada</string>
+    <string name="dashboard_quick_whitelist">Whitelist Pessoal</string>
+    <string name="dashboard_quick_history">Histórico de Bloqueio</string>
+
+    <!-- Navegação inferior -->
+    <string name="nav_home">Início</string>
+    <string name="nav_whitelist">Permitidos</string>
+    <string name="nav_history">Histórico</string>
+    <string name="nav_settings">Ajustes</string>
+
+    <!-- Whitelist -->
+    <string name="whitelist_title">Whitelist Pessoal</string>
+    <string name="whitelist_search_placeholder">Buscar descrições ou números…</string>
+    <string name="whitelist_section_allowed">Números Permitidos (%1$d)</string>
+    <string name="whitelist_about_title">Sobre a Whitelist</string>
+    <string name="whitelist_about_desc">Números nesta lista nunca serão bloqueados ou silenciados pelo Sentinela, garantindo que comunicações importantes sempre cheguem até você.</string>
+    <string name="whitelist_add_number">Adicionar Número</string>
+    <string name="whitelist_edit">Editar</string>
+    <string name="whitelist_delete">Excluir</string>
+    <string name="whitelist_export">Exportar backup</string>
+    <string name="whitelist_import">Importar backup</string>
+    <string name="whitelist_import_confirm">Importar vai mesclar os números do arquivo com a sua lista atual. Continuar?</string>
+    <string name="whitelist_duplicate">Este número já está na whitelist.</string>
+
+    <!-- Histórico -->
+    <string name="history_title">Histórico do Sentinela</string>
+    <string name="history_clear_all">Limpar tudo</string>
+    <string name="history_filter_today">Hoje</string>
+    <string name="history_filter_7days">7 dias</string>
+    <string name="history_filter_30days">30 dias</string>
+    <string name="history_unknown_number">Número Desconhecido</string>
+    <string name="history_private_number">Privado</string>
+    <string name="history_private_id">ID Oculto</string>
+    <string name="history_action_allow">Permitir</string>
+    <string name="history_action_delete">Excluir</string>
+    <string name="history_mark_unwanted">Marcar indesejado</string>
+    <string name="history_end_of_list">Fim do histórico recente</string>
+    <string name="history_empty">Nenhuma chamada bloqueada ainda.</string>
+
+    <!-- Proteção / Ajustes -->
+    <string name="settings_title">Proteção</string>
+    <string name="settings_protection_toggle">Ativar proteção</string>
+    <string name="settings_block_unknown">Bloquear números desconhecidos</string>
+    <string name="settings_block_private">Bloquear números privados</string>
+    <string name="settings_mode_reject">Rejeitar imediatamente</string>
+    <string name="settings_mode_silent_voicemail">Encaminhar silenciosamente</string>
+    <string name="settings_hide_native_log">Ocultar do histórico nativo</string>
+    <string name="settings_show_notification">Exibir notificação silenciosa</string>
+    <string name="settings_fallback_policy">Política em caso de erro</string>
+    <string name="settings_fallback_allow">Permitir chamada (recomendado)</string>
+    <string name="settings_fallback_block">Bloquear chamada</string>
+
+    <!-- Privacidade e sobre -->
+    <string name="about_title">Privacidade e sobre</string>
+    <string name="about_data_local">Todos os dados ficam somente neste aparelho.</string>
+    <string name="about_clear_all_data">Limpar todos os dados</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_open_app_settings">Abrir configurações do aplicativo</string>
+    <string name="about_open_channel_settings">Configurar canal de notificação</string>
+
+    <!-- Notificações -->
+    <string name="notification_channel_blocked">Chamadas bloqueadas</string>
+    <string name="notification_blocked_title">Chamada bloqueada</string>
+    <string name="notification_blocked_masked">Chamada de %1$s bloqueada</string>
+    <string name="notification_blocked_anonymous">Uma chamada foi bloqueada</string>
+
+    <!-- Genéricos -->
+    <string name="action_confirm">Confirmar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="state_loading">Carregando…</string>
+    <string name="state_error">Algo deu errado. Tente novamente.</string>
+</resources>

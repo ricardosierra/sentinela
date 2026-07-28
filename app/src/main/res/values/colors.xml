@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tokens do design system (docs/design/DESIGN.md). Cores de UI vivem no tema Compose. -->
+<resources>
+    <color name="sentinela_surface">#081425</color>
+    <color name="sentinela_primary">#ADC6FF</color>
+    <color name="ic_launcher_background">#081425</color>
+</resources>
