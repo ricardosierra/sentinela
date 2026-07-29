@@ -59,7 +59,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **HST-03**: Limpar histórico completo e excluir registro individual
 - [ ] **HST-04**: Adicionar número à whitelist a partir do histórico
 - [ ] **HST-05**: Marcar registro como legítimo ou indesejado (status local)
-- [ ] **HST-06**: Banco sensível excluído do backup automático do Android
+- [x] **HST-06**: Banco sensível excluído do backup automático do Android
 - [ ] **HST-07**: Filtros por período e por decisão na tela de histórico
 
 ### Notificações (NTF)
@@ -101,7 +101,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 ### Privacidade e Segurança (PRV)
 - [x] **PRV-01**: MVP sem permissão de INTERNET no manifest; nenhuma chamada de rede, telemetria, chave ou segredo — sync futura (v0.2) será opt-in e nunca no caminho da decisão
 - [ ] **PRV-02**: Números sempre mascarados em logs; logs sensíveis removidos de release (R8 `-assumenosideeffects`)
-- [ ] **PRV-03**: Room/DataStore excluídos de backup em nuvem e device-transfer (`dataExtractionRules`)
+- [x] **PRV-03**: Room/DataStore excluídos de backup em nuvem e device-transfer (`dataExtractionRules`)
 - [ ] **PRV-04**: R8/ProGuard configurado para release; componentes não necessários não exportados
 - [ ] **PRV-05**: Import de backup valida entrada: limite de tamanho, formato, prevenção de path traversal e arquivo malformado
 - [ ] **PRV-06**: Política de privacidade curta e verdadeira embutida no app ("dados ficam no aparelho"; contatos lidos apenas localmente)
@@ -169,7 +169,7 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | ENG-02..04 | 9 | Pending |
 | PRV-01 | 1 | Complete |
 | PRV-02, PRV-04 | 9 | Pending |
-| PRV-03 | 3 | Pending |
+| PRV-03 | 3 | Complete |
 | PRV-05 | 8 | Pending |
 | PRV-06..07 | 9 | Pending |
 | QLT-01 | 2, 3, 5 | Complete |

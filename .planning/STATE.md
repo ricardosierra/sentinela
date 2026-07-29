@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-05-PLAN.md
-last_updated: "2026-07-29T06:02:59.639Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-07-29T06:05:45.451Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 03 (Dados Locais) — EXECUTING
-Plan: 1 of 7
+Plan: 2 of 7
 
 ## Snapshot
 
@@ -69,6 +69,8 @@ Plan: 1 of 7
 - [Phase 02]: PhoneNumberUtil construido uma unica vez por lazy no AppContainer; nunca dentro de onScreenCall (p95 < 200 ms)
 - [Phase 02]: Gate koverVerify minBound(80) ATIVO sobre domain+phone (atual 97,619%): codigo novo nesses pacotes exige teste
 - [Phase 02]: Gate so e aceito depois de demonstrado falhando (bound temporario em 99 quebrou o build); Phase 2 nao deixou pendencia fisica nova
+- [Phase 03]: Backup: path="." explicito em todos os <exclude> e datastore sem barra final; -wal/-shm cobertos pela exclusao recursiva de diretorio
+- [Phase 03]: BackupRulesTest le os XMLs por DocumentBuilderFactory (nunca regex) e trava zero <include>; falha demonstrada removendo um exclude
 
 ## Convenções operacionais do GSD
 
@@ -111,6 +113,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T05:08:56.116Z
-Stopped at: Completed 02-05-PLAN.md
+Last session: 2026-07-29T06:05:45.449Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
