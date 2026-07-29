@@ -107,6 +107,11 @@ tasks.withType<Test>().configureEach {
     inputs.dir(layout.projectDirectory.dir("schemas"))
         .withPropertyName("roomExportedSchemas")
         .withPathSensitivity(PathSensitivity.RELATIVE)
+    // AppOpenCounterTest le o fonte Kotlin direto do disco pelo mesmo motivo: o alvo
+    // e estrutural (onde a contagem mora), e nenhum assert de valor prova isso.
+    inputs.dir(layout.projectDirectory.dir("src/main/java"))
+        .withPropertyName("mainKotlinSources")
+        .withPathSensitivity(PathSensitivity.RELATIVE)
 }
 
 detekt {

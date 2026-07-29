@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.sentinela.app.R
+import org.sentinela.app.SentinelaApp
 import org.sentinela.app.ui.theme.SentinelaTheme
 
 /**
@@ -27,6 +28,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // ENG-01: abertura de verdade é esta — há Activity e alguém olhando. A guarda
+        // de estado salvo evita contar duas vezes numa simples rotação de tela.
+        if (savedInstanceState == null) {
+            (application as SentinelaApp).container.onAppOpened()
+        }
         setContent {
             SentinelaTheme {
                 PlaceholderScreen()

@@ -95,6 +95,37 @@ class AppOpenCounterTest {
         }
     }
 
+    /**
+     * Contrato de ENG-01: quem incrementa e o ciclo de vida da tela, nao a criacao do
+     * processo. O sistema tambem cria o processo para vincular a triagem numa chamada
+     * recebida; se a contagem morasse la, toda chamada recebida viraria uma "abertura".
+     *
+     * O teste le o codigo-fonte porque o alvo e ESTRUTURAL: nenhum assert de valor
+     * distingue "contou na hora certa" de "contou na hora errada".
+     */
+    @Test
+    fun `a contagem de abertura vive na Activity e nao na criacao do processo`() {
+        val app = File("src/main/java/org/sentinela/app/SentinelaApp.kt").readText()
+        val activity = File("src/main/java/org/sentinela/app/ui/MainActivity.kt").readText()
+        val chamada = "onAppOpened()"
+
+        assertEquals(
+            "a criacao do processo nao pode contar abertura",
+            0,
+            app.split(chamada).size - 1,
+        )
+        assertEquals(
+            "a Activity precisa contar a abertura exatamente uma vez",
+            1,
+            activity.split(chamada).size - 1,
+        )
+        assertEquals(
+            "rotacao de tela nao pode contar duas vezes",
+            1,
+            activity.split("savedInstanceState == null").size - 1,
+        )
+    }
+
     @Test
     fun `contador nao interfere nas configuracoes de triagem`() = runTest {
         val repo = repo()
