@@ -167,6 +167,107 @@
     <string name="settings_notification_identification_anonymous">Não mostrar identificação</string>
     <string name="notification_permission_rationale">Para avisar sobre chamadas bloqueadas, o Sentinela precisa da permissão de notificações. O aviso é local e nunca mostra o número completo.</string>
 
+    <!-- ===================================================================
+         Fase 6 — telas de chamada e discagem (modo discador opcional).
+         Contrato: .planning/phases/06-modo-discador-opcional/06-UI-SPEC.md
+         =================================================================== -->
+
+    <!-- Chamada: rótulos de estado -->
+    <string name="call_incoming_state">Chamada recebida</string>
+    <string name="call_dialing_state">Chamando…</string>
+    <string name="call_ringing_state">Tocando…</string>
+    <string name="call_active_state">Em chamada</string>
+    <string name="call_ended_state">Chamada encerrada</string>
+    <string name="call_failed_state">Não foi possível completar a chamada</string>
+
+    <!-- Chamada: ações principais (label sob o botão) -->
+    <string name="call_action_answer">Atender</string>
+    <string name="call_action_reject">Recusar</string>
+    <string name="call_action_hangup">Encerrar</string>
+    <string name="call_action_answer_description">Atender chamada</string>
+    <string name="call_action_reject_description">Recusar chamada</string>
+    <string name="call_action_hangup_description">Encerrar chamada</string>
+
+    <!-- Chamada: controles secundários -->
+    <string name="call_control_mute">Mudo</string>
+    <string name="call_control_speaker">Viva-voz</string>
+    <string name="call_control_keypad">Teclado</string>
+    <string name="call_control_mute_off_description">Mudo, desativado</string>
+    <string name="call_control_mute_on_description">Mudo, ativado</string>
+    <string name="call_control_speaker_off_description">Viva-voz, desativado</string>
+    <string name="call_control_speaker_on_description">Viva-voz, ativado</string>
+    <string name="call_control_keypad_closed_description">Teclado numérico, fechado</string>
+    <string name="call_control_keypad_open_description">Teclado numérico, aberto</string>
+    <string name="call_control_unavailable_state">indisponível</string>
+
+    <!-- Chamada: chips de origem -->
+    <string name="call_origin_contact">Contato</string>
+    <string name="call_origin_whitelist">Permitido</string>
+    <string name="call_origin_unknown">Desconhecido</string>
+    <string name="call_origin_private">Número privado</string>
+
+    <!-- Chamada: saída de áudio -->
+    <string name="call_audio_route_title">Saída de áudio</string>
+    <string name="call_audio_route_earpiece">Telefone</string>
+    <string name="call_audio_route_speaker">Alto-falante</string>
+
+    <!-- Chamada: cronômetro e teclado DTMF -->
+    <string name="call_timer_description">Duração da chamada: %1$s</string>
+    <string name="call_keypad_close_description">Fechar teclado</string>
+
+    <!-- Discagem -->
+    <string name="dialpad_title">Discar</string>
+    <string name="dialpad_call">Ligar</string>
+    <string name="dialpad_call_description">Ligar para %1$s</string>
+    <string name="dialpad_delete_description">Apagar último dígito</string>
+    <string name="dialpad_clear_description">Apagar o número todo</string>
+    <string name="dialpad_error_failed">Não foi possível iniciar a chamada.</string>
+    <string name="dialpad_error_retry">Tentar de novo</string>
+
+    <!-- Discagem: teclas (contentDescription falada) -->
+    <string name="dialpad_key_1_description">Tecla um</string>
+    <string name="dialpad_key_2_description">Tecla dois</string>
+    <string name="dialpad_key_3_description">Tecla três</string>
+    <string name="dialpad_key_4_description">Tecla quatro</string>
+    <string name="dialpad_key_5_description">Tecla cinco</string>
+    <string name="dialpad_key_6_description">Tecla seis</string>
+    <string name="dialpad_key_7_description">Tecla sete</string>
+    <string name="dialpad_key_8_description">Tecla oito</string>
+    <string name="dialpad_key_9_description">Tecla nove</string>
+    <string name="dialpad_key_0_description">Tecla zero</string>
+    <string name="dialpad_key_star_description">Tecla asterisco</string>
+    <string name="dialpad_key_hash_description">Tecla sustenido</string>
+
+    <!-- Ativação do modo discador: copy honesta (bloco crítico) -->
+    <string name="dialer_activation_title">Tornar o Sentinela seu telefone padrão?</string>
+    <string name="dialer_activation_intro">No modo discador, o Sentinela passa a receber todas as chamadas — inclusive as de quem está na sua agenda. É o único jeito de as políticas por origem valerem também para os seus contatos.</string>
+    <string name="dialer_activation_changes_title">O que muda</string>
+    <string name="dialer_activation_change_1">O Sentinela vira seu app de telefone: a tela de chamada e o teclado passam a ser os dele.</string>
+    <string name="dialer_activation_change_2">A triagem passa a ver todas as chamadas, não só as de números fora da agenda.</string>
+    <string name="dialer_activation_change_3">A política que você escolheu para contatos passa a ser aplicada de fato. O padrão continua sendo Tocar — ativar o modo discador, sozinho, não bloqueia ninguém.</string>
+    <string name="dialer_activation_unchanged_title">O que não muda</string>
+    <string name="dialer_activation_unchanged_1">As chamadas continuam sendo registradas no histórico do telefone. Ser o app de telefone padrão não dá ao Sentinela permissão para omitir esse registro — no Android, só apps de operadora podem.</string>
+    <string name="dialer_activation_unchanged_2">O \"Não Perturbe\" do sistema continua valendo por cima das configurações do Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Chamadas de WhatsApp, Telegram e outros apps de internet continuam fora do alcance do Sentinela.</string>
+    <string name="dialer_activation_unchanged_4">O Sentinela continua 100% offline: nenhuma chamada, número ou contato sai do aparelho.</string>
+    <string name="dialer_activation_limits_title">Limitações</string>
+    <string name="dialer_activation_limit_calls">Uma chamada por vez: chamada em espera e conferência não são suportadas nesta versão.</string>
+    <string name="dialer_activation_contacts_required">O modo discador precisa da permissão de leitura da agenda. Sem ela, o Sentinela não consegue distinguir seus contatos e passaria a tratar todo mundo como desconhecido.</string>
+    <string name="dialer_activation_grant_contacts">Permitir leitura da agenda</string>
+    <string name="dialer_activation_cta">Escolher o Sentinela</string>
+    <string name="dialer_activation_cta_hint">Quem decide é o Android. Você pode voltar quando quiser.</string>
+
+    <!-- Modo discador já ativo: painel de reversão -->
+    <string name="dialer_active_chip">Ativo</string>
+    <string name="dialer_active_title">O Sentinela é seu telefone padrão</string>
+    <string name="dialer_revert_cta">Escolher outro telefone</string>
+    <string name="dialer_revert_hint">Ao voltar para outro app de telefone, o modo filtro do Sentinela continua funcionando normalmente — sem reinstalar nem reconfigurar nada.</string>
+
+    <!-- Papel de discador perdido: banner informativo, sem alarme -->
+    <string name="dialer_role_lost_title">O Sentinela deixou de ser o telefone padrão.</string>
+    <string name="dialer_role_lost_body">O modo filtro continua funcionando: chamadas de números fora da agenda seguem sendo triadas.</string>
+    <string name="dialer_role_lost_action">Ver como reativar</string>
+
     <!-- Genéricos -->
     <string name="action_confirm">Confirmar</string>
     <string name="action_cancel">Cancelar</string>

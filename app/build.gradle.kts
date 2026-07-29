@@ -112,6 +112,12 @@ tasks.withType<Test>().configureEach {
     inputs.dir(layout.projectDirectory.dir("src/main/java"))
         .withPropertyName("mainKotlinSources")
         .withPathSensitivity(PathSensitivity.RELATIVE)
+    // CallStringsTest le os RECURSOS de verdade (varredura de honestidade da copy).
+    // Sem declarar res/ como entrada, mudar so o strings.xml deixa o teste
+    // UP-TO-DATE e o verde antigo passa a valer para texto novo nunca varrido.
+    inputs.dir(layout.projectDirectory.dir("src/main/res"))
+        .withPropertyName("mainAndroidResources")
+        .withPathSensitivity(PathSensitivity.RELATIVE)
 }
 
 detekt {
