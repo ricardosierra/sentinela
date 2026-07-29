@@ -32,8 +32,8 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **DEC-05**: Política de fallback em erro inesperado é explícita e configurável (permitir/bloquear)
 
 ### Normalização de Números (NRM)
-- [ ] **NRM-01**: Normalização para E.164 com libphonenumber (port Android) — nunca normalização improvisada
-- [ ] **NRM-02**: Padrão brasileiro correto: DDI +55, DDD obrigatório, celular com 9 dígitos, fixos
+- [x] **NRM-01**: Normalização para E.164 com libphonenumber (port Android) — nunca normalização improvisada
+- [x] **NRM-02**: Padrão brasileiro correto: DDI +55, DDD obrigatório, celular com 9 dígitos, fixos
 - [ ] **NRM-03**: Formatação bonita é apenas visual; E.164 é a fonte de verdade armazenada
 - [ ] **NRM-04**: Máscara segura para exibição/log (ex.: `+55 11 9****-1234`)
 
