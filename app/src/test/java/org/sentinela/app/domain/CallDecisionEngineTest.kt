@@ -262,4 +262,24 @@ class CallDecisionEngineTest {
         val decision = decide(incoming(ScreenedNumber.Invalid))
         assertEquals(DecisionReason.INVALID_NUMBER, decision.reason)
     }
+
+    @Test
+    fun `omitir a consulta de chamada repetida se comporta como ausencia de repeticao`() {
+        val settings = defaults.copy(unknownPolicy = OriginPolicy.BLOCK, hideFromNativeCallLog = false)
+        val semArgumento = engine.decide(
+            incoming(),
+            settings,
+            ContactLookup.MISS,
+            WhitelistLookup.MISS,
+        )
+        val comMiss = engine.decide(
+            incoming(),
+            settings,
+            ContactLookup.MISS,
+            WhitelistLookup.MISS,
+            RepeatedCallLookup.MISS,
+        )
+        assertEquals(comMiss, semArgumento)
+        assertEquals(CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER), semArgumento)
+    }
 }

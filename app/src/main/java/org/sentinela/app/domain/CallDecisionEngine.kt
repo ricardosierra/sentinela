@@ -15,8 +15,11 @@ import org.sentinela.app.settings.ScreeningSettings
  *  3. Número privado/oculto → configuração específica (bloqueio por padrão).
  *  4. Contato da agenda → política de contatos (tocar por padrão).
  *  5. Whitelist pessoal → política da whitelist (nunca silenciar por padrão).
- *  6. Falha de consulta local (contatos ou whitelist) → política de fallback.
- *  7. Número desconhecido/inválido → política de desconhecidos (bloquear por padrão).
+ *  6. Chamada repetida do mesmo número dentro da janela → permitir (opção ligada
+ *     por padrão). É uma exceção que só faz TOCAR: ela nunca transforma um
+ *     resultado permissivo em bloqueio, e falha de consulta equivale a MISS.
+ *  7. Falha de consulta local (contatos ou whitelist) → política de fallback.
+ *  8. Número desconhecido/inválido → política de desconhecidos (bloquear por padrão).
  *
  * NEVER_SILENCE decide como RING; o bypass de Não Perturbe é responsabilidade
  * da camada telecom/notificações, não do motor.
@@ -28,6 +31,7 @@ class CallDecisionEngine {
         settings: ScreeningSettings,
         contact: ContactLookup,
         whitelist: WhitelistLookup,
+        repeatedCall: RepeatedCallLookup = RepeatedCallLookup.MISS,
     ): CallDecision {
         if (call.direction == CallDirection.OUTGOING) {
             return CallDecision.Allow(DecisionReason.OUTGOING_CALL)
@@ -47,6 +51,9 @@ class CallDecisionEngine {
         }
         if (whitelist == WhitelistLookup.HIT) {
             return apply(settings.whitelistPolicy, settings, DecisionReason.PERSONAL_WHITELIST)
+        }
+        if (settings.repeatedCallBypassEnabled && repeatedCall == RepeatedCallLookup.HIT) {
+            return CallDecision.Allow(DecisionReason.REPEATED_CALL)
         }
         if (contact == ContactLookup.UNAVAILABLE || whitelist == WhitelistLookup.LOOKUP_FAILED) {
             return fallback(settings)

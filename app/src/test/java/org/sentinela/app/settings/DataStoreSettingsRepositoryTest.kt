@@ -162,6 +162,19 @@ class DataStoreSettingsRepositoryTest {
             RetentionPolicy.DAYS_90,
         )
 
+    @Test
+    fun `excecao de chamada repetida vem ligada em arquivo inexistente`() = runTest {
+        assertEquals(true, repo().snapshot().repeatedCallBypassEnabled)
+    }
+
+    @Test
+    fun `round-trip de repeatedCallBypassEnabled`() =
+        roundTrip(
+            { it.copy(repeatedCallBypassEnabled = false) },
+            { it.repeatedCallBypassEnabled },
+            false,
+        )
+
     // --- persistencia real, sem depender da posicao da constante -------------
 
     @Test

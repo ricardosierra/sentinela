@@ -29,7 +29,17 @@ class DecisionReasonTest {
     }
 
     @Test
-    fun `o conjunto de reason codes permanece com nove entradas`() {
+    fun `nenhum reason code contem digito`() {
+        DecisionReason.entries.forEach { reason ->
+            assertTrue(
+                "reason code com dígito pode carregar dado de telefone: ${reason.name}",
+                reason.code.none { it.isDigit() },
+            )
+        }
+    }
+
+    @Test
+    fun `o conjunto de reason codes permanece com dez entradas`() {
         assertEquals(
             "reason code novo exige revisão de privacidade antes de entrar",
             EXPECTED_REASON_COUNT,
@@ -38,6 +48,6 @@ class DecisionReasonTest {
     }
 
     private companion object {
-        const val EXPECTED_REASON_COUNT = 9
+        const val EXPECTED_REASON_COUNT = 10
     }
 }

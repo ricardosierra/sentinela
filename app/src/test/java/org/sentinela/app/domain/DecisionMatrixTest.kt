@@ -104,6 +104,136 @@ class DecisionMatrixTest(
 }
 
 /**
+ * Uma linha da tabela de chamada repetida, escrita à mão. Os defaults descrevem o
+ * cenário base: chamada de entrada de número desconhecido que já ligou há pouco.
+ */
+data class RepeatedCallCase(
+    val esperado: CallDecision,
+    val settings: ScreeningSettings = BLOQUEIA_DESCONHECIDOS,
+    val call: ScreenedCall = incoming(),
+    val contact: ContactLookup = ContactLookup.MISS,
+    val whitelist: WhitelistLookup = WhitelistLookup.MISS,
+    val repeated: RepeatedCallLookup = RepeatedCallLookup.HIT,
+)
+
+/** Configuração base da tabela: desconhecido bloqueado, sem ocultar o log nativo. */
+val BLOQUEIA_DESCONHECIDOS = ScreeningSettings(
+    unknownPolicy = OriginPolicy.BLOCK,
+    hideFromNativeCallLog = false,
+)
+
+/**
+ * SCR-12 — exceção de chamada repetida. Tabela escrita à mão (NÃO derivada do
+ * motor): cada linha declara a entrada e o resultado esperado, provando que o
+ * bypass entra depois de contato/whitelist e antes da política de desconhecidos,
+ * e que ele só faz tocar.
+ */
+@RunWith(Parameterized::class)
+class RepeatedCallMatrixTest(private val nome: String, private val caso: RepeatedCallCase) {
+
+    @Test
+    fun `caso da tabela de chamada repetida produz a decisao esperada`() {
+        val decision = CallDecisionEngine()
+            .decide(caso.call, caso.settings, caso.contact, caso.whitelist, caso.repeated)
+        assertEquals(nome, caso.esperado, decision)
+    }
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0}")
+        fun cases(): List<Array<Any>> = casosDoBypass() + casosDePrecedencia()
+
+        private fun casosDoBypass(): List<Array<Any>> = listOf(
+            arrayOf(
+                "repetida com bypass ligado toca em vez de bloquear",
+                RepeatedCallCase(CallDecision.Allow(DecisionReason.REPEATED_CALL)),
+            ),
+            arrayOf(
+                "repetida com bypass desligado segue a politica de desconhecidos",
+                RepeatedCallCase(
+                    settings = BLOQUEIA_DESCONHECIDOS.copy(repeatedCallBypassEnabled = false),
+                    esperado = CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER),
+                ),
+            ),
+            arrayOf(
+                "sem repeticao segue a politica de desconhecidos",
+                RepeatedCallCase(
+                    repeated = RepeatedCallLookup.MISS,
+                    esperado = CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER),
+                ),
+            ),
+            arrayOf(
+                "falha da consulta de historico equivale a ausencia de repeticao",
+                RepeatedCallCase(
+                    repeated = RepeatedCallLookup.LOOKUP_FAILED,
+                    esperado = CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER),
+                ),
+            ),
+            arrayOf(
+                "bypass nunca transforma um allow em bloqueio",
+                RepeatedCallCase(
+                    settings = BLOQUEIA_DESCONHECIDOS.copy(unknownPolicy = OriginPolicy.RING),
+                    esperado = CallDecision.Allow(DecisionReason.REPEATED_CALL),
+                ),
+            ),
+            arrayOf(
+                "repetida de numero invalido tambem toca",
+                RepeatedCallCase(
+                    call = incoming(ScreenedNumber.Invalid),
+                    esperado = CallDecision.Allow(DecisionReason.REPEATED_CALL),
+                ),
+            ),
+        )
+
+        private fun casosDePrecedencia(): List<Array<Any>> = listOf(
+            arrayOf(
+                "contato vence o bypass e mantem o proprio reason",
+                RepeatedCallCase(
+                    contact = ContactLookup.HIT,
+                    esperado = CallDecision.Allow(DecisionReason.CONTACT),
+                ),
+            ),
+            arrayOf(
+                "whitelist vence o bypass e mantem o proprio reason",
+                RepeatedCallCase(
+                    whitelist = WhitelistLookup.HIT,
+                    esperado = CallDecision.Allow(DecisionReason.PERSONAL_WHITELIST),
+                ),
+            ),
+            arrayOf(
+                "protecao desligada vence o bypass",
+                RepeatedCallCase(
+                    settings = BLOQUEIA_DESCONHECIDOS.copy(protectionEnabled = false),
+                    esperado = CallDecision.Allow(DecisionReason.PROTECTION_DISABLED),
+                ),
+            ),
+            arrayOf(
+                "chamada de saida vence o bypass",
+                RepeatedCallCase(
+                    call = ScreenedCall(CallDirection.OUTGOING, ScreenedNumber.Valid(TEST_NUMBER)),
+                    esperado = CallDecision.Allow(DecisionReason.OUTGOING_CALL),
+                ),
+            ),
+            arrayOf(
+                "numero privado bloqueado vence o bypass",
+                RepeatedCallCase(
+                    call = incoming(ScreenedNumber.Private),
+                    esperado = CallDecision.Reject(DecisionReason.PRIVATE_NUMBER),
+                ),
+            ),
+            arrayOf(
+                "bypass entra antes do fallback por falha de consulta local",
+                RepeatedCallCase(
+                    settings = BLOQUEIA_DESCONHECIDOS.copy(fallbackPolicy = FallbackPolicy.BLOCK),
+                    contact = ContactLookup.UNAVAILABLE,
+                    esperado = CallDecision.Allow(DecisionReason.REPEATED_CALL),
+                ),
+            ),
+        )
+    }
+}
+
+/**
  * Casos que não pertencem à matriz parametrizada: número inválido, número
  * privado e os dois gatilhos de fallback por falha de consulta local.
  */

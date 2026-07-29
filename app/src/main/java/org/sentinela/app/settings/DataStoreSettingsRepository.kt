@@ -116,6 +116,7 @@ class DataStoreSettingsRepository(
         val FALLBACK_POLICY = stringPreferencesKey("fallback_policy")
         val HISTORY_ENABLED = booleanPreferencesKey("history_enabled")
         val RETENTION_POLICY = stringPreferencesKey("retention_policy")
+        val REPEATED_CALL_BYPASS = booleanPreferencesKey("repeated_call_bypass")
         val APP_OPEN_COUNT = intPreferencesKey("app_open_count")
         val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
     }
@@ -138,6 +139,8 @@ class DataStoreSettingsRepository(
             historyEnabled = this[Keys.HISTORY_ENABLED] ?: padrao.historyEnabled,
             // fromId já é tolerante: id desconhecido volta ao padrão do MVP.
             retentionPolicy = RetentionPolicy.fromId(this[Keys.RETENTION_POLICY]),
+            repeatedCallBypassEnabled =
+                this[Keys.REPEATED_CALL_BYPASS] ?: padrao.repeatedCallBypassEnabled,
         )
     }
 
@@ -161,5 +164,6 @@ class DataStoreSettingsRepository(
         prefs[Keys.FALLBACK_POLICY] = fallbackPolicy.name
         prefs[Keys.HISTORY_ENABLED] = historyEnabled
         prefs[Keys.RETENTION_POLICY] = retentionPolicy.id
+        prefs[Keys.REPEATED_CALL_BYPASS] = repeatedCallBypassEnabled
     }
 }

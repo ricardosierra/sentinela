@@ -4,7 +4,8 @@ package org.sentinela.app.settings
  * Configurações de triagem com os padrões do MVP: proteção ativa, desconhecidos
  * bloqueados, privados bloqueados, contatos tocando, whitelist nunca silenciada,
  * sem rastro no histórico nativo, notificação própria desabilitada, fallback
- * seguro permitindo a chamada, histórico local ligado e retenção de 30 dias.
+ * seguro permitindo a chamada, histórico local ligado, retenção de 30 dias e a
+ * exceção de chamada repetida ligada.
  */
 data class ScreeningSettings(
     val protectionEnabled: Boolean = true,
@@ -24,6 +25,11 @@ data class ScreeningSettings(
     val historyEnabled: Boolean = true,
     /** Retenção padrão 30 dias (decisão travada no CONTEXT da Fase 3). */
     val retentionPolicy: RetentionPolicy = RetentionPolicy.DAYS_30,
+    /**
+     * Se o mesmo número voltar a ligar logo depois de ser bloqueado, a segunda
+     * chamada toca. Ligada por padrão (decisão do usuário, 2026-07-29).
+     */
+    val repeatedCallBypassEnabled: Boolean = true,
 )
 
 /**
