@@ -35,6 +35,7 @@ import org.sentinela.app.telecom.PostScreeningWork
 import org.sentinela.app.telecom.ScreenedCallFactory
 import org.sentinela.app.telecom.ScreeningCoordinator
 import org.sentinela.app.telecom.ScreeningDependencies
+import org.sentinela.app.telecom.call.CallSessionStore
 import org.sentinela.app.platform.AndroidRegionProvider
 import org.sentinela.app.platform.assetsPhoneMetadataLoader
 
@@ -199,7 +200,19 @@ class AppContainer(
         appScope.launch { runCatching { block() } }
     }
 
-    // TODO(Fase 6): componentes do modo discador (InCallService/ROLE_DIALER).
+    /**
+     * Armazém da sessão de chamada do modo discador. Instância ÚNICA do processo: a Fase 5 mediu
+     * que um segundo container derruba o processo, e aqui a exigência é ainda mais direta — o
+     * serviço de chamada e a tela de chamada precisam olhar para o MESMO estado, senão a tela
+     * mostra uma ligação e o usuário comanda outra.
+     *
+     * Recebe o escopo real do processo de propósito: é ele que liga o vigia do prazo de
+     * apresentação do coordenador. Escopo ausente desliga o vigia e existe apenas para os testes
+     * de lógica pura.
+     *
+     * Preguiçoso, como todo o resto: no modo filtro, que é o padrão, este objeto nunca nasce.
+     */
+    val callSessionStore: CallSessionStore by lazy { CallSessionStore(appScope) }
 
     private companion object {
         const val SETTINGS_DATASTORE_NAME = "sentinela_settings"

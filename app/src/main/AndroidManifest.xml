@@ -10,6 +10,20 @@
          O app nunca pede gravacao na agenda: os testes instrumentados adotam a identidade
          de shell para preparar dados, entao nenhum manifest declara essa capacidade. -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- Fase 6, modo discador OPCIONAL. Leia docs/PERMISSOES.md antes de mexer aqui: a lista de
+         elegibilidade ao papel de telefone padrao foi confirmada por experimento e nao e negociavel.
+         Originar chamada e pedida em runtime, na tela de discagem. A intencao de tela cheia e
+         concedida no install a aplicativo de chamada, mas o usuario pode revoga-la nas
+         Configuracoes, entao o codigo consulta antes de usar e degrada para aviso com acoes. -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <!-- Telefonia declarada como NAO obrigatoria: o aplicativo instala e roda em aparelho sem
+         radio de telefonia, apenas sem o modo discador — nesse aparelho o sistema nao oferece o
+         papel de telefone padrao, e o estado do modo responde que ele esta indisponivel. Exigir a
+         capacidade tiraria o aplicativo da loja para esses aparelhos sem nenhum ganho. -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <application
         android:name=".SentinelaApp"
@@ -42,5 +56,57 @@
                 <action android:name="android.telecom.CallScreeningService" />
             </intent-filter>
         </service>
+
+        <!-- Fase 6: servico da interface de chamada. Sem ele DECLARADO o pedido do papel de
+             telefone padrao e NEGADO pelo sistema — medido em experimento controlado, nao deduzido
+             da documentacao. exported=true e exigido para o vinculo funcionar, e a permissao de
+             vinculo garante que so o sistema conecta (docs/PERMISSOES.md).
+             O meta-dado abaixo declara que este aplicativo substitui a interface de chamada nativa.
+             O meta-dado que transferiria ao aplicativo a responsabilidade de tocar o toque de
+             chamada NAO e declarado de proposito: o sistema continua tocando o toque escolhido pelo
+             usuario, e replicar volume, vibracao, escalonamento e nao-perturbe seria ampliar escopo
+             sem pedido. -->
+        <service
+            android:name=".telecom.SentinelaInCallService"
+            android:exported="true"
+            android:permission="android.permission.BIND_INCALL_SERVICE">
+            <meta-data
+                android:name="android.telecom.IN_CALL_SERVICE_UI"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.telecom.InCallService" />
+            </intent-filter>
+        </service>
+
+        <!-- Fase 6: tela de discagem. Os DOIS filtros de acao de discagem sao exigidos, um com
+             esquema vazio e outro com esquema de telefone: o sistema aplica os dois em sequencia e
+             passar em um so NAO e passar. Declarar estes filtros nao faz o aplicativo se intrometer
+             na discagem de quem nao ativou o modo discador — medido: sem o papel, a acao de discagem
+             continua resolvendo para o discador do aparelho. -->
+        <activity
+            android:name=".ui.dialer.DialerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="tel" />
+            </intent-filter>
+        </activity>
+
+        <!-- Fase 6: tela de chamada. NAO recebe filtro de intencao: ela e aberta pelo proprio
+             aplicativo, pela intencao de tela cheia da notificacao de chamada (plano 06-06) e pelo
+             servico acima. Os atributos de tela bloqueada existem para a chamada aparecer com o
+             aparelho travado, que e o caso de uso central de um telefone padrao. -->
+        <activity
+            android:name=".ui.call.CallActivity"
+            android:exported="false"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true" />
     </application>
 </manifest>
