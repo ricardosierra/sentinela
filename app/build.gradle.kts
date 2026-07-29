@@ -54,6 +54,10 @@ android {
 
     buildFeatures {
         compose = true
+        // Ligado no plano 06-06 para que a chave do extra de ação da notificação de chamada saia
+        // do identificador do aplicativo em vez de um literal em Kotlin, que o invariante de
+        // rebranding do projeto proíbe. Nenhum campo próprio é declarado aqui.
+        buildConfig = true
     }
 
     testOptions {

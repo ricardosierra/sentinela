@@ -178,14 +178,17 @@ class IncomingCallNotifierTest {
             MaskedCallIdentity(displayName = "Fulano", maskedNumber = MASCARA),
             MaskedCallIdentity(),
         ).forEach { identity ->
-            listOf(publicarRecebida(identity), publicarEmCurso(identity)).forEach { notification ->
-                (textos(notification) + acoesDe(notification).map { it.orEmpty() })
-                    .forEach { texto ->
-                        SEQUENCIAS_PROIBIDAS.forEach { sequencia ->
-                            assertFalse("$identity: $texto", texto.contains(sequencia))
-                        }
-                    }
+            val publicados = listOf(publicarRecebida(identity), publicarEmCurso(identity))
+            val varridos = publicados.flatMap { notification ->
+                textos(notification) + acoesDe(notification).map { it.orEmpty() }
             }
+            varridos.forEach { texto -> semSequenciaCompleta("$identity: $texto", texto) }
+        }
+    }
+
+    private fun semSequenciaCompleta(mensagem: String, texto: String) {
+        SEQUENCIAS_PROIBIDAS.forEach { sequencia ->
+            assertFalse(mensagem, texto.contains(sequencia))
         }
     }
 
@@ -247,9 +250,7 @@ class IncomingCallNotifierTest {
         assertTrue("esperadas as duas acoes, obtidas $acoes", acoes.size >= 2)
         assertTrue(acoes.contains(IncomingCallNotifier.ACTION_ANSWER))
         assertTrue(acoes.contains(IncomingCallNotifier.ACTION_REJECT))
-        textos(notification).forEach { texto ->
-            SEQUENCIAS_PROIBIDAS.forEach { assertFalse(texto, texto.contains(it)) }
-        }
+        textos(notification).forEach { texto -> semSequenciaCompleta(texto, texto) }
     }
 
     @Test

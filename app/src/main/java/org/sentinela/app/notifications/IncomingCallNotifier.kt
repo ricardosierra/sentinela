@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
+import org.sentinela.app.BuildConfig
 import org.sentinela.app.R
 import org.sentinela.app.telecom.call.CallNotificationCanceller
 import org.sentinela.app.telecom.call.MaskedCallIdentity
@@ -28,8 +29,12 @@ import org.sentinela.app.ui.call.CallActivity
  * levando, num extra, a ação pretendida pelo usuário. Quem lê o extra é a tela de chamada, que
  * traduz o valor em comando da sessão. O contrato, literal:
  *
- * - chave do extra: `org.sentinela.app.extra.CALL_ACTION`
- * - valores possíveis: `answer` (atender), `reject` (recusar), `hangup` (encerrar)
+ * - chave do extra: o identificador do aplicativo seguido de `.extra.CALL_ACTION` — que é
+ *   exatamente o valor de [EXTRA_CALL_ACTION], e é dele que a tela deve ler, nunca de um literal
+ *   repetido. O identificador não aparece escrito aqui porque literal do identificador em Kotlin é
+ *   proibido pelo invariante de rebranding do projeto: ele sai da configuração de compilação.
+ * - valores possíveis: `answer` (atender), `reject` (recusar), `hangup` (encerrar) — que são
+ *   [ACTION_ANSWER], [ACTION_REJECT] e [ACTION_HANGUP]
  *
  * Nenhum receptor de transmissão é criado e o manifest não é tocado por causa disto. O motivo é
  * técnico, não de gosto: o serviço da interface de chamada é **vinculado** pela plataforma de
@@ -182,8 +187,14 @@ class IncomingCallNotifier(
     }
 
     companion object {
-        /** Chave do extra de ação. Contrato literal, consumido pela tela de chamada. */
-        const val EXTRA_CALL_ACTION: String = "org.sentinela.app.extra.CALL_ACTION"
+        /**
+         * Chave do extra de ação, consumida pela tela de chamada.
+         *
+         * Composta a partir do identificador do aplicativo da configuração de compilação em vez de
+         * escrita como literal: o invariante de rebranding do projeto proíbe o identificador
+         * literal em Kotlin, e compor a chave faz ela acompanhar qualquer renomeação futura.
+         */
+        val EXTRA_CALL_ACTION: String = "${BuildConfig.APPLICATION_ID}.extra.CALL_ACTION"
 
         const val ACTION_ANSWER: String = "answer"
         const val ACTION_REJECT: String = "reject"
