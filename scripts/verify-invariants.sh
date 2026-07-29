@@ -153,7 +153,8 @@ count_in_report() {
   local file="$1" pattern="$2" n
   [ -f "$file" ] || return 1
   # `grep -c` imprime 0 E sai com codigo 1 quando nao ha match; a atribuicao
-  # descarta o status, entao NAO usar `|| echo 0` (duplicaria a contagem).
+  # descarta o status. NAO acrescentar um fallback com `echo` no ramo de erro:
+  # o zero ja foi impresso e a contagem sairia duplicada ("0\n0").
   n=$(grep -c "$pattern" "$file" 2>/dev/null)
   echo "${n:-0}"
 }
@@ -179,6 +180,49 @@ if LINT_ISSUES=$(count_in_report "$LINT_REPORT" "<issue "); then
   fi
 else
   skip "lint-results-debug.xml ausente (rode ./gradlew lint)"
+fi
+
+# ---------------------------------------------------------------------------
+# Bloco 5 — Fase 3: integridade do dado local (o risco da fase e PERDER dado)
+# ---------------------------------------------------------------------------
+echo "== Bloco 5: integridade do dado local =="
+
+# A migracao destrutiva do Room apagaria a whitelist do usuario numa atualizacao.
+# O match e proposital ate em comentario: linha comentada hoje vira linha ativa
+# amanha. Por isso Migrations.kt descreve o metodo em vez de escrever o nome.
+DESTRUCTIVE=$(grep -rn "fallbackToDestructiveMigration" app/src/main --include="*.kt" 2>/dev/null)
+if [ -z "$DESTRUCTIVE" ]; then
+  ok "sem fallbackToDestructiveMigration (migracao explicita obrigatoria)"
+else
+  echo "$DESTRUCTIVE" | sed 's/^/      /'
+  fail "fallbackToDestructiveMigration proibido (Fase 3): apagaria o dado do usuario"
+fi
+
+# allowMainThreadQueries mascara o problema de dispatch em vez de resolve-lo.
+MAINTHREAD=$(grep -rn "allowMainThreadQueries" app/src/main --include="*.kt" 2>/dev/null)
+if [ -z "$MAINTHREAD" ]; then
+  ok "sem allowMainThreadQueries"
+else
+  echo "$MAINTHREAD" | sed 's/^/      /'
+  fail "allowMainThreadQueries proibido (Fase 3)"
+fi
+
+# Schema v1 exportado e versionado — o JSON e o oraculo da migracao.
+SCHEMAS=$(ls -1 app/schemas/*/1.json 2>/dev/null | wc -l | tr -d ' ')
+if [ "${SCHEMAS:-0}" -ge 1 ]; then
+  ok "schema Room v1 exportado (app/schemas/*/1.json)"
+else
+  fail "app/schemas/<db>/1.json ausente — exportSchema desligado?"
+fi
+
+# O historico guarda E.164, mas NUNCA nome de contato (docs/PRIVACIDADE.md).
+CONTACT_COL=$(grep -rniE "contactName|contact_name|displayName|display_name" \
+  app/src/main/java/org/sentinela/app/data/local 2>/dev/null)
+if [ -z "$CONTACT_COL" ]; then
+  ok "nenhuma coluna de nome de contato na camada de dados"
+else
+  echo "$CONTACT_COL" | sed 's/^/      /'
+  fail "nome de contato na camada de dados — proibido (docs/PRIVACIDADE.md)"
 fi
 
 # ---------------------------------------------------------------------------
