@@ -32,11 +32,21 @@ fase pode emitir `checkpoint:human-action` ou `checkpoint:human-verify`.
 - **Número BR sem DDD** (ex.: `98765-4321`) → `NormalizationResult.Invalid` com razão explícita.
   Não inferir DDD: inferência errada envenena a whitelist e faz o motor decidir sobre um número
   que não é o do chamador.
-- **Celular BR antigo sem o 9** (ex.: `+55 11 8765-4321`) → normalizar acrescentando o 9 quando
-  libphonenumber reconhecer o número como válido-com-correção. Caso de teste explícito.
-- **Números curtos e de serviço** (`190`, `0800…`, `4004-…`) → `Valid` com o E.164 que
-  libphonenumber devolver quando possível. São números discáveis e o usuário pode legitimamente
-  querer colocá-los na whitelist. Não criar categoria separada no MVP.
+- **Celular BR antigo sem o 9** (ex.: `+55 11 8765-4321`) — **CORRIGIDO APÓS PESQUISA
+  (2026-07-29):** a pesquisa provou por experimento que libphonenumber **não** corrige sozinho
+  (`valid=false`, `UNKNOWN`). **DECISÃO DO USUÁRIO:** implementar a regra do 9º dígito **à mão** —
+  inserir o `9` quando for celular BR de 8 dígitos iniciando em 6–9, e só aceitar o resultado se
+  libphonenumber **revalidar** o número corrigido (guarda-corpo obrigatório). Caso de teste
+  explícito, incluindo o caso em que a correção não revalida e o retorno é `Invalid`.
+- **`0800…` e `4004-…`** → `Valid` com o E.164 de libphonenumber; funcionam sem esforço
+  (`TOLL_FREE` / `SHARED_COST`, `valid=true`).
+- **Números curtos** (`190`, `911`) — **CORRIGIDO APÓS PESQUISA (2026-07-29):** libphonenumber
+  produz E.164 falso (`190` → `+55190`, `valid=false`, `TOO_SHORT`) e `ShortNumberInfo` é
+  inconstruível no port `-android` (construtor package-private, confirmado por `javap`).
+  **DECISÃO DO USUÁRIO:** representar como `Valid` com os **dígitos crus**, não com E.164 falso —
+  chave própria. Limiar compartilhado `LIMIAR_CURTO = 6` dígitos, usado **pela mesma constante**
+  na normalização e na máscara. O usuário precisa conseguir pôr `190` na whitelist.
+  Consequência a registrar: isso define o formato de chave que a **Phase 3 vai persistir**.
 - **Região padrão — DECISÃO DO USUÁRIO (2026-07-29):** *não* travar em `"BR"`. O app precisa
   funcionar no mundo todo. Resolução da região em cascata:
   1. `TelephonyManager` — `simCountryIso`, com `networkCountryIso` como segunda opção.
@@ -48,10 +58,9 @@ fase pode emitir `checkpoint:human-action` ou `checkpoint:human-verify`.
   sem importar tipo do Android. A leitura do `TelephonyManager` fica atrás de uma interface
   (ex.: `RegionProvider`) com implementação Android injetada pelo `AppContainer`; o domínio vê
   só a interface. Testes usam fake.
-- **Verificar antes de implementar:** `simCountryIso`/`networkCountryIso` não podem exigir
-  `READ_PHONE_STATE` — essa permissão é proibida sem prova de necessidade
-  (`docs/PERMISSOES.md`). Se exigir, a cascata cai direto para o passo 2 (usuário informa) e a
-  permissão **não** é adicionada.
+- **RESOLVIDO PELA PESQUISA (2026-07-29):** no AOSP, `getSimCountryIso()` e
+  `getNetworkCountryIso()` têm apenas `@RequiresFeature`, **nenhum `@RequiresPermission`** —
+  a cascata é legal e `READ_PHONE_STATE` **não** é necessária nem será adicionada.
 - A persistência da região informada pelo usuário é da Phase 3; nesta fase, apenas o contrato
   e o fallback em memória.
 
@@ -60,8 +69,9 @@ fase pode emitir `checkpoint:human-action` ou `checkpoint:human-verify`.
 - Formato canônico: `+55 11 9****-1234` — DDI + DDD + primeiro dígito + `****` + últimos 4,
   conforme já fixado no `CLAUDE.md`. Generalizar para outros DDIs mantendo a forma
   "prefixo do país + área + primeiro dígito + asteriscos + últimos 4".
-- **Números curtos — DECISÃO DO USUÁRIO (2026-07-29):** número curto demais para ser mascarado
-  de forma útil (ex.: `190`) **pode ser exibido na íntegra**. Princípio orientador do usuário:
+- **Números curtos — DECISÃO DO USUÁRIO (2026-07-29):** número com menos de `LIMIAR_CURTO = 6`
+  dígitos (ex.: `190`) **é exibido na íntegra**, sem máscara. Mesma constante usada pela
+  normalização — uma única fonte de verdade. Princípio orientador do usuário:
   *"essas máscaras não podem atrapalhar o usuário"* — a máscara existe para proteger dado
   pessoal, e um número público de serviço não é dado pessoal. Definir um limiar explícito em
   código (número de dígitos abaixo do qual não se mascara) e testá-lo.
@@ -78,9 +88,14 @@ fase pode emitir `checkpoint:human-action` ou `checkpoint:human-verify`.
 - Precedência testada por **testes parametrizados sobre a matriz completa** (política × origem),
   somados aos casos nomeados que já existem — a matriz garante que nenhuma combinação nova
   entre sem cobertura.
-- libphonenumber: usar a variante JVM pura nos testes unitários se o port `-android` não rodar
-  fora do device; runtime continua com o port `-android`. Não introduzir Robolectric (o
-  `01-VALIDATION.md` registra que a versão disponível não suporta o SDK alvo).
+- libphonenumber — **RESOLVIDO PELA PESQUISA (2026-07-29):** o port `io.michaelrocks:libphonenumber-android`
+  **roda em teste JVM puro**, sem Robolectric e sem segunda dependência: `PhoneNumberUtil.createInstance(MetadataLoader)`
+  é público e os metadados do AAR são localizáveis pelo teste via `com/android/tools/test_config.properties`
+  → chave `android_merged_assets` (disponível porque `isIncludeAndroidResources = true` já está ligado).
+  Uma única dependência serve runtime e teste.
+- Kover 0.9.9 é compatível com AGP 9.3.0 + Gradle 9.6.1 e o gate falha de verdade quando violado.
+  **Exige subir `MaxMetaspaceSize` de 512m para 1g** em `gradle.properties`, senão o build morre
+  com erro de Metaspace. Baseline medido de `domain` + `phone`: 94,74%.
 
 ### Claude's Discretion
 
