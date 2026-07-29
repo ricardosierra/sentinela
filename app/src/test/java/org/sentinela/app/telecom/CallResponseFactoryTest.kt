@@ -10,9 +10,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.sentinela.app.domain.CallDecision
 import org.sentinela.app.domain.DecisionReason
-import org.sentinela.app.settings.BlockMode
-import org.sentinela.app.settings.FallbackPolicy
-import org.sentinela.app.settings.OriginPolicy
 import org.sentinela.app.settings.ScreeningSettings
 
 /**
@@ -29,87 +26,61 @@ class CallResponseFactoryTest {
     private fun response(decision: CallDecision, settings: ScreeningSettings = ScreeningSettings()) =
         factory.toResponse(decision, settings)
 
-    private fun assertCampos(
-        response: CallResponse,
-        disallow: Boolean,
-        reject: Boolean,
-        silence: Boolean,
-        skipCallLog: Boolean,
-        skipNotification: Boolean,
-    ) {
-        assertEquals("disallowCall", disallow, response.disallowCall)
-        assertEquals("rejectCall", reject, response.rejectCall)
-        assertEquals("silenceCall", silence, response.silenceCall)
-        assertEquals("skipCallLog", skipCallLog, response.skipCallLog)
-        assertEquals("skipNotification", skipNotification, response.skipNotification)
-    }
+    /** Ordem fixa: disallow, reject, silence, skipCallLog, skipNotification. */
+    private fun campos(response: CallResponse): List<Boolean> = listOf(
+        response.disallowCall,
+        response.rejectCall,
+        response.silenceCall,
+        response.skipCallLog,
+        response.skipNotification,
+    )
 
     @Test
     fun `Allow nao mexe em nenhum campo`() {
-        assertCampos(
-            response(CallDecision.Allow(DecisionReason.CONTACT)),
-            disallow = false,
-            reject = false,
-            silence = false,
-            skipCallLog = false,
-            skipNotification = false,
+        assertEquals(
+            listOf(false, false, false, false, false),
+            campos(response(CallDecision.Allow(DecisionReason.CONTACT))),
         )
     }
 
     @Test
     fun `Silence usa somente silenceCall`() {
-        assertCampos(
-            response(CallDecision.Silence(DecisionReason.UNKNOWN_NUMBER)),
-            disallow = false,
-            reject = false,
-            silence = true,
-            skipCallLog = false,
-            skipNotification = false,
+        assertEquals(
+            listOf(false, false, true, false, false),
+            campos(response(CallDecision.Silence(DecisionReason.UNKNOWN_NUMBER))),
         )
     }
 
     @Test
     fun `Reject recusa e suprime a notificacao nativa`() {
-        assertCampos(
-            response(
+        assertEquals(
+            listOf(true, true, false, false, true),
+            campos(response(
                 CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER),
                 ScreeningSettings(hideFromNativeCallLog = false),
-            ),
-            disallow = true,
-            reject = true,
-            silence = false,
-            skipCallLog = false,
-            skipNotification = true,
+            )),
         )
     }
 
     @Test
     fun `SendSilentlyToVoicemail usa a mesma combinacao de recusa`() {
-        assertCampos(
-            response(
+        assertEquals(
+            listOf(true, true, false, false, true),
+            campos(response(
                 CallDecision.SendSilentlyToVoicemail(DecisionReason.UNKNOWN_NUMBER),
                 ScreeningSettings(hideFromNativeCallLog = false),
-            ),
-            disallow = true,
-            reject = true,
-            silence = false,
-            skipCallLog = false,
-            skipNotification = true,
+            )),
         )
     }
 
     @Test
     fun `BlockWithoutTrace pede tambem o descarte do registro nativo`() {
-        assertCampos(
-            response(
+        assertEquals(
+            listOf(true, true, false, true, true),
+            campos(response(
                 CallDecision.BlockWithoutTrace(DecisionReason.PRIVATE_NUMBER),
                 ScreeningSettings(hideFromNativeCallLog = false),
-            ),
-            disallow = true,
-            reject = true,
-            silence = false,
-            skipCallLog = true,
-            skipNotification = true,
+            )),
         )
     }
 
@@ -126,8 +97,8 @@ class CallResponseFactoryTest {
 
     @Test
     fun `nenhuma combinacao de decisao e configuracao faz o construtor real lancar`() {
-        TODAS_AS_DECISOES.forEach { decision ->
-            TODAS_AS_CONFIGURACOES.forEach { settings ->
+        ResponseCases.DECISOES.forEach { decision ->
+            ResponseCases.CONFIGURACOES.forEach { settings ->
                 val r = factory.toResponse(decision, settings)
                 assertTrue("resposta nula para $decision", r != null)
             }
@@ -136,45 +107,13 @@ class CallResponseFactoryTest {
 
     @Test
     fun `nenhuma resposta combina recusa com silenciamento`() {
-        TODAS_AS_DECISOES.forEach { decision ->
-            TODAS_AS_CONFIGURACOES.forEach { settings ->
+        ResponseCases.DECISOES.forEach { decision ->
+            ResponseCases.CONFIGURACOES.forEach { settings ->
                 val r = factory.toResponse(decision, settings)
                 assertFalse(
                     "combinacao enganosa em $decision",
                     r.disallowCall && r.silenceCall,
                 )
-            }
-        }
-    }
-
-    internal companion object {
-        val TODAS_AS_DECISOES: List<CallDecision> = listOf(
-            CallDecision.Allow(DecisionReason.CONTACT),
-            CallDecision.Silence(DecisionReason.UNKNOWN_NUMBER),
-            CallDecision.Reject(DecisionReason.UNKNOWN_NUMBER),
-            CallDecision.SendSilentlyToVoicemail(DecisionReason.UNKNOWN_NUMBER),
-            CallDecision.BlockWithoutTrace(DecisionReason.PRIVATE_NUMBER),
-        )
-
-        val TODAS_AS_CONFIGURACOES: List<ScreeningSettings> = buildList {
-            for (esconder in listOf(true, false)) {
-                for (notificacao in listOf(true, false)) {
-                    for (modo in BlockMode.entries) {
-                        for (politica in OriginPolicy.entries) {
-                            for (fallback in FallbackPolicy.entries) {
-                                add(
-                                    ScreeningSettings(
-                                        hideFromNativeCallLog = esconder,
-                                        showOwnNotification = notificacao,
-                                        blockMode = modo,
-                                        unknownPolicy = politica,
-                                        fallbackPolicy = fallback,
-                                    ),
-                                )
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -192,8 +131,8 @@ class CallResponseFactoryMinSdkTest {
 
     @Test
     fun `a tabela inteira continua valida no piso do minSdk`() {
-        CallResponseFactoryTest.TODAS_AS_DECISOES.forEach { decision ->
-            CallResponseFactoryTest.TODAS_AS_CONFIGURACOES.forEach { settings ->
+        ResponseCases.DECISOES.forEach { decision ->
+            ResponseCases.CONFIGURACOES.forEach { settings ->
                 val r = factory.toResponse(decision, settings)
                 assertFalse(r.disallowCall && r.silenceCall)
             }
