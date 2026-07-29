@@ -30,12 +30,31 @@
 - **Plataforma SDK 37 não instalada localmente** (só até 36): primeiro build baixa
   automaticamente com as licenças já aceitas; se falhar, `sdkmanager "platforms;android-37"`.
 
+## Modo discador (Phase 6 — pesquisa reforçada obrigatória)
+
+- **Elegibilidade ao `ROLE_DIALER`**: o app precisa atender aos requisitos do papel
+  (handler de `ACTION_DIAL` e `InCallService` declarado com `BIND_INCALL_SERVICE`); sem
+  isso o diálogo do sistema nem oferece o app.
+- **`InCallService` é experiência completa**: atender/recusar/encerrar, áudio (mudo,
+  viva-voz, rota), DTMF, chamada em espera, tela bloqueada — escopo mínimo bem definido ou
+  a fase explode. MVP: uma chamada por vez, sem conferência.
+- **Política por contato só é plena no modo discador** — no modo filtro contatos nem chegam
+  ao app (tocam nativo). A UI deve deixar isso explícito para não parecer bug.
+- **"Nunca Silenciar" (bypass de DND)**: semântica varia (canal com `canBypassDnd`,
+  configurações de DND por estrela/contato). Validar por versão na pesquisa da fase; nunca
+  prometer além do verificado.
+- **Reversão**: ao sair do modo discador, garantir que o papel volta ao app nativo e que
+  nenhuma chamada fica sem handler (testar em aparelho).
+
 ## Produto / UX
 
-- **Mockups divergem do que a plataforma permite** (tela de política por contato): contatos
-  sempre tocam sem discador padrão. O passo vira informativo — não implementar as opções
-  bloquear/silenciar contato.
 - **Números em UI/notificação/log**: sempre mascarados; a máscara é código testado
   (`PhoneNumberNormalizer.mask`), não formatação ad-hoc espalhada.
+- **Contatos**: nome/foto nunca persistidos — lookup em memória na hora (CTT-04); qualquer
+  cache é só de números normalizados em RAM.
 - **Import de backup é superfície de ataque**: validar tamanho, formato e caminhos antes de
   tocar no banco; nunca sobrescrever sem confirmação.
+- **Convite de avaliação**: nunca durante onboarding ou chamada; contador local, sem
+  telemetria; após aceite, nunca mais aparece (ENG-02/04).
+- **Doação Bitcoin**: endereço vem do mantenedor; jamais publicar release com o placeholder
+  vazio preenchido por engano ou endereço inventado.

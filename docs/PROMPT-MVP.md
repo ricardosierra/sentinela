@@ -1,8 +1,37 @@
 # Sentinela — Prompt original do MVP
 
 > Documento de referência: prompt original que define o escopo do MVP do Sentinela.
-> Este texto é a fonte de verdade do escopo. Os documentos de planejamento (`.planning/`)
-> e a documentação técnica (`docs/`) derivam daqui.
+> Este texto **mais a seção de adendos abaixo** são a fonte de verdade do escopo. Os
+> documentos de planejamento (`.planning/`) e a documentação técnica (`docs/`) derivam daqui.
+
+---
+
+## ⚠️ Adendos do produto (2026-07-28) — sobrepõem o texto original onde conflitarem
+
+1. **Ler contatos é permitido e importante.** `READ_CONTACTS` entra no MVP (a restrição
+   original da seção 3 cai). Uso exclusivamente local e em memória: nomes/números da agenda
+   nunca são persistidos nem enviados. Toda chamada que não vier de um contato é bloqueada
+   por padrão (ou silenciada, conforme configuração).
+2. **Substituir recursos nativos (discador) é permitido no MVP.** A restrição "não
+   substituir o discador padrão" cai. O Sentinela oferece um **modo discador opcional**
+   (`ROLE_DIALER` + `InCallService` próprio) que habilita políticas também para contatos.
+   O modo filtro (call screening puro) continua sendo o padrão.
+3. **Políticas por origem, como nos mockups.** Contatos: Tocar (padrão) / Bloquear /
+   Silenciar / Nunca Silenciar. Whitelist pessoal: Nunca Silenciar (padrão) / Tocar /
+   Bloquear / Silenciar. Desconhecidos: Bloquear (padrão) / Silenciar / Permitir.
+4. **Offline-first permanente.** O app funciona 100% offline, sempre. Online serve apenas
+   para sincronizar listas (etapa v0.2.0, fora do MVP — inclui envio opcional da lista de
+   números recebidos ao backend). Sincronização é opt-in, assíncrona e nunca participa da
+   decisão de bloqueio.
+5. **Avaliação e apoio.** Na 5ª abertura do app, convidar o usuário a avaliar; se recusar,
+   repetir na 10ª, 15ª, 20ª… até aceitar. Destacar que o software é **open source**, sem
+   propaganda, sem telemetria, sem envio de dados para a nuvem, 100% offline no celular do
+   usuário — e pedir um comentário de apoio ou doação em Bitcoin.
+6. **Qualidade e performance no máximo.** Máximo possível de testes (unitários,
+   instrumentados, migrações, cobertura ≥ 80% em domínio/dados) e performance exemplar
+   (decisão p95 < 200 ms, cold start mínimo).
+7. **Branding.** O nome antigo que aparecia em parte dos mockups não existe mais; o produto
+   é somente **Sentinela**.
 
 ---
 

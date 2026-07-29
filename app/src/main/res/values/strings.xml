@@ -32,18 +32,37 @@
     <string name="unknown_option_block">Bloquear</string>
     <string name="unknown_option_block_desc">Recusa a chamada instantaneamente.</string>
     <string name="unknown_option_silence">Silenciar</string>
-    <string name="unknown_option_silence_desc">Encaminha em silêncio para a caixa postal.</string>
+    <string name="unknown_option_silence_desc">A chamada chega sem som nem vibração.</string>
     <string name="unknown_option_allow">Permitir</string>
     <string name="unknown_option_allow_desc">Recebe chamadas normalmente.</string>
 
-    <!-- Onboarding: contatos (informativo — contatos sempre tocam; ver docs/LIMITACOES.md) -->
+    <!-- Onboarding: contatos (política configurável) -->
     <string name="contacts_title">E as pessoas da sua lista de contatos?</string>
-    <string name="contacts_explainer">Quem está na sua agenda continua ligando normalmente. O Sentinela não lê seus contatos: o próprio Android só encaminha para o filtro as chamadas de números fora da agenda.</string>
+    <string name="contacts_explainer">Defina como o Sentinela deve tratar as chamadas de quem você já conhece. Você pode alterar isso depois.</string>
+    <string name="contacts_permission_rationale" formatted="false">Para saber se quem liga está na sua agenda, o Sentinela precisa ler seus contatos. A leitura é 100% local: nomes e números nunca são armazenados nem saem do aparelho.</string>
+    <string name="contacts_option_ring">Tocar</string>
+    <string name="contacts_option_ring_desc">As chamadas tocam normalmente no seu telefone.</string>
+    <string name="contacts_option_block">Bloquear</string>
+    <string name="contacts_option_block_desc">Bloqueia todas as chamadas, conforme o modo de bloqueio em Proteção.</string>
+    <string name="contacts_option_silence">Silenciar</string>
+    <string name="contacts_option_silence_desc">O telefone não vibra nem toca, mas mostra a notificação.</string>
+    <string name="contacts_option_never_silence">Nunca Silenciar</string>
+    <string name="contacts_option_never_silence_desc">Ignora o modo \"Não Perturbe\" para sua lista de contatos.</string>
+    <string name="contacts_default_badge">Padrão</string>
 
-    <!-- Onboarding: whitelist -->
+    <!-- Onboarding: whitelist (tratamento configurável) -->
     <string name="whitelist_setup_title">Configuração da Whitelist Pessoal</string>
     <string name="whitelist_setup_what_title">O que é a Whitelist?</string>
-    <string name="whitelist_setup_what_desc">A Whitelist consiste nos números que você adicionou manualmente ou marcou como seguros dentro do aplicativo. Eles nunca são bloqueados.</string>
+    <string name="whitelist_setup_what_desc">A Whitelist consiste nos números que você adicionou manualmente ou marcou como seguros dentro do aplicativo.</string>
+    <string name="whitelist_setup_question">Como tratar sua Whitelist Pessoal?</string>
+    <string name="whitelist_option_never_silence">Nunca Silenciar</string>
+    <string name="whitelist_option_never_silence_desc">Sempre toca, mesmo em \"Não Perturbe\".</string>
+    <string name="whitelist_option_ring">Tocar</string>
+    <string name="whitelist_option_ring_desc">Sempre emitir som.</string>
+    <string name="whitelist_option_block">Bloquear</string>
+    <string name="whitelist_option_block_desc">Rejeitar automaticamente.</string>
+    <string name="whitelist_option_silence">Silenciar</string>
+    <string name="whitelist_option_silence_desc">Apenas notificação visual.</string>
     <string name="whitelist_setup_hint">Você poderá alterar estas configurações e adicionar novos números a qualquer momento no menu Permitidos.</string>
 
     <!-- Dashboard -->
@@ -70,7 +89,7 @@
     <string name="whitelist_search_placeholder">Buscar descrições ou números…</string>
     <string name="whitelist_section_allowed">Números Permitidos (%1$d)</string>
     <string name="whitelist_about_title">Sobre a Whitelist</string>
-    <string name="whitelist_about_desc">Números nesta lista nunca serão bloqueados ou silenciados pelo Sentinela, garantindo que comunicações importantes sempre cheguem até você.</string>
+    <string name="whitelist_about_desc">Números que você adicionou manualmente ou marcou como seguros. O tratamento deles segue a política configurada — no padrão (Nunca Silenciar), sempre tocam.</string>
     <string name="whitelist_add_number">Adicionar Número</string>
     <string name="whitelist_edit">Editar</string>
     <string name="whitelist_delete">Excluir</string>
@@ -97,8 +116,12 @@
     <!-- Proteção / Ajustes -->
     <string name="settings_title">Proteção</string>
     <string name="settings_protection_toggle">Ativar proteção</string>
-    <string name="settings_block_unknown">Bloquear números desconhecidos</string>
+    <string name="settings_unknown_policy">Números desconhecidos</string>
+    <string name="settings_contacts_policy">Contatos da agenda</string>
+    <string name="settings_whitelist_policy">Whitelist pessoal</string>
     <string name="settings_block_private">Bloquear números privados</string>
+    <string name="settings_dialer_mode">Modo discador (avançado)</string>
+    <string name="settings_dialer_mode_desc">Torna o Sentinela o app de telefone padrão para aplicar políticas também aos contatos. Você pode reverter a qualquer momento.</string>
     <string name="settings_mode_reject">Rejeitar imediatamente</string>
     <string name="settings_mode_silent_voicemail">Encaminhar silenciosamente</string>
     <string name="settings_hide_native_log">Ocultar do histórico nativo</string>
@@ -110,10 +133,24 @@
     <!-- Privacidade e sobre -->
     <string name="about_title">Privacidade e sobre</string>
     <string name="about_data_local">Todos os dados ficam somente neste aparelho.</string>
+    <string name="about_opensource_pitch" formatted="false">O Sentinela é open source: sem propaganda, sem telemetria, sem envio de dados para a nuvem — 100% offline, rodando no seu próprio celular.</string>
     <string name="about_clear_all_data">Limpar todos os dados</string>
     <string name="about_version">Versão %1$s</string>
     <string name="about_open_app_settings">Abrir configurações do aplicativo</string>
     <string name="about_open_channel_settings">Configurar canal de notificação</string>
+
+    <!-- Apoio e avaliação -->
+    <string name="review_prompt_title">Está gostando do Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">O Sentinela é open source, sem propaganda e 100% offline. Uma avaliação ou um comentário de apoio ajuda muito o projeto.</string>
+    <string name="review_prompt_rate">Avaliar agora</string>
+    <string name="review_prompt_later">Agora não</string>
+    <string name="support_title">Apoie o Sentinela</string>
+    <string name="support_comment_cta">Deixar um comentário de apoio</string>
+    <string name="support_donate_bitcoin">Doar em Bitcoin</string>
+    <string name="support_bitcoin_copied">Endereço copiado!</string>
+    <!-- TODO: endereço real de doação deve ser fornecido pelo mantenedor antes do release.
+         NUNCA publicar com endereço inventado. -->
+    <string name="support_bitcoin_address" translatable="false"></string>
 
     <!-- Notificações -->
     <string name="notification_channel_blocked">Chamadas bloqueadas</string>

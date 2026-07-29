@@ -2,21 +2,25 @@
 
 ## Em 30 segundos
 
-O Android entrega ao app (detentor do papel `ROLE_CALL_SCREENING`) cada chamada recebida de
-número **fora da agenda** — contatos nem chegam ao app quando ele não é o discador padrão.
-O `UnknownCallScreeningService` monta uma entrada pura, o `CallDecisionEngine` decide
-(permitir, rejeitar, caixa postal silenciosa ou bloquear sem rastro) consultando apenas dados
-locais, e o Service traduz a decisão em `respondToCall` — uma única vez, muito antes do limite
-de 5 segundos da plataforma.
+O Sentinela opera em dois modos. No **modo filtro** (padrão), o Android entrega ao app
+(detentor do papel `ROLE_CALL_SCREENING`) cada chamada recebida de número **fora da agenda** —
+contatos nem chegam ao app. No **modo discador** (opcional), o Sentinela vira o app de
+telefone padrão (`ROLE_DIALER` + `InCallService` próprio) e a triagem passa a cobrir **todas**
+as chamadas, aplicando políticas também a contatos. Em ambos, o
+`UnknownCallScreeningService` monta uma entrada pura, o `CallDecisionEngine` decide
+(permitir, silenciar, rejeitar, caixa postal ou bloquear sem rastro) consultando apenas dados
+locais, e o Service traduz a decisão em `respondToCall` — uma única vez, muito antes do
+limite de 5 segundos da plataforma.
 
 ```
 Android Telecom
-      │  onScreenCall(Call.Details)        [só números fora da agenda]
+      │  onScreenCall(Call.Details)   [modo filtro: só não-contatos · modo discador: todas]
       ▼
-telecom/UnknownCallScreeningService  ←→  telecom/ScreeningRoleManager (papel)
-      │ normaliza (phone/PhoneNumberNormalizer)
-      │ snapshot (settings/SettingsRepository ── DataStore)
-      │ lookup   (data/local/PersonalWhitelistRepository ── Room)
+telecom/UnknownCallScreeningService  ←→  telecom/ScreeningRoleManager (papéis)
+      │ normaliza (phone/PhoneNumberNormalizer)          (Fase 6: + InCallService próprio)
+      │ snapshot  (settings/SettingsRepository ── DataStore)
+      │ contato?  (data/contacts/ContactLookupRepository ── READ_CONTACTS, só memória)
+      │ whitelist (data/local/PersonalWhitelistRepository ── Room)
       ▼
 domain/CallDecisionEngine ──► domain/CallDecision (+ DecisionReason)
       │
@@ -29,52 +33,67 @@ respondToCall(CallResponse)   [exatamente 1×; p95 < 200 ms]
 
 ## Fatos da plataforma que sustentam o desenho
 
-1. **Contatos nunca passam pelo filtro** quando o app não é o discador padrão (doc oficial de
-   screen-calls). É por isso que o MVP cumpre "contatos tocam normalmente" sem `READ_CONTACTS`.
-2. **Janela de ~5 s para `respondToCall`** — estourou, a chamada segue. Todo I/O da decisão tem
-   timeout interno folgado e a falha cai na política de fallback configurada.
-3. **`CallResponse`** controla tudo que o produto precisa: `setDisallowCall`, `setRejectCall`,
-   `setSilenceCall`, `setSkipCallLog`, `setSkipNotification`.
+1. **Modo filtro: contatos nunca passam pelo app** quando ele não é o discador padrão (doc
+   oficial de screen-calls) — "contatos tocam normalmente" sai de graça, e o
+   `ContactLookup` entra como `MISS` no motor.
+2. **Modo discador: o app de telefone padrão recebe todas as chamadas** no screening e conduz
+   a experiência via `InCallService` — é o que torna as políticas por contato reais. Exige
+   `READ_CONTACTS` (lookup local) e elegibilidade ao `ROLE_DIALER` (handler `ACTION_DIAL` +
+   `InCallService` declarado).
+3. **Janela de ~5 s para `respondToCall`** — estourou, a chamada segue. Todo I/O da decisão
+   tem timeout interno folgado e a falha cai na política de fallback configurada.
+4. **`CallResponse`** controla tudo que o produto precisa: `setDisallowCall`,
+   `setRejectCall`, `setSilenceCall`, `setSkipCallLog`, `setSkipNotification`.
 
 ## Regras de dependência (invioláveis)
 
-- `domain/` não importa nada de `android.telecom.*` — entrada é `ScreenedCall`, saída é `CallDecision`.
+- `domain/` não importa nada de `android.telecom.*` — entrada é `ScreenedCall` +
+  `ContactLookup`/`WhitelistLookup`, saída é `CallDecision`.
 - Toda regra de triagem vive no `CallDecisionEngine`; o Service é orquestração de I/O.
 - `ui/` (Compose) nunca importa `telecom/`; fala com repositórios e ViewModels.
+- Dados de contato (nome/foto) nunca são persistidos nem saem do processo — o motor só
+  enxerga HIT/MISS/UNAVAILABLE.
 - Histórico e notificação própria só **depois** do `respondToCall`.
-- Repositórios são interfaces — a fonte remota de whitelist (v2) pluga sem tocar no domínio.
+- Repositórios são interfaces — a fonte remota de sincronização (v0.2) pluga sem tocar no
+  domínio, e a decisão nunca espera rede.
 
-## Precedência da decisão (espelho do §5 do prompt)
+## Precedência da decisão (§5 do prompt + adendos 2026-07-28)
 
 1. Chamada de saída → `Allow(outgoing_call)`
 2. Proteção desabilitada → `Allow(protection_disabled)`
 3. Número privado/sem handle → bloqueio conforme config (padrão: bloquear) — `private_number`
-4. Whitelist pessoal → `Allow(personal_whitelist)`
-5. Falha na consulta local → política de fallback explícita — `local_lookup_failure`/`fallback_policy`
-6. Desconhecido/inválido → bloqueio conforme config — `unknown_number`/`invalid_number`
+4. Contato da agenda → **política de contatos** (Tocar padrão / Bloquear / Silenciar / Nunca Silenciar) — `contact`
+5. Whitelist pessoal → **política da whitelist** (Nunca Silenciar padrão / Tocar / Bloquear / Silenciar) — `personal_whitelist`
+6. Falha na consulta local (contatos indisponíveis ou whitelist falhou) → política de fallback — `local_lookup_failure`/`fallback_policy`
+7. Desconhecido/inválido → **política de desconhecidos** (Bloquear padrão / Silenciar / Permitir) — `unknown_number`/`invalid_number`
 
-Modos de bloqueio: `Reject` (rejeita já), `SendSilentlyToVoicemail` (encaminha em silêncio),
+Saídas do motor: `Allow`, `Silence` (toca sem som/vibração via `setSilenceCall`),
+`Reject` (rejeita já), `SendSilentlyToVoicemail` (encaminha em silêncio),
 `BlockWithoutTrace` (rejeita + `setSkipCallLog` + `setSkipNotification`).
-`setSkipNotification(true)` é usado em **todo** bloqueio para suprimir a notificação nativa de
-chamada perdida (a notificação própria, quando habilitada, substitui).
+`setSkipNotification(true)` é usado em **todo** bloqueio para suprimir a notificação nativa
+de chamada perdida. "Nunca Silenciar" decide como Allow — o bypass de Não Perturbe é
+responsabilidade da camada de toque/notificação (semântica confirmada na pesquisa da Fase 6).
 
-## Resiliência do Service (Phase 4)
+## Resiliência do Service (Fase 5)
 
 | Risco | Proteção |
 |-------|----------|
 | Resposta duplicada | Guarda de resposta única por chamada |
 | Exceção em normalização/repos | try/catch amplo → fallback configurado |
-| Banco frio/indisponível | Timeout interno (~1,5 s) → `LOOKUP_FAILED` |
+| Banco/contatos frios ou indisponíveis | Timeout interno (~1,5 s) → `LOOKUP_FAILED`/`UNAVAILABLE` |
 | Cold start do processo | DI manual lazy; zero frameworks; nada pesado no `Application` |
 | Corrida config × chamada | Snapshot atômico das settings no início da triagem |
 | Dual SIM | Decisão independe da SIM; SIM só registrada se disponível sem permissão extra |
-| Papel perdido | `ScreeningRoleManager.isRoleHeld()` revalidado na home; sem papel, nada acontece (sistema não chama o service) |
+| Papéis perdidos | `ScreeningRoleManager` revalida na home; sem papel, o sistema nem chama o service |
+| Modo discador sem READ_CONTACTS | Ativação do modo exige a permissão; em runtime, `UNAVAILABLE` → fallback |
 
-## Orçamento de performance
+## Orçamento de performance (exigência: exemplar)
 
-- p95 < 200 ms no cold path (processo recém-criado + consulta Room/DataStore).
-- Warm path esperado em poucos ms (settings em memória + índice de whitelist).
-- Medição entra como bench na Phase 4 (critério de sucesso 5 da fase).
+- p95 < 200 ms no cold path (processo recém-criado + consulta contatos/Room/DataStore).
+- Warm path esperado em poucos ms (settings em memória + caches de contatos e whitelist).
+- Cold start do processo mínimo: DI manual lazy, sem reflexão, sem frameworks.
+- Medição entra como bench nas Fases 4 (lookup de contatos) e 5 (decisão fim a fim);
+  cobertura e benchmarks são gate de release (Fase 9).
 
 ## Estrutura de pacotes
 
@@ -82,10 +101,11 @@ chamada perdida (a notificação própria, quando habilitada, substitui).
 
 | Pacote | Conteúdo |
 |--------|----------|
-| `telecom/` | `UnknownCallScreeningService`, `ScreeningRoleManager` |
-| `domain/` | `CallDecisionEngine`, `CallDecision`, `DecisionReason`, `ScreenedCall` |
-| `settings/` | `ScreeningSettings`, `SettingsRepository` (DataStore na Phase 3) |
-| `data/local/` | `PersonalWhitelistRepository`, `BlockedCallRepository` (Room na Phase 3) |
-| `phone/` | `PhoneNumberNormalizer` (libphonenumber na Phase 2) |
-| `notifications/` | `BlockedCallNotifier` (canal silencioso na Phase 4) |
+| `telecom/` | `UnknownCallScreeningService`, `ScreeningRoleManager` (+ Fase 6: `InCallService` próprio) |
+| `domain/` | `CallDecisionEngine`, `CallDecision`, `DecisionReason`, `ScreenedCall`, `ContactLookup`, `WhitelistLookup` |
+| `settings/` | `ScreeningSettings`, `OriginPolicy`, `SettingsRepository` (DataStore na Fase 3) |
+| `data/local/` | `PersonalWhitelistRepository`, `BlockedCallRepository` (Room na Fase 3) |
+| `data/contacts/` | `ContactLookupRepository` (READ_CONTACTS + cache em memória, Fase 4) |
+| `phone/` | `PhoneNumberNormalizer` (libphonenumber na Fase 2) |
+| `notifications/` | `BlockedCallNotifier` (canal silencioso na Fase 5) |
 | `ui/` | `MainActivity`, telas Compose, `ui/theme/` (tokens do design system) |

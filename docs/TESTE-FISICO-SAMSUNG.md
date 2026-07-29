@@ -1,8 +1,9 @@
 # Roteiro de Validação Física — Samsung Galaxy
 
-> Executar na Phase 7, em pelo menos um Samsung com One UI recente. Preencher a coluna
-> Resultado a cada rodada e registrar a data/aparelho/versão. Nenhum hack de OEM entra no
-> código antes de um item falhar comprovadamente aqui.
+> Executar na Phase 9, em pelo menos um Samsung com One UI recente (os cenários 23–30 exigem
+> a Fase 6 — modo discador — concluída). Preencher a coluna Resultado a cada rodada e
+> registrar a data/aparelho/versão. Nenhum hack de OEM entra no código antes de um item
+> falhar comprovadamente aqui.
 
 **Aparelho:** ____________  **Modelo/One UI/Android:** ____________  **Data:** ____________
 **Chips:** SIM1 ____________ SIM2 ____________  **Caixa postal ativa?** ____
@@ -42,6 +43,23 @@ modo rejeitar, ocultar do histórico nativo ON, notificação própria OFF.
 | 19 | Reboot | Reiniciar aparelho, ligar desconhecido sem abrir o app | Idem ao #1 (papel persiste) | |
 | 20 | Papel roubado | Instalar outro app de bloqueio e dar o papel a ele | Home do Sentinela mostra aviso + botão corrigir funciona | |
 | 21 | Sem internet | Desligar Wi-Fi e dados móveis, ligar desconhecido | Idem ao #1 — bloqueio funciona 100% offline | |
+| 22 | Contato com política Silenciar (modo filtro) | contactsPolicy=Silenciar SEM modo discador, ligar do contato | Contato toca normalmente (modo filtro não intercepta contatos); UI explica a limitação | |
+
+## Modo discador (executar após a Fase 6)
+
+Pré-condição: ativar o modo discador na tela Proteção (concede `ROLE_DIALER`; One UI pede
+confirmação de app de telefone padrão).
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 23 | Ativação do modo | Ativar modo discador na Proteção | Diálogo do sistema aparece; Sentinela vira app de telefone padrão; nada quebra | |
+| 24 | Chamada recebida (contato, Tocar) | Ligar do contato | UI de chamada do Sentinela aparece; Atender e Recusar funcionam; áudio ok | |
+| 25 | Contato com política Bloquear | contactsPolicy=Bloquear, ligar do contato | Contato é bloqueado antes de tocar (política agora efetiva) | |
+| 26 | Contato com política Silenciar | contactsPolicy=Silenciar, ligar do contato | Chega sem som/vibração, visível na tela | |
+| 27 | Desconhecido no modo discador | Ligar do número desconhecido | Bloqueado como #1 (paridade com o modo filtro) | |
+| 28 | Discagem própria | Discar um número pela tela de discagem | Chamada origina; UI em chamada com mudo/viva-voz/DTMF/encerrar funcionais | |
+| 29 | Tela bloqueada | Ligar do contato com aparelho bloqueado | UI de chamada aparece sobre a tela bloqueada; atender funciona | |
+| 30 | Reversão | Desativar modo discador | App de telefone nativo volta a ser o padrão; ligações seguem normais; modo filtro segue ativo | |
 
 ## Registro de comportamento OEM
 
@@ -53,6 +71,6 @@ sistema, atraso perceptível, notificação da One UI):
 
 ## Critérios de aceite cobertos
 
-Este roteiro fecha os critérios 3–11 da seção 16 de [`PROMPT-MVP.md`](PROMPT-MVP.md).
-Itens que falharem por comportamento de OEM vão para [`LIMITACOES.md`](LIMITACOES.md) com o
-registro do aparelho/versão.
+Este roteiro fecha os critérios 3–11 da seção 16 de [`PROMPT-MVP.md`](PROMPT-MVP.md) e os
+adendos de modo discador/políticas por contato. Itens que falharem por comportamento de OEM
+vão para [`LIMITACOES.md`](LIMITACOES.md) com o registro do aparelho/versão.

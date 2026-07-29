@@ -1,21 +1,22 @@
 # Telas do MVP — mapeamento dos mockups Stitch
 
 > Fonte: 8 telas em [`telas/`](telas/) (screen.png + code.html cada). Tokens e fundamentos em
-> [`DESIGN.md`](DESIGN.md). **Branding unificado: Sentinela** — mockups que dizem "Ultrathink"
-> são adaptados. Labels da bottom nav em inglês nos mockups viram:
+> [`DESIGN.md`](DESIGN.md). Labels da bottom nav em inglês nos mockups viram:
 > **Início / Permitidos / Histórico / Ajustes**.
 
 ## Fluxo geral
 
 ```
-boas_vindas → onboarding (papel) → desconhecidos → contatos (informativo) → whitelist → dashboard
-                                                                                 ├── whitelist_pessoal
-                                                                                 ├── hist_rico_de_bloqueios
-                                                                                 ├── proteção (ajustes)
-                                                                                 └── privacidade e sobre (sem mockup)
+boas_vindas → papel (call screening) → desconhecidos → contatos (políticas) → whitelist → dashboard
+                                                                                  ├── whitelist_pessoal
+                                                                                  ├── hist_rico_de_bloqueios
+                                                                                  ├── proteção (ajustes, inclui modo discador)
+                                                                                  └── privacidade e sobre + apoio (sem mockup)
 ```
 
-Onboarding canônico: **4 passos** (mockups divergem 4 vs 3 — decisão em `DECISOES.md`).
+Onboarding canônico: boas-vindas → papel → desconhecidos → contatos → whitelist →
+verificação final (os mockups divergiam na contagem de passos; ver `DECISOES.md`).
+O convite de avaliação/apoio **nunca** aparece durante o onboarding (ENG-04).
 
 ## 1. `telas/boas_vindas_ao_sentinela/` — Boas-vindas
 
@@ -24,50 +25,63 @@ H1 **"Sua primeira linha de defesa contra spam."**, bento grid com 3 feature-car
 com badge "Proteção Ativa", CTA pill **"Começar Configuração"** + microcopy
 *"Leva menos de 2 minutos."*.
 
-**Adaptação obrigatória:** o card "Base Global — Milhões de números identificados" promete o
-que o MVP local não faz → substituir pelos cards honestos do mockup de onboarding
-(**Bloqueio Local / Silencioso / Sem Internet**).
+**Adaptações obrigatórias:**
+- O card "Base Global — Milhões de números identificados" promete o que o MVP local não faz
+  → usar os cards honestos (**Bloqueio Local / Silencioso / Sem Internet**).
+- Incluir selo/linha **"100% open source — sem propaganda, sem telemetria"** (UIX-13/ENG-03).
 
-## 2. `telas/onboarding/` — Papel de Call Screening (passo 1 de 4)
+## 2. `telas/onboarding/` — Papel de Call Screening (passo 1)
 
 Hero com escudo, explicação de privacidade, bento grid (Bloqueio Local / Silencioso / Sem
 Internet), CTA **"Configurar Agora"** com estado "Solicitando permissão…", disclaimer sobre a
-permissão de *Call Screening* (manter, trocando Ultrathink→Sentinela). Dispara
-`ScreeningRoleManager.buildRequestIntent()`.
+permissão de *Call Screening*. Dispara `ScreeningRoleManager.buildRequestIntent()`.
 
-## 3. `telas/configura_o_desconhecidos/` — Desconhecidos (passo 2 de 4)
+## 3. `telas/configura_o_desconhecidos/` — Desconhecidos (passo 2)
 
 Card com ícone `no_sim`, título **"Chamadas Desconhecidas"**, pergunta e 3 option-cards
-single-select com `check_circle`:
-- **Bloquear** (default) — "Recusa a chamada instantaneamente." → `BlockMode.REJECT`
-- **Silenciar** — "Encaminha em silêncio para a caixa postal." → `BlockMode.SILENT_VOICEMAIL`
-- **Permitir** — "Recebe chamadas normalmente." → `blockUnknownNumbers = false`
+single-select com `check_circle` → `ScreeningSettings.unknownPolicy`:
+- **Bloquear** (default) — "Recusa a chamada instantaneamente." → `OriginPolicy.BLOCK`
+- **Silenciar** — "A chamada chega sem som nem vibração." → `OriginPolicy.SILENCE`
+- **Permitir** — "Recebe chamadas normalmente." → `OriginPolicy.RING`
 
+O estilo do BLOCK (rejeitar × caixa postal) fica na tela Proteção (`BlockMode`).
 Microcopy: *"Você pode alterar esta configuração a qualquer momento."*
 
-## 4. `telas/configura_o_contatos/` — Contatos (passo 3 de 4, **vira informativo**)
+## 4. `telas/configura_o_contatos/` — Contatos (passo 3, **políticas reais**)
 
-Mockup oferece 4 políticas por contato (Tocar/Bloquear/Silenciar/Nunca Silenciar) —
-**não implementável** sem discador padrão (contatos nem chegam ao filtro). Implementação:
-mesmo layout de wizard (indicador "Passo 3 de 4" + barra de progresso), card informativo
-explicando que a agenda continua tocando normalmente e que o Sentinela não lê contatos
-(string `contacts_explainer`). Botão "Próximo". Adicionar toggle único real:
-**"Bloquear números privados"** (config que o mockup não expôs em lugar nenhum).
+Mesmo layout de wizard do mockup (indicador de passo + barra de progresso), H1
+**"E as pessoas da sua lista de contatos?"** e os 4 option-cards do mockup →
+`ScreeningSettings.contactsPolicy`:
+- **Tocar** (default, badge "Padrão") — "As chamadas tocam normalmente no seu telefone." → `RING`
+- **Bloquear** — "Bloqueia todas as chamadas, enviando para a caixa postal." → `BLOCK`
+- **Silenciar** — "O telefone não vibra nem toca, mas mostra a notificação." → `SILENCE`
+- **Nunca Silenciar** — "Ignora o modo 'Não Perturbe' para sua lista de contatos." → `NEVER_SILENCE`
 
-## 5. `telas/configura_o_whitelist/` — Whitelist (passo 4 de 4)
+Este passo dispara o pedido de **READ_CONTACTS** com a explicação
+`contacts_permission_rationale` (leitura 100% local, nada armazenado). Card informativo
+honesto: políticas diferentes de Tocar só têm efeito pleno no **modo discador**
+(link "saiba mais" → Proteção); no modo filtro, contatos tocam nativo.
+Toggle extra real: **"Bloquear números privados"** (config que o mockup não expôs).
 
-Card "O que é a Whitelist?" (manter texto), CTA **"Finalizar Configuração"** + "Voltar",
-hint fixo sobre poder alterar depois. **Simplificação:** as 4 opções de tratamento do mockup
-viram comportamento fixo — whitelist sempre permite (é a definição dela); sem seletor.
-Ao finalizar: verificação final de configuração (papel concedido? proteção ativa?) e entrada
-no dashboard.
+## 5. `telas/configura_o_whitelist/` — Whitelist (passo 4)
+
+Card "O que é a Whitelist?" (manter texto), pergunta **"Como tratar sua Whitelist
+Pessoal?"** com os 4 option-buttons do mockup → `ScreeningSettings.whitelistPolicy`:
+- **Nunca Silenciar** (default) — "Sempre toca, mesmo em 'Não Perturbe'." → `NEVER_SILENCE`
+- **Tocar** — "Sempre emitir som." → `RING`
+- **Bloquear** — "Rejeitar automaticamente." → `BLOCK`
+- **Silenciar** — "Apenas notificação visual." → `SILENCE`
+
+CTA **"Finalizar Configuração"** + "Voltar"; hint fixo sobre poder alterar depois.
+Ao finalizar: verificação final (papel concedido? permissão de contatos? proteção ativa?)
+e entrada no dashboard.
 
 ## 6. `telas/dashboard/` — Início
 
 - Card hero `primary-container` com **"Proteção Ativa"** + dot pulsante + toggle master
   (OFF → "Proteção desativada" com destaque de aviso).
-- Estado extra obrigatório (prompt): papel perdido → aviso **"O Sentinela não é o filtro de
-  chamadas padrão."** + botão **"Corrigir configuração"**.
+- Estado extra obrigatório: papel perdido → aviso **"O Sentinela não é o filtro de chamadas
+  padrão."** + botão **"Corrigir configuração"**.
 - Stats: **Total Bloqueado** e **Hoje** (dados do `BlockedCallRepository`).
 - **"Última chamada bloqueada"** com número mascarado `+55 11 9****-1234` e motivo real
   (Número Desconhecido / Privado) — **não** usar os rótulos de spam do mockup
@@ -80,45 +94,75 @@ no dashboard.
 TopAppBar com back + busca; campo "Buscar…" (placeholder adaptado para descrições/números);
 section header **"Números Permitidos (N)"**; lista com avatar de iniciais, nome/descrição,
 número formatado, ações editar/excluir; info card "Sobre a Whitelist"; FAB **"+"** (Adicionar
-Número). **Adições fora do mockup (exigidas pelo prompt):** menu com **Exportar/Importar
-backup** (com confirmação) e toggle ativar/desativar por entrada.
+Número). **Adições fora do mockup (exigidas pelo escopo):** menu com **Exportar/Importar
+backup** (com confirmação), toggle ativar/desativar por entrada e acesso ao **tratamento da
+whitelist** (mesmas 4 opções do passo 4). O card "Sobre a Whitelist" descreve o tratamento
+conforme a política configurada — o texto fixo do mockup ("nunca serão bloqueados") só era
+verdadeiro para o padrão.
 
 ## 8. `telas/hist_rico_de_bloqueios/` — Histórico
 
 > PNG deste mockup veio corrompido no zip; layout extraído do `code.html`.
 
 TopAppBar **"Histórico do Sentinela"** + ação "Limpar tudo" (`delete_sweep` com confirmação);
-chips de período **Hoje / 7 dias / 30 dias** + **filtro por decisão** (exigido pelo prompt,
+chips de período **Hoje / 7 dias / 30 dias** + **filtro por decisão** (exigido pelo escopo,
 fora do mockup); lista com ícone por motivo (block/visibility_off), número mascarado,
 timestamp relativo; ações por item (swipe/menu): **Permitir** (→ whitelist), **Marcar
-indesejado**, **Excluir**; empty state "Fim do histórico recente"/“Nenhuma chamada bloqueada
-ainda.”. Badge "ALTO RISCO" do mockup **não entra** (MVP não classifica risco).
+indesejado**, **Excluir**; empty state "Fim do histórico recente"/"Nenhuma chamada bloqueada
+ainda.". Badge "ALTO RISCO" do mockup **não entra** (MVP não classifica risco).
 
-## 9. Privacidade e sobre — **sem mockup**
+## 9. Privacidade e sobre + Apoie o Sentinela — **sem mockup**
 
 Seguir `DESIGN.md`: lista de dados armazenados, permissões usadas (link para matriz),
 retenção configurada, **Limpar todos os dados** (confirmação dupla), versão, limitações,
 links para configurações do app e do canal de notificação.
 
+Seção **"Apoie o Sentinela"** (UIX-13/ENG-03), destaque visual do card:
+- Pitch: *"O Sentinela é open source: sem propaganda, sem telemetria, sem envio de dados
+  para a nuvem — 100% offline, rodando no seu próprio celular."*
+- Ações: **Deixar um comentário de apoio** (avaliação) e **Doar em Bitcoin**
+  (endereço com botão copiar + toast "Endereço copiado!"; QR opcional).
+- O endereço vem de `support_bitcoin_address` — release bloqueado enquanto vazio.
+
 ## 10. Proteção (Ajustes) — **sem mockup**
 
-Tela exigida pelo §9 do prompt; seguir `DESIGN.md` com grupos de configurações em cards
-`surface-container` (padding 16dp), cada opção com switch M3 + explicação de uma linha em
-`on-surface-variant` (nada de opção sem explicação):
+Grupos de configurações em cards `surface-container` (padding 16dp), cada opção com
+explicação de uma linha em `on-surface-variant` (nada de opção sem explicação):
 
 1. **Ativar proteção** — toggle master (mesmo estado do hero do dashboard); OFF pinta o card
    com `error-container` a 15% e texto "Proteção desativada".
-2. **Bloquear números desconhecidos** — switch (`blockUnknownNumbers`).
-3. **Bloquear números privados** — switch (`blockPrivateNumbers`).
-4. **Modo de bloqueio** — seleção única (option-cards pequenos): "Rejeitar imediatamente" ×
-   "Encaminhar silenciosamente" (`BlockMode`), com explicação do efeito para quem liga.
-5. **Ocultar do histórico nativo** — switch (`hideFromNativeCallLog`) + nota best-effort
+2. **Números desconhecidos** — seleção única: Bloquear / Silenciar / Permitir (`unknownPolicy`).
+3. **Contatos da agenda** — seleção única: Tocar / Bloquear / Silenciar / Nunca Silenciar
+   (`contactsPolicy`), com nota "efeito pleno no modo discador".
+4. **Whitelist pessoal** — seleção única: Nunca Silenciar / Tocar / Bloquear / Silenciar
+   (`whitelistPolicy`).
+5. **Bloquear números privados** — switch (`blockPrivateNumbers`).
+6. **Modo de bloqueio** — "Rejeitar imediatamente" × "Encaminhar silenciosamente"
+   (`BlockMode`), com explicação do efeito para quem liga.
+7. **Ocultar do histórico nativo** — switch (`hideFromNativeCallLog`) + nota best-effort
    (ver LIMITACOES.md).
-6. **Exibir notificação silenciosa** — switch (`showOwnNotification`); ao ligar pela primeira
+8. **Exibir notificação silenciosa** — switch (`showOwnNotification`); ao ligar pela primeira
    vez dispara o pedido de `POST_NOTIFICATIONS`; sub-opção número mascarado × anônimo.
-7. **Retenção do histórico** — seletor (nunca/7/30/90 dias/manual).
-8. **Em caso de erro** — seleção única da política de fallback: "Permitir chamada
-   (recomendado)" × "Bloquear chamada" (`FallbackPolicy`), com explicação honesta do trade-off.
+9. **Modo discador (avançado)** — switch/fluxo (`ROLE_DIALER`): explica o que muda (políticas
+   valem para contatos; UI de chamada própria), exige READ_CONTACTS e oferece reversão.
+10. **Retenção do histórico** — seletor (nunca/7/30/90 dias/manual).
+11. **Em caso de erro** — política de fallback: "Permitir chamada (recomendado)" ×
+    "Bloquear chamada" (`FallbackPolicy`), com explicação honesta do trade-off.
+
+## 11. UI de chamada (modo discador, Fase 6) — **sem mockup**
+
+`InCallService` próprio, design system aplicado (dark, primary "Security Blue"):
+- **Chamada recebida**: nome do contato (lookup em memória) ou número mascarado + botões
+  grandes Atender / Recusar (alvos ≥ 64dp, funciona na tela bloqueada).
+- **Em chamada**: timer, Mudo, Viva-voz, Teclado (DTMF), Encerrar.
+- Escopo mínimo: uma chamada por vez; sem conferência/vídeo/gravação.
+
+## 12. Convite de avaliação (5ª abertura) — **sem mockup**
+
+Bottom sheet (radius 24dp) disparado na 5ª abertura (depois 10ª, 15ª… até aceitar — ENG-02):
+título **"Está gostando do Sentinela?"**, corpo com o pitch open source, ações
+**"Avaliar agora"** (In-App Review quando disponível; senão abre a seção Apoie) e
+**"Agora não"**. Nunca sobre onboarding, chamada ou diálogo do sistema.
 
 ## Componentes recorrentes (design system aplicado)
 

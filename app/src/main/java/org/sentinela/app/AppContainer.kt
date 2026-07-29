@@ -16,8 +16,10 @@ class AppContainer(
 
     val decisionEngine: CallDecisionEngine by lazy { CallDecisionEngine() }
 
-    // TODO(Fase 3): settingsRepository (DataStore), whitelistRepository e
-    //  blockedCallRepository (Room) — expostos por interface.
     // TODO(Fase 2): phoneNumberNormalizer (libphonenumber-android).
-    // TODO(Fase 4): blockedCallNotifier (canal silencioso).
+    // TODO(Fase 3): settingsRepository (DataStore), whitelistRepository,
+    //  blockedCallRepository (Room) e contador de aberturas — via interface.
+    // TODO(Fase 4): contactLookupRepository (READ_CONTACTS + cache em memória).
+    // TODO(Fase 5): blockedCallNotifier (canal silencioso).
+    // TODO(Fase 6): componentes do modo discador (InCallService/ROLE_DIALER).
 }

@@ -1,7 +1,7 @@
 # Design System — "Silent Guardian"
 
-> Adaptado do design system dos mockups Stitch (original preservado em
-> [`DESIGN-TOKENS-ORIGINAL.md`](DESIGN-TOKENS-ORIGINAL.md), nome original "Ultrathink").
+> Adaptado do design system dos mockups Stitch (tokens originais preservados em
+> [`DESIGN-TOKENS-ORIGINAL.md`](DESIGN-TOKENS-ORIGINAL.md)).
 > Tokens implementados em `app/src/main/java/org/sentinela/app/ui/theme/`.
 
 ## Conceito

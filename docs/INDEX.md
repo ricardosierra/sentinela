@@ -26,7 +26,7 @@
 
 ## Qualidade e validação
 
-- [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md) — roteiro reproduzível de validação física (20 cenários)
+- [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md) — roteiro reproduzível de validação física (30 cenários, incluindo modo discador)
 
 ## Backlog
 

@@ -19,5 +19,13 @@ sealed interface ScreenedNumber {
     data object Invalid : ScreenedNumber
 }
 
+/**
+ * Resultado da consulta local aos contatos do aparelho.
+ * No modo filtro (sem discador padrão) a plataforma só entrega não-contatos,
+ * então o Service passa MISS; UNAVAILABLE = modo discador sem permissão ou
+ * consulta falhou — cai na política de fallback.
+ */
+enum class ContactLookup { HIT, MISS, UNAVAILABLE }
+
 /** Resultado da consulta local à whitelist, resolvido pela camada de dados. */
 enum class WhitelistLookup { HIT, MISS, LOOKUP_FAILED }

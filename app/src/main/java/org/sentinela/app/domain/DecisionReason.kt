@@ -8,6 +8,7 @@ enum class DecisionReason(val code: String) {
     OUTGOING_CALL("outgoing_call"),
     PROTECTION_DISABLED("protection_disabled"),
     PRIVATE_NUMBER("private_number"),
+    CONTACT("contact"),
     PERSONAL_WHITELIST("personal_whitelist"),
     UNKNOWN_NUMBER("unknown_number"),
     INVALID_NUMBER("invalid_number"),

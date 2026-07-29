@@ -1,15 +1,15 @@
-# Ultrathink MVP — Guia de Arquitetura e Implementação
+# Sentinela MVP — Guia de Arquitetura e Implementação
 
 ## 1. Arquitetura Android Nativa
 O projeto segue uma arquitetura baseada em Clean Architecture simplificada, utilizando as bibliotecas recomendadas da Google.
 
 ### Estrutura de Pacotes
-- `br.com.ultrathink.telecom`: Implementação do `CallScreeningService`.
-- `br.com.ultrathink.domain`: Modelos de dados e lógica de decisão pura (`CallDecisionEngine`).
-- `br.com.ultrathink.data.local`: Persistência com Room (Whitelist e Histórico) e DataStore (Configurações).
-- `br.com.ultrathink.ui`: Telas em Jetpack Compose e ViewModels.
-- `br.com.ultrathink.notifications`: Gerenciamento de notificações silenciosas.
-- `br.com.ultrathink.phone`: Utilitários de normalização (libphonenumber).
+- `org.sentinela.app.telecom`: Implementação do `CallScreeningService`.
+- `org.sentinela.app.domain`: Modelos de dados e lógica de decisão pura (`CallDecisionEngine`).
+- `org.sentinela.app.data.local`: Persistência com Room (Whitelist e Histórico) e DataStore (Configurações).
+- `org.sentinela.app.ui`: Telas em Jetpack Compose e ViewModels.
+- `org.sentinela.app.notifications`: Gerenciamento de notificações silenciosas.
+- `org.sentinela.app.phone`: Utilitários de normalização (libphonenumber).
 
 ## 2. CallScreeningService e Motor de Decisão
 O coração do app é o `UnknownCallScreeningService`.

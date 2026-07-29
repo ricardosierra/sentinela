@@ -1,5 +1,5 @@
 ---
-name: Ultrathink
+name: Sentinela
 colors:
   surface: '#081425'
   surface-dim: '#081425'

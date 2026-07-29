@@ -4,9 +4,11 @@ import android.telecom.Call
 import android.telecom.CallScreeningService
 
 /**
- * Camada fina sobre o Telecom. Fato da plataforma: sem ser o discador padrão,
- * onScreenCall() só recebe chamadas de números FORA da agenda — contatos tocam
- * normalmente sem READ_CONTACTS (docs/ARQUITETURA.md).
+ * Camada fina sobre o Telecom, com dois modos de operação (docs/ARQUITETURA.md):
+ *  - Modo filtro (padrão): sem ser o discador padrão, onScreenCall() só recebe
+ *    números FORA da agenda — o Service passa ContactLookup.MISS ao motor.
+ *  - Modo discador (opcional, Fase 6): com ROLE_DIALER, todas as chamadas passam
+ *    por aqui e o ContactLookupRepository decide HIT/MISS/UNAVAILABLE.
  *
  * Invariantes desta classe (não relaxar):
  *  - respondToCall é chamado exatamente uma vez, em todos os caminhos.
@@ -17,15 +19,16 @@ import android.telecom.CallScreeningService
 class UnknownCallScreeningService : CallScreeningService() {
 
     override fun onScreenCall(callDetails: Call.Details) {
-        // Esqueleto (Fase 4 do roadmap): até o motor estar ligado ao Service,
+        // Esqueleto (Fase 5 do roadmap): até o motor estar ligado ao Service,
         // a política segura é não interferir em nenhuma chamada.
         respondToCall(callDetails, CallResponse.Builder().build())
 
-        // TODO(Fase 4): montar ScreenedCall (direção via callDetails.callDirection,
+        // TODO(Fase 5): montar ScreenedCall (direção via callDetails.callDirection,
         //  normalização via PhoneNumberNormalizer, privado quando handle == null),
-        //  consultar SettingsRepository + PersonalWhitelistRepository com timeout
-        //  interno, decidir via CallDecisionEngine e traduzir CallDecision para
-        //  CallResponse (disallow/reject/silence/skipCallLog/skipNotification),
-        //  com guarda de resposta única e fallback em qualquer exceção.
+        //  consultar SettingsRepository + ContactLookupRepository +
+        //  PersonalWhitelistRepository com timeout interno, decidir via
+        //  CallDecisionEngine e traduzir CallDecision para CallResponse
+        //  (disallow/reject/silence/skipCallLog/skipNotification), com guarda de
+        //  resposta única e fallback em qualquer exceção.
     }
 }

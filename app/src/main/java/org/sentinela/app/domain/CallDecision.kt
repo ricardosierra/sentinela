@@ -10,6 +10,9 @@ sealed interface CallDecision {
     /** Deixa a chamada seguir normalmente. */
     data class Allow(override val reason: DecisionReason) : CallDecision
 
+    /** Toca sem som nem vibração (setSilenceCall); aparece na tela e no log. */
+    data class Silence(override val reason: DecisionReason) : CallDecision
+
     /** Rejeita imediatamente (disallow + reject), sem tocar. */
     data class Reject(override val reason: DecisionReason) : CallDecision
 

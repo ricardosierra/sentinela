@@ -7,7 +7,7 @@ build:
 style:
   ReturnCount:
     # O CallDecisionEngine usa early-return por precedência — idioma correto para o domínio
-    max: 5
+    max: 8
   MagicNumber:
     ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
