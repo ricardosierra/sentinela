@@ -41,9 +41,19 @@ fi
 # assinatura, nao concede capacidade e nao e removivel.
 # READ_CONTACTS e autorizada por docs/PERMISSOES.md (linha 14): entra no manifest na Fase 4,
 # uso exclusivamente local e em memoria, pedido em runtime no onboarding de contatos.
+#
+# As tres ultimas entram na Fase 6 (modo discador OPCIONAL) e estao na tabela do modo discador de
+# docs/PERMISSOES.md, com a lista de elegibilidade confirmada por experimento:
+#   - CALL_PHONE: originar chamada pela tela de discagem propria; pedida em runtime.
+#   - BIND_INCALL_SERVICE: atributo do servico de chamada, garante que so o sistema faz o vinculo.
+#   - USE_FULL_SCREEN_INTENT: tela de chamada em cima da tela bloqueada pelo caminho oficial de
+#     notificacao; concedida no install a aplicativo de chamada e revogavel nas Configuracoes.
 ALLOWLIST="android.permission.POST_NOTIFICATIONS
 org.sentinela.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-android.permission.READ_CONTACTS"
+android.permission.READ_CONTACTS
+android.permission.CALL_PHONE
+android.permission.BIND_INCALL_SERVICE
+android.permission.USE_FULL_SCREEN_INTENT"
 
 DECLARED=$(grep -o 'uses-permission android:name="[^"]*"' "$M" | sed 's/.*name="//;s/"//' | sort -u)
 
@@ -59,11 +69,19 @@ while IFS= read -r perm; do
 done <<< "$DECLARED"
 [ "$INTRUDERS" -eq 0 ] && ok "nenhuma permissao fora da allowlist"
 
-# Permissoes de fase futura (entram no manifest so na fase delas) mais uma entrada que e
-# proibida PARA SEMPRE: a gravacao na agenda. O app so le contatos; nenhum manifest — nem o
-# de androidTest — pode declarar a capacidade de escrita. Os testes preparam dados adotando
-# a identidade de shell da instrumentacao, que nao depende de permissao declarada.
-FUTURE="READ_CALL_LOG|READ_PHONE_STATE|READ_SMS|CALL_PHONE|BIND_INCALL_SERVICE|SYSTEM_ALERT_WINDOW|WRITE_CONTACTS"
+# Permissoes de fase futura (entram no manifest so na fase delas) mais duas entradas que sao
+# proibidas PARA SEMPRE: a gravacao na agenda e a janela sobre outros aplicativos.
+#
+# A gravacao na agenda: o app so le contatos; nenhum manifest — nem o de androidTest — pode
+# declarar a capacidade de escrita. Os testes preparam dados adotando a identidade de shell da
+# instrumentacao, que nao depende de permissao declarada.
+#
+# A janela sobre outros aplicativos tambem nao tem fase: a tela de chamada em cima da tela
+# bloqueada sai pelo caminho oficial de notificacao, nunca por sobreposicao.
+#
+# Tres entradas SAIRAM desta lista na Fase 6, no mesmo trabalho que as levou ao manifest e a
+# allowlist acima: originar chamada, vinculo do servico de chamada e intencao de tela cheia.
+FUTURE="READ_CALL_LOG|READ_PHONE_STATE|READ_SMS|SYSTEM_ALERT_WINDOW|WRITE_CONTACTS"
 if [ "$(grep -cE "$FUTURE" "$M")" -eq 0 ]; then
   ok "nenhuma permissao de fase futura antecipada"
 else
