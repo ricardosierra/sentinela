@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-06-PLAN.md
-last_updated: "2026-07-29T23:19:59.215Z"
+stopped_at: Completed 06-05-PLAN.md
+last_updated: "2026-07-29T23:26:02.265Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 35
-  completed_plans: 31
+  completed_plans: 33
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 06 (Modo Discador Opcional) — EXECUTING
-Plan: 4 of 8
+Plan: 7 of 8
 
 ## Snapshot
 
@@ -39,6 +39,7 @@ Plan: 4 of 8
 - **Modo discador (nucleo):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **UI (Fase 6):** tema com `numberXl`/`numberLg`/`timer` (figuras de largura fixa), formas 8/16/24/pilula e as QUATRO cores funcionais da chamada por literal fora do esquema; 74 strings pt-BR das telas de chamada/discagem/ativacao varridas contra promessa desonesta; nove componentes reutilizaveis com alvo >= 48dp e descricao de conteudo em recurso
+- **UI (telas de chamada, 06-04):** `IncomingCallScreen` (quatro identidades, ordem de foco declarada, paisagem em duas colunas), `OutgoingCallScreen` (tres pontos em fade, suprimido com reducao de movimento), `ActiveCallScreen` (cronometro congelavel + ramo do estado nao suportado com encerrar habilitado), `DtmfKeypadSheet` e `AudioRouteSheet` ancorados ao rodape; `CallActivity` com `when` exaustivo, confirmacao de apresentacao, gesto de voltar consumido e fechamento apos 1200 ms; contrato do extra de acao da notificacao (`EXTRA_CALL_ACTION` + tres valores) vive em `ui/call/CallActivity.kt`; 20 casos novos e 23 pre-visualizacoes
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -196,6 +197,18 @@ Plan: 4 of 8
 - [Phase Phase 06]: 06-06: acoes da notificacao sao intencao pendente de Activity para a tela de chamada — nenhum receptor novo e nenhuma segunda edicao do manifest na fase
 - [Phase Phase 06]: 06-06: chave do extra de acao composta de BuildConfig.APPLICATION_ID (buildConfig ligado); literal do identificador do aplicativo em Kotlin e reprovado pelo Bloco 2, inclusive em KDoc
 - [Phase Phase 06]: 06-06: no nivel 31+ as acoes vem do estilo de chamada da plataforma e nao sao adicionadas a mao — somar as duas fontes daria quatro botoes no aviso
+- [Phase 06]: 06-04: a chave do extra de acao da notificacao e MONTADA a partir do identificador do aplicativo — o literal ditado quebraria o invariante de rebranding do Bloco 1, e nem em prosa poderia aparecer; o valor exato ficou travado por caso de teste, prova mais forte que grep
+- [Phase 06]: 06-04: assert de alvo de toque exige DOIS eixos — o Compose expande sozinho o alvo de qualquer componente interativo ate o minimo da plataforma, entao reduzir um controle de 56dp para 40dp ficava VERDE; so o eixo do tamanho DESENHADO pegou a sabotagem
+- [Phase 06]: 06-04: requiredSize e obrigatorio em controle de chamada — size() negocia com o pai e o pai comprimia o circulo de atender de 72dp para 23dp em tela curta, perdendo o contrato em silencio
+- [Phase 06]: 06-04: a faixa superior da chamada ativa encolhe ao proprio conteudo em vez de tomar 30% fixos (30% colapsava o encerrar para altura zero) e o painel de tons rola na vertical (sem rolagem a ultima fileira de teclas ficava inalcancavel)
+- [Phase 06]: 06-04: numero agrupado para exibicao SO com codigo do pais brasileiro; qualquer outro aparece como a telefonia entregou — adivinhar agrupamento de pais desconhecido produz numero visualmente errado, pior que numero sem espacos
+- [Phase 06]: 06-04: assertTouchHeightIsAtLeast e escrito neste projeto — a biblioteca de teste do Compose so oferece igualdade, e igualdade quebraria a cada acerto de acabamento num contrato de minimo
+- [Phase Phase 06]: 06-05: a acao direta de ligar por intencao segue proibida em producao — a origem e sempre o gerenciador de telecomunicacoes, e falha volta como resultado nomeado (inverso do nucleo da sessao, porque aqui o usuario esta com o dedo no botao)
+- [Phase Phase 06]: 06-05: o formatador progressivo da biblioteca NAO fecha parenteses no Brasil (medido: 11 91234-5678); a forma nacional canonica entra no instante em que o numero fica valido — zero formatacao propria
+- [Phase Phase 06]: 06-05: estado desabilitado declarado por clearAndSetSemantics no ramo da discagem, com a acao de clique redeclarada — envolver o componente compartilhado com semantica de mesclagem NAO funciona, porque o no interno dele ja mescla e e ele quem responde as buscas
+- [Phase Phase 06]: 06-05: lint reprova a origem da chamada com MissingPermission quando a permissao chega por funcao injetada; runCatching nao conta como tratamento — captura por tipo, e a excecao nunca e registrada (a mensagem pode conter o numero)
+- [Phase Phase 06]: 06-05: aparelho padrao do Robolectric e pequeno demais para uma tela inteira; teste de composicao exige qualificadores de tela reais, senao o conteudo sai do viewport e todo assert de exibicao fica vermelho por motivo falso
+- [Phase Phase 06]: 06-05: call_phone_permission_asked e o terceiro par do padrao das Fases 4 e 5 — fora de ScreeningSettings e gravado ao disparar o launcher, nunca no retorno
 
 ## Convenções operacionais do GSD
 
@@ -239,6 +252,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T23:19:31.619Z
-Stopped at: Completed 06-06-PLAN.md
+Last session: 2026-07-29T23:25:32.336Z
+Stopped at: Completed 06-05-PLAN.md
 Resume file: None

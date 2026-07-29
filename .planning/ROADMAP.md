@@ -208,7 +208,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 3 | 5/7 | In Progress|  | - |
 | 4 | 4/5 | In Progress|  | - |
 | 5 | v0.1.0 | 0/7 | Planned | - |
-| 6 | 3/8 | In Progress|  | - |
+| 6 | 6/8 | In Progress|  | - |
 | 7 | v0.1.0 | 0/? | Not started | - |
 | 8 | v0.1.0 | 0/? | Not started | - |
 | 9 | v0.1.0 | 0/? | Not started | - |
