@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-07-29T06:06:45.642Z"
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-07-29T06:14:32.376Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 03 (Dados Locais) — EXECUTING
-Plan: 3 of 7
+Plan: 4 of 7
 
 ## Snapshot
 
@@ -74,6 +74,9 @@ Plan: 3 of 7
 - [Phase 03]: connectedDebugAndroidTest automatizado por scripts/run-instrumented-tests.sh: boot headless provado por sys.boot_completed + trap de emu kill
 - [Phase 03]: connectedDebugAndroidTest nao aceita --tests (nao e Test task); filtro real e -Pandroid.testInstrumentationRunnerArguments.tests_regex
 - [Phase 03]: Script apaga TEST-*.xml antes de rodar: relatorio antigo tem o mesmo defeito probatorio de UP-TO-DATE
+- [Phase 03]: Migrations.kt descreve a migracao destrutiva em vez de nomea-la: o invariante casa ate em comentario, porque linha comentada vira linha ativa
+- [Phase 03]: schemas/ e input das Test tasks: arquivo lido por teste e nao declarado como input deixa o cache falsificar o verde
+- [Phase 03]: Enum persistido por code/name; leitura tolerante cai em UNKNOWN_NUMBER/UNCLASSIFIED em vez de lancar
 
 ## Convenções operacionais do GSD
 
@@ -116,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T06:06:37.853Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-07-29T06:14:32.374Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
