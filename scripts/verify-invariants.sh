@@ -36,8 +36,11 @@ fi
 # POST_NOTIFICATIONS e autorizada por docs/PERMISSOES.md (Fase 1 manifest / Fase 5 pedido).
 # DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION e injetada pelo androidx-core, e de
 # assinatura, nao concede capacidade e nao e removivel.
+# READ_CONTACTS e autorizada por docs/PERMISSOES.md (linha 14): entra no manifest na Fase 4,
+# uso exclusivamente local e em memoria, pedido em runtime no onboarding de contatos.
 ALLOWLIST="android.permission.POST_NOTIFICATIONS
-org.sentinela.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+org.sentinela.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+android.permission.READ_CONTACTS"
 
 DECLARED=$(grep -o 'uses-permission android:name="[^"]*"' "$M" | sed 's/.*name="//;s/"//' | sort -u)
 
@@ -53,7 +56,11 @@ while IFS= read -r perm; do
 done <<< "$DECLARED"
 [ "$INTRUDERS" -eq 0 ] && ok "nenhuma permissao fora da allowlist"
 
-FUTURE="READ_CONTACTS|READ_CALL_LOG|READ_PHONE_STATE|READ_SMS|CALL_PHONE|BIND_INCALL_SERVICE|SYSTEM_ALERT_WINDOW"
+# Permissoes de fase futura (entram no manifest so na fase delas) mais uma entrada que e
+# proibida PARA SEMPRE: a gravacao na agenda. O app so le contatos; nenhum manifest — nem o
+# de androidTest — pode declarar a capacidade de escrita. Os testes preparam dados adotando
+# a identidade de shell da instrumentacao, que nao depende de permissao declarada.
+FUTURE="READ_CALL_LOG|READ_PHONE_STATE|READ_SMS|CALL_PHONE|BIND_INCALL_SERVICE|SYSTEM_ALERT_WINDOW|WRITE_CONTACTS"
 if [ "$(grep -cE "$FUTURE" "$M")" -eq 0 ]; then
   ok "nenhuma permissao de fase futura antecipada"
 else

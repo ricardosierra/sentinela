@@ -5,6 +5,11 @@
     <!-- POST_NOTIFICATIONS é declarada mas só solicitada em runtime se o usuário
          habilitar a notificação própria (desabilitada por padrão). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Fase 4: leitura da agenda APENAS em memoria, no momento da chamada. Nome, foto e
+         numero do contato nunca sao persistidos, logados nem enviados (docs/PRIVACIDADE.md).
+         O app nunca pede gravacao na agenda: os testes instrumentados adotam a identidade
+         de shell para preparar dados, entao nenhum manifest declara essa capacidade. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".SentinelaApp"
