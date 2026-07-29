@@ -78,7 +78,16 @@ Plans:
   4. Contador de aberturas do app persiste e incrementa corretamente (base do fluxo de avaliação)
   5. Backup do Android comprovadamente exclui os dados (dataExtractionRules validado)
   6. Testes de migração do Room configurados (schemas exportados em `app/schemas/`) e instrumentados de DAO verdes
-**Plans**: TBD
+**Plans**: 7 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Wave 0 instrumentado: `androidTestImplementation` de room-testing/test-core, `schemas` como asset do androidTest e `scripts/run-instrumented-tests.sh` (boot headless + polling em `sys.boot_completed` + trap)
+- [ ] 03-02-PLAN.md — Backup: `path="."` explícito nos dois XMLs (API 31+ e 29-30) e `BackupRulesTest` que lê o XML por DOM e falha se um `<exclude>` sumir
+- [ ] 03-03-PLAN.md — Schema v1 completo do `sentinela.db` (whitelist + blocked_call, índice único, conversores por code/name), `SchemaExportTest` e invariantes contra `fallbackToDestructiveMigration`
+- [ ] 03-04-PLAN.md — `RoomWhitelistRepository` com dedup por id resolvido, DAO instrumentado (CRUD/busca/código curto) e prova do índice por `EXPLAIN QUERY PLAN` + percentis medidos
+- [ ] 03-05-PLAN.md — `RetentionPolicy` pura (nunca/7/30/90/manual), `RoomBlockedCallRepository` com poda sem WorkManager e DAO instrumentado de histórico
+- [ ] 03-06-PLAN.md — `DataStoreSettingsRepository` com cache `@Volatile`, defaults seguros em arquivo corrompido e contador de aberturas (ENG-01)
+- [ ] 03-07-PLAN.md — Wiring dos singletons no `AppContainer`, `MigrationHarnessTest`, ampliação do filtro do Kover para `data.*`/`settings.*` e evidência pós-`clean`
 
 ### Phase 4: Contatos do Aparelho
 **Goal**: O Sentinela sabe — local e instantaneamente — se quem liga está na agenda, sem nunca armazenar ou vazar dados de contato.
@@ -170,7 +179,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 |-------|-----------|----------------|--------|-----------|
 | 1 | v0.1.0 | 0/3 | In progress | - |
 | 2 | v0.1.0 | 0/5 | Not started | - |
-| 3 | v0.1.0 | 0/? | Not started | - |
+| 3 | v0.1.0 | 0/7 | Not started | - |
 | 4 | v0.1.0 | 0/? | Not started | - |
 | 5 | v0.1.0 | 0/? | Not started | - |
 | 6 | v0.1.0 | 0/? | Not started | - |
