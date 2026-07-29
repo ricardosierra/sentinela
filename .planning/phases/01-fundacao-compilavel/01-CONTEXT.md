@@ -30,9 +30,26 @@ de validação física registrada no ROADMAP.
 - Stack já decidido em `PROJECT.md` e `CLAUDE.md`: Kotlin + Compose + Material 3, AGP 9.3.0
   com Kotlin embutido (nunca aplicar `org.jetbrains.kotlin.android`), Gradle KTS + Version
   Catalog, minSdk 29, compileSdk 37, DI manual, JDK 17.
-- Permissões: nesta fase o manifest só pode conter `BIND_SCREENING_SERVICE`. `READ_CONTACTS`
-  entra na Phase 4; `ROLE_DIALER`/`BIND_INCALL_SERVICE`/`CALL_PHONE` só na Phase 6.
-  Antecipar permissão é violação registrada em `docs/PERMISSOES.md`.
+- Permissões: nesta fase o manifest pode conter `BIND_SCREENING_SERVICE` e `POST_NOTIFICATIONS`
+  — `docs/PERMISSOES.md:13` (fonte canônica) autoriza a **declaração** de `POST_NOTIFICATIONS`
+  na Fase 1, com o **pedido em runtime** só na Fase 5. Remover a declaração quebraria a Phase 5.
+  `READ_CONTACTS` entra na Phase 4; `ROLE_DIALER`/`BIND_INCALL_SERVICE`/`CALL_PHONE` só na
+  Phase 6. Antecipar essas é violação registrada em `docs/PERMISSOES.md`.
+- A checagem do critério 3 roda sobre o **manifest mergeado**, não o fonte: o AGP injeta
+  `org.sentinela.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, então a verificação usa
+  allowlist, não contagem exata.
+
+### Política de lint (decidida em 2026-07-29)
+- `QLT-02` ("lint sem issues") é fechado via bloco `lint {}` em `app/build.gradle.kts` com
+  supressão justificada, **não** apagando recursos:
+  - `disable "UnusedResources"` — as 132 ocorrências são strings pt-BR já redigidas para as
+    telas das Fases 5–9; são ativos legítimos, não lixo. Comentário obrigatório no bloco.
+  - `disable "Typos"` — o dicionário do lint é en-US e acusa falso positivo em conteúdo pt-BR
+    (ex.: "'momento'… did you mean 'memento'?").
+  - `ObsoleteSdkInt` é **corrigido de verdade** (remover `mipmap-anydpi-v26`, desnecessário em
+    minSdk 29) — não suprimido.
+- Reavaliar as supressões na Phase 9, quando as telas reais consumirem as strings.
+- Não adotar `lint-baseline.xml` — exigiria regeneração a cada fase que adiciona strings.
 
 ### Validação física
 - Nenhum plano desta fase pode emitir `checkpoint:human-action` ou `checkpoint:human-verify`.
