@@ -101,11 +101,11 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Wave 0: `READ_CONTACTS` no manifest + as DUAS edições de `verify-invariants.sh` (allowlist e FUTURE, com gravação de agenda barrada para sempre) e `ContactsTestFixture` por `adoptShellPermissionIdentity`
-- [ ] 04-02-PLAN.md — Máquina de estado da permissão: enum de 4 estados por função pura, flag `contacts_permission_asked` no DataStore existente e camada fina de plataforma (a tela é da Phase 7)
-- [ ] 04-03-PLAN.md — `ContactsContractLookupSource` com sonda dupla (E.164 + nacional) e projeção mínima, `ContactKeyCache` normalizado pelo app com debounce, e o repositório HIT/MISS/UNAVAILABLE
-- [ ] 04-04-PLAN.md — Instrumentados no emulador: sonda dupla contra o provider real, invalidação por ContentObserver e percentis com 5.000 contatos (assert primário na mediana)
-- [ ] 04-05-PLAN.md — Bloco 6 de invariantes + `SchemaExportTest` de vazamento, wiring no `AppContainer`, exclude nomeado do Kover e evidência pós-`clean`
+- [x] 04-01-PLAN.md — Wave 0: `READ_CONTACTS` no manifest + as DUAS edições de `verify-invariants.sh` (allowlist e FUTURE, com gravação de agenda barrada para sempre) e `ContactsTestFixture` por `adoptShellPermissionIdentity`
+- [x] 04-02-PLAN.md — Máquina de estado da permissão: enum de 4 estados por função pura, flag `contacts_permission_asked` no DataStore existente e camada fina de plataforma (a tela é da Phase 7)
+- [x] 04-03-PLAN.md — `ContactsContractLookupSource` com sonda dupla (E.164 + nacional) e projeção mínima, `ContactKeyCache` normalizado pelo app com debounce, e o repositório HIT/MISS/UNAVAILABLE
+- [x] 04-04-PLAN.md — Instrumentados no emulador: sonda dupla contra o provider real, invalidação por ContentObserver e percentis com 5.000 contatos (assert primário na mediana)
+- [x] 04-05-PLAN.md — Bloco 6 de invariantes + `SchemaExportTest` de vazamento, wiring no `AppContainer`, exclude nomeado do Kover e evidência pós-`clean`
 
 ### Phase 5: Triagem Telecom Modo Filtro
 **Goal**: Chamada de número desconhecido é bloqueada de verdade antes de tocar, com o Service fino, resiliente e dentro do orçamento — o critério de aceite central do produto.
