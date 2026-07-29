@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-07-29T16:51:26.044Z"
+stopped_at: Completed 05-05-PLAN.md
+last_updated: "2026-07-29T17:04:22.387Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 4
   total_plans: 27
-  completed_plans: 24
+  completed_plans: 25
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
-Plan: 5 of 7
+Plan: 6 of 7
 
 ## Snapshot
 
@@ -35,7 +35,7 @@ Plan: 5 of 7
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
 - **Qualidade:** 296 testes JVM + 48 instrumentados; cobertura domain+phone+data+settings 96,6759% com gate `koverVerify` em 80%; lint e detekt zerados
-- **Telecom:** `UnknownCallScreeningService` registrado em modo pass-through seguro (não interfere até a Phase 5)
+- **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -147,6 +147,11 @@ Plan: 5 of 7
 - [Phase 05]: 05-03: decisao permissiva de emergencia reusa LOCAL_LOOKUP_FAILURE — reason code novo exigiria revisao de privacidade e quebraria a contagem travada em 10
 - [Phase 05]: 05-03: CallDecisionEngine passou a open para permitir injetar defeito no proprio motor na matriz de falhas
 - [Phase 05]: 05-03: as duas redes permissivas sao redundantes de proposito — removida so uma, zero testes vermelhos; removidas as duas, 7 de 11 ficam vermelhos
+- [Phase 05]: 05-05: o Service pede colaboradores por um contrato pequeno (ScreeningDependencies) e nunca constroi container — e o que permite hospedar o Service real na JVM
+- [Phase 05]: 05-05: a costura de resposta carrega a decisao E as configuracoes que a produziram; a traducao nao le o repositorio uma segunda vez
+- [Phase 05]: 05-05: record() do historico devolve o id da linha (0 sem rastro): sem ele toda notificacao colidiria no mesmo identificador
+- [Phase 05]: 05-05: guarda de chamada de saida e dupla (Service e coordenador) por desenho — remover a do Service nao deixa teste vermelho
+- [Phase 05]: 05-05: nao existe aviso de mudanca do papel de triagem para aplicativo comum; a verificacao e pergunta pontual na retomada da tela (Fase 7)
 
 ## Convenções operacionais do GSD
 
@@ -190,6 +195,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T16:51:14.097Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-07-29T17:04:08.454Z
+Stopped at: Completed 05-05-PLAN.md
 Resume file: None
