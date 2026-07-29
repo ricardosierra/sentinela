@@ -159,6 +159,13 @@
     <string name="notification_blocked_masked">Chamada de %1$s bloqueada</string>
     <string name="notification_blocked_anonymous">Uma chamada foi bloqueada</string>
 
+    <!-- Opt-in da notificação própria: nasce desligada e só é ligada pelo usuário -->
+    <string name="settings_notification_enable">Avisar quando bloquear uma chamada</string>
+    <string name="settings_notification_enable_desc">Vem desligado. Ao ligar, o Sentinela pede a permissão de notificações do sistema. O aviso é discreto: não toca, não vibra e não ocupa a tela.</string>
+    <string name="settings_notification_identification_masked">Mostrar número mascarado</string>
+    <string name="settings_notification_identification_anonymous">Não mostrar identificação</string>
+    <string name="notification_permission_rationale">Para avisar sobre chamadas bloqueadas, o Sentinela precisa da permissão de notificações. O aviso é local e nunca mostra o número completo.</string>
+
     <!-- Genéricos -->
     <string name="action_confirm">Confirmar</string>
     <string name="action_cancel">Cancelar</string>
