@@ -64,11 +64,11 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **HST-07**: Filtros por período e por decisão na tela de histórico
 
 ### Notificações (NTF)
-- [ ] **NTF-01**: Notificação própria desabilitada por padrão; opt-in explícito
-- [ ] **NTF-02**: `POST_NOTIFICATIONS` solicitada somente quando o usuário habilita a opção
-- [ ] **NTF-03**: Canal dedicado "Chamadas bloqueadas" com IMPORTANCE_LOW: sem som, vibração, heads-up, full-screen intent ou overlay
-- [ ] **NTF-04**: Tela bloqueada nunca mostra o número completo — escolha entre mascarado e nenhuma identificação
-- [ ] **NTF-05**: Tocar na notificação abre o registro interno correspondente
+- [x] **NTF-01**: Notificação própria desabilitada por padrão; opt-in explícito
+- [x] **NTF-02**: `POST_NOTIFICATIONS` solicitada somente quando o usuário habilita a opção
+- [x] **NTF-03**: Canal dedicado "Chamadas bloqueadas" com IMPORTANCE_LOW: sem som, vibração, heads-up, full-screen intent ou overlay
+- [x] **NTF-04**: Tela bloqueada nunca mostra o número completo — escolha entre mascarado e nenhuma identificação
+- [x] **NTF-05**: Tocar na notificação abre o registro interno correspondente
 - [ ] **NTF-06**: Notificação própria criada somente depois do `respondToCall`
 
 ### Modo Discador (DIA)

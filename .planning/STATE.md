@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-02-PLAN.md
-last_updated: "2026-07-29T16:37:49.851Z"
+stopped_at: Completed 05-04-PLAN.md
+last_updated: "2026-07-29T16:50:42.741Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 4
   total_plans: 27
-  completed_plans: 22
+  completed_plans: 24
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
-Plan: 3 of 7
+Plan: 4 of 7
 
 ## Snapshot
 
@@ -134,6 +134,13 @@ Plan: 3 of 7
 - [Phase 05]: Corte da janela e INCLUSIVO (>=), espelho do corte estrito (<) da poda; nenhum indice novo em blocked_call para nao exigir migracao v2
 - [Phase 05]: Contagem de abertura saiu de Application.onCreate e foi para MainActivity.onCreate com guarda savedInstanceState == null: start de processo do Telecom nao e abertura
 - [Phase 05]: src/main/java declarado como input das Test tasks: teste estrutural que le fonte do disco ficaria UP-TO-DATE e daria falso verde
+- [Phase 05]: Regra de permissao em runtime unificada em RuntimePermissionAsk; contactsPermissionState virou fachada que delega, sem tocar nos testes da Fase 4
+- [Phase 05]: Notificacao propria segue DESLIGADA por padrao; POST_NOTIFICATIONS so e pedida em runtime no momento do opt-in, nunca no onboarding
+- [Phase 05]: Privacidade da notificacao nao depende da visibilidade escolhida: o numero completo nunca entra no objeto, provado varrendo extras e versao publica
+- [Phase 05]: AndroidBlockedCallNotifier nao recebe PhoneNumberUtil: a mascara ja vem pronta no registro e ler numberE164 ali e proibido por criterio
+- [Phase 05]: Versao publica da notificacao usa sempre o texto anonimo, independente da configuracao de identificacao
+- [Phase 05]: notification_permission_asked fica fora de ScreeningSettings e e marcado ao disparar o launcher, nunca no callback
+- [Phase 05]: Criterio de aceite por grep nao distingue KDoc de codigo: comentario citando import android. ou IMPORTANCE_LOW derruba o proprio criterio
 
 ## Convenções operacionais do GSD
 
@@ -177,6 +184,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T16:37:38.081Z
-Stopped at: Completed 05-02-PLAN.md
+Last session: 2026-07-29T16:50:18.862Z
+Stopped at: Completed 05-04-PLAN.md
 Resume file: None
