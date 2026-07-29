@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-07-29T04:57:17.737Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-07-29T05:04:24.939Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 02 (Motor de Decisao e Normalizacao) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 
 ## Snapshot
 
@@ -60,6 +60,10 @@ Plan: 4 of 5
 - [Phase 02]: ContactLookup.UNAVAILABLE + WhitelistLookup.HIT: a whitelist vence (o if de falha vem depois) — comportamento agora contratual
 - [Phase 02]: Cascata de regiao: aparelho (SIM/rede) -> preferencia do usuario -> BR; nunca travar em BR
 - [Phase 02]: TelephonyManager isolado em platform/AndroidRegionProvider; phone/ segue sem import android.*
+- [Phase 02]: Chave persistida = E.164, exceto codigo curto (< LIMIAR_CURTO=6 digitos), que e digito cru — contrato para a Fase 3
+- [Phase 02]: 9o digito BR corrigido a mao e so aceito com revalidacao isValidNumber && type == MOBILE; senao Invalid(nono_digito_nao_revalida)
+- [Phase 02]: normalize passou a receber region: String? = null (delega ao RegionProvider); defaultRegion=BR removido
+- [Phase 02]: Mascara unica PhoneMask para log e UI, generalizada por getLengthOfNationalDestinationCode e sempre dentro de runCatching
 
 ## Convenções operacionais do GSD
 
@@ -102,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T04:57:17.736Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-07-29T05:04:24.937Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None

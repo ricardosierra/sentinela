@@ -34,8 +34,8 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 ### Normalização de Números (NRM)
 - [x] **NRM-01**: Normalização para E.164 com libphonenumber (port Android) — nunca normalização improvisada
 - [x] **NRM-02**: Padrão brasileiro correto: DDI +55, DDD obrigatório, celular com 9 dígitos, fixos
-- [ ] **NRM-03**: Formatação bonita é apenas visual; E.164 é a fonte de verdade armazenada
-- [ ] **NRM-04**: Máscara segura para exibição/log (ex.: `+55 11 9****-1234`)
+- [x] **NRM-03**: Formatação bonita é apenas visual; E.164 é a fonte de verdade armazenada
+- [x] **NRM-04**: Máscara segura para exibição/log (ex.: `+55 11 9****-1234`)
 
 ### Contatos do Aparelho (CTT)
 - [ ] **CTT-01**: `READ_CONTACTS` solicitada em runtime com explicação clara (identificar se quem liga é contato); app permanece funcional no modo filtro se negada
