@@ -2,7 +2,22 @@ package org.sentinela.app
 
 import android.content.Context
 import android.telephony.TelephonyManager
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.room.Room
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import org.sentinela.app.data.local.PersonalWhitelistRepository
+import org.sentinela.app.data.local.RoomBlockedCallRepository
+import org.sentinela.app.data.local.RoomWhitelistRepository
+import org.sentinela.app.data.local.db.SENTINELA_MIGRATIONS
+import org.sentinela.app.data.local.db.SentinelaDatabase
 import org.sentinela.app.domain.CallDecisionEngine
+import org.sentinela.app.settings.DataStoreSettingsRepository
 import org.sentinela.app.phone.CascadingRegionProvider
 import org.sentinela.app.phone.LibPhoneNumberNormalizer
 import org.sentinela.app.phone.PhoneNumberNormalizer
@@ -44,9 +59,76 @@ class AppContainer(
         )
     }
 
-    // TODO(Fase 3): settingsRepository (DataStore), whitelistRepository,
-    //  blockedCallRepository (Room) e contador de aberturas — via interface.
+    /**
+     * Escopo de processo para o cache do DataStore e para o trabalho de abertura.
+     * `SupervisorJob`: uma falha na poda não pode cancelar o collector das
+     * configurações, que alimenta o caminho quente do Service.
+     */
+    private val appScope: CoroutineScope =
+        CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+    /**
+     * Instância ÚNICA do banco. Construir mais de uma vez custaria abertura de
+     * SQLite no caminho quente do Service (Fase 5).
+     * A migração destrutiva do Room é PROIBIDA aqui: apagaria a whitelist do
+     * usuário numa atualização (recusada por scripts/verify-invariants.sh).
+     *
+     * O spread copia a cadeia de migrações uma única vez, na criação do banco, e é a
+     * assinatura que o Room oferece — o custo é irrelevante fora do caminho quente.
+     * Suprimido aqui, no ponto de uso, em vez de afrouxar a regra no detekt.yml
+     * compartilhado, que pagaria uma dívida global por um caso local.
+     */
+    @Suppress("SpreadOperator")
+    private val database: SentinelaDatabase by lazy {
+        Room.databaseBuilder(appContext, SentinelaDatabase::class.java, SentinelaDatabase.NAME)
+            .addMigrations(*SENTINELA_MIGRATIONS)
+            .build()
+    }
+
+    /**
+     * Instância ÚNICA do DataStore. O runtime derruba o processo se existirem duas
+     * instâncias sobre o mesmo arquivo — reproduzido na pesquisa da Fase 3. Singleton
+     * aqui é contrato de execução, não estilo; por isso também não se usa o delegate
+     * de Context, que esconde a instância no ponto de uso.
+     * Caminho real: files/datastore/sentinela_settings.preferences_pb, excluído do
+     * backup pela exclusão recursiva do diretório `datastore`.
+     */
+    private val settingsDataStore: DataStore<Preferences> by lazy {
+        PreferenceDataStoreFactory.create(scope = appScope) {
+            appContext.preferencesDataStoreFile(SETTINGS_DATASTORE_NAME)
+        }
+    }
+
+    val settingsRepository: DataStoreSettingsRepository by lazy {
+        DataStoreSettingsRepository(settingsDataStore, appScope)
+    }
+
+    val whitelistRepository: PersonalWhitelistRepository by lazy {
+        RoomWhitelistRepository(database.whitelistDao())
+    }
+
+    val blockedCallRepository: RoomBlockedCallRepository by lazy {
+        RoomBlockedCallRepository(database.blockedCallDao(), settingsRepository)
+    }
+
+    /**
+     * Chamado uma vez na abertura do app: incrementa o contador (ENG-01, base do
+     * convite de avaliação da Fase 9) e aplica a retenção (HST-02).
+     * Nenhum agendador em segundo plano: podar uma tabela local pequena não paga a
+     * dependência nem o custo de cold start.
+     */
+    fun onAppOpened() {
+        appScope.launch {
+            settingsRepository.incrementAppOpenCount()
+            blockedCallRepository.pruneNow()
+        }
+    }
+
     // TODO(Fase 4): contactLookupRepository (READ_CONTACTS + cache em memória).
     // TODO(Fase 5): blockedCallNotifier (canal silencioso).
     // TODO(Fase 6): componentes do modo discador (InCallService/ROLE_DIALER).
+
+    private companion object {
+        const val SETTINGS_DATASTORE_NAME = "sentinela_settings"
+    }
 }
