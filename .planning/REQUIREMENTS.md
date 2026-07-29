@@ -25,11 +25,11 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **SCR-11**: Orçamento de performance validado: p95 < 200 ms no cold path local da decisão
 
 ### Motor de Decisão (DEC)
-- [ ] **DEC-01**: `CallDecisionEngine` puro e determinístico concentra toda a regra — nenhuma condição de bloqueio fora dele
-- [ ] **DEC-02**: Precedência: saída → proteção off → privado → contato → whitelist → falha de consulta → desconhecido
-- [ ] **DEC-03**: Resultado modelado como domínio: Allow, Silence, Reject, SendSilentlyToVoicemail, BlockWithoutTrace
-- [ ] **DEC-04**: Reason codes internos sem dado pessoal (outgoing_call, protection_disabled, private_number, contact, personal_whitelist, unknown_number, invalid_number, local_lookup_failure, fallback_policy)
-- [ ] **DEC-05**: Política de fallback em erro inesperado é explícita e configurável (permitir/bloquear)
+- [x] **DEC-01**: `CallDecisionEngine` puro e determinístico concentra toda a regra — nenhuma condição de bloqueio fora dele
+- [x] **DEC-02**: Precedência: saída → proteção off → privado → contato → whitelist → falha de consulta → desconhecido
+- [x] **DEC-03**: Resultado modelado como domínio: Allow, Silence, Reject, SendSilentlyToVoicemail, BlockWithoutTrace
+- [x] **DEC-04**: Reason codes internos sem dado pessoal (outgoing_call, protection_disabled, private_number, contact, personal_whitelist, unknown_number, invalid_number, local_lookup_failure, fallback_policy)
+- [x] **DEC-05**: Política de fallback em erro inesperado é explícita e configurável (permitir/bloquear)
 
 ### Normalização de Números (NRM)
 - [ ] **NRM-01**: Normalização para E.164 com libphonenumber (port Android) — nunca normalização improvisada
@@ -40,7 +40,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 ### Contatos do Aparelho (CTT)
 - [ ] **CTT-01**: `READ_CONTACTS` solicitada em runtime com explicação clara (identificar se quem liga é contato); app permanece funcional no modo filtro se negada
 - [ ] **CTT-02**: Consulta de contato é local e rápida (cache em memória invalidado por ContentObserver), dentro do orçamento de p95 da decisão
-- [ ] **CTT-03**: Política para contatos configurável: Tocar (padrão) / Bloquear / Silenciar / Nunca Silenciar — conforme mockup de onboarding
+- [x] **CTT-03**: Política para contatos configurável: Tocar (padrão) / Bloquear / Silenciar / Nunca Silenciar — conforme mockup de onboarding
 - [ ] **CTT-04**: Nomes e dados de contato nunca são persistidos no banco nem enviados a lugar algum; uso apenas em memória no momento da chamada/exibição
 
 ### Whitelist Pessoal (WLT)
@@ -51,7 +51,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **WLT-05**: Exportar backup local (arquivo do próprio app)
 - [ ] **WLT-06**: Importar backup criado pelo próprio app, com validação de conteúdo, limite de tamanho e confirmação antes de sobrescrever
 - [ ] **WLT-07**: Consulta da whitelist na decisão é local, indexada e dentro do orçamento de performance
-- [ ] **WLT-08**: Tratamento da whitelist configurável: Nunca Silenciar (padrão) / Tocar / Bloquear / Silenciar — conforme passo do onboarding
+- [x] **WLT-08**: Tratamento da whitelist configurável: Nunca Silenciar (padrão) / Tocar / Bloquear / Silenciar — conforme passo do onboarding
 
 ### Histórico Interno (HST)
 - [ ] **HST-01**: Histórico próprio é opcional e registra o mínimo: número protegido/mascarado, data/hora UTC, motivo, ação, notificação enviada, SIM (se disponível sem permissão invasiva)
@@ -108,7 +108,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **PRV-07**: "Limpar todos os dados" remove whitelist, histórico e configurações
 
 ### Qualidade e Entrega (QLT)
-- [ ] **QLT-01**: Suíte de testes cobre os 19 casos obrigatórios da seção 13 do prompt (desconhecido, privado, inválido, whitelist, proteção off, saída, reject, voicemail, call log, notificação on/off, falha de repo, timeout, resposta única, normalização BR/intl, import duplicado, backup inválido, retenção, mudança de papel, cold start) **mais** os novos casos: política por contato, tratamento da whitelist, silenciar, contatos indisponíveis e contador de aberturas
+- [x] **QLT-01**: Suíte de testes cobre os 19 casos obrigatórios da seção 13 do prompt (desconhecido, privado, inválido, whitelist, proteção off, saída, reject, voicemail, call log, notificação on/off, falha de repo, timeout, resposta única, normalização BR/intl, import duplicado, backup inválido, retenção, mudança de papel, cold start) **mais** os novos casos: política por contato, tratamento da whitelist, silenciar, contatos indisponíveis e contador de aberturas
 - [x] **QLT-02**: Lint + detekt sem issues; builds debug e release compilam
 - [ ] **QLT-03**: Testes de migração do Room quando houver migração de schema
 - [ ] **QLT-04**: Roteiro reproduzível de validação física Samsung executado ou documentado (`docs/TESTE-FISICO-SAMSUNG.md`), incluindo cenários do modo discador
@@ -150,10 +150,10 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | DEC-01..05 | 2, 5 (integração) | Pending |
 | NRM-01..04 | 2 | Pending |
 | CTT-01..02, CTT-04 | 4 | Pending |
-| CTT-03 | 2 (lógica), 4 | Pending |
+| CTT-03 | 2 (lógica), 4 | Complete |
 | WLT-01..04, WLT-07 | 3 | Pending |
 | WLT-05..06 | 8 | Pending |
-| WLT-08 | 2 (lógica), 8 (UI) | Pending |
+| WLT-08 | 2 (lógica), 8 (UI) | Complete |
 | HST-01..06 | 3 | Pending |
 | HST-07 | 8 | Pending |
 | NTF-01..06 | 5 | Pending |
@@ -172,7 +172,7 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | PRV-03 | 3 | Pending |
 | PRV-05 | 8 | Pending |
 | PRV-06..07 | 9 | Pending |
-| QLT-01 | 2, 3, 5 | Pending |
+| QLT-01 | 2, 3, 5 | Complete |
 | QLT-02 | 1, 9 | Complete |
 | QLT-03 | 3 | Pending |
 | QLT-04..05 | 9 | Pending |

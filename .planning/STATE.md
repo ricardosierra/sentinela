@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-07-29T04:52:42.198Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-07-29T04:53:22.269Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 1
   total_plans: 8
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 02 (Motor de Decisao e Normalizacao) — EXECUTING
-Plan: 2 of 5 (02-01 concluido; wave 1 tem 02-01 e 02-02 em paralelo)
+Plan: 3 of 5 (wave 1 concluida: 02-01 e 02-02)
 
 ## Snapshot
 
@@ -55,6 +55,9 @@ Plan: 2 of 5 (02-01 concluido; wave 1 tem 02-01 e 02-02 em paralelo)
 - [Phase 02]: Kover 0.9.9 mede domain+phone desde 02-01; gate koverVerify (minBound 80) so entra em 02-05
 - [Phase 02]: TestMetadata carrega metadados reais do libphonenumber em JVM pura via android_merged_assets — sem Robolectric, sem createInstance(Context)
 - [Phase 02]: MaxMetaspaceSize=1g e obrigatorio com o plugin Kover (512m mata o build)
+- [Phase 02]: Matriz de decisao coberta por teste parametrizado (48 casos) com tabela esperada escrita a mao — nao derivada do motor
+- [Phase 02]: DecisionReason travado em 9 entradas por teste: reason code novo exige revisao de privacidade
+- [Phase 02]: ContactLookup.UNAVAILABLE + WhitelistLookup.HIT: a whitelist vence (o if de falha vem depois) — comportamento agora contratual
 
 ## Convenções operacionais do GSD
 
@@ -97,6 +100,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T04:52:42.196Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-07-29T04:53:22.267Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
