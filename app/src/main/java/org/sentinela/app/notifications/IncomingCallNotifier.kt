@@ -12,7 +12,11 @@ import org.sentinela.app.BuildConfig
 import org.sentinela.app.R
 import org.sentinela.app.telecom.call.CallNotificationCanceller
 import org.sentinela.app.telecom.call.MaskedCallIdentity
+import org.sentinela.app.ui.call.CALL_ACTION_ANSWER
+import org.sentinela.app.ui.call.CALL_ACTION_HANGUP
+import org.sentinela.app.ui.call.CALL_ACTION_REJECT
 import org.sentinela.app.ui.call.CallActivity
+import org.sentinela.app.ui.call.EXTRA_CALL_ACTION as EXTRA_CALL_ACTION_DA_TELA
 
 /**
  * Aviso de chamada do modo discador: a chamada recebida em tela cheia sobre a tela bloqueada e o
@@ -188,17 +192,24 @@ class IncomingCallNotifier(
 
     companion object {
         /**
-         * Chave do extra de ação, consumida pela tela de chamada.
+         * Contrato do extra de ação — **fonte única em `ui/call/CallActivity.kt`**, que é quem
+         * consome o valor. Aqui são apenas apelidos que reexportam a mesma constante.
          *
-         * Composta a partir do identificador do aplicativo da configuração de compilação em vez de
-         * escrita como literal: o invariante de rebranding do projeto proíbe o identificador
-         * literal em Kotlin, e compor a chave faz ela acompanhar qualquer renomeação futura.
+         * Os planos 06-04 e 06-06 rodaram em paralelo e cada um declarou o contrato do seu lado.
+         * Os valores nasceram idênticos, então nada quebrou — mas duas declarações da mesma chave
+         * são exatamente o defeito silencioso que os dois executores alertaram: mudar um lado
+         * deixaria os botões do aviso apontando para uma chave que a tela não lê, sem erro de
+         * compilação. Consolidado numa fonte única em 2026-07-29.
+         *
+         * A chave é composta a partir do identificador do aplicativo da configuração de compilação
+         * porque o invariante de rebranding proíbe esse identificador literal em Kotlin — e compor
+         * faz a chave acompanhar qualquer renomeação futura.
          */
-        val EXTRA_CALL_ACTION: String = "${BuildConfig.APPLICATION_ID}.extra.CALL_ACTION"
+        val EXTRA_CALL_ACTION: String = EXTRA_CALL_ACTION_DA_TELA
 
-        const val ACTION_ANSWER: String = "answer"
-        const val ACTION_REJECT: String = "reject"
-        const val ACTION_HANGUP: String = "hangup"
+        val ACTION_ANSWER: String = CALL_ACTION_ANSWER
+        val ACTION_REJECT: String = CALL_ACTION_REJECT
+        val ACTION_HANGUP: String = CALL_ACTION_HANGUP
 
         /**
          * Identificador único: existe no máximo uma chamada apresentada por vez, e a troca da
