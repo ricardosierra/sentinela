@@ -7,14 +7,31 @@ package org.sentinela.app.phone
  */
 interface PhoneNumberNormalizer {
 
-    /** Região padrão quando o número vem sem DDI (MVP: "BR"). */
-    fun normalize(raw: String, defaultRegion: String = "BR"): NormalizationResult
+    /**
+     * Normaliza [raw] para a chave canônica.
+     *
+     * @param region região ISO-3166-1 alpha-2 usada quando o número vem sem DDI. Quando `null`,
+     *   a resolução é delegada ao `RegionProvider` injetado (aparelho → usuário → BR). Não
+     *   travar em `"BR"`: o app precisa funcionar fora do Brasil.
+     */
+    fun normalize(raw: String, region: String? = null): NormalizationResult
 
-    /** Máscara segura para exibição/log (ex.: +55 11 9****-1234). */
+    /** Máscara segura para exibição/log (ex.: +55 11 9****-1234). Nunca lança. */
     fun mask(e164: String): String
 }
 
 sealed interface NormalizationResult {
+
+    /**
+     * Chave canônica do número.
+     *
+     * [e164] é E.164 (`+5511987654321`) **exceto para códigos curtos** — valores com menos de
+     * [PhoneNumbers.LIMIAR_CURTO] dígitos (`190`, `911`), cujo valor são os **dígitos crus**.
+     * Códigos curtos não têm E.164: `190`/BR produziria `+55190`, inválido e falso.
+     * Este é o contrato de dados que a Fase 3 persiste na whitelist e no histórico.
+     */
     data class Valid(val e164: String) : NormalizationResult
+
+    /** [reason] é código interno `[a-z_]+`, usado em log — nunca contém o número. */
     data class Invalid(val reason: String) : NormalizationResult
 }
