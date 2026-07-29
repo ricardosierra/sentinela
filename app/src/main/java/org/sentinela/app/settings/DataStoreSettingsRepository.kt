@@ -98,6 +98,28 @@ class DataStoreSettingsRepository(
         dataStore.edit { it[Keys.NOTIFICATION_PERMISSION_ASKED] = true }
     }
 
+    /**
+     * DIA-03: terceiro par do mesmo padrão, agora para a permissão de originar chamada do modo
+     * discador. A pesquisa da Fase 6 mediu que ela chega ao aparelho **não** concedida no install,
+     * portanto precisa de pedido em runtime — e o pedido só acontece no momento em que o usuário
+     * toca em ligar, nunca antes.
+     *
+     * Fora de [ScreeningSettings] pelo mesmo motivo dos outros dois: não é configuração de triagem
+     * e não pode pesar no snapshot servido no caminho quente do Service.
+     */
+    val callPhonePermissionAsked: Flow<Boolean> =
+        dataStore.data
+            .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
+            .map { it[Keys.CALL_PHONE_PERMISSION_ASKED] ?: false }
+
+    /**
+     * Chamar no momento em que o launcher da permissão é disparado, NUNCA no callback: o
+     * usuário pode matar o app com o diálogo do sistema aberto. Idempotente.
+     */
+    suspend fun markCallPhonePermissionAsked() {
+        dataStore.edit { it[Keys.CALL_PHONE_PERMISSION_ASKED] = true }
+    }
+
     init {
         // Aquece e mantém o cache enquanto o processo viver.
         scope.launch { settings.collect() }
@@ -148,6 +170,7 @@ class DataStoreSettingsRepository(
         val NOTIFICATION_PERMISSION_ASKED = booleanPreferencesKey("notification_permission_asked")
         val APP_OPEN_COUNT = intPreferencesKey("app_open_count")
         val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
+        val CALL_PHONE_PERMISSION_ASKED = booleanPreferencesKey("call_phone_permission_asked")
     }
 
     private fun Preferences.toScreeningSettings(): ScreeningSettings {
