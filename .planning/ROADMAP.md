@@ -19,19 +19,19 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Fundação Compilável** - Esqueleto Android validado: Gradle KTS + catalog, tema com tokens, detekt/lint, build.sh
-- [ ] **Phase 2: Motor de Decisão e Normalização** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
+- [ ] **Phase 1: Fundacao Compilavel** - Esqueleto Android validado: Gradle KTS + catalog, tema com tokens, detekt/lint, build.sh
+- [ ] **Phase 2: Motor de Decisao e Normalizacao** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
 - [ ] **Phase 3: Dados Locais** - DataStore (configurações + contador de aberturas), Room (whitelist + histórico), retenção e backup exclusion
 - [ ] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
-- [ ] **Phase 5: Triagem Telecom (Modo Filtro)** - Service integrado ao motor, papel de call screening, proteções e notificação silenciosa
-- [ ] **Phase 6: Modo Discador (Opcional ao Usuário)** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
+- [ ] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções e notificação silenciosa
+- [ ] **Phase 6: Modo Discador Opcional** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
 - [ ] **Phase 7: UI Onboarding e Home** - Fluxo de boas-vindas/permissões/políticas, dashboard e tela Proteção
-- [ ] **Phase 8: UI Whitelist e Histórico** - CRUD com busca e import/export; histórico com filtros e ações
-- [ ] **Phase 9: Apoio, Privacidade, Release e Validação Física** - Avaliação/apoio (5ª abertura), tela sobre, release R8, roteiro Samsung
+- [ ] **Phase 8: UI Whitelist e Historico** - CRUD com busca e import/export; histórico com filtros e ações
+- [ ] **Phase 9: Apoio Privacidade Release e Validacao Fisica** - Avaliação/apoio (5ª abertura), tela sobre, release R8, roteiro Samsung
 
 ## Phase Details
 
-### Phase 1: Fundação Compilável
+### Phase 1: Fundacao Compilavel
 **Goal**: Projeto Android compila, testa e lint-a limpo com o stack travado, pronto para receber as fases seguintes.
 **Depends on**: Nothing (first phase)
 **Requirements**: PRV-01 (base), QLT-02 (base), UIX-08 (tokens do tema), UIX-12
@@ -43,7 +43,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   5. Nome, applicationId, cores e strings centralizados — rebranding não exige tocar em código Kotlin
 **Plans**: TBD
 
-### Phase 2: Motor de Decisão e Normalização
+### Phase 2: Motor de Decisao e Normalizacao
 **Goal**: Toda regra de triagem (políticas por origem: contato, whitelist, desconhecido) e normalização de números existe como código puro, determinístico e exaustivamente testado — antes de qualquer integração com o Telecom.
 **Depends on**: Phase 1
 **Requirements**: DEC-01..05, NRM-01..04, CTT-03 (lógica), WLT-08 (lógica), QLT-01 (casos de domínio), QLT-07 (base de cobertura)
@@ -79,7 +79,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   4. Nenhum nome/dado de contato aparece em banco, logs ou backup — verificado por teste e inspeção do schema
 **Plans**: TBD
 
-### Phase 5: Triagem Telecom (Modo Filtro)
+### Phase 5: Triagem Telecom Modo Filtro
 **Goal**: Chamada de número desconhecido é bloqueada de verdade antes de tocar, com o Service fino, resiliente e dentro do orçamento — o critério de aceite central do produto.
 **Depends on**: Phase 4
 **Requirements**: SCR-01..11, NTF-01..06, DEC-01..05 (integração), QLT-01 (casos de service), QLT-06 (parcial)
@@ -92,7 +92,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   6. Política Silenciar toca sem som/vibração e Encaminhar silenciosamente cai na caixa postal quando selecionados
 **Plans**: TBD
 
-### Phase 6: Modo Discador (Opcional ao Usuário)
+### Phase 6: Modo Discador Opcional
 **Goal**: Usuário que optar pode tornar o Sentinela o telefone padrão — habilitando políticas também para contatos — com experiência de chamada própria mínima e reversão limpa.
 **Depends on**: Phase 5
 **Requirements**: DIA-01..05, QLT-06 (parcial)
@@ -116,7 +116,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   4. TalkBack navega o fluxo inteiro; strings 100% em resources pt-BR
 **Plans**: TBD
 
-### Phase 8: UI Whitelist e Histórico
+### Phase 8: UI Whitelist e Historico
 **Goal**: Usuário gerencia exceções e audita bloqueios sem sair do app.
 **Depends on**: Phase 7
 **Requirements**: UIX-04..05, UIX-07..11 (transversal), WLT-05..06 (import/export), WLT-08 (UI), HST-07, PRV-05
@@ -128,7 +128,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   5. Números aparecem sempre mascarados nas listas e notificações
 **Plans**: TBD
 
-### Phase 9: Apoio, Privacidade, Release e Validação Física
+### Phase 9: Apoio Privacidade Release e Validacao Fisica
 **Goal**: MVP instalável, auditável e honesto: fluxo de apoio/avaliação respeitoso, política de privacidade embutida, release assinado com R8 e comportamento validado (ou documentado) em Samsung físico.
 **Depends on**: Phase 8
 **Requirements**: UIX-06, UIX-07..11 (final), UIX-13, ENG-02..04, PRV-02, PRV-04, PRV-06..07, QLT-02, QLT-04..05, QLT-07 (gate)
