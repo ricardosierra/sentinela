@@ -55,9 +55,9 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 
 ### Histórico Interno (HST)
 - [x] **HST-01**: Histórico próprio é opcional e registra o mínimo: número protegido/mascarado, data/hora UTC, motivo, ação, notificação enviada, SIM (se disponível sem permissão invasiva)
-- [ ] **HST-02**: Retenção configurável: não guardar / 7 dias / 30 dias / 90 dias / até exclusão manual
-- [ ] **HST-03**: Limpar histórico completo e excluir registro individual
-- [ ] **HST-04**: Adicionar número à whitelist a partir do histórico
+- [x] **HST-02**: Retenção configurável: não guardar / 7 dias / 30 dias / 90 dias / até exclusão manual
+- [x] **HST-03**: Limpar histórico completo e excluir registro individual
+- [x] **HST-04**: Adicionar número à whitelist a partir do histórico
 - [x] **HST-05**: Marcar registro como legítimo ou indesejado (status local)
 - [x] **HST-06**: Banco sensível excluído do backup automático do Android
 - [ ] **HST-07**: Filtros por período e por decisão na tela de histórico

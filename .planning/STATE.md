@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-07-29T06:14:32.376Z"
+stopped_at: Completed 03-05-PLAN.md
+last_updated: "2026-07-29T06:25:43.396Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 03 (Dados Locais) — EXECUTING
-Plan: 4 of 7
+Plan: 6 of 7
 
 ## Snapshot
 
@@ -77,6 +77,13 @@ Plan: 4 of 7
 - [Phase 03]: Migrations.kt descreve a migracao destrutiva em vez de nomea-la: o invariante casa ate em comentario, porque linha comentada vira linha ativa
 - [Phase 03]: schemas/ e input das Test tasks: arquivo lido por teste e nao declarado como input deixa o cache falsificar o verde
 - [Phase 03]: Enum persistido por code/name; leitura tolerante cai em UNKNOWN_NUMBER/UNCLASSIFIED em vez de lancar
+- [Phase 03]: Retencao do historico persistida por id textual (never/7d/30d/90d/manual), nunca pela posicao da constante
+- [Phase 03]: NEVER_STORE e MANUAL tem cutoff nulo; quem os distingue e shouldStore (um nao grava, o outro nunca poda)
+- [Phase 03]: Poda do historico com corte ESTRITO (< cutoff): registro exatamente no limite sobrevive, travado por assert instrumentado
+- [Phase 03]: Poda roda apos cada gravacao e na abertura do app; nenhum agendador em segundo plano no MVP
+- [Phase 03]: Repositorio do historico propaga excecao do DAO: quem decide degradar e o Service da Fase 5
+- [Phase 03]: Relogio injetado (clock: () -> Long) em toda regra dependente de tempo
+- [Phase 03]: Janela de retencao virou constante nomeada em vez de afrouxar MagicNumber no detekt.yml compartilhado
 
 ## Convenções operacionais do GSD
 
@@ -119,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T06:14:32.374Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-07-29T06:25:12.812Z
+Stopped at: Completed 03-05-PLAN.md
 Resume file: None
