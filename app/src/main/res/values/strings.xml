@@ -154,6 +154,7 @@
 
     <!-- Notificações -->
     <string name="notification_channel_blocked">Chamadas bloqueadas</string>
+    <string name="notification_channel_blocked_desc">Aviso discreto de que uma chamada foi bloqueada. Nunca toca som, nunca vibra e nunca ocupa a tela.</string>
     <string name="notification_blocked_title">Chamada bloqueada</string>
     <string name="notification_blocked_masked">Chamada de %1$s bloqueada</string>
     <string name="notification_blocked_anonymous">Uma chamada foi bloqueada</string>
