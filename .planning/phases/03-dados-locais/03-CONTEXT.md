@@ -37,9 +37,19 @@ qualquer UI de whitelist/histórico (Phase 8). Nenhuma permissão nova.
 - **`enabled = false` faz `contains()` retornar `false`.** Desabilitar é equivalente funcional a
   remover, mas preserva a entrada para o usuário religar depois. A query de `contains()` filtra
   por `enabled = 1`.
-- **Orçamento medido, não presumido:** teste que popula 1.000 entradas e exige **p95 < 5 ms** em
-  `contains()`. Folga larga dentro do orçamento de 200 ms do Service. O teste deve falhar de
-  verdade se o índice for removido — provar isso.
+- **Orçamento medido, não presumido — CORRIGIDO APÓS PESQUISA (2026-07-29):**
+  - Medição real no emulador com 1.000 entradas: DAO **`suspend`** dá p50 1,46 / p95 9,12 /
+    p99 26,39 ms — **estoura o alvo**. DAO **não-suspend** dá p50 0,20 / p95 3,59 / p99 5,46 ms.
+    O gargalo é o dispatch de corrotina do Room, não o SQLite (query crua: p50 0,032 ms).
+    **Decisão: `contains()` no caminho quente é DAO não-suspend**, chamado de um contexto de IO
+    pelo chamador. A interface `PersonalWhitelistRepository` mantém `suspend fun contains` como
+    contrato público; o custo fica fora do caminho da decisão.
+  - Assert primário `p50 < 1 ms` (folga 5×, robusto em máquina lenta), mantendo `p95 < 5 ms`
+    como alvo declarado.
+  - **O teste de tempo NÃO prova o índice.** Medido: full scan com 1.000 linhas dá p50 0,047 ms
+    contra 0,032 ms do indexado — indistinguível de ruído. A prova do índice é
+    **`EXPLAIN QUERY PLAN`**, determinística, exigindo a string
+    `SEARCH ... USING INDEX` na saída. É esse o teste que deve falhar se o índice sumir.
 
 ### Histórico
 
@@ -112,7 +122,20 @@ qualquer UI de whitelist/histórico (Phase 8). Nenhuma permissão nova.
 - Domínio e `phone/` sem `import android.*`; acesso a plataforma isolado em `platform/`.
 - Strings em `res/values/strings.xml` (pt-BR), nunca hardcoded em Kotlin.
 - Nenhum número completo em log — sempre `PhoneMask.mask`.
-- Kover com gate `minBound(80)` sobre `domain.*` + `phone.*`. Avaliar se `data.*` entra no filtro.
+- Kover com gate `minBound(80)` sobre `domain.*` + `phone.*`. **Resolvido pela pesquisa:** incluir
+  `data.*` e `settings.*`, mas **excluir** `data.local.db.*` e `*_Impl` — código gerado pelo Room
+  só roda instrumentado e o Kover não o mede; incluí-lo derrubaria o gate com falso-vermelho.
+  Ampliar o filtro **só no último plano da fase** (lição literal da Phase 2).
+- **Toolchain já pronta (verificado por build real):** KSP 2.3.10 + Room 2.8.4 + AGP 9.3.0 com o
+  `ksp { arg("room.schemaLocation", ...) }` legado **funcionam** e geram `app/schemas/`.
+  **Não** migrar para o Room Gradle Plugin.
+- **DataStore:** caminho real confirmado em runtime —
+  `/data/data/<pkg>/files/datastore/<name>.preferences_pb`. O `data_extraction_rules.xml` atual já
+  exclui o lugar certo; falta apenas `path="."` explícito nos `<exclude>`. O runtime lança
+  `There are multiple DataStores active for the same file` se houver mais de uma instância — o
+  singleton no `AppContainer` é obrigatório por contrato, não por estilo.
+- **Emulador:** `adb wait-for-device` **não basta** (fica `offline` por vários segundos); é
+  preciso poll em `sys.boot_completed`.
 - Evidência de build só vale com `clean` **e** `--no-build-cache` — `FROM-CACHE` tem o mesmo
   defeito probatório que `UP-TO-DATE` (aprendido na Phase 1).
 
