@@ -123,17 +123,24 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Bloco 3 — criterio 4: dominio puro (nao conhece Android/Telecom)
+# Bloco 3 — criterio 4: dominio e normalizacao puros (nao conhecem Android/Telecom)
 # ---------------------------------------------------------------------------
-echo "== Bloco 3: dominio puro =="
+echo "== Bloco 3: dominio e normalizacao puros =="
 
-ANDROID_IMPORTS=$(grep -rn "^import android" app/src/main/java/org/sentinela/app/domain/)
-if [ -z "$ANDROID_IMPORTS" ]; then
-  ok "dominio sem import de android.*"
-else
-  echo "$ANDROID_IMPORTS" | sed 's/^/      /'
-  fail "dominio importa android.* — regra de decisao deve ser JVM pura"
-fi
+# phone/ entra na Fase 2: LibPhoneNumberNormalizer usa io.michaelrocks.libphonenumber.android,
+# que apesar do nome do pacote e codigo JVM puro. Quem conhece Context/TelephonyManager e a
+# camada platform/, nunca phone/.
+for pkg in domain phone; do
+  DIR="app/src/main/java/org/sentinela/app/$pkg"
+  [ -d "$DIR" ] || { skip "pacote $pkg ausente"; continue; }
+  IMPORTS=$(grep -rn "^import android" "$DIR")
+  if [ -z "$IMPORTS" ]; then
+    ok "$pkg sem import de android.*"
+  else
+    echo "$IMPORTS" | sed 's/^/      /'
+    fail "$pkg importa android.* — regra de decisao e normalizacao devem ser JVM puras"
+  fi
+done
 
 # ---------------------------------------------------------------------------
 # Bloco 4 — QLT-02: relatorios de qualidade (gate real e o plano 03)
