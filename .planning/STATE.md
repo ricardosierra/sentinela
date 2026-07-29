@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-07-29T14:13:35.183Z"
+stopped_at: Completed 04-04-PLAN.md
+last_updated: "2026-07-29T14:33:26.823Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 3
   total_plans: 20
-  completed_plans: 18
+  completed_plans: 19
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 04 (Contatos do Aparelho) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 
 ## Snapshot
 
@@ -110,6 +110,13 @@ Plan: 4 of 5
 - [Phase 04]: Uso do cache provado por contador de consultas ao provider, jamais por cronometro; falsificado antes de aceito
 - [Phase 04]: backgroundScope de runTest nao e despachado por advanceUntilIdle nas coroutines 1.11: testes de cache usam escopo proprio sobre o testScheduler
 - [Phase 04]: Cobertura caiu para 87,69% porque ContactsContractLookupSource vive em data.* e so roda instrumentado; ajuste do filtro do Kover e do plano 04-05
+- [Phase Phase 04]: Sonda dupla provada contra o provider real: com a segunda sonda desligada, o contato em formato nacional e o fixo BR ficam VERMELHOS
+- [Phase Phase 04]: Debounce falsificado com DEBOUNCE_MS=0: os mesmos 11 callbacks viraram 3 reconstrucoes; com 750 ms, 1
+- [Phase Phase 04]: Coalescencia do provider reconfirmada no nosso AVD: 11 callbacks para 10 transacoes — por isso o assert e sobre reconstrucoes, nunca sobre callbacks
+- [Phase Phase 04]: Cache removido deixa o teste de TEMPO verde e so o contador vermelho — a licao da Phase 3 medida de novo na Fase 4
+- [Phase Phase 04]: Lookup com 5.000 contatos: p50 0,029 ms (cache quente) e 0,39/0,92 ms (sonda direta); p95 e max so em logcat, veredito na Phase 9
+- [Phase Phase 04]: Construcao do cache medida em 2,57 s no AVD (acima dos 1,5-1,8 s da pesquisa): confirma que ela jamais pode ser aguardada
+- [Phase Phase 04]: Testes instrumentados de contatos fixam a regiao em BR: a cascata real leria o SIM us do AVD e o teste mediria o emulador
 
 ## Convenções operacionais do GSD
 
@@ -153,6 +160,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T14:13:15.421Z
-Stopped at: Completed 04-03-PLAN.md
+Last session: 2026-07-29T14:33:05.334Z
+Stopped at: Completed 04-04-PLAN.md
 Resume file: None
