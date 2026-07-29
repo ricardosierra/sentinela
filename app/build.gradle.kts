@@ -61,6 +61,25 @@ android {
             isReturnDefaultValues = true
         }
     }
+
+    lint {
+        abortOnError = true // explicito: erro de lint quebra o build
+
+        disable += setOf(
+            // Strings e cores pre-escritas para as telas das Fases 5-9
+            // (docs/design/TELAS.md). Sao ativos legitimos, nao lixo:
+            // apagar destroi trabalho e recria custo nas fases de UI.
+            // Reavaliar na Phase 9, quando as telas reais consumirem as strings.
+            "UnusedResources",
+            // O dicionario do lint e en-US e acusa falso positivo em conteudo
+            // pt-BR ("momento" != "memento"). O idioma padrao do app e pt-BR.
+            "Typos",
+            // A versao do AGP e decisao de projeto (.planning/research/STACK.md):
+            // 9.3.0 e a linha de base validada de ponta a ponta. Nao ha release
+            // notes publicadas para a 9.3.1.
+            "AndroidGradlePluginVersion",
+        )
+    }
 }
 
 java {
