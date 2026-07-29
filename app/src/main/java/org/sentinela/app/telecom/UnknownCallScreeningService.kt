@@ -17,9 +17,22 @@ import org.sentinela.app.domain.CallDirection
  * pessoas conhecidas chegam até aqui, e a consulta à agenda é obrigatória: um resultado errado
  * barraria a ligação de alguém da lista do usuário, que é a pior falha possível deste produto.
  *
+ * Sobre chamadas de saída, um ponto que precisa ficar escrito com precisão, porque a formulação
+ * fácil ("responder sempre") está errada. Quem entrega a triagem a este método é um tratador de
+ * mensagens da classe base da plataforma, e o código dele, lido na fonte do próprio sistema, faz o
+ * seguinte: chama este método e, logo depois de ele retornar, se a chamada for de saída, envia
+ * sozinho ao serviço de telefonia uma resposta vazia. A documentação da própria função de resposta
+ * confirma o outro lado: pedidos feitos por ela são ignorados quando a chamada não é de entrada, e
+ * o prazo de cinco segundos é cobrado apenas de chamadas de entrada. Ou seja, para uma chamada de
+ * saída não existe prazo estourando, nem aviso, nem punição por não responder — responder é que
+ * seria errado, porque somaria uma resposta descartada à resposta automática do sistema. Por isso o
+ * retorno antecipado é o comportamento correto, e não um atalho.
+ *
  * Invariantes desta classe (não relaxar):
- *  - a resposta ao sistema acontece exatamente uma vez em todos os caminhos;
- *  - ela sai muito antes do limite da plataforma, com folga de cinco vezes;
+ *  - em toda chamada de entrada a resposta ao sistema acontece exatamente uma vez, em todos os
+ *    caminhos, inclusive nos de falha;
+ *  - em chamada de saída este arquivo não responde nada, pela razão acima, e não interfere;
+ *  - a resposta sai muito antes do limite da plataforma, com folga de cinco vezes;
  *  - nenhuma consulta sai do aparelho;
  *  - histórico e notificação próprios só existem depois da resposta.
  */
@@ -35,8 +48,9 @@ class UnknownCallScreeningService : CallScreeningService() {
         val deps = dependencies ?: (application as SentinelaApp).container
         val chamada = deps.screenedCallFactory.from(callDetails)
 
-        // Chamada de saída: quem responde é o próprio sistema, e o que sairia daqui seria
-        // descartado. Sair antes de tudo evita gastar consulta local por nada.
+        // Chamada de saída: a classe base responde por conta própria assim que este método
+        // retorna, e o que saísse daqui seria descartado. Sair antes de tudo evita gastar
+        // consulta local por nada. Justificativa completa no comentário da classe.
         if (chamada.direction == CallDirection.OUTGOING) return
 
         // A triagem chega na thread principal e as consultas locais suspendem: o trabalho vai

@@ -5,8 +5,11 @@
 #
 # Uso: ./gradlew assembleDebug && bash scripts/verify-invariants.sh
 #
-# NAO usar `set -e`: `grep -c` sai com codigo 1 quando o resultado e 0, o que
-# abortaria o script justamente no caso de sucesso.
+# Abortar no primeiro comando com status diferente de zero e PROIBIDO aqui, e o modo
+# do shell que faz isso e deliberadamente descrito em vez de escrito: `grep -c` sai com
+# codigo 1 quando conta 0, o que abortaria o script justamente no caso de sucesso, e um
+# criterio de aceite que procura esse literal nao consegue distinguir comentario de codigo
+# (licao registrada na Fase 5). Por isso so `-u` e `pipefail` entram na linha abaixo.
 set -uo pipefail
 
 export ANDROID_HOME="${ANDROID_HOME:-$HOME/Library/Android/sdk}"
@@ -290,6 +293,82 @@ if [ -z "$PERSIST" ]; then
 else
   echo "$PERSIST" | sed 's/^/      /'
   fail "mecanismo de persistencia em data/contacts — contato vive so em memoria"
+fi
+
+# ---------------------------------------------------------------------------
+# Bloco 7 — Fase 5: regra de decisao concentrada no motor
+# ---------------------------------------------------------------------------
+# O risco desta fase e arquitetural: a camada que fala com o sistema de telefonia e o lugar mais
+# tentador do projeto para enfiar "so um if" sobre o destino de uma chamada. O CLAUDE.md proibe
+# isso — toda regra vive no motor de decisao —, e revisao de codigo nao e prova. Estas quatro
+# checagens sao a prova.
+#
+# ATENCAO ao escopo, mesma armadilha do Bloco 6: todo grep daqui aponta para app/src/main/java, e
+# nunca para scripts/. Este arquivo cita os mesmos identificadores que procura, entao inclui-lo no
+# escopo faria o invariante falhar sozinho, sem nenhuma violacao real. Confira os caminhos antes de
+# editar qualquer comentario deste bloco.
+echo "== Bloco 7: regra de decisao concentrada no motor =="
+
+# 7.1 — a camada de telefonia nao conhece politica por origem nem modo de bloqueio.
+# Excecao unica e pelo CAMINHO do arquivo: a fabrica de respostas precisa das configuracoes para
+# traduzir a decisao do dominio na resposta que o sistema entende, e traduzir nao e decidir.
+POLITICA_PAT='OriginPolicy|BlockMode'
+POLITICA_FORA=$(grep -rnE "$POLITICA_PAT" app/src/main/java/org/sentinela/app/telecom \
+  --include="*.kt" 2>/dev/null \
+  | grep -v "app/src/main/java/org/sentinela/app/telecom/CallResponseFactory.kt")
+if [ -z "$POLITICA_FORA" ]; then
+  ok "camada de telefonia nao cita politica por origem nem modo de bloqueio"
+else
+  echo "$POLITICA_FORA" | sed 's/^/      /'
+  fail "politica de triagem citada na camada de telefonia — ela pertence ao CallDecisionEngine, em app/src/main/java/org/sentinela/app/domain"
+fi
+
+# 7.2 — so o dominio constroi uma decisao que barra a chamada.
+# O padrao exige o parenteses de construcao: citar o nome do tipo em documentacao e legitimo,
+# construir a decisao fora do motor nao e.
+BLOQUEIO_PAT='CallDecision\.(Reject|Silence|BlockWithoutTrace|SendSilentlyToVoicemail)\('
+BLOQUEIO_FORA=$(grep -rnE "$BLOQUEIO_PAT" app/src/main/java --include="*.kt" 2>/dev/null \
+  | grep -v "app/src/main/java/org/sentinela/app/domain/")
+if [ -z "$BLOQUEIO_FORA" ]; then
+  ok "decisao de bloqueio so e construida no dominio"
+else
+  echo "$BLOQUEIO_FORA" | sed 's/^/      /'
+  fail "decisao de bloqueio construida fora do dominio — quem decide barrar uma chamada e o motor, em app/src/main/java/org/sentinela/app/domain"
+fi
+
+# 7.3 — o coordenador da triagem continua puro.
+# Ele orquestra as consultas locais e e o que a cobertura consegue medir em JVM; um unico tipo da
+# plataforma aqui o tira do alcance dos testes rapidos e abre a porta para regra disfarcada.
+COORD=app/src/main/java/org/sentinela/app/telecom/ScreeningCoordinator.kt
+COORD_PLATAFORMA=$(grep -n "^import android\." "$COORD" 2>/dev/null)
+if [ -z "$COORD_PLATAFORMA" ]; then
+  ok "coordenador da triagem sem tipo da plataforma"
+else
+  echo "$COORD_PLATAFORMA" | sed 's/^/      /'
+  fail "coordenador da triagem importa tipo da plataforma — ele precisa continuar puro e medido pela cobertura ($COORD)"
+fi
+
+# 7.4 — a resposta ao sistema sai de um unico lugar, uma unica vez.
+# O padrao exige o parenteses da chamada: os arquivos de historico e notificacao mencionam o nome
+# em prosa, para lembrar que rodam DEPOIS da resposta, e isso e informacao correta, nao violacao.
+SERVICO=app/src/main/java/org/sentinela/app/telecom/UnknownCallScreeningService.kt
+RESPOSTA_FORA=$(grep -rn "respondToCall(" app/src/main/java --include="*.kt" 2>/dev/null \
+  | grep -v "$SERVICO")
+if [ -z "$RESPOSTA_FORA" ]; then
+  ok "resposta ao sistema nao e emitida fora do servico de triagem"
+else
+  echo "$RESPOSTA_FORA" | sed 's/^/      /'
+  fail "resposta ao sistema emitida fora do servico de triagem — o unico emissor autorizado e $SERVICO"
+fi
+
+# A contagem e sobre chamada de ENTRADA: em chamada de saida a classe base da plataforma responde
+# sozinha assim que onScreenCall retorna, e uma resposta nossa seria descartada (fonte: AOSP).
+# Uma unica ocorrencia textual no arquivo e o que garante que nao existe um segundo caminho.
+RESPOSTA_NO_SERVICO=$(grep -c "respondToCall(" "$SERVICO" 2>/dev/null)
+if [ "${RESPOSTA_NO_SERVICO:-0}" -eq 1 ]; then
+  ok "servico de triagem responde ao sistema em um unico ponto"
+else
+  fail "servico de triagem tem ${RESPOSTA_NO_SERVICO:-0} pontos de resposta ao sistema (esperado 1) — duas respostas para a mesma chamada de entrada sao ignoradas em silencio pelo sistema"
 fi
 
 # ---------------------------------------------------------------------------
