@@ -68,6 +68,12 @@ trap restaurar EXIT
 # 1 — ponto de partida: o aparelho tem telefone padrao e nao e o nosso
 # ---------------------------------------------------------------------------
 echo "== 1: ponto de partida =="
+# A suite instrumentada deixa o aplicativo como telefone padrao de proposito (ela nao pode devolver
+# o papel sem se matar). Aqui, dirigindo de fora, devolver e seguro — e e o ponto de partida certo.
+if [ "$(holders "$ROLE_DIALER")" = "$PKG" ]; then
+  "$ADB" shell cmd role remove-role-holder "$ROLE_DIALER" "$PKG" >/dev/null 2>&1
+  sleep 2
+fi
 INICIAL=$(holders "$ROLE_DIALER")
 if [ "$INICIAL" = "$PRELOADED_DIALER" ]; then
   ok "telefone padrao inicial e o discador de fabrica ($INICIAL)"

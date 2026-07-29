@@ -15,6 +15,7 @@ import org.sentinela.app.SentinelaApp
 import org.sentinela.app.data.contacts.ContactsTestFixture
 import org.sentinela.app.domain.CallDecision
 import org.sentinela.app.domain.CallDirection
+import org.sentinela.app.domain.ContactLookup
 import org.sentinela.app.domain.DecisionReason
 import org.sentinela.app.domain.ScreenedCall
 import org.sentinela.app.domain.ScreenedNumber
@@ -83,6 +84,31 @@ class DialerScreeningIntegrationTest {
             regionProvider = RegionProvider { REGIAO },
         )
         TelecomShell.addRoleHolder(TelecomShell.ROLE_DIALER, ctx.packageName)
+        esperarContatoVisivelAoAplicativo()
+    }
+
+    /**
+     * Espera o contato preparado ficar visivel para o repositorio de contatos do aplicativo.
+     *
+     * Isto nao e paciencia decorativa: o repositorio do conjunto de colaboradores e unico no
+     * processo e mantem um conjunto de chaves reconstruido por observador com atraso proposital,
+     * medido em 750 ms na Fase 4. Quando outra suite da execucao ja aqueceu esse conjunto, uma
+     * consulta feita no instante seguinte a insercao responde pelo conjunto ANTIGO e devolve
+     * ausencia — e os casos de politica de contato ficariam vermelhos por um motivo falso, que nao
+     * tem nada a ver com o modo discador. Falhar aqui, com mensagem propria, e melhor que falhar la.
+     */
+    private fun esperarContatoVisivelAoAplicativo() {
+        repeat(TENTATIVAS_DE_AGENDA) {
+            val encontrado = runBlocking {
+                app.container.contactLookupRepository.lookup(CONTATO_E164)
+            }
+            if (encontrado == ContactLookup.HIT) return
+            Thread.sleep(INTERVALO_DE_AGENDA_MILLIS)
+        }
+        throw AssertionError(
+            "o contato preparado nao ficou visivel para o repositorio do aplicativo — sem contato " +
+                "na agenda nenhum caso de politica de contato tem cenario",
+        )
     }
 
     @After
@@ -207,6 +233,8 @@ class DialerScreeningIntegrationTest {
     }
 
     private companion object {
+        const val TENTATIVAS_DE_AGENDA = 20
+        const val INTERVALO_DE_AGENDA_MILLIS = 500L
         const val REGIAO = "BR"
         const val NOME_DO_CONTATO = "Ana da Agenda"
         const val CONTATO_E164 = "+5511987654321"

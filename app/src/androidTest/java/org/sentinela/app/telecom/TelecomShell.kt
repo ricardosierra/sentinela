@@ -64,9 +64,10 @@ internal object TelecomShell {
     /** Diagnostico do sistema de telefonia — usado para afirmar sobrevivencia de chamada. */
     fun telecomDump(): String = run("dumpsys telecom").output
 
-    fun cleanupStuckCalls(): Result = run("telecom cleanup-stuck-calls")
+    /** Comando de limpeza de chamadas presas, verificado na pesquisa da fase. */
+    const val CLEANUP_STUCK_CALLS_COMMAND: String = "telecom cleanup-stuck-calls"
 
-    fun forceStop(packageName: String): Result = run("am force-stop $packageName")
+    fun cleanupStuckCalls(): Result = run(CLEANUP_STUCK_CALLS_COMMAND)
 
     fun placeOutgoingCall(number: String): Result =
         run("am start -a android.intent.action.CALL -d tel:$number")
