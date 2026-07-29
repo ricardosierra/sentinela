@@ -93,7 +93,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **UIX-13**: Seção "Apoie o Sentinela" (em Sobre): destaque de que o app é open source, sem propaganda, sem telemetria, sem nuvem e 100% offline; convite a comentário de apoio e doação em Bitcoin
 
 ### Engajamento e Apoio (ENG)
-- [ ] **ENG-01**: Contador local de aberturas do app (DataStore), sem qualquer telemetria
+- [x] **ENG-01**: Contador local de aberturas do app (DataStore), sem qualquer telemetria
 - [ ] **ENG-02**: Na 5ª abertura, convite para avaliar/apoiar; se recusado, repete a cada 5 aberturas (10ª, 15ª, 20ª…) até o usuário aceitar; após aceite, nunca mais pergunta
 - [ ] **ENG-03**: Fluxo de apoio: avaliação (In-App Review quando disponível; senão link), comentário de apoio e doação em Bitcoin (endereço fornecido pelo mantenedor — nunca publicar placeholder como se fosse real)
 - [ ] **ENG-04**: Convite nunca interrompe fluxo crítico (não aparece durante onboarding nem chamada) e respeita a escolha do usuário
@@ -165,7 +165,7 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | UIX-08 | 1 (tokens), 7, 8, 9 | Complete |
 | UIX-12 | 1 | Complete |
 | UIX-13 | 9 | Pending |
-| ENG-01 | 3 | Pending |
+| ENG-01 | 3 | Complete |
 | ENG-02..04 | 9 | Pending |
 | PRV-01 | 1 | Complete |
 | PRV-02, PRV-04 | 9 | Pending |

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-04-PLAN.md
-last_updated: "2026-07-29T06:30:01.710Z"
+stopped_at: Completed 03-06-PLAN.md
+last_updated: "2026-07-29T12:07:13.732Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 13
+  completed_plans: 14
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 03 (Dados Locais) — EXECUTING
-Plan: 6 of 7
+Plan: 7 of 7
 
 ## Snapshot
 
@@ -87,6 +87,10 @@ Plan: 6 of 7
 - [Phase 03]: Whitelist: dedup resolve o id por findByKey ANTES do @Upsert — @Upsert com id 0 em chave com indice unico e no-op silencioso (provado por teste), nao excecao
 - [Phase 03]: Indice so e provado por EXPLAIN QUERY PLAN: sem o indice o EQP fica vermelho e o teste de tempo continua VERDE (p95 4,21 ms com full scan) — medido
 - [Phase 03]: contains() no caminho quente: p50 estavel 0,19-0,23 ms; p95 no emulador oscila 0,8-5,9 ms e mede o scheduler do host tanto quanto o SQLite
+- [Phase 03]: Contador de aberturas vive no DataStore junto das configuracoes; nenhuma tabela Room para ele
+- [Phase 03]: snapshot() servido de cache @Volatile aquecido por collector: disco so na primeira leitura (10,9 ms medidos)
+- [Phase 03]: DataStore recebido por construtor, nunca por delegate de Context: duas instancias sobre o mesmo arquivo derrubam o processo
+- [Phase 03]: @get:Rule combinado com @JvmField desliga a rule do JUnit (TemporaryFolder nunca criada)
 
 ## Convenções operacionais do GSD
 
@@ -130,6 +134,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T06:29:31.670Z
-Stopped at: Completed 03-04-PLAN.md
+Last session: 2026-07-29T12:07:13.730Z
+Stopped at: Completed 03-06-PLAN.md
 Resume file: None
