@@ -28,18 +28,38 @@ Phase 5. Políticas por contato no motor (CTT-03) já existem desde a Phase 2.
 
 ### Lookup e cache
 
-- **Consultar via `PhoneLookup.CONTENT_FILTER_URI`** — é a API que o próprio Android usa e faz
-  o matching de número por conta própria, incluindo variações de formatação. Não varrer a agenda
-  inteira normalizando número a número.
+- **CORRIGIDO APÓS PESQUISA (2026-07-29) — `PhoneLookup` NÃO resolve variação de formato sozinho.**
+  Medido no emulador: o provider casa por `NORMALIZED_NUMBER`, coluna que **ele** calcula na
+  escrita usando o país do aparelho. Duas falhas reais reproduzidas:
+  - Contato salvo como `(11) 91234-5678` num aparelho com SIM estrangeiro → `NORMALIZED_NUMBER`
+    fica **`null`** → consulta por `+5511912345678` devolve **0 linhas**. Contato conhecido vira
+    MISS — exatamente a falha silenciosa que este contexto proíbe.
+  - Pior: num aparelho com SIM dos EUA, o fixo do Rio `(21) 3216-5498` foi gravado como
+    **`+12132165498`**. Confiar nessa coluna produz **falso HIT** — o app trataria um
+    desconhecido como contato.
+  **Decisões que decorrem disso:**
+  - `PhoneLookup` continua sendo usado, mas com **dupla sondagem**: E.164 **e** número nacional
+    significativo (~2 ms cada, medido).
+  - O **cache é construído a partir de `Phone.NUMBER` cru**, normalizado pelo
+    **nosso** `LibPhoneNumberNormalizer` — nunca a partir de `NORMALIZED_NUMBER`. Isso também dá
+    paridade de chave com a whitelist.
 - **O cache guarda SOMENTE o conjunto de chaves E.164 normalizadas** (`Set<String>`), em memória.
   **Nunca** nome, foto, ID de contato ou qualquer outro campo. O motor recebe apenas
   HIT/MISS/UNAVAILABLE — nada mais atravessa a fronteira.
 - **Cache construído preguiçosamente**, na primeira consulta, e invalidado por `ContentObserver`
   sobre `ContactsContract`. **Nada** no `Application.onCreate` — cold start do Service é orçamento
   crítico e já foi protegido nas fases anteriores.
-- **Agenda grande:** medir com ~5.000 contatos e exigir **p50 < 10 ms** no cache quente. O cold
-  path pode consultar direto via `PhoneLookup` sem esperar a construção do cache inteiro —
-  correção antes de otimização.
+- **Agenda grande — MEDIDO (5.000 contatos, emulador):** consulta direta ao `PhoneLookup` já dá
+  p50 **1,95 ms** (HIT) / 2,45 ms (MISS), p95 ~8 ms, máximo 74 ms — **já cabe** no orçamento de
+  200 ms. Cache quente (`HashSet`): p50 **1,08 µs**. Construção do cache: **1,5–1,8 s**.
+  Consequência: **o cache não se justifica por velocidade, e sim por correção de chave e por
+  cortar a cauda.** Os planos devem dizer isso explicitamente, em vez de repetir o erro da
+  Phase 3 de tratar cronômetro como prova de estrutura. A construção de 1,5 s **nunca** pode
+  bloquear uma consulta — o cold path consulta direto enquanto o cache aquece.
+- **Debounce do `ContentObserver` é obrigatório, não otimização.** Medido: o provider disparou
+  51 callbacks para 50 transações numa execução e 1–2 para 30 em outra — a coalescência existe
+  mas **não é garantida**. Observar `ContactsContract.AUTHORITY_URI` com
+  `notifyForDescendants = true` foi a única combinação que pegou tudo.
 - Aplicar a lição da Phase 3: **cronômetro não prova estrutura**. Se houver afirmação de "usa
   índice/cache", ela precisa de prova determinística, não de tempo. E o assert primário deve ser
   a mediana (estável), não um percentil de cauda (flaky) — ver a decisão de p95 tomada na Phase 3.
@@ -51,6 +71,11 @@ Phase 5. Políticas por contato no motor (CTT-03) já existem desde a Phase 2.
   desconhecido — falha perigosa e silenciosa.
 - **Negação permanente** ("não perguntar de novo") é detectada e o app oferece atalho para as
   configurações do sistema, **sem insistir**. Nunca repedir a permissão a cada abertura.
+- **Armadilha confirmada pela pesquisa:** `shouldShowRequestPermissionRationale` devolve `false`
+  nos **dois** extremos — antes do primeiro pedido **e** depois da negação permanente. Distinguir
+  os estados exige um flag persistido `contacts_permission_asked`, que vai para o **DataStore de
+  configurações que já existe** (Phase 3). A regra de decisão dos estados deve ser uma função
+  **pura**, testável em JVM, separada da chamada de plataforma.
 - **O app é 100% utilizável sem a permissão, no modo filtro.** Isso não é degradação inventada:
   quando o Sentinela não é o discador padrão, o Android já não entrega chamadas de contatos ao
   `onScreenCall`. Onboarding **não** pode ser bloqueado pela negação.
@@ -70,6 +95,22 @@ Phase 5. Políticas por contato no motor (CTT-03) já existem desde a Phase 2.
 - **Testes do repositório são instrumentados**, no emulador `Medium_Phone_API_35`, com contatos
   inseridos no `ContactsContract` de teste. Segue a exceção já aberta e validada na Phase 3
   (emulador para infraestrutura de teste ≠ validação de campo, que continua na Phase 9).
+- **CORRIGIDO APÓS PESQUISA — `WRITE_CONTACTS` no manifest de androidTest NÃO funciona.** A
+  instrumentação roda sob o **uid do app**; reproduzido:
+  `Permission Denial: writing ContactsProvider2 ... requires WRITE_CONTACTS`, e
+  `GrantPermissionRule` não concede o que o pacote não declara. O caminho correto, verificado
+  funcionando, é `uiAutomation.adoptShellPermissionIdentity(...)` — e ele deixa `WRITE_CONTACTS`
+  fora de **todos** os manifests. `WRITE_CONTACTS` entra na lista de permissões **proibidas** do
+  `verify-invariants.sh`.
+- **Padrão de vazamento verificado:** `LEAK_PAT='(^|_)(name|display|contact|photo|lookup|nome|agenda)'`
+  aplicado aos **valores** de `"columnName"` no schema exportado — zero falso-positivo nas 11
+  colunas atuais e pega os 5 vazamentos simulados. Aplicar às **chaves** falsaria positivo, já
+  que o JSON é cheio de `"name"`.
+- **Adicionar `READ_CONTACTS` produz DOIS vermelhos** no `verify-invariants.sh` (`ALLOWLIST` e
+  `FUTURE`), não um. Ambas as edições no mesmo commit.
+- **Kover:** `data.contacts.*` já está dentro do include `data.*` existente — nada a incluir.
+  Excluir **exatamente uma classe nomeada** (a que fala com o `ContactsContract`), nunca o pacote,
+  para que a lógica pura de estado e cache continue contando para o gate de 80%.
 
 ### Permissão — regra de processo obrigatória
 
