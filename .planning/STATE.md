@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-07-29T22:17:43.870Z"
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-07-29T22:25:05.626Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 35
-  completed_plans: 28
+  completed_plans: 29
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 06 (Modo Discador Opcional) — EXECUTING
-Plan: 2 of 8
+Plan: 3 of 8
 
 ## Snapshot
 
@@ -37,6 +37,7 @@ Plan: 2 of 8
 - **Qualidade:** 417 testes JVM + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
 - **Modo discador (em construcao):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
+- **UI (Fase 6):** tema com `numberXl`/`numberLg`/`timer` (figuras de largura fixa), formas 8/16/24/pilula e as QUATRO cores funcionais da chamada por literal fora do esquema; 74 strings pt-BR das telas de chamada/discagem/ativacao varridas contra promessa desonesta; nove componentes reutilizaveis com alvo >= 48dp e descricao de conteudo em recurso
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -171,6 +172,14 @@ Plan: 2 of 8
 - [Phase 06]: 06-01: tom de teclado tem pareamento obrigatorio (novo digito, saida da sessao e estado terminal encerram o tom pendente) — invariante no nivel da resposta unica da Fase 5
 - [Phase 06]: 06-01: as duas defesas do vigia de apresentacao sao redundantes de proposito; quebrar so uma deixa tudo verde — precedente das duas redes da Fase 5
 - [Phase 06]: 06-01: kotlin-test nao esta no classpath — matriz de falhas usa assertThrows do JUnit 4.13; @Suppress(TooManyFunctions) local em vez de afrouxar detekt.yml
+- [Phase Phase 06]: 06-02: as TRES cores funcionais da chamada saem por literal do arquivo de cores e chegam por parametro — inclusive o vermelho; o tema troca o esquema INTEIRO por um derivado do papel de parede a partir do nivel 31, e ler recusar pelo esquema deixaria o papel de parede aproximar recusar de atender
+- [Phase Phase 06]: 06-02: CallReject/OnCallReject sao apelido digito por digito dos tokens destrutivos existentes — teste afirma a igualdade para que apelido novo nunca vire cor nova disfarcada
+- [Phase Phase 06]: 06-02: fixacao dos tres esquemas em classe Robolectric separada (CallColorFixationTest); ThemeTokensTest continua em JVM pura, como a Fase 1 decidiu
+- [Phase Phase 06]: 06-02: varredura de honestidade da copy le o TEXTO DOS RECURSOS em tempo de teste e e restrita as chaves da fase — rotulo legitimo de fase anterior usa vocabulario aqui proibido
+- [Phase Phase 06]: 06-02: src/main/res declarado como input das Test tasks — sem isso mudar so o strings.xml deixa a varredura UP-TO-DATE e o verde antigo vale para texto nunca varrido
+- [Phase Phase 06]: 06-02: material-icons-extended entrou no build (ja reservado no version catalog desde o bootstrap para as Fases 5-6): sem call_end/mic/dialpad/shield nao existe icone distinto para atender e recusar
+- [Phase Phase 06]: 06-02: fontes Inter/Geist caem na reserva monoespacada do sistema (docs/backlog/fontes-inter-geist.md); nenhuma fonte pode ser resolvida em tempo de execucao, o app nao tem rede
+- [Phase Phase 06]: 06-02: prova de vermelho nunca por git checkout de arquivo com trabalho novo — o comando reverteu as 74 strings ainda fora do indice
 
 ## Convenções operacionais do GSD
 
@@ -214,6 +223,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T22:17:16.027Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-07-29T22:25:05.622Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None
