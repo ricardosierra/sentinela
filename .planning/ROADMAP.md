@@ -23,7 +23,7 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 - [x] **Phase 2: Motor de Decisao e Normalizacao** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
 - [ ] **Phase 3: Dados Locais** - DataStore (configurações + contador de aberturas), Room (whitelist + histórico), retenção e backup exclusion
 - [ ] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
-- [ ] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções e notificação silenciosa
+- [ ] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções, chamada repetida e notificação silenciosa
 - [ ] **Phase 6: Modo Discador Opcional** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
 - [ ] **Phase 7: UI Onboarding e Home** - Fluxo de boas-vindas/permissões/políticas, dashboard e tela Proteção
 - [ ] **Phase 8: UI Whitelist e Historico** - CRUD com busca e import/export; histórico com filtros e ações
@@ -110,15 +110,24 @@ Plans:
 ### Phase 5: Triagem Telecom Modo Filtro
 **Goal**: Chamada de número desconhecido é bloqueada de verdade antes de tocar, com o Service fino, resiliente e dentro do orçamento — o critério de aceite central do produto.
 **Depends on**: Phase 4
-**Requirements**: SCR-01..11, NTF-01..06, DEC-01..05 (integração), QLT-01 (casos de service), QLT-06 (parcial)
+**Requirements**: SCR-01..06, SCR-08..12 (SCR-07 WON'T FIX), NTF-01..06, DEC-01..05 (integração), QLT-01 (casos de service), QLT-06 (parcial)
 **Success Criteria** (what must be TRUE):
   1. Com o papel concedido, número fora da agenda não toca, não mostra tela de chamada e não gera notificação nativa de perdida
-  2. Contato da agenda toca normalmente no modo filtro (comportamento da plataforma verificado em aparelho)
+  2. Contato da agenda toca normalmente no modo filtro (agora depende do NOSSO lookup: com READ_CONTACTS concedida a plataforma entrega contatos ao Service)
   3. `respondToCall` exatamente 1× em todos os caminhos, inclusive exceção/timeout interno — coberto por teste
   4. Notificação própria silenciosa só aparece se habilitada, depois da resposta, com número mascarado ou anônimo
-  5. p95 da decisão < 200 ms em cold path medido em bench local
+  5. p95 da decisão < 200 ms em cold path; mediana trava o build, cauda tem veredito na Phase 9
   6. Política Silenciar toca sem som/vibração e Encaminhar silenciosamente cai na caixa postal quando selecionados
-**Plans**: TBD
+**Plans**: 7 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Wave 0 do domínio: regra SCR-12 (chamada repetida toca) no `CallDecisionEngine` com janela em constante nomeada, `hasRecentBlock` sobre o histórico existente (sem mudar schema) e correção do contador de aberturas
+- [ ] 05-02-PLAN.md — Wave 0 do Telecom: harness Robolectric com captura das respostas emitidas, `ScreenedCallFactory` e `CallResponseFactory` (tabela de tradução validada em `sdk=[35]` e `[29]`)
+- [ ] 05-03-PLAN.md — `ScreeningCoordinator` puro: timeout interno de 1 s, garantia de resposta única por `AtomicBoolean` + rede permissiva, matriz de exceção em cada ponto e ordem provada por lista de eventos
+- [ ] 05-04-PLAN.md — Notificação própria opt-in: canal `IMPORTANCE_LOW`, conteúdo mascarado ou anônimo sem número completo, `PendingIntent` imutável e máquina de estado genérica de permissão em runtime
+- [ ] 05-05-PLAN.md — Fiação: `UnknownCallScreeningService` delegando ao coordenador, `AppContainer` com notificador e pós-resposta, testes do Service real e do papel de triagem
+- [ ] 05-06-PLAN.md — Prova instrumentada: bind real do Service (QLT-06), percentis da decisão com assert na mediana (SCR-11) e Bloco 7 de `verify-invariants.sh` (regra só no motor)
+- [ ] 05-07-PLAN.md — Honestidade e fechamento: `docs/LIMITACOES.md` itens 2/3/7 corrigidos com a fonte AOSP, rótulos revistos, cenários 40–51 do roteiro Samsung, `koverVerify` e `05-EVIDENCE.md`
 
 ### Phase 6: Modo Discador Opcional
 **Goal**: Usuário que optar pode tornar o Sentinela o telefone padrão — habilitando políticas também para contatos — com experiência de chamada própria mínima e reversão limpa.
@@ -188,7 +197,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 2 | v0.1.0 | 0/5 | Not started | - |
 | 3 | 5/7 | In Progress|  | - |
 | 4 | 4/5 | In Progress|  | - |
-| 5 | v0.1.0 | 0/? | Not started | - |
+| 5 | v0.1.0 | 0/7 | Planned | - |
 | 6 | v0.1.0 | 0/? | Not started | - |
 | 7 | v0.1.0 | 0/? | Not started | - |
 | 8 | v0.1.0 | 0/? | Not started | - |
