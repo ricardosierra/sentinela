@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-05-PLAN.md
-last_updated: "2026-07-29T06:25:43.396Z"
+stopped_at: Completed 03-04-PLAN.md
+last_updated: "2026-07-29T06:30:01.710Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State
@@ -84,6 +84,9 @@ Plan: 6 of 7
 - [Phase 03]: Repositorio do historico propaga excecao do DAO: quem decide degradar e o Service da Fase 5
 - [Phase 03]: Relogio injetado (clock: () -> Long) em toda regra dependente de tempo
 - [Phase 03]: Janela de retencao virou constante nomeada em vez de afrouxar MagicNumber no detekt.yml compartilhado
+- [Phase 03]: Whitelist: dedup resolve o id por findByKey ANTES do @Upsert — @Upsert com id 0 em chave com indice unico e no-op silencioso (provado por teste), nao excecao
+- [Phase 03]: Indice so e provado por EXPLAIN QUERY PLAN: sem o indice o EQP fica vermelho e o teste de tempo continua VERDE (p95 4,21 ms com full scan) — medido
+- [Phase 03]: contains() no caminho quente: p50 estavel 0,19-0,23 ms; p95 no emulador oscila 0,8-5,9 ms e mede o scheduler do host tanto quanto o SQLite
 
 ## Convenções operacionais do GSD
 
@@ -104,6 +107,7 @@ Plan: 6 of 7
 - **Validação física obrigatória** — `setSkipCallLog`/notificação nativa variam por OEM; critérios de aceite centrais só fecham em Samsung físico (Phase 9)
 - **Modo discador é o maior risco técnico do MVP** — `InCallService` + elegibilidade ao papel + UX de chamada; pesquisa reforçada antes da Phase 6
 - **Robolectric 4.16.1 suporta até SDK 36** — com compileSdk 37, fixar `@Config(sdk = [36])` até o 4.17 estável
+- p95 de containsCabeNoOrcamentoMedido falha ~1 em 5 execucoes no emulador; o bound de 5 ms NAO foi afrouxado (proibido pelo plano). Decisao humana antes da Phase 9: manter e tolerar re-run, mover o p95 para validacao fisica, ou medir a cauda por mediana de N execucoes
 
 ## Accumulated Context
 
@@ -126,6 +130,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T06:25:12.812Z
-Stopped at: Completed 03-05-PLAN.md
+Last session: 2026-07-29T06:29:31.670Z
+Stopped at: Completed 03-04-PLAN.md
 Resume file: None

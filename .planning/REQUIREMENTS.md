@@ -44,13 +44,13 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **CTT-04**: Nomes e dados de contato nunca são persistidos no banco nem enviados a lugar algum; uso apenas em memória no momento da chamada/exibição
 
 ### Whitelist Pessoal (WLT)
-- [ ] **WLT-01**: Adicionar número manualmente com país/DDI e descrição local opcional
-- [ ] **WLT-02**: Editar, ativar/desativar e excluir entradas
-- [ ] **WLT-03**: Pesquisar por número ou descrição
+- [x] **WLT-01**: Adicionar número manualmente com país/DDI e descrição local opcional
+- [x] **WLT-02**: Editar, ativar/desativar e excluir entradas
+- [x] **WLT-03**: Pesquisar por número ou descrição
 - [x] **WLT-04**: Duplicidade detectada e recusada com aviso
 - [ ] **WLT-05**: Exportar backup local (arquivo do próprio app)
 - [ ] **WLT-06**: Importar backup criado pelo próprio app, com validação de conteúdo, limite de tamanho e confirmação antes de sobrescrever
-- [ ] **WLT-07**: Consulta da whitelist na decisão é local, indexada e dentro do orçamento de performance
+- [x] **WLT-07**: Consulta da whitelist na decisão é local, indexada e dentro do orçamento de performance
 - [x] **WLT-08**: Tratamento da whitelist configurável: Nunca Silenciar (padrão) / Tocar / Bloquear / Silenciar — conforme passo do onboarding
 
 ### Histórico Interno (HST)
