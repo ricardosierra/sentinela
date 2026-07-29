@@ -84,6 +84,20 @@ aumentar a amostragem piorou a cauda. O número de 5 ms **não foi afrouxado**: 
 compromisso de produto, só que cobrado onde a medição significa alguma coisa. No CI seguem
 quebrando o build o p50 (< 1 ms) e o `EXPLAIN QUERY PLAN`, que é a prova real do índice.
 
+## Pendências herdadas da Phase 4 (contatos do aparelho)
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 36 | Agenda REAL do usuário | Com a agenda pessoal do Galaxy (sem fixture), ligar de um contato importado de vCard **sem DDI** e de um contato salvo em formato nacional | Ambos dão HIT: a sonda dupla (E.164 + nacional) alcança as duas grafias de gravação | |
+| 37 | Percentis do lookup em hardware real | `./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.tests_regex=ContactLookupPerformanceTest` com o Galaxy conectado. Ler as linhas `SENTINELA\|contacts\|` no logcat | p50 comparável ao emulador (0,03 ms cache quente / 0,4–0,9 ms sonda direta) e **p95 e max** registrados. Só aqui o veredito da cauda vale | |
+| 38 | Negação permanente de READ_CONTACTS | Negar a permissão duas vezes. Conferir o estado com `adb shell dumpsys package org.sentinela.app` (flags `USER_SET` / `USER_FIXED`). Reabrir o app. Resetar depois com `adb shell pm clear-permission-flags org.sentinela.app android.permission.READ_CONTACTS user-set user-fixed` | O app **não** repergunta na abertura seguinte e oferece o atalho para as Configurações do sistema; a consulta devolve UNAVAILABLE, nunca MISS | |
+| 39 | Provider de contatos do One UI | Adicionar, editar e remover contatos pelo app de agenda da Samsung com o Sentinela instalado | O observador invalida o cache e a mudança aparece na consulta seguinte. A Samsung substitui o **app** de agenda, mas o provider é AOSP — risco baixo, não zero | |
+
+Origem: Phase 4, planos 04-03/04-04. A pesquisa mediu o **mecanismo** no emulador (SIM `us`),
+não a frequência de cada grafia numa agenda brasileira real; e a cauda medida no AVD mistura o
+scheduler do host. Nenhum hack preventivo de OEM foi escrito: se o cenário 39 desviar, o desvio
+vai para [`LIMITACOES.md`](LIMITACOES.md) antes de qualquer código.
+
 ## Registro de comportamento OEM
 
 Anotar aqui QUALQUER desvio (ex.: entrada "bloqueada" no log nativo mesmo com skip, toast do
