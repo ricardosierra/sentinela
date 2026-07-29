@@ -121,13 +121,13 @@ Plans:
 **Plans**: 7 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Wave 0 do domínio: regra SCR-12 (chamada repetida toca) no `CallDecisionEngine` com janela em constante nomeada, `hasRecentBlock` sobre o histórico existente (sem mudar schema) e correção do contador de aberturas
-- [ ] 05-02-PLAN.md — Wave 0 do Telecom: harness Robolectric com captura das respostas emitidas, `ScreenedCallFactory` e `CallResponseFactory` (tabela de tradução validada em `sdk=[35]` e `[29]`)
-- [ ] 05-03-PLAN.md — `ScreeningCoordinator` puro: timeout interno de 1 s, garantia de resposta única por `AtomicBoolean` + rede permissiva, matriz de exceção em cada ponto e ordem provada por lista de eventos
-- [ ] 05-04-PLAN.md — Notificação própria opt-in: canal `IMPORTANCE_LOW`, conteúdo mascarado ou anônimo sem número completo, `PendingIntent` imutável e máquina de estado genérica de permissão em runtime
-- [ ] 05-05-PLAN.md — Fiação: `UnknownCallScreeningService` delegando ao coordenador, `AppContainer` com notificador e pós-resposta, testes do Service real e do papel de triagem
-- [ ] 05-06-PLAN.md — Prova instrumentada: bind real do Service (QLT-06), percentis da decisão com assert na mediana (SCR-11) e Bloco 7 de `verify-invariants.sh` (regra só no motor)
-- [ ] 05-07-PLAN.md — Honestidade e fechamento: `docs/LIMITACOES.md` itens 2/3/7 corrigidos com a fonte AOSP, rótulos revistos, cenários 40–51 do roteiro Samsung, `koverVerify` e `05-EVIDENCE.md`
+- [x] 05-01-PLAN.md — Wave 0 do domínio: regra SCR-12 (chamada repetida toca) no `CallDecisionEngine` com janela em constante nomeada, `hasRecentBlock` sobre o histórico existente (sem mudar schema) e correção do contador de aberturas
+- [x] 05-02-PLAN.md — Wave 0 do Telecom: harness Robolectric com captura das respostas emitidas, `ScreenedCallFactory` e `CallResponseFactory` (tabela de tradução validada em `sdk=[35]` e `[29]`)
+- [x] 05-03-PLAN.md — `ScreeningCoordinator` puro: timeout interno de 1 s, garantia de resposta única por `AtomicBoolean` + rede permissiva, matriz de exceção em cada ponto e ordem provada por lista de eventos
+- [x] 05-04-PLAN.md — Notificação própria opt-in: canal `IMPORTANCE_LOW`, conteúdo mascarado ou anônimo sem número completo, `PendingIntent` imutável e máquina de estado genérica de permissão em runtime
+- [x] 05-05-PLAN.md — Fiação: `UnknownCallScreeningService` delegando ao coordenador, `AppContainer` com notificador e pós-resposta, testes do Service real e do papel de triagem
+- [x] 05-06-PLAN.md — Prova instrumentada: bind real do Service (QLT-06), percentis da decisão com assert na mediana (SCR-11) e Bloco 7 de `verify-invariants.sh` (regra só no motor)
+- [x] 05-07-PLAN.md — Honestidade e fechamento: `docs/LIMITACOES.md` itens 2/3/7 corrigidos com a fonte AOSP, rótulos revistos, cenários 40–51 do roteiro Samsung, `koverVerify` e `05-EVIDENCE.md`
 
 ### Phase 6: Modo Discador Opcional
 **Goal**: Usuário que optar pode tornar o Sentinela o telefone padrão — habilitando políticas também para contatos — com experiência de chamada própria mínima e reversão limpa.
