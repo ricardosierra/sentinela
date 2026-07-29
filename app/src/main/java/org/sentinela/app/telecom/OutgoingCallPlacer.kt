@@ -69,14 +69,25 @@ class OutgoingCallPlacer(
         }
     }
 
+    /**
+     * A recusa da plataforma é capturada por tipo, e não por `runCatching`, por dois motivos que
+     * apontam para o mesmo lugar: o lint exige tratamento **explícito** da exceção de segurança
+     * (a verificação da permissão chega aqui por função injetada, e nenhuma ferramenta consegue
+     * enxergar isso), e a exceção não é registrada de propósito — a mensagem da plataforma pode
+     * conter o número, e número completo nunca entra em log.
+     */
+    @Suppress("SwallowedException")
     private fun discar(destino: String): PlaceCallResult {
         val telecom = telecomManager ?: return PlaceCallResult.PlatformFailure(SEM_TELEFONIA)
-        return runCatching {
-            telecom.placeCall(Uri.fromParts(ESQUEMA_TELEFONE, destino, null), null)
-        }.fold(
-            onSuccess = { PlaceCallResult.Placed },
-            onFailure = { PlaceCallResult.PlatformFailure(FALHA_DA_PLATAFORMA) },
-        )
+        val endereco = Uri.fromParts(ESQUEMA_TELEFONE, destino, null)
+        return try {
+            telecom.placeCall(endereco, null)
+            PlaceCallResult.Placed
+        } catch (recusa: SecurityException) {
+            PlaceCallResult.PlatformFailure(FALHA_DA_PLATAFORMA)
+        } catch (indisponivel: IllegalStateException) {
+            PlaceCallResult.PlatformFailure(FALHA_DA_PLATAFORMA)
+        }
     }
 
     companion object {

@@ -1,138 +1,115 @@
 package org.sentinela.app.ui.dialer
 
 import android.Manifest
-import android.content.pm.PackageManager
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.telecom.TelecomManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Backspace
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import org.sentinela.app.R
-import org.sentinela.app.ui.call.CallActionButton
-import org.sentinela.app.ui.call.callAcceptColors
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import org.sentinela.app.SentinelaApp
+import org.sentinela.app.phone.CascadingRegionProvider
+import org.sentinela.app.platform.CallPhonePermissionChecker
+import org.sentinela.app.telecom.OutgoingCallPlacer
+import org.sentinela.app.telecom.PlaceCallResult
 import org.sentinela.app.ui.theme.SentinelaTheme
-import org.sentinela.app.ui.theme.numberXl
 
 /**
- * Hospedeira da tela de discagem.
+ * Hospedeira da tela de discagem e alvo da ação de discagem do sistema.
  *
- * Ela existe por dois motivos ao mesmo tempo. O primeiro é funcional: um telefone padrão precisa
- * oferecer teclado de discagem. O segundo é de elegibilidade — o sistema só aceita este aplicativo
- * como telefone padrão se os dois filtros de ação de discagem estiverem declarados no manifest, e
- * eles precisam apontar para uma tela de verdade.
+ * Ela existe por dois motivos ao mesmo tempo, e o segundo costuma surpreender: um telefone padrão
+ * precisa oferecer teclado de discagem, **e** o sistema só aceita este aplicativo como telefone
+ * padrão se essa tela estiver declarada como alvo dos dois filtros de discagem. Sem ela, o pedido do
+ * papel falha.
  *
- * Declarar esses filtros **não** faz o aplicativo se intrometer na discagem de quem não ativou o
- * modo discador: sem o papel, a ação de discagem continua sendo resolvida para o discador do
- * aparelho. Isso foi medido, não suposto.
+ * Aberta com um endereço de telefone na intenção — o caminho que o sistema usa quando outro
+ * aplicativo pede para discar um número — o campo já vem preenchido, **sem discar sozinho**: a
+ * decisão de ligar continua sendo do usuário.
  *
- * A chamada é originada pelo gerenciador de telecomunicações, nunca pela ação direta de ligar: num
- * discador que não veio instalado no aparelho, a ação direta é reencaminhada ao discador do sistema
- * para confirmação, o que resulta numa experiência pior e num caminho que este aplicativo não
- * controla. O acabamento visual completo, o pedido de permissão em runtime e o tratamento de erro
- * de discagem são do plano 06-05.
+ * Sem o papel de telefone padrão a tela funciona igual. Não existe guarda de papel aqui, de
+ * propósito: a pesquisa mediu que, sem o papel, a ação de discagem simplesmente não é resolvida para
+ * este aplicativo, mesmo com os filtros declarados. Travar a tela por isso seria punir o usuário por
+ * uma condição que ele não criou.
+ *
+ * A permissão de originar chamada é pedida **no momento do toque em ligar**, nunca na abertura. E o
+ * sinalizador de "já perguntei" é gravado ao disparar o diálogo, jamais no retorno: o usuário pode
+ * matar o aplicativo com o diálogo do sistema aberto (lição da Fase 4).
  */
 class DialerActivity : ComponentActivity() {
 
+    private val permissionChecker = CallPhonePermissionChecker()
+
+    private val container by lazy { (application as SentinelaApp).container }
+
+    private val placer by lazy {
+        OutgoingCallPlacer(
+            telecomManager = getSystemService(TelecomManager::class.java),
+            normalizer = container.phoneNumberNormalizer,
+            // Lido a cada toque: a permissão pode ser revogada com a tela aberta.
+            callPhoneGranted = { permissionChecker.isGranted(this) },
+        )
+    }
+
+    /**
+     * O retorno do diálogo **não** origina a chamada sozinho. Concedida a permissão, o usuário toca
+     * em ligar de novo — o número continua no campo. Discar por conta própria depois de um diálogo do
+     * sistema seria uma chamada que o usuário não pediu naquele instante.
+     */
+    private val askCallPhone = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val numeroRecebido = numeroDaIntencao(intent)
         setContent {
             SentinelaTheme {
-                DialerScreen(onPlaceCall = ::placeCall)
+                DialpadScreen(
+                    initialNumber = numeroRecebido,
+                    formatNumber = ::formatar,
+                    placeCall = ::originar,
+                )
             }
         }
     }
 
     /**
-     * Origina a chamada apenas quando a permissão já está concedida. O pedido em runtime é do
-     * plano 06-05: pedir permissão de dentro de um tratador de toque, sem tela que explique o
-     * motivo, é exatamente o padrão que este produto não usa.
+     * Lê o número do endereço de telefone da intenção recebida. Qualquer outro esquema é ignorado: a
+     * tela abre vazia, que é melhor do que abrir com lixo no campo.
      */
-    private fun placeCall(number: String) {
-        val concedida = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
-        if (concedida != PackageManager.PERMISSION_GRANTED) return
-        val telecom = getSystemService(TelecomManager::class.java) ?: return
-        telecom.placeCall(Uri.fromParts("tel", number, null), null)
-    }
-}
-
-@Composable
-private fun DialerScreen(onPlaceCall: (String) -> Unit) {
-    var digitos by remember { mutableStateOf("") }
-
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-        ) {
-            DialerNumberLine(
-                digits = digitos,
-                onDelete = { digitos = digitos.dropLast(1) },
-            )
-            DialpadGrid(
-                onKeyPressStart = { tecla -> digitos += tecla },
-                onKeyPressEnd = { },
-                onPlusInserted = { digitos += "+" },
-            )
-            Spacer(Modifier.height(16.dp))
-            CallActionButton(
-                icon = Icons.Filled.Call,
-                label = stringResource(R.string.dialpad_call),
-                contentDescription = stringResource(R.string.dialpad_call_description, digitos),
-                colors = callAcceptColors(),
-                onClick = { if (digitos.isNotEmpty()) onPlaceCall(digitos) },
-            )
-            Spacer(Modifier.height(16.dp))
+    private fun numeroDaIntencao(intent: Intent?): String {
+        val dados = intent?.data ?: return ""
+        return if (dados.scheme == OutgoingCallPlacer.ESQUEMA_TELEFONE) {
+            dados.schemeSpecificPart.orEmpty()
+        } else {
+            ""
         }
     }
-}
 
-@Composable
-private fun DialerNumberLine(digits: String, onDelete: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(Modifier.height(32.dp))
-        Text(
-            text = digits.ifEmpty { stringResource(R.string.dialpad_title) },
-            style = MaterialTheme.typography.numberXl,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-        if (digits.isNotEmpty()) {
-            IconButton(onClick = onDelete) {
-                Icon(
-                    imageVector = Icons.Filled.Backspace,
-                    contentDescription = stringResource(R.string.dialpad_delete_description),
-                )
-            }
+    private fun formatar(digitos: String): String = formatAsYouType(
+        util = container.phoneUtil,
+        region = container.regionProvider.currentRegion()
+            ?: CascadingRegionProvider.DEFAULT_REGION,
+        digits = digitos,
+    )
+
+    /**
+     * Falta de permissão não é erro: é o momento exato de pedi-la. A tela recebe o resultado e mantém
+     * o número digitado nos dois casos.
+     */
+    private fun originar(digitos: String): PlaceCallResult {
+        val resultado = placer.place(digitos)
+        if (resultado == PlaceCallResult.PermissionMissing) {
+            pedirPermissaoDeOriginar()
         }
+        return resultado
+    }
+
+    private fun pedirPermissaoDeOriginar() {
+        // Gravado ANTES do launch, nunca no retorno: o diálogo do sistema pode nunca voltar.
+        lifecycleScope.launch { container.settingsRepository.markCallPhonePermissionAsked() }
+        askCallPhone.launch(Manifest.permission.CALL_PHONE)
     }
 }

@@ -210,6 +210,19 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.room.testing)
+    // Fase 6: a semantica das telas de chamada (alvo de toque, descricao, ordem de foco) e
+    // verificada em JVM sob Robolectric. As duas dependencias ja estavam no version catalog e no
+    // conjunto instrumentado desde o bootstrap — aqui elas passam a valer tambem para src/test,
+    // porque medir alvo de toque no emulador tornaria o criterio caro demais para rodar sempre.
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.compose.ui.test.manifest)
+    // Fase 6: as telas de chamada e discagem sao testadas em JVM sob Robolectric. Nao e
+    // biblioteca nova — e a MESMA do androidTest, que o version catalog ja declara e que entra
+    // na versao do Compose BOM. Sem ela nao existe regra de teste de composicao no lado JVM.
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.compose.ui.test.manifest)
 
     androidTestImplementation(libs.androidx.junit.ext)
     androidTestImplementation(libs.androidx.test.runner)

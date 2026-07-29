@@ -23,6 +23,7 @@ import org.sentinela.app.data.local.db.SentinelaDatabase
 import org.sentinela.app.domain.CallDecisionEngine
 import org.sentinela.app.notifications.AndroidBlockedCallNotifier
 import org.sentinela.app.notifications.BlockedCallNotifier
+import org.sentinela.app.notifications.IncomingCallNotifier
 import org.sentinela.app.settings.DataStoreSettingsRepository
 import org.sentinela.app.phone.CascadingRegionProvider
 import org.sentinela.app.phone.LibPhoneNumberNormalizer
@@ -53,7 +54,12 @@ class AppContainer(
 
     val decisionEngine: CallDecisionEngine by lazy { CallDecisionEngine() }
 
-    private val regionProvider: RegionProvider by lazy {
+    /**
+     * Deixou de ser privado no plano 06-05 pelo mesmo motivo de [phoneUtil]: o formatador
+     * progressivo da tela de discagem precisa de uma região, e travá-la em `BR` contrariaria a
+     * cascata decidida na Fase 2 (aparelho → preferência do usuário → `BR`).
+     */
+    val regionProvider: RegionProvider by lazy {
         CascadingRegionProvider(
             device = AndroidRegionProvider(
                 appContext.getSystemService(TelephonyManager::class.java),
@@ -64,7 +70,13 @@ class AppContainer(
         )
     }
 
-    private val phoneUtil by lazy { phoneNumberUtil(assetsPhoneMetadataLoader(appContext)) }
+    /**
+     * Deixou de ser privado no plano 06-05: a tela de discagem precisa do formatador progressivo
+     * da própria biblioteca (`getAsYouTypeFormatter`) para mostrar `(11) 91234-5678` enquanto o
+     * usuário digita. Construir um segundo util só para a tela recarregaria os metadados inteiros —
+     * a instância continua sendo **uma** no processo, que é o invariante que importa aqui.
+     */
+    val phoneUtil by lazy { phoneNumberUtil(assetsPhoneMetadataLoader(appContext)) }
 
     /**
      * Instância única. `createInstance` desserializa metadados (dezenas de ms): construir aqui,
@@ -177,12 +189,29 @@ class AppContainer(
         AndroidBlockedCallNotifier(appContext) { settingsRepository.cachedSnapshot() }
     }
 
+    /**
+     * Máscara única de exibição, com os metadados de telefone já resolvidos. Exposta porque a
+     * camada de telefonia precisa mascarar a identidade **antes** de entregá-la ao aviso do
+     * sistema: quem publica notificação nunca recebe número cru.
+     */
+    val maskNumber: (String) -> String by lazy {
+        { numero -> PhoneMask.mask(phoneUtil, numero) }
+    }
+
+    /**
+     * Aviso de chamada do modo discador (chamada recebida em tela cheia e chamada em curso).
+     * Preguiçoso pelo mesmo motivo do aviso de chamada bloqueada: criar canal e tocar no serviço
+     * de notificações na partida do processo pesaria no orçamento do caminho de resposta ao
+     * sistema de telefonia. No modo filtro, que é o padrão, este objeto nunca nasce.
+     */
+    val incomingCallNotifier: IncomingCallNotifier by lazy { IncomingCallNotifier(appContext) }
+
     override val postScreeningWork: PostScreeningWork by lazy {
         PostScreeningWork(
             settings = settingsRepository,
             history = blockedCallRepository,
             notifier = blockedCallNotifier,
-            mask = { numero -> PhoneMask.mask(phoneUtil, numero) },
+            mask = maskNumber,
         )
     }
 
@@ -212,7 +241,16 @@ class AppContainer(
      *
      * Preguiçoso, como todo o resto: no modo filtro, que é o padrão, este objeto nunca nasce.
      */
-    val callSessionStore: CallSessionStore by lazy { CallSessionStore(appScope) }
+    val callSessionStore: CallSessionStore by lazy {
+        CallSessionStore(
+            scope = appScope,
+            // A troca do aviso de chamada recebida pelo aviso de chamada em curso é a transição
+            // para o estado ativo, e o armazém é o único que a conhece. O notificador continua
+            // preguiçoso: esta referência só o constrói quando a primeira chamada fica ativa.
+            notifications = { identity -> incomingCallNotifier.notifyOngoing(identity) },
+            maskNumber = maskNumber,
+        )
+    }
 
     private companion object {
         const val SETTINGS_DATASTORE_NAME = "sentinela_settings"
