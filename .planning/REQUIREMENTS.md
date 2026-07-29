@@ -22,8 +22,8 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **SCR-12**: Chamada repetida do mesmo número dentro de uma janela curta **toca**, mesmo que a política bloquearia — habilitado por padrão, configurável. Racional: emergência real insiste, spam automatizado normalmente não. A regra vive no `CallDecisionEngine`, usa o histórico local já existente e entra depois de contato/whitelist e antes da política de desconhecidos
 - [x] **SCR-08**: Notificação nativa de chamada perdida é sempre suprimida (`setSkipNotification(true)`)
 - [x] **SCR-09**: Chamadas de saída nunca sofrem interferência
-- [ ] **SCR-10**: Service protegido contra: resposta duplicada, exceção na normalização, banco indisponível, cold start, corrida config×chamada, timeout, handle nulo, número inválido, dual SIM, processo recriado
-- [ ] **SCR-11**: Orçamento de performance validado: p95 < 200 ms no cold path local da decisão
+- [x] **SCR-10**: Service protegido contra: resposta duplicada, exceção na normalização, banco indisponível, cold start, corrida config×chamada, timeout, handle nulo, número inválido, dual SIM, processo recriado
+- [x] **SCR-11**: Orçamento de performance validado: p95 < 200 ms no cold path local da decisão
 
 ### Motor de Decisão (DEC)
 - [x] **DEC-01**: `CallDecisionEngine` puro e determinístico concentra toda a regra — nenhuma condição de bloqueio fora dele

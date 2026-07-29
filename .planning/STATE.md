@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-05-PLAN.md
-last_updated: "2026-07-29T17:04:22.387Z"
+stopped_at: Completed 05-06-PLAN.md
+last_updated: "2026-07-29T17:20:14.473Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 4
   total_plans: 27
-  completed_plans: 25
+  completed_plans: 26
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
-Plan: 6 of 7
+Plan: 7 of 7
 
 ## Snapshot
 
@@ -34,7 +34,7 @@ Plan: 6 of 7
 - **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
-- **Qualidade:** 296 testes JVM + 48 instrumentados; cobertura domain+phone+data+settings 96,6759% com gate `koverVerify` em 80%; lint e detekt zerados
+- **Qualidade:** 296 testes JVM + 53 instrumentados; cobertura domain+phone+data+settings 96,6759% com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
@@ -152,6 +152,12 @@ Plan: 6 of 7
 - [Phase 05]: 05-05: record() do historico devolve o id da linha (0 sem rastro): sem ele toda notificacao colidiria no mesmo identificador
 - [Phase 05]: 05-05: guarda de chamada de saida e dupla (Service e coordenador) por desenho — remover a do Service nao deixa teste vermelho
 - [Phase 05]: 05-05: nao existe aviso de mudanca do papel de triagem para aplicativo comum; a verificacao e pergunta pontual na retomada da tela (Fase 7)
+- [Phase 05]: 05-06: nao responder em chamada de saida esta CORRETO — a classe base do AOSP envia sozinha uma resposta nula assim que onScreenCall retorna, e respondToCall e ignorado fora de DIRECTION_INCOMING
+- [Phase 05]: 05-06: o invariante de resposta unica vale sobre chamadas de ENTRADA; a formulacao antiga (todos os caminhos) codificava regra falsa
+- [Phase 05]: 05-06: Bloco 7 trava a regra de decisao no motor com 5 checagens; padroes de construcao/chamada exigem parenteses para nao punir mencao em prosa
+- [Phase 05]: 05-06: comentario sobre o modo de abortar do shell passou a DESCREVER o literal (precedente do Migrations.kt): criterio por grep nao distingue comentario de codigo
+- [Phase 05]: 05-06: caminho de decisao p50 medido 28,7 / 15,5 / 0,79 ms conforme o aquecimento do processo; assert unico em 50 ms, p95 e max so em logcat, veredito na Phase 9
+- [Phase 05]: 05-06: teste de tempo carrega assert estrutural sobre a decisao medida — quebradas juntas, a sabotagem de tempo e a de direcao se anulam
 
 ## Convenções operacionais do GSD
 
@@ -195,6 +201,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T17:04:08.454Z
-Stopped at: Completed 05-05-PLAN.md
+Last session: 2026-07-29T17:19:58.600Z
+Stopped at: Completed 05-06-PLAN.md
 Resume file: None
