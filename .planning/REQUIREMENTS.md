@@ -72,11 +72,11 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **NTF-06**: Notificação própria criada somente depois do `respondToCall`
 
 ### Modo Discador (DIA)
-- [ ] **DIA-01**: Modo discador opcional: usuário pode tornar o Sentinela o app de telefone padrão (`ROLE_DIALER`) com explicação clara do que muda
+- [x] **DIA-01**: Modo discador opcional: usuário pode tornar o Sentinela o app de telefone padrão (`ROLE_DIALER`) com explicação clara do que muda
 - [x] **DIA-02**: `InCallService` com UI própria mínima de chamada: receber, atender, recusar, encerrar, mudo, viva-voz e teclado DTMF
 - [ ] **DIA-03**: Discagem mínima: handler de `ACTION_DIAL` e tela de discagem simples (requisito de elegibilidade ao papel)
 - [ ] **DIA-04**: No modo discador, a triagem cobre todas as chamadas — inclusive contatos, aplicando as políticas CTT
-- [ ] **DIA-05**: Reversão limpa para o discador nativo a qualquer momento; telefonia nunca fica quebrada e o app continua funcional no modo filtro
+- [x] **DIA-05**: Reversão limpa para o discador nativo a qualquer momento; telefonia nunca fica quebrada e o app continua funcional no modo filtro
 
 ### Telas e UX (UIX)
 - [ ] **UIX-01**: Onboarding: explicação do funcionamento, aviso de que só chamadas telefônicas são filtradas, solicitação do papel, política de desconhecidos, política de contatos (com pedido de READ_CONTACTS), tratamento da whitelist, opt-in de notificação e verificação final

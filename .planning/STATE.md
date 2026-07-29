@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-07-29T22:25:05.626Z"
+stopped_at: Completed 06-03-PLAN.md
+last_updated: "2026-07-29T22:48:27.129Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 35
-  completed_plans: 29
+  completed_plans: 30
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 06 (Modo Discador Opcional) — EXECUTING
-Plan: 3 of 8
+Plan: 4 of 8
 
 ## Snapshot
 
@@ -35,7 +35,8 @@ Plan: 3 of 8
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
 - **Qualidade:** 417 testes JVM + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
-- **Modo discador (em construcao):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
+- **Modo discador (elegibilidade PRONTA):** manifest com o servico de chamada exportado/protegido, meta-dado de substituicao da interface e os DOIS filtros de discagem; quatro permissoes novas autorizadas na matriz e no script; `SentinelaInCallService` fino + `CallSessionStore` (instancia unica no container) + `TelecomCallControls`; `DialerRoleManager` sobre `SystemRoleGate` e `DialerModeState` puro; `CallActivity`/`DialerActivity` hospedeiras reais; Bloco 8 com 4 checagens
+- **Modo discador (nucleo):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **UI (Fase 6):** tema com `numberXl`/`numberLg`/`timer` (figuras de largura fixa), formas 8/16/24/pilula e as QUATRO cores funcionais da chamada por literal fora do esquema; 74 strings pt-BR das telas de chamada/discagem/ativacao varridas contra promessa desonesta; nove componentes reutilizaveis com alvo >= 48dp e descricao de conteudo em recurso
 - **Git:** repo local sem remote; branch `master`
@@ -180,6 +181,15 @@ Plan: 3 of 8
 - [Phase Phase 06]: 06-02: material-icons-extended entrou no build (ja reservado no version catalog desde o bootstrap para as Fases 5-6): sem call_end/mic/dialpad/shield nao existe icone distinto para atender e recusar
 - [Phase Phase 06]: 06-02: fontes Inter/Geist caem na reserva monoespacada do sistema (docs/backlog/fontes-inter-geist.md); nenhuma fonte pode ser resolvida em tempo de execucao, o app nao tem rede
 - [Phase Phase 06]: 06-02: prova de vermelho nunca por git checkout de arquivo com trabalho novo — o comando reverteu as 74 strings ainda fora do indice
+- [Phase Phase 06]: 06-03: a elegibilidade ao papel de telefone padrao exige o servico de chamada DECLARADO — so a tela de discagem faz o pedido falhar (medido); e os DOIS filtros de discagem, esquema vazio E esquema de telefone, sao exigidos
+- [Phase Phase 06]: 06-03: USE_FULL_SCREEN_INTENT e a quarta permissao da fase; entrou na matriz ANTES do manifest e na allowlist no mesmo trabalho, com a lista de fases futuras perdendo as tres
+- [Phase Phase 06]: 06-03: detach() do armazem publica o retrato final ANTES de cancelar o espelho — sem isso o encerramento se perdia numa corrida e a tela mostrava chamada ativa ja terminada
+- [Phase Phase 06]: 06-03: no piso da plataforma a sobrecarga moderna de recusa NAO EXISTE — verificar sua ausencia estoura com erro de metodo ausente; a prova correta e confirmVerified sobre a chamada
+- [Phase Phase 06]: 06-03: uses-feature de telefonia com required=false e obrigatorio junto da permissao de originar chamada (lint reprova como erro) e e a declaracao correta: sem radio o modo discador fica indisponivel
+- [Phase Phase 06]: 06-03: reverter e abrir o seletor do sistema; desabilitar componente proprio e proibido PARA SEMPRE (a plataforma remove o papel e encerra o app) e virou checagem 8.2 do script
+- [Phase Phase 06]: 06-03: papel detido SEMPRE vence a intencao gravada em DialerModeState; o estado do modo nunca sai de valor persistido
+- [Phase Phase 06]: 06-03: cobertura caiu de 97,70% para 96,08% porque telecom.call.* ganhou tres arquivos que falam com a plataforma; alargar o filtro do Kover e do plano 06-08, nao deste
+- [Phase Phase 06]: 06-03: o retorno de mudanca de estado pertence ao CallSessionStore (CallSessionObserver), nunca ao servico da plataforma — e por ali que 06-06 liga a notificacao
 
 ## Convenções operacionais do GSD
 
@@ -223,6 +233,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T22:25:05.622Z
-Stopped at: Completed 06-02-PLAN.md
+Last session: 2026-07-29T22:47:14.938Z
+Stopped at: Completed 06-03-PLAN.md
 Resume file: None
