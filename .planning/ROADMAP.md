@@ -19,8 +19,8 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Fundacao Compilavel** - Esqueleto Android validado: Gradle KTS + catalog, tema com tokens, detekt/lint, build.sh
-- [ ] **Phase 2: Motor de Decisao e Normalizacao** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
+- [x] **Phase 1: Fundacao Compilavel** - Esqueleto Android validado: Gradle KTS + catalog, tema com tokens, detekt/lint, build.sh
+- [x] **Phase 2: Motor de Decisao e Normalizacao** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
 - [ ] **Phase 3: Dados Locais** - DataStore (configurações + contador de aberturas), Room (whitelist + histórico), retenção e backup exclusion
 - [ ] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
 - [ ] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções e notificação silenciosa
