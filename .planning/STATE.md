@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-06-PLAN.md
-last_updated: "2026-07-29T17:20:14.473Z"
+stopped_at: Completed 05-07-PLAN.md — Phase 05 COMPLETE
+last_updated: "2026-07-29T17:31:37.965Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 27
-  completed_plans: 26
+  completed_plans: 27
 ---
 
 # Project State
@@ -24,8 +24,9 @@ Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
+Phase: 05 (Triagem Telecom Modo Filtro) — COMPLETE
 Plan: 7 of 7
+Next: Phase 06 — Modo Discador (pesquisa obrigatória reforçada antes do planejamento)
 
 ## Snapshot
 
@@ -34,7 +35,7 @@ Plan: 7 of 7
 - **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
-- **Qualidade:** 296 testes JVM + 53 instrumentados; cobertura domain+phone+data+settings 96,6759% com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor)
+- **Qualidade:** 417 testes JVM + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
@@ -158,6 +159,11 @@ Plan: 7 of 7
 - [Phase 05]: 05-06: comentario sobre o modo de abortar do shell passou a DESCREVER o literal (precedente do Migrations.kt): criterio por grep nao distingue comentario de codigo
 - [Phase 05]: 05-06: caminho de decisao p50 medido 28,7 / 15,5 / 0,79 ms conforme o aquecimento do processo; assert unico em 50 ms, p95 e max so em logcat, veredito na Phase 9
 - [Phase 05]: 05-06: teste de tempo carrega assert estrutural sobre a decisao medida — quebradas juntas, a sabotagem de tempo e a de direcao se anulam
+- [Phase 05]: 05-07: ocultar a chamada bloqueada do historico do telefone e INATINGIVEL — o Android so honra o pedido para app de operadora; o papel de discador da Fase 6 NAO destrava. SCR-07 fica WONT FIX e a UI diz a verdade
+- [Phase 05]: 05-07: o modo nao perturbar NAO e contornavel (filtro paralelo, bypass exigiria permissao proibida); 'Nunca Silenciar' descreve o que o Sentinela faz, nunca o que o sistema faz — zero codigo, so texto
+- [Phase 05]: 05-07: SCR-04 (numero oculto) e PARCIAL — nunca entregue no modo filtro, vale no modo discador (Fase 6); codigo e configuracao mantidos, limitacao documentada
+- [Phase 05]: 05-07: camada de triagem entrou no Kover SEM exclude novo e a cobertura SUBIU (96,68% -> 97,64%) — consequencia do coordenador ser puro; ele nunca pode aparecer em exclude
+- [Phase 05]: 05-07: criterio por grep nao distingue include de exclude (3a autossabotagem da fase); grep prova ausencia de texto, jamais ausencia de comportamento — verificar a intencao no bloco certo
 
 ## Convenções operacionais do GSD
 
@@ -201,6 +207,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T17:19:58.600Z
-Stopped at: Completed 05-06-PLAN.md
+Last session: 2026-07-29T17:31:37.963Z
+Stopped at: Completed 05-07-PLAN.md — Phase 05 COMPLETE
 Resume file: None
