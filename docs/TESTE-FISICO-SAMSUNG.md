@@ -50,16 +50,23 @@ modo rejeitar, ocultar do histórico nativo ON, notificação própria OFF.
 Pré-condição: ativar o modo discador na tela Proteção (concede `ROLE_DIALER`; One UI pede
 confirmação de app de telefone padrão).
 
+O que a Fase 6 **já provou em automação**, no aparelho virtual, e por isso saiu do escopo de
+julgamento destes cenários: elegibilidade ao papel pelo caminho que a verifica, vínculo real do
+serviço de interface de chamada, política por contato valendo de fato, independência dos dois
+papéis, reversão pelo seletor do sistema, e sobrevivência da chamada ao encerramento do processo.
+Nos cenários abaixo o que se julga é o **acabamento no aparelho e na interface do fabricante** —
+não o comportamento da plataforma.
+
 | # | Cenário | Passos | Esperado | Resultado |
 |---|---------|--------|----------|-----------|
-| 23 | Ativação do modo | Ativar modo discador na Proteção | Diálogo do sistema aparece; Sentinela vira app de telefone padrão; nada quebra | |
-| 24 | Chamada recebida (contato, Tocar) | Ligar do contato | UI de chamada do Sentinela aparece; Atender e Recusar funcionam; áudio ok | |
-| 25 | Contato com política Bloquear | contactsPolicy=Bloquear, ligar do contato | Contato é bloqueado antes de tocar (política agora efetiva) | |
-| 26 | Contato com política Silenciar | contactsPolicy=Silenciar, ligar do contato | Chega sem som/vibração, visível na tela | |
+| 23 | Ativação do modo | Ativar modo discador na Proteção | A elegibilidade já é provada em automação; o que resta é o **diálogo do fabricante**: registrar se a One UI insere confirmação extra, quantos toques exige e se aparece toast próprio. Sentinela vira app de telefone padrão e nada quebra | |
+| 24 | Chamada recebida (contato, Tocar) | Ligar do contato | UI de chamada do Sentinela aparece; Atender e Recusar funcionam; **áudio de verdade nas duas pontas** (o único juiz do caminho de áudio é o aparelho) | |
+| 25 | Contato com política Bloquear | contactsPolicy=Bloquear, ligar do contato | A decisão já é provada em automação; o que resta é a **percepção real**: o telefone não toca, não vibra e não acende, e quem liga ouve o que a operadora der | |
+| 26 | Contato com política Silenciar | contactsPolicy=Silenciar, ligar do contato | A decisão já é provada em automação; o que resta é a **percepção real**: chega sem som e sem vibração, visível na tela, sem heads-up sonoro da One UI | |
 | 27 | Desconhecido no modo discador | Ligar do número desconhecido | Bloqueado como #1 (paridade com o modo filtro) | |
-| 28 | Discagem própria | Discar um número pela tela de discagem | Chamada origina; UI em chamada com mudo/viva-voz/DTMF/encerrar funcionais | |
-| 29 | Tela bloqueada | Ligar do contato com aparelho bloqueado | UI de chamada aparece sobre a tela bloqueada; atender funciona | |
-| 30 | Reversão | Desativar modo discador | App de telefone nativo volta a ser o padrão; ligações seguem normais; modo filtro segue ativo | |
+| 28 | Discagem própria | Discar um número pela tela de discagem | Chamada origina; UI em chamada com mudo/viva-voz/DTMF/encerrar funcionais e o **tom de tecla audível para o outro lado** | |
+| 29 | Tela bloqueada | Ligar do contato com aparelho bloqueado | UI de chamada aparece sobre a tela bloqueada da One UI; atender funciona sem desbloquear (detalhe do fabricante no cenário 53) | |
+| 30 | Reversão | Desativar modo discador pelo seletor do sistema | A reversão já é provada em automação (papel devolvido, papel de triagem intacto); o que resta é a **interface do fabricante**: o discador nativo volta a ser o padrão, ligações seguem normais, o modo filtro segue ativo e **nenhuma notificação de chamada órfã** fica na One UI depois de o app ser encerrado pela troca | |
 
 ## Pendências herdadas da Phase 1 (fundação)
 
@@ -126,6 +133,30 @@ nos cenários 40, 41, 45 e 46. O **veredito do percentil de cauda** (p95 e max d
 decisão) também é diferido: o CI cobra só a mediana, porque no emulador a cauda mede o scheduler
 do host tanto quanto o nosso código; o veredito é o cenário 47.
 
+## Pendências da Phase 6 (modo discador)
+
+Pré-condição: modo discador ativo (cenário 23) e leitura da agenda concedida.
+
+Estes nove cenários são o que **sobrou** depois da automação da Fase 6. Nenhum deles repete
+assunto dos cenários 23–30: ali se julga acabamento do fluxo básico, aqui se julgam rota de
+áudio real, interface do fabricante, degradação e as três questões abertas de OEM.
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 52 | Viva-voz e roteamento real | Em chamada ativa, alternar viva-voz, fone e Bluetooth | O áudio troca de rota de fato e a interface reflete a rota ativa. **Único ponto de DIA-02 impossível no aparelho virtual**, que expõe somente a rota de alto-falante | |
+| 53 | Tela cheia sobre a tela bloqueada do fabricante | Aparelho bloqueado, receber chamada de contato | A tela de chamada do Sentinela aparece por cima; atender e recusar funcionam com o aparelho travado | |
+| 54 | Permissão de tela cheia revogada | Revogar em Configurações e receber chamada | Degrada para aviso com ações de atender e recusar; **nunca fica em silêncio** | |
+| 55 | Morte no meio da chamada em aparelho real | Com chamada ativa, forçar a parada do aplicativo | A chamada continua; o sistema assume com o discador do fabricante e avisa. Confirma no aparelho o que foi medido no aparelho virtual | |
+| 56 | Dois chips e escolha de conta de telefone | Com dois chips, originar chamada sem chip padrão definido | Estado tratado com tela informativa e botão de encerrar funcional — **nunca tela em branco** | |
+| 57 | Papel tomado por atualização do sistema | Após atualização da interface do fabricante ou instalação de outro discador, reabrir o aplicativo | A tela detecta a perda na retomada e degrada para modo filtro sem alarme e sem quebrar | |
+| 58 | Otimização de bateria agressiva | Colocar o aplicativo em suspensão de atividade do fabricante e receber chamada | Registrar se o serviço de chamada ainda é vinculado. Se não for, é **limitação de fabricante, não defeito** | |
+| 59 | Número privado no modo discador | Ligar com identificação bloqueada | **Registrar** se a chamada chega à triagem ou somente à interface de chamada. Resolve a questão aberta e decide o texto do item 8 de [`LIMITACOES.md`](LIMITACOES.md) | |
+| 60 | Histórico do fabricante como telefone padrão | Bloquear uma chamada com o modo discador ativo e abrir o histórico do fabricante | A chamada **APARECE** como bloqueada. Confirma no aparelho que ser telefone padrão não destrava o pulo do registro | |
+
+Origem: Phase 6, planos 06-03 a 06-07. Tudo que a automação já provou virou registro em
+[`LIMITACOES.md`](LIMITACOES.md) (itens 3, 8 e 9) e nota nos cenários 23–30; o que sobrou aqui é
+só o que exige aparelho real.
+
 ## Registro de comportamento OEM
 
 Anotar aqui QUALQUER desvio (toast do sistema, atraso perceptível, notificação da One UI). A
@@ -135,6 +166,19 @@ cenário 41.
 
 - ____________________________________________
 - ____________________________________________
+
+**Questões abertas de fabricante da Phase 6** — responder com sim/não e o que foi observado:
+
+1. A One UI insere **confirmação extra** ao trocar o app de telefone padrão (diálogo próprio,
+   aviso de segurança, passo adicional)? Cenário 23.
+2. O app de telefone nativo **reassume o papel** após atualização do sistema ou da One UI?
+   Cenário 57.
+3. A **otimização de bateria** do fabricante impede o vínculo do serviço de interface de chamada?
+   Cenário 58.
+
+**Nenhum ajuste preventivo de fabricante entra no código** antes de um destes itens falhar
+comprovadamente aqui. Resposta esperada de um item que falhe: registro em
+[`LIMITACOES.md`](LIMITACOES.md) com aparelho e versão, e só então decisão de código.
 
 ## Critérios de aceite cobertos
 
@@ -146,3 +190,19 @@ Os cenários **40 a 51** carregam, além disso, os critérios de aceite 1, 2 e 6
 veredito dos percentis de cauda do caminho de decisão. Enquanto eles não forem executados em
 Samsung físico, esses critérios permanecem **abertos por desenho** — a Phase 5 entregou o
 comportamento e a prova em JVM e emulador, não a prova em hardware.
+
+Os cenários **52 a 60** fecham o que resta do modo discador da Phase 6:
+- **DIA-01** (papel de telefone padrão, ativação e reversão) — provado em automação; aqui só o
+  acabamento do fabricante: cenários 23, 30 e 57.
+- **DIA-02** (interface de chamada própria: atender, recusar, mudo, viva-voz, tons, encerrar) —
+  provado em automação e em teste de composição, **exceto o roteamento de áudio real**, que é o
+  cenário 52. Nenhum outro ponto de DIA-02 depende de aparelho físico.
+- **DIA-03** (discagem própria) — cenários 28 e 56.
+- **DIA-04** (políticas por contato valendo no modo discador) — provado em automação sem alterar
+  o motor de decisão; percepção real nos cenários 25 e 26.
+- **DIA-05** (degradação honesta e reversibilidade) — cenários 54, 55, 57 e 58.
+- **SCR-04** (números privados) permanece **PARCIAL e não verificado** no modo discador: o
+  veredito é o cenário 59, e até lá nenhum documento nem texto de interface afirma que o modo
+  discador destrava o recurso.
+- **SCR-07** (omitir do histórico do telefone) permanece **WONT FIX** por decisão do Android, e o
+  cenário 60 apenas reconfirma isso no aparelho, agora com o papel de telefone padrão ativo.
