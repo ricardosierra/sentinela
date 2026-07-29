@@ -1,8 +1,27 @@
 package org.sentinela.app.telecom.call
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+/**
+ * Prazo para a interface confirmar que apresentou uma chamada recebida.
+ *
+ * Dois segundos são generosos para desenhar uma tela e curtos o bastante para o usuário ainda
+ * poder atender: uma chamada toca por dezenas de segundos. Vencido o prazo sem confirmação, a
+ * sessão falha ALTO, porque interface vinculada e congelada é o único modo de falha desta fase
+ * que ninguém detecta — nem o sistema de telefonia, nem o usuário, que só vê uma tela parada.
+ */
+const val PRESENTATION_DEADLINE_MILLIS: Long = 2_000L
+
+/** Falha alta: a chamada recebida não conseguiu ser apresentada dentro do prazo. */
+class CallPresentationTimeoutException(rawState: Int) : IllegalStateException(
+    "sessao de chamada nao apresentou interface no prazo; estado recebido: $rawState",
+)
 
 /** O estado encerra a sessão? Usado para desarmar tom de teclado e teclado aberto. */
 private val CallUiState.terminal: Boolean
@@ -33,6 +52,8 @@ class CallSessionCoordinator(
     private val controls: CallControls,
     private val mapper: CallStateMapper = PlatformCallStateMapper(),
     private val clock: () -> Long = System::currentTimeMillis,
+    private val scope: CoroutineScope? = null,
+    private val presentationDeadlineMillis: Long = PRESENTATION_DEADLINE_MILLIS,
 ) {
 
     private val estado = MutableStateFlow(CallSnapshot())
@@ -43,6 +64,10 @@ class CallSessionCoordinator(
     /** Dígito de teclado em curso. Local à sessão, nunca compartilhado entre chamadas. */
     private var digitoEmCurso: Char? = null
 
+    /** Vigia do prazo de apresentação. Local à sessão, como a guarda da triagem. */
+    private var vigiaDeApresentacao: Job? = null
+    private var apresentada: Boolean = false
+
     // --- entradas vindas da telefonia -------------------------------------------------
 
     fun onCallAdded(rawState: Int, identity: CallIdentity) {
@@ -52,11 +77,39 @@ class CallSessionCoordinator(
             identity = identity,
             startedAtMillis = if (novo == CallUiState.Active) clock() else null,
         )
+        if (novo == CallUiState.Incoming) armarPrazo(rawState) else desarmarPrazo()
+    }
+
+    /**
+     * Chamada pela camada de interface no momento em que a tela da chamada recebida está
+     * efetivamente na frente do usuário. Sem esta confirmação, o prazo vence e a sessão falha.
+     */
+    fun confirmPresented() {
+        apresentada = true
+        desarmarPrazo()
+    }
+
+    private fun armarPrazo(rawState: Int) {
+        val escopo = scope ?: return
+        apresentada = false
+        desarmarPrazo()
+        vigiaDeApresentacao = escopo.launch {
+            delay(presentationDeadlineMillis)
+            if (!apresentada) throw CallPresentationTimeoutException(rawState)
+        }
+    }
+
+    private fun desarmarPrazo() {
+        vigiaDeApresentacao?.cancel()
+        vigiaDeApresentacao = null
     }
 
     fun onStateChanged(rawState: Int) {
         val novo = mapper.map(rawState)
-        if (novo.terminal) encerrarTomPendente()
+        if (novo.terminal) {
+            encerrarTomPendente()
+            desarmarPrazo()
+        }
         val atual = estado.value
         estado.value = atual.copy(
             state = novo,
@@ -80,6 +133,7 @@ class CallSessionCoordinator(
 
     fun onCallRemoved() {
         encerrarTomPendente()
+        desarmarPrazo()
         estado.value = estado.value.copy(state = CallUiState.Ended, keypadOpen = false)
     }
 
