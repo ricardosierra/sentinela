@@ -61,11 +61,11 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Infra de validação: Kover 0.9.9 + Metaspace 1g, fixture `TestMetadata` (libphonenumber em JVM puro) e invariante de pureza estendido a `phone/`
-- [ ] 02-02-PLAN.md — Matriz parametrizada política × origem × modo de bloqueio (48 casos), privados/inválidos/fallback, reason codes sem dado pessoal e precedência entre os 7 níveis
-- [ ] 02-03-PLAN.md — Cascata de região SIM/rede → preferência do usuário → BR (`RegionProvider` puro + `AndroidRegionProvider` isolado), sem permissão nova
-- [ ] 02-04-PLAN.md — `LibPhoneNumberNormalizer` real: E.164 BR/internacional, regra do 9º dígito à mão com revalidação, códigos curtos por dígitos crus e máscara única
-- [ ] 02-05-PLAN.md — Wiring no `AppContainer` (loader de assets em `platform/`), gate `koverVerify` em 80% e evidência pós-`clean`
+- [x] 02-01-PLAN.md — Infra de validação: Kover 0.9.9 + Metaspace 1g, fixture `TestMetadata` (libphonenumber em JVM puro) e invariante de pureza estendido a `phone/`
+- [x] 02-02-PLAN.md — Matriz parametrizada política × origem × modo de bloqueio (48 casos), privados/inválidos/fallback, reason codes sem dado pessoal e precedência entre os 7 níveis
+- [x] 02-03-PLAN.md — Cascata de região SIM/rede → preferência do usuário → BR (`RegionProvider` puro + `AndroidRegionProvider` isolado), sem permissão nova
+- [x] 02-04-PLAN.md — `LibPhoneNumberNormalizer` real: E.164 BR/internacional, regra do 9º dígito à mão com revalidação, códigos curtos por dígitos crus e máscara única
+- [x] 02-05-PLAN.md — Wiring no `AppContainer` (loader de assets em `platform/`), gate `koverVerify` em 80% e evidência pós-`clean`
 
 ### Phase 3: Dados Locais
 **Goal**: Configurações, whitelist, histórico e contador de aberturas persistem localmente com retenção e ficam fora de backup — com a consulta da whitelist dentro do orçamento de performance.
