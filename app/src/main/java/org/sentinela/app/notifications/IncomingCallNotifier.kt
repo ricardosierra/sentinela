@@ -62,7 +62,7 @@ class IncomingCallNotifier(
     private val manager: NotificationManager?
         get() = context.getSystemService(NotificationManager::class.java)
 
-    /** Chamada recebida: tela cheia quando permitido, aviso com as duas ações sempre. */
+    /** Chamada recebida: tela cheia quando permitido, sempre com atender e recusar. */
     fun notifyIncoming(identity: MaskedCallIdentity) {
         CallNotificationChannels.ensureCallChannel(context)
         val builder = base(R.string.notification_call_incoming_title, identity)
@@ -74,11 +74,12 @@ class IncomingCallNotifier(
                     intencaoDeAcao(ACTION_ANSWER, REQUEST_ANSWER),
                 ),
             )
+        } else {
+            // Piso da plataforma: o estilo de chamada não existe e as duas ações são adicionadas
+            // à mão. Sem elas, um usuário com a tela cheia revogada veria o aviso e não teria como
+            // atender por ele.
+            acoesDeChamadaRecebida(builder)
         }
-        // As ações também são adicionadas no piso da plataforma, onde o estilo de chamada não
-        // existe. Sem elas, um usuário com a tela cheia revogada veria o aviso e não teria como
-        // atender por ele.
-        acoesDeChamadaRecebida(builder)
         if (fullScreenAllowed()) {
             builder.setFullScreenIntent(intencaoDeAcao(ACTION_ANSWER, REQUEST_FULL_SCREEN), true)
         }
@@ -96,12 +97,13 @@ class IncomingCallNotifier(
                     intencaoDeAcao(ACTION_HANGUP, REQUEST_HANGUP),
                 ),
             )
+        } else {
+            builder.addAction(
+                R.drawable.ic_launcher_foreground,
+                context.getString(R.string.call_action_hangup),
+                intencaoDeAcao(ACTION_HANGUP, REQUEST_HANGUP),
+            )
         }
-        builder.addAction(
-            R.drawable.ic_launcher_foreground,
-            context.getString(R.string.call_action_hangup),
-            intencaoDeAcao(ACTION_HANGUP, REQUEST_HANGUP),
-        )
         manager?.notify(CALL_NOTIFICATION_ID, builder.build())
     }
 
