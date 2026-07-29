@@ -4,14 +4,14 @@ milestone: v0.1
 milestone_name: milestone
 current_plan: 3
 status: unknown
-stopped_at: Completed 01-02-PLAN.md
-last_updated: "2026-07-29T03:48:17.503Z"
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-07-29T03:54:03.834Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -52,6 +52,8 @@ Total Plans in Phase: 3
 - [Phase 01-fundacao-compilavel]: Politica de lint declarada no app/build.gradle.kts (sem lint-baseline); ObsoleteSdkInt corrigido de verdade renomeando res/mipmap-anydpi-v26 para res/mipmap
 - [Phase 01]: Permissoes verificadas por allowlist sobre o manifest MERGEADO (scripts/verify-invariants.sh); Phase 4/6 devem atualizar docs/PERMISSOES.md e a allowlist no mesmo commit
 - [Phase 01]: DarkColors passou a internal para permitir ThemeTokensTest em JVM pura (sem Robolectric)
+- [Phase 01]: Evidencia de build so vale com --no-build-cache alem do clean: FROM-CACHE tem o mesmo defeito probatorio que UP-TO-DATE
+- [Phase 01]: POST_NOTIFICATIONS permanece declarada no manifest — docs/PERMISSOES.md e fonte canonica; pedido em runtime fica na Fase 5
 
 ## Convenções operacionais do GSD
 
@@ -94,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T03:48:17.501Z
-Stopped at: Completed 01-02-PLAN.md
+Last session: 2026-07-29T03:53:56.095Z
+Stopped at: Completed 01-03-PLAN.md
 Resume file: None

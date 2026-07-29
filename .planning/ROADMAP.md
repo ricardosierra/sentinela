@@ -44,9 +44,9 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Política de lint declarada (`lint {}` com disable justificado) + correção real do `ObsoleteSdkInt` (rename `mipmap-anydpi-v26` → `mipmap-anydpi`), fechando QLT-02 na letra
-- [ ] 01-02-PLAN.md — `scripts/verify-invariants.sh` (allowlist de permissões sobre o manifest mesclado + greps de rebranding + domínio puro) e `ThemeTokensTest` cobrindo os tokens Silent Guardian
-- [ ] 01-03-PLAN.md — Evidência arquivada de build pós-`clean` (`01-EVIDENCE.md`), reconciliação do `POST_NOTIFICATIONS` com `docs/PERMISSOES.md` e registro das pendências físicas (cenários 31–34) para a Phase 9
+- [x] 01-01-PLAN.md — Política de lint declarada (`lint {}` com disable justificado) + correção real do `ObsoleteSdkInt` (rename `mipmap-anydpi-v26` → `mipmap`), fechando QLT-02 na letra
+- [x] 01-02-PLAN.md — `scripts/verify-invariants.sh` (allowlist de permissões sobre o manifest mesclado + greps de rebranding + domínio puro) e `ThemeTokensTest` cobrindo os tokens Silent Guardian
+- [x] 01-03-PLAN.md — Evidência arquivada de build pós-`clean` (`01-EVIDENCE.md`), reconciliação do `POST_NOTIFICATIONS` com `docs/PERMISSOES.md` e registro das pendências físicas (cenários 31–34) para a Phase 9
 
 ### Phase 2: Motor de Decisao e Normalizacao
 **Goal**: Toda regra de triagem (políticas por origem: contato, whitelist, desconhecido) e normalização de números existe como código puro, determinístico e exaustivamente testado — antes de qualquer integração com o Telecom.
