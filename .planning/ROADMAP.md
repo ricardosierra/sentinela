@@ -92,13 +92,20 @@ Plans:
 ### Phase 4: Contatos do Aparelho
 **Goal**: O Sentinela sabe — local e instantaneamente — se quem liga está na agenda, sem nunca armazenar ou vazar dados de contato.
 **Depends on**: Phase 3
-**Requirements**: CTT-01..04
+**Requirements**: CTT-01..04 (CTT-03 já completo desde a Phase 2)
 **Success Criteria** (what must be TRUE):
   1. Pedido de `READ_CONTACTS` acontece com explicação clara e o app permanece 100% funcional no modo filtro se negado
   2. `ContactLookupRepository` responde HIT/MISS/UNAVAILABLE por E.164 com cache em memória invalidado por ContentObserver
   3. Lookup medido dentro do orçamento de p95 da decisão (inclusive cold start)
   4. Nenhum nome/dado de contato aparece em banco, logs ou backup — verificado por teste e inspeção do schema
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Wave 0: `READ_CONTACTS` no manifest + as DUAS edições de `verify-invariants.sh` (allowlist e FUTURE, com gravação de agenda barrada para sempre) e `ContactsTestFixture` por `adoptShellPermissionIdentity`
+- [ ] 04-02-PLAN.md — Máquina de estado da permissão: enum de 4 estados por função pura, flag `contacts_permission_asked` no DataStore existente e camada fina de plataforma (a tela é da Phase 7)
+- [ ] 04-03-PLAN.md — `ContactsContractLookupSource` com sonda dupla (E.164 + nacional) e projeção mínima, `ContactKeyCache` normalizado pelo app com debounce, e o repositório HIT/MISS/UNAVAILABLE
+- [ ] 04-04-PLAN.md — Instrumentados no emulador: sonda dupla contra o provider real, invalidação por ContentObserver e percentis com 5.000 contatos (assert primário na mediana)
+- [ ] 04-05-PLAN.md — Bloco 6 de invariantes + `SchemaExportTest` de vazamento, wiring no `AppContainer`, exclude nomeado do Kover e evidência pós-`clean`
 
 ### Phase 5: Triagem Telecom Modo Filtro
 **Goal**: Chamada de número desconhecido é bloqueada de verdade antes de tocar, com o Service fino, resiliente e dentro do orçamento — o critério de aceite central do produto.
@@ -180,7 +187,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 1 | v0.1.0 | 0/3 | In progress | - |
 | 2 | v0.1.0 | 0/5 | Not started | - |
 | 3 | 5/7 | In Progress|  | - |
-| 4 | v0.1.0 | 0/? | Not started | - |
+| 4 | v0.1.0 | 0/5 | Planned | - |
 | 5 | v0.1.0 | 0/? | Not started | - |
 | 6 | v0.1.0 | 0/? | Not started | - |
 | 7 | v0.1.0 | 0/? | Not started | - |
