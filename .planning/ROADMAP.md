@@ -140,7 +140,17 @@ Plans:
   3. Política por contato (Tocar/Bloquear/Silenciar/Nunca Silenciar) é aplicada de verdade a chamadas de contatos
   4. Discar um número pela tela de discagem funciona (ACTION_DIAL atendido)
   5. Reverter para o discador nativo restaura tudo sem quebrar telefonia; modo filtro continua operante
-**Plans**: TBD
+**Plans**: 8 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Núcleo puro: estados da chamada, mapa exaustivo dos 13 estados da plataforma, costura de comandos (mudo/viva-voz provados aqui) e coordenador com prazo de apresentação que falha alto
+- [ ] 06-02-PLAN.md — Fundação visual: tipografia numérica com figuras tabulares, cores fixas de atender/recusar fora do Dynamic Color, formas, as 46 strings pt-BR e nove componentes com alvo ≥ 48dp
+- [ ] 06-03-PLAN.md — `docs/PERMISSOES.md` primeiro (4ª permissão `USE_FULL_SCREEN_INTENT`), manifest mínimo medido (InCallService + os DOIS filtros de `ACTION_DIAL`), serviço fino, store no `AppContainer`, `DialerRoleManager` e Bloco 8 de invariantes
+- [ ] 06-04-PLAN.md — Telas de chamada (recebida em tela cheia, saída, ativa, teclado DTMF, rota de áudio) com as 4 variantes de identidade, semântica TalkBack e a fronteira número completo × mascarado travada por teste
+- [ ] 06-05-PLAN.md — Discagem (`ACTION_DIAL`): origem por `placeCall`, `CALL_PHONE` em runtime, tela de discagem nos dois contextos e tela de ativação/reversão com copy honesta
+- [ ] 06-06-PLAN.md — Tela cheia oficial da chamada recebida: canal `IMPORTANCE_HIGH` separado do canal da Fase 5, `setFullScreenIntent`, degradação para heads-up com ações e privacidade da notificação
+- [ ] 06-07-PLAN.md — Prova instrumentada: bind real (QLT-06), elegibilidade real ao papel, DIA-04 provado com o motor intocado, reversão limpa e morte mid-call
+- [ ] 06-08-PLAN.md — Honestidade e fechamento: item 8 de `LIMITACOES.md` corrigido, `TELAS.md` §11 reescrita, cenários 23–30 revisados no lugar + 52–60 novos, `koverVerify` e `06-EVIDENCE.md`
 
 ### Phase 7: UI Onboarding e Home
 **Goal**: Usuário sai do zero ao protegido em menos de 2 minutos, entendendo exatamente o que o app faz, o que cada política significa e o que o modo discador oferece.
@@ -198,7 +208,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 3 | 5/7 | In Progress|  | - |
 | 4 | 4/5 | In Progress|  | - |
 | 5 | v0.1.0 | 0/7 | Planned | - |
-| 6 | v0.1.0 | 0/? | Not started | - |
+| 6 | v0.1.0 | 0/8 | Planned | - |
 | 7 | v0.1.0 | 0/? | Not started | - |
 | 8 | v0.1.0 | 0/? | Not started | - |
 | 9 | v0.1.0 | 0/? | Not started | - |
