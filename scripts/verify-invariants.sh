@@ -390,6 +390,81 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Bloco 8 — Fase 6: elegibilidade ao papel de telefone padrao e reversao segura
+# ---------------------------------------------------------------------------
+# O risco desta fase e o aparelho recusar o aplicativo como telefone padrao por um detalhe de
+# manifest, ou o aplicativo se autodestruir tentando "desligar" o modo. As duas coisas foram
+# medidas na pesquisa e nenhuma delas aparece em revisao de codigo: a primeira falha com uma
+# mensagem do sistema que nao diz o motivo, e a segunda encerra o processo do usuario.
+#
+# ATENCAO ao escopo, mesma armadilha dos Blocos 6 e 7: todo grep daqui aponta para o manifest
+# mergeado ou para app/src/main/java, nunca para scripts/. E as mensagens de erro DESCREVEM o que e
+# proibido em vez de repetir o identificador procurado, porque um comentario que o cite derrubaria o
+# proprio invariante sem existir defeito nenhum (armadilha que ja pegou cinco executores).
+echo "== Bloco 8: elegibilidade ao papel de telefone padrao =="
+
+# 8.1 — os DOIS filtros da acao de discagem, um deles com o esquema de telefone. O sistema aplica os
+# dois em sequencia e passar em um so NAO e passar: com apenas a tela de discagem declarada, o
+# pedido do papel falhou com erro (medido em experimento controlado).
+FILTROS_DISCAGEM=$(grep -c "android.intent.action.DIAL" "$M")
+if [ "$FILTROS_DISCAGEM" -eq 2 ]; then
+  ok "manifest mergeado declara os dois filtros da acao de discagem"
+else
+  fail "manifest mergeado tem ${FILTROS_DISCAGEM} filtro(s) da acao de discagem (esperado 2) — um so nao qualifica o aplicativo ao papel de telefone padrao"
+fi
+
+ESQUEMA_TELEFONE=$(grep -c 'android:scheme="tel"' "$M")
+if [ "$ESQUEMA_TELEFONE" -ge 1 ]; then
+  ok "um dos filtros de discagem usa o esquema de telefone"
+else
+  fail "nenhum filtro de discagem com o esquema de telefone no manifest mergeado — o segundo filtro do sistema exige esse esquema"
+fi
+
+# 8.2 — o aplicativo nunca desabilita componente proprio. A plataforma verifica os requisitos do
+# papel continuamente: deixar de cumpri-los faz o sistema remover o papel E ENCERRAR o aplicativo,
+# com o usuario segurando o aparelho. Proibido PARA SEMPRE, nao ate a proxima fase.
+DESLIGA_COMPONENTE=$(grep -rn "setComponentEnabledSetting" app/src/main/java --include="*.kt" 2>/dev/null)
+if [ -z "$DESLIGA_COMPONENTE" ]; then
+  ok "nenhum arquivo desabilita componente do proprio aplicativo"
+else
+  echo "$DESLIGA_COMPONENTE" | sed 's/^/      /'
+  fail "o codigo pede ao gerenciador de pacotes para desabilitar um componente do proprio aplicativo — a plataforma responde removendo o papel de telefone padrao e ENCERRANDO o aplicativo; reverter e abrir a tela de escolha do sistema"
+fi
+
+# 8.3 — a chamada e sempre originada pelo gerenciador de telecomunicacoes. A acao direta de ligar,
+# vinda de um discador que nao veio instalado no aparelho, e reencaminhada ao discador do sistema
+# para confirmacao: o usuario ve duas telas e o aplicativo perde o controle do resultado.
+ACAO_DIRETA=$(grep -rnE 'Intent\.ACTION_CALL([^_A-Za-z]|$)|"android\.intent\.action\.CALL"' \
+  app/src/main/java --include="*.kt" 2>/dev/null)
+if [ -z "$ACAO_DIRETA" ]; then
+  ok "chamada originada apenas pelo gerenciador de telecomunicacoes"
+else
+  echo "$ACAO_DIRETA" | sed 's/^/      /'
+  fail "o codigo origina chamada pela acao direta de ligar — num discador que nao vem no aparelho ela e reencaminhada ao discador do sistema para confirmacao; a origem correta e o gerenciador de telecomunicacoes"
+fi
+
+# 8.4 — a camada da sessao de chamada nao conhece a interface, e o coordenador continua puro. A
+# inversao de dependencia aqui e o que permite medir a maquina de estado em maquina virtual pura,
+# como o coordenador da triagem do Bloco 7.
+CALL_DIR=app/src/main/java/org/sentinela/app/telecom/call
+CALL_VE_UI=$(grep -rn "^import org\.sentinela\.app\.ui\." "$CALL_DIR" --include="*.kt" 2>/dev/null)
+if [ -z "$CALL_VE_UI" ]; then
+  ok "camada da sessao de chamada nao importa a camada de interface"
+else
+  echo "$CALL_VE_UI" | sed 's/^/      /'
+  fail "a camada da sessao de chamada importa a camada de interface — a dependencia e no sentido oposto ($CALL_DIR)"
+fi
+
+COORD_CHAMADA=$CALL_DIR/CallSessionCoordinator.kt
+COORD_CHAMADA_PLATAFORMA=$(grep -n "^import android\." "$COORD_CHAMADA" 2>/dev/null)
+if [ -z "$COORD_CHAMADA_PLATAFORMA" ]; then
+  ok "coordenador da sessao de chamada sem tipo da plataforma"
+else
+  echo "$COORD_CHAMADA_PLATAFORMA" | sed 's/^/      /'
+  fail "coordenador da sessao de chamada importa tipo da plataforma — ele precisa continuar puro e medido pela cobertura ($COORD_CHAMADA)"
+fi
+
+# ---------------------------------------------------------------------------
 if [ "$FAILURES" -gt 0 ]; then
   echo "== $FAILURES invariante(s) violado(s) =="
   exit 1
