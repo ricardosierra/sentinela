@@ -259,7 +259,10 @@ else
 fi
 
 # 6.2 — fronteira: so um pacote fala com o provider da agenda.
-PROVIDER_FORA=$(grep -rn "ContactsContract" app/src/main/java --include="*.kt" 2>/dev/null \
+# O padrao casa o USO do provider (import do pacote ou acesso a membro), nao o nome da classe do
+# app que o encapsula: o container precisa poder construir essa classe sem falar com o provider.
+PROVIDER_PAT='android\.provider\.Contacts|ContactsContract\.'
+PROVIDER_FORA=$(grep -rnE "$PROVIDER_PAT" app/src/main/java --include="*.kt" 2>/dev/null \
   | grep -v "app/src/main/java/org/sentinela/app/data/contacts/")
 if [ -z "$PROVIDER_FORA" ]; then
   ok "provider de contatos so e citado em data/contacts"

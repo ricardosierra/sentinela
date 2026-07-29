@@ -11,6 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import org.sentinela.app.data.contacts.ContactKeyCache
+import org.sentinela.app.data.contacts.ContactLookupRepository
+import org.sentinela.app.data.contacts.ContactsContractLookupSource
+import org.sentinela.app.data.contacts.DefaultContactLookupRepository
 import org.sentinela.app.data.local.PersonalWhitelistRepository
 import org.sentinela.app.data.local.RoomBlockedCallRepository
 import org.sentinela.app.data.local.RoomWhitelistRepository
@@ -124,7 +128,27 @@ class AppContainer(
         }
     }
 
-    // TODO(Fase 4): contactLookupRepository (READ_CONTACTS + cache em memória).
+    /**
+     * Instância ÚNICA do processo. Nada aqui é construído em `Application.onCreate`: a fonte, o
+     * cache e o registro do observador são PREGUIÇOSOS, só na primeira consulta. Construir o
+     * conjunto de chaves foi medido em 2,57 s com 5.000 contatos (plano 04-04) — 12× o orçamento
+     * inteiro da decisão —, por isso ele nunca é aguardado: cache frio responde pela sonda direta.
+     * O registro do observador morre com o processo; `close()` existe para os testes
+     * instrumentados e em produção nunca é chamado.
+     */
+    val contactLookupRepository: ContactLookupRepository by lazy {
+        val source = ContactsContractLookupSource(appContext)
+        DefaultContactLookupRepository(
+            source = source,
+            cache = ContactKeyCache(
+                source = source,
+                normalizer = phoneNumberNormalizer,
+                scope = appScope,
+            ),
+            normalizer = phoneNumberNormalizer,
+        )
+    }
+
     // TODO(Fase 5): blockedCallNotifier (canal silencioso).
     // TODO(Fase 6): componentes do modo discador (InCallService/ROLE_DIALER).
 

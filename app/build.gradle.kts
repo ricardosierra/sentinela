@@ -133,6 +133,11 @@ kover {
                 // falso-vermelho mesmo com o codigo humano 100% coberto.
                 // Fica coberto por connectedDebugAndroidTest (planos 03-04/03-05).
                 classes("org.sentinela.app.data.local.db.*")
+                // Fase 4: a fonte do provider de contatos so executa em teste INSTRUMENTADO
+                // (mesma razao do gerado pelo Room). A logica pura — estado de permissao, cache
+                // e decisao HIT/MISS/UNAVAILABLE — fica FORA deste exclude e continua medida
+                // pelo gate de 80%. Uma classe nomeada, jamais o pacote inteiro.
+                classes("org.sentinela.app.data.contacts.ContactsContractLookupSource")
                 classes("*_Impl", "*_Impl\$*")
                 annotatedBy("androidx.room.Dao", "androidx.room.Database")
             }
