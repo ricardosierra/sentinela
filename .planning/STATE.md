@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-05-PLAN.md
-last_updated: "2026-07-29T23:26:02.265Z"
+stopped_at: Completed 06-07-PLAN.md
+last_updated: "2026-07-29T23:52:56.025Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 35
-  completed_plans: 33
+  completed_plans: 34
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 06 (Modo Discador Opcional) — EXECUTING
-Plan: 7 of 8
+Plan: 8 of 8
 
 ## Snapshot
 
@@ -41,6 +41,7 @@ Plan: 7 of 8
 - **UI (Fase 6):** tema com `numberXl`/`numberLg`/`timer` (figuras de largura fixa), formas 8/16/24/pilula e as QUATRO cores funcionais da chamada por literal fora do esquema; 74 strings pt-BR das telas de chamada/discagem/ativacao varridas contra promessa desonesta; nove componentes reutilizaveis com alvo >= 48dp e descricao de conteudo em recurso
 - **UI (telas de chamada, 06-04):** `IncomingCallScreen` (quatro identidades, ordem de foco declarada, paisagem em duas colunas), `OutgoingCallScreen` (tres pontos em fade, suprimido com reducao de movimento), `ActiveCallScreen` (cronometro congelavel + ramo do estado nao suportado com encerrar habilitado), `DtmfKeypadSheet` e `AudioRouteSheet` ancorados ao rodape; `CallActivity` com `when` exaustivo, confirmacao de apresentacao, gesto de voltar consumido e fechamento apos 1200 ms; contrato do extra de acao da notificacao (`EXTRA_CALL_ACTION` + tres valores) vive em `ui/call/CallActivity.kt`; 20 casos novos e 23 pre-visualizacoes
 - **UI (discagem e ativacao, 06-05):** `DialpadScreen` completa (campo somente saida com formatacao progressiva da propria biblioteca e forma nacional quando o numero fica valido, apagar invisivel que ocupa espaco, barra de falha que mantem o numero) e `DialerActivationScreen` com os cinco ramos de estado, cards de custo e beneficio com estilo identico e reversao pelo seletor do sistema; `OutgoingCallPlacer` origina pelo gerenciador de telecomunicacoes com resultados nomeados; `CallPhonePermissionChecker` em `platform/` e `call_phone_permission_asked` no DataStore; 27 casos novos
+- **Modo discador (provado no aparelho virtual, 06-07):** 27 casos instrumentados novos (suite 53 -> 80) cobrindo vinculo real do servico de chamada, elegibilidade ao papel pelo comando que a VERIFICA, politica por contato valendo de fato com o motor intocado, independencia dos dois papeis e chamada de saida real; `scripts/verify-dialer-lifecycle.sh` prova de FORA do processo o ciclo completo do papel e a sobrevivencia da chamada a morte do processo
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -210,6 +211,15 @@ Plan: 7 of 8
 - [Phase Phase 06]: 06-05: lint reprova a origem da chamada com MissingPermission quando a permissao chega por funcao injetada; runCatching nao conta como tratamento — captura por tipo, e a excecao nunca e registrada (a mensagem pode conter o numero)
 - [Phase Phase 06]: 06-05: aparelho padrao do Robolectric e pequeno demais para uma tela inteira; teste de composicao exige qualificadores de tela reais, senao o conteudo sai do viewport e todo assert de exibicao fica vermelho por motivo falso
 - [Phase Phase 06]: 06-05: call_phone_permission_asked e o terceiro par do padrao das Fases 4 e 5 — fora de ScreeningSettings e gravado ao disparar o launcher, nunca no retorno
+- [Phase 06]: 06-07: perder um papel do sistema ENCERRA o processo do aplicativo (medido 3x, motivo registrado pelo sistema como mudanca de permissao) — vale para telefone padrao e para triagem, e vale igual quando e o usuario que troca nas configuracoes
+- [Phase 06]: 06-07: prova cujo objeto e a morte do proprio processo nao cabe na instrumentacao (ela roda dentro dele) — reversao e morte no meio da chamada viraram `scripts/verify-dialer-lifecycle.sh`, dirigido pelo computador, com codigos de saida de verdade; nada foi enfraquecido nem adiado para a Phase 9
+- [Phase 06]: 06-07: o encerramento ao perder o papel E o argumento do desenho — e por isso que o estado do modo discador e derivado de perguntas ao sistema e nunca de valor gravado, e por isso que desabilitar componente proprio e proibido para sempre
+- [Phase 06]: 06-07: DIA-04 provado, nao implementado — ultima alteracao do CallDecisionEngine segue sendo da Fase 5 (d7d188b); zero linha do motor mudou na fase 06
+- [Phase 06]: 06-07: bloquear com configuracoes de fabrica produz a variante que pede para nao registrar no historico do telefone, nunca a rejeicao simples — expectativa errada num teste, motor certo
+- [Phase 06]: 06-07: caso de contato exige esperar o conjunto de chaves do processo ficar quente; consulta imediata apos insercao responde pelo conjunto ANTIGO quando outra suite ja o aqueceu (atraso proposital do observador, Fase 4)
+- [Phase 06]: 06-07: o atalho de configuracao de telefonia que aponta o discador padrao BYPASSA a qualificacao e por isso nao aparece nem em prosa nos testes — deixaria a suite verde com o manifesto quebrado; prova de vermelho: removida a declaracao do servico de chamada, a concessao volta rc=255
+- [Phase 06]: 06-07: comando de sistema no teste instrumentado nao passa por interpretador — sem `;`, sem codigo de saida; o equivalente observavel e a saida de erro separada, sempre acompanhada da conferencia do EFEITO do comando
+- [Phase 06]: 06-07: `grep -q` sobre saida grande no shell le SUCESSO como falha (cano fechado + modo do shell) — terceira encarnacao da armadilha no repo; usar contagem em variavel
 
 ## Convenções operacionais do GSD
 
@@ -253,6 +263,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T23:25:32.336Z
-Stopped at: Completed 06-05-PLAN.md
+Last session: 2026-07-29T23:52:56.023Z
+Stopped at: Completed 06-07-PLAN.md
 Resume file: None
