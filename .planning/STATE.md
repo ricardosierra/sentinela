@@ -2,16 +2,15 @@
 gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
-current_plan: 3
 status: unknown
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-07-29T03:56:45.319Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-07-29T04:52:42.198Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 8
+  completed_plans: 4
 ---
 
 # Project State
@@ -20,14 +19,13 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 01 — Fundacao Compilavel
+**Current focus:** Phase 02 — Motor de Decisao e Normalizacao
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 01 (Fundacao Compilavel) — EXECUTING
-Current Plan: 3
-Total Plans in Phase: 3
+Phase: 02 (Motor de Decisao e Normalizacao) — EXECUTING
+Plan: 2 of 5 (02-01 concluido; wave 1 tem 02-01 e 02-02 em paralelo)
 
 ## Snapshot
 
@@ -54,6 +52,9 @@ Total Plans in Phase: 3
 - [Phase 01]: DarkColors passou a internal para permitir ThemeTokensTest em JVM pura (sem Robolectric)
 - [Phase 01]: Evidencia de build so vale com --no-build-cache alem do clean: FROM-CACHE tem o mesmo defeito probatorio que UP-TO-DATE
 - [Phase 01]: POST_NOTIFICATIONS permanece declarada no manifest — docs/PERMISSOES.md e fonte canonica; pedido em runtime fica na Fase 5
+- [Phase 02]: Kover 0.9.9 mede domain+phone desde 02-01; gate koverVerify (minBound 80) so entra em 02-05
+- [Phase 02]: TestMetadata carrega metadados reais do libphonenumber em JVM pura via android_merged_assets — sem Robolectric, sem createInstance(Context)
+- [Phase 02]: MaxMetaspaceSize=1g e obrigatorio com o plugin Kover (512m mata o build)
 
 ## Convenções operacionais do GSD
 
@@ -96,6 +97,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T03:53:56.095Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-07-29T04:52:42.196Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
