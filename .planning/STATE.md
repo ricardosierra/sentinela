@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-07-29T14:00:20.597Z"
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-07-29T14:13:35.183Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 3
   total_plans: 20
-  completed_plans: 17
+  completed_plans: 18
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 04 (Contatos do Aparelho) — EXECUTING
-Plan: 3 of 5
+Plan: 4 of 5
 
 ## Snapshot
 
@@ -103,6 +103,13 @@ Plan: 3 of 5
 - [Phase 04]: Flag contacts_permission_asked gravado ao disparar o launcher, nunca no callback: o usuario pode matar o app com o dialogo aberto
 - [Phase 04]: Camada que toca ActivityCompat vive em platform/, fora dos pacotes medidos pelo Kover — evita falso-vermelho no gate sem excludes novo
 - [Phase 04]: contacts_permission_asked fica fora de ScreeningSettings: nao e configuracao de triagem e nao pesa no snapshot do caminho quente
+- [Phase 04]: Chave do cache de contatos vem do LibPhoneNumberNormalizer do app; a coluna normalizada do provider e proibida (medida nula e as vezes errada)
+- [Phase 04]: Sonda dupla na agenda (E.164 + nacional): nenhuma das duas sozinha cobre a matriz medida do provider
+- [Phase 04]: O cache de contatos se justifica por correcao de chave e corte de cauda, nao por velocidade (sonda direta ja da p50 ~2 ms com 5.000 contatos)
+- [Phase 04]: Construcao do cache (1,5-1,8 s) nunca e aguardada: cache frio responde pela sonda direta
+- [Phase 04]: Uso do cache provado por contador de consultas ao provider, jamais por cronometro; falsificado antes de aceito
+- [Phase 04]: backgroundScope de runTest nao e despachado por advanceUntilIdle nas coroutines 1.11: testes de cache usam escopo proprio sobre o testScheduler
+- [Phase 04]: Cobertura caiu para 87,69% porque ContactsContractLookupSource vive em data.* e so roda instrumentado; ajuste do filtro do Kover e do plano 04-05
 
 ## Convenções operacionais do GSD
 
@@ -146,6 +153,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T14:00:20.595Z
-Stopped at: Completed 04-02-PLAN.md
+Last session: 2026-07-29T14:13:15.421Z
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
