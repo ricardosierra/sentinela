@@ -41,7 +41,12 @@ apoio/avaliação, privacidade, release e validação física Samsung.
   3. Manifest não declara INTERNET e registra o `CallScreeningService` com `BIND_SCREENING_SERVICE`
   4. `CallDecisionEngine` puro existe com a precedência (incluindo políticas por origem) coberta por testes unitários
   5. Nome, applicationId, cores e strings centralizados — rebranding não exige tocar em código Kotlin
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Política de lint declarada (`lint {}` com disable justificado) + correção real do `ObsoleteSdkInt` (rename `mipmap-anydpi-v26` → `mipmap-anydpi`), fechando QLT-02 na letra
+- [ ] 01-02-PLAN.md — `scripts/verify-invariants.sh` (allowlist de permissões sobre o manifest mesclado + greps de rebranding + domínio puro) e `ThemeTokensTest` cobrindo os tokens Silent Guardian
+- [ ] 01-03-PLAN.md — Evidência arquivada de build pós-`clean` (`01-EVIDENCE.md`), reconciliação do `POST_NOTIFICATIONS` com `docs/PERMISSOES.md` e registro das pendências físicas (cenários 31–34) para a Phase 9
 
 ### Phase 2: Motor de Decisao e Normalizacao
 **Goal**: Toda regra de triagem (políticas por origem: contato, whitelist, desconhecido) e normalização de números existe como código puro, determinístico e exaustivamente testado — antes de qualquer integração com o Telecom.
@@ -156,7 +161,7 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1 | v0.1.0 | 0/1 | In progress | - |
+| 1 | v0.1.0 | 0/3 | In progress | - |
 | 2 | v0.1.0 | 0/? | Not started | - |
 | 3 | v0.1.0 | 0/? | Not started | - |
 | 4 | v0.1.0 | 0/? | Not started | - |
