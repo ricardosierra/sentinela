@@ -233,6 +233,63 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Bloco 6 — Fase 4: dado de contato nunca sai da memoria
+# ---------------------------------------------------------------------------
+# O risco desta fase e privacidade, nao performance: e a primeira vez que o app toca em dado
+# pessoal de terceiros. Revisao de codigo nao conta como prova; estas quatro checagens sao a
+# prova. A proibicao de gravar na agenda ja esta no Bloco 1 (variavel FUTURE) e NAO e repetida.
+#
+# ATENCAO ao escopo: todo grep deste bloco aponta para app/schemas ou app/src/main/java, nunca
+# para scripts/. Os padroes abaixo sao literais que eles mesmos procuram — incluir este arquivo
+# no escopo faria o invariante falhar sozinho, sem nenhuma violacao real.
+echo "== Bloco 6: dado de contato apenas em memoria =="
+
+# 6.1 — nenhuma coluna do banco pode carregar identidade de contato.
+# O padrao e aplicado aos VALORES de "columnName", jamais as CHAVES do JSON: o schema exportado
+# e cheio de chaves chamadas "name" (tableName, fields[].name, indices[].name), e casar contra
+# elas daria falso positivo em 100% dos builds.
+LEAK_PAT='(^|_)(name|display|contact|photo|lookup|nome|agenda)'
+LEAKED=$(grep -ohE '"columnName": "[^"]*"' app/schemas/*/*.json 2>/dev/null \
+  | sed 's/.*: "//;s/"//' | sort -u | grep -E "$LEAK_PAT")
+if [ -z "$LEAKED" ]; then
+  ok "nenhuma coluna de identidade de contato no schema exportado"
+else
+  echo "$LEAKED" | sed 's/^/      /'
+  fail "coluna de identidade de contato no schema exportado — proibido (docs/PRIVACIDADE.md)"
+fi
+
+# 6.2 — fronteira: so um pacote fala com o provider da agenda.
+PROVIDER_FORA=$(grep -rn "ContactsContract" app/src/main/java --include="*.kt" 2>/dev/null \
+  | grep -v "app/src/main/java/org/sentinela/app/data/contacts/")
+if [ -z "$PROVIDER_FORA" ]; then
+  ok "provider de contatos so e citado em data/contacts"
+else
+  echo "$PROVIDER_FORA" | sed 's/^/      /'
+  fail "provider de contatos citado fora de data/contacts — a fronteira e o que garante a regra"
+fi
+
+# 6.3 — nenhuma coluna de identidade do contato e projetada em lugar nenhum do codigo de app.
+IDENT_PAT='DISPLAY_NAME|PHOTO_URI|PHOTO_THUMBNAIL_URI|PHOTO_FILE_ID|LOOKUP_KEY'
+IDENT=$(grep -rnE "$IDENT_PAT" app/src/main/java --include="*.kt" 2>/dev/null)
+if [ -z "$IDENT" ]; then
+  ok "nenhuma coluna de identidade do contato projetada em app/src/main/java"
+else
+  echo "$IDENT" | sed 's/^/      /'
+  fail "coluna de identidade do contato projetada — leia apenas presenca e numero"
+fi
+
+# 6.4 — a camada de contatos nao tem como persistir nada: sem Room, sem DataStore, sem arquivo.
+PERSIST_PAT='@Entity|@Dao|Room\.|DataStore|edit \{|openFileOutput|SharedPreferences'
+PERSIST=$(grep -rnE "$PERSIST_PAT" app/src/main/java/org/sentinela/app/data/contacts \
+  --include="*.kt" 2>/dev/null)
+if [ -z "$PERSIST" ]; then
+  ok "data/contacts sem nenhum mecanismo de persistencia"
+else
+  echo "$PERSIST" | sed 's/^/      /'
+  fail "mecanismo de persistencia em data/contacts — contato vive so em memoria"
+fi
+
+# ---------------------------------------------------------------------------
 if [ "$FAILURES" -gt 0 ]; then
   echo "== $FAILURES invariante(s) violado(s) =="
   exit 1
