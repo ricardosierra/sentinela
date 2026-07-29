@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-07-29T05:04:24.939Z"
+stopped_at: Completed 02-05-PLAN.md
+last_updated: "2026-07-29T05:09:28.724Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -19,20 +19,24 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 02 — Motor de Decisao e Normalizacao
+**Current focus:** Phase 03 — Dados Locais (Phase 02 concluída)
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 02 (Motor de Decisao e Normalizacao) — EXECUTING
+Phase: 02 (Motor de Decisao e Normalizacao) — COMPLETE
 Plan: 5 of 5
+
+Proxima: Phase 03 — Dados Locais (DataStore + Room). Exige `$gsd-discuss-phase` e pesquisa antes do planejamento.
 
 ## Snapshot
 
 - **Esqueleto:** Gradle KTS + catalog, AGP 9.3.0 (Kotlin embutido), Compose BOM 2026.06.01, compileSdk 37 / minSdk 29
-- **Domínio:** `CallDecisionEngine` com precedência saída→proteção→privado→contato→whitelist→falha→desconhecido e políticas por origem (`OriginPolicy`) + 20 testes
+- **Domínio:** `CallDecisionEngine` com precedência saída→proteção→privado→contato→whitelist→falha→desconhecido e políticas por origem (`OriginPolicy`)
+- **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
+- **Qualidade:** 156 testes, cobertura domain+phone 97,619% com gate `koverVerify` em 80%; lint e detekt zerados
 - **Telecom:** `UnknownCallScreeningService` registrado em modo pass-through seguro (não interfere até a Phase 5)
-- **Git:** repo local com 5 commits, sem remote; branch `master`
+- **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
 ## Decisions
@@ -52,7 +56,7 @@ Plan: 5 of 5
 - [Phase 01]: DarkColors passou a internal para permitir ThemeTokensTest em JVM pura (sem Robolectric)
 - [Phase 01]: Evidencia de build so vale com --no-build-cache alem do clean: FROM-CACHE tem o mesmo defeito probatorio que UP-TO-DATE
 - [Phase 01]: POST_NOTIFICATIONS permanece declarada no manifest — docs/PERMISSOES.md e fonte canonica; pedido em runtime fica na Fase 5
-- [Phase 02]: Kover 0.9.9 mede domain+phone desde 02-01; gate koverVerify (minBound 80) so entra em 02-05
+- [Phase 02]: Kover 0.9.9 mede domain+phone desde 02-01; gate koverVerify (minBound 80) ligado em 02-05
 - [Phase 02]: TestMetadata carrega metadados reais do libphonenumber em JVM pura via android_merged_assets — sem Robolectric, sem createInstance(Context)
 - [Phase 02]: MaxMetaspaceSize=1g e obrigatorio com o plugin Kover (512m mata o build)
 - [Phase 02]: Matriz de decisao coberta por teste parametrizado (48 casos) com tabela esperada escrita a mao — nao derivada do motor
@@ -64,6 +68,9 @@ Plan: 5 of 5
 - [Phase 02]: 9o digito BR corrigido a mao e so aceito com revalidacao isValidNumber && type == MOBILE; senao Invalid(nono_digito_nao_revalida)
 - [Phase 02]: normalize passou a receber region: String? = null (delega ao RegionProvider); defaultRegion=BR removido
 - [Phase 02]: Mascara unica PhoneMask para log e UI, generalizada por getLengthOfNationalDestinationCode e sempre dentro de runCatching
+- [Phase 02]: PhoneNumberUtil construido uma unica vez por lazy no AppContainer; nunca dentro de onScreenCall (p95 < 200 ms)
+- [Phase 02]: Gate koverVerify minBound(80) ATIVO sobre domain+phone (atual 97,619%): codigo novo nesses pacotes exige teste
+- [Phase 02]: Gate so e aceito depois de demonstrado falhando (bound temporario em 99 quebrou o build); Phase 2 nao deixou pendencia fisica nova
 
 ## Convenções operacionais do GSD
 
@@ -106,6 +113,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T05:04:24.937Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-07-29T05:08:56.116Z
+Stopped at: Completed 02-05-PLAN.md
 Resume file: None
