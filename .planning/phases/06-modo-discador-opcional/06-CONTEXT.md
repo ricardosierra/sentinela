@@ -97,6 +97,66 @@ e comportamento da One UI ao trocar o app de telefone.
   desde a Phase 1. Lembrar que a Phase 4 provou que adicionar uma permissão gera **dois**
   vermelhos no script (allowlist e lista de fases futuras).
 
+### Achados da pesquisa reforçada (2026-07-29) — medidos, não supostos
+
+A pesquisa criou um AVD do zero, virou discador padrão e dirigiu chamadas reais (14 medições),
+além de ler o AOSP local. Duas decisões deste contexto foram **falsificadas**.
+
+- **Elegibilidade ao `ROLE_DIALER` isolada por experimento controlado:** só a activity de
+  `ACTION_DIAL` → `cmd role add-role-holder DIALER` **falha (rc=255)**. Somando o `<service>` do
+  `InCallService` → **rc=0**. Os **dois** filtros de `ACTION_DIAL` (esquema vazio **e** `tel:`) são
+  exigidos por `DefaultDialerManager`. O manifest mínimo completo está no `06-RESEARCH.md`.
+- **O "pior fracasso" da fase já é resolvido pela plataforma, e o perigo real é o oposto.**
+  `am force-stop` durante chamada ATIVA **não** derrubou a ligação: o Telecom registrou
+  `onDisconnected` e religou no discador do sistema via `EmergencyInCallServiceConnection`; as
+  chamadas seguiram `ACTIVE`/`ON_HOLD` e a seguinte voltou para nós. **Morrer é seguro; travar
+  não.** Uma UI vinculada mas congelada o Telecom não detecta e não substitui.
+  → **Consequência de desenho: o `InCallService` deve falhar ALTO (crash rápido), o inverso da
+  rede permissiva da Phase 5.** O esforço de degradação muda de alvo: não é "não morrer", é
+  "nunca travar vivo".
+- **DIA-04 (política por contato) não precisa de código novo.** Com `ROLE_DIALER` em nossas mãos e
+  `ROLE_CALL_SCREENING` com ninguém, o Telecom ainda vinculou nosso serviço de triagem e honrou o
+  `Reject`. A triagem roda **antes** do `onCallAdded`, então chamada bloqueada nunca chega à UI de
+  chamada. Ter os dois papéis produz **um** bind — sem risco de dupla triagem.
+- **Testabilidade resolvida, e melhor que na Phase 5:** cinco sondas Robolectric verdes.
+  `buildService(InCallService)` funciona, `mockk<Call>` funciona apesar de `Call` ser `final`
+  (`answer`/`disconnect`/`playDtmfTone` verificáveis), e `onCallAdded` pode ser invocado direto no
+  Service real — **sem reflexão**, diferente do proxy de `ICallScreeningAdapter` da Phase 5.
+  **Armadilha de teste vacuoso:** `setMuted()` num Service sem `Phone` é **no-op silencioso** —
+  mudo e viva-voz precisam ser provados na costura, não na chamada direta.
+- **FALSIFICADO — "o emulador não reproduz troca de discador padrão de forma fiel".** É falso onde
+  importa: concessão e remoção do papel, chamadas de entrada (`gsm call`) e saída, a máquina de
+  estado completa, a triagem ponta a ponta, morte no meio da chamada e reversão são todos
+  reproduzíveis. **Só viva-voz** (`supportedRouteMask` traz apenas `SPEAKER`) **e One UI** exigem
+  hardware de verdade. Muito mais desta fase é verificável em CI do que este contexto supôs.
+- **Defeito de documento:** `docs/TESTE-FISICO-SAMSUNG.md` **já tem os cenários 23–30** para o modo
+  discador. Revisar 23–30 no lugar e usar 52+ apenas para o que é novo — não duplicar.
+- **Questão aberta:** não foi verificado se o modo discador realmente destrava números
+  privados/restritos (SCR-04). O item 8 de `docs/LIMITACOES.md` hoje **afirma** que destrava.
+  Não prometer isso na UI até haver prova.
+
+### Permissão adicional — DECISÃO DO USUÁRIO (2026-07-29)
+
+- A tela cheia obrigatória da chamada recebida exige **`USE_FULL_SCREEN_INTENT`** (Android 14+),
+  que **não constava** da lista fechada de `docs/PERMISSOES.md`. Medida como `granted=true` na
+  instalação, porque o app qualifica como app de chamadas.
+- **DECISÃO: autorizada e documentada.** Entra na matriz de `docs/PERMISSOES.md` como permissão da
+  **Fase 6**, restrita ao modo discador, com a justificativa funcional: sem ela, com a tela
+  bloqueada, o usuário não vê a chamada chegando — é o mecanismo que o próprio Android indica
+  para telefonia (`Notification.CallStyle` + `fullScreenIntent`). Continua **proibido**
+  `SYSTEM_ALERT_WINDOW`.
+- `CALL_PHONE` foi medida como `granted=false` e **precisa ser pedida** em runtime.
+- Cada permissão entra no manifest **e** na allowlist do `verify-invariants.sh` no mesmo commit,
+  com `docs/PERMISSOES.md` atualizado **antes**. São agora **quatro**: `ROLE_DIALER`,
+  `BIND_INCALL_SERVICE`, `CALL_PHONE`, `USE_FULL_SCREEN_INTENT`.
+
+### Número na tela — DECISÃO DO USUÁRIO (2026-07-29)
+
+- **Nas telas de chamada e de discagem o número aparece COMPLETO.** Ali o número é o produto: o
+  usuário precisa reconhecer quem liga para decidir atender.
+- **Em todo o resto continua mascarado:** log, notificação, histórico e crash report usam
+  exclusivamente `PhoneMask.mask`. A fronteira é testável e deve ser travada por invariante.
+
 ### Claude's Discretion
 
 - Organização dos arquivos de UI, nomes dos composables, estrutura da máquina de estado da
