@@ -1,24 +1,35 @@
 package org.sentinela.app.settings
 
+import app.cash.turbine.test
+import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import java.io.File
 
 /**
- * Suite JVM pura: PreferenceDataStoreFactory.create recebe um File arbitrario e
- * dispensa Context, entao nada de instrumentacao nem de sandbox de recursos.
+ * Suite JVM pura: `PreferenceDataStoreFactory.create { file }` recebe um File arbitrario
+ * e dispensa Context, entao nada de instrumentacao nem de sandbox de recursos.
+ *
+ * Regra de ouro desta suite: UM arquivo novo por teste e o scope cancelado no @After.
+ * O runtime do DataStore trava o arquivo por processo e lanca se houver duas instancias
+ * ativas sobre o mesmo caminho — foi o modo de falha reproduzido na pesquisa da fase.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class DataStoreSettingsRepositoryTest {
@@ -31,72 +42,244 @@ class DataStoreSettingsRepositoryTest {
 
     @After
     fun tearDown() {
-        // Sem cancelar o scope, o arquivo continua travado e o proximo teste bate em
-        // "There are multiple DataStores active for the same file".
-        scopes.forEach { it.cancel() }
+        // Sem o scope.cancel() o arquivo continua travado e o proximo teste quebra.
+        scopes.forEach { scope -> scope.cancel() }
         scopes.clear()
     }
 
     private fun novoArquivo(): File =
         tmp.newFile("settings-${contador++}.preferences_pb").also { it.delete() }
 
-    private fun repo(scope: CoroutineScope, file: File = novoArquivo()): DataStoreSettingsRepository {
-        scopes += scope
-        return DataStoreSettingsRepository(
-            PreferenceDataStoreFactory.create(scope = scope) { file },
-            scope,
+    private fun TestScope.novoScope(): CoroutineScope =
+        CoroutineScope(UnconfinedTestDispatcher(testScheduler)).also { scopes += it }
+
+    private fun dataStore(scope: CoroutineScope, file: File): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(scope = scope) { file }
+
+    private fun TestScope.repo(file: File = novoArquivo()): DataStoreSettingsRepository {
+        val scope = novoScope()
+        return DataStoreSettingsRepository(dataStore(scope, file), scope)
+    }
+
+    /** Round-trip generico: grava um valor NAO-default e confere na releitura. */
+    private fun <T> roundTrip(
+        transform: (ScreeningSettings) -> ScreeningSettings,
+        leitura: (ScreeningSettings) -> T,
+        esperado: T,
+    ) = runTest {
+        val repo = repo()
+        repo.update(transform)
+        assertEquals(esperado, leitura(repo.snapshot()))
+    }
+
+    // --- defaults -----------------------------------------------------------
+
+    @Test
+    fun `arquivo inexistente devolve exatamente os defaults do MVP`() = runTest {
+        assertEquals(ScreeningSettings(), repo().snapshot())
+    }
+
+    @Test
+    fun `defaults do MVP sao desconhecido bloqueado contato tocando e whitelist protegida`() =
+        runTest {
+            val padrao = repo().snapshot()
+
+            assertEquals(OriginPolicy.BLOCK, padrao.unknownPolicy)
+            assertEquals(OriginPolicy.RING, padrao.contactsPolicy)
+            assertEquals(OriginPolicy.NEVER_SILENCE, padrao.whitelistPolicy)
+            assertEquals(true, padrao.historyEnabled)
+            assertEquals(RetentionPolicy.DAYS_30, padrao.retentionPolicy)
+        }
+
+    // --- round-trip dos 11 campos -------------------------------------------
+
+    @Test
+    fun `round-trip de protectionEnabled`() =
+        roundTrip({ it.copy(protectionEnabled = false) }, { it.protectionEnabled }, false)
+
+    @Test
+    fun `round-trip de unknownPolicy`() =
+        roundTrip(
+            { it.copy(unknownPolicy = OriginPolicy.SILENCE) },
+            { it.unknownPolicy },
+            OriginPolicy.SILENCE,
         )
-    }
 
     @Test
-    fun `arquivo inexistente devolve os defaults do MVP`() = runTest {
-        val repo = repo(CoroutineScope(UnconfinedTestDispatcher(testScheduler)))
-
-        assertEquals(ScreeningSettings(), repo.snapshot())
-    }
-
-    @Test
-    fun `protectionEnabled sobrevive ao round-trip`() = runTest {
-        val repo = repo(CoroutineScope(UnconfinedTestDispatcher(testScheduler)))
-
-        repo.update { it.copy(protectionEnabled = false) }
-
-        assertEquals(false, repo.snapshot().protectionEnabled)
-    }
+    fun `round-trip de contactsPolicy`() =
+        roundTrip(
+            { it.copy(contactsPolicy = OriginPolicy.BLOCK) },
+            { it.contactsPolicy },
+            OriginPolicy.BLOCK,
+        )
 
     @Test
-    fun `enum invalido no arquivo cai no default do campo`() = runTest {
+    fun `round-trip de whitelistPolicy`() =
+        roundTrip(
+            { it.copy(whitelistPolicy = OriginPolicy.RING) },
+            { it.whitelistPolicy },
+            OriginPolicy.RING,
+        )
+
+    @Test
+    fun `round-trip de blockPrivateNumbers`() =
+        roundTrip({ it.copy(blockPrivateNumbers = false) }, { it.blockPrivateNumbers }, false)
+
+    @Test
+    fun `round-trip de blockMode`() =
+        roundTrip(
+            { it.copy(blockMode = BlockMode.SILENT_VOICEMAIL) },
+            { it.blockMode },
+            BlockMode.SILENT_VOICEMAIL,
+        )
+
+    @Test
+    fun `round-trip de hideFromNativeCallLog`() =
+        roundTrip({ it.copy(hideFromNativeCallLog = false) }, { it.hideFromNativeCallLog }, false)
+
+    @Test
+    fun `round-trip de showOwnNotification`() =
+        roundTrip({ it.copy(showOwnNotification = true) }, { it.showOwnNotification }, true)
+
+    @Test
+    fun `round-trip de fallbackPolicy`() =
+        roundTrip(
+            { it.copy(fallbackPolicy = FallbackPolicy.BLOCK) },
+            { it.fallbackPolicy },
+            FallbackPolicy.BLOCK,
+        )
+
+    @Test
+    fun `round-trip de historyEnabled`() =
+        roundTrip({ it.copy(historyEnabled = false) }, { it.historyEnabled }, false)
+
+    @Test
+    fun `round-trip de retentionPolicy`() =
+        roundTrip(
+            { it.copy(retentionPolicy = RetentionPolicy.DAYS_90) },
+            { it.retentionPolicy },
+            RetentionPolicy.DAYS_90,
+        )
+
+    // --- persistencia real, sem depender da posicao da constante -------------
+
+    @Test
+    fun `enum vai ao disco pelo nome e retencao pelo id`() = runTest {
         val file = novoArquivo()
-        val scope = CoroutineScope(UnconfinedTestDispatcher(testScheduler))
-        scopes += scope
-        val dataStore = PreferenceDataStoreFactory.create(scope = scope) { file }
-        dataStore.edit { it[stringPreferencesKey("unknown_policy")] = "POLITICA_DO_FUTURO" }
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+        DataStoreSettingsRepository(ds, scope).update {
+            it.copy(unknownPolicy = OriginPolicy.SILENCE, retentionPolicy = RetentionPolicy.DAYS_7)
+        }
 
-        val repo = DataStoreSettingsRepository(dataStore, scope)
+        val prefs = ds.data.first()
 
-        assertEquals(OriginPolicy.BLOCK, repo.snapshot().unknownPolicy)
+        assertEquals("SILENCE", prefs[stringPreferencesKey("unknown_policy")])
+        assertEquals("7d", prefs[stringPreferencesKey("retention_policy")])
     }
 
     @Test
-    fun `tipo errado gravado na chave nao derruba a leitura`() = runTest {
+    fun `todos os campos sobrevivem a recriacao do repositorio sobre o mesmo arquivo`() = runTest {
         val file = novoArquivo()
-        val scope = CoroutineScope(UnconfinedTestDispatcher(testScheduler))
-        scopes += scope
-        val dataStore = PreferenceDataStoreFactory.create(scope = scope) { file }
-        dataStore.edit { it[booleanPreferencesKey("protection_enabled")] = false }
+        val scopeA = novoScope()
+        val desejado = ScreeningSettings(
+            protectionEnabled = false,
+            unknownPolicy = OriginPolicy.SILENCE,
+            contactsPolicy = OriginPolicy.BLOCK,
+            whitelistPolicy = OriginPolicy.RING,
+            blockPrivateNumbers = false,
+            blockMode = BlockMode.SILENT_VOICEMAIL,
+            hideFromNativeCallLog = false,
+            showOwnNotification = true,
+            fallbackPolicy = FallbackPolicy.BLOCK,
+            historyEnabled = false,
+            retentionPolicy = RetentionPolicy.MANUAL,
+        )
+        DataStoreSettingsRepository(dataStore(scopeA, file), scopeA).update { desejado }
+        scopeA.cancel()
 
-        val repo = DataStoreSettingsRepository(dataStore, scope)
+        val scopeB = novoScope()
+        val relido = DataStoreSettingsRepository(dataStore(scopeB, file), scopeB).snapshot()
 
-        assertEquals(false, repo.snapshot().protectionEnabled)
+        assertEquals(desejado, relido)
+    }
+
+    // --- tolerancia a dado invalido -----------------------------------------
+
+    @Test
+    fun `enum desconhecido no arquivo cai no default do campo sem lancar`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+        ds.edit {
+            it[stringPreferencesKey("unknown_policy")] = "POLITICA_DO_FUTURO"
+            it[stringPreferencesKey("block_mode")] = "???"
+            it[stringPreferencesKey("fallback_policy")] = ""
+            it[stringPreferencesKey("retention_policy")] = "eterno"
+        }
+
+        val lido = DataStoreSettingsRepository(ds, scope).snapshot()
+
+        assertEquals(OriginPolicy.BLOCK, lido.unknownPolicy)
+        assertEquals(BlockMode.REJECT, lido.blockMode)
+        assertEquals(FallbackPolicy.ALLOW, lido.fallbackPolicy)
+        assertEquals(RetentionPolicy.DAYS_30, lido.retentionPolicy)
     }
 
     @Test
-    fun `snapshot repetido serve do cache em memoria`() = runTest {
-        val repo = repo(CoroutineScope(UnconfinedTestDispatcher(testScheduler)))
+    fun `arquivo com lixo binario cai nos defaults seguros em vez de derrubar o Flow`() = runTest {
+        val file = tmp.newFile("corrompido-${contador++}.preferences_pb")
+        file.writeBytes(byteArrayOf(0x42, 0x13, 0x37, 0x00, 0x7F))
+        val scope = novoScope()
+
+        val lido = DataStoreSettingsRepository(dataStore(scope, file), scope).settings.first()
+
+        assertEquals(ScreeningSettings(), lido)
+    }
+
+    // --- composicao e emissao ------------------------------------------------
+
+    @Test
+    fun `updates sucessivos compoem`() = runTest {
+        val repo = repo()
+
+        repo.update { it.copy(unknownPolicy = OriginPolicy.SILENCE) }
+        repo.update { it.copy(historyEnabled = false) }
+
+        val lido = repo.snapshot()
+        assertEquals(OriginPolicy.SILENCE, lido.unknownPolicy)
+        assertEquals(false, lido.historyEnabled)
+    }
+
+    @Test
+    fun `settings emite o valor novo apos o update`() = runTest {
+        val repo = repo()
+
+        repo.settings.test {
+            assertEquals(ScreeningSettings(), awaitItem())
+            repo.update { it.copy(retentionPolicy = RetentionPolicy.NEVER_STORE) }
+            assertEquals(RetentionPolicy.NEVER_STORE, awaitItem().retentionPolicy)
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `snapshot repetido devolve a MESMA instancia do cache em memoria`() = runTest {
+        val repo = repo()
 
         val primeiro = repo.snapshot()
         val segundo = repo.snapshot()
 
-        assertEquals(primeiro, segundo)
+        assertNotNull(primeiro)
+        assertSame(primeiro, segundo)
+    }
+
+    @Test
+    fun `retencao MANUAL persistida nao produz cutoff`() = runTest {
+        val repo = repo()
+
+        repo.update { it.copy(retentionPolicy = RetentionPolicy.MANUAL) }
+
+        assertNull(repo.snapshot().retentionPolicy.cutoffUtcMillis(1_000_000L))
     }
 }
