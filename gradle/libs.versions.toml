@@ -13,6 +13,7 @@ coroutines = "1.11.0"
 coreKtx = "1.19.0"
 libphonenumberAndroid = "9.0.34"
 detekt = "1.23.8"
+kover = "0.9.9"
 junit4 = "4.13.2"
 mockk = "1.14.11"
 turbine = "1.2.1"
@@ -69,3 +70,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

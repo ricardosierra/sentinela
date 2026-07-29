@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.kover)
 }
 
 // Identidade centralizada para permitir rebranding (ver docs/DECISOES.md)
@@ -95,6 +96,16 @@ ksp {
 detekt {
     config.setFrom(rootProject.file("detekt.yml"))
     buildUponDefaultConfig = true
+}
+
+// Cobertura da Fase 2. O gate (verify { rule { minBound(80) } }) so entra no plano 02-05,
+// depois que os testes de normalizacao existirem — habilitar antes falharia o build.
+kover {
+    reports {
+        filters {
+            includes { classes("org.sentinela.app.domain.*", "org.sentinela.app.phone.*") }
+        }
+    }
 }
 
 dependencies {
