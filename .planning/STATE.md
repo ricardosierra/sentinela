@@ -47,7 +47,7 @@ Plan: 7 of 7
 - [Adendos 2026-07-28]: Convite de avaliação/apoio na 5ª abertura, repetindo a cada 5 (10ª, 15ª…) até aceite; seção "Apoie" com open source em destaque + doação Bitcoin
 - [Adendos 2026-07-28]: Offline-first permanente — MVP sem INTERNET; sync (v0.2.0) opt-in/assíncrona, inclui envio opcional da lista de números recebidos
 - [Adendos 2026-07-28]: Nome antigo dos mockups eliminado de todos os arquivos (docs + HTMLs); branding único Sentinela
-- [Bootstrap 2026-07-27]: Bloqueio de desconhecidos no modo filtro apoiado no contrato da plataforma (onScreenCall só recebe não-contatos sem discador padrão) — confirmado na doc oficial
+- ~~[Bootstrap 2026-07-27]: Bloqueio de desconhecidos no modo filtro apoiado no contrato da plataforma (onScreenCall só recebe não-contatos sem discador padrão)~~ **SUPERADA POR MEDICAO 2026-07-29 (Phase 05, pesquisa na fonte do Android):** a triagem entrega **tambem contatos** enquanto a leitura da agenda estiver concedida; o sistema so dispensa a triagem de quem esta na agenda quando o app nao pode consulta-la. A decisao sobre contato e nossa desde a Fase 4 — a consulta a agenda virou obrigatoria no caminho quente
 - [Bootstrap 2026-07-27]: DI manual, sem Hilt/Koin — cold start do Service é orçamento crítico
 - [Bootstrap 2026-07-27]: AGP 9 tem Kotlin embutido — plugin `org.jetbrains.kotlin.android` NÃO deve ser aplicado (erro se aplicar)
 - [Bootstrap 2026-07-27]: Links GitHub no CHANGELOG usam `ricardosierra/sentinela` como placeholder até o remote existir
@@ -175,9 +175,9 @@ Plan: 7 of 7
 
 ## Blockers/Concerns
 
-- **Validação física obrigatória** — `setSkipCallLog`/notificação nativa variam por OEM; critérios de aceite centrais só fecham em Samsung físico (Phase 9)
+- **Validação física obrigatória** — critérios de aceite centrais só fecham em Samsung físico (Phase 9), cenários 40-51. Correção 2026-07-29: pular o registro no histórico do telefone **não** é variação de OEM — é no-op do próprio Android para apps que não sejam de operadora; o que resta medir no aparelho é **onde** a chamada bloqueada aparece na One UI
 - **Modo discador é o maior risco técnico do MVP** — `InCallService` + elegibilidade ao papel + UX de chamada; pesquisa reforçada antes da Phase 6
-- **Robolectric 4.16.1 suporta até SDK 36** — com compileSdk 37, fixar `@Config(sdk = [36])` até o 4.17 estável
+- ~~**Robolectric 4.16.1 suporta até SDK 36** — fixar a configuração de SDK dos testes em 36~~ **SUPERADO POR MEDICAO 2026-07-29 (Phase 05):** o teto real e a versao do **Java do projeto**, nao a do Robolectric — a versao 36 do Android exige Java 21 e o projeto roda em JDK 17. O valor correto e fixo em **35**, ja aplicado em todos os testes sob Robolectric
 - ~~p95 de containsCabeNoOrcamentoMedido falha ~1 em 5 execucoes no emulador~~ **RESOLVIDO 2026-07-29 (decisao do usuario):** o p95 saiu do assert do emulador e virou o cenario 35 de `docs/TESTE-FISICO-SAMSUNG.md`, medido em Samsung fisico na Phase 9. O numero de 5 ms **nao foi afrouxado**; p50 < 1 ms e o `EXPLAIN QUERY PLAN` seguem quebrando o build
 
 ## Accumulated Context

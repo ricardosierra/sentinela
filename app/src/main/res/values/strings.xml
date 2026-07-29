@@ -47,7 +47,7 @@
     <string name="contacts_option_silence">Silenciar</string>
     <string name="contacts_option_silence_desc">O telefone não vibra nem toca, mas mostra a notificação.</string>
     <string name="contacts_option_never_silence">Nunca Silenciar</string>
-    <string name="contacts_option_never_silence_desc">Ignora o modo \"Não Perturbe\" para sua lista de contatos.</string>
+    <string name="contacts_option_never_silence_desc">O Sentinela nunca silencia sua lista de contatos. O \"Não Perturbe\" do sistema continua valendo.</string>
     <string name="contacts_default_badge">Padrão</string>
 
     <!-- Onboarding: whitelist (tratamento configurável) -->
@@ -56,7 +56,7 @@
     <string name="whitelist_setup_what_desc">A Whitelist consiste nos números que você adicionou manualmente ou marcou como seguros dentro do aplicativo.</string>
     <string name="whitelist_setup_question">Como tratar sua Whitelist Pessoal?</string>
     <string name="whitelist_option_never_silence">Nunca Silenciar</string>
-    <string name="whitelist_option_never_silence_desc">Sempre toca, mesmo em \"Não Perturbe\".</string>
+    <string name="whitelist_option_never_silence_desc">O Sentinela nunca silencia essa origem. O \"Não Perturbe\" do sistema continua valendo.</string>
     <string name="whitelist_option_ring">Tocar</string>
     <string name="whitelist_option_ring_desc">Sempre emitir som.</string>
     <string name="whitelist_option_block">Bloquear</string>
@@ -124,7 +124,8 @@
     <string name="settings_dialer_mode_desc">Torna o Sentinela o app de telefone padrão para aplicar políticas também aos contatos. Você pode reverter a qualquer momento.</string>
     <string name="settings_mode_reject">Rejeitar imediatamente</string>
     <string name="settings_mode_silent_voicemail">Encaminhar silenciosamente</string>
-    <string name="settings_hide_native_log">Ocultar do histórico nativo</string>
+    <string name="settings_hide_native_log">Pedir para não registrar no histórico do telefone</string>
+    <string name="settings_hide_native_log_desc">O Android só atende esse pedido para apps de operadora. Chamadas bloqueadas continuam aparecendo no histórico do telefone, marcadas como bloqueadas. O que o bloqueio garante: não toca, não vibra, não mostra a tela de chamada e não gera aviso de chamada perdida.</string>
     <string name="settings_show_notification">Exibir notificação silenciosa</string>
     <string name="settings_fallback_policy">Política em caso de erro</string>
     <string name="settings_fallback_allow">Permitir chamada (recomendado)</string>

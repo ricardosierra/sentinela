@@ -3,18 +3,20 @@
 ## Em 30 segundos
 
 O Sentinela opera em dois modos. No **modo filtro** (padrão), o Android entrega ao app
-(detentor do papel `ROLE_CALL_SCREENING`) cada chamada recebida de número **fora da agenda** —
-contatos nem chegam ao app. No **modo discador** (opcional), o Sentinela vira o app de
-telefone padrão (`ROLE_DIALER` + `InCallService` próprio) e a triagem passa a cobrir **todas**
-as chamadas, aplicando políticas também a contatos. Em ambos, o
+(detentor do papel `ROLE_CALL_SCREENING`) as chamadas recebidas — inclusive de contatos,
+**enquanto a leitura da agenda estiver concedida**; o Android só dispensa a triagem de quem
+está na agenda quando o app não consegue consultá-la. No **modo discador** (opcional), o
+Sentinela vira o app de telefone padrão (`ROLE_DIALER` + `InCallService` próprio) e passa a
+receber também as chamadas sem handle (número oculto). Em ambos, o
 `UnknownCallScreeningService` monta uma entrada pura, o `CallDecisionEngine` decide
-(permitir, silenciar, rejeitar, caixa postal ou bloquear sem rastro) consultando apenas dados
+(permitir, silenciar, rejeitar ou encaminhar à caixa postal) consultando apenas dados
 locais, e o Service traduz a decisão em `respondToCall` — uma única vez, muito antes do
-limite de 5 segundos da plataforma.
+limite de 5 segundos da plataforma. O registro no histórico do telefone **não** é evitável
+(ver item 3 de [`LIMITACOES.md`](LIMITACOES.md)).
 
 ```
 Android Telecom
-      │  onScreenCall(Call.Details)   [modo filtro: só não-contatos · modo discador: todas]
+      │  onScreenCall(Call.Details)   [entrada; contatos incluídos se a agenda for legível]
       ▼
 telecom/UnknownCallScreeningService  ←→  telecom/ScreeningRoleManager (papéis)
       │ normaliza (phone/PhoneNumberNormalizer)          (Fase 6: + InCallService próprio)

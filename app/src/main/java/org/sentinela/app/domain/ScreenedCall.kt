@@ -21,9 +21,14 @@ sealed interface ScreenedNumber {
 
 /**
  * Resultado da consulta local aos contatos do aparelho.
- * No modo filtro (sem discador padrão) a plataforma só entrega não-contatos,
- * então o Service passa MISS; UNAVAILABLE = modo discador sem permissão ou
- * consulta falhou — cai na política de fallback.
+ *
+ * Com a leitura da agenda concedida, chamadas de contatos chegam ao serviço de
+ * triagem também no modo filtro: quem decide é o motor, e HIT/MISS são resultado
+ * da nossa própria consulta. Sem a leitura concedida, o Android nem aciona o
+ * serviço para números já conhecidos da agenda — eles seguem pelo caminho nativo
+ * e nunca chegam a este enum.
+ *
+ * UNAVAILABLE = permissão ausente ou consulta falhou; cai na política de fallback.
  */
 enum class ContactLookup { HIT, MISS, UNAVAILABLE }
 

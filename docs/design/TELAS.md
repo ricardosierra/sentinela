@@ -55,19 +55,22 @@ Mesmo layout de wizard do mockup (indicador de passo + barra de progresso), H1
 - **Tocar** (default, badge "Padrão") — "As chamadas tocam normalmente no seu telefone." → `RING`
 - **Bloquear** — "Bloqueia todas as chamadas, enviando para a caixa postal." → `BLOCK`
 - **Silenciar** — "O telefone não vibra nem toca, mas mostra a notificação." → `SILENCE`
-- **Nunca Silenciar** — "Ignora o modo 'Não Perturbe' para sua lista de contatos." → `NEVER_SILENCE`
+- **Nunca Silenciar** — "O Sentinela nunca silencia sua lista de contatos. O 'Não Perturbe' do
+  sistema continua valendo." → `NEVER_SILENCE`
 
 Este passo dispara o pedido de **READ_CONTACTS** com a explicação
 `contacts_permission_rationale` (leitura 100% local, nada armazenado). Card informativo
-honesto: políticas diferentes de Tocar só têm efeito pleno no **modo discador**
-(link "saiba mais" → Proteção); no modo filtro, contatos tocam nativo.
+honesto: as políticas por contato valem no modo filtro **enquanto a leitura da agenda estiver
+concedida** — se o usuário revogar, o Android nem aciona o Sentinela para contatos conhecidos e
+eles voltam a tocar pelo caminho nativo, sem aviso (link "saiba mais" → Proteção).
 Toggle extra real: **"Bloquear números privados"** (config que o mockup não expôs).
 
 ## 5. `telas/configura_o_whitelist/` — Whitelist (passo 4)
 
 Card "O que é a Whitelist?" (manter texto), pergunta **"Como tratar sua Whitelist
 Pessoal?"** com os 4 option-buttons do mockup → `ScreeningSettings.whitelistPolicy`:
-- **Nunca Silenciar** (default) — "Sempre toca, mesmo em 'Não Perturbe'." → `NEVER_SILENCE`
+- **Nunca Silenciar** (default) — "O Sentinela nunca silencia essa origem. O 'Não Perturbe' do
+  sistema continua valendo." → `NEVER_SILENCE`
 - **Tocar** — "Sempre emitir som." → `RING`
 - **Bloquear** — "Rejeitar automaticamente." → `BLOCK`
 - **Silenciar** — "Apenas notificação visual." → `SILENCE`
@@ -133,14 +136,17 @@ explicação de uma linha em `on-surface-variant` (nada de opção sem explicaç
    com `error-container` a 15% e texto "Proteção desativada".
 2. **Números desconhecidos** — seleção única: Bloquear / Silenciar / Permitir (`unknownPolicy`).
 3. **Contatos da agenda** — seleção única: Tocar / Bloquear / Silenciar / Nunca Silenciar
-   (`contactsPolicy`), com nota "efeito pleno no modo discador".
+   (`contactsPolicy`), com nota "vale enquanto a leitura da agenda estiver concedida".
 4. **Whitelist pessoal** — seleção única: Nunca Silenciar / Tocar / Bloquear / Silenciar
    (`whitelistPolicy`).
 5. **Bloquear números privados** — switch (`blockPrivateNumbers`).
 6. **Modo de bloqueio** — "Rejeitar imediatamente" × "Encaminhar silenciosamente"
    (`BlockMode`), com explicação do efeito para quem liga.
-7. **Ocultar do histórico nativo** — switch (`hideFromNativeCallLog`) + nota best-effort
-   (ver LIMITACOES.md).
+7. **Pedir para não registrar no histórico do telefone** — switch (`hideFromNativeCallLog`) +
+   nota obrigatória de que o Android só atende o pedido para apps de operadora: a chamada
+   bloqueada continua no histórico, marcada como bloqueada (item 3 de LIMITACOES.md). O switch
+   existe para a intenção do usuário e para o modo operadora; a tela nunca promete ausência de
+   registro.
 8. **Exibir notificação silenciosa** — switch (`showOwnNotification`); ao ligar pela primeira
    vez dispara o pedido de `POST_NOTIFICATIONS`; sub-opção número mascarado × anônimo.
 9. **Modo discador (avançado)** — switch/fluxo (`ROLE_DIALER`): explica o que muda (políticas

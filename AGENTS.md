@@ -60,10 +60,12 @@ no manifest antes da fase dela.** Matriz completa em [`docs/PERMISSOES.md`](docs
 
 **Telecom.** O `UnknownCallScreeningService` é camada fina: chama `respondToCall` **exatamente
 uma vez**, responde muito antes do limite de 5 segundos da plataforma, consulta somente dados
-locais e cria notificação só **depois** de responder ao sistema. Fatos centrais: no modo
-filtro, `onScreenCall()` só recebe números **fora da agenda** (contatos tocam nativo); no modo
-discador, recebe **todas** as chamadas e as políticas por contato passam a valer. Nada de hack
-de OEM antes de provar necessidade em aparelho físico.
+locais e cria notificação só **depois** de responder ao sistema. Fatos centrais (medidos na
+fonte do Android, Fase 5): `onScreenCall()` recebe **também contatos** enquanto a leitura da
+agenda estiver concedida — o Android só dispensa a triagem de quem está na agenda quando o app
+não pode consultá-la; ocultar a chamada bloqueada do histórico do telefone **não funciona** para
+apps de terceiros; e o modo "Não Perturbe" **não** é contornável. Nada de hack de OEM antes de
+provar necessidade em aparelho físico. Detalhes em [`docs/LIMITACOES.md`](docs/LIMITACOES.md).
 
 **Arquitetura.** Toda regra de decisão vive no `CallDecisionEngine` (puro, determinístico,
 testado) — inclusive as políticas por origem (`OriginPolicy`: contatos/whitelist/desconhecidos).

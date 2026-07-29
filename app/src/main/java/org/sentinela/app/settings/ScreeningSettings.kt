@@ -3,7 +3,8 @@ package org.sentinela.app.settings
 /**
  * Configurações de triagem com os padrões do MVP: proteção ativa, desconhecidos
  * bloqueados, privados bloqueados, contatos tocando, whitelist nunca silenciada,
- * sem rastro no histórico nativo, notificação própria desabilitada, fallback
+ * pedido de não registrar no histórico do telefone ligado (pedido que o Android
+ * só atende para apps de operadora), notificação própria desabilitada, fallback
  * seguro permitindo a chamada, histórico local ligado, retenção de 30 dias e a
  * exceção de chamada repetida ligada.
  */
