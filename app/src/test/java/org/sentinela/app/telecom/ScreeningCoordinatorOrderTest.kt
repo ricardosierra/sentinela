@@ -47,7 +47,7 @@ class ScreeningCoordinatorOrderTest {
 
         coordenador().screen(
             entrada(),
-            { eventos += RESPOSTA },
+            { _, _ -> eventos += RESPOSTA },
             { _, _ -> eventos += POSTERIOR },
         )
 
@@ -61,7 +61,7 @@ class ScreeningCoordinatorOrderTest {
 
         coordenador().screen(
             entrada(),
-            { eventos += RESPOSTA },
+            { _, _ -> eventos += RESPOSTA },
             { _, _ ->
                 eventos += NOTIFICACAO
                 eventos += HISTORICO
@@ -79,7 +79,7 @@ class ScreeningCoordinatorOrderTest {
 
         coordenador().screen(
             entrada(),
-            { eventos += RESPOSTA },
+            { _, _ -> eventos += RESPOSTA },
             { _, _ ->
                 delay(DEMORA_LONGA)
                 eventos += POSTERIOR
@@ -99,7 +99,7 @@ class ScreeningCoordinatorOrderTest {
         val execucao = runCatching {
             coordenador().screen(
                 entrada(),
-                { eventos += RESPOSTA },
+                { _, _ -> eventos += RESPOSTA },
                 { _, _ -> error("falha injetada no trabalho posterior") },
             )
         }
@@ -115,7 +115,7 @@ class ScreeningCoordinatorOrderTest {
 
         coordenador().screen(
             entrada(),
-            { respondidas += it },
+            { decisao, _ -> respondidas += decisao },
             { _, decisao -> recebidas += decisao },
         )
 
@@ -129,7 +129,7 @@ class ScreeningCoordinatorOrderTest {
 
         coordenador().screen(
             ScreenedCall(CallDirection.OUTGOING, ScreenedNumber.Valid(NUMERO)),
-            { eventos += RESPOSTA },
+            { _, _ -> eventos += RESPOSTA },
             { _, _ -> eventos += POSTERIOR },
         )
 

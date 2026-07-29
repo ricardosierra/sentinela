@@ -1,6 +1,7 @@
 package org.sentinela.app.telecom
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.sentinela.app.data.contacts.ContactLookupRepository
@@ -15,7 +16,17 @@ import org.sentinela.app.domain.RepeatedCallLookup
 import org.sentinela.app.domain.ScreenedCall
 import org.sentinela.app.domain.WhitelistLookup
 import org.sentinela.app.settings.ScreeningSettings
+import org.sentinela.app.notifications.BlockedCallNotifier
+import org.sentinela.app.phone.CascadingRegionProvider
+import org.sentinela.app.phone.LibPhoneNumberNormalizer
+import org.sentinela.app.phone.RegionProvider
+import org.sentinela.app.phone.TestMetadata
 import org.sentinela.app.settings.SettingsRepository
+
+/** Mascara fixa: o teste do serviço não mede normalização, mede ligação. */
+const val MASCARA_DE_TESTE = "+55 11 9****-8888"
+
+const val AGORA_DE_TESTE = 1_700_000_000_000L
 
 /**
  * Dublês controláveis dos quatro colaboradores do [ScreeningCoordinator].
@@ -142,8 +153,73 @@ class RespostaGravada {
     val total: Int get() = decisoes.size
     val unica: CallDecision get() = decisoes.single()
 
-    fun costura(): (CallDecision) -> Unit = { decisao ->
+    val configuracoes = mutableListOf<ScreeningSettings>()
+
+    fun costura(): (CallDecision, ScreeningSettings) -> Unit = { decisao, valores ->
         decisoes += decisao
+        configuracoes += valores
         if (falharNaPrimeira && decisoes.size == 1) error("falha injetada na costura de resposta")
+    }
+}
+
+/** Notificador de teste: só registra o que foi pedido, sem tocar na plataforma. */
+class NotificadorGravado : BlockedCallNotifier {
+    val enviadas = mutableListOf<BlockedCallEntry>()
+    override fun ensureChannel() = Unit
+    override fun notifyBlocked(entry: BlockedCallEntry) {
+        enviadas += entry
+    }
+}
+
+/**
+ * Substitui o container do processo por dublês. Construir um container de verdade aqui
+ * derrubaria o processo do teste: dois armazenamentos de configurações sobre o mesmo arquivo
+ * não coexistem, e isso já foi medido.
+ */
+class AmbienteDeTriagem(motorComDefeito: Boolean = false) : ScreeningDependencies {
+    val settings = FakeSettingsRepository()
+    val contatos = FakeContactLookupRepository()
+    val whitelist = FakePersonalWhitelistRepository()
+    val historico = FakeBlockedCallRepository()
+    val notificador = NotificadorGravado()
+
+    private val motor = if (motorComDefeito) {
+        ExplodingDecisionEngine().apply { falha = true }
+    } else {
+        CallDecisionEngine()
+    }
+
+    override val screenedCallFactory = ScreenedCallFactory(
+        LibPhoneNumberNormalizer(
+            TestMetadata.util(),
+            RegionProvider { CascadingRegionProvider.DEFAULT_REGION },
+        ),
+    )
+
+    override val callResponseFactory = CallResponseFactory()
+
+    override val screeningCoordinator = ScreeningCoordinator(
+        settings = settings,
+        contacts = contatos,
+        whitelist = whitelist,
+        blockedCalls = historico,
+        engine = motor,
+        clock = { AGORA_DE_TESTE },
+    )
+
+    override val postScreeningWork = PostScreeningWork(
+        settings = settings,
+        history = historico,
+        notifier = notificador,
+        mask = { MASCARA_DE_TESTE },
+        clock = { AGORA_DE_TESTE },
+    )
+
+    /**
+     * Em produção isto vai para o escopo do processo. No teste roda de forma síncrona: a
+     * ordem já é provada pelo coordenador, e aqui o que importa é o resultado observável.
+     */
+    override fun launchAfterResponse(block: suspend () -> Unit) {
+        runBlocking { runCatching { block() } }
     }
 }

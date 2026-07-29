@@ -9,6 +9,7 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.sentinela.app.domain.ContactLookup
 import java.lang.reflect.Proxy
 
 /**
@@ -91,17 +92,22 @@ class ScreeningTestHarness {
 }
 
 /**
- * Teste de fumaca do proprio harness: prova que a captura funciona ANTES de qualquer logica de
- * triagem depender dela. Enquanto o Service esta em modo pass-through, uma chamada de entrada
- * precisa produzir exatamente uma resposta, e essa resposta nao pode interferir na chamada.
+ * Teste de fumaca do proprio harness: prova que a captura funciona, e que ela enxerga os cinco
+ * campos da resposta. A chamada usada e a de um contato da agenda, que passa sem interferencia —
+ * assim os cinco campos ficam falsos e o que esta sendo medido e a captura, nao a decisao.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35])
 class ScreeningTestHarnessSmokeTest {
 
+    private fun harness(): ScreeningTestHarness {
+        val ambiente = AmbienteDeTriagem().apply { contatos.resultado = ContactLookup.HIT }
+        return ScreeningTestHarness().also { it.service().dependencies = ambiente }
+    }
+
     @Test
     fun `chamada de entrada produz exatamente uma resposta capturada`() {
-        val harness = ScreeningTestHarness()
+        val harness = harness()
 
         harness.screen(handle = Uri.parse("tel:+5511999998888"))
 
@@ -110,7 +116,7 @@ class ScreeningTestHarnessSmokeTest {
 
     @Test
     fun `a resposta capturada expoe os cinco campos da API`() {
-        val harness = ScreeningTestHarness()
+        val harness = harness()
 
         harness.screen(handle = Uri.parse("tel:+5511999998888"))
 

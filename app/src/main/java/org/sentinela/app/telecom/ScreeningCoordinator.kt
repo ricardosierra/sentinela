@@ -69,13 +69,16 @@ class ScreeningCoordinator(
 ) {
 
     /**
-     * @param respond costura de saída; chamada no máximo uma vez por triagem.
+     * @param respond costura de saída; chamada no máximo uma vez por triagem. Recebe também as
+     *   configurações que produziram a decisão, para que a tradução da resposta não precise
+     *   consultar o repositório uma segunda vez, nem corra o risco de traduzir com um valor
+     *   diferente do que o motor usou.
      * @param afterResponse trabalho desacoplado (notificação, histórico) executado
      *   somente **depois** da resposta e incapaz de atrasá-la ou derrubá-la.
      */
     suspend fun screen(
         call: ScreenedCall,
-        respond: (CallDecision) -> Unit,
+        respond: (CallDecision, ScreeningSettings) -> Unit,
         afterResponse: suspend (ScreenedCall, CallDecision) -> Unit = { _, _ -> },
     ) {
         // Chamada de saída não é triada: sai antes de qualquer consulta e sem emitir nada.
@@ -84,30 +87,32 @@ class ScreeningCoordinator(
         val responded = AtomicBoolean(false)
         var emitted: CallDecision? = null
 
-        fun emit(decision: CallDecision) {
+        fun emit(decision: CallDecision, configuracoes: ScreeningSettings) {
             if (responded.compareAndSet(false, true)) {
                 emitted = decision
-                runCatching { respond(decision) }
+                runCatching { respond(decision, configuracoes) }
             }
         }
 
         try {
-            emit(decide(call))
+            val (decisao, configuracoes) = decide(call)
+            emit(decisao, configuracoes)
         } catch (error: Throwable) {
-            emit(permissive())
+            emit(permissive(), ScreeningSettings())
         } finally {
             // Rede permissiva: se nada respondeu até aqui, a chamada passa.
-            emit(permissive())
+            emit(permissive(), ScreeningSettings())
             emitted?.let { decision -> runCatching { afterResponse(call, decision) } }
         }
     }
 
-    private suspend fun decide(call: ScreenedCall): CallDecision {
+    /** Devolve a decisão e as configurações exatas com que ela foi tomada. */
+    private suspend fun decide(call: ScreenedCall): Pair<CallDecision, ScreeningSettings> {
         val key = (call.number as? ScreenedNumber.Valid)?.e164
         return try {
             withTimeout(timeoutMillis) {
                 coroutineScope {
-                    val configuracoes = async { settings.snapshot() }
+                    val pedido = async { settings.snapshot() }
                     val contato = async { key?.let { contacts.lookup(it) } ?: ContactLookup.MISS }
                     val lista = async {
                         key?.let { toLookup(whitelist.contains(it)) } ?: WhitelistLookup.MISS
@@ -119,23 +124,25 @@ class ScreeningCoordinator(
                             blockedCalls.hasRecentBlock(key, clock())
                         }
                     }
+                    val configuracoes = pedido.await()
                     engine.decide(
                         call = call,
-                        settings = configuracoes.await(),
+                        settings = configuracoes,
                         contact = contato.await(),
                         whitelist = lista.await(),
                         repeatedCall = repetida.await(),
-                    )
+                    ) to configuracoes
                 }
             }
         } catch (expired: TimeoutCancellationException) {
+            val reserva = ScreeningSettings()
             engine.decide(
                 call = call,
-                settings = ScreeningSettings(),
+                settings = reserva,
                 contact = ContactLookup.UNAVAILABLE,
                 whitelist = WhitelistLookup.LOOKUP_FAILED,
                 repeatedCall = RepeatedCallLookup.LOOKUP_FAILED,
-            )
+            ) to reserva
         }
     }
 
