@@ -98,12 +98,17 @@ detekt {
     buildUponDefaultConfig = true
 }
 
-// Cobertura da Fase 2. O gate (verify { rule { minBound(80) } }) so entra no plano 02-05,
-// depois que os testes de normalizacao existirem — habilitar antes falharia o build.
+// Cobertura da Fase 2: gate real sobre o motor de decisao e a normalizacao.
+// koverVerify quebra o build abaixo do minimo — o filtro define o denominador.
 kover {
     reports {
         filters {
             includes { classes("org.sentinela.app.domain.*", "org.sentinela.app.phone.*") }
+        }
+        verify {
+            rule("Cobertura minima de dominio e normalizacao") {
+                minBound(80)
+            }
         }
     }
 }
