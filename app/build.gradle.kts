@@ -189,6 +189,10 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
+    // Reservado no version catalog desde o bootstrap para "as Fases 5-6 (UI)": as telas de
+    // chamada e discagem precisam de mic/mic_off, dialpad, call_end, backspace e shield, que
+    // nao existem no conjunto nucleo de icones. Entra na versao do Compose BOM.
+    implementation(libs.compose.material.icons.extended)
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.room.runtime)
