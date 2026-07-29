@@ -3,7 +3,7 @@ phase: 3
 slug: dados-locais
 status: approved
 nyquist_compliant: true
-wave_0_complete: false
+wave_0_complete: true
 created: 2026-07-29
 updated: 2026-07-29
 ---
@@ -23,7 +23,7 @@ updated: 2026-07-29
 | **Framework (JVM)** | JUnit 4 `4.13.2` sobre AGP 9.3.0 / Gradle 9.6.1 / JDK 17 — testes JVM puros, herdado da Phase 2. **Sem Robolectric** (4.16.1 nao suporta compileSdk 37 — blocker no STATE) |
 | **Framework (instrumentado)** | AndroidX Test com `androidx.test.runner.AndroidJUnitRunner` (**ja configurado** em `defaultConfig` — nada a mudar), `androidx.test.ext:junit-ktx 1.3.0`, `androidx.test:core-ktx 1.7.0`, `androidx.room:room-testing 2.8.4` |
 | **Config file** | `app/build.gradle.kts` — `testOptions { unitTests { isIncludeAndroidResources = true; isReturnDefaultValues = true } }` (**nao remover**: pre-requisito do libphonenumber em teste, Phase 2) + `sourceSets.getByName("androidTest").assets.srcDir("$projectDir/schemas")` (Wave 0 desta fase; sem ele `MigrationTestHelper` falha com "Cannot find the schema file") |
-| **Cobertura** | Kover `0.9.9`. Filtro atual: `domain.*` + `phone.*` (97,619%). Ampliado **so no plano 03-07** para `+ data.* + settings.*`, **excluindo** `org.sentinela.app.data.local.db.*`, `*_Impl` e `annotatedBy(androidx.room.Dao/Database)` — o gerado pelo Room so roda instrumentado e o Kover nao o mede, entao inclui-lo derrubaria o gate com falso-vermelho |
+| **Cobertura** | Kover `0.9.9`. Filtro **ja ampliado** no plano 03-07 (fechado): `domain.*` + `phone.*` + `data.*` + `settings.*` = **97,2881%** (era 97,619% so com domain+phone), **excluindo** `org.sentinela.app.data.local.db.*`, `*_Impl` e `annotatedBy(androidx.room.Dao/Database)` — o gerado pelo Room so roda instrumentado e o Kover nao o mede, entao inclui-lo derrubaria o gate com falso-vermelho |
 | **Quick run command** | `./gradlew testDebugUnitTest` |
 | **Instrumented command** | `bash scripts/run-instrumented-tests.sh [--tests "*Padrao"]` (sobe o AVD `Medium_Phone_API_35` headless, poll em `sys.boot_completed`, roda `:app:connectedDebugAndroidTest`, `trap` de `emu kill`) |
 | **Full suite command** | `./gradlew clean && ./gradlew --no-build-cache assembleDebug testDebugUnitTest koverVerify lint detekt && bash scripts/verify-invariants.sh && bash scripts/run-instrumented-tests.sh` |
@@ -65,25 +65,25 @@ da Phase 2 seguem no mesmo `testDebugUnitTest` e nao podem quebrar.
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 3-01-01 | 01 | 1 | QLT-06 | build config (deps androidTest + assets de schema) | `./gradlew :app:assembleDebugAndroidTest` | ❌ **Wave 0** — bloqueia 03-03..07 | ⬜ pending |
-| 3-01-02 | 01 | 1 | QLT-06 | script (boot polling + trap) | `bash -n scripts/run-instrumented-tests.sh && grep -q sys.boot_completed scripts/run-instrumented-tests.sh` | ❌ **Wave 0** — bloqueia toda task instrumentada | ⬜ pending |
-| 3-01-03 | 01 | 1 | QLT-06 | instrumentado (fumaca) | `bash scripts/run-instrumented-tests.sh --tests "*InstrumentationSmokeTest"` — XML com `failures="0"` | ❌ criado pela task | ⬜ pending |
-| 3-02-01 | 02 | 1 | PRV-03, HST-06 | build + lint sobre XML de backup | `./gradlew assembleDebug lint` + greps de `path="."` e ausencia de `<include>` | ✅ (XMLs existem, a corrigir) | ⬜ pending |
-| 3-02-02 | 02 | 1 | PRV-03, HST-06 | **unit (le o XML por DOM)** | `./gradlew testDebugUnitTest --tests "*BackupRulesTest"` — 5 testes, com falha demonstrada ao remover um `<exclude>` | ❌ criado pela task | ⬜ pending |
-| 3-03-01 | 03 | 2 | WLT-04, HST-01, HST-05 | build (KSP) + unit (conversores) | `./gradlew :app:compileDebugKotlin testDebugUnitTest --tests "*ConvertersTest"` + `ls app/schemas/*/1.json` + grep `"unique": true` | ❌ criado pela task | ⬜ pending |
-| 3-03-02 | 03 | 2 | QLT-03 | **unit (le o schema exportado)** | `./gradlew testDebugUnitTest --tests "*SchemaExportTest"` — falha demonstrada com `exportSchema = false` | ❌ criado pela task | ⬜ pending |
-| 3-03-03 | 03 | 2 | QLT-03, PRV-03 | script de invariantes | `./gradlew assembleDebug lint detekt && bash scripts/verify-invariants.sh` — Bloco 5: destrutivo, main-thread, schema v1, nome de contato | ✅ (estende script das Fases 1–2) | ⬜ pending |
-| 3-04-01 | 04 | 3 | WLT-01, WLT-02, WLT-04, QLT-01 | unit (fake DAO) | `./gradlew testDebugUnitTest --tests "*RoomWhitelistRepositoryTest"` — ≥ 10 `@Test`, inclui falha de repositorio | ❌ criado pela task | ⬜ pending |
-| 3-04-02 | 04 | 3 | WLT-01, WLT-02, WLT-03, WLT-04, QLT-06 | instrumentado (DAO) | `bash scripts/run-instrumented-tests.sh --tests "*WhitelistDaoTest"` — ≥ 9 `@Test`, inclui `SQLiteConstraintException` e codigo curto `"190"` | ❌ criado pela task | ⬜ pending |
-| 3-04-03 | 04 | 3 | WLT-07 | instrumentado (**EQP** + benchmark) | `bash scripts/run-instrumented-tests.sh --tests "*WhitelistPerformanceTest"` — assert de `USING INDEX index_whitelist_number_key`, `p50 < 1 ms` (primario) e `p95 < 5 ms` (declarado) | ❌ **prova deterministica do indice; substitui o cronometro** | ⬜ pending |
-| 3-05-01 | 05 | 3 | HST-02 | **unit (regra pura)** | `./gradlew testDebugUnitTest --tests "*RetentionPolicyTest"` — ≥ 8 `@Test`, lista travada em 5 politicas com `id` literal | ❌ criado pela task | ⬜ pending |
-| 3-05-02 | 05 | 3 | HST-01, HST-02, HST-03, HST-04, QLT-01 | unit (fakes de DAO e Settings, relogio injetado) | `./gradlew testDebugUnitTest --tests "*RoomBlockedCallRepositoryTest"` — ≥ 12 `@Test` | ❌ criado pela task | ⬜ pending |
-| 3-05-03 | 05 | 3 | HST-01, HST-02, HST-03, HST-05, QLT-06 | instrumentado (DAO) | `bash scripts/run-instrumented-tests.sh --tests "*BlockedCallDaoTest"` — ≥ 8 `@Test`, limite do cutoff travado | ❌ criado pela task | ⬜ pending |
-| 3-06-01 | 06 | 4 | ENG-01, HST-02, QLT-01 | build + detekt (cache volatil, catch de IOException) | `./gradlew :app:compileDebugKotlin detekt lint` + greps de `@Volatile`, `emptyPreferences()` e ausencia de `ordinal`/`valueOf(` | ❌ criado pela task | ⬜ pending |
-| 3-06-02 | 06 | 4 | ENG-01, HST-02, QLT-01 | **unit (DataStore em `TemporaryFolder`, JVM pura)** | `./gradlew testDebugUnitTest --tests "*DataStoreSettingsRepositoryTest" --tests "*AppOpenCounterTest"` — ≥ 16 + ≥ 5 `@Test` | ❌ criado pela task | ⬜ pending |
-| 3-07-01 | 07 | 5 | WLT-07, HST-02, ENG-01 | build + invariantes (wiring de singletons) | `./gradlew assembleDebug testDebugUnitTest lint detekt && bash scripts/verify-invariants.sh` | ❌ criado pela task | ⬜ pending |
-| 3-07-02 | 07 | 5 | QLT-03, QLT-06 | instrumentado (`MigrationTestHelper`) | `bash scripts/run-instrumented-tests.sh --tests "*MigrationHarnessTest"` — v1 aberta pelo helper, 2 tabelas confirmadas no `sqlite_master` | ❌ criado pela task | ⬜ pending |
-| 3-07-03 | 07 | 5 | QLT-01, QLT-06 | gate de cobertura + evidencia pos-`clean` | `./gradlew clean && ./gradlew --no-build-cache assembleDebug testDebugUnitTest koverVerify lint detekt && bash scripts/verify-invariants.sh && bash scripts/run-instrumented-tests.sh` | ❌ `03-EVIDENCE.md` criado pela task | ⬜ pending |
+| 3-01-01 | 01 | 1 | QLT-06 | build config (deps androidTest + assets de schema) | `./gradlew :app:assembleDebugAndroidTest` | ❌ **Wave 0** — bloqueia 03-03..07 | ✅ green |
+| 3-01-02 | 01 | 1 | QLT-06 | script (boot polling + trap) | `bash -n scripts/run-instrumented-tests.sh && grep -q sys.boot_completed scripts/run-instrumented-tests.sh` | ❌ **Wave 0** — bloqueia toda task instrumentada | ✅ green |
+| 3-01-03 | 01 | 1 | QLT-06 | instrumentado (fumaca) | `bash scripts/run-instrumented-tests.sh --tests "*InstrumentationSmokeTest"` — XML com `failures="0"` | ❌ criado pela task | ✅ green |
+| 3-02-01 | 02 | 1 | PRV-03, HST-06 | build + lint sobre XML de backup | `./gradlew assembleDebug lint` + greps de `path="."` e ausencia de `<include>` | ✅ (XMLs existem, a corrigir) | ✅ green |
+| 3-02-02 | 02 | 1 | PRV-03, HST-06 | **unit (le o XML por DOM)** | `./gradlew testDebugUnitTest --tests "*BackupRulesTest"` — 5 testes, com falha demonstrada ao remover um `<exclude>` | ❌ criado pela task | ✅ green |
+| 3-03-01 | 03 | 2 | WLT-04, HST-01, HST-05 | build (KSP) + unit (conversores) | `./gradlew :app:compileDebugKotlin testDebugUnitTest --tests "*ConvertersTest"` + `ls app/schemas/*/1.json` + grep `"unique": true` | ❌ criado pela task | ✅ green |
+| 3-03-02 | 03 | 2 | QLT-03 | **unit (le o schema exportado)** | `./gradlew testDebugUnitTest --tests "*SchemaExportTest"` — falha demonstrada com `exportSchema = false` | ❌ criado pela task | ✅ green |
+| 3-03-03 | 03 | 2 | QLT-03, PRV-03 | script de invariantes | `./gradlew assembleDebug lint detekt && bash scripts/verify-invariants.sh` — Bloco 5: destrutivo, main-thread, schema v1, nome de contato | ✅ (estende script das Fases 1–2) | ✅ green |
+| 3-04-01 | 04 | 3 | WLT-01, WLT-02, WLT-04, QLT-01 | unit (fake DAO) | `./gradlew testDebugUnitTest --tests "*RoomWhitelistRepositoryTest"` — ≥ 10 `@Test`, inclui falha de repositorio | ❌ criado pela task | ✅ green |
+| 3-04-02 | 04 | 3 | WLT-01, WLT-02, WLT-03, WLT-04, QLT-06 | instrumentado (DAO) | `bash scripts/run-instrumented-tests.sh --tests "*WhitelistDaoTest"` — ≥ 9 `@Test`, inclui `SQLiteConstraintException` e codigo curto `"190"` | ❌ criado pela task | ✅ green |
+| 3-04-03 | 04 | 3 | WLT-07 | instrumentado (**EQP** + benchmark) | `bash scripts/run-instrumented-tests.sh --tests "*WhitelistPerformanceTest"` — assert de `USING INDEX index_whitelist_number_key` e `p50 < 1 ms` (primario); `p95 < 5 ms` **reportado, nao afirmado** — movido para a validacao fisica da Phase 9 por decisao do usuario (2026-07-29), sem afrouxar o numero | ❌ **prova deterministica do indice; substitui o cronometro** | ✅ green |
+| 3-05-01 | 05 | 3 | HST-02 | **unit (regra pura)** | `./gradlew testDebugUnitTest --tests "*RetentionPolicyTest"` — ≥ 8 `@Test`, lista travada em 5 politicas com `id` literal | ❌ criado pela task | ✅ green |
+| 3-05-02 | 05 | 3 | HST-01, HST-02, HST-03, HST-04, QLT-01 | unit (fakes de DAO e Settings, relogio injetado) | `./gradlew testDebugUnitTest --tests "*RoomBlockedCallRepositoryTest"` — ≥ 12 `@Test` | ❌ criado pela task | ✅ green |
+| 3-05-03 | 05 | 3 | HST-01, HST-02, HST-03, HST-05, QLT-06 | instrumentado (DAO) | `bash scripts/run-instrumented-tests.sh --tests "*BlockedCallDaoTest"` — ≥ 8 `@Test`, limite do cutoff travado | ❌ criado pela task | ✅ green |
+| 3-06-01 | 06 | 4 | ENG-01, HST-02, QLT-01 | build + detekt (cache volatil, catch de IOException) | `./gradlew :app:compileDebugKotlin detekt lint` + greps de `@Volatile`, `emptyPreferences()` e ausencia de `ordinal`/`valueOf(` | ❌ criado pela task | ✅ green |
+| 3-06-02 | 06 | 4 | ENG-01, HST-02, QLT-01 | **unit (DataStore em `TemporaryFolder`, JVM pura)** | `./gradlew testDebugUnitTest --tests "*DataStoreSettingsRepositoryTest" --tests "*AppOpenCounterTest"` — ≥ 16 + ≥ 5 `@Test` | ❌ criado pela task | ✅ green |
+| 3-07-01 | 07 | 5 | WLT-07, HST-02, ENG-01 | build + invariantes (wiring de singletons) | `./gradlew assembleDebug testDebugUnitTest lint detekt && bash scripts/verify-invariants.sh` | ❌ criado pela task | ✅ green |
+| 3-07-02 | 07 | 5 | QLT-03, QLT-06 | instrumentado (`MigrationTestHelper`) | `bash scripts/run-instrumented-tests.sh --tests "*MigrationHarnessTest"` — v1 aberta pelo helper, 2 tabelas confirmadas no `sqlite_master` | ❌ criado pela task | ✅ green |
+| 3-07-03 | 07 | 5 | QLT-01, QLT-06 | gate de cobertura + evidencia pos-`clean` | `./gradlew clean && ./gradlew --no-build-cache assembleDebug testDebugUnitTest koverVerify lint detekt && bash scripts/verify-invariants.sh && bash scripts/run-instrumented-tests.sh` | ❌ `03-EVIDENCE.md` criado pela task | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -95,7 +95,7 @@ da Phase 2 seguem no mesmo `testDebugUnitTest` e nao podem quebrar.
 | WLT-02 | 3-04-01 (`enabled` afeta `contains`), 3-04-02 (update de descricao, toggle, deleteById) |
 | WLT-03 | 3-04-02 (`search` por trecho de numero **e** por descricao) |
 | WLT-04 | 3-03-01 (indice UNICO no schema exportado), 3-04-01 (id resolvido antes do upsert), 3-04-02 (2 inserts → 1 linha + `SQLiteConstraintException` no insert cru) |
-| WLT-07 | 3-04-03 (**EQP** `USING INDEX index_whitelist_number_key` + `p50 < 1 ms` / `p95 < 5 ms` com warmup de 300 e 500 amostras), 3-07-01 (DAO nao-suspend ligado no container) |
+| WLT-07 | 3-04-03 (**EQP** `USING INDEX index_whitelist_number_key` + `p50 < 1 ms` com warmup de 300 e 500 amostras; `p95 < 5 ms` reportado no CI e cobrado na Phase 9, cenario 35), 3-07-01 (DAO nao-suspend ligado no container) |
 | HST-01 | 3-03-01 (entidade minima, sem coluna de nome de contato), 3-05-02, 3-05-03 |
 | HST-02 | 3-05-01 (5 politicas puras: NEVER_STORE / 7 / 30 / 90 / MANUAL), 3-05-02 (poda apos gravacao, MANUAL nao poda), 3-05-03 (poda efetiva no banco), 3-06-01/02 (persistencia da politica), 3-07-01 (poda na abertura do app) |
 | HST-03 | 3-05-02 (delegacao), 3-05-03 (`clearAll` zera `observeTotalCount`, `deleteById` remove 1) |
@@ -117,17 +117,17 @@ Nenhum requisito da fase fica sem task. Nenhuma task fica sem `<automated>`.
 Infraestrutura que **bloqueia** as tasks seguintes e por isso vive no plano **03-01** (wave 1),
 executado antes de qualquer trabalho de Room ou DataStore:
 
-- [ ] `app/build.gradle.kts` — `androidTestImplementation(libs.room.testing)` e
+- [x] `app/build.gradle.kts` — `androidTestImplementation(libs.room.testing)` e
       `androidTestImplementation(libs.androidx.test.core)`. Hoje as duas estao apenas em
       `testImplementation`, onde `MigrationTestHelper` e inutil (precisa de instrumentacao)
-- [ ] `app/build.gradle.kts` — `sourceSets.getByName("androidTest").assets.srcDir("$projectDir/schemas")`.
+- [x] `app/build.gradle.kts` — `sourceSets.getByName("androidTest").assets.srcDir("$projectDir/schemas")`.
       **Sem isso o `MigrationTestHelper` falha com "Cannot find the schema file"**
-- [ ] `scripts/run-instrumented-tests.sh` — boot headless do AVD `Medium_Phone_API_35`,
+- [x] `scripts/run-instrumented-tests.sh` — boot headless do AVD `Medium_Phone_API_35`,
       **polling em `sys.boot_completed`** (`adb wait-for-device` sozinho NAO basta: o device
       fica `offline` por varios segundos), `connectedDebugAndroidTest`, `trap` de `emu kill`
       que roda tambem em falha, e reaproveitamento de device ja conectado.
       **Nenhum `checkpoint:human-action`** — subir emulador e automatizavel (decisao do usuario)
-- [ ] `app/src/androidTest/.../InstrumentationSmokeTest.kt` — prova de que o ciclo roda
+- [x] `app/src/androidTest/.../InstrumentationSmokeTest.kt` — prova de que o ciclo roda
 
 **Nao e Wave 0, deliberadamente:**
 

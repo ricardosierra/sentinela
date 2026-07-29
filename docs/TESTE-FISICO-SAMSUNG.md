@@ -72,6 +72,18 @@ confirmação de app de telefone padrão).
 
 Origem: Phase 1, criterio 2. Diferido conforme a politica de validacao fisica do ROADMAP (2026-07-28).
 
+## Pendências herdadas da Phase 3 (dados locais)
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 35 | p95 da consulta da whitelist em hardware real | Instalar o APK de androidTest e rodar `WhitelistPerformanceTest` no aparelho: `./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.tests_regex=WhitelistPerformanceTest` com o Galaxy conectado. Ler a linha `SENTINELA\|contains\|` no logcat | **p95 < 5 ms** com 1.000 entradas na whitelist (p50 < 1 ms já é cobrado no CI). Registrar os três percentis medidos | |
+
+Origem: decisão humana de 2026-07-29. O assert de p95 saiu do emulador porque falhava 2 de 8
+execuções **sem regressão real** — ali ele mede o scheduler do host tanto quanto o SQLite, e
+aumentar a amostragem piorou a cauda. O número de 5 ms **não foi afrouxado**: continua sendo o
+compromisso de produto, só que cobrado onde a medição significa alguma coisa. No CI seguem
+quebrando o build o p50 (< 1 ms) e o `EXPLAIN QUERY PLAN`, que é a prova real do índice.
+
 ## Registro de comportamento OEM
 
 Anotar aqui QUALQUER desvio (ex.: entrada "bloqueada" no log nativo mesmo com skip, toast do

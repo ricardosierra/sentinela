@@ -27,7 +27,8 @@ private const val INDEX_NAME = "index_whitelist_number_key"
  *    prova indice: medido na pesquisa da fase, full scan com 1.000 linhas da p50
  *    0,047 ms contra 0,032 ms do indexado, indistinguivel de ruido. Um teste de
  *    tempo que se proponha a falhar quando o indice sumir e falso-verde.
- * 2. O ORCAMENTO e provado por percentis com warmup, e so isso.
+ * 2. O ORCAMENTO e medido por percentis com warmup, e so isso. Aqui no emulador so o
+ *    p50 quebra o build; o p95 e reportado e cobrado em aparelho fisico na Phase 9.
  *
  * Banco EM ARQUIVO, nao em memoria: o plano de query e o custo de I/O precisam ser
  * realistas.
@@ -97,6 +98,21 @@ class WhitelistPerformanceTest {
         println("SENTINELA|contains|entries=$ENTRIES|p50=$p50|p95=$p95|p99=$p99")
 
         assertTrue("p50=$p50 ms — sinal estavel, esperado < $P50_MAX_MS ms", p50 < P50_MAX_MS)
-        assertTrue("p95=$p95 ms acima do orcamento declarado de $P95_MAX_MS ms", p95 < P95_MAX_MS)
+
+        // DECISAO HUMANA (2026-07-29): o p95 NAO quebra mais o build AQUI, e o numero
+        // de 5 ms NAO foi afrouxado — ele continua sendo o compromisso de produto, so
+        // que verificado em aparelho fisico na Phase 9 (docs/TESTE-FISICO-SAMSUNG.md).
+        // Motivo: no emulador o p95 falhou 2 de 8 execucoes sem nenhuma regressao real,
+        // porque mede o scheduler do host tanto quanto o SQLite; aumentar a amostragem
+        // piorou (6,21 ms com 1.000/2.000). Um teste que fica vermelho sem regressao
+        // corroi a confianca na suite inteira. O p50 e o sinal estavel e segue quebrando
+        // o build, e a garantia do indice continua sendo o EXPLAIN QUERY PLAN acima —
+        // que e quem realmente pega a regressao estrutural.
+        if (p95 >= P95_MAX_MS) {
+            println(
+                "SENTINELA|contains|AVISO p95=$p95 ms >= $P95_MAX_MS ms " +
+                    "(nao falha no emulador; veredito na Phase 9 em aparelho fisico)",
+            )
+        }
     }
 }

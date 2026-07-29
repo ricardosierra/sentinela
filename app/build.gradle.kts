@@ -114,15 +114,31 @@ detekt {
     buildUponDefaultConfig = true
 }
 
-// Cobertura da Fase 2: gate real sobre o motor de decisao e a normalizacao.
+// Cobertura das Fases 2-3: gate real sobre motor, normalizacao, dados e configuracoes.
 // koverVerify quebra o build abaixo do minimo — o filtro define o denominador.
 kover {
     reports {
         filters {
-            includes { classes("org.sentinela.app.domain.*", "org.sentinela.app.phone.*") }
+            includes {
+                classes(
+                    "org.sentinela.app.domain.*",
+                    "org.sentinela.app.phone.*",
+                    "org.sentinela.app.data.*",
+                    "org.sentinela.app.settings.*",
+                )
+            }
+            excludes {
+                // Codigo gerado pelo Room (KSP) so executa em teste INSTRUMENTADO,
+                // que o Kover nao mede. Incluir no denominador derrubaria o gate com
+                // falso-vermelho mesmo com o codigo humano 100% coberto.
+                // Fica coberto por connectedDebugAndroidTest (planos 03-04/03-05).
+                classes("org.sentinela.app.data.local.db.*")
+                classes("*_Impl", "*_Impl\$*")
+                annotatedBy("androidx.room.Dao", "androidx.room.Database")
+            }
         }
         verify {
-            rule("Cobertura minima de dominio e normalizacao") {
+            rule("Cobertura minima de dominio, normalizacao e dados") {
                 minBound(80)
             }
         }
