@@ -24,8 +24,7 @@ import java.io.File
 class DataStoreSettingsRepositoryTest {
 
     @get:Rule
-    @JvmField
-    val tmp = TemporaryFolder()
+    val tmp: TemporaryFolder = TemporaryFolder()
 
     private val scopes = mutableListOf<CoroutineScope>()
     private var contador = 0
