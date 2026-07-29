@@ -98,10 +98,40 @@ não a frequência de cada grafia numa agenda brasileira real; e a cauda medida 
 scheduler do host. Nenhum hack preventivo de OEM foi escrito: se o cenário 39 desviar, o desvio
 vai para [`LIMITACOES.md`](LIMITACOES.md) antes de qualquer código.
 
+## Pendências herdadas da Phase 5 (triagem no modo filtro)
+
+| # | Cenário | Ação | Esperado | Resultado |
+|---|---------|------|----------|-----------|
+| 40 | Bloqueio real de desconhecido | Ligar de um número fora da agenda e fora da whitelist | Não toca, não vibra, não mostra tela de chamada, **nenhuma** notificação nativa de perdida | |
+| 41 | Chamada bloqueada no histórico da One UI | Após o cenário 40, abrir o histórico nativo do telefone Samsung | Registrar **onde** a chamada aparece (aba "Bloqueadas"? misturada na lista?). Confirma o no-op do pedido de não registrar; é registro de comportamento, **não** falha | |
+| 42 | Contato toca no modo filtro | Com `READ_CONTACTS` concedida, ligar de um contato da agenda | Toca normalmente. **Este cenário agora exercita o nosso lookup**, não a plataforma: a chamada chega ao serviço e a decisão é do motor | |
+| 43 | `READ_CONTACTS` revogada | Revogar a permissão e repetir o cenário 42 | Toca normalmente (o Telecom nem faz o bind). Registrar se o app detecta a revogação e avisa o usuário | |
+| 44 | Caixa postal | Política Bloquear = "encaminhar silenciosamente"; ligar de desconhecido | Registrar o que o **chamador** ouve: caixa postal ou tom de não atendida. Depende da operadora — nunca prometido na UI | |
+| 45 | Não Perturbe ativo | Com o Não Perturbe ligado, ligar de origem com política "Nunca Silenciar" (whitelist) | **Esperado: continua suprimida pelo Não Perturbe.** Confirma a limitação documentada; não é bug | |
+| 46 | Silenciar | Política Silenciar para desconhecidos; ligar | Tela de chamada aparece, **sem som e sem vibração**; entra no histórico nativo | |
+| 47 | p95 da decisão em hardware real | `./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.tests_regex=DecisionPerformanceTest` com o Galaxy conectado; ler `SENTINELA\|decision\|` no logcat | **p95 < 200 ms**. Registrar p50/p95/max. Só aqui a cauda tem veredito | |
+| 48 | Início a frio por chamada | Forçar parada do app (`adb shell am force-stop org.sentinela.app`) e ligar em seguida | A chamada é bloqueada mesmo com o processo morto — o start pelo bind cabe nos 5 s | |
+| 49 | Perda do papel | Instalar outro app de bloqueio e conceder o papel a ele; reabrir o Sentinela | A home detecta a perda e oferece correção (SCR-02) | |
+| 50 | Notificação na tela bloqueada | Habilitar a notificação própria e bloquear uma chamada com a tela travada | Silenciosa, sem heads-up, e **sem o número completo** em nenhuma configuração de privacidade da tela bloqueada | |
+| 51 | Dual SIM / chamada em espera | Durante uma chamada ativa, receber uma de desconhecido | Bloqueada corretamente, sem afetar a chamada em curso | |
+
+Origem: Phase 5, pesquisa lida na fonte do próprio Android. Tudo que a fonte já provou virou
+correção em [`LIMITACOES.md`](LIMITACOES.md) (itens 2, 3, 7 e 8) e **não** volta como cenário;
+o que sobrou aqui é só o que exige aparelho real.
+
+**Diferidos explicitamente para a Phase 9, não lacuna da Phase 5:** os critérios de aceite 1, 2
+e 6 desta fase no [`ROADMAP`](../.planning/ROADMAP.md) — bloqueio efetivo ponta a ponta, ausência
+de aviso nativo de perdida e comportamento sob Não Perturbe — dependem de chamada real e estão
+nos cenários 40, 41, 45 e 46. O **veredito do percentil de cauda** (p95 e max do caminho de
+decisão) também é diferido: o CI cobra só a mediana, porque no emulador a cauda mede o scheduler
+do host tanto quanto o nosso código; o veredito é o cenário 47.
+
 ## Registro de comportamento OEM
 
-Anotar aqui QUALQUER desvio (ex.: entrada "bloqueada" no log nativo mesmo com skip, toast do
-sistema, atraso perceptível, notificação da One UI):
+Anotar aqui QUALQUER desvio (toast do sistema, atraso perceptível, notificação da One UI). A
+entrada "bloqueada" no histórico nativo **não** é desvio: é o comportamento documentado do
+Android (item 3 de [`LIMITACOES.md`](LIMITACOES.md)) — registre só *onde* ela aparece, no
+cenário 41.
 
 - ____________________________________________
 - ____________________________________________
@@ -111,3 +141,8 @@ sistema, atraso perceptível, notificação da One UI):
 Este roteiro fecha os critérios 3–11 da seção 16 de [`PROMPT-MVP.md`](PROMPT-MVP.md) e os
 adendos de modo discador/políticas por contato. Itens que falharem por comportamento de OEM
 vão para [`LIMITACOES.md`](LIMITACOES.md) com o registro do aparelho/versão.
+
+Os cenários **40 a 51** carregam, além disso, os critérios de aceite 1, 2 e 6 da Phase 5 e o
+veredito dos percentis de cauda do caminho de decisão. Enquanto eles não forem executados em
+Samsung físico, esses critérios permanecem **abertos por desenho** — a Phase 5 entregou o
+comportamento e a prova em JVM e emulador, não a prova em hardware.
