@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-04-PLAN.md
-last_updated: "2026-07-29T14:33:26.823Z"
+stopped_at: Completed 04-05-PLAN.md
+last_updated: "2026-07-29T14:42:20.741Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 20
-  completed_plans: 19
+  completed_plans: 20
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 04 — Contatos do Aparelho
+**Current focus:** Phase 05 — Telecom (próxima; Phase 04 concluída)
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 04 (Contatos do Aparelho) — EXECUTING
+Phase: 04 (Contatos do Aparelho) — COMPLETE
 Plan: 5 of 5
 
 ## Snapshot
@@ -33,7 +33,8 @@ Plan: 5 of 5
 - **Domínio:** `CallDecisionEngine` com precedência saída→proteção→privado→contato→whitelist→falha→desconhecido e políticas por origem (`OriginPolicy`)
 - **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
-- **Qualidade:** 245 testes JVM + 30 instrumentados; cobertura domain+phone+data+settings 97,2881% com gate `koverVerify` em 80%; lint e detekt zerados
+- **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
+- **Qualidade:** 296 testes JVM + 48 instrumentados; cobertura domain+phone+data+settings 96,6759% com gate `koverVerify` em 80%; lint e detekt zerados
 - **Telecom:** `UnknownCallScreeningService` registrado em modo pass-through seguro (não interfere até a Phase 5)
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
@@ -117,6 +118,12 @@ Plan: 5 of 5
 - [Phase Phase 04]: Lookup com 5.000 contatos: p50 0,029 ms (cache quente) e 0,39/0,92 ms (sonda direta); p95 e max so em logcat, veredito na Phase 9
 - [Phase Phase 04]: Construcao do cache medida em 2,57 s no AVD (acima dos 1,5-1,8 s da pesquisa): confirma que ela jamais pode ser aguardada
 - [Phase Phase 04]: Testes instrumentados de contatos fixam a regiao em BR: a cascata real leria o SIM us do AVD e o teste mediria o emulador
+- [Phase 04]: Vazamento de contato para o banco e provado pelo schema EXPORTADO, lido nos VALORES de columnName: casar as CHAVES do JSON daria falso positivo em todo build
+- [Phase 04]: Bloco 6.2 casa o USO do provider (import do pacote ou acesso a membro), nunca o nome da classe do app que o encapsula — senao o AppContainer nao poderia constru-la
+- [Phase 04]: Exclude do Kover e UMA classe nomeada (ContactsContractLookupSource); cache, repositorio e estado de permissao seguem no denominador — cobertura 87,69% -> 96,68%
+- [Phase 04]: contactLookupRepository e singleton preguicoso no AppContainer, com a fonte compartilhada com o cache (duas fontes registrariam dois observadores); nada em Application.onCreate
+- [Phase 04]: max da sonda direta em MISS variou 30 ms -> 140 ms entre execucoes sem mudanca de codigo: a cauda so tem veredito em hardware real (cenario 37)
+- [Phase 04]: Tela de onboarding de contatos e da Phase 7 por desenho, nao lacuna da Fase 4: esta fase entrega manifest, maquina de estado, flag e string
 
 ## Convenções operacionais do GSD
 
@@ -160,6 +167,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T14:33:05.334Z
-Stopped at: Completed 04-04-PLAN.md
+Last session: 2026-07-29T14:41:50.884Z
+Stopped at: Completed 04-05-PLAN.md
 Resume file: None
