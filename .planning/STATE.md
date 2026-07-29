@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-03-PLAN.md
-last_updated: "2026-07-29T22:48:27.129Z"
+stopped_at: Completed 06-06-PLAN.md
+last_updated: "2026-07-29T23:19:59.215Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
   total_plans: 35
-  completed_plans: 30
+  completed_plans: 31
 ---
 
 # Project State
@@ -190,6 +190,12 @@ Plan: 4 of 8
 - [Phase Phase 06]: 06-03: papel detido SEMPRE vence a intencao gravada em DialerModeState; o estado do modo nunca sai de valor persistido
 - [Phase Phase 06]: 06-03: cobertura caiu de 97,70% para 96,08% porque telecom.call.* ganhou tres arquivos que falam com a plataforma; alargar o filtro do Kover e do plano 06-08, nao deste
 - [Phase Phase 06]: 06-03: o retorno de mudanca de estado pertence ao CallSessionStore (CallSessionObserver), nunca ao servico da plataforma — e por ali que 06-06 liga a notificacao
+- [Phase Phase 06]: 06-06: canal de chamada e NOVO e de importancia ALTA (ongoing_calls); reaproveitar o canal discreto da Fase 5 daria pedido de tela cheia que nunca dispara, porque a importancia de um canal e imutavel depois de criada
+- [Phase Phase 06]: 06-06: a troca para o aviso de chamada em curso vive no CallSessionStore e acontece so na TRANSICAO para ativa; mudo/viva-voz/teclado republicam o estado ativo varias vezes por chamada
+- [Phase Phase 06]: 06-06: capacidade de ocupar a tela entra por costura injetavel (a consulta da versao 34 nao tem sombra no Robolectric 4.16.1) e degradar publica aviso com atender e recusar, nunca silencio
+- [Phase Phase 06]: 06-06: acoes da notificacao sao intencao pendente de Activity para a tela de chamada — nenhum receptor novo e nenhuma segunda edicao do manifest na fase
+- [Phase Phase 06]: 06-06: chave do extra de acao composta de BuildConfig.APPLICATION_ID (buildConfig ligado); literal do identificador do aplicativo em Kotlin e reprovado pelo Bloco 2, inclusive em KDoc
+- [Phase Phase 06]: 06-06: no nivel 31+ as acoes vem do estilo de chamada da plataforma e nao sao adicionadas a mao — somar as duas fontes daria quatro botoes no aviso
 
 ## Convenções operacionais do GSD
 
@@ -233,6 +239,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T22:47:14.938Z
-Stopped at: Completed 06-03-PLAN.md
+Last session: 2026-07-29T23:19:31.619Z
+Stopped at: Completed 06-06-PLAN.md
 Resume file: None
