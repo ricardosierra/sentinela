@@ -11,8 +11,15 @@ boas_vindas → papel (call screening) → desconhecidos → contatos (política
                                                                                   ├── whitelist_pessoal
                                                                                   ├── hist_rico_de_bloqueios
                                                                                   ├── proteção (ajustes, inclui modo discador)
-                                                                                  └── privacidade e sobre + apoio (sem mockup)
+                                                                                  └── privacidade e sobre + apoio (fora dos mockups)
+
+modo discador (opcional):  proteção → ativação/reversão → discagem
+                           chamada recebida / de saída → ativa → teclado de tons  (§11)
 ```
+
+As telas do modo discador ficam **fora do fluxo de navegação normal**: a chamada é aberta pelo
+sistema, não pelo usuário, e a discagem pode ser aberta pelo próprio Android com um número
+pré-preenchido.
 
 Onboarding canônico: boas-vindas → papel → desconhecidos → contatos → whitelist →
 verificação final (os mockups divergiam na contagem de passos; ver `DECISOES.md`).
@@ -155,13 +162,126 @@ explicação de uma linha em `on-surface-variant` (nada de opção sem explicaç
 11. **Em caso de erro** — política de fallback: "Permitir chamada (recomendado)" ×
     "Bloquear chamada" (`FallbackPolicy`), com explicação honesta do trade-off.
 
-## 11. UI de chamada (modo discador, Fase 6) — **sem mockup**
+## 11. UI de chamada e discagem (modo discador, Fase 6) — contrato fechado, fora dos mockups
 
-`InCallService` próprio, design system aplicado (dark, primary "Security Blue"):
-- **Chamada recebida**: nome do contato (lookup em memória) ou número mascarado + botões
-  grandes Atender / Recusar (alvos ≥ 64dp, funciona na tela bloqueada).
-- **Em chamada**: timer, Mudo, Viva-voz, Teclado (DTMF), Encerrar.
-- Escopo mínimo: uma chamada por vez; sem conferência/vídeo/gravação.
+Derivada do mesmo design system, com acabamento equivalente aos mockups. Contrato completo (com
+tabelas de cor, tipografia e chaves de string) no plano da fase; o que segue é o resumo canônico.
+
+### 11.1 As seis telas
+
+1. **Chamada recebida** (`IncomingCallScreen`) — tela cheia, exibida por pedido de tela cheia no
+   canal de chamada, **nunca** por overlay de sistema; aparece também sobre a tela bloqueada.
+   Coluna: marca d'água → rótulo de estado → avatar 96dp → identidade → chip de origem →
+   barra Recusar/Atender empurrada para o rodapé.
+2. **Chamada de saída** (`OutgoingCallScreen`) — mesmo esqueleto; estado "Chamando…"/"Tocando…",
+   três pontos de 6dp em fade sequencial (nunca indicador circular girando), ação única
+   **Encerrar**, e mudo/viva-voz já habilitados antes do atendimento.
+3. **Chamada ativa** (`ActiveCallScreen`) — identidade + cronômetro, fileira de três controles
+   (Mudo / Teclado / Viva-voz) e **Encerrar** centralizado.
+4. **Teclado de tons** (`DtmfKeypadSheet`) — painel ancorado ao rodapé, ~70% da altura, cantos
+   superiores 24dp; o cronômetro e o Encerrar continuam visíveis e clicáveis acima dele. Grade
+   3×4 (`1 2 3 / 4 5 6 / 7 8 9 / * 0 #`), linha de dígitos enviados no topo, sem placeholder.
+   O tom em si é responsabilidade do Telecom, não da UI.
+5. **Discagem** (`DialpadScreen`) — alvo do pedido de discagem do sistema e entrada manual.
+   Campo **somente saída** (não abre teclado do sistema), formatação progressiva pt-BR,
+   sugestão de nome quando o número casa com contato/whitelist (nunca inventada), grade de
+   teclas idêntica à do teclado de tons, **Chamar** e **Apagar** (toque = 1 dígito, toque longo
+   = limpa tudo). Falha ao originar vira barra de aviso com "Tentar de novo" e **mantém** o
+   número digitado.
+6. **Ativação / reversão do modo discador** (`DialerActivationScreen`) — alcançada por Proteção.
+   Dois cards de **estilo idêntico e deliberado**, "O que muda" e "O que não muda", com o mesmo
+   peso visual; card de pré-requisito quando a leitura da agenda está negada (o CTA fica
+   desabilitado); microcopy "Quem decide é o Android. Você pode voltar quando quiser.".
+   Com o modo ativo a mesma tela vira painel de reversão: chip "Ativo", CTA **tonal** (reverter
+   não é destruir dado — nunca cor de erro) que abre o **seletor do sistema**. O app nunca força
+   a troca. Se o papel foi perdido em silêncio, banner informativo, sem vermelho e sem alarme:
+   "O modo filtro continua funcionando."
+
+### 11.2 As quatro variantes de identidade (todas obrigatórias)
+
+| Caso | Avatar | Primária | Secundária | Chip |
+|------|--------|----------|-----------|------|
+| Contato da agenda | foto da agenda, ou monograma com anel 2dp `primary` | nome do contato | número completo formatado | "Contato" |
+| Número na whitelist | ícone `verified_user` sobre `primary` a 15% | descrição da entrada, senão o número | número completo | "Permitido" |
+| Desconhecido com número | ícone `person` | **o número completo** promovido a linha primária | região/operadora **não** é exibida (o MVP não a conhece — nunca inventar) | "Desconhecido" |
+| Privado / sem identificação | ícone `visibility_off` | "Privado" | "ID Oculto" | "Número privado" |
+
+A foto do contato é lida **em memória** no instante da chamada e nunca cacheada em disco. Com a
+leitura da agenda revogada, a tela degrada para "Desconhecido com número" — sem erro e **sem
+nenhum aviso durante a chamada**.
+
+A tela de chamada recebida **não expõe controle de política**: o chip é passivo. Mudar política
+com o telefone tocando é decisão sob pressão, e qualquer toque perto de atender/recusar aumenta a
+chance de erro irreversível. Ajuste de política vive em Proteção e no item do histórico.
+
+### 11.3 Tamanhos travados
+
+| Elemento | Tamanho |
+|----------|---------|
+| Atender e Recusar | **72dp** de diâmetro |
+| Encerrar | **64dp** |
+| Tecla do teclado (discagem e tons) | **72dp**, gap 8dp |
+| Controle secundário (mudo/viva-voz/teclado) e Apagar | **56dp** |
+| Fechar o painel de teclado | 48dp |
+| Avatar / monograma | **96dp** |
+
+São mínimos contratuais, não sugestões: o tamanho **desenhado** é o que vale, porque o Compose
+expande sozinho o alvo de toque de qualquer componente interativo e um controle encolhido passaria
+verde num teste que só olhasse o alvo. Nenhuma ação destrutiva fica a menos de 24dp de outra ação.
+
+### 11.4 Cores funcionais fixas, fora da cor dinâmica
+
+| Ação | Fundo | Conteúdo |
+|------|-------|----------|
+| Atender | `#1E6E42` | `#D9F2E3` |
+| Recusar / Encerrar | `#93000A` (`error-container`) | `#FFDAD6` (`on-error-container`) |
+
+A cor dinâmica continua ligada no resto do app, mas **estas quatro cores saem por literal** e
+chegam por parâmetro. Razão: a partir do Android 12 o tema troca o esquema **inteiro** por um
+derivado do papel de parede — ler o vermelho de recusar pelo esquema deixaria um papel de parede
+aproximá-lo do verde de atender e produzir o único erro irreversível do app (recusar por engano
+uma chamada real). Os dois botões diferem também por **ícone** (`call` × `call_end`) e por
+**rótulo textual** sob o botão: estado nunca é comunicado só por cor. Contraste medido ≥ 7:1.
+
+### 11.5 Número completo na tela, mascarado em todo o resto
+
+Nas telas de chamada, de tons e de discagem o número aparece **completo e formatado**: é a chamada
+do próprio usuário, acontecendo agora, e ele precisa do número inteiro para decidir se atende — um
+discador que mascara o número que está tocando é inútil. A proibição do projeto é sobre **log,
+notificação, histórico e relatório de falha**, e ali a máscara é obrigatória, sempre. A fronteira é
+testável e testada. Origem privada nunca ganha rótulo inventado: "Privado" / "ID Oculto", nunca
+"Desconhecido".
+
+### 11.6 Os dez requisitos de acessibilidade (critério de aceite, não enfeite)
+
+1. Todo alvo de toque ≥ 48dp — os tamanhos de 11.3 são todos folgados sobre esse piso.
+2. Todo ícone acionável com descrição de conteúdo **em recurso**, incluindo o estado quando o
+   controle alterna.
+3. Nunca só cor: atender/recusar por ícone e rótulo; mudo/viva-voz/teclado por ícone e/ou
+   descrição de estado.
+4. Contraste ≥ 4,5:1 no corpo e ≥ 3:1 em texto grande e ícones; ≥ 7:1 nos pares funcionais.
+   Sob cor dinâmica, par que caia abaixo do mínimo cai para os tokens fixos.
+5. Ordem de foco **declarada** na chamada recebida: marca → estado → identidade → chip →
+   recusar → atender. Elemento decorativo não é focável.
+6. Número lido **dígito a dígito**, nunca como valor numérico — na discagem e na chamada.
+7. Escala de fonte a 200%: nenhum controle sai da tela nem se sobrepõe; o número reduz por
+   autoajuste, os botões **não** reduzem.
+8. Com "reduzir animações" ligado, pulsação, fade dos três pontos e escala de toque são
+   suprimidos. Nenhuma informação depende de animação.
+9. Na tela bloqueada a chamada recebida é legível e operável sem desbloquear, e nada além do que
+   a tela já mostra vaza para a tela de bloqueio.
+10. Em paisagem, chamada recebida e ativa viram duas colunas (identidade à esquerda, ações à
+    direita) — os botões de ação **nunca** são cortados.
+
+### 11.7 Escopo e honestidade
+
+Uma chamada por vez: chamada em espera, segunda chamada, conferência, transferência, vídeo,
+gravação, mensagem rápida ao recusar, arrastar para atender, histórico do discador e busca de
+contatos na discagem estão **fora desta versão** e registrados em
+[`../LIMITACOES.md`](../LIMITACOES.md) — são decisões de escopo, não lacunas. Nenhum texto destas
+telas afirma que o bloqueio é garantido ou total, que a chamada bloqueada deixa de entrar no
+histórico do telefone, ou que chamadas de aplicativos de internet são filtradas. Nenhum texto
+pressiona a ativação: sem "recomendado", sem urgência, sem contador.
 
 ## 12. Convite de avaliação (5ª abertura) — **sem mockup**
 

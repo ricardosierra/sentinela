@@ -25,6 +25,11 @@
    verdadeira e a chamada bloqueada **sempre** entra no histórico nativo, marcada como
    bloqueada. Virar o discador padrão na Fase 6 **não** destrava isso — a isenção é exclusiva
    de apps de operadora.
+   **Reconfirmado em execução na Fase 6**, com o papel de telefone padrão ativo no aparelho
+   virtual: bloquear com as configurações de fábrica produz exatamente a variante de decisão que
+   *pede* para não registrar no histórico do telefone, e o registro entra no histórico do mesmo
+   jeito. Ser o app de telefone padrão não muda o cálculo do sistema — a isenção continua
+   amarrada ao tipo operadora, não ao papel de discador.
    O que o bloqueio **de fato** entrega: a chamada não toca, não vibra, não mostra tela de
    chamada e não gera aviso de chamada perdida. O registro no histórico permanece.
    Origem: código do Telecom do Android (cálculo de `shouldAddToCallLog` no filtro do serviço
@@ -49,11 +54,33 @@
    usuário — está descartada em definitivo.
    Origem: código do filtro de Não Perturbe do Telecom do Android.
    Roteiro físico: cenário 45 de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
-8. **Número oculto/restrito não é entregue ao serviço no modo filtro.** Sem handle, o Android
-   não aciona a triagem: a opção "Bloquear números privados" existe e é honrada pelo motor,
-   mas só tem efeito real no **modo discador** (Fase 6). No modo filtro ela fica sem efeito
-   prático — a UI não deve prometer o contrário.
-   Roteiro físico: cenário do modo discador, após a Fase 6.
+8. **Número oculto/restrito: sem efeito prático no modo filtro; no modo discador, nao verificado
+   (nunca foi medido).** O que se sabe, por leitura da fonte do Telecom: sem handle o Android não
+   aciona o serviço de triagem, então no **modo filtro** a opção "Bloquear números privados"
+   existe e é honrada pelo motor, mas nunca é alcançada por uma chamada real.
+   O que **não** se sabe: se deter o papel de telefone padrão faz essas chamadas passarem pela
+   triagem — onde o bloqueio ainda é possível — ou se elas só aparecem na interface de chamada,
+   quando já é tarde demais para bloquear. As duas hipóteses são compatíveis com o que foi
+   medido até aqui: a Fase 6 provou elegibilidade, vínculo, política por contato e reversão,
+   e **não** provou entrega de chamada sem identificação, porque simular chamada de entrada
+   com identificação bloqueada está fora do alcance do processo de teste.
+   Enquanto o cenário 59 do roteiro físico não for executado e registrado, este item **não
+   afirma** que o modo discador destrava o recurso. Nenhum texto da interface promete isso:
+   a copy da ativação lista o que muda e o que não muda, e número privado não está em nenhuma
+   das duas listas.
+   Roteiro físico: cenário **59** de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
+9. **Perder um papel do sistema encerra o processo do app.** Medido em execução na Fase 6, com o
+   motivo registrado pelo próprio sistema como mudança de permissão. Vale para o papel de
+   triagem e para o de telefone padrão, e vale igual quando é o **usuário** que escolhe outro
+   app de telefone nas configurações do sistema: o Sentinela é morto na hora, sem aviso e sem
+   chance de rodar código de despedida.
+   Consequências visíveis, nenhuma delas defeito: uma tela do Sentinela aberta no momento da
+   troca desaparece; e o app sempre volta em processo novo, por isso o estado do modo discador é
+   **derivado** de perguntas ao sistema e nunca de valor gravado — um valor gravado seria mentira
+   desde o primeiro instante. É também por isso que o app nunca desliga o modo desabilitando
+   componente próprio.
+   Uma chamada em curso **sobrevive** ao encerramento: o sistema de telefonia religa no discador
+   que vem no aparelho sozinho (medido). Roteiro físico: cenários **55** e **57**.
 
 ## De OEM (Samsung/One UI) — a validar no roteiro físico
 
@@ -70,7 +97,19 @@
 
 - Sem identificação de quem liga (caller ID/base de spam) — o produto não classifica, só
   aplica as políticas por origem.
-- Modo discador mínimo: uma chamada por vez, sem conferência, sem gravação, sem videochamada.
+- **Modo discador: uma chamada por vez.** Chamada em espera, segunda chamada simultânea,
+  conferência e transferência **não são suportadas nesta versão** — a interface de chamada
+  atende uma sessão só. Se uma segunda chamada chegar durante a primeira, o comportamento é o
+  que o sistema fizer; o Sentinela não a apresenta.
+- Sem videochamada no modo discador.
+- Sem mensagem rápida ao recusar ("respond via SMS") — exigiria permissão de mensagens, que está
+  fora da lista permitida.
+- Sem gesto de arrastar para atender: dois botões grandes, com rótulo e ícone distintos. Gesto
+  sem affordance clara erra mais e não funciona com leitor de tela. É decisão, não falta.
+- **Chamada de emergência é sempre atendida pelo discador que vem no aparelho**, mesmo com o
+  papel de telefone padrão nas mãos do Sentinela. O app não intercepta, não apresenta e não
+  bloqueia chamada de emergência em nenhuma configuração.
+- Sem gravação de chamada.
 - Sem bloqueio por prefixo/padrão (ex.: 0303) — candidato a backlog.
 - Sem app para tablet/Wear; retrato como orientação principal.
 - Import/export cobre só a whitelist (histórico fica no aparelho por decisão de privacidade).
