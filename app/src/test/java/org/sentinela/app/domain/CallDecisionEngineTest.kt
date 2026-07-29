@@ -86,6 +86,15 @@ class CallDecisionEngineTest {
     }
 
     @Test
+    fun `contato com politica nunca silenciar toca`() {
+        val decision = decide(
+            settings = defaults.copy(contactsPolicy = OriginPolicy.NEVER_SILENCE),
+            contact = ContactLookup.HIT,
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.CONTACT), decision)
+    }
+
+    @Test
     fun `contato tem precedencia sobre whitelist`() {
         val decision = decide(
             settings = defaults.copy(whitelistPolicy = OriginPolicy.BLOCK),
@@ -110,6 +119,24 @@ class CallDecisionEngineTest {
             whitelist = WhitelistLookup.HIT,
         )
         assertEquals(CallDecision.Silence(DecisionReason.PERSONAL_WHITELIST), decision)
+    }
+
+    @Test
+    fun `whitelist com politica tocar e permitida`() {
+        val decision = decide(
+            settings = defaults.copy(whitelistPolicy = OriginPolicy.RING),
+            whitelist = WhitelistLookup.HIT,
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.PERSONAL_WHITELIST), decision)
+    }
+
+    @Test
+    fun `whitelist com politica bloquear e bloqueada sem rastro`() {
+        val decision = decide(
+            settings = defaults.copy(whitelistPolicy = OriginPolicy.BLOCK),
+            whitelist = WhitelistLookup.HIT,
+        )
+        assertEquals(CallDecision.BlockWithoutTrace(DecisionReason.PERSONAL_WHITELIST), decision)
     }
 
     // 6. Falha de consulta local
@@ -171,6 +198,12 @@ class CallDecisionEngineTest {
     @Test
     fun `desconhecido com politica tocar e permitido`() {
         val decision = decide(settings = defaults.copy(unknownPolicy = OriginPolicy.RING))
+        assertEquals(CallDecision.Allow(DecisionReason.UNKNOWN_NUMBER), decision)
+    }
+
+    @Test
+    fun `desconhecido com politica nunca silenciar toca`() {
+        val decision = decide(settings = defaults.copy(unknownPolicy = OriginPolicy.NEVER_SILENCE))
         assertEquals(CallDecision.Allow(DecisionReason.UNKNOWN_NUMBER), decision)
     }
 
