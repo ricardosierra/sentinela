@@ -274,6 +274,9 @@
     <!-- Modo discador já ativo: painel de reversão -->
     <string name="dialer_active_chip">Ativo</string>
     <string name="dialer_active_title">O Sentinela é seu telefone padrão</string>
+    <string name="action_back">Voltar</string>
+    <string name="dialer_active_changes_title">O que está valendo agora</string>
+    <string name="dialer_activation_unavailable">Este aparelho não oferece o papel de telefone padrão — normalmente porque não tem telefonia. O modo filtro do Sentinela continua funcionando onde houver chamadas de telefone.</string>
     <string name="dialer_revert_cta">Escolher outro telefone</string>
     <string name="dialer_revert_hint">Ao voltar para outro app de telefone, o modo filtro do Sentinela continua funcionando normalmente — sem reinstalar nem reconfigurar nada.</string>
 
