@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-07-29T13:58:50.628Z"
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-07-29T14:00:20.597Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 3
   total_plans: 20
-  completed_plans: 16
+  completed_plans: 17
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 04 (Contatos do Aparelho) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 
 ## Snapshot
 
@@ -100,6 +100,9 @@ Plan: 2 of 5
 - [Phase 03]: Instancia unica de DataStore e de banco no AppContainer; onCreate da Application nunca faz I/O sincrono (cold start do Service)
 - [Phase 04]: READ_CONTACTS entra no manifest no MESMO commit das duas edicoes do verify-invariants.sh (ALLOWLIST + FUTURE)
 - [Phase 04]: Gravacao na agenda proibida para sempre em manifest: testes usam adoptShellPermissionIdentity (declarar em androidTest nao funciona, a instrumentacao roda no uid do app)
+- [Phase 04]: Flag contacts_permission_asked gravado ao disparar o launcher, nunca no callback: o usuario pode matar o app com o dialogo aberto
+- [Phase 04]: Camada que toca ActivityCompat vive em platform/, fora dos pacotes medidos pelo Kover — evita falso-vermelho no gate sem excludes novo
+- [Phase 04]: contacts_permission_asked fica fora de ScreeningSettings: nao e configuracao de triagem e nao pesa no snapshot do caminho quente
 
 ## Convenções operacionais do GSD
 
@@ -143,6 +146,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T13:58:50.625Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-07-29T14:00:20.595Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
