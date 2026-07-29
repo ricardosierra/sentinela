@@ -35,7 +35,6 @@ import org.sentinela.app.SentinelaApp
 import org.sentinela.app.telecom.call.CallSessionCoordinator
 import org.sentinela.app.telecom.call.CallSnapshot
 import org.sentinela.app.telecom.call.CallUiState
-import org.sentinela.app.telecom.call.CallOrigin as DomainCallOrigin
 import org.sentinela.app.ui.theme.SentinelaTheme
 import org.sentinela.app.ui.theme.numberLg
 import org.sentinela.app.ui.theme.timer
@@ -252,13 +251,5 @@ private fun stateLabelOf(state: CallUiState): Int = when (state) {
     CallUiState.Active -> R.string.call_active_state
     CallUiState.Ended -> R.string.call_ended_state
     CallUiState.Failed -> R.string.call_failed_state
-    is CallUiState.Unsupported -> R.string.call_active_state
-}
-
-/** Tradução entre a origem do domínio e o chip visual, que tem vocabulário próprio. */
-private fun chipOriginOf(origin: DomainCallOrigin): CallOrigin = when (origin) {
-    DomainCallOrigin.CONTATO -> CallOrigin.CONTACT
-    DomainCallOrigin.PERMITIDO -> CallOrigin.WHITELIST
-    DomainCallOrigin.DESCONHECIDO -> CallOrigin.UNKNOWN
-    DomainCallOrigin.PRIVADO -> CallOrigin.PRIVATE
+    is CallUiState.Unsupported -> R.string.call_unsupported_state
 }
