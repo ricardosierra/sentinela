@@ -38,3 +38,13 @@
 - [x] GSD inicializado em `.planning/` — 81 requisitos, roadmap de 9 fases, pesquisa de stack/plataforma, perfil quality
 - [x] Travas de agente: `CLAUDE.md`/`AGENTS.md` espelhados, `.claude/settings.json` com hooks do graphify
 - [x] Nome provisório dos mockups eliminado de todos os arquivos — branding único Sentinela
+
+**Phase 1 — Fundação compilável (2026-07-29):**
+
+- [x] **Política de lint declarada** (QLT-02) — bloco `lint { }` único em `app/build.gradle.kts` com `abortOnError = true` e três supressões justificadas por comentário (`UnusedResources`, `Typos`, `AndroidGradlePluginVersion`); sem `lint-baseline.xml`, de 137 warnings a **0 issues**
+- [x] **`ObsoleteSdkInt` corrigido de verdade**, não suprimido — qualificador de API obsoleto removido do ícone adaptativo (`res/mipmap-anydpi-v26/` → `res/mipmap/`), desnecessário em minSdk 29
+- [x] **`scripts/verify-invariants.sh`** — gate reexecutável de manifest (allowlist de permissões sobre o manifest **mergeado**, zero `INTERNET`, `BIND_SCREENING_SERVICE` presente), rebranding (`sentinelaApplicationId`, nenhuma string hardcoded, nenhuma `Color(0x` fora de `ui/theme`) e domínio puro (nenhum `import android` em `domain/`)
+- [x] **`ThemeTokensTest`** — trava em JVM pura (sem Robolectric) dos tokens "Silent Guardian" e do wiring do `darkColorScheme`
+- [x] Matriz `OriginPolicy` × origem fechada no `CallDecisionEngineTest` — suíte de 20 para **28 testes**, 0 falhas
+- [x] Evidência auditável do build pós-`clean` arquivada em `.planning/phases/01-fundacao-compilavel/01-EVIDENCE.md` (57 actionable tasks, 34 executadas, lint 0, detekt 0, APK debug 33,8 MB)
+- [x] Conflito documental de `POST_NOTIFICATIONS` reconciliado a favor de `docs/PERMISSOES.md` (fonte canônica): declaração mantida na Fase 1, pedido em runtime só na Fase 5

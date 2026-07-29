@@ -61,6 +61,17 @@ confirmação de app de telefone padrão).
 | 29 | Tela bloqueada | Ligar do contato com aparelho bloqueado | UI de chamada aparece sobre a tela bloqueada; atender funciona | |
 | 30 | Reversão | Desativar modo discador | App de telefone nativo volta a ser o padrão; ligações seguem normais; modo filtro segue ativo | |
 
+## Pendências herdadas da Phase 1 (fundação)
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 31 | APK debug instala | `adb install sentinela-debug.apk` | Instala sem erro; ícone aparece na gaveta | |
+| 32 | Tema dark Silent Guardian renderiza | Abrir o app com o sistema em dark mode | Fundo `#081425`, texto legível, contraste correto; nenhum flash branco no splash | |
+| 33 | Dynamic Color sob One UI | Trocar o papel de parede/paleta do sistema (Android 12+) e reabrir | O app adota a paleta dinâmica sem quebrar legibilidade | |
+| 34 | Tema light forçado | Forçar light mode no sistema | App permanece utilizável e legível (produto é dark-first) | |
+
+Origem: Phase 1, criterio 2. Diferido conforme a politica de validacao fisica do ROADMAP (2026-07-28).
+
 ## Registro de comportamento OEM
 
 Anotar aqui QUALQUER desvio (ex.: entrada "bloqueada" no log nativo mesmo com skip, toast do

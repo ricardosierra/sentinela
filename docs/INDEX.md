@@ -31,6 +31,7 @@
 ## Backlog
 
 - [`backlog/supabase-v2.md`](backlog/supabase-v2.md) — etapa 2 (Supabase/sync), fora do MVP
+- [`backlog/manutencao-toolchain.md`](backlog/manutencao-toolchain.md) — itens de manutenção de toolchain adiados (gradlew.bat, AGP 9.3.1, revisão dos disable de lint)
 
 ## Planejamento (GSD)
 

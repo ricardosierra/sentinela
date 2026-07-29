@@ -35,6 +35,13 @@ de validação física registrada no ROADMAP.
   na Fase 1, com o **pedido em runtime** só na Fase 5. Remover a declaração quebraria a Phase 5.
   `READ_CONTACTS` entra na Phase 4; `ROLE_DIALER`/`BIND_INCALL_SERVICE`/`CALL_PHONE` só na
   Phase 6. Antecipar essas é violação registrada em `docs/PERMISSOES.md`.
+
+> **Reconciliação POST_NOTIFICATIONS (2026-07-29):** `docs/PERMISSOES.md` (linha 13) é a fonte
+> canônica de permissões segundo o `CLAUDE.md` e autoriza explicitamente a **declaração** de
+> `POST_NOTIFICATIONS` no manifest na Fase 1, com o **pedido em runtime** apenas na Fase 5
+> (NTF-02). A permissão PERMANECE declarada. Removê-la quebraria a Phase 5. O verifier não deve
+> tratar sua presença como violação de permissão.
+
 - A checagem do critério 3 roda sobre o **manifest mergeado**, não o fonte: o AGP injeta
   `org.sentinela.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, então a verificação usa
   allowlist, não contagem exata.
