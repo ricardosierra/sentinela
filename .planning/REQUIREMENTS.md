@@ -113,7 +113,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **QLT-03**: Testes de migração do Room quando houver migração de schema
 - [ ] **QLT-04**: Roteiro reproduzível de validação física Samsung executado ou documentado (`docs/TESTE-FISICO-SAMSUNG.md`), incluindo cenários do modo discador
 - [ ] **QLT-05**: Entregáveis: README, APK debug, matriz de permissões, política de privacidade, limitações, decisões, backlog de sincronização e relatório final de entrega (resumo, arquivos principais, comandos, resultado dos testes, pendências físicas, riscos reais)
-- [ ] **QLT-06**: Testes instrumentados possíveis no ambiente executam verdes (`connectedDebugAndroidTest`): Room DAO/migrações, DataStore, bind do CallScreeningService e fluxo mínimo do InCallService
+- [x] **QLT-06**: Testes instrumentados possíveis no ambiente executam verdes (`connectedDebugAndroidTest`): Room DAO/migrações, DataStore, bind do CallScreeningService e fluxo mínimo do InCallService
 - [x] **QLT-07**: Cobertura de testes ≥ 80% nas camadas de domínio e dados (Kover), medida no gate de release
 
 ## v2 Requirements
@@ -176,7 +176,7 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | QLT-02 | 1, 9 | Complete |
 | QLT-03 | 3 | Pending |
 | QLT-04..05 | 9 | Pending |
-| QLT-06 | 3, 5, 6 | Pending |
+| QLT-06 | 3, 5, 6 | Complete |
 | QLT-07 | 2, 9 | Complete |
 
 **Coverage:**

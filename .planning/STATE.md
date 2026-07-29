@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-07-29T06:05:45.451Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-07-29T06:06:45.642Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 2
   total_plans: 15
-  completed_plans: 9
+  completed_plans: 10
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 03 (Dados Locais) — EXECUTING
-Plan: 2 of 7
+Plan: 3 of 7
 
 ## Snapshot
 
@@ -71,6 +71,9 @@ Plan: 2 of 7
 - [Phase 02]: Gate so e aceito depois de demonstrado falhando (bound temporario em 99 quebrou o build); Phase 2 nao deixou pendencia fisica nova
 - [Phase 03]: Backup: path="." explicito em todos os <exclude> e datastore sem barra final; -wal/-shm cobertos pela exclusao recursiva de diretorio
 - [Phase 03]: BackupRulesTest le os XMLs por DocumentBuilderFactory (nunca regex) e trava zero <include>; falha demonstrada removendo um exclude
+- [Phase 03]: connectedDebugAndroidTest automatizado por scripts/run-instrumented-tests.sh: boot headless provado por sys.boot_completed + trap de emu kill
+- [Phase 03]: connectedDebugAndroidTest nao aceita --tests (nao e Test task); filtro real e -Pandroid.testInstrumentationRunnerArguments.tests_regex
+- [Phase 03]: Script apaga TEST-*.xml antes de rodar: relatorio antigo tem o mesmo defeito probatorio de UP-TO-DATE
 
 ## Convenções operacionais do GSD
 
@@ -113,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T06:05:45.449Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-07-29T06:06:37.853Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
