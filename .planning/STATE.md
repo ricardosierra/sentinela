@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-05-PLAN.md
-last_updated: "2026-07-29T14:45:16.426Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-07-29T16:37:49.851Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 4
-  total_plans: 20
-  completed_plans: 20
+  total_plans: 27
+  completed_plans: 22
 ---
 
 # Project State
@@ -19,13 +19,13 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 05 — Telecom (próxima; Phase 04 concluída)
+**Current focus:** Phase 05 — Triagem Telecom Modo Filtro
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 04 (Contatos do Aparelho) — COMPLETE
-Plan: 5 of 5
+Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
+Plan: 2 of 7
 
 ## Snapshot
 
@@ -124,6 +124,16 @@ Plan: 5 of 5
 - [Phase 04]: contactLookupRepository e singleton preguicoso no AppContainer, com a fonte compartilhada com o cache (duas fontes registrariam dois observadores); nada em Application.onCreate
 - [Phase 04]: max da sonda direta em MISS variou 30 ms -> 140 ms entre execucoes sem mudanca de codigo: a cauda so tem veredito em hardware real (cenario 37)
 - [Phase 04]: Tela de onboarding de contatos e da Phase 7 por desenho, nao lacuna da Fase 4: esta fase entrega manifest, maquina de estado, flag e string
+- [Phase 05]: Harness JVM do Service confirmado: buildService + Proxy de ICallScreeningAdapter no campo mCallScreeningAdapter captura cada resposta
+- [Phase 05]: Robolectric fixado em sdk 35 (teto real do JDK 17); sdk 36 exige Java 21 e nao e usado em nenhum teste
+- [Phase 05]: Classe de teste nao enxerga membros de outra classe de teste entre sandboxes de SDK do Robolectric: fixtures compartilhadas vivem em objeto neutro
+- [Phase 05]: SendSilentlyToVoicemail e emitido identico a Reject: a API nao tem caixa postal e o destino e da operadora
+- [Phase 05]: disallowCall + silenceCall e proibido no app apesar de legal na API: o Telecom avalia a recusa primeiro e o par seria enganoso
+- [Phase 05]: SCR-12: janela de chamada repetida = 5 min em REPEATED_CALL_WINDOW_MILLIS; regra no motor, nivel 6 de 8, so faz TOCAR e nunca bloquear
+- [Phase 05]: hasRecentBlock e a UNICA excecao ao contrato da Fase 3 de propagar excecao do DAO: falha vira LOOKUP_FAILED e a decisao segue a politica normal
+- [Phase 05]: Corte da janela e INCLUSIVO (>=), espelho do corte estrito (<) da poda; nenhum indice novo em blocked_call para nao exigir migracao v2
+- [Phase 05]: Contagem de abertura saiu de Application.onCreate e foi para MainActivity.onCreate com guarda savedInstanceState == null: start de processo do Telecom nao e abertura
+- [Phase 05]: src/main/java declarado como input das Test tasks: teste estrutural que le fonte do disco ficaria UP-TO-DATE e daria falso verde
 
 ## Convenções operacionais do GSD
 
@@ -167,6 +177,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T14:41:50.884Z
-Stopped at: Completed 04-05-PLAN.md
+Last session: 2026-07-29T16:37:38.081Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
