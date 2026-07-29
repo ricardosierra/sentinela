@@ -39,11 +39,14 @@ class RoomBlockedCallRepository(
      * Excecao do DAO propaga de proposito — quem decide engolir e o Service da
      * Fase 5, que precisa saber que o registro nao aconteceu.
      */
-    override suspend fun record(entry: BlockedCallEntry): Unit = withContext(io) {
+    override suspend fun record(entry: BlockedCallEntry): Long = withContext(io) {
         val current = settings.snapshot()
-        if (!current.historyEnabled || !current.retentionPolicy.shouldStore) return@withContext
-        dao.record(entry.toEntity())
+        if (!current.historyEnabled || !current.retentionPolicy.shouldStore) {
+            return@withContext SEM_REGISTRO
+        }
+        val id = dao.record(entry.toEntity())
         pruneAccordingTo(current.retentionPolicy)
+        id
     }
 
     /** Chamada tambem na abertura do app (AppContainer). */
@@ -95,6 +98,11 @@ class RoomBlockedCallRepository(
     /** HST-05: o usuario marca a chamada como legitima ou indesejada. */
     suspend fun updateClassification(id: Long, classification: CallClassification): Unit =
         withContext(io) { dao.updateClassification(id, classification.name) }
+
+    private companion object {
+        /** Nada foi guardado: a configuracao do usuario manda nao deixar rastro local. */
+        const val SEM_REGISTRO = 0L
+    }
 }
 
 /**

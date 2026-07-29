@@ -106,6 +106,13 @@ class DataStoreSettingsRepository(
     override suspend fun snapshot(): ScreeningSettings =
         cached ?: settings.first().also { cached = it }
 
+    /**
+     * Leitura sem suspensão, para quem não pode esperar disco: cache frio devolve os padrões
+     * do MVP, que são os mais conservadores. Serve à notificação, chamada depois da resposta;
+     * nenhuma decisão de triagem pode se apoiar nisto — lá vale [snapshot].
+     */
+    fun cachedSnapshot(): ScreeningSettings = cached ?: ScreeningSettings()
+
     override suspend fun update(transform: (ScreeningSettings) -> ScreeningSettings) {
         dataStore.edit { prefs -> transform(prefs.toScreeningSettings()).writeInto(prefs) }
     }

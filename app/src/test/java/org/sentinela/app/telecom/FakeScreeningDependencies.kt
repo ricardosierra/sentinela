@@ -91,7 +91,13 @@ class FakeBlockedCallRepository(
     var chamadas: Int = 0
     var ultimoAgora: Long = -1
 
-    override suspend fun record(entry: BlockedCallEntry) = Unit
+    val gravados = mutableListOf<BlockedCallEntry>()
+    var idGravado: Long = 0
+
+    override suspend fun record(entry: BlockedCallEntry): Long {
+        gravados += entry
+        return idGravado
+    }
 
     override fun observeRecent(): Flow<List<BlockedCallEntry>> = flowOf(emptyList())
 

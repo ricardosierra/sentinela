@@ -21,23 +21,34 @@ import org.sentinela.app.data.local.RoomWhitelistRepository
 import org.sentinela.app.data.local.db.SENTINELA_MIGRATIONS
 import org.sentinela.app.data.local.db.SentinelaDatabase
 import org.sentinela.app.domain.CallDecisionEngine
+import org.sentinela.app.notifications.AndroidBlockedCallNotifier
+import org.sentinela.app.notifications.BlockedCallNotifier
 import org.sentinela.app.settings.DataStoreSettingsRepository
 import org.sentinela.app.phone.CascadingRegionProvider
 import org.sentinela.app.phone.LibPhoneNumberNormalizer
+import org.sentinela.app.phone.PhoneMask
 import org.sentinela.app.phone.PhoneNumberNormalizer
 import org.sentinela.app.phone.RegionProvider
 import org.sentinela.app.phone.phoneNumberUtil
+import org.sentinela.app.telecom.CallResponseFactory
+import org.sentinela.app.telecom.PostScreeningWork
+import org.sentinela.app.telecom.ScreenedCallFactory
+import org.sentinela.app.telecom.ScreeningCoordinator
+import org.sentinela.app.telecom.ScreeningDependencies
 import org.sentinela.app.platform.AndroidRegionProvider
 import org.sentinela.app.platform.assetsPhoneMetadataLoader
 
 /**
- * Container de dependências manual. As implementações reais (Room, DataStore,
- * notifier) entram nas Fases 3–5 do roadmap; aqui ficam apenas as fábricas para
- * o Service e a UI não instanciarem nada por conta própria.
+ * Container de dependências manual, instância única do processo. Nada é construído na partida:
+ * cada colaborador nasce preguiçoso, na primeira vez que alguém precisa dele, porque este
+ * arquivo define o custo de partida a frio do caminho de resposta ao sistema de telefonia.
+ *
+ * Ele também cumpre o contrato de que o serviço de triagem precisa, para que nem o serviço nem
+ * a interface instanciem qualquer coisa por conta própria.
  */
 class AppContainer(
     private val appContext: Context,
-) {
+) : ScreeningDependencies {
 
     val decisionEngine: CallDecisionEngine by lazy { CallDecisionEngine() }
 
@@ -52,13 +63,15 @@ class AppContainer(
         )
     }
 
+    private val phoneUtil by lazy { phoneNumberUtil(assetsPhoneMetadataLoader(appContext)) }
+
     /**
      * Instância única. `createInstance` desserializa metadados (dezenas de ms): construir aqui,
      * NUNCA dentro de `onScreenCall` — a Fase 5 tem orçamento p95 < 200 ms.
      */
     val phoneNumberNormalizer: PhoneNumberNormalizer by lazy {
         LibPhoneNumberNormalizer(
-            util = phoneNumberUtil(assetsPhoneMetadataLoader(appContext)),
+            util = phoneUtil,
             regionProvider = regionProvider,
         )
     }
@@ -149,7 +162,43 @@ class AppContainer(
         )
     }
 
-    // TODO(Fase 5): blockedCallNotifier (canal silencioso).
+    override val screenedCallFactory: ScreenedCallFactory by lazy {
+        ScreenedCallFactory(phoneNumberNormalizer)
+    }
+
+    override val callResponseFactory: CallResponseFactory by lazy { CallResponseFactory() }
+
+    /**
+     * Canal silencioso e opcional. Preguicoso de proposito: criar canal e tocar no servico de
+     * notificacoes na partida do processo pesaria no orcamento do caminho de resposta.
+     */
+    val blockedCallNotifier: BlockedCallNotifier by lazy {
+        AndroidBlockedCallNotifier(appContext) { settingsRepository.cachedSnapshot() }
+    }
+
+    override val postScreeningWork: PostScreeningWork by lazy {
+        PostScreeningWork(
+            settings = settingsRepository,
+            history = blockedCallRepository,
+            notifier = blockedCallNotifier,
+            mask = { numero -> PhoneMask.mask(phoneUtil, numero) },
+        )
+    }
+
+    override val screeningCoordinator: ScreeningCoordinator by lazy {
+        ScreeningCoordinator(
+            settings = settingsRepository,
+            contacts = contactLookupRepository,
+            whitelist = whitelistRepository,
+            blockedCalls = blockedCallRepository,
+            engine = decisionEngine,
+        )
+    }
+
+    override fun launchAfterResponse(block: suspend () -> Unit) {
+        appScope.launch { runCatching { block() } }
+    }
+
     // TODO(Fase 6): componentes do modo discador (InCallService/ROLE_DIALER).
 
     private companion object {

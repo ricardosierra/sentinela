@@ -10,7 +10,12 @@ import org.sentinela.app.domain.RepeatedCallLookup
  */
 interface BlockedCallRepository {
 
-    suspend fun record(entry: BlockedCallEntry)
+    /**
+     * Grava a chamada barrada e devolve o identificador da linha criada, ou zero quando a
+     * configuração manda não guardar rastro. O identificador é o que liga a notificação ao
+     * registro certo na tela de histórico.
+     */
+    suspend fun record(entry: BlockedCallEntry): Long
 
     fun observeRecent(): Flow<List<BlockedCallEntry>>
 

@@ -22,3 +22,20 @@ sealed interface CallDecision {
     /** Rejeita e suprime notificação nativa e histórico nativo. */
     data class BlockWithoutTrace(override val reason: DecisionReason) : CallDecision
 }
+
+/**
+ * A decisão barrou a chamada, isto é, impediu o telefone de tocar?
+ *
+ * Serve ao trabalho posterior — histórico e notificação —, que só faz sentido quando houve
+ * bloqueio de verdade. Silenciar não conta: a chamada aconteceu, apareceu na tela e o usuário
+ * pôde atender. Vive no domínio de propósito, para que a camada da plataforma não precise
+ * carregar uma condição própria sobre o destino de uma chamada.
+ */
+val CallDecision.blocksCall: Boolean
+    get() = when (this) {
+        is CallDecision.Allow, is CallDecision.Silence -> false
+        is CallDecision.Reject,
+        is CallDecision.SendSilentlyToVoicemail,
+        is CallDecision.BlockWithoutTrace,
+        -> true
+    }
