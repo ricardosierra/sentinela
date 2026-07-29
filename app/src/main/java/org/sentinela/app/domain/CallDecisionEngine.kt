@@ -24,9 +24,9 @@ import org.sentinela.app.settings.ScreeningSettings
  * NEVER_SILENCE decide como RING; o bypass de Não Perturbe é responsabilidade
  * da camada telecom/notificações, não do motor.
  */
-class CallDecisionEngine {
+open class CallDecisionEngine {
 
-    fun decide(
+    open fun decide(
         call: ScreenedCall,
         settings: ScreeningSettings,
         contact: ContactLookup,
