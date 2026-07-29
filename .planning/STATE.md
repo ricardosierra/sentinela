@@ -2,15 +2,16 @@
 gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
+current_plan: 3
 status: unknown
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-07-29T03:46:25.438Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-07-29T03:48:17.503Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -25,7 +26,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 01 (Fundacao Compilavel) — EXECUTING
-Current Plan: 2
+Current Plan: 3
 Total Plans in Phase: 3
 
 ## Snapshot
@@ -49,6 +50,8 @@ Total Plans in Phase: 3
 - [Bootstrap 2026-07-27]: AGP 9 tem Kotlin embutido — plugin `org.jetbrains.kotlin.android` NÃO deve ser aplicado (erro se aplicar)
 - [Bootstrap 2026-07-27]: Links GitHub no CHANGELOG usam `ricardosierra/sentinela` como placeholder até o remote existir
 - [Phase 01-fundacao-compilavel]: Politica de lint declarada no app/build.gradle.kts (sem lint-baseline); ObsoleteSdkInt corrigido de verdade renomeando res/mipmap-anydpi-v26 para res/mipmap
+- [Phase 01]: Permissoes verificadas por allowlist sobre o manifest MERGEADO (scripts/verify-invariants.sh); Phase 4/6 devem atualizar docs/PERMISSOES.md e a allowlist no mesmo commit
+- [Phase 01]: DarkColors passou a internal para permitir ThemeTokensTest em JVM pura (sem Robolectric)
 
 ## Convenções operacionais do GSD
 
@@ -91,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T03:46:25.435Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-07-29T03:48:17.501Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None

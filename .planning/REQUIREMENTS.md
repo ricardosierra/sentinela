@@ -85,11 +85,11 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **UIX-05**: Tela Histórico: filtros, marcar legítimo/indesejado, adicionar à whitelist, excluir/limpar
 - [ ] **UIX-06**: Tela Privacidade e sobre: dados armazenados, permissões usadas, retenção, limpar tudo, versão, limitações, links para configurações do app e do canal
 - [ ] **UIX-07**: Todas as strings em resources pt-BR — nenhum texto hardcoded em Kotlin
-- [ ] **UIX-08**: Dark mode (dark-first) + Dynamic Color quando disponível, seguindo tokens de `docs/design/DESIGN.md`
+- [x] **UIX-08**: Dark mode (dark-first) + Dynamic Color quando disponível, seguindo tokens de `docs/design/DESIGN.md`
 - [ ] **UIX-09**: Acessibilidade: TalkBack, alvos de toque ≥ 48 dp, contraste correto
 - [ ] **UIX-10**: Estados de carregamento e erro em todas as telas; proteção desativada é comunicada com destaque
 - [ ] **UIX-11**: Nenhuma promessa falsa na UI: não afirmar filtro de WhatsApp/VoIP nem "100% garantido"
-- [ ] **UIX-12**: Nome do app, applicationId, cores e strings centralizados para rebranding (resources + `sentinelaApplicationId` em `app/build.gradle.kts`)
+- [x] **UIX-12**: Nome do app, applicationId, cores e strings centralizados para rebranding (resources + `sentinelaApplicationId` em `app/build.gradle.kts`)
 - [ ] **UIX-13**: Seção "Apoie o Sentinela" (em Sobre): destaque de que o app é open source, sem propaganda, sem telemetria, sem nuvem e 100% offline; convite a comentário de apoio e doação em Bitcoin
 
 ### Engajamento e Apoio (ENG)
@@ -99,7 +99,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **ENG-04**: Convite nunca interrompe fluxo crítico (não aparece durante onboarding nem chamada) e respeita a escolha do usuário
 
 ### Privacidade e Segurança (PRV)
-- [ ] **PRV-01**: MVP sem permissão de INTERNET no manifest; nenhuma chamada de rede, telemetria, chave ou segredo — sync futura (v0.2) será opt-in e nunca no caminho da decisão
+- [x] **PRV-01**: MVP sem permissão de INTERNET no manifest; nenhuma chamada de rede, telemetria, chave ou segredo — sync futura (v0.2) será opt-in e nunca no caminho da decisão
 - [ ] **PRV-02**: Números sempre mascarados em logs; logs sensíveis removidos de release (R8 `-assumenosideeffects`)
 - [ ] **PRV-03**: Room/DataStore excluídos de backup em nuvem e device-transfer (`dataExtractionRules`)
 - [ ] **PRV-04**: R8/ProGuard configurado para release; componentes não necessários não exportados
@@ -162,12 +162,12 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | UIX-04..05 | 8 | Pending |
 | UIX-06 | 9 | Pending |
 | UIX-07, UIX-09..11 | 7, 8, 9 | Pending |
-| UIX-08 | 1 (tokens), 7, 8, 9 | Pending |
-| UIX-12 | 1 | Pending |
+| UIX-08 | 1 (tokens), 7, 8, 9 | Complete |
+| UIX-12 | 1 | Complete |
 | UIX-13 | 9 | Pending |
 | ENG-01 | 3 | Pending |
 | ENG-02..04 | 9 | Pending |
-| PRV-01 | 1 | Pending |
+| PRV-01 | 1 | Complete |
 | PRV-02, PRV-04 | 9 | Pending |
 | PRV-03 | 3 | Pending |
 | PRV-05 | 8 | Pending |
