@@ -21,6 +21,19 @@ fun interface CallSessionObserver {
 }
 
 /**
+ * Identidade da chamada como ela pode aparecer em **aviso do sistema**: nome que a própria ligação
+ * informou e número já **mascarado**.
+ *
+ * Existe como tipo próprio para que a fronteira seja visível no código: quem publica notificação
+ * recebe este objeto e não tem como obter a sequência completa de dígitos, que só vive em
+ * [CallIdentity] e só aparece na tela de chamada.
+ */
+data class MaskedCallIdentity(
+    val displayName: String? = null,
+    val maskedNumber: String? = null,
+)
+
+/**
  * Instância única do processo com o estado observável da chamada em curso.
  *
  * Existe porque o serviço da plataforma e a tela de chamada são dois componentes com ciclos de

@@ -167,6 +167,15 @@
     <string name="settings_notification_identification_anonymous">Não mostrar identificação</string>
     <string name="notification_permission_rationale">Para avisar sobre chamadas bloqueadas, o Sentinela precisa da permissão de notificações. O aviso é local e nunca mostra o número completo.</string>
 
+    <!-- Notificação de chamada (modo discador). Canal SEPARADO do canal de chamada bloqueada:
+         este precisa de importância alta para poder ocupar a tela bloqueada, e a importância de
+         um canal não muda depois de criada. -->
+    <string name="notification_channel_call">Chamadas em andamento</string>
+    <string name="notification_channel_call_desc">Mostra a chamada recebida em tela cheia e o aviso da chamada em curso. Só aparece quando o Sentinela é o telefone padrão.</string>
+    <string name="notification_call_incoming_title">Chamada recebida</string>
+    <string name="notification_call_ongoing_title">Chamada em andamento</string>
+    <string name="notification_call_unknown_caller">Número não identificado</string>
+
     <!-- ===================================================================
          Fase 6 — telas de chamada e discagem (modo discador opcional).
          Contrato: .planning/phases/06-modo-discador-opcional/06-UI-SPEC.md
@@ -179,6 +188,8 @@
     <string name="call_active_state">Em chamada</string>
     <string name="call_ended_state">Chamada encerrada</string>
     <string name="call_failed_state">Não foi possível completar a chamada</string>
+    <string name="call_unsupported_state">Chamada em curso</string>
+    <string name="call_unsupported_body">Esta versão do Sentinela não mostra os controles deste estado da chamada. Encerrar continua disponível abaixo.</string>
 
     <!-- Chamada: ações principais (label sob o botão) -->
     <string name="call_action_answer">Atender</string>
@@ -210,6 +221,9 @@
     <string name="call_audio_route_title">Saída de áudio</string>
     <string name="call_audio_route_earpiece">Telefone</string>
     <string name="call_audio_route_speaker">Alto-falante</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Fone de ouvido</string>
+    <string name="call_audio_route_active_state">em uso</string>
 
     <!-- Chamada: cronômetro e teclado DTMF -->
     <string name="call_timer_description">Duração da chamada: %1$s</string>
