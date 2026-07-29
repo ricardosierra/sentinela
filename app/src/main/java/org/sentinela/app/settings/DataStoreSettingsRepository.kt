@@ -78,6 +78,26 @@ class DataStoreSettingsRepository(
         dataStore.edit { it[Keys.CONTACTS_PERMISSION_ASKED] = true }
     }
 
+    /**
+     * NTF-02: mesmo par de sinais da agenda, agora para a permissão de notificações, que só é
+     * pedida no momento do opt-in — nunca no onboarding.
+     *
+     * Também fora de [ScreeningSettings] pelo mesmo motivo: não é configuração de triagem e
+     * não pode pesar no snapshot servido no caminho quente do Service.
+     */
+    val notificationPermissionAsked: Flow<Boolean> =
+        dataStore.data
+            .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
+            .map { it[Keys.NOTIFICATION_PERMISSION_ASKED] ?: false }
+
+    /**
+     * Chamar no momento em que o launcher da permissão é disparado, NUNCA no callback: o
+     * usuário pode matar o app com o diálogo do sistema aberto. Idempotente.
+     */
+    suspend fun markNotificationPermissionAsked() {
+        dataStore.edit { it[Keys.NOTIFICATION_PERMISSION_ASKED] = true }
+    }
+
     init {
         // Aquece e mantém o cache enquanto o processo viver.
         scope.launch { settings.collect() }
@@ -117,6 +137,8 @@ class DataStoreSettingsRepository(
         val HISTORY_ENABLED = booleanPreferencesKey("history_enabled")
         val RETENTION_POLICY = stringPreferencesKey("retention_policy")
         val REPEATED_CALL_BYPASS = booleanPreferencesKey("repeated_call_bypass")
+        val NOTIFICATION_IDENTIFICATION = stringPreferencesKey("notification_identification")
+        val NOTIFICATION_PERMISSION_ASKED = booleanPreferencesKey("notification_permission_asked")
         val APP_OPEN_COUNT = intPreferencesKey("app_open_count")
         val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
     }
@@ -141,6 +163,9 @@ class DataStoreSettingsRepository(
             retentionPolicy = RetentionPolicy.fromId(this[Keys.RETENTION_POLICY]),
             repeatedCallBypassEnabled =
                 this[Keys.REPEATED_CALL_BYPASS] ?: padrao.repeatedCallBypassEnabled,
+            notificationIdentification = NotificationIdentification.entries
+                .firstOrNull { it.name == this[Keys.NOTIFICATION_IDENTIFICATION] }
+                ?: padrao.notificationIdentification,
         )
     }
 
@@ -165,5 +190,8 @@ class DataStoreSettingsRepository(
         prefs[Keys.HISTORY_ENABLED] = historyEnabled
         prefs[Keys.RETENTION_POLICY] = retentionPolicy.id
         prefs[Keys.REPEATED_CALL_BYPASS] = repeatedCallBypassEnabled
+        // Nome do enum, nunca a posição: reordenar as constantes trocaria a configuração
+        // já gravada do usuário (lição da Fase 3).
+        prefs[Keys.NOTIFICATION_IDENTIFICATION] = notificationIdentification.name
     }
 }

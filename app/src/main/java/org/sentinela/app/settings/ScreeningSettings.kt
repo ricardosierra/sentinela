@@ -30,7 +30,19 @@ data class ScreeningSettings(
      * chamada toca. Ligada por padrão (decisão do usuário, 2026-07-29).
      */
     val repeatedCallBypassEnabled: Boolean = true,
+    /**
+     * O que a notificação própria mostra quando está ligada. Padrão mascarado:
+     * o número completo nunca entra na notificação em nenhuma das opções.
+     */
+    val notificationIdentification: NotificationIdentification = NotificationIdentification.MASKED,
 )
+
+/**
+ * Identificação exibida na notificação própria. MASKED usa a máscara única do app
+ * (`+55 11 9****-1234`); ANONYMOUS não mostra dígito algum, para quem lê a tela
+ * bloqueada em público. Nenhuma das duas carrega a sequência completa de dígitos.
+ */
+enum class NotificationIdentification { MASKED, ANONYMOUS }
 
 /**
  * Política por origem da chamada (contato, whitelist ou desconhecido) —

@@ -1,7 +1,14 @@
 package org.sentinela.app.data.contacts
 
+import org.sentinela.app.permissions.RuntimePermissionAsk
+import org.sentinela.app.permissions.runtimePermissionAsk
+
 /**
  * Estado da permissao READ_CONTACTS do ponto de vista do usuario (CTT-01).
+ *
+ * Fachada nomeada da regra generica [RuntimePermissionAsk], que a Fase 5 extraiu para servir
+ * tambem a permissao de notificacoes. Este enum e mantido porque a agenda ja tem contrato
+ * publico com ele; a regra, porem, vive num lugar so.
  *
  * Por que existe um flag persistido no meio disso:
  * `shouldShowRequestPermissionRationale` devolve `false` nos DOIS extremos — antes do
@@ -50,9 +57,10 @@ val ContactsPermissionState.shouldOfferSystemSettings: Boolean
 /**
  * Regra pura e determinística: recebe os tres sinais ja coletados e devolve o estado.
  *
- * Deliberadamente sem nenhum `import android.*` — a leitura de `checkSelfPermission` e de
- * `shouldShowRequestPermissionRationale` fica na camada fina `platform/ContactsPermissionChecker`,
- * de modo que toda a regra seja testavel em JVM e medida pelo Kover.
+ * Delega inteiramente a [runtimePermissionAsk] — nenhuma condicao propria mora aqui, para que
+ * agenda e notificacoes nunca possam divergir. Deliberadamente sem nenhum `import android.*`:
+ * a leitura de `checkSelfPermission` e de `shouldShowRequestPermissionRationale` fica na camada
+ * fina `platform/ContactsPermissionChecker`, testavel em JVM e medida pelo Kover.
  *
  * @param granted resultado de `checkSelfPermission(READ_CONTACTS) == PERMISSION_GRANTED`.
  * @param alreadyAsked flag persistido: ja disparamos o launcher alguma vez nesta instalacao.
@@ -62,10 +70,9 @@ fun contactsPermissionState(
     granted: Boolean,
     alreadyAsked: Boolean,
     rationale: Boolean,
-): ContactsPermissionState = when {
-    granted -> ContactsPermissionState.GRANTED
-    // rationale e falso aqui porque nunca perguntamos, nao porque negaram de vez.
-    !alreadyAsked -> ContactsPermissionState.NEVER_ASKED
-    rationale -> ContactsPermissionState.DENIED_ONCE
-    else -> ContactsPermissionState.DENIED_PERMANENTLY
+): ContactsPermissionState = when (runtimePermissionAsk(granted, alreadyAsked, rationale)) {
+    RuntimePermissionAsk.GRANTED -> ContactsPermissionState.GRANTED
+    RuntimePermissionAsk.NEVER_ASKED -> ContactsPermissionState.NEVER_ASKED
+    RuntimePermissionAsk.DENIED_ONCE -> ContactsPermissionState.DENIED_ONCE
+    RuntimePermissionAsk.DENIED_PERMANENTLY -> ContactsPermissionState.DENIED_PERMANENTLY
 }

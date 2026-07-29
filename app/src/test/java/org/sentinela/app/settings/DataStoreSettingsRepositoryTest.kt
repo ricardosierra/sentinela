@@ -359,6 +359,106 @@ class DataStoreSettingsRepositoryTest {
         assertEquals(ScreeningSettings(), repo.snapshot())
     }
 
+    // --- NTF: identificacao da notificacao e flag de pedido ------------------
+
+    @Test
+    fun `identificacao da notificacao comeca mascarada`() = runTest {
+        assertEquals(
+            NotificationIdentification.MASKED,
+            repo().snapshot().notificationIdentification,
+        )
+    }
+
+    @Test
+    fun `identificacao anonima faz round-trip pelo disco`() = runTest {
+        val file = novoArquivo()
+        val scopeA = novoScope()
+        DataStoreSettingsRepository(dataStore(scopeA, file), scopeA)
+            .update { it.copy(notificationIdentification = NotificationIdentification.ANONYMOUS) }
+        scopeA.cancel()
+
+        val scopeB = novoScope()
+        val relido = DataStoreSettingsRepository(dataStore(scopeB, file), scopeB)
+
+        assertEquals(
+            NotificationIdentification.ANONYMOUS,
+            relido.snapshot().notificationIdentification,
+        )
+    }
+
+    @Test
+    fun `identificacao e persistida pelo nome do enum e nao pela posicao`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+
+        DataStoreSettingsRepository(ds, scope)
+            .update { it.copy(notificationIdentification = NotificationIdentification.ANONYMOUS) }
+
+        assertEquals(
+            "ANONYMOUS",
+            ds.data.first()[stringPreferencesKey("notification_identification")],
+        )
+    }
+
+    @Test
+    fun `identificacao desconhecida gravada em disco cai no padrao mascarado`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+        ds.edit { it[stringPreferencesKey("notification_identification")] = "FULL_NUMBER" }
+
+        val repo = DataStoreSettingsRepository(ds, scope)
+
+        assertEquals(
+            NotificationIdentification.MASKED,
+            repo.snapshot().notificationIdentification,
+        )
+    }
+
+    @Test
+    fun `notificationPermissionAsked comeca falso e sobrevive a recriacao`() = runTest {
+        val file = novoArquivo()
+        val scopeA = novoScope()
+        val primeiro = DataStoreSettingsRepository(dataStore(scopeA, file), scopeA)
+        assertEquals(false, primeiro.notificationPermissionAsked.first())
+        primeiro.markNotificationPermissionAsked()
+        scopeA.cancel()
+
+        val scopeB = novoScope()
+        val relido = DataStoreSettingsRepository(dataStore(scopeB, file), scopeB)
+
+        assertEquals(true, relido.notificationPermissionAsked.first())
+    }
+
+    @Test
+    fun `o flag de notificacao vai ao disco com a chave textual contratada`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+
+        DataStoreSettingsRepository(ds, scope).markNotificationPermissionAsked()
+
+        assertEquals(
+            true,
+            ds.data.first()[booleanPreferencesKey("notification_permission_asked")],
+        )
+    }
+
+    @Test
+    fun `o flag de notificacao nao contamina as configuracoes de triagem`() = runTest {
+        val repo = repo()
+
+        repo.markNotificationPermissionAsked()
+
+        assertEquals(ScreeningSettings(), repo.snapshot())
+    }
+
+    @Test
+    fun `a notificacao propria continua desligada por padrao`() = runTest {
+        assertEquals(false, repo().snapshot().showOwnNotification)
+    }
+
     @Test
     fun `retencao MANUAL persistida nao produz cutoff`() = runTest {
         val repo = repo()
