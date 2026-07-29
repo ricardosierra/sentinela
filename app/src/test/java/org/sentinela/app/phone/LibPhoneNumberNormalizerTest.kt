@@ -1,6 +1,7 @@
 package org.sentinela.app.phone
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -99,6 +100,49 @@ class LibPhoneNumberNormalizerTest {
     @Test
     fun `mask delega a PhoneMask e devolve o formato canonico`() {
         assertEquals("+55 11 9****-1234", normalizer().mask("+5511987651234"))
+    }
+
+    // --- nationalDigits: a SEGUNDA sonda da consulta a agenda (Fase 4) ---------------------
+    // Motivo medido em 04-RESEARCH.md: contato gravado em formato nacional de outra regiao fica
+    // com o normalizado do provider nulo e NAO e alcancado por uma consulta iniciada com "+".
+
+    @Test
+    fun `nationalDigits de celular BR tira DDI e o mais`() {
+        assertEquals("11912345678", normalizer().nationalDigits("+5511912345678"))
+    }
+
+    @Test
+    fun `nationalDigits de numero dos EUA tira o DDI 1`() {
+        assertEquals("4155552671", normalizer().nationalDigits("+14155552671"))
+    }
+
+    @Test
+    fun `nationalDigits de fixo BR preserva o DDD`() {
+        assertEquals("2132165498", normalizer().nationalDigits("+552132165498"))
+    }
+
+    @Test
+    fun `nationalDigits de codigo curto e nulo`() {
+        assertNull(normalizer().nationalDigits("190"))
+    }
+
+    @Test
+    fun `nationalDigits de texto nao numerico e nulo e nunca lanca`() {
+        assertNull(normalizer().nationalDigits("nao-e-numero"))
+    }
+
+    @Test
+    fun `nationalDigits de entrada vazia e nulo`() {
+        assertNull(normalizer().nationalDigits(""))
+    }
+
+    @Test
+    fun `nationalDigits nunca devolve o mais nem espaco`() {
+        val n = normalizer()
+        listOf("+5511912345678", "+14155552671", "+442071838750").forEach { e164 ->
+            val nacional = n.nationalDigits(e164)
+            assertTrue("nacional inesperado: $nacional", nacional!!.matches(Regex("[0-9]+")))
+        }
     }
 
     @Test

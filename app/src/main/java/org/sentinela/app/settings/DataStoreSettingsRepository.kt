@@ -57,8 +57,10 @@ class DataStoreSettingsRepository(
 
     /**
      * CTT-01: distingue "nunca pedimos" de "negada permanentemente" — a plataforma devolve
-     * `shouldShowRequestPermissionRationale = false` nos dois casos. Ver
-     * [org.sentinela.app.data.contacts.contactsPermissionState].
+     * `shouldShowRequestPermissionRationale = false` nos dois casos. Ver a função pura
+     * `contactsPermissionState`, em `data/contacts` — referência escrita sem o nome totalmente
+     * qualificado de propósito: o invariante de rebranding proíbe o applicationId literal em
+     * Kotlin, e ele não distingue KDoc de código.
      *
      * Deliberadamente fora de [ScreeningSettings]: não é configuração de triagem e não pode
      * entrar no snapshot servido no caminho quente do Service.

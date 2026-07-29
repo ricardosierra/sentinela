@@ -54,6 +54,17 @@ class LibPhoneNumberNormalizer(
         return NormalizationResult.Invalid(motivoDeInvalido(parsed, regiao))
     }
 
+    /**
+     * Sem regiao de fallback de proposito: `parse(e164, null)` so aceita entrada com DDI
+     * explicito, que e exatamente o contrato de [nationalDigits]. Passar uma regiao aqui faria
+     * um numero solto virar "nacional" de um pais arbitrario e envenenaria a segunda sonda.
+     * Codigo curto e recusado pelo mesmo limiar da normalizacao ([PhoneNumbers.LIMIAR_CURTO],
+     * com o MESMO operador `<`): `190` nao tem numero nacional significativo.
+     */
+    override fun nationalDigits(e164: String): String? = runCatching {
+        util.parse(e164, null).nationalNumber.toString()
+    }.getOrNull()?.takeIf { it.length >= PhoneNumbers.LIMIAR_CURTO }
+
     override fun mask(e164: String): String = PhoneMask.mask(util, e164)
 
     /**

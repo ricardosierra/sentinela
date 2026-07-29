@@ -16,6 +16,16 @@ interface PhoneNumberNormalizer {
      */
     fun normalize(raw: String, region: String? = null): NormalizationResult
 
+    /**
+     * Dígitos do número nacional significativo (DDD + número, sem DDI e sem `+`), ou `null`
+     * quando [e164] não parseia ou é código curto.
+     *
+     * Existe para a SEGUNDA sonda da consulta à agenda (Fase 4): um contato gravado em formato
+     * nacional de outra região fica com o valor normalizado do provider nulo e **não** é
+     * alcançado por uma consulta iniciada com `+` — medido em `04-RESEARCH.md`. Nunca lança.
+     */
+    fun nationalDigits(e164: String): String?
+
     /** Máscara segura para exibição/log (ex.: +55 11 9****-1234). Nunca lança. */
     fun mask(e164: String): String
 }
