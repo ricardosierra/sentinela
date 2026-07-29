@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-07-PLAN.md — Phase 05 COMPLETE
-last_updated: "2026-07-29T17:35:11.838Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-07-29T22:17:43.870Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 5
-  total_plans: 27
-  completed_plans: 27
+  total_plans: 35
+  completed_plans: 28
 ---
 
 # Project State
@@ -19,14 +19,13 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 05 — Triagem Telecom Modo Filtro
+**Current focus:** Phase 06 — Modo Discador Opcional
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 05 (Triagem Telecom Modo Filtro) — COMPLETE
-Plan: 7 of 7
-Next: Phase 06 — Modo Discador (pesquisa obrigatória reforçada antes do planejamento)
+Phase: 06 (Modo Discador Opcional) — EXECUTING
+Plan: 2 of 8
 
 ## Snapshot
 
@@ -36,6 +35,7 @@ Next: Phase 06 — Modo Discador (pesquisa obrigatória reforçada antes do plan
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
 - **Qualidade:** 417 testes JVM + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
+- **Modo discador (em construcao):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
@@ -164,6 +164,13 @@ Next: Phase 06 — Modo Discador (pesquisa obrigatória reforçada antes do plan
 - [Phase 05]: 05-07: SCR-04 (numero oculto) e PARCIAL — nunca entregue no modo filtro, vale no modo discador (Fase 6); codigo e configuracao mantidos, limitacao documentada
 - [Phase 05]: 05-07: camada de triagem entrou no Kover SEM exclude novo e a cobertura SUBIU (96,68% -> 97,64%) — consequencia do coordenador ser puro; ele nunca pode aparecer em exclude
 - [Phase 05]: 05-07: criterio por grep nao distingue include de exclude (3a autossabotagem da fase); grep prova ausencia de texto, jamais ausencia de comportamento — verificar a intencao no bloco certo
+- [Phase 06]: 06-01: nucleo do modo discador e puro (CallUiState/CallStateMapper/CallControls/CallSessionCoordinator) — zero tipo da plataforma, cobertura subiu para 97,70% sem exclude novo
+- [Phase 06]: 06-01: falha no caminho da chamada PROPAGA (inverso da rede permissiva da Fase 5) — processo morto o Telecom detecta e religa no discador do aparelho; interface viva e congelada ninguem detecta
+- [Phase 06]: 06-01: prazo de apresentacao de 2 s (PRESENTATION_DEADLINE_MILLIS) com confirmPresented() da UI; sem confirmacao a sessao lanca CallPresentationTimeoutException
+- [Phase 06]: 06-01: mudo e viva-voz sao provados na costura CallControls por lista ordenada de eventos — pedi-los ao servico sem telefone vinculado e no-op silencioso e daria teste vacuoso
+- [Phase 06]: 06-01: tom de teclado tem pareamento obrigatorio (novo digito, saida da sessao e estado terminal encerram o tom pendente) — invariante no nivel da resposta unica da Fase 5
+- [Phase 06]: 06-01: as duas defesas do vigia de apresentacao sao redundantes de proposito; quebrar so uma deixa tudo verde — precedente das duas redes da Fase 5
+- [Phase 06]: 06-01: kotlin-test nao esta no classpath — matriz de falhas usa assertThrows do JUnit 4.13; @Suppress(TooManyFunctions) local em vez de afrouxar detekt.yml
 
 ## Convenções operacionais do GSD
 
@@ -207,6 +214,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T17:31:37.963Z
-Stopped at: Completed 05-07-PLAN.md — Phase 05 COMPLETE
+Last session: 2026-07-29T22:17:16.027Z
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None
