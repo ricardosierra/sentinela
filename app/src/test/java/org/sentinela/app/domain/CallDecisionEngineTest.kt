@@ -36,6 +36,24 @@ class CallDecisionEngineTest {
         assertEquals(CallDecision.Allow(DecisionReason.OUTGOING_CALL), decision)
     }
 
+    @Test
+    fun `saida vence protecao desligada`() {
+        val decision = decide(
+            ScreenedCall(CallDirection.OUTGOING, ScreenedNumber.Valid("+5511912341234")),
+            defaults.copy(protectionEnabled = false),
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.OUTGOING_CALL), decision)
+    }
+
+    @Test
+    fun `saida vence bloqueio de numero privado`() {
+        val decision = decide(
+            ScreenedCall(CallDirection.OUTGOING, ScreenedNumber.Private),
+            defaults.copy(blockPrivateNumbers = true),
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.OUTGOING_CALL), decision)
+    }
+
     // 2. Proteção
 
     @Test
@@ -57,6 +75,15 @@ class CallDecisionEngineTest {
     fun `numero privado permitido quando configurado`() {
         val decision = decide(incoming(ScreenedNumber.Private), defaults.copy(blockPrivateNumbers = false))
         assertEquals(CallDecision.Allow(DecisionReason.PRIVATE_NUMBER), decision)
+    }
+
+    @Test
+    fun `protecao desligada vence bloqueio de numero privado`() {
+        val decision = decide(
+            incoming(ScreenedNumber.Private),
+            defaults.copy(protectionEnabled = false, blockPrivateNumbers = true),
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.PROTECTION_DISABLED), decision)
     }
 
     // 4. Contato da agenda
@@ -100,6 +127,29 @@ class CallDecisionEngineTest {
             settings = defaults.copy(whitelistPolicy = OriginPolicy.BLOCK),
             contact = ContactLookup.HIT,
             whitelist = WhitelistLookup.HIT,
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.CONTACT), decision)
+    }
+
+    @Test
+    fun `politica de contato vence a whitelist mesmo quando bloqueia`() {
+        val decision = decide(
+            settings = defaults.copy(
+                contactsPolicy = OriginPolicy.BLOCK,
+                whitelistPolicy = OriginPolicy.RING,
+            ),
+            contact = ContactLookup.HIT,
+            whitelist = WhitelistLookup.HIT,
+        )
+        assertTrue(decision is CallDecision.BlockWithoutTrace)
+        assertEquals(DecisionReason.CONTACT, decision.reason)
+    }
+
+    @Test
+    fun `contato hit vence falha de consulta da whitelist`() {
+        val decision = decide(
+            contact = ContactLookup.HIT,
+            whitelist = WhitelistLookup.LOOKUP_FAILED,
         )
         assertEquals(CallDecision.Allow(DecisionReason.CONTACT), decision)
     }
