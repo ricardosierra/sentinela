@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-06-PLAN.md
-last_updated: "2026-07-29T12:07:13.732Z"
+stopped_at: Completed 03-07-PLAN.md
+last_updated: "2026-07-29T12:21:58.065Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 15
-  completed_plans: 14
+  completed_plans: 15
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 03 — Dados Locais
+**Current focus:** Phase 04 — Contatos do Aparelho (Phase 03 fechada)
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 03 (Dados Locais) — EXECUTING
+Phase: 03 (Dados Locais) — COMPLETE
 Plan: 7 of 7
 
 ## Snapshot
@@ -32,7 +32,8 @@ Plan: 7 of 7
 - **Esqueleto:** Gradle KTS + catalog, AGP 9.3.0 (Kotlin embutido), Compose BOM 2026.06.01, compileSdk 37 / minSdk 29
 - **Domínio:** `CallDecisionEngine` com precedência saída→proteção→privado→contato→whitelist→falha→desconhecido e políticas por origem (`OriginPolicy`)
 - **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
-- **Qualidade:** 156 testes, cobertura domain+phone 97,619% com gate `koverVerify` em 80%; lint e detekt zerados
+- **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
+- **Qualidade:** 245 testes JVM + 30 instrumentados; cobertura domain+phone+data+settings 97,2881% com gate `koverVerify` em 80%; lint e detekt zerados
 - **Telecom:** `UnknownCallScreeningService` registrado em modo pass-through seguro (não interfere até a Phase 5)
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
@@ -91,6 +92,12 @@ Plan: 7 of 7
 - [Phase 03]: snapshot() servido de cache @Volatile aquecido por collector: disco so na primeira leitura (10,9 ms medidos)
 - [Phase 03]: DataStore recebido por construtor, nunca por delegate de Context: duas instancias sobre o mesmo arquivo derrubam o processo
 - [Phase 03]: @get:Rule combinado com @JvmField desliga a rule do JUnit (TemporaryFolder nunca criada)
+- [Phase 03]: p95 da whitelist saiu do assert do emulador e virou cenario 35 da validacao fisica (Phase 9); o numero de 5 ms NAO foi afrouxado — decisao do usuario
+- [Phase 03]: p50 < 1 ms e o EXPLAIN QUERY PLAN continuam quebrando o build: sinal estavel e prova estrutural ficam no CI
+- [Phase 03]: Kover mede data.* e settings.* excluindo o gerado pelo Room (data.local.db.*, *_Impl, annotatedBy Dao/Database): so roda instrumentado e daria falso-vermelho
+- [Phase 03]: Resolucao consistente do AGP: piso de dependencia so-de-teste precisa ser declarado no runtime PRINCIPAL, senao o androidTest herda a versao antiga
+- [Phase 03]: MigrationTestHelper(Instrumentation, Class<out RoomDatabase>) e a sobrecarga nao-deprecada do Room 2.8.4
+- [Phase 03]: Instancia unica de DataStore e de banco no AppContainer; onCreate da Application nunca faz I/O sincrono (cold start do Service)
 
 ## Convenções operacionais do GSD
 
@@ -111,7 +118,7 @@ Plan: 7 of 7
 - **Validação física obrigatória** — `setSkipCallLog`/notificação nativa variam por OEM; critérios de aceite centrais só fecham em Samsung físico (Phase 9)
 - **Modo discador é o maior risco técnico do MVP** — `InCallService` + elegibilidade ao papel + UX de chamada; pesquisa reforçada antes da Phase 6
 - **Robolectric 4.16.1 suporta até SDK 36** — com compileSdk 37, fixar `@Config(sdk = [36])` até o 4.17 estável
-- p95 de containsCabeNoOrcamentoMedido falha ~1 em 5 execucoes no emulador; o bound de 5 ms NAO foi afrouxado (proibido pelo plano). Decisao humana antes da Phase 9: manter e tolerar re-run, mover o p95 para validacao fisica, ou medir a cauda por mediana de N execucoes
+- ~~p95 de containsCabeNoOrcamentoMedido falha ~1 em 5 execucoes no emulador~~ **RESOLVIDO 2026-07-29 (decisao do usuario):** o p95 saiu do assert do emulador e virou o cenario 35 de `docs/TESTE-FISICO-SAMSUNG.md`, medido em Samsung fisico na Phase 9. O numero de 5 ms **nao foi afrouxado**; p50 < 1 ms e o `EXPLAIN QUERY PLAN` seguem quebrando o build
 
 ## Accumulated Context
 
@@ -134,6 +141,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T12:07:13.730Z
-Stopped at: Completed 03-06-PLAN.md
+Last session: 2026-07-29T12:21:58.063Z
+Stopped at: Completed 03-07-PLAN.md
 Resume file: None
