@@ -75,14 +75,14 @@ private const val CONTROLS_FADE_OUT_MILLIS = 200
 private const val KEYPAD_ENTER_MILLIS = 250
 private const val KEYPAD_EXIT_MILLIS = 200
 
-/**
- * Fracao superior da tela reservada quando o teclado de tons esta aberto.
- *
- * Existe para que o cronometro e o botao de encerrar continuem visiveis **e clicaveis** acima do
- * painel: enviar tom e tarefa secundaria, e perder o acesso ao encerrar por causa dela seria
- * exatamente a armadilha que esta fase existe para evitar.
+/*
+ * Nao existe fracao fixa de altura para a faixa superior quando o teclado de tons esta aberto, e
+ * isso foi MEDIDO, nao escolhido: reservar 30% da tela para ela colapsava o botao de encerrar para
+ * altura zero numa tela de 470 unidades — exatamente a armadilha que esta fase existe para evitar,
+ * e o caso de teste de alvo de toque pegou. Agora a faixa superior toma o tamanho do proprio
+ * conteudo e o painel fica com o resto, entao o cronometro e o encerrar continuam visiveis e
+ * clicaveis em qualquer altura de tela.
  */
-private const val TOP_REGION_FRACTION_WITH_KEYPAD = 0.3f
 
 /**
  * Chamada ativa: identidade, cronometro, tres controles e encerrar.
@@ -103,7 +103,7 @@ fun ActiveCallScreen(
     now: () -> Long = System::currentTimeMillis,
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .safeDrawingPadding()
@@ -116,10 +116,13 @@ fun ActiveCallScreen(
                 routes = routes,
                 activeRoute = activeRoute,
                 now = now,
+                // Com o painel aberto a faixa superior encolhe ao tamanho do conteudo; sem ele,
+                // ocupa a tela inteira e empurra as acoes para o rodape.
+                modifier = if (snapshot.keypadOpen) Modifier else Modifier.weight(1f),
             )
             AnimatedVisibility(
                 visible = snapshot.keypadOpen,
-                modifier = Modifier.align(Alignment.BottomCenter),
+                modifier = Modifier.weight(1f, fill = false),
                 enter = slideInVertically(
                     animationSpec = tween(KEYPAD_ENTER_MILLIS, easing = FastOutSlowInEasing),
                     initialOffsetY = { it },
@@ -148,15 +151,11 @@ private fun ActiveCallContent(
     routes: Set<CallAudioRoute>,
     activeRoute: CallAudioRoute?,
     now: () -> Long,
+    modifier: Modifier = Modifier,
 ) {
     val terminal = snapshot.state.isTerminal()
-    val alturaSuperior = if (snapshot.keypadOpen) {
-        Modifier.fillMaxHeight(TOP_REGION_FRACTION_WITH_KEYPAD)
-    } else {
-        Modifier.fillMaxSize()
-    }
     Column(
-        modifier = alturaSuperior
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = ScreenHorizontalMargin),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -180,7 +179,9 @@ private fun ActiveCallContent(
                 textAlign = TextAlign.Center,
             )
         }
-        Spacer(Modifier.weight(1f))
+        // O espacador de peso existe so quando a faixa toma a tela inteira: em modo de conteudo
+        // proprio ele valeria zero e so confundiria a leitura do layout.
+        if (!snapshot.keypadOpen) Spacer(Modifier.weight(1f))
         // Os controles secundarios saem de cena com fade quando a chamada termina; o encerrar
         // continua no lugar, inclusive no estado nao suportado, onde ele e a unica saida.
         AnimatedVisibility(
@@ -199,7 +200,7 @@ private fun ActiveCallContent(
         if (snapshot.hangUpEnabled) {
             HangUpButton(onHangUp = actions.onHangUp)
         }
-        Spacer(Modifier.height(BottomSlack))
+        if (!snapshot.keypadOpen) Spacer(Modifier.height(BottomSlack))
     }
 }
 

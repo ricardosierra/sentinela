@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
@@ -125,7 +126,9 @@ fun CallControlButton(
     ) {
         Box(
             modifier = Modifier
-                .size(CallControlDiameter)
+                // requiredSize: o controle nunca encolhe por pressao de layout (ver KDoc de
+                // CallActionButton). Reduzir o alvo em silencio e falha de acessibilidade.
+                .requiredSize(CallControlDiameter)
                 .background(container, CircleShape)
                 .then(activeRing(on && enabled, scheme.primary))
                 .toggleable(

@@ -5,12 +5,12 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -31,9 +31,6 @@ import org.sentinela.app.ui.dialer.DialpadGrid
 import org.sentinela.app.ui.theme.SentinelaTheme
 import org.sentinela.app.ui.theme.numberLg
 
-/** Fracao da altura ocupada pelo painel de tons. */
-private const val SHEET_HEIGHT_FRACTION = 0.7f
-
 private val SheetTopCornerRadius = 24.dp
 private val SheetHorizontalPadding = 16.dp
 private val CloseButtonSize = 48.dp
@@ -41,7 +38,7 @@ private val DigitLineToGridGap = 24.dp
 private val GridBottomSlack = 24.dp
 
 /**
- * Painel de tons ancorado ao rodape, sobre a chamada ativa.
+ * Painel de tons ancorado ao rodape, ocupando a altura que a faixa superior deixa livre.
  *
  * **Nao e modal do sistema de proposito.** O cronometro e o botao de encerrar continuam visiveis e
  * clicaveis na faixa superior da tela: quem abriu o teclado para navegar num menu de atendimento
@@ -65,9 +62,7 @@ fun DtmfKeypadSheet(
     // O gesto de voltar fecha o painel em vez de sair da chamada — a chamada continua em curso.
     BackHandler(enabled = true) { onClose() }
     Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .fillMaxHeight(SHEET_HEIGHT_FRACTION),
+        modifier = modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.surfaceContainerLow,
         shape = RoundedCornerShape(
             topStart = SheetTopCornerRadius,
@@ -77,6 +72,10 @@ fun DtmfKeypadSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                // Rolagem vertical: numa tela baixa a ultima fileira de teclas ficaria fora do
+                // recorte do painel, e tecla inalcancavel e falha de acessibilidade silenciosa —
+                // medida por caso de teste, nao imaginada.
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = SheetHorizontalPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

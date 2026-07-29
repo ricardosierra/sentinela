@@ -8,6 +8,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -113,7 +114,10 @@ fun CallActionButton(
         Box(
             modifier = Modifier
                 .scale(scale)
-                .size(diameter)
+                // requiredSize e nao size: com a tela curta ou a fonte em 200% o pai comprimia o
+                // circulo — medido em 23dp num alvo de 72dp — e o contrato diz que os botoes NAO
+                // reduzem. size() negocia com o pai; requiredSize() nao negocia.
+                .requiredSize(diameter)
                 .background(colors.container, CircleShape)
                 .clickable(
                     interactionSource = interactionSource,

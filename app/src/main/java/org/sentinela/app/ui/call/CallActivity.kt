@@ -1,255 +1,187 @@
 package org.sentinela.app.ui.call
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.CallEnd
-import androidx.compose.material.icons.filled.Dialpad
-import androidx.compose.material.icons.filled.Mic
-import androidx.compose.material.icons.filled.MicOff
-import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import org.sentinela.app.R
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
+import org.sentinela.app.BuildConfig
 import org.sentinela.app.SentinelaApp
 import org.sentinela.app.telecom.call.CallSessionCoordinator
+import org.sentinela.app.telecom.call.CallSessionStore
 import org.sentinela.app.telecom.call.CallSnapshot
 import org.sentinela.app.telecom.call.CallUiState
 import org.sentinela.app.ui.theme.SentinelaTheme
-import org.sentinela.app.ui.theme.numberLg
-import org.sentinela.app.ui.theme.timer
+
+/**
+ * Chave do extra que carrega a acao pedida pela notificacao de chamada.
+ *
+ * O valor textual e contrato ditado e vale exatamente o identificador do aplicativo seguido de
+ * `.extra.CALL_ACTION`. Ele e **montado** a partir do identificador em vez de escrito por extenso
+ * porque um invariante do projeto proibe identificador do aplicativo literal em Kotlin — o projeto
+ * precisa poder ser rebatizado num unico lugar. O valor resultante e o mesmo, byte por byte, e o
+ * teste desta fase o afirma por extenso (no conjunto de teste, onde o invariante nao se aplica).
+ *
+ * Mora aqui, num unico lugar, porque escrever a chave duas vezes nao quebra compilacao: so faz o
+ * botao da notificacao parar de funcionar em silencio.
+ */
+const val EXTRA_CALL_ACTION = "${BuildConfig.APPLICATION_ID}.extra.CALL_ACTION"
+
+/** Valores aceitos no extra de acao. */
+const val CALL_ACTION_ANSWER = "answer"
+const val CALL_ACTION_REJECT = "reject"
+const val CALL_ACTION_HANGUP = "hangup"
+
+/** Acao pedida de fora da tela. Nomeada: valor bruto de intencao nunca circula pelo codigo. */
+internal enum class CallIntentAction { ANSWER, REJECT, HANGUP }
+
+/**
+ * Traduz o valor bruto do extra.
+ *
+ * Valor ausente ou desconhecido devolve **nenhuma acao**, e isso e regra de seguranca, nao
+ * tolerancia: qualquer aplicativo pode montar uma intencao para esta tela, e uma intencao malformada
+ * jamais pode atender nem recusar uma chamada de verdade por acidente. O pior que ela consegue fazer
+ * e abrir a tela que a chamada abriria de qualquer forma.
+ */
+internal fun callActionOf(raw: String?): CallIntentAction? = when (raw) {
+    CALL_ACTION_ANSWER -> CallIntentAction.ANSWER
+    CALL_ACTION_REJECT -> CallIntentAction.REJECT
+    CALL_ACTION_HANGUP -> CallIntentAction.HANGUP
+    else -> null
+}
+
+/**
+ * Aplica a acao no coordenador da sessao.
+ *
+ * A tela **nao fala com a plataforma de telefonia**: ela pede ao coordenador, que e quem conhece a
+ * guarda por estado corrente. Este e o unico caminho das acoes da notificacao — a fase nao cria
+ * receptor de transmissao.
+ */
+internal fun applyCallAction(session: CallSessionCoordinator?, action: CallIntentAction?) {
+    when (action) {
+        CallIntentAction.ANSWER -> session?.answer()
+        CallIntentAction.REJECT -> session?.reject()
+        CallIntentAction.HANGUP -> session?.hangUp()
+        null -> Unit
+    }
+}
 
 /**
  * Hospedeira da tela de chamada.
  *
- * Ela apenas **observa** o armazém da sessão e comanda pelo coordenador puro. Não conhece nenhum
- * tipo da telefonia: o objeto de chamada da plataforma é um manipulador de comunicação entre
+ * Ela apenas **observa** o armazem da sessao e comanda pelo coordenador puro. Nao conhece nenhum
+ * tipo da telefonia: o objeto de chamada da plataforma e um manipulador de comunicacao entre
  * processos e nunca atravessa esta fronteira.
  *
- * Não existe estado a restaurar aqui, e isso é medido, não suposto: morrendo o processo no meio de
- * uma ligação, o sistema de telefonia religa a chamada no discador do aparelho sem derrubá-la.
- * Persistir sessão de chamada seria trabalho inútil sobre um estado que já não é nosso.
+ * Nao existe estado a restaurar aqui, e isso e medido, nao suposto: morrendo o processo no meio de
+ * uma ligacao, o sistema de telefonia religa a chamada no discador do aparelho sem derruba-la.
  *
- * O acabamento visual completo desta tela é do plano 06-04. O que existe aqui já apresenta
- * identidade, estado e ações reais de propósito: uma chamada nunca pode abrir uma tela vazia,
- * porque tela vazia é justamente o modo de falha que ninguém detecta.
+ * A foto do contato e a lista de rotas de audio ainda nao chegam a esta tela: a identidade que o
+ * servico resolve carrega so o que a propria ligacao informa. Ambas entram por parametro dos
+ * composables quando a resolucao de identidade em memoria existir — nenhuma delas e cacheada.
  */
 class CallActivity : ComponentActivity() {
 
+    private lateinit var store: CallSessionStore
+
+    /** Acao ainda nao aplicada, guardada como estado para sobreviver a uma sessao ainda nula. */
+    private var acaoPendente by mutableStateOf<CallIntentAction?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val store = (application as SentinelaApp).container.callSessionStore
+        store = (application as SentinelaApp).container.callSessionStore
+        // A intencao INICIAL conta: quando a tela ainda nao existe, o toque na notificacao chega por
+        // onCreate e nunca por onNewIntent.
+        acaoPendente = callActionOf(intent?.getStringExtra(EXTRA_CALL_ACTION))
         setContent {
             SentinelaTheme {
                 val snapshot by store.state.collectAsState()
-                CallScreen(
+                CallHost(
                     snapshot = snapshot,
                     session = store.session,
+                    pendingAction = acaoPendente,
+                    onActionApplied = { acaoPendente = null },
                     onFinish = ::finish,
                 )
             }
         }
     }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        acaoPendente = callActionOf(intent.getStringExtra(EXTRA_CALL_ACTION))
+    }
 }
 
+/**
+ * Escolhe a tela pelo estado e fecha a si mesma depois do estado final.
+ *
+ * O `when` sobre o estado e **exaustivo**, inclusive no ramo nao suportado: tela em branco durante
+ * uma ligacao e a unica falha desta fase que ninguem detecta — nem o usuario, que ve a tela, nem o
+ * sistema de telefonia, que mediu-se nao perceber interface viva e travada.
+ */
 @Composable
-private fun CallScreen(
+internal fun CallHost(
     snapshot: CallSnapshot,
     session: CallSessionCoordinator?,
+    pendingAction: CallIntentAction?,
+    onActionApplied: () -> Unit,
     onFinish: () -> Unit,
 ) {
-    // Sem esta confirmação o prazo de apresentação vence e a sessão falha alto por desenho: é
-    // assim que interface congelada deixa de ser silêncio e passa a ser defeito visível.
-    LaunchedEffect(snapshot.identity) { session?.confirmPresented() }
+    // Sem esta confirmacao o prazo de apresentacao vence e a sessao falha alto por desenho: e assim
+    // que interface congelada deixa de ser silencio e passa a ser defeito visivel.
+    LaunchedEffect(session) { session?.confirmPresented() }
 
-    // Chamada em curso engole o gesto de voltar: sair da tela por acidente com o telefone no
-    // ouvido deixaria o usuário sem controle nenhum sobre a ligação.
-    BackHandler(enabled = snapshot.state != CallUiState.Ended) { }
-
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-        ) {
-            CallHeader(snapshot)
-            CallActions(snapshot = snapshot, session = session, onFinish = onFinish)
+    LaunchedEffect(pendingAction, session) {
+        if (pendingAction != null && session != null) {
+            applyCallAction(session, pendingAction)
+            onActionApplied()
         }
     }
-}
 
-@Composable
-private fun CallHeader(snapshot: CallSnapshot) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(Modifier.height(48.dp))
-        Text(
-            text = stringResource(stateLabelOf(snapshot.state)),
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = snapshot.identity.displayName
-                ?: snapshot.identity.fullNumber
-                ?: stringResource(R.string.call_origin_private),
-            style = MaterialTheme.typography.numberLg,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-        Spacer(Modifier.height(12.dp))
-        CallOriginChip(origin = chipOriginOf(snapshot.identity.origin))
-        val startedAt = snapshot.startedAtMillis
-        if (startedAt != null) {
-            Spacer(Modifier.height(12.dp))
-            CallTimer(startedAtMillis = startedAt)
-        }
-        if (snapshot.sentDigits.isNotEmpty()) {
-            Spacer(Modifier.height(8.dp))
-            Text(
-                text = snapshot.sentDigits,
-                style = MaterialTheme.typography.timer,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+    // Chamada em curso engole o gesto de voltar: sair da tela por acidente com o telefone no ouvido
+    // deixaria o usuario sem controle nenhum sobre a ligacao.
+    BackHandler(enabled = !snapshot.state.isTerminal()) { }
+
+    LaunchedEffect(snapshot.state) {
+        if (snapshot.state.isTerminal()) {
+            delay(CALL_ENDED_DISMISS_MILLIS)
+            onFinish()
         }
     }
-}
 
-@Composable
-private fun CallActions(
-    snapshot: CallSnapshot,
-    session: CallSessionCoordinator?,
-    onFinish: () -> Unit,
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        if (snapshot.state == CallUiState.Active || snapshot.state is CallUiState.Unsupported) {
-            OngoingControls(snapshot = snapshot, session = session)
-            Spacer(Modifier.height(24.dp))
-        }
-        if (snapshot.state == CallUiState.Incoming) {
-            IncomingActions(session = session)
-        } else {
-            CallActionButton(
-                icon = Icons.Filled.CallEnd,
-                label = stringResource(R.string.call_action_hangup),
-                contentDescription = stringResource(R.string.call_action_hangup_description),
-                colors = callRejectColors(),
-                onClick = { session?.hangUp() ?: onFinish() },
-                diameter = CallActionDiameterHangup,
-            )
-        }
-        Spacer(Modifier.height(24.dp))
+    val actions = CallScreenActions(
+        onHangUp = { session?.hangUp() ?: onFinish() },
+        onAnswer = { session?.answer() },
+        onReject = { session?.reject() },
+        onToggleMute = { session?.setMuted(it) },
+        onToggleSpeaker = { session?.setSpeakerOn(it) },
+        onToggleKeypad = { session?.toggleKeypad() },
+        onDigitPressStart = { digito -> digito.firstOrNull()?.let { session?.pressDigit(it) } },
+        onDigitPressEnd = { session?.releaseDigit() },
+    )
+
+    when (snapshot.state) {
+        CallUiState.Incoming -> IncomingCallScreen(
+            identity = snapshot.identity,
+            onAnswer = actions.onAnswer,
+            onReject = actions.onReject,
+        )
+        CallUiState.Dialing,
+        CallUiState.Ringing,
+        -> OutgoingCallScreen(snapshot = snapshot, actions = actions)
+        CallUiState.Active,
+        CallUiState.Ended,
+        CallUiState.Failed,
+        is CallUiState.Unsupported,
+        -> ActiveCallScreen(snapshot = snapshot, actions = actions)
     }
-}
-
-@Composable
-private fun IncomingActions(session: CallSessionCoordinator?) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-    ) {
-        CallActionButton(
-            icon = Icons.Filled.CallEnd,
-            label = stringResource(R.string.call_action_reject),
-            contentDescription = stringResource(R.string.call_action_reject_description),
-            colors = callRejectColors(),
-            onClick = { session?.reject() },
-        )
-        CallActionButton(
-            icon = Icons.Filled.Call,
-            label = stringResource(R.string.call_action_answer),
-            contentDescription = stringResource(R.string.call_action_answer_description),
-            colors = callAcceptColors(),
-            onClick = { session?.answer() },
-        )
-    }
-}
-
-@Composable
-private fun OngoingControls(snapshot: CallSnapshot, session: CallSessionCoordinator?) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-    ) {
-        CallControlButton(
-            on = snapshot.muted,
-            iconOff = Icons.Filled.Mic,
-            iconOn = Icons.Filled.MicOff,
-            label = stringResource(R.string.call_control_mute),
-            contentDescription = stringResource(
-                if (snapshot.muted) {
-                    R.string.call_control_mute_on_description
-                } else {
-                    R.string.call_control_mute_off_description
-                },
-            ),
-            onToggle = { session?.setMuted(it) },
-        )
-        CallControlButton(
-            on = snapshot.speakerOn,
-            iconOff = Icons.Filled.VolumeUp,
-            iconOn = Icons.Filled.VolumeUp,
-            label = stringResource(R.string.call_control_speaker),
-            contentDescription = stringResource(
-                if (snapshot.speakerOn) {
-                    R.string.call_control_speaker_on_description
-                } else {
-                    R.string.call_control_speaker_off_description
-                },
-            ),
-            onToggle = { session?.setSpeakerOn(it) },
-            enabled = snapshot.speakerAvailable,
-        )
-        CallControlButton(
-            on = snapshot.keypadOpen,
-            iconOff = Icons.Filled.Dialpad,
-            iconOn = Icons.Filled.Dialpad,
-            label = stringResource(R.string.call_control_keypad),
-            contentDescription = stringResource(
-                if (snapshot.keypadOpen) {
-                    R.string.call_control_keypad_open_description
-                } else {
-                    R.string.call_control_keypad_closed_description
-                },
-            ),
-            onToggle = { session?.toggleKeypad() },
-        )
-    }
-}
-
-/** Rótulo do estado. O ramo final é visível: estado sem nome na tela é a pior falha da fase. */
-private fun stateLabelOf(state: CallUiState): Int = when (state) {
-    CallUiState.Incoming -> R.string.call_incoming_state
-    CallUiState.Dialing -> R.string.call_dialing_state
-    CallUiState.Ringing -> R.string.call_ringing_state
-    CallUiState.Active -> R.string.call_active_state
-    CallUiState.Ended -> R.string.call_ended_state
-    CallUiState.Failed -> R.string.call_failed_state
-    is CallUiState.Unsupported -> R.string.call_unsupported_state
 }
