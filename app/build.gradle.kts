@@ -130,6 +130,12 @@ kover {
                     "org.sentinela.app.phone.*",
                     "org.sentinela.app.data.*",
                     "org.sentinela.app.settings.*",
+                    // Fase 5: a camada de triagem entra no denominador. O coordenador e puro
+                    // e a traducao da resposta roda sob Robolectric, que e teste em JVM e
+                    // portanto e medido pelo Kover.
+                    "org.sentinela.app.telecom.*",
+                    "org.sentinela.app.notifications.*",
+                    "org.sentinela.app.permissions.*",
                 )
             }
             excludes {
