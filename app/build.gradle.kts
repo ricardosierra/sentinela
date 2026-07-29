@@ -99,6 +99,16 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
 
+// SchemaExportTest le `schemas/` direto do disco, e o Gradle nao tem como
+// adivinhar isso: sem declarar a pasta como entrada, o teste fica UP-TO-DATE
+// (ou FROM-CACHE) e passa VERDE mesmo com o schema apagado — o mesmo defeito
+// probatorio que a Phase 1 documentou para o cache de build.
+tasks.withType<Test>().configureEach {
+    inputs.dir(layout.projectDirectory.dir("schemas"))
+        .withPropertyName("roomExportedSchemas")
+        .withPathSensitivity(PathSensitivity.RELATIVE)
+}
+
 detekt {
     config.setFrom(rootProject.file("detekt.yml"))
     buildUponDefaultConfig = true
