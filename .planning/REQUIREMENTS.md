@@ -15,10 +15,11 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **SCR-01**: Onboarding solicita explicitamente o papel `ROLE_CALL_SCREENING` via RoleManager
 - [ ] **SCR-02**: App verifica continuamente se ainda ocupa o papel e oferece correção na home
 - [ ] **SCR-03**: Número desconhecido é bloqueado antes de tocar — sem tela de chamada, som, vibração ou heads-up
-- [ ] **SCR-04**: Número privado/restrito/sem handle é bloqueado por padrão (configurável)
+- [ ] **SCR-04**: Número privado/restrito/sem handle é bloqueado por padrão (configurável) — **parcial: só no modo discador (Phase 6).** O AOSP não entrega `PRESENTATION_RESTRICTED/UNKNOWN/UNAVAILABLE/PAYPHONE` ao `CallScreeningService` no modo filtro; a lógica existe e é testada no motor desde a Phase 2 e passa a valer quando o app é o discador padrão
 - [ ] **SCR-05**: `respondToCall` é chamado exatamente uma vez, muito antes do limite de 5 s da plataforma
 - [ ] **SCR-06**: Para a política Bloquear, usuário escolhe entre rejeitar imediatamente e encaminhar silenciosamente para a caixa postal
-- [ ] **SCR-07**: Chamada bloqueada não aparece no histórico nativo por padrão (`setSkipCallLog` configurável)
+- [~] **SCR-07**: ~~Chamada bloqueada não aparece no histórico nativo por padrão~~ — **WON'T FIX (inatingível, decidido em 2026-07-29).** `CallScreeningServiceFilter` calcula `setShouldAddToCallLog(!skipCallLog || packageType != PACKAGE_TYPE_CARRIER)`; o Sentinela é `PACKAGE_TYPE_USER_CHOSEN`, então a chamada bloqueada **sempre** entra no log nativo como `BLOCKED_TYPE`. Não é variação de OEM e o `ROLE_DIALER` da Phase 6 não destrava — só apps de operadora são isentos. A UI não pode prometer ausência de rastro; ver `docs/LIMITACOES.md`
+- [ ] **SCR-12**: Chamada repetida do mesmo número dentro de uma janela curta **toca**, mesmo que a política bloquearia — habilitado por padrão, configurável. Racional: emergência real insiste, spam automatizado normalmente não. A regra vive no `CallDecisionEngine`, usa o histórico local já existente e entra depois de contato/whitelist e antes da política de desconhecidos
 - [ ] **SCR-08**: Notificação nativa de chamada perdida é sempre suprimida (`setSkipNotification(true)`)
 - [ ] **SCR-09**: Chamadas de saída nunca sofrem interferência
 - [ ] **SCR-10**: Service protegido contra: resposta duplicada, exceção na normalização, banco indisponível, cold start, corrida config×chamada, timeout, handle nulo, número inválido, dual SIM, processo recriado

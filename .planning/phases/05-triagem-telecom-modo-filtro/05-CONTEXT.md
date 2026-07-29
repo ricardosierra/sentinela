@@ -39,9 +39,14 @@ telas de whitelist e histórico (Phase 8).
 - **Exceção inesperada → PERMITIR a chamada.** Bloquear por bug é pior que deixar passar: o
   usuário perde uma ligação importante e não tem como descobrir o motivo. O valor do produto é
   não interromper, não bloquear a qualquer custo.
-- **O Service usa o `ContactLookupRepository` real**, não `MISS` hardcoded. No modo filtro o
-  Android já não entrega contatos ao `onScreenCall`, então o custo é baixo — e o comportamento
-  continua correto se essa premissa da plataforma mudar ou se o modo discador (Phase 6) entrar.
+- **O Service usa o `ContactLookupRepository` real**, não `MISS` hardcoded. Isto deixou de ser
+  precaução e virou **obrigatório**: a pesquisa provou que, com `READ_CONTACTS` concedida na
+  Phase 4, contatos **passam a chegar** ao `onScreenCall`. Um `MISS` hardcoded bloquearia a
+  ligação de um contato.
+- **`snapshot()`, `contains()` e `lookup()` são todos `suspend`, e `onScreenCall` roda na main
+  thread.** `runBlocking` está fora de questão. O `containsBlocking` e o `snapshot()` não-suspend
+  mencionados em fases anteriores não existem na forma assumida — conferir as assinaturas reais
+  antes de planejar.
 
 ### Tradução `CallDecision` → `CallResponse`
 
@@ -51,9 +56,10 @@ telas de whitelist e histórico (Phase 8).
   e o registro entra no log nativo. É comportamento diferente de bloquear — não confundir.
 - `SendSilentlyToVoicemail` → `disallowCall` + `rejectCall` + `skipNotification`. **A ida à caixa
   postal depende da operadora** — a UI e a documentação **não podem prometer** que sempre cai lá.
-- `BlockWithoutTrace` → `disallowCall` + `rejectCall` + `skipCallLog(true)` + `skipNotification(true)`.
-  `skipCallLog` **varia por OEM** — vai obrigatoriamente para o roteiro Samsung da Phase 9, e o
-  app não deve afirmar garantia.
+- `BlockWithoutTrace` → `disallowCall` + `rejectCall` + `skipNotification(true)`.
+  **CORRIGIDO PELA PESQUISA:** `setSkipCallLog` é **no-op** para este app (ver achados abaixo) —
+  não é variação de OEM. Enviar o campo é inofensivo, mas nem o rótulo nem a documentação podem
+  afirmar ausência de rastro.
 - `Allow` → resposta vazia (não interferir).
 
 ### Notificação e histórico
@@ -84,6 +90,74 @@ Escolhido: **bench + emulador agora, comportamento de OEM na Phase 9.**
 - O p95 < 200 ms continua sendo o compromisso declarado do produto — apenas é **verificado em
   hardware real**, não afirmado no emulador. A mediana é que trava o build.
 - Nenhum plano desta fase emite `checkpoint:human-action` ou `checkpoint:human-verify`.
+
+### Achados da pesquisa reforçada e decisões do usuário (2026-07-29)
+
+A pesquisa leu o AOSP (`frameworks/base` + `packages/services/Telecomm`) e derrubou quatro
+premissas do projeto. As decisões abaixo são **do usuário** e substituem qualquer texto anterior.
+
+- **SCR-07 (`skipCallLog`, "bloquear sem rastro") é INATINGÍVEL.** `CallScreeningServiceFilter`
+  calcula `setShouldAddToCallLog(!skipCallLog || packageType != PACKAGE_TYPE_CARRIER)`. O Sentinela
+  é `PACKAGE_TYPE_USER_CHOSEN`, o `||` curto-circuita e a chamada **sempre** entra no log nativo
+  como `BLOCKED_TYPE`. Virar `ROLE_DIALER` na Phase 6 **não** destrava — só `CARRIER` é isento.
+  **DECISÃO: marcar inatingível e ser honesto na UI.** Registrar em `docs/LIMITACOES.md` com a
+  fonte do AOSP; **remover** a opção "sem rastro" da UI ou renomeá-la para descrever o que de fato
+  acontece; marcar SCR-07 como *Won't Fix* com justificativa em `REQUIREMENTS.md`. O app nunca
+  promete o que não entrega. A `CallDecision.BlockWithoutTrace` pode continuar existindo no
+  domínio, mas o rótulo e a documentação não podem afirmar ausência de rastro.
+- **SCR-04 (números privados/ocultos) é INATINGÍVEL no modo filtro** —
+  `PRESENTATION_RESTRICTED/UNKNOWN/UNAVAILABLE/PAYPHONE` nunca são entregues ao Service.
+  **DECISÃO: manter o código e marcar parcial.** A lógica já existe e é testada no motor desde a
+  Phase 2; ela vale para o **modo discador** (Phase 6), onde todas as chamadas passam pelo app.
+  SCR-04 vira "parcial: só no modo discador", documentado. Não remover a opção.
+- **Não Perturbe NÃO pode ser burlado.** O DND é avaliado num filtro paralelo via
+  `NotificationManager`; nenhum campo de `CallResponse` o alcança. O único bypass exigiria
+  `ACCESS_NOTIFICATION_POLICY`, fora da lista permitida e mutando política global do usuário.
+  `NEVER_SILENCE` decidir como `RING` **já está correto** — zero trabalho de implementação. O que
+  muda é texto: `docs/LIMITACOES.md` e o rótulo da política precisam parar de sugerir bypass.
+- **Contatos AGORA chegam ao `onScreenCall`.** O gate do Telecom é
+  `if (contactExists && !hasReadContactsPermission()) não vincula` — a Phase 4 concedeu
+  `READ_CONTACTS`, então a premissa de bootstrap ("modo filtro só recebe não-contatos") morreu.
+  **Consequência crítica:** o critério 2 saiu da plataforma e passou a ser responsabilidade do
+  **nosso** código. Um `MISS` errado agora **bloqueia a ligação de um contato**. O caminho de
+  contato precisa de teste próprio e explícito.
+- **O Service é 100% testável em JVM** — harness já provado: `Robolectric.buildService(...)` +
+  `Call.Details` mockado + um `Proxy` de `ICallScreeningAdapter` injetado no campo privado
+  `mCallScreeningAdapter`, capturando e afirmando cada `ParcelableCallResponse`. **Usar
+  `@Config(sdk = [35])`** — o `sdk = [36]` registrado no STATE **não funciona** (exige Java 21 e o
+  projeto está travado em JDK 17).
+- **Chamar `respondToCall` duas vezes NÃO lança nem derruba o processo** — emite dois IPCs em
+  silêncio. Ou seja, o `AtomicBoolean` é a **única** proteção que existe. Isso eleva, não reduz,
+  a importância do critério 3.
+- **Cold start não é o gargalo temido:** caminho quente 23,3 ms, pior soma a frio ~50 ms — ~4× de
+  folga sob os 200 ms.
+
+### Defeito a corrigir nesta fase + feature nova (decisão do usuário)
+
+- **DEFEITO:** `SentinelaApp.onCreate` chama `onAppOpened()`, que roda em **todo** start de
+  processo — inclusive os disparados pelo Telecom numa chamada recebida. Chamadas recebidas estão
+  sendo contadas como "aberturas do app", corrompendo ENG-01 e o convite de avaliação da Phase 9.
+  **DECISÃO: corrigir agora.** Contar abertura apenas quando houver Activity, não em start de
+  processo.
+- **FEATURE NOVA — chamada repetida toca (pedida pelo usuário, 2026-07-29):**
+  > "duas ligações seguidas deve tocar, caso habilitado nas configurações (vem habilitado por padrão)"
+
+  Se o **mesmo número** ligar novamente pouco depois de ter sido bloqueado, a segunda chamada
+  **toca**. Racional: emergência real insiste; spam automatizado normalmente não. Regras:
+  - **Habilitada por padrão** (`repeatedCallBypassEnabled = true` em `ScreeningSettings`).
+  - A janela de tempo é configurável em código; padrão sugerido **5 minutos** — o executor pode
+    ajustar, mas o valor precisa ser uma constante nomeada e testada, nunca literal solto.
+  - A fonte da informação é o **histórico já existente** (`BlockedCallRepository`, Phase 3), que
+    grava `numberE164` + `timestampUtcMillis`. Não criar armazenamento novo.
+  - **A regra vive no `CallDecisionEngine`**, não no Service — é regra de decisão, e o `CLAUDE.md`
+    proíbe condição de bloqueio espalhada. O motor recebe um dado novo de entrada (houve bloqueio
+    recente deste número?), decide, e continua puro e determinístico.
+  - **Precedência:** o bypass entra **depois** de contato e whitelist (que já tocam) e **antes** da
+    política de desconhecidos — é uma exceção que faz tocar, nunca que faz bloquear.
+  - Consulta ao histórico entra no mesmo orçamento e no mesmo timeout interno; falha de consulta
+    → trata como "não houve chamada repetida" e segue a política normal.
+  - Precisa de requisito próprio em `REQUIREMENTS.md` (não existe hoje) e de casos na matriz
+    parametrizada do motor.
 
 ### Claude's Discretion
 
