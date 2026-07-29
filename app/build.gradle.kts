@@ -63,6 +63,12 @@ android {
         }
     }
 
+    // MigrationTestHelper le o JSON exportado pelo Room a partir dos assets do
+    // androidTest. Sem este srcDir ele falha com "Cannot find the schema file".
+    sourceSets {
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+
     lint {
         abortOnError = true // explicito: erro de lint quebra o build
 
@@ -146,6 +152,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit.ext)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
