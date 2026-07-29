@@ -109,7 +109,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 
 ### Qualidade e Entrega (QLT)
 - [ ] **QLT-01**: Suíte de testes cobre os 19 casos obrigatórios da seção 13 do prompt (desconhecido, privado, inválido, whitelist, proteção off, saída, reject, voicemail, call log, notificação on/off, falha de repo, timeout, resposta única, normalização BR/intl, import duplicado, backup inválido, retenção, mudança de papel, cold start) **mais** os novos casos: política por contato, tratamento da whitelist, silenciar, contatos indisponíveis e contador de aberturas
-- [ ] **QLT-02**: Lint + detekt sem issues; builds debug e release compilam
+- [x] **QLT-02**: Lint + detekt sem issues; builds debug e release compilam
 - [ ] **QLT-03**: Testes de migração do Room quando houver migração de schema
 - [ ] **QLT-04**: Roteiro reproduzível de validação física Samsung executado ou documentado (`docs/TESTE-FISICO-SAMSUNG.md`), incluindo cenários do modo discador
 - [ ] **QLT-05**: Entregáveis: README, APK debug, matriz de permissões, política de privacidade, limitações, decisões, backlog de sincronização e relatório final de entrega (resumo, arquivos principais, comandos, resultado dos testes, pendências físicas, riscos reais)
@@ -173,7 +173,7 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 | PRV-05 | 8 | Pending |
 | PRV-06..07 | 9 | Pending |
 | QLT-01 | 2, 3, 5 | Pending |
-| QLT-02 | 1, 9 | Pending |
+| QLT-02 | 1, 9 | Complete |
 | QLT-03 | 3 | Pending |
 | QLT-04..05 | 9 | Pending |
 | QLT-06 | 3, 5, 6 | Pending |

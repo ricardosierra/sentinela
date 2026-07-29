@@ -1,17 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v0.1.0
-milestone_name: MVP
-status: active
-stopped_at: "Adendos do produto incorporados (contatos, modo discador, apoio); roadmap 9 fases; falta commit inicial e fechar a Phase 1"
-last_updated: "2026-07-28T02:40:00.000Z"
+milestone: v0.1
+milestone_name: milestone
+status: unknown
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-07-29T03:46:25.438Z"
+last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 0
-  planned_phases: 9
-  deferred_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 3
+  completed_plans: 1
 ---
 
 # Project State
@@ -20,18 +19,14 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 1 — Fundação Compilável
-Last activity: 2026-07-28 - Adendos do produto incorporados em todo o planejamento, docs e esqueleto
+**Current focus:** Phase 01 — Fundacao Compilavel
+Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 1 of 9 (Fundação Compilável)
-Plan: nenhum plano gerado ainda (`.planning/phases/` ainda não existe)
-Status: In progress — esqueleto criado e validado: `assembleDebug` + `testDebugUnitTest`
-(20/20, incluindo políticas por origem) + `lint` + `detekt` verdes em 2026-07-28. Restam:
-commit inicial e fechamento formal da fase (success criterion 2 — instalar o APK num
-aparelho — ainda não exercitado)
-Last activity: 2026-07-28
+Phase: 01 (Fundacao Compilavel) — EXECUTING
+Current Plan: 2
+Total Plans in Phase: 3
 
 ## Snapshot
 
@@ -53,6 +48,7 @@ Last activity: 2026-07-28
 - [Bootstrap 2026-07-27]: DI manual, sem Hilt/Koin — cold start do Service é orçamento crítico
 - [Bootstrap 2026-07-27]: AGP 9 tem Kotlin embutido — plugin `org.jetbrains.kotlin.android` NÃO deve ser aplicado (erro se aplicar)
 - [Bootstrap 2026-07-27]: Links GitHub no CHANGELOG usam `ricardosierra/sentinela` como placeholder até o remote existir
+- [Phase 01-fundacao-compilavel]: Politica de lint declarada no app/build.gradle.kts (sem lint-baseline); ObsoleteSdkInt corrigido de verdade renomeando res/mipmap-anydpi-v26 para res/mipmap
 
 ## Convenções operacionais do GSD
 
@@ -95,6 +91,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-28
-Stopped at: Adendos do produto propagados em planejamento, docs, travas e esqueleto (build verde, 20 testes)
-Resume file: None — próximo passo natural: `/gsd:plan-phase 1` (ou fechar a Phase 1 direto e seguir para a 2)
+Last session: 2026-07-29T03:46:25.435Z
+Stopped at: Completed 01-01-PLAN.md
+Resume file: None
