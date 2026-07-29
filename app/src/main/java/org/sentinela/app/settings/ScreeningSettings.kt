@@ -3,8 +3,8 @@ package org.sentinela.app.settings
 /**
  * Configurações de triagem com os padrões do MVP: proteção ativa, desconhecidos
  * bloqueados, privados bloqueados, contatos tocando, whitelist nunca silenciada,
- * sem rastro no histórico nativo, notificação própria desabilitada e fallback
- * seguro permitindo a chamada.
+ * sem rastro no histórico nativo, notificação própria desabilitada, fallback
+ * seguro permitindo a chamada, histórico local ligado e retenção de 30 dias.
  */
 data class ScreeningSettings(
     val protectionEnabled: Boolean = true,
@@ -20,6 +20,10 @@ data class ScreeningSettings(
     val hideFromNativeCallLog: Boolean = true,
     val showOwnNotification: Boolean = false,
     val fallbackPolicy: FallbackPolicy = FallbackPolicy.ALLOW,
+    /** Histórico ligado por padrão: é o que dá auditabilidade ao bloqueio. */
+    val historyEnabled: Boolean = true,
+    /** Retenção padrão 30 dias (decisão travada no CONTEXT da Fase 3). */
+    val retentionPolicy: RetentionPolicy = RetentionPolicy.DAYS_30,
 )
 
 /**
