@@ -17,6 +17,7 @@ import org.junit.Test
  * Tempo aqui é relógio virtual do despachante de teste. Cronômetro de verdade não prova
  * estrutura e ainda mede o escalonador da máquina que roda o teste.
  */
+@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 class CallSessionWatchdogTest {
 
     private val controls = RecordingCallControls()

@@ -48,6 +48,11 @@ private val CallUiState.terminal: Boolean
  * Nenhuma regra de bloqueio de chamada mora aqui: quem decide o destino de uma ligação é o
  * motor de decisão, e a triagem já rodou antes desta sessão existir.
  */
+// A superfície larga é o contrato desta fase, não descuido: são quatro entradas vindas da
+// telefonia, oito comandos da interface e a confirmação de apresentação. Reduzir o número de
+// funções aqui só seria possível agrupando comandos num objeto de intenção, o que esconderia
+// a guarda por estado corrente — justamente o que precisa ficar visível e testável.
+@Suppress("TooManyFunctions")
 class CallSessionCoordinator(
     private val controls: CallControls,
     private val mapper: CallStateMapper = PlatformCallStateMapper(),
