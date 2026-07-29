@@ -55,6 +55,27 @@ class DataStoreSettingsRepository(
             .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
             .map { it[Keys.APP_OPEN_COUNT] ?: 0 }
 
+    /**
+     * CTT-01: distingue "nunca pedimos" de "negada permanentemente" — a plataforma devolve
+     * `shouldShowRequestPermissionRationale = false` nos dois casos. Ver
+     * [org.sentinela.app.data.contacts.contactsPermissionState].
+     *
+     * Deliberadamente fora de [ScreeningSettings]: não é configuração de triagem e não pode
+     * entrar no snapshot servido no caminho quente do Service.
+     */
+    val contactsPermissionAsked: Flow<Boolean> =
+        dataStore.data
+            .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
+            .map { it[Keys.CONTACTS_PERMISSION_ASKED] ?: false }
+
+    /**
+     * Chamar no momento em que o launcher da permissão é disparado, NUNCA no callback: o
+     * usuário pode matar o app com o diálogo do sistema aberto. Idempotente.
+     */
+    suspend fun markContactsPermissionAsked() {
+        dataStore.edit { it[Keys.CONTACTS_PERMISSION_ASKED] = true }
+    }
+
     init {
         // Aquece e mantém o cache enquanto o processo viver.
         scope.launch { settings.collect() }
@@ -94,6 +115,7 @@ class DataStoreSettingsRepository(
         val HISTORY_ENABLED = booleanPreferencesKey("history_enabled")
         val RETENTION_POLICY = stringPreferencesKey("retention_policy")
         val APP_OPEN_COUNT = intPreferencesKey("app_open_count")
+        val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
     }
 
     private fun Preferences.toScreeningSettings(): ScreeningSettings {

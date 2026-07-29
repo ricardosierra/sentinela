@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.CoroutineScope
@@ -272,6 +273,77 @@ class DataStoreSettingsRepositoryTest {
 
         assertNotNull(primeiro)
         assertSame(primeiro, segundo)
+    }
+
+    // --- CTT-01: flag contacts_permission_asked ------------------------------
+
+    @Test
+    fun `contactsPermissionAsked comeca falso em arquivo inexistente`() = runTest {
+        assertEquals(false, repo().contactsPermissionAsked.first())
+    }
+
+    @Test
+    fun `markContactsPermissionAsked faz o Flow emitir verdadeiro`() = runTest {
+        val repo = repo()
+
+        repo.markContactsPermissionAsked()
+
+        assertEquals(true, repo.contactsPermissionAsked.first())
+    }
+
+    @Test
+    fun `marcar duas vezes e idempotente`() = runTest {
+        val repo = repo()
+
+        repo.markContactsPermissionAsked()
+        repo.markContactsPermissionAsked()
+
+        assertEquals(true, repo.contactsPermissionAsked.first())
+    }
+
+    @Test
+    fun `o flag sobrevive a recriacao do repositorio sobre o mesmo arquivo`() = runTest {
+        val file = novoArquivo()
+        val scopeA = novoScope()
+        DataStoreSettingsRepository(dataStore(scopeA, file), scopeA).markContactsPermissionAsked()
+        scopeA.cancel()
+
+        val scopeB = novoScope()
+        val relido = DataStoreSettingsRepository(dataStore(scopeB, file), scopeB)
+
+        assertEquals(true, relido.contactsPermissionAsked.first())
+    }
+
+    @Test
+    fun `o flag vai ao disco com a chave textual contratada`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+
+        DataStoreSettingsRepository(ds, scope).markContactsPermissionAsked()
+
+        assertEquals(true, ds.data.first()[booleanPreferencesKey("contacts_permission_asked")])
+    }
+
+    @Test
+    fun `arquivo corrompido devolve falso em vez de derrubar o Flow do flag`() = runTest {
+        val file = tmp.newFile("corrompido-flag-${contador++}.preferences_pb")
+        file.writeBytes(byteArrayOf(0x42, 0x13, 0x37, 0x00, 0x7F))
+        val scope = novoScope()
+
+        val repo = DataStoreSettingsRepository(dataStore(scope, file), scope)
+
+        assertEquals(false, repo.contactsPermissionAsked.first())
+    }
+
+    @Test
+    fun `o flag de permissao nao contamina as configuracoes de triagem`() = runTest {
+        val repo = repo()
+
+        repo.markContactsPermissionAsked()
+
+        // Nao e configuracao de triagem: nao pode entrar no snapshot do caminho quente.
+        assertEquals(ScreeningSettings(), repo.snapshot())
     }
 
     @Test
