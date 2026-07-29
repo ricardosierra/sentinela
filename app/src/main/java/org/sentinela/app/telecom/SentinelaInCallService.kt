@@ -4,10 +4,13 @@ import android.telecom.Call
 import android.telecom.CallAudioState
 import android.telecom.InCallService
 import android.telecom.TelecomManager
+import org.sentinela.app.AppContainer
 import org.sentinela.app.SentinelaApp
+import org.sentinela.app.notifications.IncomingCallNotifier
 import org.sentinela.app.telecom.call.CallIdentity
 import org.sentinela.app.telecom.call.CallOrigin
 import org.sentinela.app.telecom.call.CallSessionStore
+import org.sentinela.app.telecom.call.MaskedCallIdentity
 import org.sentinela.app.telecom.call.TelecomCallControls
 import org.sentinela.app.telecom.call.audioRoutesFromMask
 
@@ -37,8 +40,18 @@ import org.sentinela.app.telecom.call.audioRoutesFromMask
  */
 class SentinelaInCallService : InCallService() {
 
+    private val container: AppContainer
+        get() = (application as SentinelaApp).container
+
     private val store: CallSessionStore
-        get() = (application as SentinelaApp).container.callSessionStore
+        get() = container.callSessionStore
+
+    /**
+     * Aviso da chamada. Vem do container da aplicação, como todo o resto: o serviço não constrói
+     * colaborador próprio e nem sabe criar canal de notificação.
+     */
+    private val notifier: IncomingCallNotifier
+        get() = container.incomingCallNotifier
 
     /**
      * Observador da chamada. Registrado ao receber a chamada e removido ao perdê-la: manter o
@@ -50,12 +63,20 @@ class SentinelaInCallService : InCallService() {
 
     override fun onCallAdded(call: Call) {
         call.registerCallback(observador)
+        // O aviso é publicado ANTES de qualquer abertura de tela, e é ele que abre a tela quando o
+        // aparelho está bloqueado: é o caminho oficial da plataforma para isso. A troca para o
+        // aviso de chamada em curso não está aqui de propósito — quem sabe que o estado mudou é o
+        // armazém, e ela vive lá.
+        if (call.state == Call.STATE_RINGING) {
+            notifier.notifyIncoming(maskedIdentityOf(call, container.maskNumber))
+        }
         store.attach(TelecomCallControls(call, this))
         store.onCallAdded(call.state, identityOf(call), opaqueIdOf(call))
     }
 
     override fun onCallRemoved(call: Call) {
         call.unregisterCallback(observador)
+        notifier.cancel()
         store.onCallRemoved()
         store.detach()
     }
@@ -81,6 +102,20 @@ private fun identityOf(call: Call): CallIdentity {
         displayName = details.callerDisplayName?.takeIf { it.isNotBlank() },
         fullNumber = details.handle?.schemeSpecificPart,
         origin = if (restrito) CallOrigin.PRIVADO else CallOrigin.DESCONHECIDO,
+    )
+}
+
+/**
+ * A mesma identidade, na forma que pode aparecer em **aviso do sistema**: nome que a ligação
+ * informou e número mascarado pela máscara única do projeto. A máscara é aplicada aqui, na
+ * fronteira, exatamente como no trabalho pós-resposta da triagem — o notificador nunca recebe
+ * número cru.
+ */
+private fun maskedIdentityOf(call: Call, mask: (String) -> String): MaskedCallIdentity {
+    val details = call.details
+    return MaskedCallIdentity(
+        displayName = details.callerDisplayName?.takeIf { it.isNotBlank() },
+        maskedNumber = details.handle?.schemeSpecificPart?.let(mask),
     )
 }
 

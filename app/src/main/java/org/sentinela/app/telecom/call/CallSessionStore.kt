@@ -34,6 +34,20 @@ data class MaskedCallIdentity(
 )
 
 /**
+ * Costura do aviso de chamada em curso.
+ *
+ * Ela existe aqui, e não no serviço da plataforma, porque **este** arquivo é o único que sabe
+ * quando o retrato mudou: a troca do aviso de chamada recebida pelo aviso de chamada em curso é
+ * exatamente a transição para o estado ativo, e criar um segundo caminho para o mesmo fato é como
+ * se produz aviso que não troca nunca ou troca duas vezes.
+ *
+ * Pura de propósito: quem sabe postar notificação é a camada de plataforma.
+ */
+fun interface OngoingCallNotifier {
+    fun notifyOngoing(identity: MaskedCallIdentity)
+}
+
+/**
  * Instância única do processo com o estado observável da chamada em curso.
  *
  * Existe porque o serviço da plataforma e a tela de chamada são dois componentes com ciclos de
@@ -51,7 +65,11 @@ data class MaskedCallIdentity(
  * morrendo o processo, o sistema de telefonia religa a chamada no discador do aparelho sem
  * derrubar a ligação, e reentrega a chamada seguinte a este aplicativo normalmente.
  */
-class CallSessionStore(private val scope: CoroutineScope) {
+class CallSessionStore(
+    private val scope: CoroutineScope,
+    private val notifications: OngoingCallNotifier? = null,
+    private val maskNumber: (String) -> String? = { null },
+) {
 
     private val retrato = MutableStateFlow(CallSnapshot())
 
@@ -122,10 +140,31 @@ class CallSessionStore(private val scope: CoroutineScope) {
         opaqueCallId = null
     }
 
+    private var estadoAnterior: CallUiState = CallSnapshot().state
+
     private fun publicar(novo: CallSnapshot) {
         retrato.value = novo
+        val anterior = estadoAnterior
+        estadoAnterior = novo.state
         observadores.toList().forEach { it.onSnapshot(novo) }
+        // Só na transição, nunca a cada retrato: mudo, viva-voz e teclado republicam o estado
+        // ativo várias vezes por chamada, e republicar o aviso a cada um faria a barra de avisos
+        // piscar durante a ligação.
+        if (novo.state == CallUiState.Active && anterior != CallUiState.Active) {
+            notifications?.notifyOngoing(avisoDe(novo.identity))
+        }
     }
+
+    /**
+     * Identidade como ela pode aparecer em aviso do sistema. A máscara entra por costura porque a
+     * máscara única do projeto depende dos metadados de telefone, que não podem atravessar esta
+     * fronteira. Sem a costura, o aviso sai **sem número** — degradação segura; o que nunca
+     * acontece é a sequência completa de dígitos chegar à notificação.
+     */
+    private fun avisoDe(identity: CallIdentity) = MaskedCallIdentity(
+        displayName = identity.displayName,
+        maskedNumber = identity.fullNumber?.let(maskNumber),
+    )
 
     // --- entradas repassadas pela camada de telefonia ---------------------------------
 
