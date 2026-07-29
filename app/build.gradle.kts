@@ -130,6 +130,16 @@ kover {
 }
 
 dependencies {
+    // O androidTest herda as versoes do runtime principal por resolucao consistente,
+    // entao o piso precisa ser declarado aqui e nao so no androidTest. Nao acrescenta
+    // biblioteca ao APK: kotlinx-serialization-core ja entra via lifecycle — muda so
+    // a versao, do 1.7.3 para o piso que o room-migration exige.
+    constraints {
+        implementation(libs.kotlinx.serialization.core) {
+            because("room-migration 2.8.4 (MigrationTestHelper) quebra com serialization 1.7.3")
+        }
+    }
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
