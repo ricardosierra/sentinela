@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-04-PLAN.md
-last_updated: "2026-07-29T16:50:42.741Z"
+stopped_at: Completed 05-03-PLAN.md
+last_updated: "2026-07-29T16:51:26.044Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 05 (Triagem Telecom Modo Filtro) — EXECUTING
-Plan: 4 of 7
+Plan: 5 of 7
 
 ## Snapshot
 
@@ -141,6 +141,12 @@ Plan: 4 of 7
 - [Phase 05]: Versao publica da notificacao usa sempre o texto anonimo, independente da configuracao de identificacao
 - [Phase 05]: notification_permission_asked fica fora de ScreeningSettings e e marcado ao disparar o launcher, nunca no callback
 - [Phase 05]: Criterio de aceite por grep nao distingue KDoc de codigo: comentario citando import android. ou IMPORTANCE_LOW derruba o proprio criterio
+- [Phase 05]: 05-03: ScreeningCoordinator e puro (zero import da plataforma) e a costura de saida e uma funcao de dominio — a logica de verdade nao depende de Robolectric
+- [Phase 05]: 05-03: guarda atomica LOCAL a cada triagem, nunca campo da classe: dual SIM tria duas chamadas ao mesmo tempo
+- [Phase 05]: 05-03: falha de consulta sobe para a rede permissiva e a chamada PASSA; so o estouro de prazo passa pelo motor com resultados degradados e politica de reserva
+- [Phase 05]: 05-03: decisao permissiva de emergencia reusa LOCAL_LOOKUP_FAILURE — reason code novo exigiria revisao de privacidade e quebraria a contagem travada em 10
+- [Phase 05]: 05-03: CallDecisionEngine passou a open para permitir injetar defeito no proprio motor na matriz de falhas
+- [Phase 05]: 05-03: as duas redes permissivas sao redundantes de proposito — removida so uma, zero testes vermelhos; removidas as duas, 7 de 11 ficam vermelhos
 
 ## Convenções operacionais do GSD
 
@@ -184,6 +190,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T16:50:18.862Z
-Stopped at: Completed 05-04-PLAN.md
+Last session: 2026-07-29T16:51:14.097Z
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None
