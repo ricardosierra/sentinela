@@ -46,6 +46,10 @@ de validação física registrada no ROADMAP.
     telas das Fases 5–9; são ativos legítimos, não lixo. Comentário obrigatório no bloco.
   - `disable "Typos"` — o dicionário do lint é en-US e acusa falso positivo em conteúdo pt-BR
     (ex.: "'momento'… did you mean 'memento'?").
+  - `disable "AndroidGradlePluginVersion"` — o lint sugere subir para AGP 9.3.1, versão sem
+    release notes oficiais; a fase trava o baseline validado em 9.3.0 e o bump vira item de
+    `docs/backlog/manutencao-toolchain.md`. Sem esta supressão o critério "lint com 0 issues"
+    não fecha. Registrado a posteriori (2026-07-29) após o plan-checker apontar a omissão.
   - `ObsoleteSdkInt` é **corrigido de verdade** (remover `mipmap-anydpi-v26`, desnecessário em
     minSdk 29) — não suprimido.
 - Reavaliar as supressões na Phase 9, quando as telas reais consumirem as strings.
