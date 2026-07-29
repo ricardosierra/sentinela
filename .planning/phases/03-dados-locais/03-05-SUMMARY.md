@@ -166,6 +166,11 @@ que roda em paralelo e e o dono da prova de indice da whitelist. Nenhum arquivo 
 tocado e nenhum foi incluido nos meus commits (cada commit staged arquivo a arquivo). O resto da
 suite esta verde; a falha se resolve quando o 03-04 fechar.
 
+**Confirmado depois:** o 03-04 commitou (`49bec35`, `7791f7f`) e a arvore ficou limpa.
+`./gradlew testDebugUnitTest --rerun-tasks` → `BUILD SUCCESSFUL`, **31 de 31 tasks executadas,
+218 testes, 0 falhas**, com `lint`, `detekt` e os invariantes verdes. Nenhuma correcao minha foi
+necessaria — o diagnostico de "trabalho em voo do plano vizinho" estava certo.
+
 ## Para as proximas fases
 
 - `RoomBlockedCallRepository` ainda **nao** esta ligado no `AppContainer` — a composicao e a
