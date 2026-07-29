@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-07-PLAN.md
-last_updated: "2026-07-29T12:25:27.212Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-07-29T13:58:50.628Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 3
-  total_plans: 15
-  completed_plans: 15
+  total_plans: 20
+  completed_plans: 16
 ---
 
 # Project State
@@ -19,13 +19,13 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 04 — Contatos do Aparelho (Phase 03 fechada)
+**Current focus:** Phase 04 — Contatos do Aparelho
 Last activity: 2026-07-29
 
 ## Current Position
 
-Phase: 03 (Dados Locais) — COMPLETE
-Plan: 7 of 7
+Phase: 04 (Contatos do Aparelho) — EXECUTING
+Plan: 2 of 5
 
 ## Snapshot
 
@@ -98,6 +98,8 @@ Plan: 7 of 7
 - [Phase 03]: Resolucao consistente do AGP: piso de dependencia so-de-teste precisa ser declarado no runtime PRINCIPAL, senao o androidTest herda a versao antiga
 - [Phase 03]: MigrationTestHelper(Instrumentation, Class<out RoomDatabase>) e a sobrecarga nao-deprecada do Room 2.8.4
 - [Phase 03]: Instancia unica de DataStore e de banco no AppContainer; onCreate da Application nunca faz I/O sincrono (cold start do Service)
+- [Phase 04]: READ_CONTACTS entra no manifest no MESMO commit das duas edicoes do verify-invariants.sh (ALLOWLIST + FUTURE)
+- [Phase 04]: Gravacao na agenda proibida para sempre em manifest: testes usam adoptShellPermissionIdentity (declarar em androidTest nao funciona, a instrumentacao roda no uid do app)
 
 ## Convenções operacionais do GSD
 
@@ -141,6 +143,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-29T12:21:58.063Z
-Stopped at: Completed 03-07-PLAN.md
+Last session: 2026-07-29T13:58:50.625Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None

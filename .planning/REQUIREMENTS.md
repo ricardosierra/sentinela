@@ -38,10 +38,10 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **NRM-04**: Máscara segura para exibição/log (ex.: `+55 11 9****-1234`)
 
 ### Contatos do Aparelho (CTT)
-- [ ] **CTT-01**: `READ_CONTACTS` solicitada em runtime com explicação clara (identificar se quem liga é contato); app permanece funcional no modo filtro se negada
+- [x] **CTT-01**: `READ_CONTACTS` solicitada em runtime com explicação clara (identificar se quem liga é contato); app permanece funcional no modo filtro se negada
 - [ ] **CTT-02**: Consulta de contato é local e rápida (cache em memória invalidado por ContentObserver), dentro do orçamento de p95 da decisão
 - [x] **CTT-03**: Política para contatos configurável: Tocar (padrão) / Bloquear / Silenciar / Nunca Silenciar — conforme mockup de onboarding
-- [ ] **CTT-04**: Nomes e dados de contato nunca são persistidos no banco nem enviados a lugar algum; uso apenas em memória no momento da chamada/exibição
+- [x] **CTT-04**: Nomes e dados de contato nunca são persistidos no banco nem enviados a lugar algum; uso apenas em memória no momento da chamada/exibição
 
 ### Whitelist Pessoal (WLT)
 - [x] **WLT-01**: Adicionar número manualmente com país/DDI e descrição local opcional
