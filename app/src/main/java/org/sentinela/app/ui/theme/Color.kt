@@ -33,3 +33,29 @@ val Error = Color(0xFFFFB4AB)
 val OnError = Color(0xFF690005)
 val ErrorContainer = Color(0xFF93000A)
 val OnErrorContainer = Color(0xFFFFDAD6)
+
+// ---------------------------------------------------------------------------
+// Cores funcionais da chamada (atender / recusar / encerrar)
+// ---------------------------------------------------------------------------
+//
+// Estes QUATRO tokens sao literais deste arquivo e chegam aos componentes por
+// PARAMETRO. Nenhum deles pode ser lido de um papel do esquema de cor do tema.
+//
+// Por que o vermelho tambem ganha apelido proprio, em vez de reaproveitar o
+// papel destrutivo do esquema: `SentinelaTheme` monta o esquema INTEIRO a
+// partir da cor dinamica do papel de parede quando o aparelho e do nivel 31 ou
+// maior (o padrao). Isso substitui todos os papeis do esquema, inclusive os
+// papeis destrutivos. Naquele caminho, quem responde pelo tom de recusar
+// passaria a ser o papel de parede — exatamente junto com o verde de atender.
+// Um papel de parede poderia entao aproximar os dois botoes da tela de chamada
+// recebida e produzir uma recusa acidental de uma chamada real, que e um erro
+// irreversivel.
+//
+// Nao ha cor nova aqui: `CallReject` e `OnCallReject` valem, digito por digito,
+// o mesmo que os dois tokens destrutivos declarados acima. O contrato de design
+// segue honrado; o que muda e a FONTE — literal de arquivo, nunca papel do
+// esquema. Contraste do par >= 7:1 nos dois casos.
+val CallAccept = Color(0xFF1E6E42)
+val OnCallAccept = Color(0xFFD9F2E3)
+val CallReject = Color(0xFF93000A)
+val OnCallReject = Color(0xFFFFDAD6)

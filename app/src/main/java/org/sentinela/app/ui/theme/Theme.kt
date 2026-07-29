@@ -66,6 +66,7 @@ fun SentinelaTheme(
     }
     MaterialTheme(
         colorScheme = colorScheme,
+        shapes = SentinelaShapes,
         typography = SentinelaTypography,
         content = content,
     )
