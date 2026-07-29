@@ -11,6 +11,8 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.sentinela.app.domain.DecisionReason
+import org.sentinela.app.domain.REPEATED_CALL_WINDOW_MILLIS
+import org.sentinela.app.domain.RepeatedCallLookup
 import org.sentinela.app.settings.RetentionPolicy
 import org.sentinela.app.settings.ScreeningSettings
 import org.sentinela.app.settings.SettingsRepository
@@ -256,4 +258,65 @@ class RoomBlockedCallRepositoryTest {
         notificationShown = false,
         classification = CallClassification.UNCLASSIFIED.name,
     )
+
+    // --- SCR-12: consulta de bloqueio recente --------------------------------
+
+    private val numeroDeTeste = "+5511999991234"
+
+    @Test
+    fun `numero bloqueado dentro da janela responde HIT`() = runTest {
+        val (_, repo) = fixture()
+        repo.record(entry(e164 = numeroDeTeste, timestamp = AGORA - 1_000L))
+        assertEquals(RepeatedCallLookup.HIT, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `numero bloqueado antes da janela responde MISS`() = runTest {
+        val (_, repo) = fixture()
+        repo.record(entry(e164 = numeroDeTeste, timestamp = AGORA - REPEATED_CALL_WINDOW_MILLIS - 1L))
+        assertEquals(RepeatedCallLookup.MISS, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `registro exatamente no limite da janela ainda conta como repeticao`() = runTest {
+        val (_, repo) = fixture()
+        repo.record(entry(e164 = numeroDeTeste, timestamp = AGORA - REPEATED_CALL_WINDOW_MILLIS))
+        assertEquals(RepeatedCallLookup.HIT, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `numero sem nenhum registro responde MISS`() = runTest {
+        val (_, repo) = fixture()
+        assertEquals(RepeatedCallLookup.MISS, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `registro recente de outro numero nao vira repeticao`() = runTest {
+        val (_, repo) = fixture()
+        repo.record(entry(e164 = "+5511988887777", timestamp = AGORA - 1_000L))
+        assertEquals(RepeatedCallLookup.MISS, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `numero nulo ou em branco responde MISS sem tocar no banco`() = runTest {
+        val (dao, repo) = fixture()
+        dao.countFailure = IllegalStateException("o DAO nao pode ser chamado")
+        assertEquals(RepeatedCallLookup.MISS, repo.hasRecentBlock(null, AGORA))
+        assertEquals(RepeatedCallLookup.MISS, repo.hasRecentBlock("   ", AGORA))
+        assertNull(dao.lastCountSince)
+    }
+
+    @Test
+    fun `falha do DAO vira LOOKUP_FAILED em vez de propagar`() = runTest {
+        val (dao, repo) = fixture()
+        dao.countFailure = IllegalStateException("banco indisponivel")
+        assertEquals(RepeatedCallLookup.LOOKUP_FAILED, repo.hasRecentBlock(numeroDeTeste, AGORA))
+    }
+
+    @Test
+    fun `o corte enviado ao DAO e o agora menos a janela nomeada`() = runTest {
+        val (dao, repo) = fixture()
+        repo.hasRecentBlock(numeroDeTeste, AGORA)
+        assertEquals(AGORA - REPEATED_CALL_WINDOW_MILLIS, dao.lastCountSince)
+    }
 }

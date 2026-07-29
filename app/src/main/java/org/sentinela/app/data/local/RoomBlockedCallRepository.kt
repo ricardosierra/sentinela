@@ -8,6 +8,8 @@ import kotlinx.coroutines.withContext
 import org.sentinela.app.data.local.db.BlockedCallDao
 import org.sentinela.app.data.local.db.BlockedCallEntity
 import org.sentinela.app.domain.DecisionReason
+import org.sentinela.app.domain.REPEATED_CALL_WINDOW_MILLIS
+import org.sentinela.app.domain.RepeatedCallLookup
 import org.sentinela.app.settings.RetentionPolicy
 import org.sentinela.app.settings.SettingsRepository
 
@@ -65,6 +67,30 @@ class RoomBlockedCallRepository(
 
     override suspend fun pruneOlderThan(utcMillis: Long): Unit =
         withContext(io) { dao.pruneOlderThan(utcMillis) }
+
+    /**
+     * SCR-12. Unica excecao ao contrato desta classe de propagar a excecao do DAO: a
+     * decisao de triagem nao pode falhar por causa do historico. Se a consulta quebrar,
+     * o motor recebe LOOKUP_FAILED, trata como ausencia de repeticao e aplica a politica
+     * normal — nunca bloqueia por causa da falha.
+     */
+    override suspend fun hasRecentBlock(
+        numberE164: String?,
+        nowUtcMillis: Long,
+    ): RepeatedCallLookup {
+        if (numberE164.isNullOrBlank()) return RepeatedCallLookup.MISS
+        return withContext(io) {
+            runCatching {
+                val since = nowUtcMillis - REPEATED_CALL_WINDOW_MILLIS
+                dao.countBlockedSince(numberE164, since)
+            }.fold(
+                onSuccess = { count ->
+                    if (count > 0) RepeatedCallLookup.HIT else RepeatedCallLookup.MISS
+                },
+                onFailure = { RepeatedCallLookup.LOOKUP_FAILED },
+            )
+        }
+    }
 
     /** HST-05: o usuario marca a chamada como legitima ou indesejada. */
     suspend fun updateClassification(id: Long, classification: CallClassification): Unit =

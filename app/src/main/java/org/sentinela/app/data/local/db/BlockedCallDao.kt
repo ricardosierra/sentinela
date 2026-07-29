@@ -34,6 +34,23 @@ interface BlockedCallDao {
     @Query("DELETE FROM blocked_call WHERE timestamp_utc_millis < :cutoffUtcMillis")
     suspend fun pruneOlderThan(cutoffUtcMillis: Long): Int
 
+    /**
+     * SCR-12: quantas vezes este numero ja foi bloqueado a partir do instante de corte.
+     *
+     * Corte INCLUSIVO (`>=`): um registro exatamente no limite conta como dentro da
+     * janela — espelho coerente do corte estrito da poda, que usa `<`.
+     *
+     * Nenhum indice novo foi criado de proposito: acrescentar indice mudaria o schema e
+     * exigiria migracao para a versao 2, enquanto a tabela permanece pequena por causa da
+     * politica de retencao. Se algum dia a medicao em aparelho mostrar custo relevante,
+     * o indice entra junto com a migracao — nunca sozinho.
+     */
+    @Query(
+        "SELECT COUNT(*) FROM blocked_call " +
+            "WHERE number_e164 = :numberE164 AND timestamp_utc_millis >= :sinceUtcMillis",
+    )
+    suspend fun countBlockedSince(numberE164: String, sinceUtcMillis: Long): Int
+
     /** HST-05: o usuario classifica a chamada como legitima ou indesejada. */
     @Query("UPDATE blocked_call SET classification = :classification WHERE id = :id")
     suspend fun updateClassification(id: Long, classification: String)

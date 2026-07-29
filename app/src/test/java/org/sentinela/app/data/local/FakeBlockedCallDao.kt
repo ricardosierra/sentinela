@@ -64,6 +64,21 @@ class FakeBlockedCallDao : BlockedCallDao {
         return antes - rows.value.size
     }
 
+    /** Quando setado, `countBlockedSince` lanca — o repositorio precisa degradar. */
+    var countFailure: Throwable? = null
+
+    var lastCountSince: Long? = null
+        private set
+
+    override suspend fun countBlockedSince(numberE164: String, sinceUtcMillis: Long): Int {
+        countFailure?.let { throw it }
+        lastCountSince = sinceUtcMillis
+        // Corte INCLUSIVO: um registro exatamente no limite conta como dentro da janela.
+        return rows.value.count {
+            it.numberE164 == numberE164 && it.timestampUtcMillis >= sinceUtcMillis
+        }
+    }
+
     override suspend fun updateClassification(id: Long, classification: String) {
         rows.value = rows.value.map { if (it.id == id) it.copy(classification = classification) else it }
     }
