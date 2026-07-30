@@ -3,7 +3,7 @@ phase: 7
 slug: ui-onboarding-e-home
 status: approved
 nyquist_compliant: true
-wave_0_complete: false
+wave_0_complete: true
 created: 2026-07-30
 updated: 2026-07-30
 ---
@@ -306,3 +306,25 @@ armadilha que ja pegou seis executores.
 - [x] `nyquist_compliant: true` no frontmatter
 
 **Approval:** approved 2026-07-30
+
+---
+
+## Sign-off — aprovado em 2026-07-30
+
+- [x] Infraestrutura de teste real e declarada (JVM + Robolectric com qualificador de tela; sem emulador para nenhum critério central)
+- [x] Comando rápido e comando completo verificados
+- [x] Mapa de verificação por task: todas as linhas verdes
+- [x] Wave 0 concluída (asserts de dois eixos extraídos para arquivo neutro; rotas por texto)
+- [x] Gate de cobertura cobrado **e visto vermelho** (piso 99 quebra; restaurado em 80)
+- [x] Evidência pós-`clean` **sem cache** arquivada em `07-EVIDENCE.md` — 75 de 75 tarefas executadas
+- [x] Suíte instrumentada existente executada uma vez: 80 casos, 0 falhas (nenhum caso novo, por decisão registrada)
+- [x] O que só se prova em aparelho está numerado: cenários 61–68 em `docs/TESTE-FISICO-SAMSUNG.md`
+
+**Números reais da fase:** 845 testes JVM (0 falhas), 80 instrumentados (0 falhas), cobertura
+96,6157% com piso 80, 9 blocos de invariantes verdes, 3 achados de recursos não usados após o
+estreitamento do lint.
+
+**Correção de previsão registrada:** a pesquisa previu que o estreitamento levaria 133 achados a 81.
+O resultado real foi **3** — as telas desta fase consumiram quase tudo. Dois dos três remanescentes
+são chaves que a **Fase 6** escreveu e suas próprias telas não usaram; ficam visíveis em vez de
+silenciadas.
