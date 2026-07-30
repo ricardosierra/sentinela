@@ -59,3 +59,29 @@ val CallAccept = Color(0xFF1E6E42)
 val OnCallAccept = Color(0xFFD9F2E3)
 val CallReject = Color(0xFF93000A)
 val OnCallReject = Color(0xFFFFDAD6)
+
+// ---------------------------------------------------------------------------
+// Cores semanticas de estado da protecao (Fase 7)
+// ---------------------------------------------------------------------------
+//
+// Mesmo argumento da secao anterior, aplicado agora ao par que responde por
+// "protecao ativa" e "protecao desligada". `SentinelaTheme` substitui o esquema
+// de cor INTEIRO por um esquema derivado do papel de parede a partir do nivel 31
+// do Android, que e o caminho padrao. Uma cor de significado lida de um papel do
+// esquema deixaria, naquele caminho, o papel de parede decidir a diferenca entre
+// o aparelho estar sendo triado e nao estar. Isso e requisito de seguranca de
+// LEITURA, nao preferencia estetica: um papel de parede alaranjado poderia
+// aproximar os dois estados e fazer o usuario acreditar que esta protegido
+// quando nao esta.
+//
+// O estado ATIVO reusa `CallAccept`/`OnCallAccept` declarados acima — sao os
+// mesmos literais, e nao ha motivo para um verde novo.
+//
+// Nao ha cor nova aqui tambem: os tres valores abaixo valem, digito por digito,
+// o mesmo que `ErrorContainer`, `OnErrorContainer` e `Error`. Sao apelidos
+// SEMANTICOS, e a igualdade e afirmada por teste para que apelido novo nunca
+// vire cor nova disfarcada — precedente registrado em 06-02 com `CallReject`.
+// Contraste de cada par >= 7:1.
+val StatusAttention = Color(0xFF93000A)
+val OnStatusAttention = Color(0xFFFFDAD6)
+val StatusBlocked = Color(0xFFFFB4AB)

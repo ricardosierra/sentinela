@@ -77,6 +77,31 @@ class ThemeTokensTest {
         assertNotEquals(OnCallAccept, OnCallReject)
     }
 
+    // --- Fase 7: cores semanticas do estado da protecao --------------------
+
+    @Test
+    fun `os tres tokens de estado da protecao valem os literais do contrato`() {
+        assertEquals(Color(0xFF93000A), StatusAttention)
+        assertEquals(Color(0xFFFFDAD6), OnStatusAttention)
+        assertEquals(Color(0xFFFFB4AB), StatusBlocked)
+    }
+
+    @Test
+    fun `os apelidos de estado nao introduziram cor nova na paleta`() {
+        assertEquals(ErrorContainer, StatusAttention)
+        assertEquals(OnErrorContainer, OnStatusAttention)
+        assertEquals(Error, StatusBlocked)
+    }
+
+    @Test
+    fun `protecao ativa e protecao desligada nunca colapsam na mesma cor`() {
+        // Se qualquer um dos tres calhasse de valer o verde de ativo, o estado
+        // ligado e o desligado ficariam indistinguiveis na home.
+        assertNotEquals(CallAccept, StatusAttention)
+        assertNotEquals(CallAccept, OnStatusAttention)
+        assertNotEquals(CallAccept, StatusBlocked)
+    }
+
     // --- Fase 6: tipografia numerica --------------------------------------
 
     @Test
@@ -171,6 +196,26 @@ class CallColorFixationTest {
             assertEquals("OnCallAccept mudou sob $nome", Color(0xFFD9F2E3), OnCallAccept)
             assertEquals("CallReject mudou sob $nome", Color(0xFF93000A), CallReject)
             assertEquals("OnCallReject mudou sob $nome", Color(0xFFFFDAD6), OnCallReject)
+        }
+    }
+
+    @Test
+    fun `tokens de estado da protecao nao mudam em nenhum dos tres esquemas`() {
+        val schemes = listOf(
+            "escuro do produto" to DarkColors,
+            "derivado escuro do papel de parede" to dynamicDarkColorScheme(context),
+            "derivado claro do papel de parede" to dynamicLightColorScheme(context),
+        )
+        schemes.forEach { (nome, esquema) ->
+            assertEquals("StatusAttention mudou sob $nome", Color(0xFF93000A), StatusAttention)
+            assertEquals("OnStatusAttention mudou sob $nome", Color(0xFFFFDAD6), OnStatusAttention)
+            assertEquals("StatusBlocked mudou sob $nome", Color(0xFFFFB4AB), StatusBlocked)
+            // O papel destrutivo do esquema montado responde por si; o token e
+            // nosso. E essa independencia que o caso documenta.
+            assertTrue(
+                "o esquema $nome responde pelos proprios papeis",
+                esquema.errorContainer.value != 0UL,
+            )
         }
     }
 
