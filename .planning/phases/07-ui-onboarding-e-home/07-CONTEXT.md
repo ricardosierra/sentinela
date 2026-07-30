@@ -87,6 +87,77 @@ não há tela a derivar: há tela a implementar com fidelidade.
 - Testes de composição precisam de qualificadores reais de tela (`w411dp-h891dp-xxhdpi`) — o
   dispositivo padrão do Robolectric é pequeno demais e produz falha por motivo falso.
 
+### Achados da pesquisa (2026-07-30) — medidos no repositório
+
+- **Zero dependência a adicionar.** `navigation-compose 2.9.8`, `lifecycle-viewmodel-compose 2.11.0`,
+  `lifecycle-runtime-compose 2.11.0` e `savedstate 1.4.0` **já estão no APK** desde o bootstrap,
+  declaradas e nunca consumidas. A pergunta "adicionar navegação viola a regra de cold start?"
+  se dissolve — não há o que adicionar, e o cold start medido já as inclui.
+- **Navegação type-safe é falso-verde de compilação — reproduzido.** `composable<Route>()` com
+  `@Serializable` compila limpo e **estoura em runtime**:
+  `SerializationException: Serializer for class 'X' is not found`. O `javap` confirma: sem
+  `$serializer`, sem `Companion`. O Kotlin embutido do AGP 9 **não** traz o plugin de serialização,
+  então `@Serializable` compilou como anotação vazia. **Usar rotas por string** — isto é
+  guarda-corpo, não nota de pé de página.
+- **A consulta viva do papel é gratuita:** o trio por retomada mede **p50 29,9 µs**, máximo 284 µs
+  em 200 amostras — três ordens de grandeza abaixo de um frame. Não existe argumento de performance
+  para cachear, e cachear compraria de volta a mentira que este contexto proíbe. E o **callback de
+  resultado do pedido de papel é insuficiente**, porque perder papel mata o processo (medido 3× na
+  Phase 6): o callback nunca roda justamente no caminho que importa.
+- **Supressão de lint da Phase 1 — o número real é 133** (131 strings + 1 cor + 1 mipmap), e a
+  premissa era errada: com `UnusedResources` reabilitado, `lintDebug` **saiu 0** — é severidade de
+  aviso e `warningsAsErrors` não está ligado. A supressão nunca foi o que mantinha o build verde.
+  Estreitar via `app/lint.xml` com `<ignore regexp>` foi **testado: 133 → 81**, silenciando
+  exatamente os 52 que pertencem às Phases 8–9. ~79 pertencem a esta fase.
+- **O fluxo multi-tela é testável em JVM:** `NavHost` real sob `createComposeRule` + Robolectric
+  funciona — `navigate`, `popUpTo`, `currentDestination` e `currentBackStack` verificados. Diferente
+  da Phase 6, o núcleo desta fase **não precisa de emulador**. Detalhe medido: a entrada `NavGraph`
+  tem rota `null`, então asserção de back-stack precisa de `mapNotNull`.
+- **Cold start: mediana 680 ms** (612–917 ms, 8 execuções). Nada precisa ser diferido. Duas regras a
+  preservar: **nunca** tocar `contactLookupRepository` na UI desta fase (a construção do cache leva
+  2,57 s) e **nunca** usar `runBlocking` para escolher a `startDestination`.
+- **Wave 0 real:** as três asserções de toque de dois eixos vivem **dentro** de
+  `CallScreenSemanticsTest.kt`, no pacote de chamada. As telas desta fase estão em outros pacotes —
+  extrair para arquivo de apoio neutro, **não duplicar** (cópias deixariam o eixo com dentes divergir).
+- **Dois defeitos incidentais achados:** `strings.xml:266` tem `%` não escapado
+  (`dialer_activation_unchanged_4`) — crash latente se algum dia for formatada; e
+  `app/build.gradle.kts` tem um bloco `testImplementation` **duplicado**.
+
+### Copy dos mockups — DECISÃO DO USUÁRIO (2026-07-30)
+
+Os mockups entregues contêm cinco afirmações que o MVP **não** entrega: "Base Global — milhões de
+números", "processamento local criptografado", "filtros inteligentes", "Provável Fraude Financeira"
+e "seguro contra spam conhecido". Duas telas também carregam imagens de `googleusercontent.com`,
+impossível sem `INTERNET`.
+
+> "Substituir por copy honesta e o que ficou de fora adicionar em planos futuros do GSD para versões
+> depois do MVP"
+
+- **No MVP:** manter layout e visual dos mockups, trocando **somente os textos** por equivalentes
+  verdadeiros. A Phase 1 já escreveu essas substituições em `strings.xml`. Imagens remotas viram
+  superfície tonal, como o próprio mockup do passo 1 do onboarding já faz.
+- **Pós-MVP:** as cinco capacidades estão registradas, uma a uma e com dependências, em
+  [`docs/backlog/capacidades-prometidas-nos-mockups.md`](../../../docs/backlog/capacidades-prometidas-nos-mockups.md),
+  indexado em `docs/INDEX.md`. Cada uma vira planejamento próprio depois do `v0.1.0` — a de base
+  global depende do backend já previsto como `v0.2.0`.
+- **Regra permanente:** enquanto a capacidade não existir e não estiver medida, a UI não pode
+  sugerir que existe. Mesmo princípio que já governa `docs/LIMITACOES.md`.
+
+### Switch do card de proteção — DECISÃO DO USUÁRIO (2026-07-30)
+
+- O switch principal da home liga/desliga a **preferência `protectionEnabled`** (configuração
+  própria, efeito imediato na triagem), **não** o papel do sistema.
+- O papel do sistema aparece como **estado somente-leitura** num banner separado, com botão de
+  correção que abre o seletor. Motivo concreto: revogar papel **mata o processo** — o usuário veria
+  o app fechar sozinho ao desligar um switch.
+
+### Cores novas fixas fora do Dynamic Color
+
+- `StatusAttention`, `OnStatusAttention` e `StatusBlocked` entram como **literais**, pelo mesmo
+  motivo da Phase 6: `Theme.kt` substitui o esquema **inteiro** por `dynamicDark/LightColorScheme`
+  em API 31+, então o papel de parede decidiria a diferença entre "proteção ativa" e "desligada".
+  `CallAccept`/`OnCallAccept` são reaproveitados.
+
 ### Claude's Discretion
 
 - Estrutura de navegação, organização dos composables, nomes de ViewModel/state holder e como o

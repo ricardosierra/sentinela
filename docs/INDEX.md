@@ -33,6 +33,7 @@
 - [`backlog/supabase-v2.md`](backlog/supabase-v2.md) — etapa 2 (Supabase/sync), fora do MVP
 - [`backlog/manutencao-toolchain.md`](backlog/manutencao-toolchain.md) — itens de manutenção de toolchain adiados (gradlew.bat, AGP 9.3.1, revisão dos disable de lint)
 - [`backlog/fontes-inter-geist.md`](backlog/fontes-inter-geist.md) — empacotar Inter/Geist em `res/font/`; até lá os estilos numéricos usam a família monoespaçada do sistema
+- [`backlog/capacidades-prometidas-nos-mockups.md`](backlog/capacidades-prometidas-nos-mockups.md) — 5 capacidades que os mockups anunciam e o MVP não tem (base global, criptografia, filtros inteligentes, classificação de fraude, lista de spam); copy honesta no MVP, capacidades em versões posteriores
 
 ## Planejamento (GSD)
 
