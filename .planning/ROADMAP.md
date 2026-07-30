@@ -21,10 +21,10 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 
 - [x] **Phase 1: Fundacao Compilavel** - Esqueleto Android validado: Gradle KTS + catalog, tema com tokens, detekt/lint, build.sh
 - [x] **Phase 2: Motor de Decisao e Normalizacao** - Domínio puro com políticas por origem, libphonenumber e suíte exaustiva
-- [ ] **Phase 3: Dados Locais** - DataStore (configurações + contador de aberturas), Room (whitelist + histórico), retenção e backup exclusion
-- [ ] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
-- [ ] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções, chamada repetida e notificação silenciosa
-- [ ] **Phase 6: Modo Discador Opcional** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
+- [x] **Phase 3: Dados Locais** - DataStore (configurações + contador de aberturas), Room (whitelist + histórico), retenção e backup exclusion
+- [x] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
+- [x] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções, chamada repetida e notificação silenciosa
+- [x] **Phase 6: Modo Discador Opcional** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
 - [ ] **Phase 7: UI Onboarding e Home** - Fluxo de boas-vindas/permissões/políticas, dashboard e tela Proteção
 - [ ] **Phase 8: UI Whitelist e Historico** - CRUD com busca e import/export; histórico com filtros e ações
 - [ ] **Phase 9: Apoio Privacidade Release e Validacao Fisica** - Avaliação/apoio (5ª abertura), tela sobre, release R8, roteiro Samsung
@@ -203,12 +203,12 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1 | v0.1.0 | 0/3 | In progress | - |
-| 2 | v0.1.0 | 0/5 | Not started | - |
-| 3 | 5/7 | In Progress|  | - |
-| 4 | 4/5 | In Progress|  | - |
-| 5 | v0.1.0 | 0/7 | Planned | - |
-| 6 | 7/8 | In Progress|  | - |
+| 1 | v0.1.0 | 3/3 | Complete | 2026-07-29 |
+| 2 | v0.1.0 | 5/5 | Complete | 2026-07-29 |
+| 3 | v0.1.0 | 7/7 | Complete | 2026-07-29 |
+| 4 | v0.1.0 | 5/5 | Complete | 2026-07-29 |
+| 5 | v0.1.0 | 7/7 | Complete | 2026-07-29 |
+| 6 | v0.1.0 | 8/8 | Complete | 2026-07-29 |
 | 7 | v0.1.0 | 0/? | Not started | - |
 | 8 | v0.1.0 | 0/? | Not started | - |
 | 9 | v0.1.0 | 0/? | Not started | - |
