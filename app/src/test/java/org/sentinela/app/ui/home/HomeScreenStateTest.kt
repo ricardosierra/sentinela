@@ -33,6 +33,7 @@ import org.sentinela.app.telecom.call.DialerModeState
 import org.sentinela.app.ui.assertLayoutHeightIsAtLeast
 import org.sentinela.app.ui.assertTouchHeightIsAtLeast
 import org.sentinela.app.ui.assertTouchWidthIsAtLeast
+import org.sentinela.app.ui.theme.SentinelaTheme
 
 /**
  * Os oito estados degradados da home, o teto de avisos e os dois eixos de alvo.
@@ -91,7 +92,7 @@ class HomeScreenStateTest {
 
     private fun compor(state: HomeUiState) {
         compose.setContent {
-            org.sentinela.app.ui.theme.SentinelaTheme(darkTheme = true, dynamicColor = false) {
+            SentinelaTheme(darkTheme = true, dynamicColor = false) {
                 HomeScreen(
                     state = state,
                     onProtectionChange = {},
