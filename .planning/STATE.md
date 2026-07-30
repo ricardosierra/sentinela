@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-06-PLAN.md
-last_updated: "2026-07-30T05:19:52.234Z"
+stopped_at: Completed 07-07-PLAN.md
+last_updated: "2026-07-30T05:21:06.750Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 42
+  completed_plans: 43
 ---
 
 # Project State
@@ -268,6 +268,10 @@ Plan: 7 of 11
 - [Phase Phase 07]: 07-06: no passo 4 o aviso temporizado do mockup virou TEXTO PERMANENTE (informacao que desaparece sozinha e informacao perdida, e aviso com tempo e hostil ao leitor de tela) e o quadro ilustrado remoto virou cartao tonal, porque o aplicativo nao declara acesso a internet
 - [Phase Phase 07]: 07-06: quatro pre-visualizacoes num arquivo que ja tem varias compostas privadas saem de UM provedor de parametro — quatro funcoes anotadas estouram o limite de funcoes por arquivo do detekt, e afrouxar a regra compartilhada por pre-visualizacao seria o preco errado
 - [Phase Phase 07]: 07-06: KDoc que CITA o nome do recurso derruba criterio de aceite por contagem de texto (quarta encarnacao da armadilha das Fases 3 e 5) — o comentario passou a descrever o texto em vez de nomear a chave
+- [Phase 07]: 07-07: assert de acao em no separado so tem dentes na arvore MESCLADA — com o botao movido para dentro do no mesclado, os asserts sobre a arvore NAO mesclada ficaram VERDES (ela preserva o no do botao mesmo com o ancestral limpando a semantica) e so tres casos vizinhos pegaram a sabotagem; a prova de vermelho consertou o teste em vez de confirma-lo
+- [Phase 07]: 07-07: titulo e cor do veredito final saem do MESMO booleano do papel — nao existem dois sinais para divergir, e por isso circulo verde sobre titulo parcial e impossivel por construcao, no molde do StatValue de 07-04
+- [Phase 07]: 07-07: NEVER_SILENCE cai no rotulo de permitir na linha de desconhecidos porque o passo 2 so ofereceu tres opcoes — mostrar na conferencia uma palavra que o usuario nunca viu na tela da escolha seria pior que agrupar
+- [Phase 07]: 07-07: UIX-10 segue PENDENTE de proposito — estados de carregamento e erro sao da home (07-08), e marcar requisito antes da tela e o estado falsamente positivo que este proprio plano existe para impedir
 
 ## Convenções operacionais do GSD
 
@@ -311,6 +315,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T05:19:11.359Z
-Stopped at: Completed 07-06-PLAN.md
+Last session: 2026-07-30T05:20:41.366Z
+Stopped at: Completed 07-07-PLAN.md
 Resume file: None
