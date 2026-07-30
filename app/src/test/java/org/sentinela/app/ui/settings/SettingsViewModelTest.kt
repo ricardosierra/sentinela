@@ -194,7 +194,7 @@ class SettingsViewModelTest {
         val vm = criar(repositorioReal(), total = 7L)
         val estado = observar(vm)
 
-        assertEquals(7L, estado().historyCount)
+        assertEquals(7L, estado().historyRecordCount)
     }
 
     // ------------------------------------------------------------------------------------------

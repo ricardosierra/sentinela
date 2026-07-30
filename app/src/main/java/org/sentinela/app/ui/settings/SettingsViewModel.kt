@@ -25,20 +25,6 @@ import org.sentinela.app.telecom.call.DialerModeState
 import org.sentinela.app.telecom.call.dialerModeState
 
 /**
- * Estado da tela Proteção.
- *
- * [historyCount] existe por causa da confirmação da §9.2: o diálogo de limpar histórico precisa
- * dizer QUANTOS registros serão apagados. "Apagar tudo" sem número é pedir consentimento no escuro.
- */
-data class SettingsUiState(
-    val settings: ScreeningSettings = ScreeningSettings(),
-    val screeningRoleHeld: Boolean = false,
-    val screeningRoleAvailable: Boolean = false,
-    val dialerMode: DialerModeState = DialerModeState.UNAVAILABLE,
-    val historyCount: Long = 0L,
-)
-
-/**
  * Dono de estado da tela Proteção.
  *
  * **Não existe função de salvar, e a ausência dela é o contrato.** Cada item da tela grava no
@@ -89,7 +75,8 @@ class SettingsViewModel(
                     contactsGranted = sistema.agendaConcedida,
                     userOptedIn = optou,
                 ),
-                historyCount = quantos,
+                historyRecordCount = quantos,
+                loading = false,
             )
         }.stateIn(
             scope = viewModelScope,
