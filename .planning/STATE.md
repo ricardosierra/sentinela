@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-07-PLAN.md
-last_updated: "2026-07-30T05:21:06.750Z"
+stopped_at: Completed 07-08-PLAN.md
+last_updated: "2026-07-30T05:43:23.242Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 43
+  completed_plans: 44
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 7 of 11
+Plan: 8 of 11
 
 ## Snapshot
 
@@ -49,6 +49,7 @@ Plan: 7 of 11
 - **UI (donos de estado, 07-04):** `HomeViewModel`, `OnboardingViewModel` e `SettingsViewModel` — colaboradores por parametro, `AppContainer` fora inclusive das fabricas (montagem fica na rota), consultas de papel injetadas como FUNCOES para o teste conta-las; `StatValue` fechado em `Loaded`/`Unavailable`/`Loading` torna o zero mentiroso impossivel por assinatura e `LastBlockedUi` carrega so o texto mascarado; falha de leitura do historico vira estado visivel em vez de propagar; chave `onboarding_completed` fora de `ScreeningSettings`; tela Protecao com uma funcao por item e ZERO funcao de salvar (ausencia travada por reflexao), retencao "nao guardar" gravando e podando na mesma corotina; 42 casos novos (suite JVM 698) com seis provas de vermelho — cobertura 96,6157%
 - **UI (boas-vindas e dois primeiros passos, 07-05):** `WelcomeScreen` fiel ao layout do mockup e honesta no texto — tres cartoes locais, selo de codigo aberto no lugar do selo de protecao ativa, zero base global de numeros, zero endereco remoto e zero progresso falso, com as tres adaptacoes em KDoc apontando o registro pos-lancamento; `RoleStepScreen` carrega o AVISO OBRIGATORIO de escopo em cartao de peso visual igual, com as tres frases das Fases 5 e 6 por identificador de recurso, e os tres ramos do papel sem travar nem repetir o dialogo (concedido mostra chip de ativo e exige toque; negado avanca com aviso e acao); `UnknownPolicyStepScreen` com o cartao central flutuante, tres opcoes em grupo de escolha unica e bloquear como padrao, sem a politica que nunca silencia e sem o estilo do bloqueio; duracao da transicao de passo publicada para o envelope de navegacao; 18 casos de composicao e tres provas de vermelho, a terceira medida nas duas direcoes
 - **UI (passos 3 e 4 do onboarding, 07-06):** `ContactsPolicyStepScreen` com os QUATRO ramos da permissao da agenda por `when` exaustivo (justificativa + pedido, chip de concedido, aviso da consequencia honesta com pedido, aviso de bloqueio com atalho e SEM pedido), quatro politicas sempre editaveis e o interruptor de privados ligado por padrao; `WhitelistPolicyStepScreen` com Nunca Silenciar selado como padrao, cartao tonal no lugar da imagem remota, hint permanente e botao Proximo; `ContactsAndWhitelistStepTest` com 23 casos e tres provas de vermelho; zero chave nova no `strings.xml`
+- **UI (home, 07-08):** `StatusHeroCard` com interruptor de PREFERENCIA (papel do sistema e somente-leitura no aviso, e o botao de correcao DESAPARECE quando o aparelho nao oferece o papel), cores de significado por literal e zero mesclagem de descendentes no arquivo; `StatCard` com `when` exaustivo sobre `StatValue` e nenhum parametro numerico na assinatura; `LastBlockedCard` recebendo o numero JA mascarado e sem rotulo de risco; `QuickActionRow` de 72dp exigidos; `HomeScreen` com os OITO estados degradados, precedencia de avisos, teto de dois com excedente levando a Protecao, rolagem total e ordem de travessia declarada por bloco; `relativeTimeLabel` por plurais reais; 29 casos novos (24 + 5) e quatro provas de vermelho, com o zero proibido e a fronteira do numero provados por VARREDURA das duas arvores semanticas; 6 chaves + 2 plurais novos (269 -> 275 `<string name=`)
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -272,6 +273,10 @@ Plan: 7 of 11
 - [Phase 07]: 07-07: titulo e cor do veredito final saem do MESMO booleano do papel — nao existem dois sinais para divergir, e por isso circulo verde sobre titulo parcial e impossivel por construcao, no molde do StatValue de 07-04
 - [Phase 07]: 07-07: NEVER_SILENCE cai no rotulo de permitir na linha de desconhecidos porque o passo 2 so ofereceu tres opcoes — mostrar na conferencia uma palavra que o usuario nunca viu na tela da escolha seria pior que agrupar
 - [Phase 07]: 07-07: UIX-10 segue PENDENTE de proposito — estados de carregamento e erro sao da home (07-08), e marcar requisito antes da tela e o estado falsamente positivo que este proprio plano existe para impedir
+- [Phase 07]: 07-08: o interruptor do cartao principal alterna a PREFERENCIA de protecao e nunca o papel do sistema — revogar papel encerra o processo (medido 3x na Fase 6) e o aplicativo nem pode revoga-lo; o papel e estado somente-leitura no aviso, com botao que abre o seletor do sistema e que DESAPARECE quando o aparelho nao oferece o papel
+- [Phase 07]: 07-08: o zero mentiroso e provado por VARREDURA da arvore semantica inteira (texto, descricao de conteudo e descricao de estado), nas duas arvores — afirmar so que o traco aparece seria fraco, porque a tela poderia exibir os dois; no ramo de carregamento o zero sabotado foi pego pela descricao de conteudo, nao por texto visivel
+- [Phase 07]: 07-08: quarta medicao da semantica mesclada, agora na home — com a descricao de estado movida para um container que mescla, o no do interruptor continuou existindo e alcancavel e o que se perdeu foi o ESTADO; por isso ele mora sempre no modificador do proprio Switch e o arquivo do cartao nao tem uma unica mesclagem de descendentes
+- [Phase 07]: 07-08: a home ganhou 6 chaves de texto novas + 2 plurais de tempo (contagem de 07-01 de 269 para 275 <string name=) — tempo relativo por plurais reais, leitura da ultima bloqueada, excedente de avisos e acao de tentar de novo; reusar 'Conceder agora' como nova tentativa de leitura seria texto errado na tela
 
 ## Convenções operacionais do GSD
 
@@ -315,6 +320,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T05:20:41.366Z
-Stopped at: Completed 07-07-PLAN.md
+Last session: 2026-07-30T05:42:54.736Z
+Stopped at: Completed 07-08-PLAN.md
 Resume file: None
