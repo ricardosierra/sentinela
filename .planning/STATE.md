@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-04-PLAN.md
-last_updated: "2026-07-30T04:57:15.841Z"
+stopped_at: Completed 07-05-PLAN.md
+last_updated: "2026-07-30T05:17:48.655Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 40
+  completed_plans: 41
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 5 of 11
+Plan: 6 of 11
 
 ## Snapshot
 
@@ -47,6 +47,7 @@ Plan: 5 of 11
 - **UI (fundacao de texto e cor, 07-01):** `StatusAttention`/`OnStatusAttention`/`StatusBlocked` como literais fora do Dynamic Color (apelidos semanticos dos tokens destrutivos, igualdade afirmada por teste; ativo reusa `CallAccept`), travados em JVM pura e fixados nos tres esquemas; 44 chaves pt-BR novas da fase — 269 `<string name=` mais o plural real de `settings_clear_history_confirm`; `Phase7StringsTest` com 11 casos varrendo as chaves de nove prefixos contra seis grupos de expressao proibida, sempre por `Context.getString`; os dois `PluralsCandidate` do lint eliminados, incluindo o porcento cru de `dialer_activation_unchanged_4` (corrigido por `formatted="false"`, com o texto visivel intacto)
 - **UI (componentes compartilhados, 07-03):** seis componentes em `ui/components/` — `OptionCard` (linha inteira como alvo unico com papel de botao de radio, 72dp, descricao permanente, selo, desabilitado com motivo no PROPRIO no), `StepHeader` (contador por recurso + barra decorativa), `SentinelaTopBar` (marca vinda do recurso, dois tipos de acao com alvo exigido de 48dp), `SettingSwitchRow` (tres nos, zero mesclagem no arquivo), `CheckRow` (estado por icone E texto, acao em no focavel separado) e `SentinelaBottomBar` (quatro destinos, `Role.Tab`, item de 56dp por `requiredHeight`, os dois da Phase 8 desabilitados com motivo textual); `Phase7ComponentSemanticsTest` com 17 casos sob qualificadores de tela reais e tres provas de vermelho, uma delas corrigindo o entendimento da semantica mesclada
 - **UI (donos de estado, 07-04):** `HomeViewModel`, `OnboardingViewModel` e `SettingsViewModel` — colaboradores por parametro, `AppContainer` fora inclusive das fabricas (montagem fica na rota), consultas de papel injetadas como FUNCOES para o teste conta-las; `StatValue` fechado em `Loaded`/`Unavailable`/`Loading` torna o zero mentiroso impossivel por assinatura e `LastBlockedUi` carrega so o texto mascarado; falha de leitura do historico vira estado visivel em vez de propagar; chave `onboarding_completed` fora de `ScreeningSettings`; tela Protecao com uma funcao por item e ZERO funcao de salvar (ausencia travada por reflexao), retencao "nao guardar" gravando e podando na mesma corotina; 42 casos novos (suite JVM 698) com seis provas de vermelho — cobertura 96,6157%
+- **UI (boas-vindas e dois primeiros passos, 07-05):** `WelcomeScreen` fiel ao layout do mockup e honesta no texto — tres cartoes locais, selo de codigo aberto no lugar do selo de protecao ativa, zero base global de numeros, zero endereco remoto e zero progresso falso, com as tres adaptacoes em KDoc apontando o registro pos-lancamento; `RoleStepScreen` carrega o AVISO OBRIGATORIO de escopo em cartao de peso visual igual, com as tres frases das Fases 5 e 6 por identificador de recurso, e os tres ramos do papel sem travar nem repetir o dialogo (concedido mostra chip de ativo e exige toque; negado avanca com aviso e acao); `UnknownPolicyStepScreen` com o cartao central flutuante, tres opcoes em grupo de escolha unica e bloquear como padrao, sem a politica que nunca silencia e sem o estilo do bloqueio; duracao da transicao de passo publicada para o envelope de navegacao; 18 casos de composicao e tres provas de vermelho, a terceira medida nas duas direcoes
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -256,6 +257,11 @@ Plan: 5 of 11
 - [Phase 07]: 07-04: onboarding_completed e chave propria fora de ScreeningSettings, nunca o contador de aberturas — amarrar o onboarding ao numero que o convite de avaliacao da Fase 9 ja usa seria divida garantida
 - [Phase 07]: 07-04: ausencia de funcao de salvar na tela Protecao travada por teste de REFLEXAO sobre nomes de metodo — um botao salvar tornaria possivel a tela e a triagem discordarem, e o retrato ja e imediato
 - [Phase 07]: 07-04: coletor de teste de dono de estado exige despachante NAO CONFINADO amarrado ao agendador — o backgroundScope do runTest usa o padrao, stateIn(WhileSubscribed) nunca liga o fluxo de origem e 11 de 15 casos ficaram vermelhos por motivo falso reportando o valor inicial; prima da armadilha da Fase 4
+- [Phase 07]: 07-05: as tres adaptacoes do mockup na tela de boas-vindas ficam em KDoc apontando o registro pos-lancamento — sem base global de numeros, sem imagem remota (o app nao declara internet, entao ela e impossivel por construcao) e sem sobreposicao de progresso falso, que seria padrao escuro medindo nada
+- [Phase 07]: 07-05: a prova de vermelho do container mesclado foi medida NAS DUAS DIRECOES e refuta a formulacao do proprio criterio — envolver o botao num container que mescla fica VERDE; o vermelho so vem quando o estado desabilitado e declarado NO CONTAINER e o botao fica habilitado (terceira medicao do mesmo achado, agora em ecra de onboarding)
+- [Phase 07]: 07-05: o grupo de opcoes usa o modificador compartilhado optionCardGroup() e por isso o literal selectableGroup NAO aparece na tela — reescreve-lo seria a duplicacao que 07-03 proibiu, e planta-lo em comentario e o defeito que a Fase 5 registrou tres vezes
+- [Phase 07]: 07-05: a transicao entre passos nao mora na tela — a tela publica a duracao de 250 ms e a supressao por reducao de movimento, e o envelope de navegacao (07-09) aplica o movimento, porque so ele conhece os dois passos e o sentido
+- [Phase 07]: 07-05: papel concedido nunca avanca sozinho e papel negado nunca trava — o chip e o aviso sao regiao viva EDUCADA, e repetir o dialogo do sistema exige toque explicito na acao do aviso
 
 ## Convenções operacionais do GSD
 
@@ -299,6 +305,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T04:56:34.762Z
-Stopped at: Completed 07-04-PLAN.md
+Last session: 2026-07-30T05:17:24.008Z
+Stopped at: Completed 07-05-PLAN.md
 Resume file: None

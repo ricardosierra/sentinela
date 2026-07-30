@@ -89,7 +89,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **UIX-08**: Dark mode (dark-first) + Dynamic Color quando disponível, seguindo tokens de `docs/design/DESIGN.md`
 - [x] **UIX-09**: Acessibilidade: TalkBack, alvos de toque ≥ 48 dp, contraste correto
 - [ ] **UIX-10**: Estados de carregamento e erro em todas as telas; proteção desativada é comunicada com destaque
-- [ ] **UIX-11**: Nenhuma promessa falsa na UI: não afirmar filtro de WhatsApp/VoIP nem "100% garantido"
+- [x] **UIX-11**: Nenhuma promessa falsa na UI: não afirmar filtro de WhatsApp/VoIP nem "100% garantido"
 - [x] **UIX-12**: Nome do app, applicationId, cores e strings centralizados para rebranding (resources + `sentinelaApplicationId` em `app/build.gradle.kts`)
 - [ ] **UIX-13**: Seção "Apoie o Sentinela" (em Sobre): destaque de que o app é open source, sem propaganda, sem telemetria, sem nuvem e 100% offline; convite a comentário de apoio e doação em Bitcoin
 
