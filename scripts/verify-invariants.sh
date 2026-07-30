@@ -465,6 +465,71 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Bloco 9 — Fase 7: texto de interface, fronteira do numero e o repositorio proibido
+# ---------------------------------------------------------------------------
+# O risco desta fase e de regressao silenciosa, nao de defeito visivel: texto embutido em Kotlin
+# passa em qualquer teste e so aparece quando alguem tenta traduzir ou renomear o produto; um
+# numero completo vazado para a tela nao quebra nada e viola a promessa central do aplicativo; e a
+# consulta a agenda arrastada para dentro de uma tela custa mais de dois segundos e meio de
+# construcao de cache, medidos, sem nenhuma tela desta fase precisar disso.
+#
+# ATENCAO ao escopo, mesma armadilha dos Blocos 6, 7 e 8: todo grep daqui aponta para as tres
+# pastas de interface desta fase, nunca para scripts/. E as mensagens descrevem o que e proibido em
+# prosa em vez de repetir o identificador procurado.
+#
+# Aritmetica obrigatoria, terceira encarnacao dela neste arquivo: `grep -c` sai com codigo 1 quando
+# conta zero, entao a comparacao vai sempre em `[ "$(grep -c ...)" -eq 0 ]`, jamais com um
+# fallback de echo, que imprimiria a contagem duas vezes.
+echo "== Bloco 9: interface sem texto embutido, sem numero e sem consulta a agenda =="
+
+UI_ONBOARDING=app/src/main/java/org/sentinela/app/ui/onboarding
+UI_HOME=app/src/main/java/org/sentinela/app/ui/home
+UI_SETTINGS=app/src/main/java/org/sentinela/app/ui/settings
+
+# 9.1 — nenhum texto de interface escrito em Kotlin nas tres pastas da fase.
+# O padrao casa aspas que contenham duas ou mais letras seguidas de um espaco, que e a assinatura de
+# frase; nome de chave, identificador e anotacao de supressao nao tem espaco dentro das aspas e
+# portanto nao casam. Linha de comentario e de documentacao sai por padrao de linha ANTES da
+# contagem: a proibicao e descrita em prosa neste arquivo e nos arquivos de interface, e um criterio
+# que casasse a propria prosa que o descreve falharia sozinho — foi o que aconteceu com quem tentou
+# escrever a regra sem esta exclusao.
+FRASE_EM_KOTLIN='"[[:alpha:]][[:alpha:]][^"]*[[:space:]]'
+TEXTO_EMBUTIDO=$(grep -rnE "$FRASE_EM_KOTLIN" "$UI_ONBOARDING" "$UI_HOME" "$UI_SETTINGS" \
+  --include="*.kt" 2>/dev/null | grep -vE '^[^:]*:[0-9]+:[[:space:]]*(\*|//|/\*)')
+if [ -z "$TEXTO_EMBUTIDO" ]; then
+  ok "nenhum texto de interface embutido em Kotlin nas telas da fase"
+else
+  echo "$TEXTO_EMBUTIDO" | sed 's/^/      /'
+  fail "texto de interface escrito em Kotlin — toda frase vive em res/values/strings.xml, em pt-BR"
+fi
+
+# 9.2 — a fronteira do numero. Nenhuma tela da fase enxerga o campo do registro de bloqueio que
+# guarda o numero em formato internacional; o que desce para a tela e a mascara unica, e nada mais.
+# Os donos de estado estao FORA do escopo por desenho de 07-04: e neles que a mascara e aplicada, e
+# esse e o ultimo ponto do aplicativo em que os digitos existem. O tipo que sai dali nao tem campo
+# para eles, e e por isso que a exclusao aqui nao abre buraco nenhum.
+NUMERO_CRU=$(grep -rn "numberE164" "$UI_ONBOARDING" "$UI_HOME" "$UI_SETTINGS" \
+  --include="*.kt" 2>/dev/null | grep -v "ViewModel.kt:")
+if [ -z "$NUMERO_CRU" ]; then
+  ok "nenhuma tela da fase enxerga o numero completo do registro de bloqueio"
+else
+  echo "$NUMERO_CRU" | sed 's/^/      /'
+  fail "tela da fase referencia o campo do numero completo — a exibicao passa somente pela mascara unica aplicada no dono de estado"
+fi
+
+# 9.3 — o repositorio de consulta da agenda nao e citado por nenhuma tela da fase. Ele registra
+# observador do provedor da agenda e dispara a construcao de um conjunto de chaves medido em mais de
+# dois segundos e meio com cinco mil contatos; nenhuma tela desta fase precisa de nome de contato.
+AGENDA_NA_UI=$(grep -rniE "contactLookupRepository" "$UI_ONBOARDING" "$UI_HOME" "$UI_SETTINGS" \
+  --include="*.kt" 2>/dev/null)
+if [ -z "$AGENDA_NA_UI" ]; then
+  ok "nenhuma tela da fase cita o repositorio de consulta da agenda"
+else
+  echo "$AGENDA_NA_UI" | sed 's/^/      /'
+  fail "tela da fase cita o repositorio de consulta da agenda — ele constroi cache medido em mais de dois segundos e meio e nenhuma tela desta fase precisa dele"
+fi
+
+# ---------------------------------------------------------------------------
 if [ "$FAILURES" -gt 0 ]; then
   echo "== $FAILURES invariante(s) violado(s) =="
   exit 1

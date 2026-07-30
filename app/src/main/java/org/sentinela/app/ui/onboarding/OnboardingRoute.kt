@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import org.sentinela.app.AppContainer
 import org.sentinela.app.platform.ContactsPermissionChecker
 import org.sentinela.app.platform.NotificationPermissionChecker
+import org.sentinela.app.settings.ScreeningSettings
 import org.sentinela.app.telecom.ScreeningRoleManager
 import org.sentinela.app.ui.navigation.DestinoEmPreparacao
 import org.sentinela.app.ui.navigation.PASSOS_DO_ONBOARDING
@@ -68,7 +69,6 @@ internal fun WelcomeRoute(nav: NavController) {
  * negar custa a capacidade correspondente, nunca o resto do onboarding.
  */
 @Composable
-@Suppress("LongMethod", "CyclomaticComplexMethod")
 internal fun OnboardingRoute(container: AppContainer, nav: NavController, passo: Int) {
     val activity = LocalActivity.current
     val context = LocalContext.current
@@ -106,74 +106,103 @@ internal fun OnboardingRoute(container: AppContainer, nav: NavController, passo:
         ActivityResultContracts.RequestPermission(),
     ) { dono.reconsultarPermissoes() }
 
-    val pedirPapel = { dono.intencaoDePedidoDoPapel()?.let(seletorDePapel::launch) ?: Unit }
-    val pedirAgenda = {
-        dono.pedirAgenda { pedidoDaAgenda.launch(Manifest.permission.READ_CONTACTS) }
-    }
-    val abrirConfiguracoes = {
-        context.startActivity(verificadorDaAgenda.appSettingsIntent(context.packageName))
-    }
-    val avancar = { nav.navigate(PASSOS_DO_ONBOARDING[(passo + 1).coerceAtMost(ULTIMO_PASSO)]) }
-    val voltar = { nav.popBackStack(); Unit }
-    val pular = { dono.pular(); nav.irParaHome() }
-    val concluir = { dono.concluir(); nav.irParaHome() }
-    val config = estado.settings
+    AcoesDoPasso(
+        pedirPapel = { dono.intencaoDePedidoDoPapel()?.let(seletorDePapel::launch) },
+        pedirAgenda = {
+            dono.pedirAgenda { pedidoDaAgenda.launch(Manifest.permission.READ_CONTACTS) }
+        },
+        abrirConfiguracoes = {
+            context.startActivity(verificadorDaAgenda.appSettingsIntent(context.packageName))
+        },
+        gravar = dono::gravarConfiguracao,
+        alternarAviso = { ligado ->
+            aderirAoAviso(dono, ligado) {
+                pedidoDoAviso.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        },
+        avancar = { nav.navigate(PASSOS_DO_ONBOARDING[(passo + 1).coerceAtMost(ULTIMO_PASSO)]) },
+        voltar = { nav.popBackStack() },
+        pular = { dono.pular(); nav.irParaHome() },
+        concluir = { dono.concluir(); nav.irParaHome() },
+    ).let { acoes -> PassoDoOnboarding(passo = passo, estado = estado, acoes = acoes) }
+}
 
+/**
+ * As nove intenções que um passo do onboarding pode emitir, reunidas para poder atravessar a fronteira
+ * entre a fiação e o desvio de passo em um único objeto.
+ *
+ * A razão de existir é que ela separa o QUE cada passo faz do COMO isso é executado, e é o que permite
+ * ao teste de fluxo compor o desvio REAL de produção — com navegação de verdade e sem container.
+ */
+@Suppress("LongParameterList")
+internal class AcoesDoPasso(
+    val pedirPapel: () -> Unit,
+    val pedirAgenda: () -> Unit,
+    val abrirConfiguracoes: () -> Unit,
+    val gravar: ((ScreeningSettings) -> ScreeningSettings) -> Unit,
+    val alternarAviso: (Boolean) -> Unit,
+    val avancar: () -> Unit,
+    val voltar: () -> Unit,
+    val pular: () -> Unit,
+    val concluir: () -> Unit,
+)
+
+/**
+ * Desvio de passo: recebe o passo e o estado, e desenha uma das seis compostas puras que já existem.
+ *
+ * Nenhuma delas conhece navegação, container ou plataforma — o que entra é estado, o que sai é intenção.
+ */
+@Composable
+@Suppress("LongMethod")
+internal fun PassoDoOnboarding(passo: Int, estado: OnboardingUiState, acoes: AcoesDoPasso) {
+    val config = estado.settings
     when (passo) {
         PASSO_DO_PAPEL -> RoleStepScreen(
             state = estado,
-            onRequestRole = pedirPapel,
-            onNext = avancar,
-            onSkip = pular,
+            onRequestRole = acoes.pedirPapel,
+            onNext = acoes.avancar,
+            onSkip = acoes.pular,
         )
 
         PASSO_DOS_DESCONHECIDOS -> UnknownPolicyStepScreen(
             selected = config.unknownPolicy,
-            onSelect = { politica -> dono.gravarConfiguracao { it.copy(unknownPolicy = politica) } },
-            onNext = avancar,
-            onSkip = pular,
+            onSelect = { politica -> acoes.gravar { it.copy(unknownPolicy = politica) } },
+            onNext = acoes.avancar,
+            onSkip = acoes.pular,
         )
 
         PASSO_DOS_CONTATOS -> ContactsPolicyStepScreen(
             permission = estado.contactsPermission,
             selected = config.contactsPolicy,
             blockPrivate = config.blockPrivateNumbers,
-            onSelect = { politica ->
-                dono.gravarConfiguracao { it.copy(contactsPolicy = politica) }
-            },
+            onSelect = { politica -> acoes.gravar { it.copy(contactsPolicy = politica) } },
             onBlockPrivateChange = { bloquear ->
-                dono.gravarConfiguracao { it.copy(blockPrivateNumbers = bloquear) }
+                acoes.gravar { it.copy(blockPrivateNumbers = bloquear) }
             },
-            onGrantContacts = pedirAgenda,
-            onOpenAppSettings = abrirConfiguracoes,
-            onNext = avancar,
-            onSkip = pular,
+            onGrantContacts = acoes.pedirAgenda,
+            onOpenAppSettings = acoes.abrirConfiguracoes,
+            onNext = acoes.avancar,
+            onSkip = acoes.pular,
         )
 
         PASSO_DA_WHITELIST -> WhitelistPolicyStepScreen(
             selected = config.whitelistPolicy,
-            onSelect = { politica ->
-                dono.gravarConfiguracao { it.copy(whitelistPolicy = politica) }
-            },
-            onNext = avancar,
-            onBack = voltar,
-            onSkip = pular,
+            onSelect = { politica -> acoes.gravar { it.copy(whitelistPolicy = politica) } },
+            onNext = acoes.avancar,
+            onBack = acoes.voltar,
+            onSkip = acoes.pular,
         )
 
         PASSO_DO_AVISO -> NotificationStepScreen(
             enabled = config.showOwnNotification,
             identification = config.notificationIdentification,
             permission = estado.notificationPermission,
-            onEnabledChange = { ligado ->
-                aderirAoAviso(dono, ligado) {
-                    pedidoDoAviso.launch(Manifest.permission.POST_NOTIFICATIONS)
-                }
-            },
+            onEnabledChange = acoes.alternarAviso,
             onIdentificationChange = { identificacao ->
-                dono.gravarConfiguracao { it.copy(notificationIdentification = identificacao) }
+                acoes.gravar { it.copy(notificationIdentification = identificacao) }
             },
-            onNext = avancar,
-            onSkip = pular,
+            onNext = acoes.avancar,
+            onSkip = acoes.pular,
         )
 
         else -> SummaryStepScreen(
@@ -182,9 +211,9 @@ internal fun OnboardingRoute(container: AppContainer, nav: NavController, passo:
             unknownPolicy = config.unknownPolicy,
             contactsPolicy = config.contactsPolicy,
             whitelistPolicy = config.whitelistPolicy,
-            onFixRole = pedirPapel,
-            onGrantContacts = pedirAgenda,
-            onFinish = concluir,
+            onFixRole = acoes.pedirPapel,
+            onGrantContacts = acoes.pedirAgenda,
+            onFinish = acoes.concluir,
         )
     }
 }
