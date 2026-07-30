@@ -76,12 +76,15 @@ android {
     lint {
         abortOnError = true // explicito: erro de lint quebra o build
 
+        // A regra de recursos nao usados saiu deste bloco na Phase 7 e passou a ser
+        // estreitada nominalmente por fase em app/lint.xml.
+        //
+        // Correcao de premissa (medida em 2026-07-30): a supressao NUNCA foi o que
+        // mantinha o build verde. Com a regra reabilitada, lintDebug sai com codigo 0
+        // — a severidade e de aviso e a conversao de aviso em erro nao esta ligada.
+        // Ela servia para manter o relatorio limpo enquanto as telas nao existiam.
+        // Agora que as telas consomem as chaves, o relatorio volta a ser util.
         disable += setOf(
-            // Strings e cores pre-escritas para as telas das Fases 5-9
-            // (docs/design/TELAS.md). Sao ativos legitimos, nao lixo:
-            // apagar destroi trabalho e recria custo nas fases de UI.
-            // Reavaliar na Phase 9, quando as telas reais consumirem as strings.
-            "UnusedResources",
             // O dicionario do lint e en-US e acusa falso positivo em conteudo
             // pt-BR ("momento" != "memento"). O idioma padrao do app e pt-BR.
             "Typos",
@@ -244,12 +247,9 @@ dependencies {
     // verificada em JVM sob Robolectric. As duas dependencias ja estavam no version catalog e no
     // conjunto instrumentado desde o bootstrap — aqui elas passam a valer tambem para src/test,
     // porque medir alvo de toque no emulador tornaria o criterio caro demais para rodar sempre.
-    testImplementation(platform(libs.compose.bom))
-    testImplementation(libs.compose.ui.test.junit4)
-    testImplementation(libs.compose.ui.test.manifest)
-    // Fase 6: as telas de chamada e discagem sao testadas em JVM sob Robolectric. Nao e
-    // biblioteca nova — e a MESMA do androidTest, que o version catalog ja declara e que entra
-    // na versao do Compose BOM. Sem ela nao existe regra de teste de composicao no lado JVM.
+    // Nao e biblioteca nova: e a MESMA do conjunto instrumentado, na versao do Compose BOM.
+    // (Este bloco estava DUPLICADO desde a Fase 6, com dois comentarios diferentes; a segunda
+    // copia saiu na Fase 7 e o argumento util dela foi absorvido na linha acima.)
     testImplementation(platform(libs.compose.bom))
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.compose.ui.test.manifest)

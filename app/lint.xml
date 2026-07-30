@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Estreitamento nominal da regra de recursos nao usados.
+
+  Historico honesto: a Phase 1 desabilitou a regra inteira porque 133 recursos pt-BR
+  tinham sido escritos antes das telas. A medicao da Phase 7 (2026-07-30) mostrou que
+  a supressao NUNCA foi necessaria para manter o build verde — a severidade e de aviso
+  e a conversao de aviso em erro nao esta ligada. Ela servia para o relatorio nao ficar
+  ilegivel. Com as telas desta fase consumindo as chaves, o bloco cego virou esta lista.
+
+  Cada linha abaixo silencia UM prefixo e nomeia a fase que vai consumi-lo. A fase
+  correspondente deve APAGAR a sua linha quando implementar as telas — se apagar e o
+  achado nao aparecer, e porque a chave ficou orfa de verdade.
+
+  Medido: 133 achados no total; com este estreitamento, 81. Os 52 silenciados sao
+  exatamente os das Phases 8 e 9.
+-->
+<lint>
+    <issue id="UnusedResources">
+        <!-- Phase 8 — tela de whitelist pessoal (CRUD, busca, import/export) -->
+        <ignore regexp="R\.string\.whitelist_" />
+        <!-- Phase 8 — tela de historico de bloqueios (filtros, acoes por item) -->
+        <ignore regexp="R\.string\.history_" />
+        <!-- Phase 9 — tela sobre o app e politica de privacidade embutida -->
+        <ignore regexp="R\.string\.about_" />
+        <!-- Phase 9 — secao de apoio ao projeto e doacao -->
+        <ignore regexp="R\.string\.support_" />
+        <!-- Phase 9 — convite de avaliacao na 5a abertura -->
+        <ignore regexp="R\.string\.review_" />
+
+        <!--
+          Residuos reais do esqueleto, e nao texto de fase futura. Conduta escolhida
+          para cada um, justificada em vez de suprimida em bloco:
+
+          - ic_launcher_round: IGNORADO com motivo. A arte final do icone e pendencia
+            registrada no estado do projeto (hoje ha um placeholder vetorial de escudo).
+            Apagar recriaria trabalho quando a arte chegar; usar exige a arte.
+        -->
+        <ignore path="res/mipmap/ic_launcher_round.xml" />
+    </issue>
+</lint>
