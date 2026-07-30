@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -60,6 +61,7 @@ private val ScreenHorizontalPadding = 16.dp
 private val GroupGap = 24.dp
 private val ItemGap = 16.dp
 private val BottomGap = 32.dp
+private val DestructiveMinTarget = 48.dp
 
 /**
  * Tela Proteção: os dezesseis itens da §9 do contrato de interface, agrupados, com explicação
@@ -476,7 +478,17 @@ private fun GrupoDeHistorico(
             RetencaoOpcao(state, RetentionPolicy.DAYS_90, R.string.settings_retention_90, onRetention)
             RetencaoOpcao(state, RetentionPolicy.MANUAL, R.string.settings_retention_manual, onRetention)
         }
-        TextButton(onClick = onPedirLimpeza, modifier = Modifier.fillMaxWidth()) {
+        NotaDoGrupo(text = stringResource(R.string.about_data_local))
+        // Piso EXIGIDO de altura: o botão de texto do Material desenha 40dp, e o alvo de toque que o
+        // Compose expande sozinho esconderia isso de qualquer assert de toque. O eixo do desenho
+        // pegou — quarta vez neste projeto (Fases 6, 07-03 e aqui). `requiredHeightIn` não negocia
+        // com o pai; `heightIn` negociaria e voltaria a 40dp em tela apertada.
+        TextButton(
+            onClick = onPedirLimpeza,
+            modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeightIn(min = DestructiveMinTarget),
+        ) {
             Text(
                 text = stringResource(R.string.history_clear_all),
                 style = MaterialTheme.typography.labelLarge,
@@ -487,9 +499,16 @@ private fun GrupoDeHistorico(
 }
 
 /**
- * Uma janela de retenção. "Não guardar" carrega a explicação do que a escolha DESTRÓI; as quatro
- * janelas que preservam registro carregam a mesma afirmação curta de privacidade, porque a duração em
- * si já está dita no rótulo e repetir um parágrafo diferente sob cada duração seria enchimento.
+ * Uma janela de retenção.
+ *
+ * Estas são as ÚNICAS opções da tela sem descrição própria, e é deliberado. A duração inteira já está
+ * dita no rótulo ("7 dias", "Até eu excluir"); a explicação do item vive uma vez, como nota do grupo,
+ * logo abaixo das cinco. Repetir cinco parágrafos idênticos sob cinco durações seria enchimento, e
+ * inventar um parágrafo diferente para cada duração seria pior: texto sem informação nova.
+ *
+ * A consequência destrutiva de "Não guardar" não é dita aqui de propósito — ela é o corpo do diálogo
+ * de confirmação, que é onde a §9.2 a coloca. Dizê-la nos dois lugares criaria duas cópias da mesma
+ * frase, e a cópia esquecida é sempre a que fica errada.
  */
 @Composable
 private fun RetencaoOpcao(
@@ -500,11 +519,7 @@ private fun RetencaoOpcao(
 ) {
     OpcaoDePolitica(
         title = stringResource(labelRes),
-        description = if (politica == RetentionPolicy.NEVER_STORE) {
-            stringResource(R.string.settings_retention_never_confirm)
-        } else {
-            stringResource(R.string.about_data_local)
-        },
+        description = "",
         icon = if (politica == RetentionPolicy.NEVER_STORE) {
             Icons.Outlined.Delete
         } else {
