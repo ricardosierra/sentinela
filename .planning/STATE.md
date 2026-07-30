@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-08-PLAN.md
-last_updated: "2026-07-30T00:10:42.461Z"
+stopped_at: Completed 06-09-PLAN.md
+last_updated: "2026-07-30T00:21:54.787Z"
 last_activity: 2026-07-29
 progress:
   total_phases: 9
   completed_phases: 6
-  total_plans: 35
-  completed_plans: 35
+  total_plans: 36
+  completed_plans: 36
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-29
 ## Current Position
 
 Phase: 06 (Modo Discador Opcional) — COMPLETE
-Plan: 8 of 8
+Plan: 9 of 9
 
 ## Snapshot
 
@@ -34,7 +34,7 @@ Plan: 8 of 8
 - **Normalização:** `LibPhoneNumberNormalizer` + `PhoneMask` + cascata de região, ligados em `AppContainer.phoneNumberNormalizer` (util construído 1x, fora do caminho quente)
 - **Dados locais:** Room v1 (`whitelist` + `blocked_call`, schema exportado) e DataStore Preferences, ambos como instância única no `AppContainer`; retenção de histórico em 5 políticas, podada na abertura do app
 - **Contatos:** `ContactLookupRepository` real ligado no `AppContainer` (singleton preguiçoso, sonda dupla + cache invalidado por observer); nada de identidade de contato toca disco — Bloco 6 de `verify-invariants.sh`
-- **Qualidade:** 417 testes JVM + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
+- **Qualidade:** 618 testes JVM (era 417 na Fase 5) + 53 instrumentados; cobertura 97,6351% sobre domain+phone+data+settings+telecom+notifications+permissions com gate `koverVerify` em 80%; lint e detekt zerados; `verify-invariants.sh` com 7 blocos (Bloco 7 trava a regra de decisao dentro do motor); evidencia pos-limpeza em `05-EVIDENCE.md`
 - **Modo discador (elegibilidade PRONTA):** manifest com o servico de chamada exportado/protegido, meta-dado de substituicao da interface e os DOIS filtros de discagem; quatro permissoes novas autorizadas na matriz e no script; `SentinelaInCallService` fino + `CallSessionStore` (instancia unica no container) + `TelecomCallControls`; `DialerRoleManager` sobre `SystemRoleGate` e `DialerModeState` puro; `CallActivity`/`DialerActivity` hospedeiras reais; Bloco 8 com 4 checagens
 - **Modo discador (nucleo):** nucleo puro em `telecom/call/` — `CallUiState`/`CallSnapshot`, `PlatformCallStateMapper` (12 codigos + ramo final visivel), `CallControls` e `CallSessionCoordinator` com prazo de apresentacao de 2 s e falha ALTA (excecao propaga, zero captura)
 - **Telecom:** `UnknownCallScreeningService` LIGADO — delega ao `ScreeningCoordinator` pelo contrato `ScreeningDependencies`, responde uma unica vez e dispara historico/notificacao depois da resposta
@@ -42,7 +42,7 @@ Plan: 8 of 8
 - **UI (telas de chamada, 06-04):** `IncomingCallScreen` (quatro identidades, ordem de foco declarada, paisagem em duas colunas), `OutgoingCallScreen` (tres pontos em fade, suprimido com reducao de movimento), `ActiveCallScreen` (cronometro congelavel + ramo do estado nao suportado com encerrar habilitado), `DtmfKeypadSheet` e `AudioRouteSheet` ancorados ao rodape; `CallActivity` com `when` exaustivo, confirmacao de apresentacao, gesto de voltar consumido e fechamento apos 1200 ms; contrato do extra de acao da notificacao (`EXTRA_CALL_ACTION` + tres valores) vive em `ui/call/CallActivity.kt`; 20 casos novos e 23 pre-visualizacoes
 - **UI (discagem e ativacao, 06-05):** `DialpadScreen` completa (campo somente saida com formatacao progressiva da propria biblioteca e forma nacional quando o numero fica valido, apagar invisivel que ocupa espaco, barra de falha que mantem o numero) e `DialerActivationScreen` com os cinco ramos de estado, cards de custo e beneficio com estilo identico e reversao pelo seletor do sistema; `OutgoingCallPlacer` origina pelo gerenciador de telecomunicacoes com resultados nomeados; `CallPhonePermissionChecker` em `platform/` e `call_phone_permission_asked` no DataStore; 27 casos novos
 - **Modo discador (provado no aparelho virtual, 06-07):** 27 casos instrumentados novos (suite 53 -> 80) cobrindo vinculo real do servico de chamada, elegibilidade ao papel pelo comando que a VERIFICA, politica por contato valendo de fato com o motor intocado, independencia dos dois papeis e chamada de saida real; `scripts/verify-dialer-lifecycle.sh` prova de FORA do processo o ciclo completo do papel e a sobrevivencia da chamada a morte do processo
-- **Fechamento da Fase 6 (06-08):** documentos sem afirmacao nao medida — item de numero privado de volta a NAO VERIFICADO com o cenario 59 como veredito, item do historico do telefone reconfirmado em execucao com o papel ativo, item novo do encerramento do processo ao perder papel, e o escopo do modo discador (uma chamada por vez, sem video, emergencia sempre nativa); secao 11 de `docs/design/TELAS.md` de esboco de 6 linhas a contrato de 121; roteiro fisico com 60 cenarios (23-30 revisados no lugar, 52-60 novos) e as tres questoes abertas de fabricante; cobertura 96,648% com dois excludes por nome de classe e gate visto vermelho; `06-EVIDENCE.md` pos-clean sem cache (603 JVM + 80 instrumentados + ciclo de vida do papel)
+- **Fechamento da Fase 6 (06-08):** documentos sem afirmacao nao medida — item de numero privado de volta a NAO VERIFICADO com o cenario 59 como veredito, item do historico do telefone reconfirmado em execucao com o papel ativo, item novo do encerramento do processo ao perder papel, e o escopo do modo discador (uma chamada por vez, sem video, emergencia sempre nativa); secao 11 de `docs/design/TELAS.md` de esboco de 6 linhas a contrato de 121; roteiro fisico com 60 cenarios (23-30 revisados no lugar, 52-60 novos) e as tres questoes abertas de fabricante; cobertura 96,648% com dois excludes por nome de classe e gate visto vermelho (o exclude da costura caiu no 06-09: 96,69% com a costura em 100%); `06-EVIDENCE.md` pos-clean sem cache (603 JVM + 80 instrumentados + ciclo de vida do papel)
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -225,6 +225,8 @@ Plan: 8 of 8
 - [Phase 06]: 06-08: excludes novos do Kover sao dois nomes de classe (costura da telefonia e servico de interface de chamada, so alcancaveis instrumentados) — 95,4741% -> 96,648%, nenhuma classe pura fora do denominador, gate visto vermelho com piso 99 antes de aceito
 - [Phase 06]: 06-08: cenario fisico ja escrito e revisado NO LUGAR e nunca duplicado — 23-30 ganharam o que a automacao provou, os novos comecam em 52 e o documento fecha em 60
 - [Phase 06]: 06-08: gravar configuracao e triar no instante seguinte e corrida no TESTE, nao no produto — o retrato do repositorio vem de cache mantido por coletor assincrono (Fase 3); o caso passou a esperar o valor gravado ser reportado
+- [Phase 06]: 06-09: exclude do Kover da costura da telefonia REMOVIDO — a justificativa antiga (objeto de chamada so montavel pela plataforma) era falsa para mudo e viva-voz, que operam sobre o servico de chamada; costura em 100% de linhas, cobertura do gate 96,69%, piso 99 visto vermelho
+- [Phase 06]: 06-09: mudo e viva-voz agora provados NA costura por verificacao de delegacao com argumento exato — chamar e concluir que nao estourou e vacuoso, porque a falha e no-op silencioso; vermelho executado sabotando producao JA COMMITADA
 
 ## Convenções operacionais do GSD
 
@@ -268,6 +270,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T00:10:29.803Z
-Stopped at: Completed 06-08-PLAN.md
+Last session: 2026-07-30T00:21:54.647Z
+Stopped at: Completed 06-09-PLAN.md
 Resume file: None
