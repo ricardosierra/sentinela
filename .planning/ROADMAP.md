@@ -165,17 +165,17 @@ Plans:
 **Plans**: 11 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Fundacao de texto e cor: tres cores semanticas fixas fora do Dynamic Color, as 43 chaves pt-BR novas (226 -> 269), varredura de honestidade sobre o TEXTO dos recursos e correcao do porcento cru medido
-- [ ] 07-02-PLAN.md — Wave 0 de teste: extracao dos tres asserts de dois eixos para pacote neutro (nunca duplicados) + dez rotas por TEXTO com contrato do grafo provado em EXECUCAO (rota tipada e falso-verde de compilacao, medido)
-- [ ] 07-03-PLAN.md — Seis componentes compartilhados (cartao de opcao, cabecalho de passo, barra superior, linha de interruptor, linha de verificacao, barra inferior) com quatro dos cinco pontos de risco de semantica mesclada travados
-- [ ] 07-04-PLAN.md — Tres donos de estado: tipo FECHADO do valor de estatistica (zero mentiroso impossivel), papel vivo provado por contador de consultas, marca de permissao ao disparar e efeito imediato sem botao salvar
-- [ ] 07-05-PLAN.md — Boas-vindas + passos 1-2: copy honesta no lugar das cinco promessas dos mockups, aviso obrigatorio de escopo com peso visual, papel negado que nao trava
-- [ ] 07-06-PLAN.md — Passos 3-4: quatro ramos da permissao da agenda com a consequencia honesta na tela, opcoes sempre editaveis, imagem remota substituida por superficie tonal
-- [ ] 07-07-PLAN.md — Passos 5-6: opt-in de notificacao sem pressao e verificacao final com veredito nunca falsamente positivo
-- [ ] 07-08-PLAN.md — Home: interruptor que alterna a PREFERENCIA (nunca o papel), oito estados degradados, zero proibido em tres deles e ultima bloqueada mascarada provada por varredura da arvore semantica
-- [ ] 07-09-PLAN.md — Tela Protecao: 16 itens com explicacao permanente, efeito imediato, exatamente duas confirmacoes (so por perda de dado) e caso de COMPLETUDE que pega item esquecido
-- [ ] 07-10-PLAN.md — Fiacao: grafo real, quatro camadas de rota, hospedeira sem bloqueio da thread principal, Bloco 9 de invariantes e fluxo de ponta a ponta em JVM; fecha a pendencia de 06-05 (ativacao do modo discador ganha ponto de entrada)
-- [ ] 07-11-PLAN.md — Fechamento: supressao de lint reabilitada e estreitada nominalmente (133 -> 81 medido), faxina dos defeitos incidentais, TELAS.md reescrita, cenarios fisicos 61+, koverVerify e 07-EVIDENCE.md
+- [x] 07-01-PLAN.md — Fundacao de texto e cor: tres cores semanticas fixas fora do Dynamic Color, as 43 chaves pt-BR novas (226 -> 269), varredura de honestidade sobre o TEXTO dos recursos e correcao do porcento cru medido
+- [x] 07-02-PLAN.md — Wave 0 de teste: extracao dos tres asserts de dois eixos para pacote neutro (nunca duplicados) + dez rotas por TEXTO com contrato do grafo provado em EXECUCAO (rota tipada e falso-verde de compilacao, medido)
+- [x] 07-03-PLAN.md — Seis componentes compartilhados (cartao de opcao, cabecalho de passo, barra superior, linha de interruptor, linha de verificacao, barra inferior) com quatro dos cinco pontos de risco de semantica mesclada travados
+- [x] 07-04-PLAN.md — Tres donos de estado: tipo FECHADO do valor de estatistica (zero mentiroso impossivel), papel vivo provado por contador de consultas, marca de permissao ao disparar e efeito imediato sem botao salvar
+- [x] 07-05-PLAN.md — Boas-vindas + passos 1-2: copy honesta no lugar das cinco promessas dos mockups, aviso obrigatorio de escopo com peso visual, papel negado que nao trava
+- [x] 07-06-PLAN.md — Passos 3-4: quatro ramos da permissao da agenda com a consequencia honesta na tela, opcoes sempre editaveis, imagem remota substituida por superficie tonal
+- [x] 07-07-PLAN.md — Passos 5-6: opt-in de notificacao sem pressao e verificacao final com veredito nunca falsamente positivo
+- [x] 07-08-PLAN.md — Home: interruptor que alterna a PREFERENCIA (nunca o papel), oito estados degradados, zero proibido em tres deles e ultima bloqueada mascarada provada por varredura da arvore semantica
+- [x] 07-09-PLAN.md — Tela Protecao: 16 itens com explicacao permanente, efeito imediato, exatamente duas confirmacoes (so por perda de dado) e caso de COMPLETUDE que pega item esquecido
+- [x] 07-10-PLAN.md — Fiacao: grafo real, quatro camadas de rota, hospedeira sem bloqueio da thread principal, Bloco 9 de invariantes e fluxo de ponta a ponta em JVM; fecha a pendencia de 06-05 (ativacao do modo discador ganha ponto de entrada)
+- [x] 07-11-PLAN.md — Fechamento: supressao de lint reabilitada e estreitada nominalmente (133 -> 81 medido), faxina dos defeitos incidentais, TELAS.md reescrita, cenarios fisicos 61+, koverVerify e 07-EVIDENCE.md
 
 ### Phase 8: UI Whitelist e Historico
 **Goal**: Usuário gerencia exceções e audita bloqueios sem sair do app.
