@@ -79,7 +79,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [x] **DIA-05**: Reversão limpa para o discador nativo a qualquer momento; telefonia nunca fica quebrada e o app continua funcional no modo filtro
 
 ### Telas e UX (UIX)
-- [ ] **UIX-01**: Onboarding: explicação do funcionamento, aviso de que só chamadas telefônicas são filtradas, solicitação do papel, política de desconhecidos, política de contatos (com pedido de READ_CONTACTS), tratamento da whitelist, opt-in de notificação e verificação final
+- [x] **UIX-01**: Onboarding: explicação do funcionamento, aviso de que só chamadas telefônicas são filtradas, solicitação do papel, política de desconhecidos, política de contatos (com pedido de READ_CONTACTS), tratamento da whitelist, opt-in de notificação e verificação final
 - [ ] **UIX-02**: Home: status proteção ativa/inativa, status do papel com botão de correção, contagem de bloqueadas, última bloqueada (respeitando privacidade), atalhos para whitelist e histórico
 - [ ] **UIX-03**: Tela Proteção: políticas por origem (desconhecidos/contatos/whitelist), privados, modo de bloqueio, ocultar histórico nativo, notificação silenciosa, política de fallback, modo discador — cada opção com explicação clara
 - [ ] **UIX-04**: Tela Whitelist: listagem, busca, cadastro, edição, exclusão, import/export
@@ -87,7 +87,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 - [ ] **UIX-06**: Tela Privacidade e sobre: dados armazenados, permissões usadas, retenção, limpar tudo, versão, limitações, links para configurações do app e do canal
 - [ ] **UIX-07**: Todas as strings em resources pt-BR — nenhum texto hardcoded em Kotlin
 - [x] **UIX-08**: Dark mode (dark-first) + Dynamic Color quando disponível, seguindo tokens de `docs/design/DESIGN.md`
-- [ ] **UIX-09**: Acessibilidade: TalkBack, alvos de toque ≥ 48 dp, contraste correto
+- [x] **UIX-09**: Acessibilidade: TalkBack, alvos de toque ≥ 48 dp, contraste correto
 - [ ] **UIX-10**: Estados de carregamento e erro em todas as telas; proteção desativada é comunicada com destaque
 - [ ] **UIX-11**: Nenhuma promessa falsa na UI: não afirmar filtro de WhatsApp/VoIP nem "100% garantido"
 - [x] **UIX-12**: Nome do app, applicationId, cores e strings centralizados para rebranding (resources + `sentinelaApplicationId` em `app/build.gradle.kts`)

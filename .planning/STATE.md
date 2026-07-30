@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-09-PLAN.md
-last_updated: "2026-07-30T00:25:59.841Z"
-last_activity: 2026-07-29
+stopped_at: Completed 07-02-PLAN.md
+last_updated: "2026-07-30T04:28:23.709Z"
+last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
-  total_plans: 35
-  completed_plans: 36
+  total_plans: 46
+  completed_plans: 37
 ---
 
 # Project State
@@ -19,13 +19,13 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 06 — Modo Discador Opcional
-Last activity: 2026-07-29
+**Current focus:** Phase 07 — UI Onboarding e Home
+Last activity: 2026-07-30
 
 ## Current Position
 
-Phase: 06 (Modo Discador Opcional) — COMPLETE
-Plan: 9 of 9
+Phase: 07 (UI Onboarding e Home) — EXECUTING
+Plan: 2 of 11
 
 ## Snapshot
 
@@ -43,6 +43,7 @@ Plan: 9 of 9
 - **UI (discagem e ativacao, 06-05):** `DialpadScreen` completa (campo somente saida com formatacao progressiva da propria biblioteca e forma nacional quando o numero fica valido, apagar invisivel que ocupa espaco, barra de falha que mantem o numero) e `DialerActivationScreen` com os cinco ramos de estado, cards de custo e beneficio com estilo identico e reversao pelo seletor do sistema; `OutgoingCallPlacer` origina pelo gerenciador de telecomunicacoes com resultados nomeados; `CallPhonePermissionChecker` em `platform/` e `call_phone_permission_asked` no DataStore; 27 casos novos
 - **Modo discador (provado no aparelho virtual, 06-07):** 27 casos instrumentados novos (suite 53 -> 80) cobrindo vinculo real do servico de chamada, elegibilidade ao papel pelo comando que a VERIFICA, politica por contato valendo de fato com o motor intocado, independencia dos dois papeis e chamada de saida real; `scripts/verify-dialer-lifecycle.sh` prova de FORA do processo o ciclo completo do papel e a sobrevivencia da chamada a morte do processo
 - **Fechamento da Fase 6 (06-08):** documentos sem afirmacao nao medida — item de numero privado de volta a NAO VERIFICADO com o cenario 59 como veredito, item do historico do telefone reconfirmado em execucao com o papel ativo, item novo do encerramento do processo ao perder papel, e o escopo do modo discador (uma chamada por vez, sem video, emergencia sempre nativa); secao 11 de `docs/design/TELAS.md` de esboco de 6 linhas a contrato de 121; roteiro fisico com 60 cenarios (23-30 revisados no lugar, 52-60 novos) e as tres questoes abertas de fabricante; cobertura 96,648% com dois excludes por nome de classe e gate visto vermelho (o exclude da costura caiu no 06-09: 96,69% com a costura em 100%); `06-EVIDENCE.md` pos-clean sem cache (603 JVM + 80 instrumentados + ciclo de vida do papel)
+- **UI (navegacao e apoio de teste, 07-02):** `Rotas` com as dez rotas por TEXTO da fase (boas-vindas, seis passos, home, protecao, modo discador) e `NavGraphContractTest` que COMPOE o `NavHost` real e navega — 6 casos, contagem de destinos travada em dez; os tres asserts de dois eixos extraidos para `org.sentinela.app.ui.TouchTargetAsserts`, sem copia, com a suite da Fase 6 em 14 casos antes e depois
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -227,6 +228,12 @@ Plan: 9 of 9
 - [Phase 06]: 06-08: gravar configuracao e triar no instante seguinte e corrida no TESTE, nao no produto — o retrato do repositorio vem de cache mantido por coletor assincrono (Fase 3); o caso passou a esperar o valor gravado ser reportado
 - [Phase 06]: 06-09: exclude do Kover da costura da telefonia REMOVIDO — a justificativa antiga (objeto de chamada so montavel pela plataforma) era falsa para mudo e viva-voz, que operam sobre o servico de chamada; costura em 100% de linhas, cobertura do gate 96,69%, piso 99 visto vermelho
 - [Phase 06]: 06-09: mudo e viva-voz agora provados NA costura por verificacao de delegacao com argumento exato — chamar e concluir que nao estourou e vacuoso, porque a falha e no-op silencioso; vermelho executado sabotando producao JA COMMITADA
+- [Phase 07]: 07-02: a rota tipada da biblioteca de navegacao e falso-verde de COMPILACAO reproduzido neste repo — zero erro de compilacao e SerializationException na primeira composicao do grafo; por isso as rotas sao TEXTO e o guarda-corpo e um teste que COMPOE o NavHost, nunca um assert de compilacao
+- [Phase 07]: 07-02: objeto anotado PRIVADO falha por IllegalAccessException em findObjectSerializer, nao pela ausencia do complemento de serializacao — reproduzir a falha certa exige visibilidade nao privada; sonda com objeto privado concluiria a causa errada
+- [Phase 07]: 07-02: a entrada do proprio NavGraph tem rota nula — toda leitura da pilha usa mapNotNull, medido
+- [Phase 07]: 07-02: os tres asserts de dois eixos vivem em org.sentinela.app.ui (TouchTargetAsserts.kt) e DUPLICA-LOS E PROIBIDO PARA SEMPRE: duas copias deixariam o eixo com dentes divergir
+- [Phase 07]: 07-02: contagem de destinos do grafo travada em dez, no molde dos reason codes da Fase 2 — tela nova exige revisao de navegacao
+- [Phase 07]: 07-02: MatchingDeclarationName do detekt exige @file:Suppress (a anotacao na declaracao nao surte efeito); desligada no arquivo, nunca no detekt.yml compartilhado
 
 ## Convenções operacionais do GSD
 
@@ -270,6 +277,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T00:21:54.647Z
-Stopped at: Completed 06-09-PLAN.md
+Last session: 2026-07-30T04:28:23.707Z
+Stopped at: Completed 07-02-PLAN.md
 Resume file: None
