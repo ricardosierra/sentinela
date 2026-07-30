@@ -352,4 +352,25 @@
     <string name="state_on">Ligado</string>
     <string name="state_off">Desligado</string>
     <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Tempo relativo da home: granularidade agora / min / h / ontem / data curta.
+         Os dois casos de quantidade existem como <plurals> de verdade porque montar
+         "há N min" por concatenação é proibido pelo contrato de design. -->
+    <string name="time_now">agora</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">há %d min</item>
+        <item quantity="other">há %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">há %d h</item>
+        <item quantity="other">há %d h</item>
+    </plurals>
+    <string name="time_yesterday">ontem</string>
+    <string name="time_date_short_pattern" translatable="false">dd/MM/yyyy</string>
+
+    <!-- Home: leitura da última bloqueada — máscara, motivo real e tempo relativo -->
+    <string name="dashboard_last_blocked_description">Última chamada bloqueada, %1$s, %2$s, %3$s</string>
+
+    <!-- Home: excedente de avisos quando a precedência já ocupou os dois lugares -->
+    <string name="dashboard_more_warnings">Ver todos os avisos</string>
 </resources>
