@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-05-PLAN.md
-last_updated: "2026-07-30T05:17:48.655Z"
+stopped_at: Completed 07-06-PLAN.md
+last_updated: "2026-07-30T05:19:52.234Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 41
+  completed_plans: 42
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 6 of 11
+Plan: 7 of 11
 
 ## Snapshot
 
@@ -48,6 +48,7 @@ Plan: 6 of 11
 - **UI (componentes compartilhados, 07-03):** seis componentes em `ui/components/` — `OptionCard` (linha inteira como alvo unico com papel de botao de radio, 72dp, descricao permanente, selo, desabilitado com motivo no PROPRIO no), `StepHeader` (contador por recurso + barra decorativa), `SentinelaTopBar` (marca vinda do recurso, dois tipos de acao com alvo exigido de 48dp), `SettingSwitchRow` (tres nos, zero mesclagem no arquivo), `CheckRow` (estado por icone E texto, acao em no focavel separado) e `SentinelaBottomBar` (quatro destinos, `Role.Tab`, item de 56dp por `requiredHeight`, os dois da Phase 8 desabilitados com motivo textual); `Phase7ComponentSemanticsTest` com 17 casos sob qualificadores de tela reais e tres provas de vermelho, uma delas corrigindo o entendimento da semantica mesclada
 - **UI (donos de estado, 07-04):** `HomeViewModel`, `OnboardingViewModel` e `SettingsViewModel` — colaboradores por parametro, `AppContainer` fora inclusive das fabricas (montagem fica na rota), consultas de papel injetadas como FUNCOES para o teste conta-las; `StatValue` fechado em `Loaded`/`Unavailable`/`Loading` torna o zero mentiroso impossivel por assinatura e `LastBlockedUi` carrega so o texto mascarado; falha de leitura do historico vira estado visivel em vez de propagar; chave `onboarding_completed` fora de `ScreeningSettings`; tela Protecao com uma funcao por item e ZERO funcao de salvar (ausencia travada por reflexao), retencao "nao guardar" gravando e podando na mesma corotina; 42 casos novos (suite JVM 698) com seis provas de vermelho — cobertura 96,6157%
 - **UI (boas-vindas e dois primeiros passos, 07-05):** `WelcomeScreen` fiel ao layout do mockup e honesta no texto — tres cartoes locais, selo de codigo aberto no lugar do selo de protecao ativa, zero base global de numeros, zero endereco remoto e zero progresso falso, com as tres adaptacoes em KDoc apontando o registro pos-lancamento; `RoleStepScreen` carrega o AVISO OBRIGATORIO de escopo em cartao de peso visual igual, com as tres frases das Fases 5 e 6 por identificador de recurso, e os tres ramos do papel sem travar nem repetir o dialogo (concedido mostra chip de ativo e exige toque; negado avanca com aviso e acao); `UnknownPolicyStepScreen` com o cartao central flutuante, tres opcoes em grupo de escolha unica e bloquear como padrao, sem a politica que nunca silencia e sem o estilo do bloqueio; duracao da transicao de passo publicada para o envelope de navegacao; 18 casos de composicao e tres provas de vermelho, a terceira medida nas duas direcoes
+- **UI (passos 3 e 4 do onboarding, 07-06):** `ContactsPolicyStepScreen` com os QUATRO ramos da permissao da agenda por `when` exaustivo (justificativa + pedido, chip de concedido, aviso da consequencia honesta com pedido, aviso de bloqueio com atalho e SEM pedido), quatro politicas sempre editaveis e o interruptor de privados ligado por padrao; `WhitelistPolicyStepScreen` com Nunca Silenciar selado como padrao, cartao tonal no lugar da imagem remota, hint permanente e botao Proximo; `ContactsAndWhitelistStepTest` com 23 casos e tres provas de vermelho; zero chave nova no `strings.xml`
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -262,6 +263,11 @@ Plan: 6 of 11
 - [Phase 07]: 07-05: o grupo de opcoes usa o modificador compartilhado optionCardGroup() e por isso o literal selectableGroup NAO aparece na tela — reescreve-lo seria a duplicacao que 07-03 proibiu, e planta-lo em comentario e o defeito que a Fase 5 registrou tres vezes
 - [Phase 07]: 07-05: a transicao entre passos nao mora na tela — a tela publica a duracao de 250 ms e a supressao por reducao de movimento, e o envelope de navegacao (07-09) aplica o movimento, porque so ele conhece os dois passos e o sentido
 - [Phase 07]: 07-05: papel concedido nunca avanca sozinho e papel negado nunca trava — o chip e o aviso sao regiao viva EDUCADA, e repetir o dialogo do sistema exige toque explicito na acao do aviso
+- [Phase Phase 07]: 07-06: negar a leitura da agenda NAO desabilita nenhuma das quatro opcoes de politica — a escolha e preferencia persistida e passa a valer no instante da concessao, entao desabilitar nao protegeria nada e seria pressao; a prova de vermelho deixou os TRES estados nao concedidos vermelhos e o concedido verde
+- [Phase Phase 07]: 07-06: na negacao definitiva da agenda NAO existe botao de pedir a permissao — a plataforma nao mostra mais o dialogo e o toque nao faria nada; o ramo oferece so o atalho para as configuracoes, e sabotar isso deixa DOIS casos vermelhos (perde a saida real e ganha o botao inerte)
+- [Phase Phase 07]: 07-06: no passo 4 o aviso temporizado do mockup virou TEXTO PERMANENTE (informacao que desaparece sozinha e informacao perdida, e aviso com tempo e hostil ao leitor de tela) e o quadro ilustrado remoto virou cartao tonal, porque o aplicativo nao declara acesso a internet
+- [Phase Phase 07]: 07-06: quatro pre-visualizacoes num arquivo que ja tem varias compostas privadas saem de UM provedor de parametro — quatro funcoes anotadas estouram o limite de funcoes por arquivo do detekt, e afrouxar a regra compartilhada por pre-visualizacao seria o preco errado
+- [Phase Phase 07]: 07-06: KDoc que CITA o nome do recurso derruba criterio de aceite por contagem de texto (quarta encarnacao da armadilha das Fases 3 e 5) — o comentario passou a descrever o texto em vez de nomear a chave
 
 ## Convenções operacionais do GSD
 
@@ -305,6 +311,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T05:17:24.008Z
-Stopped at: Completed 07-05-PLAN.md
+Last session: 2026-07-30T05:19:11.359Z
+Stopped at: Completed 07-06-PLAN.md
 Resume file: None
