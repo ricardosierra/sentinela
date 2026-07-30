@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-09-PLAN.md
-last_updated: "2026-07-30T05:45:30.080Z"
+stopped_at: Completed 07-10-PLAN.md
+last_updated: "2026-07-30T06:14:16.000Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 45
+  completed_plans: 46
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 9 of 11
+Plan: 10 of 11
 
 ## Snapshot
 
@@ -50,6 +50,7 @@ Plan: 9 of 11
 - **UI (boas-vindas e dois primeiros passos, 07-05):** `WelcomeScreen` fiel ao layout do mockup e honesta no texto — tres cartoes locais, selo de codigo aberto no lugar do selo de protecao ativa, zero base global de numeros, zero endereco remoto e zero progresso falso, com as tres adaptacoes em KDoc apontando o registro pos-lancamento; `RoleStepScreen` carrega o AVISO OBRIGATORIO de escopo em cartao de peso visual igual, com as tres frases das Fases 5 e 6 por identificador de recurso, e os tres ramos do papel sem travar nem repetir o dialogo (concedido mostra chip de ativo e exige toque; negado avanca com aviso e acao); `UnknownPolicyStepScreen` com o cartao central flutuante, tres opcoes em grupo de escolha unica e bloquear como padrao, sem a politica que nunca silencia e sem o estilo do bloqueio; duracao da transicao de passo publicada para o envelope de navegacao; 18 casos de composicao e tres provas de vermelho, a terceira medida nas duas direcoes
 - **UI (passos 3 e 4 do onboarding, 07-06):** `ContactsPolicyStepScreen` com os QUATRO ramos da permissao da agenda por `when` exaustivo (justificativa + pedido, chip de concedido, aviso da consequencia honesta com pedido, aviso de bloqueio com atalho e SEM pedido), quatro politicas sempre editaveis e o interruptor de privados ligado por padrao; `WhitelistPolicyStepScreen` com Nunca Silenciar selado como padrao, cartao tonal no lugar da imagem remota, hint permanente e botao Proximo; `ContactsAndWhitelistStepTest` com 23 casos e tres provas de vermelho; zero chave nova no `strings.xml`
 - **UI (home, 07-08):** `StatusHeroCard` com interruptor de PREFERENCIA (papel do sistema e somente-leitura no aviso, e o botao de correcao DESAPARECE quando o aparelho nao oferece o papel), cores de significado por literal e zero mesclagem de descendentes no arquivo; `StatCard` com `when` exaustivo sobre `StatValue` e nenhum parametro numerico na assinatura; `LastBlockedCard` recebendo o numero JA mascarado e sem rotulo de risco; `QuickActionRow` de 72dp exigidos; `HomeScreen` com os OITO estados degradados, precedencia de avisos, teto de dois com excedente levando a Protecao, rolagem total e ordem de travessia declarada por bloco; `relativeTimeLabel` por plurais reais; 29 casos novos (24 + 5) e quatro provas de vermelho, com o zero proibido e a fronteira do numero provados por VARREDURA das duas arvores semanticas; 6 chaves + 2 plurais novos (269 -> 275 `<string name=`)
+- **UI (a fiacao, 07-10):** `SentinelaNavHost` com os DEZ destinos por texto escritos um por um (contagem travada por teste) e a transicao de passo de 250 ms suprimida por reducao de movimento — a pendencia que 07-05 deixou; cinco camadas de rota fininhas sao as UNICAS a conhecer o container (`WelcomeRoute`, `OnboardingRoute`, `HomeRoute`, `SettingsRoute`, `DialerActivationRoute`), com o papel reconsultado na retomada de cada uma e o retorno do seletor do sistema servindo so de redundancia; `PassoDoOnboarding` + `AcoesDoPasso` separam o desvio de passo da fiacao para o teste compor producao sem container; **a pendencia de 06-05 fechou** — a tela de ativacao do modo discador tem ponto de entrada pela tela Protecao e pelo aviso da home, sem uma linha alterada nela; `MainActivity` hospeda o grafo com o destino inicial resolvido por `produceState` e espera anunciada, mantendo a guarda de estado salvo da contagem de abertura; `HomeViewModel` ganhou os quatro comandos que a tela exigia (religar o historico mexe nas DUAS configuracoes que o desligam, e tentar de novo REINSCREVE o fluxo); Bloco 9 do script com texto embutido, fronteira do numero e repositorio da agenda, com cinco provas de vermelho incluindo a de nao auto-sabotagem; 21 casos novos (suite JVM 845) — cobertura 96,6157%
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -283,6 +284,19 @@ Plan: 9 of 11
 - [Phase 07]: 07-09: a consequencia destrutiva de 'nao guardar' vive SO no corpo do dialogo; repeti-la no cartao criaria duas copias da mesma frase, e a copia esquecida e sempre a que fica errada
 - [Phase 07]: 07-09: as cinco janelas de retencao sao as UNICAS opcoes da tela sem descricao propria — a duracao ja esta dita no rotulo e a explicacao do item vive uma vez, como nota do grupo
 - [Phase 07]: 07-09: nome totalmente qualificado em pre-visualizacao reprova o Bloco 2 (carrega o identificador do aplicativo) — o inverso do achado de 07-04, onde o nome qualificado era a fuga da contagem de linhas do grep
+- [Phase 07]: 07-10: a PILHA de navegacao e a unica fonte da verdade do passo do onboarding — o passo chega a rota como parametro do destino; o contador do dono de estado continuaria em paralelo e divergiria no primeiro gesto de voltar, mostrando a tela de um passo com o cabecalho de outro
+- [Phase 07]: 07-10: os dez destinos do grafo sao escritos um por um, sem laco — a contagem e ponto de revisao de navegacao e um laco a esconderia de quem le o arquivo e de quem o verifica de fora
+- [Phase 07]: 07-10: destino inicial resolvido ANTES de compor o grafo, por produceState, com espera anunciada — trocar startDestination com o grafo ja composto NAO re-navega, e bloquear a thread principal para decidir seria estragar a partida a frio; a correcao do defeito e a de desempenho sao a mesma linha
+- [Phase 07]: 07-10: desvio de passo extraido para PassoDoOnboarding + AcoesDoPasso — e o que permite ao teste de fluxo compor o codigo REAL de producao (rotas, ordem dos passos e descarte inclusivo) sem container, em maquina virtual pura
+- [Phase 07]: 07-10: Bloco 9 com tres checagens sobre onboarding/home/settings; 9.2 exclui os donos de estado por desenho de 07-04 (a mascara e aplicada neles e o tipo publicado nao tem campo para digitos), e 9.1 exclui linha de comentario ANTES da contagem — e o que impede o criterio de casar a propria prosa que o descreve
+- [Phase 07]: 07-10: sabotar 9.2 com nome totalmente qualificado derruba DOIS invariantes — o Bloco 2 pega o identificador do aplicativo literal em Kotlin no mesmo instante; a armadilha que derrubou quatro executores funciona
+- [Phase 07]: 07-10: permitidos, historico e privacidade-e-sobre NAO ganham destino (contagem do grafo travada em dez) — os tres atalhos abrem aviso honesto pela frase que ja existe em recurso, porque a linha de sobre e ATIVA na tela Protecao e toque sem efeito e defeito silencioso; desabilita-la sabotaria ProtectionScreenTest
+- [Phase 07]: 07-10: intencao de ativar o modo discador derivada da marca do pedido de originar chamada, sem chave nova — essa permissao so e pedida na tela de discagem propria, que o sistema so encaminha a quem detem o papel de telefone padrao; chave dedicada adiada em deferred-items.md
+- [Phase 07]: 07-10: a home ganhou os quatro comandos que a tela de 07-08 exigia e nao tinha — religar historico mexe em DUAS configuracoes (interruptor e retencao que nao guarda), senao o aviso reaparece no quadro seguinte, e tentar de novo REINSCREVE o fluxo em vez de recalcular o mesmo resultado
+- [Phase 07]: 07-10: o gesto de voltar na home esvazia a pilha e o destino corrente fica NULO — medido; sair do aplicativo e o comportamento correto, e o assert certo e que nem a pilha nem o destino podem ser de onboarding
+- [Phase 07]: 07-10: performScrollTo reprova controle de rodape fixo (14 de 15 casos vermelhos por motivo falso) — a rolagem virou tentativa tolerada e o TOQUE continua obrigatorio
+- [Phase 07]: 07-10: UIX-07 segue PENDENTE de proposito — o Bloco 9.1 vigia as tres pastas desta fase, e as de chamada, discagem e componentes ficam fora; fecha em 07-11
+- [Phase 07]: 07-10: contagem de planos do STATE corrigida a mao para 45 — o calculo por disco chegou a 46/46 somando duas anomalias que se anulam (a Fase 6 tem um resumo extra legitimo, 06-09, e a Fase 7 tem o 07-11 ainda aberto)
 
 ## Convenções operacionais do GSD
 
@@ -326,6 +340,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T05:45:00.835Z
-Stopped at: Completed 07-09-PLAN.md
+Last session: 2026-07-30T06:13:01.670Z
+Stopped at: Completed 07-10-PLAN.md
 Resume file: None
