@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-02-PLAN.md
-last_updated: "2026-07-30T04:28:23.709Z"
+stopped_at: Completed 07-01-PLAN.md
+last_updated: "2026-07-30T04:29:14.755Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 37
+  completed_plans: 38
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 2 of 11
+Plan: 3 of 11
 
 ## Snapshot
 
@@ -44,6 +44,7 @@ Plan: 2 of 11
 - **Modo discador (provado no aparelho virtual, 06-07):** 27 casos instrumentados novos (suite 53 -> 80) cobrindo vinculo real do servico de chamada, elegibilidade ao papel pelo comando que a VERIFICA, politica por contato valendo de fato com o motor intocado, independencia dos dois papeis e chamada de saida real; `scripts/verify-dialer-lifecycle.sh` prova de FORA do processo o ciclo completo do papel e a sobrevivencia da chamada a morte do processo
 - **Fechamento da Fase 6 (06-08):** documentos sem afirmacao nao medida — item de numero privado de volta a NAO VERIFICADO com o cenario 59 como veredito, item do historico do telefone reconfirmado em execucao com o papel ativo, item novo do encerramento do processo ao perder papel, e o escopo do modo discador (uma chamada por vez, sem video, emergencia sempre nativa); secao 11 de `docs/design/TELAS.md` de esboco de 6 linhas a contrato de 121; roteiro fisico com 60 cenarios (23-30 revisados no lugar, 52-60 novos) e as tres questoes abertas de fabricante; cobertura 96,648% com dois excludes por nome de classe e gate visto vermelho (o exclude da costura caiu no 06-09: 96,69% com a costura em 100%); `06-EVIDENCE.md` pos-clean sem cache (603 JVM + 80 instrumentados + ciclo de vida do papel)
 - **UI (navegacao e apoio de teste, 07-02):** `Rotas` com as dez rotas por TEXTO da fase (boas-vindas, seis passos, home, protecao, modo discador) e `NavGraphContractTest` que COMPOE o `NavHost` real e navega — 6 casos, contagem de destinos travada em dez; os tres asserts de dois eixos extraidos para `org.sentinela.app.ui.TouchTargetAsserts`, sem copia, com a suite da Fase 6 em 14 casos antes e depois
+- **UI (fundacao de texto e cor, 07-01):** `StatusAttention`/`OnStatusAttention`/`StatusBlocked` como literais fora do Dynamic Color (apelidos semanticos dos tokens destrutivos, igualdade afirmada por teste; ativo reusa `CallAccept`), travados em JVM pura e fixados nos tres esquemas; 44 chaves pt-BR novas da fase — 269 `<string name=` mais o plural real de `settings_clear_history_confirm`; `Phase7StringsTest` com 11 casos varrendo as chaves de nove prefixos contra seis grupos de expressao proibida, sempre por `Context.getString`; os dois `PluralsCandidate` do lint eliminados, incluindo o porcento cru de `dialer_activation_unchanged_4` (corrigido por `formatted="false"`, com o texto visivel intacto)
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -234,6 +235,13 @@ Plan: 2 of 11
 - [Phase 07]: 07-02: os tres asserts de dois eixos vivem em org.sentinela.app.ui (TouchTargetAsserts.kt) e DUPLICA-LOS E PROIBIDO PARA SEMPRE: duas copias deixariam o eixo com dentes divergir
 - [Phase 07]: 07-02: contagem de destinos do grafo travada em dez, no molde dos reason codes da Fase 2 — tela nova exige revisao de navegacao
 - [Phase 07]: 07-02: MatchingDeclarationName do detekt exige @file:Suppress (a anotacao na declaracao nao surte efeito); desligada no arquivo, nunca no detekt.yml compartilhado
+- [Phase 07]: 07-01: cor de significado do estado da protecao sai por literal de Color.kt (StatusAttention/OnStatusAttention/StatusBlocked), pelo mesmo argumento de 06-02: o tema troca o esquema INTEIRO por um derivado do papel de parede a partir do nivel 31, e o papel de parede decidiria a diferenca entre protegido e desprotegido — o estado ativo reusa CallAccept e nao ha verde novo
+- [Phase 07]: 07-01: porcento cru em recurso NAO se corrige duplicando o sinal — getString sem argumento nao formata, e a tela passaria a exibir os dois sinais; a correcao e formatted="false", precedente das tres strings de "100%" da Fase 1
+- [Phase 07]: 07-01: settings_clear_history_confirm e <plurals> de verdade, nunca "registro(s)": o lint acusa a concatenacao como PluralsCandidate e a secao 12.10 do contrato de design ja a proibia — e e o que faz a contagem fechar em 269 <string name= (43 string + 1 plurals)
+- [Phase 07]: 07-01: excecao verdadeira da varredura de copy ("100% offline", "100% open source") e removida do TEXTO antes da busca, jamais isentando a chave — isentar a chave deixaria promessa nova entrar na mesma string
+- [Phase 07]: 07-01: settings_fallback_allow e isenta NOMINALMENTE so da varredura de pressao de opt-in: politica de erro nao tem nada a ativar, e omitir qual alternativa preserva a chamada seria pior que dize-lo
+- [Phase 07]: 07-01: UIX-07 e UIX-11 seguem PENDENTES apesar do frontmatter do plano — nenhuma tela existe ainda, e marcar requisito antes da tela e o estado falsamente positivo que o item 11 da secao 10.3 proibe
+- [Phase 07]: 07-01: dois planos da mesma onda sobre o mesmo app/build produzem EOFException no arquivo binario de resultados e falha do redirecionamento da listagem do APK — falha de ambiente, resolvida esperando e repetindo, nunca sinal de codigo
 
 ## Convenções operacionais do GSD
 
@@ -277,6 +285,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T04:28:23.707Z
-Stopped at: Completed 07-02-PLAN.md
+Last session: 2026-07-30T04:29:14.753Z
+Stopped at: Completed 07-01-PLAN.md
 Resume file: None

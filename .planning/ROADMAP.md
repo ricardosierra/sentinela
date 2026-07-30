@@ -222,8 +222,8 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 3 | v0.1.0 | 7/7 | Complete | 2026-07-29 |
 | 4 | v0.1.0 | 5/5 | Complete | 2026-07-29 |
 | 5 | v0.1.0 | 7/7 | Complete | 2026-07-29 |
-| 6 | 9/8 | Complete   | 2026-07-30 | 2026-07-29 |
-| 7 | v0.1.0 | 0/11 | Planned | - |
+| 6 | v0.1.0 | 9/8 | Complete | 2026-07-30 |
+| 7 | v0.1.0 | 2/11 | In Progress | - |
 | 8 | v0.1.0 | 0/? | Not started | - |
 | 9 | v0.1.0 | 0/? | Not started | - |
 
