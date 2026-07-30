@@ -347,6 +347,7 @@
     <!-- Genéricos -->
     <string name="action_confirm">Confirmar</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_retry">Tentar de novo</string>
     <string name="state_loading">Carregando…</string>
     <string name="state_error">Algo deu errado. Tente novamente.</string>
     <string name="state_on">Ligado</string>
