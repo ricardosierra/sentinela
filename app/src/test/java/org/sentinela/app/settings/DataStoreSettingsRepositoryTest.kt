@@ -467,4 +467,56 @@ class DataStoreSettingsRepositoryTest {
 
         assertNull(repo.snapshot().retentionPolicy.cutoffUtcMillis(1_000_000L))
     }
+
+    // ------------------------------------------------------------------------------------------
+    // onboarding_completed (UIX-01) — quarto par do mesmo padrao das tres marcas de permissao.
+    // ------------------------------------------------------------------------------------------
+
+    @Test
+    fun `onboardingCompleted comeca falso numa instalacao nova e sobrevive a recriacao`() =
+        runTest {
+            val file = novoArquivo()
+            val scopeA = novoScope()
+            val primeiro = DataStoreSettingsRepository(dataStore(scopeA, file), scopeA)
+            assertEquals(false, primeiro.onboardingCompleted.first())
+            primeiro.markOnboardingCompleted()
+            scopeA.cancel()
+
+            val scopeB = novoScope()
+            val relido = DataStoreSettingsRepository(dataStore(scopeB, file), scopeB)
+
+            assertEquals(true, relido.onboardingCompleted.first())
+        }
+
+    @Test
+    fun `a marca de onboarding vai ao disco com a chave textual contratada`() = runTest {
+        val file = novoArquivo()
+        val scope = novoScope()
+        val ds = dataStore(scope, file)
+
+        DataStoreSettingsRepository(ds, scope).markOnboardingCompleted()
+
+        assertEquals(true, ds.data.first()[booleanPreferencesKey("onboarding_completed")])
+    }
+
+    @Test
+    fun `marcar o onboarding e idempotente`() = runTest {
+        val repo = repo()
+
+        repo.markOnboardingCompleted()
+        repo.markOnboardingCompleted()
+
+        assertEquals(true, repo.onboardingCompleted.first())
+    }
+
+    @Test
+    fun `a marca de onboarding NAO entra no retrato do caminho quente`() = runTest {
+        val repo = repo()
+
+        repo.markOnboardingCompleted()
+
+        // O retrato servido a triagem precisa continuar idêntico ao de fábrica: a chave nova é de
+        // produto, não de triagem, e pesá-la aqui custaria orçamento no caminho da decisão.
+        assertEquals(ScreeningSettings(), repo.snapshot())
+    }
 }

@@ -27,6 +27,12 @@ import java.io.IOException
  *
  * Nenhuma chamada de rede e nenhum valor de configuração é escrito em log.
  */
+// A chave de onboarding concluído levou a classe ao limite de funções do detekt. Suprimido AQUI, no
+// ponto de uso, em vez de afrouxar o limite no detekt.yml compartilhado: pagar uma dívida global por
+// um caso local é o que o projeto já recusou nas Fases 3 e 6. Cada par de leitura e marca desta
+// classe é uma pergunta persistida distinta, e juntá-las num mapa genérico trocaria nomes
+// verificáveis por texto solto.
+@Suppress("TooManyFunctions")
 class DataStoreSettingsRepository(
     private val dataStore: DataStore<Preferences>,
     scope: CoroutineScope,
@@ -120,6 +126,30 @@ class DataStoreSettingsRepository(
         dataStore.edit { it[Keys.CALL_PHONE_PERMISSION_ASKED] = true }
     }
 
+    /**
+     * UIX-01: o onboarding já foi concluído (ou pulado) nesta instalação?
+     *
+     * Fora de [ScreeningSettings] pelo mesmo motivo das três marcas de permissão: não é
+     * configuração de triagem e não pode pesar no retrato servido no caminho quente do serviço.
+     *
+     * Por que ela **não** reaproveita o contador de aberturas, que também saberia dizer "é a
+     * primeira vez": aquele contador já tem outro dono — o convite de avaliação da Fase 9, que
+     * dispara na quinta abertura e a cada cinco depois. Amarrar duas decisões de produto ao mesmo
+     * número é dívida garantida: qualquer ajuste no ritmo do convite mexeria em quem vê o
+     * onboarding, e vice-versa. São perguntas diferentes e merecem chaves diferentes.
+     *
+     * Padrão falso: instalação nova nunca concluiu onboarding.
+     */
+    val onboardingCompleted: Flow<Boolean> =
+        dataStore.data
+            .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
+            .map { it[Keys.ONBOARDING_COMPLETED] ?: false }
+
+    /** Chamada ao concluir E ao pular: nos dois casos o usuário já viu o onboarding. Idempotente. */
+    suspend fun markOnboardingCompleted() {
+        dataStore.edit { it[Keys.ONBOARDING_COMPLETED] = true }
+    }
+
     init {
         // Aquece e mantém o cache enquanto o processo viver.
         scope.launch { settings.collect() }
@@ -171,6 +201,7 @@ class DataStoreSettingsRepository(
         val APP_OPEN_COUNT = intPreferencesKey("app_open_count")
         val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
         val CALL_PHONE_PERMISSION_ASKED = booleanPreferencesKey("call_phone_permission_asked")
+        val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
     }
 
     private fun Preferences.toScreeningSettings(): ScreeningSettings {
