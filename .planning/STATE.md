@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-01-PLAN.md
-last_updated: "2026-07-30T04:29:14.755Z"
+stopped_at: Completed 07-03-PLAN.md
+last_updated: "2026-07-30T04:49:45.142Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 38
+  completed_plans: 39
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 3 of 11
+Plan: 4 of 11
 
 ## Snapshot
 
@@ -45,6 +45,7 @@ Plan: 3 of 11
 - **Fechamento da Fase 6 (06-08):** documentos sem afirmacao nao medida — item de numero privado de volta a NAO VERIFICADO com o cenario 59 como veredito, item do historico do telefone reconfirmado em execucao com o papel ativo, item novo do encerramento do processo ao perder papel, e o escopo do modo discador (uma chamada por vez, sem video, emergencia sempre nativa); secao 11 de `docs/design/TELAS.md` de esboco de 6 linhas a contrato de 121; roteiro fisico com 60 cenarios (23-30 revisados no lugar, 52-60 novos) e as tres questoes abertas de fabricante; cobertura 96,648% com dois excludes por nome de classe e gate visto vermelho (o exclude da costura caiu no 06-09: 96,69% com a costura em 100%); `06-EVIDENCE.md` pos-clean sem cache (603 JVM + 80 instrumentados + ciclo de vida do papel)
 - **UI (navegacao e apoio de teste, 07-02):** `Rotas` com as dez rotas por TEXTO da fase (boas-vindas, seis passos, home, protecao, modo discador) e `NavGraphContractTest` que COMPOE o `NavHost` real e navega — 6 casos, contagem de destinos travada em dez; os tres asserts de dois eixos extraidos para `org.sentinela.app.ui.TouchTargetAsserts`, sem copia, com a suite da Fase 6 em 14 casos antes e depois
 - **UI (fundacao de texto e cor, 07-01):** `StatusAttention`/`OnStatusAttention`/`StatusBlocked` como literais fora do Dynamic Color (apelidos semanticos dos tokens destrutivos, igualdade afirmada por teste; ativo reusa `CallAccept`), travados em JVM pura e fixados nos tres esquemas; 44 chaves pt-BR novas da fase — 269 `<string name=` mais o plural real de `settings_clear_history_confirm`; `Phase7StringsTest` com 11 casos varrendo as chaves de nove prefixos contra seis grupos de expressao proibida, sempre por `Context.getString`; os dois `PluralsCandidate` do lint eliminados, incluindo o porcento cru de `dialer_activation_unchanged_4` (corrigido por `formatted="false"`, com o texto visivel intacto)
+- **UI (componentes compartilhados, 07-03):** seis componentes em `ui/components/` — `OptionCard` (linha inteira como alvo unico com papel de botao de radio, 72dp, descricao permanente, selo, desabilitado com motivo no PROPRIO no), `StepHeader` (contador por recurso + barra decorativa), `SentinelaTopBar` (marca vinda do recurso, dois tipos de acao com alvo exigido de 48dp), `SettingSwitchRow` (tres nos, zero mesclagem no arquivo), `CheckRow` (estado por icone E texto, acao em no focavel separado) e `SentinelaBottomBar` (quatro destinos, `Role.Tab`, item de 56dp por `requiredHeight`, os dois da Phase 8 desabilitados com motivo textual); `Phase7ComponentSemanticsTest` com 17 casos sob qualificadores de tela reais e tres provas de vermelho, uma delas corrigindo o entendimento da semantica mesclada
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -242,6 +243,11 @@ Plan: 3 of 11
 - [Phase 07]: 07-01: settings_fallback_allow e isenta NOMINALMENTE so da varredura de pressao de opt-in: politica de erro nao tem nada a ativar, e omitir qual alternativa preserva a chamada seria pior que dize-lo
 - [Phase 07]: 07-01: UIX-07 e UIX-11 seguem PENDENTES apesar do frontmatter do plano — nenhuma tela existe ainda, e marcar requisito antes da tela e o estado falsamente positivo que o item 11 da secao 10.3 proibe
 - [Phase 07]: 07-01: dois planos da mesma onda sobre o mesmo app/build produzem EOFException no arquivo binario de resultados e falha do redirecionamento da listagem do APK — falha de ambiente, resolvida esperando e repetindo, nunca sinal de codigo
+- [Phase 07]: 07-03: envolver o controle com container que mescla NAO derruba o estado por si — o que derruba e DECLARAR o estado no container; o no do proprio controle e fronteira de mesclagem e continua respondendo as buscas, entao o estado mora sempre no no do controle (medido nas duas direcoes, refinando o registro da Fase 6)
+- [Phase 07]: 07-03: os seis componentes compartilhados da fase vivem em ui/components e nenhuma tela reimplementa cartao de opcao, linha de interruptor ou linha de verificacao — cinco copias multiplicariam por cinco a chance de perder um estado
+- [Phase 07]: 07-03: a barra inferior entrega os QUATRO destinos, com os dois da Phase 8 desabilitados e com motivo textual (aba que leva a tela em branco sem explicacao e proibida por UIX-10); habilitar e mudar a lista na tela que chama, nunca o componente
+- [Phase 07]: 07-03: requiredSizeIn de piso ANTES de requiredHeight — a ordem inversa devolveu 48dp desenhados onde o contrato pedia 56dp, medido pelo eixo do desenho
+- [Phase 07]: 07-03: prova de vermelho do eixo desenhado repetida com o mesmo veredito da Fase 6 — item de 56dp reduzido a 40dp deixa os DOIS asserts de alvo de toque verdes, porque o Compose expande o alvo sozinho
 
 ## Convenções operacionais do GSD
 
@@ -285,6 +291,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T04:29:14.753Z
-Stopped at: Completed 07-01-PLAN.md
+Last session: 2026-07-30T04:49:13.492Z
+Stopped at: Completed 07-03-PLAN.md
 Resume file: None
