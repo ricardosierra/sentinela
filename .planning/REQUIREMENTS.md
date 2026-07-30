@@ -81,7 +81,7 @@ políticas por origem, apoio/avaliação, offline-first com sync futura).
 ### Telas e UX (UIX)
 - [x] **UIX-01**: Onboarding: explicação do funcionamento, aviso de que só chamadas telefônicas são filtradas, solicitação do papel, política de desconhecidos, política de contatos (com pedido de READ_CONTACTS), tratamento da whitelist, opt-in de notificação e verificação final
 - [x] **UIX-02**: Home: status proteção ativa/inativa, status do papel com botão de correção, contagem de bloqueadas, última bloqueada (respeitando privacidade), atalhos para whitelist e histórico
-- [ ] **UIX-03**: Tela Proteção: políticas por origem (desconhecidos/contatos/whitelist), privados, modo de bloqueio, ocultar histórico nativo, notificação silenciosa, política de fallback, modo discador — cada opção com explicação clara
+- [x] **UIX-03**: Tela Proteção: políticas por origem (desconhecidos/contatos/whitelist), privados, modo de bloqueio, ocultar histórico nativo, notificação silenciosa, política de fallback, modo discador — cada opção com explicação clara
 - [ ] **UIX-04**: Tela Whitelist: listagem, busca, cadastro, edição, exclusão, import/export
 - [ ] **UIX-05**: Tela Histórico: filtros, marcar legítimo/indesejado, adicionar à whitelist, excluir/limpar
 - [ ] **UIX-06**: Tela Privacidade e sobre: dados armazenados, permissões usadas, retenção, limpar tudo, versão, limitações, links para configurações do app e do canal

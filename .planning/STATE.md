@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-08-PLAN.md
-last_updated: "2026-07-30T05:43:23.242Z"
+stopped_at: Completed 07-09-PLAN.md
+last_updated: "2026-07-30T05:45:30.080Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 44
+  completed_plans: 45
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 8 of 11
+Plan: 9 of 11
 
 ## Snapshot
 
@@ -277,6 +277,12 @@ Plan: 8 of 11
 - [Phase 07]: 07-08: o zero mentiroso e provado por VARREDURA da arvore semantica inteira (texto, descricao de conteudo e descricao de estado), nas duas arvores — afirmar so que o traco aparece seria fraco, porque a tela poderia exibir os dois; no ramo de carregamento o zero sabotado foi pego pela descricao de conteudo, nao por texto visivel
 - [Phase 07]: 07-08: quarta medicao da semantica mesclada, agora na home — com a descricao de estado movida para um container que mescla, o no do interruptor continuou existindo e alcancavel e o que se perdeu foi o ESTADO; por isso ele mora sempre no modificador do proprio Switch e o arquivo do cartao nao tem uma unica mesclagem de descendentes
 - [Phase 07]: 07-08: a home ganhou 6 chaves de texto novas + 2 plurais de tempo (contagem de 07-01 de 269 para 275 <string name=) — tempo relativo por plurais reais, leitura da ultima bloqueada, excedente de avisos e acao de tentar de novo; reusar 'Conceder agora' como nova tentativa de leitura seria texto errado na tela
+- [Phase 07]: 07-09: os rotulos das politicas por origem COLIDEM entre os tres grupos (Bloquear/Silenciar/Tocar/Nunca Silenciar) — o caso que trocava a politica de contatos buscando o texto acertava o cartao de desconhecidos e afirmava a coisa errada; politica se clica pela DESCRICAO, e nenhum cabecalho de grupo pode repetir o rotulo de um item seu
+- [Phase 07]: 07-09: botao de texto do Material desenha 40dp e os dois asserts de alvo de toque ficam VERDES — quarta medicao do eixo do DESENHO neste projeto; o piso vai em requiredHeightIn, porque heightIn negocia com o pai e volta a 40dp em tela apertada
+- [Phase 07]: 07-09: a tela Protecao tem EXATAMENTE dois dialogos, os dois por perda de dado (limpar historico e nao guardar); trocar politica, desligar historico, desligar protecao e ativar o discador nao confirmam — confirmacao excessiva ensina a tocar em sim sem ler
+- [Phase 07]: 07-09: a consequencia destrutiva de 'nao guardar' vive SO no corpo do dialogo; repeti-la no cartao criaria duas copias da mesma frase, e a copia esquecida e sempre a que fica errada
+- [Phase 07]: 07-09: as cinco janelas de retencao sao as UNICAS opcoes da tela sem descricao propria — a duracao ja esta dita no rotulo e a explicacao do item vive uma vez, como nota do grupo
+- [Phase 07]: 07-09: nome totalmente qualificado em pre-visualizacao reprova o Bloco 2 (carrega o identificador do aplicativo) — o inverso do achado de 07-04, onde o nome qualificado era a fuga da contagem de linhas do grep
 
 ## Convenções operacionais do GSD
 
@@ -320,6 +326,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T05:42:54.736Z
-Stopped at: Completed 07-08-PLAN.md
+Last session: 2026-07-30T05:45:00.835Z
+Stopped at: Completed 07-09-PLAN.md
 Resume file: None
