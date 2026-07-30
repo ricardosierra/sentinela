@@ -159,6 +159,28 @@ kover {
                 // e decisao HIT/MISS/UNAVAILABLE — fica FORA deste exclude e continua medida
                 // pelo gate de 80%. Uma classe nomeada, jamais o pacote inteiro.
                 classes("org.sentinela.app.data.contacts.ContactsContractLookupSource")
+                // Fase 6, plano 06-08: duas classes do modo discador — e somente estas duas —
+                // so executam em teste INSTRUMENTADO, pela mesma razao das anteriores.
+                //
+                // A costura que traduz comando de interface para a telefonia so faz efeito com um
+                // objeto de chamada montado pelo proprio sistema, que nenhum teste em JVM pode
+                // construir; e o servico de interface de chamada so roda quando o sistema o
+                // vincula. Os dois estao cobertos por InCallServiceBindTest, InCallServiceDeathTest
+                // e por scripts/verify-dialer-lifecycle.sh.
+                //
+                // Tudo que e PURO no modo discador fica FORA deste exclude e continua no
+                // denominador do gate de 80%: estado e retrato da chamada, tradutor dos codigos da
+                // plataforma, a costura abstrata dos controles, o coordenador da sessao e o armazem
+                // da sessao. Duas classes nomeadas, jamais o pacote inteiro — classe pura com
+                // cobertura baixa se resolve escrevendo teste, nunca excluindo.
+                //
+                // Medido antes deste exclude: noventa e cinco inteiros e 4741 decimos de milesimo
+                // por cento. Medido depois: noventa e seis inteiros e 648 milesimos por cento.
+                // O gate segue em 80 e foi demonstrado falhando com o piso levantado para 99.
+                classes("org.sentinela.app.telecom.call.TelecomCallControls")
+                classes("org.sentinela.app.telecom.call.TelecomCallControls\$*")
+                classes("org.sentinela.app.telecom.SentinelaInCallService")
+                classes("org.sentinela.app.telecom.SentinelaInCallService\$*")
                 classes("*_Impl", "*_Impl\$*")
                 annotatedBy("androidx.room.Dao", "androidx.room.Database")
             }

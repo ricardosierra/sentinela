@@ -203,6 +203,7 @@ class DialerScreeningIntegrationTest {
         )
 
         runBlocking { app.container.settingsRepository.update { ScreeningSettings() } }
+        esperarPoliticaDeContatos(OriginPolicy.RING)
 
         assertEquals(
             "o repositorio de configuracoes nao reportou Tocar como politica de contatos padrao",
@@ -217,8 +218,34 @@ class DialerScreeningIntegrationTest {
         )
     }
 
-    private fun politicaDeContatos(politica: OriginPolicy) = runBlocking {
-        app.container.settingsRepository.update { it.copy(contactsPolicy = politica) }
+    /**
+     * Grava a politica de contatos **e espera o repositorio passar a reporta-la**.
+     *
+     * A espera nao e zelo excessivo: o repositorio de configuracoes serve o retrato de um cache em
+     * memoria mantido por um coletor (decisao da Fase 3, para que o caminho quente da triagem nao
+     * toque disco), e o coletor e alimentado de forma assincrona. Sem esta espera, a gravacao e a
+     * triagem seguinte correm entre si e a decisao sai calculada com o valor ANTERIOR — medido
+     * neste plano, com o caso de Silenciar recebendo Permitir por ter lido a politica Tocar que a
+     * limpeza do caso anterior acabara de restaurar. O defeito estava no teste, nao no produto:
+     * o cache eventualmente consistente e desenho deliberado, e a triagem real nunca disputa com
+     * uma gravacao feita no mesmo milissegundo.
+     */
+    private fun politicaDeContatos(politica: OriginPolicy) {
+        runBlocking { app.container.settingsRepository.update { it.copy(contactsPolicy = politica) } }
+        esperarPoliticaDeContatos(politica)
+    }
+
+    private fun esperarPoliticaDeContatos(politica: OriginPolicy) {
+        repeat(TENTATIVAS_DE_CONFIGURACAO) {
+            val lida = runBlocking { app.container.settingsRepository.snapshot() }.contactsPolicy
+            if (lida == politica) return
+            Thread.sleep(INTERVALO_DE_CONFIGURACAO_MILLIS)
+        }
+        throw AssertionError(
+            "o repositorio de configuracoes nao passou a reportar a politica de contatos gravada " +
+                "($politica) — sem isso a triagem decidiria pelo valor anterior e o caso mediria " +
+                "uma corrida, nao o modo discador",
+        )
     }
 
     /** Triagem pelo coordenador REAL do conjunto de colaboradores do aplicativo. */
@@ -235,6 +262,8 @@ class DialerScreeningIntegrationTest {
     private companion object {
         const val TENTATIVAS_DE_AGENDA = 20
         const val INTERVALO_DE_AGENDA_MILLIS = 500L
+        const val TENTATIVAS_DE_CONFIGURACAO = 40
+        const val INTERVALO_DE_CONFIGURACAO_MILLIS = 50L
         const val REGIAO = "BR"
         const val NOME_DO_CONTATO = "Ana da Agenda"
         const val CONTATO_E164 = "+5511987654321"

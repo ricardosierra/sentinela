@@ -16,7 +16,10 @@
 - [ ] **Bloqueio de desconhecidos antes de tocar** — CallScreeningService + ROLE_CALL_SCREENING, sem tela de chamada, som ou notificação nativa (Phase 5)
 - [ ] **Políticas por origem** — contatos (Tocar padrão), whitelist (Nunca Silenciar padrão) e desconhecidos (Bloquear padrão), com opções Tocar/Bloquear/Silenciar/Nunca Silenciar (Phases 2, 4, 7)
 - [ ] **Leitura local de contatos** — READ_CONTACTS com explicação, lookup em memória, nada armazenado nem enviado (Phase 4)
-- [ ] **Modo discador opcional** — Sentinela como app de telefone padrão (ROLE_DIALER + InCallService próprio), políticas valendo também para contatos, reversível (Phase 6)
+- [x] **Modo discador opcional** — Sentinela como app de telefone padrão (ROLE_DIALER + InCallService próprio), políticas valendo também para contatos, reversível pelo seletor do sistema (Phase 6)
+- [x] **Telas de chamada próprias** — chamada recebida em tela cheia (inclusive sobre a tela bloqueada, por full-screen intent e **nunca** por overlay), chamada de saída, chamada ativa com cronômetro, mudo, viva-voz e teclado de tons; quatro variantes de identidade (contato, whitelist, desconhecido, privado) (Phase 6)
+- [x] **Tela de discagem** — campo somente saída com formatação progressiva pt-BR, sugestão de contato, teclas de 72dp, apagar com toque longo; alvo do pedido de discagem do sistema (Phase 6)
+- [x] **Ativação honesta do modo discador** — cards "O que muda" e "O que não muda" com estilo idêntico e o mesmo peso visual, pré-requisito de leitura da agenda explícito, aviso informativo (sem alarme) quando o papel é perdido (Phase 6)
 - [ ] **Whitelist pessoal local** — CRUD com busca, E.164, tratamento configurável, import/export com validação (Phases 3 e 8)
 - [ ] **Histórico interno opcional** — retenção configurável (nunca/7/30/90 dias/manual), ações permitir/indesejado/excluir (Phases 3 e 8)
 - [ ] **Notificação silenciosa opt-in** — canal IMPORTANCE_LOW, número mascarado, desabilitada por padrão (Phase 5)
@@ -48,3 +51,14 @@
 - [x] Matriz `OriginPolicy` × origem fechada no `CallDecisionEngineTest` — suíte de 20 para **28 testes**, 0 falhas
 - [x] Evidência auditável do build pós-`clean` arquivada em `.planning/phases/01-fundacao-compilavel/01-EVIDENCE.md` (57 actionable tasks, 34 executadas, lint 0, detekt 0, APK debug 33,8 MB)
 - [x] Conflito documental de `POST_NOTIFICATIONS` reconciliado a favor de `docs/PERMISSOES.md` (fonte canônica): declaração mantida na Fase 1, pedido em runtime só na Fase 5
+
+**Phase 6 — Modo discador opcional (2026-07-29):**
+
+- [x] **Quatro permissões novas**, cada uma na matriz de `docs/PERMISSOES.md` **antes** do manifest e na allowlist do script de invariantes no mesmo trabalho: papel de telefone padrão, vínculo do serviço de interface de chamada, originar chamada e ocupar a tela. Zero `INTERNET`, zero permissão de fase futura antecipada
+- [x] **Bloco 8 do `scripts/verify-invariants.sh`** — trava a elegibilidade ao papel de telefone padrão: os dois filtros da ação de discagem no manifest **mergeado**, a proibição permanente de desabilitar componente próprio (a plataforma remove o papel e encerra o app), a origem da chamada só pelo gerenciador de telecomunicações e a pureza da camada da sessão. As quatro checagens demonstradas falhando
+- [x] **Políticas por contato provadas, não implementadas** — o requisito de as políticas valerem para contatos no modo discador foi provado com o coordenador de triagem real e a agenda real do aparelho virtual **sem alterar uma linha do `CallDecisionEngine`**: a última mudança do motor continua sendo da Fase 5. O que o modo discador muda é *quem chega* à decisão, não a decisão
+- [x] **Perder um papel do sistema encerra o processo do app** (medido, com o motivo registrado pelo próprio sistema) — é por isso que o estado do modo discador é derivado de consultas ao sistema e nunca de valor gravado. Provado de **fora** do processo por `scripts/verify-dialer-lifecycle.sh`, porque a instrumentação roda dentro dele; a chamada em curso sobrevive
+- [x] **Cores funcionais da chamada fora do Dynamic Color** — atender, recusar e encerrar saem por literal e chegam por parâmetro: um papel de parede não pode aproximar recusar de atender e produzir o único erro irreversível do app
+- [x] Suíte JVM de **417 para 603 testes** e instrumentada de **53 para 80**, 0 falhas; cobertura **96,648%** com gate `koverVerify` em 80 (dois excludes novos, ambos por **nome de classe**: a costura da telefonia e o serviço de interface de chamada, que só rodam instrumentados — nenhuma classe pura excluída)
+- [x] Documentação honesta: `docs/LIMITACOES.md` ganhou "uma chamada por vez", o encerramento do app ao perder papel e a **correção** do item de número privado, que voltou a dizer **não verificado** no modo discador; `docs/design/TELAS.md` §11 deixou de ser esboço de 6 linhas e virou contrato; roteiro Samsung revisado nos cenários 23–30 e completado de 52 a 60
+- [x] Evidência pós-`clean` e sem cache arquivada em `.planning/phases/06-modo-discador-opcional/06-EVIDENCE.md` (78 de 78 tarefas executadas, lint 0, detekt 0, 8 blocos de invariantes verdes, gate demonstrado falhando)
