@@ -25,79 +25,89 @@ Onboarding canônico: boas-vindas → papel → desconhecidos → contatos → w
 verificação final (os mockups divergiam na contagem de passos; ver `DECISOES.md`).
 O convite de avaliação/apoio **nunca** aparece durante o onboarding (ENG-04).
 
-## 1. `telas/boas_vindas_ao_sentinela/` — Boas-vindas
+## 1. Boas-vindas — `ui/onboarding/WelcomeScreen.kt`
 
-Landing pré-onboarding. Header (escudo + "Sentinela"), hero flutuante com ícone de segurança,
-H1 **"Sua primeira linha de defesa contra spam."**, bento grid com 3 feature-cards, imagem
-com badge "Proteção Ativa", CTA pill **"Começar Configuração"** + microcopy
-*"Leva menos de 2 minutos."*.
+Landing pré-onboarding. Cabeçalho com escudo e a palavra **Sentinela**, hero tonal, título, três
+cartões de característica, selo de código aberto, CTA pill e microcopy de duração.
 
-**Adaptações obrigatórias:**
-- O card "Base Global — Milhões de números identificados" promete o que o MVP local não faz
-  → usar os cards honestos (**Bloqueio Local / Silencioso / Sem Internet**).
-- Incluir selo/linha **"100% open source — sem propaganda, sem telemetria"** (UIX-13/ENG-03).
+**Componentes:** `SentinelaWatermark`, `HonestyCard` ×3, CTA pill de 56dp.
+**Chaves:** `welcome_*`, `onboarding_start_cta`, `onboarding_duration_hint`, `about_open_source_badge`.
 
-## 2. `telas/onboarding/` — Papel de Call Screening (passo 1)
+**Substituições de copy (decisão do usuário, 2026-07-30).** O mockup prometia capacidades que o MVP
+não tem. O layout foi preservado; **só os textos** mudaram:
 
-Hero com escudo, explicação de privacidade, bento grid (Bloqueio Local / Silencioso / Sem
-Internet), CTA **"Configurar Agora"** com estado "Solicitando permissão…", disclaimer sobre a
-permissão de *Call Screening*. Dispara `ScreeningRoleManager.buildRequestIntent()`.
+| Prometido no mockup | O que a tela diz | Por quê |
+|---|---|---|
+| base mundial com milhões de números | Bloqueio local | o app não declara acesso à internet |
+| processamento local com cifragem | Sem internet, nada sai do aparelho | não há cifragem; há ausência de rede, que é verificável |
+| filtros inteligentes | Regra clara e previsível | a decisão é determinística, não aprende |
+| classificação de motivo da chamada | motivo **da decisão**, não da chamada | o app não classifica intenção |
+| proteção contra remetentes já conhecidos | desconhecido não interrompe | mais forte: não depende de reconhecer o número |
 
-## 3. `telas/configura_o_desconhecidos/` — Desconhecidos (passo 2)
+As cinco capacidades estão registradas, com dependências, em
+[`../backlog/capacidades-prometidas-nos-mockups.md`](../backlog/capacidades-prometidas-nos-mockups.md)
+para versões posteriores ao MVP.
 
-Card com ícone `no_sim`, título **"Chamadas Desconhecidas"**, pergunta e 3 option-cards
-single-select com `check_circle` → `ScreeningSettings.unknownPolicy`:
-- **Bloquear** (default) — "Recusa a chamada instantaneamente." → `OriginPolicy.BLOCK`
-- **Silenciar** — "A chamada chega sem som nem vibração." → `OriginPolicy.SILENCE`
-- **Permitir** — "Recebe chamadas normalmente." → `OriginPolicy.RING`
+**Imagens remotas substituídas.** Duas telas dos mockups carregavam imagem de um domínio externo.
+Impossível sem acesso à internet, e contraditório num app de privacidade. Ambas viraram superfície
+tonal — o que o próprio mockup do passo 1 já fazia.
 
-O estilo do BLOCK (rejeitar × caixa postal) fica na tela Proteção (`BlockMode`).
-Microcopy: *"Você pode alterar esta configuração a qualquer momento."*
+## 2. Passo 1 de 6: papel de triagem — `ui/onboarding/RoleStepScreen.kt`
 
-## 4. `telas/configura_o_contatos/` — Contatos (passo 3, **políticas reais**)
+Explicação do que o app faz, **o aviso obrigatório de escopo** (só chamadas telefônicas são
+filtradas — não WhatsApp nem outras chamadas por internet) e o pedido do papel de triagem.
 
-Mesmo layout de wizard do mockup (indicador de passo + barra de progresso), H1
-**"E as pessoas da sua lista de contatos?"** e os 4 option-cards do mockup →
-`ScreeningSettings.contactsPolicy`:
-- **Tocar** (default, badge "Padrão") — "As chamadas tocam normalmente no seu telefone." → `RING`
-- **Bloquear** — "Bloqueia todas as chamadas, enviando para a caixa postal." → `BLOCK`
-- **Silenciar** — "O telefone não vibra nem toca, mas mostra a notificação." → `SILENCE`
-- **Nunca Silenciar** — "O Sentinela nunca silencia sua lista de contatos. O 'Não Perturbe' do
-  sistema continua valendo." → `NEVER_SILENCE`
+**Três ramos de estado:** papel disponível e não concedido, concedido, indisponível no aparelho.
+Nenhum deles bloqueia o fluxo — negar leva à home com o estado real e o botão de correção.
+**Componentes:** `StepHeader`, `HonestyCard`, CTA. **Chaves:** `role_step_*`, `onboarding_scope_warning`.
 
-Este passo dispara o pedido de **READ_CONTACTS** com a explicação
-`contacts_permission_rationale` (leitura 100% local, nada armazenado). Card informativo
-honesto: as políticas por contato valem no modo filtro **enquanto a leitura da agenda estiver
-concedida** — se o usuário revogar, o Android nem aciona o Sentinela para contatos conhecidos e
-eles voltam a tocar pelo caminho nativo, sem aviso (link "saiba mais" → Proteção).
-Toggle extra real: **"Bloquear números privados"** (config que o mockup não expôs).
+## 3. Passo 2 de 6: desconhecidos — `ui/onboarding/UnknownPolicyStepScreen.kt`
 
-## 5. `telas/configura_o_whitelist/` — Whitelist (passo 4)
+Quatro políticas em `OptionCard` agrupados por `Modifier.optionCardGroup()`, com descrição
+permanente sob cada uma. **Padrão: Bloquear** — extraído do mockup e coincidente com
+`ScreeningSettings`, então a tela reflete o repositório em vez de redefinir padrão.
 
-Card "O que é a Whitelist?" (manter texto), pergunta **"Como tratar sua Whitelist
-Pessoal?"** com os 4 option-buttons do mockup → `ScreeningSettings.whitelistPolicy`:
-- **Nunca Silenciar** (default) — "O Sentinela nunca silencia essa origem. O 'Não Perturbe' do
-  sistema continua valendo." → `NEVER_SILENCE`
-- **Tocar** — "Sempre emitir som." → `RING`
-- **Bloquear** — "Rejeitar automaticamente." → `BLOCK`
-- **Silenciar** — "Apenas notificação visual." → `SILENCE`
+## 4. Passo 3 de 6: contatos — `ui/onboarding/ContactsPolicyStepScreen.kt`
 
-CTA **"Finalizar Configuração"** + "Voltar"; hint fixo sobre poder alterar depois.
-Ao finalizar: verificação final (papel concedido? permissão de contatos? proteção ativa?)
-e entrada no dashboard.
+Política para quem está na agenda, com o pedido de leitura da agenda. **Padrão: Tocar.**
 
-## 6. `telas/dashboard/` — Início
+**Quatro ramos de permissão**, do estado puro de 4 estados que a Phase 4 entregou: nunca pedida,
+negada uma vez, negada permanentemente (atalho para as configurações do sistema, sem insistir),
+concedida. **As opções nunca são desabilitadas** — desabilitar seria pressão. Negar não impede
+seguir: a consulta devolve indisponível e a política de reserva resolve.
 
-- Card hero `primary-container` com **"Proteção Ativa"** + dot pulsante + toggle master
-  (OFF → "Proteção desativada" com destaque de aviso).
-- Estado extra obrigatório: papel perdido → aviso **"O Sentinela não é o filtro de chamadas
-  padrão."** + botão **"Corrigir configuração"**.
-- Stats: **Total Bloqueado** e **Hoje** (dados do `BlockedCallRepository`).
-- **"Última chamada bloqueada"** com número mascarado `+55 11 9****-1234` e motivo real
-  (Número Desconhecido / Privado) — **não** usar os rótulos de spam do mockup
-  ("Provável Fraude Financeira"): o MVP não classifica spam.
-- Quick actions: Whitelist Pessoal, Histórico de Bloqueio.
-- Bottom nav 4 abas (Início ativa).
+## 5. Passo 4 de 6: whitelist — `ui/onboarding/WhitelistPolicyStepScreen.kt`
+
+Tratamento da whitelist pessoal. **Padrão: Nunca Silenciar.** Mesmo padrão de `OptionCard` do passo 2.
+
+## 6. Passos 5–6 e home
+
+### Passo 5: notificação — `ui/onboarding/NotificationStepScreen.kt`
+Opt-in **sem pressão**: nasce desligada, porque o valor do produto é não interromper. A permissão de
+notificação é pedida em runtime só quando o usuário liga a opção.
+
+### Passo 6: verificação final — `ui/onboarding/SummaryStepScreen.kt`
+Resumo do estado real. **Nunca falsamente positivo:** se o papel foi negado ou uma permissão falta, a
+tela diz isso em vez de mostrar visto verde. `CheckRow` com o botão de correção em nó próprio,
+alcançável pelo leitor de tela.
+
+### Home — `ui/home/HomeScreen.kt`
+`StatusHeroCard` com o interruptor principal, `StatCard`, `LastBlockedCard`, `QuickActionRow`,
+`InfoBanner` para os avisos.
+
+- **O interruptor liga/desliga a preferência de proteção**, não o papel do sistema. O papel é estado
+  somente-leitura num banner com botão de correção — revogar papel **mata o processo** (medido na
+  Phase 6), e o usuário veria o app fechar sozinho ao mexer num interruptor.
+- **Status consultado vivo a cada retomada, nunca cacheado.** Medido: p50 29,9 µs — três ordens de
+  grandeza abaixo de um frame, então cachear só compraria a mentira.
+- **"Última bloqueada" usa número mascarado.** A home pode estar visível a terceiros. Número completo
+  aparece **somente** nas telas de chamada e discagem (§11).
+- **Contagem: zero mentiroso é impossível por tipo.** `StatCard` recebe `StatValue`
+  (`Loaded` / `Unavailable` / `Loading`), nunca um número cru. Com o histórico desligado a tela mostra
+  o estado, não `0`.
+- Oito estados degradados cobertos, incluindo proteção ligada sem leitura da agenda (avisa que
+  contatos podem cair como desconhecidos, com atalho para conceder).
+
 
 ## 7. `telas/whitelist_pessoal/` — Permitidos
 
@@ -134,10 +144,29 @@ Seção **"Apoie o Sentinela"** (UIX-13/ENG-03), destaque visual do card:
   (endereço com botão copiar + toast "Endereço copiado!"; QR opcional).
 - O endereço vem de `support_bitcoin_address` — release bloqueado enquanto vazio.
 
-## 10. Proteção (Ajustes) — **sem mockup**
+## 10. Proteção (Ajustes) — `ui/settings/SettingsScreen.kt` — implementada na Fase 7
 
-Grupos de configurações em cards `surface-container` (padding 16dp), cada opção com
-explicação de uma linha em `on-surface-variant` (nada de opção sem explicação):
+Sem mockup de origem; derivada do sistema visual. **16 itens** em `SettingsGroup` sobre
+`surface-container` (padding 16dp), cada opção com explicação **permanente** de uma linha em
+`on-surface-variant` — nada de dica escondida, porque o objetivo declarado da fase é o usuário
+entender o que cada política significa.
+
+**Contrato de comportamento, travado por teste:**
+- **Efeito imediato, sem botão salvar.** O `snapshot()` do DataStore com cache volátil já alimenta a
+  triagem; a mudança vale na próxima chamada. Teste afirma a ausência de qualquer ação de salvar.
+- **Exatamente dois diálogos de confirmação**, e só para o que perde dado. Trocar política **não**
+  confirma — é reversível, e confirmação excessiva treina o usuário a aceitar sem ler. Um teste
+  afirma que limpar histórico não apaga nada antes da confirmação.
+- **Completude:** um teste percorre os 16 itens e falha se algum desaparecer.
+- O modo discador reaproveita `ui/dialer/DialerActivationScreen.kt`, entregue na Fase 6 e ligado à
+  navegação nesta fase.
+
+**Armadilha real encontrada aqui:** os rótulos das políticas ("Bloquear", "Silenciar", "Tocar",
+"Nunca Silenciar") **colidem entre os três grupos**. Clicar por rótulo atingia o grupo errado. As
+políticas são acionadas pela descrição, única por grupo, e nenhum título de grupo pode repetir o
+rótulo de um membro.
+
+Itens, na ordem:
 
 1. **Ativar proteção** — toggle master (mesmo estado do hero do dashboard); OFF pinta o card
    com `error-container` a 15% e texto "Proteção desativada".

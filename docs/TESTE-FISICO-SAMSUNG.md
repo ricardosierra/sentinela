@@ -206,3 +206,31 @@ Os cenários **52 a 60** fecham o que resta do modo discador da Phase 6:
   discador destrava o recurso.
 - **SCR-07** (omitir do histórico do telefone) permanece **WONT FIX** por decisão do Android, e o
   cenário 60 apenas reconfirma isso no aparelho, agora com o papel de telefone padrão ativo.
+
+---
+
+## Phase 7 — Onboarding, home e acessibilidade real (cenários 61–68)
+
+A Phase 7 automatizou tudo que a árvore de semântica alcança: `contentDescription`,
+`stateDescription`, semântica de cabeçalho, ordem de foco **declarada** e alvo de toque nos dois
+eixos (área de toque **e** tamanho desenhado — o segundo eixo pegou quatro defeitos reais de layout
+na Phase 6 e um quinto na Phase 7).
+
+O que resta aqui é o que nenhuma árvore de semântica mede: o que o leitor de tela **fala**, como o
+dedo **explora**, e o que o olho **enxerga** sob papel de parede real. Enquanto estes cenários não
+rodarem, o critério de aceite 4 da Phase 7 ("TalkBack navega o fluxo inteiro") permanece **aberto por
+desenho** — a fase entregou a semântica correta e a prova em JVM, não a prova de locução.
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 61 | Locução e verbosidade do leitor de tela no onboarding | Ligar o TalkBack e atravessar os 6 passos, ouvindo cada anúncio | Cada opção é anunciada com rótulo, papel e estado. Nada é lido duas vezes, nada fica mudo, e o contador de passo é dito uma vez por tela | |
+| 62 | Exploração por toque e deslizamento na home | Com o TalkBack ligado, explorar a home arrastando o dedo e depois deslizando para a direita item a item | Todo controle é alcançável pelos dois gestos. O interruptor de proteção anuncia o estado ligado/desligado, e o aviso de papel ausente é alcançado antes dos atalhos | |
+| 63 | Ordem de foco **efetiva** | Deslizar da primeira à última posição em cada tela desta fase | A ordem percorrida é a mesma da leitura visual. A ordem declarada já é automatizada; aqui se confere a efetiva, que pode divergir | |
+| 64 | Contraste sob cor dinâmica com papel de parede real | Trocar o papel de parede por um claro, um escuro e um saturado; abrir home e tela Proteção | Texto e ícones seguem legíveis nos três. As cores funcionais de estado (proteção ativa / atenção / bloqueado) **não mudam** com o papel de parede — são literais fora do Dynamic Color | |
+| 65 | Escala de fonte a 200% | Configurar o tamanho de fonte do sistema no máximo e atravessar onboarding, home e Proteção | Nenhum texto é cortado, nenhum botão desaparece, nenhuma linha de opção fica ilegível. Rolagem aparece onde for preciso | |
+| 66 | Exibição maior (densidade) a 200% | Configurar o tamanho de exibição no máximo e repetir o percurso | Mesmo critério do cenário 65. Atenção especial aos alvos de 48dp, que a Phase 6 já viu comprimirem em tela curta | |
+| 67 | Partida a frio percebida em hardware | Fechar o app, matar o processo, abrir e cronometrar até a primeira tela útil | A abertura é percebida como imediata. A mediana de 680 ms foi medida em **aparelho virtual**, onde a cauda mede o hospedeiro tanto quanto o app — o veredito é do aparelho | |
+| 68 | Zero a protegido em menos de 2 minutos | Instalação limpa: atravessar o onboarding concedendo tudo, cronometrando | O usuário sai de instalado a protegido em menos de 2 minutos, e ao final entende o que cada política faz. É o objetivo declarado da fase, e só o aparelho o mede | |
+
+**Regra de honestidade herdada:** afirmação de documento sem medição é defeito. Nenhum item acima é
+apresentado como verificado; cada um é o veredito pendente do seu critério.
