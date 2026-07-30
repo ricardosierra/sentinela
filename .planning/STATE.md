@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-03-PLAN.md
-last_updated: "2026-07-30T04:49:45.142Z"
+stopped_at: Completed 07-04-PLAN.md
+last_updated: "2026-07-30T04:57:15.841Z"
 last_activity: 2026-07-30
 progress:
   total_phases: 9
   completed_phases: 6
   total_plans: 46
-  completed_plans: 39
+  completed_plans: 40
 ---
 
 # Project State
@@ -25,7 +25,7 @@ Last activity: 2026-07-30
 ## Current Position
 
 Phase: 07 (UI Onboarding e Home) — EXECUTING
-Plan: 4 of 11
+Plan: 5 of 11
 
 ## Snapshot
 
@@ -46,6 +46,7 @@ Plan: 4 of 11
 - **UI (navegacao e apoio de teste, 07-02):** `Rotas` com as dez rotas por TEXTO da fase (boas-vindas, seis passos, home, protecao, modo discador) e `NavGraphContractTest` que COMPOE o `NavHost` real e navega — 6 casos, contagem de destinos travada em dez; os tres asserts de dois eixos extraidos para `org.sentinela.app.ui.TouchTargetAsserts`, sem copia, com a suite da Fase 6 em 14 casos antes e depois
 - **UI (fundacao de texto e cor, 07-01):** `StatusAttention`/`OnStatusAttention`/`StatusBlocked` como literais fora do Dynamic Color (apelidos semanticos dos tokens destrutivos, igualdade afirmada por teste; ativo reusa `CallAccept`), travados em JVM pura e fixados nos tres esquemas; 44 chaves pt-BR novas da fase — 269 `<string name=` mais o plural real de `settings_clear_history_confirm`; `Phase7StringsTest` com 11 casos varrendo as chaves de nove prefixos contra seis grupos de expressao proibida, sempre por `Context.getString`; os dois `PluralsCandidate` do lint eliminados, incluindo o porcento cru de `dialer_activation_unchanged_4` (corrigido por `formatted="false"`, com o texto visivel intacto)
 - **UI (componentes compartilhados, 07-03):** seis componentes em `ui/components/` — `OptionCard` (linha inteira como alvo unico com papel de botao de radio, 72dp, descricao permanente, selo, desabilitado com motivo no PROPRIO no), `StepHeader` (contador por recurso + barra decorativa), `SentinelaTopBar` (marca vinda do recurso, dois tipos de acao com alvo exigido de 48dp), `SettingSwitchRow` (tres nos, zero mesclagem no arquivo), `CheckRow` (estado por icone E texto, acao em no focavel separado) e `SentinelaBottomBar` (quatro destinos, `Role.Tab`, item de 56dp por `requiredHeight`, os dois da Phase 8 desabilitados com motivo textual); `Phase7ComponentSemanticsTest` com 17 casos sob qualificadores de tela reais e tres provas de vermelho, uma delas corrigindo o entendimento da semantica mesclada
+- **UI (donos de estado, 07-04):** `HomeViewModel`, `OnboardingViewModel` e `SettingsViewModel` — colaboradores por parametro, `AppContainer` fora inclusive das fabricas (montagem fica na rota), consultas de papel injetadas como FUNCOES para o teste conta-las; `StatValue` fechado em `Loaded`/`Unavailable`/`Loading` torna o zero mentiroso impossivel por assinatura e `LastBlockedUi` carrega so o texto mascarado; falha de leitura do historico vira estado visivel em vez de propagar; chave `onboarding_completed` fora de `ScreeningSettings`; tela Protecao com uma funcao por item e ZERO funcao de salvar (ausencia travada por reflexao), retencao "nao guardar" gravando e podando na mesma corotina; 42 casos novos (suite JVM 698) com seis provas de vermelho — cobertura 96,6157%
 - **Git:** repo local sem remote; branch `master`
 - **Última tag git:** nenhuma (primeira release será `v0.1.0`)
 
@@ -248,6 +249,13 @@ Plan: 4 of 11
 - [Phase 07]: 07-03: a barra inferior entrega os QUATRO destinos, com os dois da Phase 8 desabilitados e com motivo textual (aba que leva a tela em branco sem explicacao e proibida por UIX-10); habilitar e mudar a lista na tela que chama, nunca o componente
 - [Phase 07]: 07-03: requiredSizeIn de piso ANTES de requiredHeight — a ordem inversa devolveu 48dp desenhados onde o contrato pedia 56dp, medido pelo eixo do desenho
 - [Phase 07]: 07-03: prova de vermelho do eixo desenhado repetida com o mesmo veredito da Fase 6 — item de 56dp reduzido a 40dp deixa os DOIS asserts de alvo de toque verdes, porque o Compose expande o alvo sozinho
+- [Phase 07]: 07-04: StatValue fechado em Loaded/Unavailable/Loading torna o zero mentiroso IMPOSSIVEL por assinatura — sem Int nas variantes de ausencia, a regra da secao 8 deixou de ser convencao; o caso do zero verdadeiro e o do proibido ficam lado a lado na mesma classe de teste
+- [Phase 07]: 07-04: papel do sistema reconsultado a cada chamada e provado por CONTADOR DE INVOCACOES, nunca por cronometro (licao das Fases 3 e 4 medida de novo); o retorno do seletor do sistema nao serve porque perder papel encerra o processo, e o trio custa 30 us — nao existe argumento de desempenho para cachear
+- [Phase 07]: 07-04: os donos de estado NAO conhecem AppContainer nem na fabrica — o criterio de no maximo uma ocorrencia e inatingivel com import mais assinatura (grep conta LINHAS), e o nome totalmente qualificado seria literal do identificador do aplicativo, proibido pelo Bloco 2; as fabricas recebem colaboradores um por um e a montagem fica na rota
+- [Phase 07]: 07-04: falha de leitura do historico vira estado visivel em vez de propagar — inverso DELIBERADO do caminho da chamada da Fase 6: processo morto o Telecom detecta, home congelada ninguem detecta exceto o usuario
+- [Phase 07]: 07-04: onboarding_completed e chave propria fora de ScreeningSettings, nunca o contador de aberturas — amarrar o onboarding ao numero que o convite de avaliacao da Fase 9 ja usa seria divida garantida
+- [Phase 07]: 07-04: ausencia de funcao de salvar na tela Protecao travada por teste de REFLEXAO sobre nomes de metodo — um botao salvar tornaria possivel a tela e a triagem discordarem, e o retrato ja e imediato
+- [Phase 07]: 07-04: coletor de teste de dono de estado exige despachante NAO CONFINADO amarrado ao agendador — o backgroundScope do runTest usa o padrao, stateIn(WhileSubscribed) nunca liga o fluxo de origem e 11 de 15 casos ficaram vermelhos por motivo falso reportando o valor inicial; prima da armadilha da Fase 4
 
 ## Convenções operacionais do GSD
 
@@ -291,6 +299,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-07-30T04:49:13.492Z
-Stopped at: Completed 07-03-PLAN.md
+Last session: 2026-07-30T04:56:34.762Z
+Stopped at: Completed 07-04-PLAN.md
 Resume file: None
