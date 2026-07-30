@@ -47,6 +47,7 @@ import org.sentinela.app.settings.FallbackPolicy
 import org.sentinela.app.settings.NotificationIdentification
 import org.sentinela.app.settings.OriginPolicy
 import org.sentinela.app.settings.RetentionPolicy
+import org.sentinela.app.settings.ScreeningSettings
 import org.sentinela.app.telecom.call.DialerModeState
 import org.sentinela.app.ui.components.HonestyCard
 import org.sentinela.app.ui.components.InfoBanner
@@ -733,7 +734,7 @@ private fun SettingsScreenProtectionOffPreview() {
     SentinelaTheme(darkTheme = true, dynamicColor = false) {
         TelaDeExemplo(
             SettingsUiState(
-                settings = org.sentinela.app.settings.ScreeningSettings(protectionEnabled = false),
+                settings = ScreeningSettings(protectionEnabled = false),
                 screeningRoleAvailable = true,
             ),
         )
