@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import org.sentinela.app.data.contacts.ContactsPermissionState
 import org.sentinela.app.data.local.BlockedCallEntry
 import org.sentinela.app.data.local.BlockedCallRepository
@@ -35,7 +38,13 @@ import java.time.ZoneId
  * teste possa contá-las: o que prova que o estado é vivo é o **contador de invocações**, nunca um
  * cronômetro. Cronômetro mede o ambiente e passa verde com qualquer cache dentro.
  */
-@Suppress("LongParameterList")
+// Os quatro comandos que a home ganhou quando a tela passou a existir (07-10) levaram a classe ao
+// limite de funções do analisador. Suprimido AQUI, no ponto de uso, em vez de afrouxar o limite na
+// configuração compartilhada — precedente das Fases 3 e 6 e do repositório de configurações.
+// A reinscrição do fluxo de leitura usa um operador ainda marcado como experimental na biblioteca de
+// corotinas; ele é estável em uso há várias versões e o projeto já o consome na camada de contatos.
+@OptIn(ExperimentalCoroutinesApi::class)
+@Suppress("LongParameterList", "TooManyFunctions")
 class HomeViewModel(
     private val settings: DataStoreSettingsRepository,
     history: BlockedCallRepository,
@@ -71,6 +80,12 @@ class HomeViewModel(
     private val ultimaConsulta = MutableStateFlow(consultarAgora())
 
     /**
+     * Contador de tentativas de leitura do histórico. Cada incremento REINSCREVE o fluxo de origem, e é
+     * isso que dá dentes ao botão de tentar de novo do estado de falha.
+     */
+    private val tentativa = MutableStateFlow(0)
+
+    /**
      * Leitura do histórico já com a falha domesticada.
      *
      * `catch` aqui é o oposto DELIBERADO do caminho da chamada da Fase 6, onde a exceção propaga de
@@ -80,11 +95,13 @@ class HomeViewModel(
      * estado visível ([HomeUiState.readError]) com as contagens indisponíveis, e não sobe.
      */
     private val leitura: Flow<LeituraHistorico> =
-        combine(history.observeTotalCount(), history.observeRecent()) { total, recentes ->
-            LeituraHistorico.Ok(total, recentes) as LeituraHistorico
+        tentativa.flatMapLatest {
+            combine(history.observeTotalCount(), history.observeRecent()) { total, recentes ->
+                LeituraHistorico.Ok(total, recentes) as LeituraHistorico
+            }
+                .catch { emit(LeituraHistorico.Falha) }
+                .onStart { emit(LeituraHistorico.Carregando) }
         }
-            .catch { emit(LeituraHistorico.Falha) }
-            .onStart { emit(LeituraHistorico.Carregando) }
 
     /**
      * Estado da tela.
@@ -123,6 +140,66 @@ class HomeViewModel(
      * caso — disparar levaria o usuário a uma tela do sistema que não resolve nada.
      */
     fun intencaoDePedidoDoPapel(): Intent? = requestRoleIntent()
+
+    /**
+     * Liga e desliga a proteção pelo interruptor do cartão de status. Grava na hora, sem botão salvar,
+     * exatamente como cada item da tela Proteção: o cache mantido por coletor leva o valor à triagem e
+     * a mudança vale na próxima chamada.
+     */
+    fun definirProtecao(ligada: Boolean) {
+        viewModelScope.launch { settings.update { it.copy(protectionEnabled = ligada) } }
+    }
+
+    /**
+     * Religa o histórico a partir do aviso da home.
+     *
+     * **Duas configurações o desligam, e mexer em uma só deixaria o aviso reaparecer no quadro
+     * seguinte:** o interruptor do histórico e a retenção "não guardar", que mantém o interruptor
+     * ligado e ainda assim não grava nada. Um usuário que toca em "ativar histórico" e vê o mesmo aviso
+     * de novo conclui, com razão, que o botão não funciona. Por isso a retenção volta ao padrão do
+     * produto quando a que estava valendo não guardava.
+     *
+     * Nada é apagado aqui, em nenhum dos dois caminhos.
+     */
+    fun religarHistorico() {
+        viewModelScope.launch {
+            settings.update { atual ->
+                atual.copy(
+                    historyEnabled = true,
+                    retentionPolicy = if (atual.retentionPolicy.shouldStore) {
+                        atual.retentionPolicy
+                    } else {
+                        ScreeningSettings().retentionPolicy
+                    },
+                )
+            }
+        }
+    }
+
+    /**
+     * Tenta ler o histórico de novo depois de uma falha.
+     *
+     * A releitura é uma reinscrição de verdade, e não um recálculo do mesmo resultado: o fluxo de
+     * origem é refeito, passando pelo estado de carregamento antes de publicar o novo resultado. Um
+     * botão de tentar de novo que não refaz a leitura é pior do que nenhum — ele devolve a mesma falha
+     * e ensina o usuário a desconfiar do aplicativo.
+     */
+    fun tentarLerNovamente() {
+        tentativa.value += 1
+    }
+
+    /**
+     * Pede a leitura da agenda a partir do aviso da home.
+     *
+     * A ORDEM é contrato, estabelecido três vezes desde a Fase 4: a marca é gravada e SÓ ENTÃO o
+     * diálogo é disparado, sem esperar a escrita concluir. O usuário pode encerrar o aplicativo com o
+     * diálogo do sistema aberto; se a marca dependesse do retorno, o aplicativo voltaria achando que
+     * nunca perguntou e pediria de novo a cada abertura, para sempre.
+     */
+    fun pedirAgenda(dispararLauncher: () -> Unit) {
+        viewModelScope.launch { settings.markContactsPermissionAsked() }
+        dispararLauncher()
+    }
 
     private fun consultarAgora(): ConsultaDePapel {
         val agenda = contactsState()
