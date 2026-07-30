@@ -113,6 +113,7 @@
     <string name="nav_whitelist">Permitidos</string>
     <string name="nav_history">Histórico</string>
     <string name="nav_settings">Ajustes</string>
+    <string name="nav_unavailable">Esta tela chega em uma etapa seguinte do aplicativo.</string>
 
     <!-- Whitelist -->
     <string name="whitelist_title">Whitelist Pessoal</string>
@@ -348,4 +349,7 @@
     <string name="action_cancel">Cancelar</string>
     <string name="state_loading">Carregando…</string>
     <string name="state_error">Algo deu errado. Tente novamente.</string>
+    <string name="state_on">Ligado</string>
+    <string name="state_off">Desligado</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
 </resources>
