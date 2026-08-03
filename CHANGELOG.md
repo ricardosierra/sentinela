@@ -52,7 +52,32 @@
 - [x] Evidência auditável do build pós-`clean` arquivada em `.planning/phases/01-fundacao-compilavel/01-EVIDENCE.md` (57 actionable tasks, 34 executadas, lint 0, detekt 0, APK debug 33,8 MB)
 - [x] Conflito documental de `POST_NOTIFICATIONS` reconciliado a favor de `docs/PERMISSOES.md` (fonte canônica): declaração mantida na Fase 1, pedido em runtime só na Fase 5
 
-**Phase 6 — Modo discador opcional (2026-07-29):**
+**Phase 2 — Motor de decisão e normalização (2026-07-29):**
+
+- [x] **Precedência completa e políticas por origem** — Cobertura caso a caso (saída, proteção off, privado, contato, whitelist, falha de consulta, desconhecido, inválido) e 48 casos de teste parametrizado provando as transições.
+- [x] **Normalização libphonenumber** — Integração limpa `LibPhoneNumberNormalizer`, E.164 BR e internacional, máscara de exibição blindada que não vaza número completo.
+- [x] **Cascata de região** — SIM/rede → preferência → BR em um `RegionProvider` puro, sem novas permissões.
+
+**Phase 3 — Dados locais (2026-07-29):**
+
+- [x] **Whitelist e histórico no Room** — Schema exportado, dedup E.164, índices medidos (consulta `< 5ms`).
+- [x] **Retenção de histórico puramente local** — Poda sem `WorkManager` no caminho de banco (políticas 7/30/90 dias e manual).
+- [x] **Configurações em DataStore** — Leitura síncrona cacheada via `snapshot()`, contador de aberturas (para avaliação).
+- [x] **Privacidade de dados** — Regras provadas excluindo o Room/DataStore dos backups automáticos do Android.
+
+**Phase 4 — Contatos do aparelho (2026-07-29):**
+
+- [x] **Sonda dupla de agenda** — Lookup local cacheado contra provider (E.164 + número bruto) operando sob p95 de 200ms na cold start, sem enviar dados para a rede.
+- [x] **Gestão estrita de READ_CONTACTS** — Máquina de estado, permissão com fail-open (regride para desconhecido, não quebra a triagem).
+- [x] **Invariante antivazamento de contatos** — Provado por exportação de schema e Kover que nomes de contato nunca tocam o banco local do Sentinela.
+
+**Phase 5 — Triagem Telecom modo filtro (2026-07-29):**
+
+- [x] **Coordenador puro de Screening** — `AtomicBoolean` garantindo exatamente uma resposta ao `CallScreeningService`, timeout interno resiliente, e redes permissivas para lidar com crash de IO.
+- [x] **Notificação silenciosa própria** — Opt-in com máscara de número gerada antes do broadcast.
+- [x] **Decisão dentro do motor** — Bloco 7 no script de invariantes provando que lógicas de bloqueio nunca "vazam" para a camada da UI ou do Telecom.
+
+**Phase 6 — Modo discador opcional (2026-07-30):**
 
 - [x] **Quatro permissões novas**, cada uma na matriz de `docs/PERMISSOES.md` **antes** do manifest e na allowlist do script de invariantes no mesmo trabalho: papel de telefone padrão, vínculo do serviço de interface de chamada, originar chamada e ocupar a tela. Zero `INTERNET`, zero permissão de fase futura antecipada
 - [x] **Bloco 8 do `scripts/verify-invariants.sh`** — trava a elegibilidade ao papel de telefone padrão: os dois filtros da ação de discagem no manifest **mergeado**, a proibição permanente de desabilitar componente próprio (a plataforma remove o papel e encerra o app), a origem da chamada só pelo gerenciador de telecomunicações e a pureza da camada da sessão. As quatro checagens demonstradas falhando
@@ -62,3 +87,10 @@
 - [x] Suíte JVM de **417 para 603 testes** e instrumentada de **53 para 80**, 0 falhas; cobertura **96,648%** com gate `koverVerify` em 80 (dois excludes novos, ambos por **nome de classe**: a costura da telefonia e o serviço de interface de chamada, que só rodam instrumentados — nenhuma classe pura excluída)
 - [x] Documentação honesta: `docs/LIMITACOES.md` ganhou "uma chamada por vez", o encerramento do app ao perder papel e a **correção** do item de número privado, que voltou a dizer **não verificado** no modo discador; `docs/design/TELAS.md` §11 deixou de ser esboço de 6 linhas e virou contrato; roteiro Samsung revisado nos cenários 23–30 e completado de 52 a 60
 - [x] Evidência pós-`clean` e sem cache arquivada em `.planning/phases/06-modo-discador-opcional/06-EVIDENCE.md` (78 de 78 tarefas executadas, lint 0, detekt 0, 8 blocos de invariantes verdes, gate demonstrado falhando)
+
+**Phase 7 — UI Onboarding e Home (2026-07-30):**
+
+- [x] **Onboarding honesto** — 6 passos (papel, desconhecidos, agenda, whitelist, notificações, revisão) sem dark patterns; recusa do papel não trava o app.
+- [x] **Home e Proteção reativas** — `HomeScreen` com 8 estados degradados provados, status reativo do papel; tela `ProtectionScreen` operando imediatamente (sem botão de salvar).
+- [x] **Navegação estrita e limpa** — Grafo de 10 destinos baseado em strings para evitar falsos-positivos na validação.
+- [x] **Componentes compartilhados blindados** — 6 componentes de UI genéricos (barras, switch row) com semântica estrita para leitores de tela provada via Compose Rules.

@@ -284,7 +284,6 @@
     <string name="call_keypad_close_description">Fechar teclado</string>
 
     <!-- Discagem -->
-    <string name="dialpad_title">Discar</string>
     <string name="dialpad_call">Ligar</string>
     <string name="dialpad_call_description">Ligar para %1$s</string>
     <string name="dialpad_delete_description">Apagar último dígito</string>
@@ -323,7 +322,6 @@
          que também dizem "100%". Escapar duplicando o sinal mudaria o texto VISÍVEL,
          porque getString sem argumento não formata nada. -->
     <string name="dialer_activation_unchanged_4" formatted="false">O Sentinela continua 100% offline: nenhuma chamada, número ou contato sai do aparelho.</string>
-    <string name="dialer_activation_limits_title">Limitações</string>
     <string name="dialer_activation_limit_calls">Uma chamada por vez: chamada em espera e conferência não são suportadas nesta versão.</string>
     <string name="dialer_activation_contacts_required">O modo discador precisa da permissão de leitura da agenda. Sem ela, o Sentinela não consegue distinguir seus contatos e passaria a tratar todo mundo como desconhecido.</string>
     <string name="dialer_activation_grant_contacts">Permitir leitura da agenda</string>
