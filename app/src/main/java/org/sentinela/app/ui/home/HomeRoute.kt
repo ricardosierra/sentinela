@@ -48,7 +48,11 @@ import org.sentinela.app.ui.navigation.rememberMarcasDePermissao
  */
 @Composable
 @Suppress("LongMethod")
-internal fun HomeRoute(container: AppContainer, nav: NavController) {
+internal fun HomeRoute(
+    container: AppContainer,
+    nav: NavController,
+    bottomBar: @Composable () -> Unit,
+) {
     val activity = LocalActivity.current
     val context = LocalContext.current
     val verificadorDaAgenda = remember { ContactsPermissionChecker() }
@@ -101,10 +105,11 @@ internal fun HomeRoute(container: AppContainer, nav: NavController) {
         },
         onEnableHistory = dono::religarHistorico,
         onRetryHistory = dono::tentarLerNovamente,
-        onOpenSettings = { nav.navigate(Rotas.PROTECAO) },
-        onOpenWhitelist = { emPreparacao = true },
-        onOpenHistory = { emPreparacao = true },
-        onOpenDialerActivation = { nav.navigate(Rotas.MODO_DISCADOR) },
+        onOpenSettings = { nav.navigate(Rotas.PROTECAO) { launchSingleTop = true } },
+        onOpenWhitelist = { nav.navigate(Rotas.WHITELIST) { launchSingleTop = true } },
+        onOpenHistory = { nav.navigate(Rotas.HISTORICO) { launchSingleTop = true } },
+        onOpenDialerActivation = { nav.navigate(Rotas.MODO_DISCADOR) { launchSingleTop = true } },
+        bottomBar = bottomBar,
     )
     DestinoEmPreparacao(visivel = emPreparacao) { emPreparacao = false }
 }

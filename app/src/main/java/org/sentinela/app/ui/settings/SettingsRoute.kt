@@ -36,7 +36,11 @@ import org.sentinela.app.ui.navigation.Rotas
  */
 @Composable
 @Suppress("LongMethod")
-internal fun SettingsRoute(container: AppContainer, nav: NavController) {
+internal fun SettingsRoute(
+    container: AppContainer,
+    nav: NavController,
+    bottomBar: @Composable () -> Unit,
+) {
     val context = LocalContext.current
     val verificadorDaAgenda = remember { ContactsPermissionChecker() }
     val papelDeTriagem = remember(context) { ScreeningRoleManager(context) }
@@ -87,6 +91,7 @@ internal fun SettingsRoute(container: AppContainer, nav: NavController) {
         onClearHistory = dono::limparHistorico,
         onFallback = dono::definirPoliticaDeFalha,
         onOpenAbout = { emPreparacao = true },
+        bottomBar = bottomBar,
     )
     DestinoEmPreparacao(visivel = emPreparacao) { emPreparacao = false }
 }

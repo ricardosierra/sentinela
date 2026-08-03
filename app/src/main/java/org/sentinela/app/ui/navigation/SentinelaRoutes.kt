@@ -55,4 +55,10 @@ internal object Rotas {
 
     /** Ativacao do modo discador — opcional, fora do onboarding por decisao de produto. */
     const val MODO_DISCADOR = "modo_discador"
+
+    /** Tela de Permissões / Whitelist Pessoal */
+    const val WHITELIST = "whitelist"
+
+    /** Tela do Histórico de Bloqueios */
+    const val HISTORICO = "historico"
 }

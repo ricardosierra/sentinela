@@ -122,6 +122,7 @@ fun SettingsScreen(
     onClearHistory: () -> Unit,
     onFallback: (FallbackPolicy) -> Unit,
     onOpenAbout: () -> Unit,
+    bottomBar: @Composable () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var confirmarLimpeza by remember { mutableStateOf(false) }
@@ -133,6 +134,7 @@ fun SettingsScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { BarraDaProtecao(onBack = onBack) },
+        bottomBar = bottomBar,
         snackbarHost = { SnackbarHost(hostState = avisos) },
     ) { areaInterna ->
         Column(
@@ -773,5 +775,6 @@ private fun TelaDeExemplo(state: SettingsUiState) {
         onClearHistory = {},
         onFallback = {},
         onOpenAbout = {},
+        bottomBar = {},
     )
 }

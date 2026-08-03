@@ -123,6 +123,7 @@ fun HomeScreen(
     onOpenWhitelist: () -> Unit,
     onOpenHistory: () -> Unit,
     onOpenDialerActivation: () -> Unit,
+    bottomBar: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     nowUtcMillis: Long = System.currentTimeMillis(),
 ) {
@@ -161,10 +162,9 @@ fun HomeScreen(
                     onOpenHistory = onOpenHistory,
                 )
             }
-            SentinelaBottomBar(
-                items = itensDaBarra(onOpenWhitelist, onOpenHistory, onOpenSettings),
-                modifier = Modifier.ordemDeTravessia(TRAVERSAL_BARRA_INFERIOR),
-            )
+            Box(modifier = Modifier.ordemDeTravessia(TRAVERSAL_BARRA_INFERIOR)) {
+                bottomBar()
+            }
             Spacer(
                 modifier = Modifier.height(
                     WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
@@ -535,6 +535,11 @@ private fun HomeScreenPreview(
             onOpenWhitelist = {},
             onOpenHistory = {},
             onOpenDialerActivation = {},
+            bottomBar = {
+                SentinelaBottomBar(
+                    items = itensDaBarra({}, {}, {})
+                )
+            },
             nowUtcMillis = 0L,
         )
     }

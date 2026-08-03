@@ -39,6 +39,17 @@ import org.sentinela.app.ui.onboarding.OnboardingRoute
 import org.sentinela.app.ui.onboarding.WelcomeRoute
 import org.sentinela.app.ui.onboarding.rememberStepTransitionMillis
 import org.sentinela.app.ui.settings.SettingsRoute
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.VerifiedUser
+import androidx.navigation.compose.currentBackStackEntryAsState
+import org.sentinela.app.ui.components.BottomBarItem
+import org.sentinela.app.ui.components.SentinelaBottomBar
+import org.sentinela.app.ui.history.HistoryRoute
+import org.sentinela.app.ui.whitelist.WhitelistRoute
+import androidx.navigation.NavGraph.Companion.findStartDestination
 
 /**
  * Os seis passos do onboarding na ordem em que o usuário os percorre.
@@ -96,6 +107,72 @@ internal fun SentinelaNavHost(
     val sai: Saida = { saidaDePasso(duracao) }
     val entraDeVolta: Entrada = { entradaDeVolta(duracao) }
     val saiDeVolta: Saida = { saidaDeVolta(duracao) }
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    val bottomBar: @Composable () -> Unit = {
+        SentinelaBottomBar(
+            items = listOf(
+                BottomBarItem(
+                    label = stringResource(R.string.nav_home),
+                    icon = Icons.Filled.Home,
+                    selected = currentRoute == Rotas.HOME,
+                    onClick = { 
+                        if (currentRoute != Rotas.HOME) {
+                            navController.navigate(Rotas.HOME) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    },
+                ),
+                BottomBarItem(
+                    label = stringResource(R.string.nav_whitelist),
+                    icon = Icons.Outlined.VerifiedUser,
+                    selected = currentRoute == Rotas.WHITELIST,
+                    onClick = { 
+                        if (currentRoute != Rotas.WHITELIST) {
+                            navController.navigate(Rotas.WHITELIST) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    },
+                ),
+                BottomBarItem(
+                    label = stringResource(R.string.nav_history),
+                    icon = Icons.Outlined.History,
+                    selected = currentRoute == Rotas.HISTORICO,
+                    onClick = { 
+                        if (currentRoute != Rotas.HISTORICO) {
+                            navController.navigate(Rotas.HISTORICO) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    },
+                ),
+                BottomBarItem(
+                    label = stringResource(R.string.nav_settings),
+                    icon = Icons.Outlined.Settings,
+                    selected = currentRoute == Rotas.PROTECAO,
+                    onClick = { 
+                        if (currentRoute != Rotas.PROTECAO) {
+                            navController.navigate(Rotas.PROTECAO) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    },
+                ),
+            )
+        )
+    }
 
     NavHost(
         navController = navController,
@@ -160,10 +237,16 @@ internal fun SentinelaNavHost(
             OnboardingRoute(container = container, nav = navController, passo = 5)
         }
         composable(Rotas.HOME) {
-            HomeRoute(container = container, nav = navController)
+            HomeRoute(container = container, nav = navController, bottomBar = bottomBar)
         }
         composable(Rotas.PROTECAO) {
-            SettingsRoute(container = container, nav = navController)
+            SettingsRoute(container = container, nav = navController, bottomBar = bottomBar)
+        }
+        composable(Rotas.WHITELIST) {
+            WhitelistRoute(container = container, nav = navController, bottomBar = bottomBar)
+        }
+        composable(Rotas.HISTORICO) {
+            HistoryRoute(container = container, bottomBar = bottomBar)
         }
         composable(Rotas.MODO_DISCADOR) {
             DialerActivationRoute(container = container, nav = navController)

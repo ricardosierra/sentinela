@@ -21,7 +21,11 @@ import java.io.InputStream
 import java.io.OutputStream
 
 @Composable
-fun WhitelistRoute(container: AppContainer, nav: NavController) {
+fun WhitelistRoute(
+    container: AppContainer,
+    nav: NavController,
+    bottomBar: @Composable () -> Unit,
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     // For a full implementation, we'd use a ViewModel for import/export state, but here we can do it directly.
@@ -83,6 +87,7 @@ fun WhitelistRoute(container: AppContainer, nav: NavController) {
         onDelete = viewModel::delete,
         onExport = { exportLauncher.launch("sentinela_whitelist_backup.json") },
         onImport = { importLauncher.launch(arrayOf("application/json")) },
+        bottomBar = bottomBar,
         onBack = { nav.popBackStack() }
     )
 

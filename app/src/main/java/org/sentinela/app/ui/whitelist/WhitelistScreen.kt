@@ -56,6 +56,7 @@ fun WhitelistScreen(
     onDelete: (Long) -> Unit,
     onExport: () -> Unit,
     onImport: () -> Unit,
+    bottomBar: @Composable () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -132,6 +133,7 @@ fun WhitelistScreen(
                 )
             }
         },
+        bottomBar = bottomBar,
         floatingActionButton = {
             FloatingActionButton(onClick = onAdd) {
                 Icon(Icons.Default.Add, contentDescription = stringResource(R.string.whitelist_add_number))
