@@ -283,6 +283,10 @@ class SettingsViewModelTest {
         override suspend fun clearAll() {
             limpezas++
         }
+        override suspend fun updateClassification(
+            id: Long,
+            classification: org.sentinela.app.data.local.CallClassification
+        ) = Unit
 
         override suspend fun pruneOlderThan(utcMillis: Long) {
             podas += utcMillis

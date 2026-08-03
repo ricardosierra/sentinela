@@ -33,6 +33,9 @@ interface BlockedCallRepository {
      * Número nulo ou em branco responde MISS sem consultar o banco.
      */
     suspend fun hasRecentBlock(numberE164: String?, nowUtcMillis: Long): RepeatedCallLookup
+
+    /** HST-05: o usuario marca a chamada como legitima ou indesejada. */
+    suspend fun updateClassification(id: Long, classification: CallClassification)
 }
 
 data class BlockedCallEntry(

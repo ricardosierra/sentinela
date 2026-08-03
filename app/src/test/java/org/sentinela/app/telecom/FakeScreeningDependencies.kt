@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.sentinela.app.data.contacts.ContactLookupRepository
 import org.sentinela.app.data.local.BlockedCallEntry
 import org.sentinela.app.data.local.BlockedCallRepository
+import org.sentinela.app.data.local.CallClassification
 import org.sentinela.app.data.local.PersonalWhitelistRepository
 import org.sentinela.app.data.local.WhitelistEntry
 import org.sentinela.app.domain.CallDecision
@@ -121,7 +122,18 @@ class FakeBlockedCallRepository(
 
     override suspend fun clearAll() = Unit
 
-    override suspend fun pruneOlderThan(utcMillis: Long) = Unit
+    override suspend fun pruneOlderThan(utcMillis: Long) {
+        val keep = gravados.filter { it.timestampUtcMillis >= utcMillis }
+        gravados.clear()
+        gravados.addAll(keep)
+    }
+
+    override suspend fun updateClassification(id: Long, classification: CallClassification) {
+        val index = gravados.indexOfFirst { it.id == id }
+        if (index != -1) {
+            gravados[index] = gravados[index].copy(classification = classification)
+        }
+    }
 
     override suspend fun hasRecentBlock(numberE164: String?, nowUtcMillis: Long): RepeatedCallLookup {
         chamadas++

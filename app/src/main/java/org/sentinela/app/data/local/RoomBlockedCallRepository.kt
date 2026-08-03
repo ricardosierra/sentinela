@@ -97,7 +97,7 @@ class RoomBlockedCallRepository(
     }
 
     /** HST-05: o usuario marca a chamada como legitima ou indesejada. */
-    suspend fun updateClassification(id: Long, classification: CallClassification): Unit =
+    override suspend fun updateClassification(id: Long, classification: CallClassification): Unit =
         withContext(io) { dao.updateClassification(id, classification.name) }
 
     private companion object {

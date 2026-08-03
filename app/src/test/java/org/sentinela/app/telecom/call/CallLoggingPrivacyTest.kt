@@ -235,6 +235,16 @@ private class HistoricoEspiao : BlockedCallRepository {
         nowUtcMillis: Long,
     ): org.sentinela.app.domain.RepeatedCallLookup =
         org.sentinela.app.domain.RepeatedCallLookup.MISS
+
+    override suspend fun updateClassification(
+        id: Long,
+        classification: org.sentinela.app.data.local.CallClassification
+    ) {
+        val index = registradas.indexOfFirst { it.id == id }
+        if (index != -1) {
+            registradas[index] = registradas[index].copy(classification = classification)
+        }
+    }
 }
 
 private class ControlesSilenciosos(

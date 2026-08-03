@@ -171,6 +171,10 @@ class RoleLiveStateTest {
         override fun observeTotalCount() = MutableStateFlow(0L)
         override suspend fun deleteById(id: Long) = Unit
         override suspend fun clearAll() = Unit
+        override suspend fun updateClassification(
+            id: Long,
+            classification: org.sentinela.app.data.local.CallClassification
+        ) = Unit
         override suspend fun pruneOlderThan(utcMillis: Long) = Unit
         override suspend fun hasRecentBlock(
             numberE164: String?,
