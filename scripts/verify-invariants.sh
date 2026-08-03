@@ -530,6 +530,22 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Bloco 10 — Fase 8: mascaramento de números nas listas de UI (Histórico e Whitelist)
+# ---------------------------------------------------------------------------
+echo "== Bloco 10: mascaramento de numeros nas listas =="
+
+UI_HISTORY=app/src/main/java/org/sentinela/app/ui/history
+UI_WHITELIST=app/src/main/java/org/sentinela/app/ui/whitelist
+
+TEXTO_NUMERO_CRU=$(grep -rnE 'Text\([^)]*numberE164' "$UI_HISTORY" "$UI_WHITELIST" --include="*.kt" 2>/dev/null || true)
+if [ -z "$TEXTO_NUMERO_CRU" ]; then
+  ok "nenhuma tela da fase 8 renderiza o numero cru em Text()"
+else
+  echo "$TEXTO_NUMERO_CRU" | sed 's/^/      /'
+  fail "tela da fase 8 renderiza o numero cru em Text() — deve usar maskedNumber"
+fi
+
+# ---------------------------------------------------------------------------
 if [ "$FAILURES" -gt 0 ]; then
   echo "== $FAILURES invariante(s) violado(s) =="
   exit 1
