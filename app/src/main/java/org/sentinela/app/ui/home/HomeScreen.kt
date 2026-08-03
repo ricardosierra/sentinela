@@ -36,7 +36,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -124,9 +132,18 @@ fun HomeScreen(
     onOpenHistory: () -> Unit,
     onOpenDialerActivation: () -> Unit,
     bottomBar: @Composable () -> Unit,
+    onAcceptRating: () -> Unit,
+    onDismissRating: () -> Unit,
     modifier: Modifier = Modifier,
     nowUtcMillis: Long = System.currentTimeMillis(),
 ) {
+    if (state.showRatingInvitation) {
+        RatingBottomSheet(
+            onAccept = onAcceptRating,
+            onDismiss = onDismissRating
+        )
+    }
+
     val avisos = avisosDaHome(
         state = state,
         onFixRole = onFixRole,
@@ -436,6 +453,52 @@ private fun BlocoDeAtalhos(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun RatingBottomSheet(
+    onAccept: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(ScreenPadding)
+                .padding(bottom = BottomGap),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = stringResource(R.string.review_prompt_title),
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(modifier = Modifier.height(StatGap))
+            Text(
+                text = stringResource(R.string.review_prompt_body),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(modifier = Modifier.height(BlockGap))
+            Button(
+                onClick = onAccept,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(R.string.review_prompt_rate))
+            }
+            Spacer(modifier = Modifier.height(QuickActionGap))
+            TextButton(
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(R.string.review_prompt_later))
+            }
+        }
+    }
+}
+
 @Composable
 private fun itensDaBarra(
     onOpenWhitelist: () -> Unit,
@@ -540,6 +603,8 @@ private fun HomeScreenPreview(
                     items = itensDaBarra({}, {}, {})
                 )
             },
+            onAcceptRating = {},
+            onDismissRating = {},
             nowUtcMillis = 0L,
         )
     }

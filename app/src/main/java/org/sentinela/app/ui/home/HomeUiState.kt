@@ -69,6 +69,7 @@ data class HomeUiState(
     val lastBlocked: LastBlockedUi? = null,
     val historyEnabled: Boolean = true,
     val readError: Boolean = false,
+    val showRatingInvitation: Boolean = false,
 )
 
 /**

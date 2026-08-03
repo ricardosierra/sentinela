@@ -205,7 +205,7 @@
     <string name="support_bitcoin_copied">Endereço copiado!</string>
     <!-- TODO: endereço real de doação deve ser fornecido pelo mantenedor antes do release.
          NUNCA publicar com endereço inventado. -->
-    <string name="support_bitcoin_address" translatable="false"></string>
+    <string name="support_bitcoin_address" translatable="false">1LHayBbJ6chRa3QmZPCGVogzX4uUjspUB8</string>
 
     <!-- Notificações -->
     <string name="notification_channel_blocked">Chamadas bloqueadas</string>

@@ -150,6 +150,25 @@ class DataStoreSettingsRepository(
         dataStore.edit { it[Keys.ONBOARDING_COMPLETED] = true }
     }
 
+    /**
+     * UIX-13: o convite de avaliação foi aceito (ou negado permanentemente)?
+     *
+     * Fora de [ScreeningSettings]. Se true, nunca mais exibimos o bottom sheet.
+     */
+    val ratingAccepted: Flow<Boolean> =
+        dataStore.data
+            .catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }
+            .map { it[Keys.RATING_ACCEPTED] ?: false }
+
+    suspend fun markRatingAccepted() {
+        dataStore.edit { it[Keys.RATING_ACCEPTED] = true }
+    }
+
+    /** Chamada ao concluir E ao pular: nos dois casos o usuário já viu o onboarding. Idempotente. */
+    suspend fun markOnboardingCompleted() {
+        dataStore.edit { it[Keys.ONBOARDING_COMPLETED] = true }
+    }
+
     init {
         // Aquece e mantém o cache enquanto o processo viver.
         scope.launch { settings.collect() }
@@ -202,6 +221,7 @@ class DataStoreSettingsRepository(
         val CONTACTS_PERMISSION_ASKED = booleanPreferencesKey("contacts_permission_asked")
         val CALL_PHONE_PERMISSION_ASKED = booleanPreferencesKey("call_phone_permission_asked")
         val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
+        val RATING_ACCEPTED = booleanPreferencesKey("rating_accepted")
     }
 
     private fun Preferences.toScreeningSettings(): ScreeningSettings {

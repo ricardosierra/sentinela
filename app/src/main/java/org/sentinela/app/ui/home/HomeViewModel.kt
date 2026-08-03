@@ -85,6 +85,9 @@ class HomeViewModel(
      */
     private val tentativa = MutableStateFlow(0)
 
+    /** Indica se o convite de avaliação foi descartado nesta sessão (nesta abertura de app). */
+    private val ratingDismissed = MutableStateFlow(false)
+
     /**
      * Leitura do histórico já com a falha domesticada.
      *
@@ -112,7 +115,15 @@ class HomeViewModel(
      * tela branca de duração desconhecida.
      */
     val estado: StateFlow<HomeUiState> =
-        combine(settings.settings, leitura, ultimaConsulta, ::montar)
+        combine(
+            settings.settings, 
+            leitura, 
+            ultimaConsulta, 
+            settings.appOpenCount,
+            settings.ratingAccepted,
+            ratingDismissed,
+            ::montar
+        )
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TEMPO_DE_SOBREVIDA_MILLIS),
@@ -120,6 +131,9 @@ class HomeViewModel(
                     ScreeningSettings(),
                     LeituraHistorico.Carregando,
                     ultimaConsulta.value,
+                    0,
+                    false,
+                    false,
                 ),
             )
 
@@ -201,6 +215,22 @@ class HomeViewModel(
         dispararLauncher()
     }
 
+    /**
+     * O usuário aceitou avaliar (ou marcou que não quer).
+     * O bottom sheet não volta mais.
+     */
+    fun onRatingAccepted() {
+        viewModelScope.launch { settings.markRatingAccepted() }
+    }
+
+    /**
+     * O usuário apenas fechou o bottom sheet. Ele não aparece mais nesta sessão,
+     * mas voltará a aparecer quando a contagem atingir o próximo múltiplo de 5.
+     */
+    fun onRatingDismissed() {
+        ratingDismissed.value = true
+    }
+
     private fun consultarAgora(): ConsultaDePapel {
         val agenda = contactsState()
         return ConsultaDePapel(
@@ -220,6 +250,9 @@ class HomeViewModel(
         config: ScreeningSettings,
         leitura: LeituraHistorico,
         papel: ConsultaDePapel,
+        appOpenCount: Int,
+        ratingAccepted: Boolean,
+        ratingDismissed: Boolean,
     ): HomeUiState {
         // Duas configurações desligam o histórico, e a segunda é fácil de esquecer: escolher "não
         // guardar" na retenção deixa `historyEnabled` ligado e ainda assim nada é gravado.
@@ -231,6 +264,7 @@ class HomeViewModel(
             contactsPermission = papel.agenda,
             dialerMode = papel.modoDiscador,
             historyEnabled = historicoLigado,
+            showRatingInvitation = !ratingAccepted && !ratingDismissed && appOpenCount > 0 && appOpenCount % 5 == 0,
         )
         return when {
             // Precedência: desligado vence falha e vence carregando. Quem desligou o histórico não

@@ -110,6 +110,8 @@ internal fun HomeRoute(
         onOpenHistory = { nav.navigate(Rotas.HISTORICO) { launchSingleTop = true } },
         onOpenDialerActivation = { nav.navigate(Rotas.MODO_DISCADOR) { launchSingleTop = true } },
         bottomBar = bottomBar,
+        onAcceptRating = dono::onRatingAccepted,
+        onDismissRating = dono::onRatingDismissed,
     )
     DestinoEmPreparacao(visivel = emPreparacao) { emPreparacao = false }
 }
