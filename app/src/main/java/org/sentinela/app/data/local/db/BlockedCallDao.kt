@@ -15,11 +15,17 @@ interface BlockedCallDao {
     @Insert
     suspend fun record(entity: BlockedCallEntity): Long
 
-    @Query("SELECT * FROM blocked_call ORDER BY timestamp_utc_millis DESC")
+    @Query("SELECT * FROM blocked_call ORDER BY timestamp_utc_millis DESC LIMIT 200")
     fun observeRecent(): Flow<List<BlockedCallEntity>>
 
     @Query("SELECT COUNT(*) FROM blocked_call")
     fun observeTotalCount(): Flow<Long>
+
+    @Query("SELECT * FROM blocked_call WHERE classification = :decision ORDER BY timestamp_utc_millis DESC")
+    fun observeByDecision(decision: String): Flow<List<BlockedCallEntity>>
+
+    @Query("SELECT * FROM blocked_call WHERE timestamp_utc_millis >= :sinceUtcMillis ORDER BY timestamp_utc_millis DESC")
+    fun observeByPeriod(sinceUtcMillis: Long): Flow<List<BlockedCallEntity>>
 
     @Query("SELECT * FROM blocked_call WHERE id = :id")
     suspend fun findById(id: Long): BlockedCallEntity?

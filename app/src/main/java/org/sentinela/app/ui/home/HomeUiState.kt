@@ -92,5 +92,6 @@ fun reasonLabelRes(reason: DecisionReason): Int = when (reason) {
     DecisionReason.OUTGOING_CALL,
     DecisionReason.PROTECTION_DISABLED,
     DecisionReason.REPEATED_CALL,
+    DecisionReason.EMERGENCY_NUMBER,
     -> R.string.history_unknown_number
 }

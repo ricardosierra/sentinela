@@ -70,6 +70,8 @@ class FakeWhitelistDao : WhitelistDao {
     override fun observeAll(): Flow<List<WhitelistEntity>> =
         rows.map { list -> list.sortedByDescending { it.createdAtUtcMillis } }
 
+    override fun count(): Flow<Int> = rows.map { it.size }
+
     override fun search(query: String): Flow<List<WhitelistEntity>> =
         rows.map { list ->
             list.filter {

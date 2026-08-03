@@ -45,6 +45,12 @@ class FakeBlockedCallDao : BlockedCallDao {
 
     override fun observeTotalCount(): Flow<Long> = rows.map { it.size.toLong() }
 
+    override fun observeByDecision(decision: String): Flow<List<BlockedCallEntity>> =
+        rows.map { list -> list.filter { it.classification == decision }.sortedByDescending { it.timestampUtcMillis } }
+
+    override fun observeByPeriod(sinceUtcMillis: Long): Flow<List<BlockedCallEntity>> =
+        rows.map { list -> list.filter { it.timestampUtcMillis >= sinceUtcMillis }.sortedByDescending { it.timestampUtcMillis } }
+
     override suspend fun findById(id: Long): BlockedCallEntity? = rows.value.firstOrNull { it.id == id }
 
     override suspend fun deleteById(id: Long) {

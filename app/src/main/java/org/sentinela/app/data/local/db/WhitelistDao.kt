@@ -37,6 +37,9 @@ interface WhitelistDao {
     @Query("SELECT * FROM whitelist ORDER BY created_at_utc_millis DESC")
     fun observeAll(): Flow<List<WhitelistEntity>>
 
+    @Query("SELECT COUNT(*) FROM whitelist")
+    fun count(): Flow<Int>
+
     @Query(
         "SELECT * FROM whitelist " +
             "WHERE number_key LIKE '%' || :query || '%' " +
