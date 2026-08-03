@@ -4,6 +4,7 @@ package org.sentinela.app.domain
 data class ScreenedCall(
     val direction: CallDirection,
     val number: ScreenedNumber,
+    val isEmergency: Boolean = false,
 )
 
 enum class CallDirection { INCOMING, OUTGOING }

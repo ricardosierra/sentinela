@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements")
+
 package org.sentinela.app.data.local
 
 import kotlinx.coroutines.flow.Flow

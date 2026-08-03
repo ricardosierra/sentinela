@@ -24,7 +24,7 @@ Para decidir se quem liga está na sua agenda, o Sentinela pode ler seus contato
   com descrição opcional.
 - **Configurações de proteção**: suas escolhas (políticas para desconhecidos, contatos e
   whitelist, privados, modo de bloqueio, notificação, retenção, modo discador).
-- **Histórico de bloqueios (opcional)**: se habilitado, guarda número mascarado, data/hora,
+- **Histórico de bloqueios (opcional)**: se habilitado, guarda o número completo bloqueado (armazenado estritamente no banco local para que você possa consultar quem te ligou), o número mascarado (para notificações), data/hora,
   motivo da decisão e ação tomada — pelo período de retenção que você escolher
   (nunca guardar, 7, 30, 90 dias ou até exclusão manual).
 - **Contador de aberturas do app**: um número local, usado apenas para o convite de

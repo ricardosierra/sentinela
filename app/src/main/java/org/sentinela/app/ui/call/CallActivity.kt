@@ -96,6 +96,11 @@ class CallActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.filterTouchesWhenObscured = true
+        window.setFlags(
+            android.view.WindowManager.LayoutParams.FLAG_SECURE,
+            android.view.WindowManager.LayoutParams.FLAG_SECURE
+        )
         store = (application as SentinelaApp).container.callSessionStore
         // A intencao INICIAL conta: quando a tela ainda nao existe, o toque na notificacao chega por
         // onCreate e nunca por onNewIntent.

@@ -13,7 +13,7 @@ import org.sentinela.app.phone.PhoneNumberNormalizer
 import org.sentinela.app.phone.NormalizationResult
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
+@Config(sdk = [35])
 class WhitelistImportExportTest {
 
     private val normalizer = mockk<PhoneNumberNormalizer> {

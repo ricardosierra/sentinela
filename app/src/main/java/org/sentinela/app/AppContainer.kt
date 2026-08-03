@@ -97,6 +97,12 @@ class AppContainer(
     private val appScope: CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
+    init {
+        // Pre-warm: carrega os metadados do libphonenumber em background assim que o
+        // AppContainer nasce, evitando StrictMode violation (I/O) na main thread durante a triagem.
+        appScope.launch { phoneUtil }
+    }
+
     /**
      * Instância ÚNICA do banco. Construir mais de uma vez custaria abertura de
      * SQLite no caminho quente do Service (Fase 5).

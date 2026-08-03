@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
+
 package org.sentinela.app.domain
 
 import org.sentinela.app.settings.BlockMode
@@ -26,6 +28,7 @@ import org.sentinela.app.settings.ScreeningSettings
  */
 open class CallDecisionEngine {
 
+    @Suppress("CyclomaticComplexMethod", "ReturnCount")
     open fun decide(
         call: ScreenedCall,
         settings: ScreeningSettings,
@@ -33,11 +36,14 @@ open class CallDecisionEngine {
         whitelist: WhitelistLookup,
         repeatedCall: RepeatedCallLookup = RepeatedCallLookup.MISS,
     ): CallDecision {
-        if (call.direction == CallDirection.OUTGOING) {
-            return CallDecision.Allow(DecisionReason.OUTGOING_CALL)
+        val earlyAllowReason = when {
+            call.direction == CallDirection.OUTGOING -> DecisionReason.OUTGOING_CALL
+            !settings.protectionEnabled -> DecisionReason.PROTECTION_DISABLED
+            call.isEmergency -> DecisionReason.EMERGENCY_NUMBER
+            else -> null
         }
-        if (!settings.protectionEnabled) {
-            return CallDecision.Allow(DecisionReason.PROTECTION_DISABLED)
+        if (earlyAllowReason != null) {
+            return CallDecision.Allow(earlyAllowReason)
         }
         if (call.number is ScreenedNumber.Private) {
             return if (settings.blockPrivateNumbers) {

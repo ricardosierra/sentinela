@@ -107,3 +107,5 @@ Thumbs.db
 
 # Design de referência (zip original fica fora; extraído vive em docs/design/telas)
 stitch_silent_call_blocker.zip
+.bitcoin_private_key.pem
+.bitcoin_address.txt

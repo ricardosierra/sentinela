@@ -81,8 +81,8 @@ responsabilidade da camada de toque/notificação (semântica confirmada na pesq
 | Risco | Proteção |
 |-------|----------|
 | Resposta duplicada | Guarda de resposta única por chamada |
-| Exceção em normalização/repos | try/catch amplo → fallback configurado |
-| Banco/contatos frios ou indisponíveis | Timeout interno (~1,5 s) → `LOOKUP_FAILED`/`UNAVAILABLE` |
+| Exceção em normalização/repos | try/catch amplo → *fail-open*: responde permitindo a chamada (`CallResponse` vazio) |
+| Banco/contatos frios ou indisponíveis | Timeout interno (~1,0 s) → `LOOKUP_FAILED`/`UNAVAILABLE` ou timeout externo (~4,0 s) → *fail-open* |
 | Cold start do processo | DI manual lazy; zero frameworks; nada pesado no `Application` |
 | Corrida config × chamada | Snapshot atômico das settings no início da triagem |
 | Dual SIM | Decisão independe da SIM; SIM só registrada se disponível sem permissão extra |

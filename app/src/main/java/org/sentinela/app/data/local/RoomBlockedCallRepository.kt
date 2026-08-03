@@ -3,6 +3,7 @@ package org.sentinela.app.data.local
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.sentinela.app.data.local.db.BlockedCallDao
@@ -60,7 +61,7 @@ class RoomBlockedCallRepository(
     }
 
     override fun observeRecent(): Flow<List<BlockedCallEntry>> =
-        dao.observeRecent().map { list -> list.map(BlockedCallEntity::toDomain) }
+        dao.observeRecent().map { list -> list.map(BlockedCallEntity::toDomain) }.conflate()
 
     override fun observeTotalCount(): Flow<Long> = dao.observeTotalCount()
 

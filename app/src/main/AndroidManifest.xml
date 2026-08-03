@@ -27,7 +27,9 @@
 
     <application
         android:name=".SentinelaApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/full_backup_content"
         android:icon="@mipmap/ic_launcher"
@@ -85,6 +87,7 @@
              continua resolvendo para o discador do aparelho. -->
         <activity
             android:name=".ui.dialer.DialerActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />

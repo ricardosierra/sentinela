@@ -1,161 +1,133 @@
-# Sentinela
+<div align="center">
+  <img src="https://via.placeholder.com/150/1c1c1e/ffffff?text=Sentinela" alt="Sentinela Logo" width="150"/>
 
-Bloqueador local de chamadas desconhecidas para Android: se o número não está nos seus
-contatos nem na sua whitelist pessoal, a chamada não toca — sem som, sem tela de chamada,
-sem notificação. **Open source, sem propaganda, sem telemetria, sem envio de dados para a
-nuvem — 100% offline, rodando no seu próprio celular.**
+  <h1>🛡️ Sentinela</h1>
+  
+  <p><b>Bloqueador local de chamadas desconhecidas para Android — 100% Offline e Privado.</b></p>
+  
+  <p>
+    <i>Desenvolvido e mantido por <b>SierraTecnologia</b> e <b>RicaSoluções</b></i>
+  </p>
+  
+  <p>
+    <a href="README.md">🇧🇷 Português</a> |
+    <a href="README.en.md">🇬🇧 English</a> |
+    <a href="README.es.md">🇪🇸 Español</a>
+  </p>
 
-**Versão atual:** 0.1.0 (versionCode 1) — em desenvolvimento (esqueleto)
-**SDK:** Android 10 (API 29) até Android 17 (API 37)
-**Stack:** Kotlin + Jetpack Compose + Material 3 + Telecom (`CallScreeningService` / `InCallService`)
-**Status:** Phase 1 de 9 do roadmap (`.planning/ROADMAP.md`)
+  <p>
+    <img src="https://img.shields.io/badge/Android-10.0%2B-3DDC84?style=flat-square&logo=android" alt="Android Version"/>
+    <img src="https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=flat-square&logo=kotlin" alt="Kotlin"/>
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License"/>
+    <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=flat-square" alt="Status"/>
+  </p>
+</div>
 
 ---
 
-## TL;DR
+Se o número não está nos seus contatos nem na sua whitelist pessoal, a chamada não toca — sem som, sem tela de chamada, sem notificação. **Open source, sem propaganda, sem telemetria, sem envio de dados para a nuvem — rodando silenciosamente no seu próprio aparelho.**
+
+## ✨ Principais Funcionalidades
+
+O Sentinela opera em **dois modos de proteção**:
+
+- 🛡️ **Modo Filtro (Padrão)**
+  O app atua em segundo plano com o papel de triagem (`ROLE_CALL_SCREENING`). O Android envia apenas chamadas de números **desconhecidos** para análise. Contatos da sua agenda tocam normalmente. Números desconhecidos são bloqueados ou silenciados instantaneamente.
+  
+- 📞 **Modo Discador (Avançado)**
+  O Sentinela substitui o app de telefone padrão (`ROLE_DIALER`). Isso garante proteção total sobre **todas** as chamadas, permitindo que você configure políticas (Bloquear, Silenciar, Tocar) inclusive para contatos específicos. Acompanha uma interface de discagem limpa e moderna.
+
+> **Sua privacidade é nossa regra número zero:** A leitura de contatos ocorre inteiramente na memória. Nomes, números ou fotos nunca são gravados em disco e nunca saem do aparelho.
+
+## 🚀 Como Funciona a Triagem
+
+```mermaid
+graph LR
+    A[Chamada Recebida] --> B[Motor de Decisão]
+    B --> C{Conhecido?}
+    C -->|Sim| D[Permite Tocar]
+    C -->|Não| E[Bloqueia / Silencia]
+    E --> F[Histórico Offline]
+```
+
+Detalhes técnicos aprofundados podem ser encontrados em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) e limitações conhecidas estão em [`docs/LIMITACOES.md`](docs/LIMITACOES.md).
+
+## 🏢 Apoiadores Oficiais
+
+Este projeto é uma iniciativa open-source desenvolvida e suportada por:
+
+- **SierraTecnologia** — Soluções robustas em engenharia de software e privacidade digital.
+- **RicaSoluções** — Inovação tecnológica e usabilidade focada no usuário.
+
+Nosso compromisso é entregar uma ferramenta livre de rastreadores, focada unicamente na paz de espírito do usuário.
+
+## 🛠️ Build & Instalação
+
+### Pré-requisitos
+- **JDK 17** (Recomendado via Homebrew: `brew install openjdk@17`)
+- **Android SDK** API 37
+- Gradle via wrapper (não requer instalação global)
+
+### Rodando Localmente
+
+Para compilar, gerar o APK e instalar diretamente no seu aparelho via ADB:
 
 ```bash
-./build.sh                        # build debug + copia sentinela-debug.apk para a raiz
-adb install sentinela-debug.apk   # instalar no aparelho
+# Build e cópia do APK (debug)
+./build.sh
 
-./gradlew testDebugUnitTest       # testes unitários
-./gradlew lint detekt             # qualidade
+# Instalar no dispositivo
+adb install sentinela-debug.apk
 ```
 
----
-
-## Como funciona
-
-O Sentinela tem **dois modos de operação**:
-
-- **Modo filtro (padrão)** — o app detém o papel **`ROLE_CALL_SCREENING`**. O Android só
-  encaminha ao filtro chamadas de números **fora da agenda**; contatos tocam normalmente.
-  Desconhecido sem whitelist = bloqueado (ou silenciado, conforme configuração) antes de tocar.
-- **Modo discador (opcional)** — o Sentinela vira o app de telefone padrão (**`ROLE_DIALER`**
-  + UI de chamada própria via `InCallService`). A triagem passa a cobrir **todas** as
-  chamadas, habilitando políticas também para contatos
-  (Tocar/Bloquear/Silenciar/Nunca Silenciar). Reversível a qualquer momento.
-
-A leitura de contatos é local e efêmera: nomes e números da agenda nunca são gravados nem
-saem do aparelho.
-
-```
-Chamada recebida
-  → UnknownCallScreeningService (fino, responde < 5 s)
-  → CallDecisionEngine (puro: saída? proteção? privado? contato? whitelist? → política)
-  → respondToCall: permitir / silenciar / rejeitar / caixa postal / bloquear sem rastro
-  → depois: histórico interno opcional + notificação silenciosa opt-in
-```
-
-Detalhes em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md). O que o app **não** faz (WhatsApp,
-caller ID, garantias absolutas): [`docs/LIMITACOES.md`](docs/LIMITACOES.md).
-
-### Por que assim?
-
-- **Privacidade comprovável** — o manifest do MVP não declara INTERNET; não há como
-  exfiltrar dados. Sync com backend (v0.2.0) será opt-in e o app seguirá 100% funcional offline.
-- **Regra testável** — toda decisão vive num motor puro coberto por testes JVM
-  (20 testes hoje, cobertura ≥ 80% como gate de release).
-- **Sem hacks** — só APIs oficiais do Telecom; comportamento de OEM é validado em aparelho,
-  não contornado às cegas ([`docs/TESTE-FISICO-SAMSUNG.md`](docs/TESTE-FISICO-SAMSUNG.md)).
-
----
-
-## Estrutura do repositório
-
-```
-app/src/main/java/org/sentinela/app/
-  telecom/        UnknownCallScreeningService, ScreeningRoleManager (+ InCallService na Fase 6)
-  domain/         CallDecisionEngine, CallDecision, DecisionReason, ScreenedCall
-  settings/       ScreeningSettings, OriginPolicy, SettingsRepository (DataStore na Fase 3)
-  data/local/     PersonalWhitelistRepository, BlockedCallRepository (Room na Fase 3)
-  data/contacts/  ContactLookupRepository (READ_CONTACTS, só memória — Fase 4)
-  phone/          PhoneNumberNormalizer (libphonenumber na Fase 2)
-  notifications/  BlockedCallNotifier (canal silencioso na Fase 5)
-  ui/             MainActivity + ui/theme (tokens "Silent Guardian")
-docs/             documentação completa — comece por docs/INDEX.md
-.planning/        GSD: PROJECT, REQUIREMENTS (81 reqs), ROADMAP (9 fases), STATE, research/
-```
-
----
-
-## Build & Deploy
-
-### Requisitos
-
-- JDK 17 (Homebrew: `brew install openjdk@17`) — o Gradle não roda no JDK 25;
-  `gradle.properties` já aponta `org.gradle.java.home`
-- Android SDK em `~/Library/Android/sdk` (platform 37 baixa automaticamente no primeiro build)
-- Gradle via wrapper (9.6.1) — não instalar globalmente
-
-### Debug
+Para garantir a qualidade, execute a suíte de testes:
 
 ```bash
-./build.sh          # ou ./gradlew assembleDebug
+./gradlew testDebugUnitTest       # Testes unitários do motor (puro JVM)
+./gradlew lint detekt             # Análise estática (Sem erros!)
 ```
 
-### Release
-
+Para build de release (requer configuração do keystore em `app/keystore.properties`):
 ```bash
-./gradlew assembleRelease   # exige app/keystore.properties (fora do git)
+./gradlew assembleRelease
 ```
+Veja mais em [`docs/RELEASE.md`](docs/RELEASE.md).
 
-Processo completo (bump, changelog, tag, assinatura, validação de permissões):
-[`docs/RELEASE.md`](docs/RELEASE.md).
+## 🔒 Permissões (E por que precisamos delas)
 
----
+| Permissão | Propósito | Obrigatoriedade |
+|-----------|-----------|-----------------|
+| `ROLE_CALL_SCREENING` | Habilita o filtro em segundo plano. | **Obrigatória** |
+| `READ_CONTACTS` | Permitir que chamadas de conhecidos toquem. Zero dados salvos. | Opcional |
+| `POST_NOTIFICATIONS` | Aviso silencioso sobre ligações barradas. | Opcional |
+| `ROLE_DIALER` | Necessário apenas para o Modo Discador Avançado. | Opcional |
 
-## Permissões
+**O que NÃO pedimos:**
+- ❌ Sem permissão de `INTERNET`
+- ❌ Sem permissão de Ler SMS (`READ_SMS`)
+- ❌ Sem permissão para ocultar chamadas do histórico (`READ_CALL_LOG`)
 
-| Permissão | Uso | Quando pede |
-|-----------|-----|-------------|
-| `ROLE_CALL_SCREENING` (papel) | Habilita a triagem de chamadas | Onboarding, diálogo nativo |
-| `READ_CONTACTS` | Saber se quem liga é contato (uso 100% local, nada armazenado) | Onboarding (passo de contatos), recusável |
-| `POST_NOTIFICATIONS` | Notificação silenciosa de bloqueio | Só se o usuário habilitar (off por padrão) |
-| `ROLE_DIALER` + `CALL_PHONE` | Modo discador opcional (políticas para contatos + UI de chamada) | Só ao ativar o modo discador |
+Leia a matriz completa em [`docs/PERMISSOES.md`](docs/PERMISSOES.md).
 
-**Sem INTERNET, sem READ_CALL_LOG, sem READ_SMS.** Matriz completa, fases e justificativas:
-[`docs/PERMISSOES.md`](docs/PERMISSOES.md).
+## 🤝 Como Contribuir
 
----
+Toda ajuda é bem-vinda, seja reportando bugs, melhorando traduções ou escrevendo código! 
 
-## Testes
+Consulte nosso [Guia de Contribuição](CONTRIBUTING.md) para entender nossas convenções de commits, regras de arquitetura e código de conduta.
 
-```bash
-./gradlew testDebugUnitTest              # unitários (motor de decisão: 20 casos hoje)
-./gradlew connectedDebugAndroidTest      # instrumentados (exige aparelho/emulador)
-```
+## 📚 Documentação Adicional
 
-Qualidade é requisito do produto: suíte obrigatória da seção 13 do
-[`docs/PROMPT-MVP.md`](docs/PROMPT-MVP.md) + novos casos dos adendos, testes instrumentados,
-testes de migração do Room e cobertura ≥ 80% em domínio/dados (Kover) como gate de release
-(`.planning/REQUIREMENTS.md` → QLT). Validação física: 30 cenários em
-[`docs/TESTE-FISICO-SAMSUNG.md`](docs/TESTE-FISICO-SAMSUNG.md).
+1. [`docs/INDEX.md`](docs/INDEX.md) — Índice completo
+2. [`docs/PROMPT-MVP.md`](docs/PROMPT-MVP.md) — O escopo original detalhado
+3. [`docs/PRIVACIDADE.md`](docs/PRIVACIDADE.md) — O manifesto de privacidade embutido
+4. [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — Diretrizes para agentes de IA atuando no repositório
 
----
+## 💙 Apoie o Projeto
 
-## Apoie o projeto
+O Sentinela é mantido voluntariamente. Se o app te ajudou a recuperar a sua paz, considere apoiar:
 
-O Sentinela é **open source** e vive sem propaganda, sem telemetria e sem nuvem. Se ele te
-poupou de interrupções: deixe um comentário de apoio/avaliação — ou doe em Bitcoin
-(endereço na tela "Apoie o Sentinela" do app, quando publicado). Licença: a definir
-(pendência registrada em `.planning/STATE.md`).
+- ⭐ Dê uma estrela no repositório!
+- ☕ Faça uma doação (Endereço de Bitcoin no app na versão de produção).
 
 ---
-
-## Onde ler primeiro
-
-1. [`docs/INDEX.md`](docs/INDEX.md) — índice de toda a documentação
-2. [`docs/PROMPT-MVP.md`](docs/PROMPT-MVP.md) — escopo completo (prompt original + adendos)
-3. [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) — como o produto funciona por dentro
-4. [`.planning/ROADMAP.md`](.planning/ROADMAP.md) — as 9 fases até o v0.1.0
-5. [`CLAUDE.md`](CLAUDE.md) — regras não-negociáveis para agentes
-
----
-
-## Convenções
-
-- Código em inglês; strings de UI em pt-BR via resources (nada hardcoded); docs em português.
-- Conventional Commits, sem atribuição de IA. Changelog no formato **Release Notes**.
-- Toda regra de triagem no `CallDecisionEngine` — nunca no Service ou na UI.
-- Nenhum número completo em log — sempre mascarado; nenhum dado de contato persistido.
+*Sentinela — O seu guardião offline. Criado com dedicação pela **SierraTecnologia** e **RicaSoluções**.*

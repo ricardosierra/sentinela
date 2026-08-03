@@ -63,6 +63,7 @@ class OutgoingCallPlacer(
      */
     fun place(rawNumber: String): PlaceCallResult = when {
         !callPhoneGranted() -> PlaceCallResult.PermissionMissing
+        rawNumber.any { it == '*' || it == '#' } -> PlaceCallResult.InvalidNumber
         else -> when (val resultado = normalizer.normalize(rawNumber)) {
             is NormalizationResult.Invalid -> PlaceCallResult.InvalidNumber
             is NormalizationResult.Valid -> discar(resultado.e164)

@@ -22,10 +22,15 @@ import org.sentinela.app.phone.PhoneNumberNormalizer
  */
 class ScreenedCallFactory(private val normalizer: PhoneNumberNormalizer) {
 
-    fun from(details: Call.Details): ScreenedCall = ScreenedCall(
-        direction = direction(details.callDirection),
-        number = number(details),
-    )
+    fun from(details: Call.Details): ScreenedCall {
+        val handle = details.handle?.schemeSpecificPart.orEmpty()
+        val isEmergency = android.telephony.PhoneNumberUtils.isEmergencyNumber(handle)
+        return ScreenedCall(
+            direction = direction(details.callDirection),
+            number = number(details),
+            isEmergency = isEmergency,
+        )
+    }
 
     /** Direcao desconhecida cai em INCOMING: o lado seguro e o que faz a triagem acontecer. */
     private fun direction(raw: Int): CallDirection = when (raw) {

@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -67,8 +68,12 @@ fun CallTimer(
             delay(TICK_MILLIS)
         }
     }
-    val decorrido = (agora - startedAtMillis) / MILLIS_PER_SECOND
-    val texto = formatCallDuration(decorrido)
+    val texto by remember(startedAtMillis) {
+        derivedStateOf { 
+            val decorrido = (agora - startedAtMillis) / MILLIS_PER_SECOND
+            formatCallDuration(decorrido) 
+        }
+    }
     val descricao = stringResource(R.string.call_timer_description, texto)
     Text(
         text = texto,

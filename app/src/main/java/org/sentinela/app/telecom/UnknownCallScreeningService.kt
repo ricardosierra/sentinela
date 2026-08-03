@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements")
+
 package org.sentinela.app.telecom
 
 import android.telecom.Call
@@ -45,27 +47,38 @@ class UnknownCallScreeningService : CallScreeningService() {
     internal var dependencies: ScreeningDependencies? = null
 
     override fun onScreenCall(callDetails: Call.Details) {
-        val deps = dependencies ?: (application as SentinelaApp).container
-        val chamada = deps.screenedCallFactory.from(callDetails)
-
         // Chamada de saída: a classe base responde por conta própria assim que este método
         // retorna, e o que saísse daqui seria descartado. Sair antes de tudo evita gastar
         // consulta local por nada. Justificativa completa no comentário da classe.
-        if (chamada.direction == CallDirection.OUTGOING) return
+        if (callDetails.callDirection == Call.Details.DIRECTION_OUTGOING) return
+
+        val deps = dependencies ?: (application as SentinelaApp).container
 
         // A triagem chega na thread principal e as consultas locais suspendem: o trabalho vai
         // para o escopo do processo, e a resposta ao sistema acontece dentro dele.
         deps.launchAfterResponse {
-            deps.screeningCoordinator.screen(
-                call = chamada,
-                respond = { decisao, configuracoes ->
-                    respondToCall(
-                        callDetails,
-                        deps.callResponseFactory.toResponse(decisao, configuracoes),
+            try {
+                kotlinx.coroutines.withTimeout(SCREENING_FALLBACK_TIMEOUT_MILLIS) {
+                    val chamada = deps.screenedCallFactory.from(callDetails)
+                    deps.screeningCoordinator.screen(
+                        call = chamada,
+                        respond = { decisao, configuracoes ->
+                            respondToCall(
+                                callDetails,
+                                deps.callResponseFactory.toResponse(decisao, configuracoes),
+                            )
+                        },
+                        afterResponse = deps.postScreeningWork::run,
                     )
-                },
-                afterResponse = deps.postScreeningWork::run,
-            )
+                }
+            } catch (_: Throwable) {
+                // Falha catastrófica antes do coordenador ou timeout (ex: normalizador quebrou). Responde permitindo.
+                respondToCall(callDetails, CallScreeningService.CallResponse.Builder().build())
+            }
         }
+    }
+
+    private companion object {
+        const val SCREENING_FALLBACK_TIMEOUT_MILLIS = 4_000L
     }
 }

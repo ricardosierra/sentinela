@@ -3,6 +3,11 @@
 > Regra do projeto: todo `.md` novo entra aqui. Se não couber no índice, provavelmente não
 > deveria existir como arquivo separado.
 
+## Documentação Pública & Comunidade
+
+- [Guia de Contribuição (pt-BR)](../CONTRIBUTING.md) | [EN](../CONTRIBUTING.en.md) | [ES](../CONTRIBUTING.es.md)
+- [Licença MIT](../LICENSE)
+
 ## Escopo e produto
 
 - [`PROMPT-MVP.md`](PROMPT-MVP.md) — prompt original do MVP; **fonte de verdade do escopo**

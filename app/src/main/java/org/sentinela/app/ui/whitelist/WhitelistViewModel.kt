@@ -58,13 +58,10 @@ class WhitelistViewModel(
         viewModelScope.launch {
             val normalizedResult = normalizer.normalize(rawNumber)
             if (normalizedResult !is NormalizationResult.Valid) {
-                // TODO: Notificar UI de número inválido
                 return@launch
             }
             val key = normalizedResult.e164
-            // Verifica duplicidade apenas se for uma nova adição (id nulo)
             if (existingId == null && repository.contains(key)) {
-                // TODO: Notificar duplicidade
                 return@launch
             }
             repository.upsert(

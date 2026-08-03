@@ -10,6 +10,7 @@ enum class DecisionReason(val code: String) {
     PRIVATE_NUMBER("private_number"),
     CONTACT("contact"),
     PERSONAL_WHITELIST("personal_whitelist"),
+    EMERGENCY_NUMBER("emergency_number"),
     /** Mesmo número voltou a ligar dentro da janela — exceção que faz tocar. */
     REPEATED_CALL("repeated_call"),
     UNKNOWN_NUMBER("unknown_number"),

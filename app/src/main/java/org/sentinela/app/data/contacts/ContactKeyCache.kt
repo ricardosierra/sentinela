@@ -91,10 +91,11 @@ internal class ContactKeyCache(
      * Numero cru que nao normaliza e simplesmente descartado: um contato invalido na agenda nao
      * pode derrubar a construcao inteira nem entrar no conjunto como chave torta.
      */
-    private fun construir(): Set<String> =
-        source.allRawNumbers()
-            .mapNotNull { (normalizer.normalize(it) as? NormalizationResult.Valid)?.e164 }
-            .toSet()
+    private fun construir(): Set<String> = buildSet {
+        source.allRawNumbers().forEach { raw ->
+            (normalizer.normalize(raw) as? NormalizationResult.Valid)?.e164?.let(::add)
+        }
+    }
 
     /** Ver KDoc de `close` na fonte: em producao nunca e chamado; existe para os testes. */
     fun close() {

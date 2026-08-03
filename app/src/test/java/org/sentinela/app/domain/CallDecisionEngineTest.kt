@@ -62,6 +62,15 @@ class CallDecisionEngineTest {
         assertEquals(CallDecision.Allow(DecisionReason.PROTECTION_DISABLED), decision)
     }
 
+    @Test
+    fun `chamada de emergencia fura bloqueio`() {
+        val decision = decide(
+            call = ScreenedCall(CallDirection.INCOMING, ScreenedNumber.Valid("190"), isEmergency = true),
+            settings = defaults.copy(unknownPolicy = OriginPolicy.BLOCK)
+        )
+        assertEquals(CallDecision.Allow(DecisionReason.EMERGENCY_NUMBER), decision)
+    }
+
     // 3. Privado
 
     @Test

@@ -48,6 +48,6 @@ class DecisionReasonTest {
     }
 
     private companion object {
-        const val EXPECTED_REASON_COUNT = 10
+        const val EXPECTED_REASON_COUNT = 11
     }
 }

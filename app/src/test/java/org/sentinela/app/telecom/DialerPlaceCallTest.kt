@@ -96,6 +96,13 @@ class DialerPlaceCallTest {
     }
 
     @Test
+    fun `codigo ussd com asterisco ou cerquilha e bloqueado de imediato`() {
+        assertEquals(PlaceCallResult.InvalidNumber, placer().place("*#06#"))
+
+        verify(exactly = 0) { telecom.placeCall(any(), any()) }
+    }
+
+    @Test
     fun `aparelho sem gerenciador de telecomunicacoes devolve falha de plataforma`() {
         assertEquals(
             PlaceCallResult.PlatformFailure(OutgoingCallPlacer.SEM_TELEFONIA),

@@ -52,6 +52,11 @@ class PostScreeningWork(
         // o registro certo. Histórico desligado devolve zero, e a notificação segue possível.
         val id = history.record(entrada)
 
+        // Aplica a política de retenção assim que gravar, para manter o banco limpo
+        configuracoes.retentionPolicy.cutoffUtcMillis(clock())?.let { 
+            history.pruneOlderThan(it) 
+        }
+
         if (configuracoes.showOwnNotification) {
             notifier.notifyBlocked(entrada.copy(id = id))
         }

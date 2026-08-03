@@ -63,6 +63,7 @@ class DialerActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.filterTouchesWhenObscured = true
         val numeroRecebido = numeroDaIntencao(intent)
         setContent {
             SentinelaTheme {
@@ -82,7 +83,7 @@ class DialerActivity : ComponentActivity() {
     private fun numeroDaIntencao(intent: Intent?): String {
         val dados = intent?.data ?: return ""
         return if (dados.scheme == OutgoingCallPlacer.ESQUEMA_TELEFONE) {
-            dados.schemeSpecificPart.orEmpty()
+            dados.schemeSpecificPart.orEmpty().filter { it.isDigit() || it == '+' }
         } else {
             ""
         }
