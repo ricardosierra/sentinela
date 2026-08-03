@@ -3,6 +3,7 @@ package org.sentinela.app.telecom
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import org.sentinela.app.data.contacts.ContactLookupRepository
 import org.sentinela.app.data.local.BlockedCallEntry
@@ -87,7 +88,9 @@ class FakePersonalWhitelistRepository(
         return presente
     }
 
-    override fun observeAll(): Flow<List<WhitelistEntry>> = flowOf(emptyList())
+    override fun observeAll(): Flow<List<WhitelistEntry>> = emptyFlow()
+
+    override fun search(query: String): Flow<List<WhitelistEntry>> = emptyFlow()
 
     override suspend fun upsert(entry: WhitelistEntry) = Unit
 

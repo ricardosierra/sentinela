@@ -13,6 +13,8 @@ interface PersonalWhitelistRepository {
 
     fun observeAll(): Flow<List<WhitelistEntry>>
 
+    fun search(query: String): Flow<List<WhitelistEntry>>
+
     suspend fun upsert(entry: WhitelistEntry)
 
     suspend fun delete(id: Long)

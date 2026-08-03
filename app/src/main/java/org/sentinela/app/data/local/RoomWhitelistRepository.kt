@@ -3,6 +3,7 @@ package org.sentinela.app.data.local
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.sentinela.app.data.local.db.WhitelistDao
@@ -30,10 +31,10 @@ class RoomWhitelistRepository(
         withContext(io) { dao.containsBlocking(numberE164) }
 
     override fun observeAll(): Flow<List<WhitelistEntry>> =
-        dao.observeAll().map { list -> list.map(WhitelistEntity::toDomain) }
+        dao.observeAll().map { list -> list.map(WhitelistEntity::toDomain) }.conflate()
 
-    fun search(query: String): Flow<List<WhitelistEntry>> =
-        dao.search(query).map { list -> list.map(WhitelistEntity::toDomain) }
+    override fun search(query: String): Flow<List<WhitelistEntry>> =
+        dao.search(query).map { list -> list.map(WhitelistEntity::toDomain) }.conflate()
 
     /**
      * Dedup (WLT-04): o indice UNICO em number_key garante a atomicidade, mas
