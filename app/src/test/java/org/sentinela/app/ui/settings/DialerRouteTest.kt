@@ -169,5 +169,6 @@ private fun TelaDeProtecao(state: SettingsUiState, onOpenDialerActivation: () ->
         onClearHistory = { },
         onFallback = { },
         onOpenAbout = { },
+        bottomBar = { },
     )
 }

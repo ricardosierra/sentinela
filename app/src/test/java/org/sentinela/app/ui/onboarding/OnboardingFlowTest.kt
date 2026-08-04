@@ -151,6 +151,10 @@ class OnboardingFlowTest {
                         onOpenWhitelist = { },
                         onOpenHistory = { },
                         onOpenDialerActivation = { nav.navigate(Rotas.MODO_DISCADOR) },
+                        nowUtcMillis = 1000L,
+                        bottomBar = { },
+                        onAcceptRating = { },
+                        onDismissRating = { },
                     )
                 }
                 composable(Rotas.PROTECAO) {
@@ -434,5 +438,6 @@ private fun ProtecaoDeTeste(
         onClearHistory = { },
         onFallback = { },
         onOpenAbout = { },
+        bottomBar = { },
     )
 }

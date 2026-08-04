@@ -148,6 +148,7 @@ class ProtectionScreenTest {
                 onClearHistory = { limpezas++ },
                 onFallback = { politicaDeFalha = it },
                 onOpenAbout = { aberturasDeSobre++ },
+                bottomBar = { },
             )
         }
     }

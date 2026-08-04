@@ -9,7 +9,7 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
-## [Unreleased](https://github.com/ricardosierra/sentinela/compare/master...develop)
+## [v0.1.0 (2026-08-04)](https://github.com/ricardosierra/sentinela/releases/tag/v0.1.0)
 
 ### ✨ Novidades
 
