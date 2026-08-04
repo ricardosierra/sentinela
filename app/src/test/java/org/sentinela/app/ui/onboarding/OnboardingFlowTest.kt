@@ -7,6 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.res.stringResource
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -152,7 +154,24 @@ class OnboardingFlowTest {
                         onOpenHistory = { },
                         onOpenDialerActivation = { nav.navigate(Rotas.MODO_DISCADOR) },
                         nowUtcMillis = 1000L,
-                        bottomBar = { },
+                        bottomBar = { 
+                            org.sentinela.app.ui.components.SentinelaBottomBar(
+                                items = listOf(
+                                    org.sentinela.app.ui.components.BottomBarItem(
+                                        label = texto(org.sentinela.app.R.string.nav_home),
+                                        icon = androidx.compose.material.icons.Icons.Filled.Home,
+                                        selected = true,
+                                        onClick = {}
+                                    ),
+                                    org.sentinela.app.ui.components.BottomBarItem(
+                                        label = texto(org.sentinela.app.R.string.nav_settings),
+                                        icon = androidx.compose.material.icons.Icons.Filled.Home,
+                                        selected = false,
+                                        onClick = { nav.navigate(Rotas.PROTECAO) }
+                                    )
+                                )
+                            )
+                        },
                         onAcceptRating = { },
                         onDismissRating = { },
                     )
@@ -438,6 +457,23 @@ private fun ProtecaoDeTeste(
         onClearHistory = { },
         onFallback = { },
         onOpenAbout = { },
-        bottomBar = { },
+        bottomBar = { 
+            org.sentinela.app.ui.components.SentinelaBottomBar(
+                items = listOf(
+                    org.sentinela.app.ui.components.BottomBarItem(
+                        label = stringResource(R.string.nav_home),
+                        icon = androidx.compose.material.icons.Icons.Filled.Home,
+                        selected = false,
+                        onClick = { }
+                    ),
+                    org.sentinela.app.ui.components.BottomBarItem(
+                        label = stringResource(R.string.nav_settings),
+                        icon = androidx.compose.material.icons.Icons.Filled.Home,
+                        selected = true,
+                        onClick = {}
+                    )
+                )
+            )
+        },
     )
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
@@ -106,7 +107,18 @@ class HomeScreenStateTest {
                     onOpenHistory = {},
                     onOpenDialerActivation = { aberturasDaAtivacao++ },
                     nowUtcMillis = AGORA,
-                    bottomBar = {},
+                    bottomBar = { 
+                        org.sentinela.app.ui.components.SentinelaBottomBar(
+                            items = listOf(
+                                org.sentinela.app.ui.components.BottomBarItem(
+                                    label = texto(org.sentinela.app.R.string.nav_home),
+                                    icon = androidx.compose.material.icons.Icons.Filled.Home,
+                                    selected = true,
+                                    onClick = {}
+                                )
+                            )
+                        )
+                    },
                     onAcceptRating = {},
                     onDismissRating = {},
                 )

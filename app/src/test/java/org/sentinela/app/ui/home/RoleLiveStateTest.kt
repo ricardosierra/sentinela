@@ -152,6 +152,8 @@ class RoleLiveStateTest {
     private fun criar() = HomeViewModel(
         settings = mockk<DataStoreSettingsRepository> {
             every { settings } returns flowOf(ScreeningSettings())
+            every { appOpenCount } returns kotlinx.coroutines.flow.flowOf(0)
+            every { ratingAccepted } returns kotlinx.coroutines.flow.flowOf(false)
         },
         history = historicoVazio(),
         roleHeld = { consultasDeDeter++; papelDetido },

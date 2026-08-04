@@ -264,7 +264,11 @@ class HomeViewModelTest {
         const val MASCARA = "+55 11 9****-5678"
 
         fun repositorioDeConfiguracoes(fluxo: Flow<ScreeningSettings>) =
-            mockk<DataStoreSettingsRepository> { every { settings } returns fluxo }
+            mockk<DataStoreSettingsRepository> {
+                every { settings } returns fluxo
+                every { appOpenCount } returns kotlinx.coroutines.flow.flowOf(0)
+                every { ratingAccepted } returns kotlinx.coroutines.flow.flowOf(false)
+            }
 
         fun historico(total: Flow<Long>, recentes: List<BlockedCallEntry>) =
             object : BlockedCallRepository {
