@@ -106,6 +106,9 @@ class HomeScreenStateTest {
                     onOpenHistory = {},
                     onOpenDialerActivation = { aberturasDaAtivacao++ },
                     nowUtcMillis = AGORA,
+                    bottomBar = {},
+                    onAcceptRating = {},
+                    onDismissRating = {},
                 )
             }
         }

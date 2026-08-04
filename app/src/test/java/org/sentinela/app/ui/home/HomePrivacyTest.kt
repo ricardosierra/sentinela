@@ -81,6 +81,9 @@ class HomePrivacyTest {
                     onOpenHistory = {},
                     onOpenDialerActivation = {},
                     nowUtcMillis = AGORA,
+                    bottomBar = {},
+                    onAcceptRating = {},
+                    onDismissRating = {},
                 )
             }
         }
