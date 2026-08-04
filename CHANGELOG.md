@@ -13,17 +13,17 @@
 
 ### ✨ Novidades
 
-- [ ] **Bloqueio de desconhecidos antes de tocar** — CallScreeningService + ROLE_CALL_SCREENING, sem tela de chamada, som ou notificação nativa (Phase 5)
-- [ ] **Políticas por origem** — contatos (Tocar padrão), whitelist (Nunca Silenciar padrão) e desconhecidos (Bloquear padrão), com opções Tocar/Bloquear/Silenciar/Nunca Silenciar (Phases 2, 4, 7)
-- [ ] **Leitura local de contatos** — READ_CONTACTS com explicação, lookup em memória, nada armazenado nem enviado (Phase 4)
+- [x] **Bloqueio de desconhecidos antes de tocar** — CallScreeningService + ROLE_CALL_SCREENING, sem tela de chamada, som ou notificação nativa (Phase 5)
+- [x] **Políticas por origem** — contatos (Tocar padrão), whitelist (Nunca Silenciar padrão) e desconhecidos (Bloquear padrão), com opções Tocar/Bloquear/Silenciar/Nunca Silenciar (Phases 2, 4, 7)
+- [x] **Leitura local de contatos** — READ_CONTACTS com explicação, lookup em memória, nada armazenado nem enviado (Phase 4)
 - [x] **Modo discador opcional** — Sentinela como app de telefone padrão (ROLE_DIALER + InCallService próprio), políticas valendo também para contatos, reversível pelo seletor do sistema (Phase 6)
 - [x] **Telas de chamada próprias** — chamada recebida em tela cheia (inclusive sobre a tela bloqueada, por full-screen intent e **nunca** por overlay), chamada de saída, chamada ativa com cronômetro, mudo, viva-voz e teclado de tons; quatro variantes de identidade (contato, whitelist, desconhecido, privado) (Phase 6)
 - [x] **Tela de discagem** — campo somente saída com formatação progressiva pt-BR, sugestão de contato, teclas de 72dp, apagar com toque longo; alvo do pedido de discagem do sistema (Phase 6)
 - [x] **Ativação honesta do modo discador** — cards "O que muda" e "O que não muda" com estilo idêntico e o mesmo peso visual, pré-requisito de leitura da agenda explícito, aviso informativo (sem alarme) quando o papel é perdido (Phase 6)
-- [ ] **Whitelist pessoal local** — CRUD com busca, E.164, tratamento configurável, import/export com validação (Phases 3 e 8)
-- [ ] **Histórico interno opcional** — retenção configurável (nunca/7/30/90 dias/manual), ações permitir/indesejado/excluir (Phases 3 e 8)
-- [ ] **Notificação silenciosa opt-in** — canal IMPORTANCE_LOW, número mascarado, desabilitada por padrão (Phase 5)
-- [ ] **Onboarding completo** — papel de filtro, política de desconhecidos, política de contatos, tratamento da whitelist (Phase 7)
+- [x] **Whitelist pessoal local** — CRUD com busca, E.164, tratamento configurável, import/export com validação (Phases 3 e 8)
+- [x] **Histórico interno opcional** — retenção configurável (nunca/7/30/90 dias/manual), ações permitir/indesejado/excluir (Phases 3 e 8)
+- [x] **Notificação silenciosa opt-in** — canal IMPORTANCE_LOW, número mascarado, desabilitada por padrão (Phase 5)
+- [x] **Onboarding completo** — papel de filtro, política de desconhecidos, política de contatos, tratamento da whitelist (Phase 7)
 - [x] **Apoio e avaliação** — convite na 5ª abertura (repete a cada 5 até aceite), seção "Apoie o Sentinela": open source, sem telemetria, 100% offline, comentário de apoio e doação em Bitcoin (Phase 9)
 - [x] **Tela Privacidade e sobre** — dados locais, permissões, retenção, limpar tudo (Phase 9)
 
