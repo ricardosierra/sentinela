@@ -61,4 +61,7 @@ internal object Rotas {
 
     /** Tela do Histórico de Bloqueios */
     const val HISTORICO = "historico"
+
+    /** Tela Sobre e Privacidade */
+    const val SOBRE = "sobre"
 }

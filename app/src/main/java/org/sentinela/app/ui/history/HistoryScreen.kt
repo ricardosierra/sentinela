@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -66,7 +67,6 @@ import org.sentinela.app.data.local.CallClassification
 import org.sentinela.app.ui.components.CheckRow
 import org.sentinela.app.ui.components.SentinelaTopBar
 import org.sentinela.app.ui.components.SentinelaTopBarIconAction
-import org.sentinela.app.ui.theme.GeistMono
 import org.sentinela.app.ui.theme.ShapeMedium
 
 private val ScreenHorizontalPadding = 16.dp
@@ -144,7 +144,7 @@ fun HistoryScreen(
         AlertDialog(
             onDismissRequest = { showClearConfirm = false },
             title = { Text(text = stringResource(R.string.history_clear_all)) },
-            text = { Text(text = stringResource(R.string.settings_clear_history_confirm)) },
+            text = { Text(text = "Isso apagará todo o seu histórico de bloqueios. Deseja continuar?") },
             confirmButton = {
                 TextButton(onClick = {
                     showClearConfirm = false
@@ -180,34 +180,34 @@ fun HistoryScreen(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                CheckRow(
+                FilterRow(
                     label = "Todo o histórico",
-                    checked = currentFilter == HistoryFilter.ALL,
-                    onCheckedChange = {
+                    selected = currentFilter == HistoryFilter.ALL,
+                    onClick = {
                         onFilterChanged(HistoryFilter.ALL)
                         scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
                     }
                 )
-                CheckRow(
+                FilterRow(
                     label = "Hoje",
-                    checked = currentFilter == HistoryFilter.TODAY,
-                    onCheckedChange = {
+                    selected = currentFilter == HistoryFilter.TODAY,
+                    onClick = {
                         onFilterChanged(HistoryFilter.TODAY)
                         scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
                     }
                 )
-                CheckRow(
+                FilterRow(
                     label = "Últimos 7 dias",
-                    checked = currentFilter == HistoryFilter.WEEK,
-                    onCheckedChange = {
+                    selected = currentFilter == HistoryFilter.WEEK,
+                    onClick = {
                         onFilterChanged(HistoryFilter.WEEK)
                         scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
                     }
                 )
-                CheckRow(
+                FilterRow(
                     label = "Últimos 30 dias",
-                    checked = currentFilter == HistoryFilter.MONTH,
-                    onCheckedChange = {
+                    selected = currentFilter == HistoryFilter.MONTH,
+                    onClick = {
                         onFilterChanged(HistoryFilter.MONTH)
                         scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
                     }
@@ -258,7 +258,7 @@ private fun HistoryContent(
                 onAllowNumber = { onAllowNumber(item.id, item.numberE164) },
                 onMarkUnwanted = { onMarkUnwanted(item.id) },
                 onDeleteEntry = { onDeleteEntry(item.id) },
-                modifier = Modifier.animateItemPlacement()
+                
             )
         }
     }
@@ -275,7 +275,7 @@ private fun HistoryItem(
     var showMenu by remember { mutableStateOf(false) }
     
     val icon = when (entry.reason) {
-        org.sentinela.app.telecom.CallDecision.Reason.BLOCKED_PRIVATE -> Icons.Outlined.VisibilityOff
+        org.sentinela.app.domain.DecisionReason.PRIVATE_NUMBER -> Icons.Outlined.VisibilityOff
         else -> Icons.Outlined.Block
     }
 
@@ -308,11 +308,11 @@ private fun HistoryItem(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = entry.maskedNumber,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontFamily = GeistMono),
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = stringResource(entry.reasonLabelRes),
+                    text = entry.reason.name,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -354,5 +354,23 @@ private fun HistoryItem(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun FilterRow(label: String, selected: Boolean, onClick: () -> Unit) {
+    androidx.compose.foundation.layout.Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        androidx.compose.material3.RadioButton(
+            selected = selected,
+            onClick = null
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(text = label, style = MaterialTheme.typography.bodyLarge)
     }
 }

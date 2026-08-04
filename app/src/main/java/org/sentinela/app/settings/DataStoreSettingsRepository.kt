@@ -164,10 +164,6 @@ class DataStoreSettingsRepository(
         dataStore.edit { it[Keys.RATING_ACCEPTED] = true }
     }
 
-    /** Chamada ao concluir E ao pular: nos dois casos o usuário já viu o onboarding. Idempotente. */
-    suspend fun markOnboardingCompleted() {
-        dataStore.edit { it[Keys.ONBOARDING_COMPLETED] = true }
-    }
 
     init {
         // Aquece e mantém o cache enquanto o processo viver.

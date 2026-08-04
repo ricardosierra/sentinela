@@ -116,14 +116,14 @@ class HomeViewModel(
      */
     val estado: StateFlow<HomeUiState> =
         combine(
-            settings.settings, 
-            leitura, 
-            ultimaConsulta, 
+            settings.settings,
+            leitura,
+            ultimaConsulta,
             settings.appOpenCount,
-            settings.ratingAccepted,
-            ratingDismissed,
-            ::montar
-        )
+            combine(settings.ratingAccepted, ratingDismissed) { acc, dis -> Pair(acc, dis) }
+        ) { config, leit, papel, appOpenCount, (ratingAccepted, ratingDismissed) ->
+            montar(config, leit, papel, appOpenCount, ratingAccepted, ratingDismissed)
+        }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TEMPO_DE_SOBREVIDA_MILLIS),

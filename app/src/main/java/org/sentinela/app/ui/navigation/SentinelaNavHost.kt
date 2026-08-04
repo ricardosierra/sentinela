@@ -39,6 +39,7 @@ import org.sentinela.app.ui.onboarding.OnboardingRoute
 import org.sentinela.app.ui.onboarding.WelcomeRoute
 import org.sentinela.app.ui.onboarding.rememberStepTransitionMillis
 import org.sentinela.app.ui.settings.SettingsRoute
+import org.sentinela.app.ui.about.AboutRoute
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.History
@@ -250,6 +251,9 @@ internal fun SentinelaNavHost(
         }
         composable(Rotas.MODO_DISCADOR) {
             DialerActivationRoute(container = container, nav = navController)
+        }
+        composable(Rotas.SOBRE) {
+            AboutRoute(container = container, nav = navController)
         }
     }
 }

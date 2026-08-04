@@ -90,7 +90,7 @@ internal fun SettingsRoute(
         onRetention = dono::definirRetencao,
         onClearHistory = dono::limparHistorico,
         onFallback = dono::definirPoliticaDeFalha,
-        onOpenAbout = { emPreparacao = true },
+        onOpenAbout = { nav.navigate(Rotas.SOBRE) { launchSingleTop = true } },
         bottomBar = bottomBar,
     )
     DestinoEmPreparacao(visivel = emPreparacao) { emPreparacao = false }

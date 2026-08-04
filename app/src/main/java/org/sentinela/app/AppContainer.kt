@@ -5,6 +5,7 @@ import android.telephony.TelephonyManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import kotlinx.coroutines.CoroutineScope
@@ -158,6 +159,11 @@ class AppContainer(
             settingsRepository.incrementAppOpenCount()
             blockedCallRepository.pruneNow()
         }
+    }
+
+    suspend fun clearAllData() {
+        database.clearAllTables()
+        settingsDataStore.edit { it.clear() }
     }
 
     /**

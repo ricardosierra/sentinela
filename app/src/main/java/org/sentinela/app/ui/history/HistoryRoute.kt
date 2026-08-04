@@ -18,7 +18,7 @@ fun HistoryRoute(
             override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
                 return HistoryViewModel(
                     repository = container.blockedCallRepository,
-                    whitelistRepository = container.personalWhitelistRepository,
+                    whitelistRepository = container.whitelistRepository,
                     normalizer = container.phoneNumberNormalizer
                 ) as T
             }
