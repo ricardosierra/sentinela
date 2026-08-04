@@ -234,3 +234,13 @@ desenho** — a fase entregou a semântica correta e a prova em JVM, não a prov
 
 **Regra de honestidade herdada:** afirmação de documento sem medição é defeito. Nenhum item acima é
 apresentado como verificado; cada um é o veredito pendente do seu critério.
+
+## Phase 9 — Avaliação, Privacidade e Release (cenários 69–72)
+
+| # | Cenário | Passos | Esperado | Resultado |
+|---|---------|--------|----------|-----------|
+| 69 | Convite de Avaliação (5ª abertura) | Abrir e fechar o aplicativo 5 vezes | O convite de avaliação aparece (com as opções de avaliar, apoiar ou depois) sem interromper nenhuma tarefa crítica | |
+| 70 | Tela Sobre e Privacidade | Acessar "Privacidade e Sobre" a partir das Configurações | Tela exibe os cards de permissões, retenção de dados, e "Apoie o Sentinela" corretamente | |
+| 71 | Endereço Bitcoin para doação | Tocar no botão de copiar o endereço de Bitcoin | O endereço correto do mantenedor é copiado para a área de transferência com um toast/snackbar informando o sucesso | |
+| 72 | Release com regras do ProGuard | Instalar `sentinela-release.apk` gerado pelo `assembleRelease` | O aplicativo abre normalmente, sem crash, indicando que o R8 não removeu classes essenciais | |
+

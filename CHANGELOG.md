@@ -24,8 +24,8 @@
 - [ ] **Histórico interno opcional** — retenção configurável (nunca/7/30/90 dias/manual), ações permitir/indesejado/excluir (Phases 3 e 8)
 - [ ] **Notificação silenciosa opt-in** — canal IMPORTANCE_LOW, número mascarado, desabilitada por padrão (Phase 5)
 - [ ] **Onboarding completo** — papel de filtro, política de desconhecidos, política de contatos, tratamento da whitelist (Phase 7)
-- [ ] **Apoio e avaliação** — convite na 5ª abertura (repete a cada 5 até aceite), seção "Apoie o Sentinela": open source, sem telemetria, 100% offline, comentário de apoio e doação em Bitcoin (Phase 9)
-- [ ] **Tela Privacidade e sobre** — dados locais, permissões, retenção, limpar tudo (Phase 9)
+- [x] **Apoio e avaliação** — convite na 5ª abertura (repete a cada 5 até aceite), seção "Apoie o Sentinela": open source, sem telemetria, 100% offline, comentário de apoio e doação em Bitcoin (Phase 9)
+- [x] **Tela Privacidade e sobre** — dados locais, permissões, retenção, limpar tudo (Phase 9)
 
 ### 🔧 Técnico
 
