@@ -9,6 +9,36 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
+## [v0.2.0 (2026-08-06)](https://github.com/ricardosierra/sentinela/compare/v0.1.0...v0.2.0)
+
+### ✨ Novidades
+
+- [x] **Filtro do histórico por decisão** — além do período, dá para ver só as chamadas sem classificação, as marcadas como legítimas ou as marcadas como indesejadas; os dois eixos valem ao mesmo tempo
+- [x] **Backup da whitelist de verdade** — exportar grava os seus números no arquivo escolhido e importar mescla sem duplicar, com confirmação antes de alterar a lista
+
+### 🐛 Correções
+
+- [x] **Chamada bloqueada podia receber uma segunda resposta** — uma falha depois da decisão somava uma resposta "permitir" à mesma chamada, desfazendo em silêncio um bloqueio já decidido; agora a resposta ao sistema acontece em um ponto único, atrás de guarda, com regressão coberta por teste
+- [x] **Exportar whitelist gerava arquivo vazio** — o backup gravava uma lista fixa vazia em vez dos seus números; quem confiou nele não tinha backup nenhum
+- [x] **Importar whitelist não fazia nada** — o arquivo era lido e descartado
+- [x] **Número duplicado ou inválido sumia sem aviso** — o cadastro fechava como se tivesse dado certo; agora diz o que aconteceu
+- [x] **Histórico mostrava "Agora" em toda linha** — um histórico de trinta dias parecia ter acontecido inteiro no último minuto; agora mostra o tempo real de cada bloqueio
+- [x] **Histórico mostrava código interno** — a legenda exibia `UNKNOWN_NUMBER` em vez do motivo em português
+
+### 🔧 Técnico
+
+**Auditoria retroativa das Fases 8 e 9 (2026-08-06):**
+
+As duas fases tinham sido implementadas por commits diretos, fora do fluxo de planejamento, e a
+v0.1.0 saiu sem passar por verificação. A auditoria encontrou 8 defeitos — os 6 acima, mais os
+dois abaixo — e produziu os artefatos de verificação que faltavam.
+
+- [x] Endereço de doação em Bitcoin **removido da tela**: a v0.1.0 publicou um endereço placeholder que tinha, no próprio arquivo, o comentário mandando nunca publicar endereço inventado. Doação para endereço errado é irreversível. O botão só volta com endereço real gerado em carteira sob custódia do mantenedor
+- [x] 557 arquivos de um virtualenv Python (`.venv/`) saíram do versionamento e entraram no `.gitignore`
+- [x] `scripts/verify-invariants.sh` estava vermelho em 3 dos 10 blocos no master e passa nos 10
+- [x] Strings de interface que tinham ficado embutidas em Kotlin (whitelist, histórico e tela Sobre) foram para `strings.xml`
+- [x] Testes novos: resposta única sob falha posterior, avisos de duplicado/inválido, ligação real do export/import, filtro por decisão e formatação de tempo e motivo
+
 ## [v0.1.0 (2026-08-04)](https://github.com/ricardosierra/sentinela/releases/tag/v0.1.0)
 
 ### ✨ Novidades
