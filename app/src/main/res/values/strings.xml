@@ -128,6 +128,15 @@
     <string name="whitelist_import">Importar backup</string>
     <string name="whitelist_import_confirm">Importar vai mesclar os números do arquivo com a sua lista atual. Continuar?</string>
     <string name="whitelist_duplicate">Este número já está na whitelist.</string>
+    <string name="whitelist_number_label">Número</string>
+    <string name="whitelist_description_label">Descrição (opcional)</string>
+    <string name="whitelist_invalid_number">Número inválido. Use um número brasileiro com DDD.</string>
+    <string name="whitelist_load_error">Falha ao carregar a whitelist.</string>
+    <string name="whitelist_added_from_history">Adicionado pelo histórico</string>
+    <string name="whitelist_export_ok">Backup da whitelist salvo.</string>
+    <string name="whitelist_export_failed">Não foi possível salvar o backup.</string>
+    <string name="whitelist_import_failed">Não foi possível ler o arquivo.</string>
+    <string name="whitelist_import_result">%1$d adicionados, %2$d já existiam, %3$d inválidos.</string>
 
     <!-- Histórico -->
     <string name="history_title">Histórico do Sentinela</string>
@@ -143,6 +152,37 @@
     <string name="history_mark_unwanted">Marcar indesejado</string>
     <string name="history_end_of_list">Fim do histórico recente</string>
     <string name="history_empty">Nenhuma chamada bloqueada ainda.</string>
+    <string name="history_clear_confirm">Isso apagará todo o seu histórico de bloqueios. Deseja continuar?</string>
+    <string name="history_filter_period">Período</string>
+    <string name="history_filter_all">Todo o histórico</string>
+    <string name="history_action_allow_whitelist">Permitir (adicionar à whitelist)</string>
+
+    <!-- Histórico: filtro por decisão. O critério 3 da Fase 8 pede período E decisão. -->
+    <string name="history_filter_decision">Decisão</string>
+    <string name="history_decision_all">Todas</string>
+    <string name="history_decision_unclassified">Sem classificação</string>
+    <string name="history_decision_legitimate">Marcadas como legítimas</string>
+    <string name="history_decision_unwanted">Marcadas como indesejadas</string>
+
+    <!-- Histórico: motivo da decisão em texto de gente. O código interno (DecisionReason) nunca
+         aparece na tela: ele existe para diagnóstico, não para o usuário ler. -->
+    <string name="history_reason_outgoing_call">Chamada de saída</string>
+    <string name="history_reason_protection_disabled">Proteção desligada</string>
+    <string name="history_reason_private_number">Número privado</string>
+    <string name="history_reason_contact">Está na sua agenda</string>
+    <string name="history_reason_personal_whitelist">Está na sua whitelist</string>
+    <string name="history_reason_emergency_number">Número de emergência</string>
+    <string name="history_reason_repeated_call">Ligou de novo em seguida</string>
+    <string name="history_reason_unknown_number">Número desconhecido</string>
+    <string name="history_reason_invalid_number">Número não identificado</string>
+    <string name="history_reason_local_lookup_failure">Falha na consulta local</string>
+    <string name="history_reason_fallback_policy">Política de reserva</string>
+
+    <!-- Histórico: tempo relativo. Substitui o "Agora" fixo que aparecia em toda entrada. -->
+    <string name="history_time_now">Agora</string>
+    <string name="history_time_minutes">há %1$d min</string>
+    <string name="history_time_hours">há %1$d h</string>
+    <string name="history_time_days">há %1$d d</string>
 
     <!-- Proteção / Ajustes -->
     <string name="settings_title">Proteção</string>
@@ -201,11 +241,19 @@
     <string name="review_prompt_later">Agora não</string>
     <string name="support_title">Apoie o Sentinela</string>
     <string name="support_comment_cta">Deixar um comentário de apoio</string>
-    <string name="support_donate_bitcoin">Doar em Bitcoin</string>
-    <string name="support_bitcoin_copied">Endereço copiado!</string>
-    <!-- TODO: endereço real de doação deve ser fornecido pelo mantenedor antes do release.
-         NUNCA publicar com endereço inventado. -->
-    <string name="support_bitcoin_address" translatable="false">1LHayBbJ6chRa3QmZPCGVogzX4uUjspUB8</string>
+    <!-- Doação em Bitcoin: intencionalmente AUSENTE.
+         A v0.1.0 publicou um endereço placeholder que ninguém confirmou pertencer ao mantenedor.
+         Doação com endereço errado é irreversível: o dinheiro vai para um terceiro e não volta.
+         Enquanto o endereço real não for gerado numa carteira sob custódia do mantenedor e
+         colado aqui, o botão de doação não existe na tela. Reativar exige as três coisas juntas:
+         esta string, o botão em AboutScreen e a linha correspondente no CHANGELOG. -->
+
+    <!-- Limpar todos os dados: duas confirmações, porque a ação é irreversível. -->
+    <string name="about_clear_warning_title">Atenção</string>
+    <string name="about_clear_warning_body">Isso apagará seu histórico de bloqueios, sua whitelist pessoal e todas as suas configurações. Deseja continuar?</string>
+    <string name="about_clear_continue">Continuar</string>
+    <string name="about_clear_final_title">Confirmação final</string>
+    <string name="about_clear_final_body">Você tem certeza? Esta ação não pode ser desfeita e todos os dados locais serão perdidos permanentemente.</string>
 
     <!-- Notificações -->
     <string name="notification_channel_blocked">Chamadas bloqueadas</string>

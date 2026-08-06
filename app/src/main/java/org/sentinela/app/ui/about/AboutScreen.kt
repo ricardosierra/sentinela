@@ -143,19 +143,17 @@ fun AboutScreen(
     if (showClearConfirmation1) {
         AlertDialog(
             onDismissRequest = { showClearConfirmation1 = false },
-            title = { Text("Atenção") },
-            text = {
-                Text(
-                    "Isso apagará seu histórico de bloqueios, sua whitelist " +
-                        "pessoal e todas as suas configurações. Deseja continuar?"
-                )
-            },
+            title = { Text(stringResource(R.string.about_clear_warning_title)) },
+            text = { Text(stringResource(R.string.about_clear_warning_body)) },
             confirmButton = {
                 TextButton(onClick = {
                     showClearConfirmation1 = false
                     showClearConfirmation2 = true
                 }) {
-                    Text("Continuar", color = MaterialTheme.colorScheme.error)
+                    Text(
+                        stringResource(R.string.about_clear_continue),
+                        color = MaterialTheme.colorScheme.error,
+                    )
                 }
             },
             dismissButton = {
@@ -169,13 +167,8 @@ fun AboutScreen(
     if (showClearConfirmation2) {
         AlertDialog(
             onDismissRequest = { showClearConfirmation2 = false },
-            title = { Text("Confirmação Final") },
-            text = {
-                Text(
-                    "Você tem certeza? Esta ação não pode ser desfeita e " +
-                        "todos os dados locais serão perdidos permanentemente."
-                )
-            },
+            title = { Text(stringResource(R.string.about_clear_final_title)) },
+            text = { Text(stringResource(R.string.about_clear_final_body)) },
             confirmButton = {
                 TextButton(onClick = {
                     showClearConfirmation2 = false
@@ -248,23 +241,11 @@ private fun SupportCard(context: Context) {
             ) {
                 Text(stringResource(R.string.support_comment_cta))
             }
-            
-            val bitcoinAddress = stringResource(R.string.support_bitcoin_address)
-            val copiedMsg = stringResource(R.string.support_bitcoin_copied)
-            
-            OutlinedButton(
-                onClick = {
-                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clip = ClipData.newPlainText("Bitcoin Address", bitcoinAddress)
-                    clipboard.setPrimaryClip(clip)
-                    Toast.makeText(context, copiedMsg, Toast.LENGTH_SHORT).show()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Icon(Icons.Outlined.ContentCopy, contentDescription = null)
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(stringResource(R.string.support_donate_bitcoin))
-            }
+
+            // O botão de doação em Bitcoin foi retirado de propósito. A v0.1.0 publicou um
+            // endereço placeholder que ninguém confirmou pertencer ao mantenedor, e doação para
+            // endereço errado não tem volta. Ele só reaparece quando houver endereço real gerado
+            // em carteira sob custódia do mantenedor. Detalhes na string removida, em strings.xml.
         }
     }
 }
