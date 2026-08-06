@@ -102,6 +102,8 @@ internal fun SentinelaNavHost(
     startDestination: String,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    /** Registro do histórico que veio do toque na notificação, quando houver. */
+    registroEmDestaque: Long? = null,
 ) {
     val duracao = rememberStepTransitionMillis()
     val entra: Entrada = { entradaDePasso(duracao) }
@@ -247,7 +249,11 @@ internal fun SentinelaNavHost(
             WhitelistRoute(container = container, nav = navController, bottomBar = bottomBar)
         }
         composable(Rotas.HISTORICO) {
-            HistoryRoute(container = container, bottomBar = bottomBar)
+            HistoryRoute(
+                container = container,
+                bottomBar = bottomBar,
+                registroEmDestaque = registroEmDestaque,
+            )
         }
         composable(Rotas.MODO_DISCADOR) {
             DialerActivationRoute(container = container, nav = navController)

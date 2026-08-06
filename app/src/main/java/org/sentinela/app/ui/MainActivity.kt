@@ -1,5 +1,6 @@
 package org.sentinela.app.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,7 +16,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,6 +30,7 @@ import kotlinx.coroutines.flow.first
 import org.sentinela.app.AppContainer
 import org.sentinela.app.R
 import org.sentinela.app.SentinelaApp
+import org.sentinela.app.notifications.AndroidBlockedCallNotifier
 import org.sentinela.app.ui.navigation.Rotas
 import org.sentinela.app.ui.navigation.SentinelaNavHost
 import org.sentinela.app.ui.theme.SentinelaTheme
@@ -69,6 +73,16 @@ import org.sentinela.app.ui.theme.SentinelaTheme
  */
 class MainActivity : ComponentActivity() {
 
+    /**
+     * Pedido de abrir o histórico vindo do toque na notificação de chamada bloqueada.
+     *
+     * O notificador já carregava o identificador do registro na intenção, mas ninguém lia esse
+     * valor: tocar na notificação abria a Home, e a metade "abre o registro correspondente" do
+     * requisito NTF-05 nunca existiu — a peça estava pronta e desligada. É estado da Activity, e
+     * não valor lido uma vez, porque a notificação também chega com o aplicativo já aberto.
+     */
+    private var registroDaNotificacao by mutableStateOf<Long?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val container = (application as SentinelaApp).container
@@ -77,11 +91,26 @@ class MainActivity : ComponentActivity() {
         if (savedInstanceState == null) {
             container.onAppOpened()
         }
+        registroDaNotificacao = registroPedidoPor(intent)
         setContent {
             SentinelaTheme {
-                RaizDaInterface(container)
+                RaizDaInterface(container, registroDaNotificacao)
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        registroPedidoPor(intent)?.let { registroDaNotificacao = it }
+    }
+
+    private fun registroPedidoPor(intent: Intent?): Long? =
+        intent?.getLongExtra(AndroidBlockedCallNotifier.EXTRA_ENTRY_ID, SEM_REGISTRO)
+            ?.takeIf { it != SEM_REGISTRO }
+
+    private companion object {
+        const val SEM_REGISTRO = -1L
     }
 }
 
@@ -92,10 +121,13 @@ class MainActivity : ComponentActivity() {
  * contrato de interface proíbe em qualquer tela do aplicativo.
  */
 @Composable
-private fun RaizDaInterface(container: AppContainer) {
-    val destinoInicial by produceState<String?>(initialValue = null, container) {
+private fun RaizDaInterface(container: AppContainer, registroDaNotificacao: Long?) {
+    val destinoInicial by produceState<String?>(initialValue = null, container, registroDaNotificacao) {
         value = if (container.settingsRepository.onboardingCompleted.first()) {
-            Rotas.HOME
+            // Vindo da notificação de bloqueio, o destino é o histórico — que é onde o registro
+            // mora. Só vale com o onboarding concluído: quem ainda não configurou nada não pode
+            // ser jogado no meio do app por causa de um toque em notificação.
+            if (registroDaNotificacao != null) Rotas.HISTORICO else Rotas.HOME
         } else {
             Rotas.BOAS_VINDAS
         }
@@ -105,7 +137,11 @@ private fun RaizDaInterface(container: AppContainer) {
     if (destino == null) {
         EsperaDoDestinoInicial()
     } else {
-        SentinelaNavHost(container = container, startDestination = destino)
+        SentinelaNavHost(
+            container = container,
+            startDestination = destino,
+            registroEmDestaque = registroDaNotificacao,
+        )
     }
 }
 

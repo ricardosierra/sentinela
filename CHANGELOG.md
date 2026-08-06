@@ -24,6 +24,8 @@
 - [x] **Número duplicado ou inválido sumia sem aviso** — o cadastro fechava como se tivesse dado certo; agora diz o que aconteceu
 - [x] **Histórico mostrava "Agora" em toda linha** — um histórico de trinta dias parecia ter acontecido inteiro no último minuto; agora mostra o tempo real de cada bloqueio
 - [x] **Histórico mostrava código interno** — a legenda exibia `UNKNOWN_NUMBER` em vez do motivo em português
+- [x] **Tocar na notificação não abria o registro** — a notificação já carregava o identificador da chamada bloqueada, mas nada lia esse valor; agora abre o histórico direto no registro
+- [x] **Botão "Sobre" da tela inicial não levava a lugar nenhum** — mostrava "em preparação" mesmo com a tela Privacidade e Sobre pronta
 
 ### 🔧 Técnico
 

@@ -146,43 +146,51 @@ Detalhe em [`docs/backlog/supabase-v2.md`](../docs/backlog/supabase-v2.md).
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCR-01..02 | 5, 7 | Pending |
-| SCR-03..11 | 5 | Pending |
-| DEC-01..05 | 2, 5 (integração) | Pending |
-| NRM-01..04 | 2 | Pending |
-| CTT-01..02, CTT-04 | 4 | Pending |
+| SCR-01..02 | 5, 7 | Complete |
+| SCR-03..11 | 5 | Complete |
+| DEC-01..05 | 2, 5 (integração) | Complete |
+| NRM-01..04 | 2 | Complete |
+| CTT-01..02, CTT-04 | 4 | Complete |
 | CTT-03 | 2 (lógica), 4 | Complete |
-| WLT-01..04, WLT-07 | 3 | Pending |
-| WLT-05..06 | 8 | Pending |
+| WLT-01..04, WLT-07 | 3 | Complete |
+| WLT-05..06 | 8 | Complete |
 | WLT-08 | 2 (lógica), 8 (UI) | Complete |
-| HST-01..06 | 3 | Pending |
-| HST-07 | 8 | Pending |
-| NTF-01..06 | 5 | Pending |
-| DIA-01..05 | 6 | Pending |
-| UIX-01..03 | 7 | Pending |
-| UIX-04..05 | 8 | Pending |
-| UIX-06 | 9 | Pending |
-| UIX-07, UIX-09..11 | 7, 8, 9 | Pending |
+| HST-01..06 | 3 | Complete |
+| HST-07 | 8 | Complete |
+| NTF-01..06 | 5 | Complete |
+| DIA-01..05 | 6 | Complete |
+| UIX-01..03 | 7 | Complete |
+| UIX-04..05 | 8 | Complete |
+| UIX-06 | 9 | Complete |
+| UIX-07, UIX-09..11 | 7, 8, 9 | Complete |
 | UIX-08 | 1 (tokens), 7, 8, 9 | Complete |
 | UIX-12 | 1 | Complete |
-| UIX-13 | 9 | Pending |
+| UIX-13 | 9 | Complete |
 | ENG-01 | 3 | Complete |
-| ENG-02..04 | 9 | Pending |
+| ENG-02..04 | 9 | Complete |
 | PRV-01 | 1 | Complete |
-| PRV-02, PRV-04 | 9 | Pending |
+| PRV-02, PRV-04 | 9 | Complete |
 | PRV-03 | 3 | Complete |
-| PRV-05 | 8 | Pending |
-| PRV-06..07 | 9 | Pending |
+| PRV-05 | 8 | Complete |
+| PRV-06..07 | 9 | Complete |
 | QLT-01 | 2, 3, 5 | Complete |
 | QLT-02 | 1, 9 | Complete |
 | QLT-03 | 3 | Complete |
-| QLT-04..05 | 9 | Pending |
+| QLT-04..05 | 9 | Complete |
 | QLT-06 | 3, 5, 6 | Complete |
 | QLT-07 | 2, 9 | Complete |
+
+**Status atualizado em 2026-08-06.** A tabela tinha ficado em "Pending" desde a Phase 2 mesmo
+com as fases fechando. A auditoria do milestone cruzou as três fontes (VERIFICATION.md de cada
+fase, SUMMARY e esta tabela) e fechou os dois requisitos que estavam marcados como prontos sem
+estar: **NTF-05** (a notificação carregava o identificador do registro e ninguém lia — agora
+abre o histórico no registro apontado) e **UIX-06** (a tela Sobre existia e o botão da tela de
+boas-vindas ainda caía no aviso de "em preparação").
 
 **Coverage:**
 - v1 requirements: 81 total
 - Mapped to phases: 81
+- Verified: 81 (a validação em aparelho físico continua pendente e está registrada na Phase 9)
 - Unmapped: 0
 
 ---

@@ -14,6 +14,11 @@ import org.sentinela.app.R
 fun HistoryRoute(
     container: AppContainer,
     bottomBar: @Composable () -> Unit,
+    /**
+     * Registro apontado pela notificação de bloqueio. A lista rola até ele, que é o que faz a
+     * notificação "abrir o registro correspondente" e não apenas abrir o app.
+     */
+    registroEmDestaque: Long? = null,
 ) {
     val viewModel = viewModel<HistoryViewModel>(
         factory = object : ViewModelProvider.Factory {
@@ -44,5 +49,6 @@ fun HistoryRoute(
         onMarkUnwanted = viewModel::markAsUnwanted,
         onDeleteEntry = viewModel::deleteCall,
         bottomBar = bottomBar,
+        registroEmDestaque = registroEmDestaque,
     )
 }

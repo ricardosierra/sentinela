@@ -63,6 +63,8 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.sentinela.app.R
 import org.sentinela.app.data.local.BlockedCallEntry
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.LaunchedEffect
 import org.sentinela.app.data.local.CallClassification
 import org.sentinela.app.domain.DecisionReason
 import org.sentinela.app.ui.components.CheckRow
@@ -109,6 +111,7 @@ fun HistoryScreen(
     // O relógio entra por parâmetro para o tempo relativo de cada linha ser testável sem
     // depender da hora da máquina que roda a suíte.
     agoraUtcMillis: Long = System.currentTimeMillis(),
+    registroEmDestaque: Long? = null,
 ) {
     var showClearConfirm by remember { mutableStateOf(false) }
     var showFilterSheet by remember { mutableStateOf(false) }
@@ -159,6 +162,7 @@ fun HistoryScreen(
                         onMarkUnwanted = onMarkUnwanted,
                         onDeleteEntry = onDeleteEntry,
                         agoraUtcMillis = agoraUtcMillis,
+                        registroEmDestaque = registroEmDestaque,
                     )
                 }
             }
@@ -275,8 +279,20 @@ private fun HistoryContent(
     onMarkUnwanted: (Long) -> Unit,
     onDeleteEntry: (Long) -> Unit,
     agoraUtcMillis: Long,
+    registroEmDestaque: Long?,
 ) {
+    val listState = rememberLazyListState()
+
+    // Rola até o registro que a notificação apontou. Só uma vez por identificador, e só se ele
+    // ainda existir na lista — o usuário pode ter apagado o registro antes de tocar no aviso.
+    LaunchedEffect(registroEmDestaque, items) {
+        val alvo = registroEmDestaque ?: return@LaunchedEffect
+        val posicao = items.indexOfFirst { it.id == alvo }
+        if (posicao >= 0) listState.animateScrollToItem(posicao)
+    }
+
     LazyColumn(
+        state = listState,
         contentPadding = PaddingValues(vertical = 8.dp),
         modifier = Modifier.fillMaxSize()
     ) {

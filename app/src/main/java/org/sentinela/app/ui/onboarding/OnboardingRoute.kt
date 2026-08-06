@@ -34,13 +34,13 @@ import org.sentinela.app.ui.navigation.rememberMarcasDePermissao
  */
 @Composable
 internal fun WelcomeRoute(nav: NavController) {
-    var emPreparacao by remember { mutableStateOf(false) }
-
     WelcomeScreen(
         onStart = { nav.navigate(Rotas.PASSO_PAPEL) },
-        onAbout = { emPreparacao = true },
+        // A tela Sobre existe desde a Fase 9 e já é alcançável pela tela Proteção. Este ponto
+        // continuava no aviso genérico de "em preparação", deixando um beco sem saída logo na
+        // primeira tela do app para um destino que funciona.
+        onAbout = { nav.navigate(Rotas.SOBRE) },
     )
-    DestinoEmPreparacao(visivel = emPreparacao) { emPreparacao = false }
 }
 
 /**
