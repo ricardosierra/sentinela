@@ -52,7 +52,7 @@ export manual da whitelist dentro do app.
 
 ## Futuro (transparência)
 
-Uma versão futura (v0.2.0) oferecerá **sincronização opcional** de listas com um backend —
+Uma versão futura (v0.3.0) oferecerá **sincronização opcional** de listas com um backend —
 sempre opt-in, sempre explicada, e o app continuará funcionando 100% offline para quem não
 quiser. Esta política será atualizada antes de qualquer recurso online existir.
 

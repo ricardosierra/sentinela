@@ -241,12 +241,19 @@
     <string name="review_prompt_later">Agora não</string>
     <string name="support_title">Apoie o Sentinela</string>
     <string name="support_comment_cta">Deixar um comentário de apoio</string>
-    <!-- Doação em Bitcoin: intencionalmente AUSENTE.
-         A v0.1.0 publicou um endereço placeholder que ninguém confirmou pertencer ao mantenedor.
-         Doação com endereço errado é irreversível: o dinheiro vai para um terceiro e não volta.
-         Enquanto o endereço real não for gerado numa carteira sob custódia do mantenedor e
-         colado aqui, o botão de doação não existe na tela. Reativar exige as três coisas juntas:
-         esta string, o botão em AboutScreen e a linha correspondente no CHANGELOG. -->
+    <!-- Doação: endereços OFICIAIS do mantenedor, fornecidos por ele em 2026-08-06 e substituindo
+         o placeholder que a v0.1.0 publicou por engano.
+         Estas duas strings são a ÚNICA fonte do endereço no projeto — não duplique em outro
+         arquivo, doc ou README: cópia divergente é dinheiro perdido de um doador.
+         Trocar qualquer uma delas exige confirmação do mantenedor e reconferir o checksum
+         (SupportAddressTest trava as duas: bech32 P2WPKH em `bc` e blech32 confidencial em `lq`).
+         Doação para endereço errado é irreversível — na dúvida, não publique. -->
+    <string name="support_donate_hint">Doação opcional, direto para a carteira do mantenedor. Confira o endereço antes de enviar.</string>
+    <string name="support_donate_bitcoin">Copiar endereço Bitcoin</string>
+    <string name="support_donate_liquid">Copiar endereço Liquid (L-BTC)</string>
+    <string name="support_address_copied">Endereço copiado!</string>
+    <string name="support_bitcoin_address" translatable="false">bc1q7nlql56kczaq2ehxvl2d64hykanc2g4zyrzgtm</string>
+    <string name="support_liquid_address" translatable="false">lq1qq0sr0cgnp5z23q0u56xsr84vnfl3287wqegplr7mx58r495t4tkynfarmdl0vnj7ep8xt227x3y8a5j237tuvhkfegevs5w50</string>
 
     <!-- Limpar todos os dados: duas confirmações, porque a ação é irreversível. -->
     <string name="about_clear_warning_title">Atenção</string>

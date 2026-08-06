@@ -2,16 +2,25 @@
 
 ## Current State
 
-**Milestone v0.1.0 MVP em andamento — Phase 1 (Fundação) iniciada**
+**Milestone v0.1 fechado — 9 de 9 fases. Versão corrente: v0.2.0 (2026-08-06).**
 
-Esqueleto Android criado em 2026-07-27 e revisado em 2026-07-28 com os adendos do produto:
-Gradle KTS + Version Catalog (AGP 9.3.0 com Kotlin embutido, Compose BOM 2026.06.01,
-compileSdk 37, minSdk 29), pacotes da arquitetura com stubs, `CallDecisionEngine` puro com
-políticas por origem (contato/whitelist/desconhecido) e 20 testes verdes, manifest com
-`CallScreeningService` registrado (pass-through seguro), tema Compose com tokens do design
-system, documentação completa em `docs/` e travas em `CLAUDE.md`/`AGENTS.md`.
+O MVP está completo e auditado: triagem por `CallScreeningService` com resposta única,
+`CallDecisionEngine` puro com políticas por origem, Room + DataStore locais, leitura efêmera de
+contatos, modo discador opcional com `InCallService` próprio, e as telas de onboarding, Home,
+Proteção, Whitelist, Histórico e Privacidade/Sobre.
 
-**Próximo:** fechar a Phase 1 e planejar a Phase 2 (motor completo + normalização).
+A v0.1.0 foi tagueada sem passar por verificação — as fases 8 e 9 tinham sido implementadas
+fora do fluxo de planejamento. A auditoria retroativa de 2026-08-06 encontrou 10 defeitos
+(entre eles a quebra da resposta única ao sistema e um endereço de doação placeholder
+publicado), corrigiu todos e saiu como v0.2.0. Detalhes em
+[`milestones/v0.1-MILESTONE-AUDIT.md`](milestones/v0.1-MILESTONE-AUDIT.md).
+
+**Pendências abertas:**
+1. **Validação em Samsung físico** — 51 cenários de `docs/TESTE-FISICO-SAMSUNG.md`, nenhum
+   executado. É o que falta para o MVP estar validado de ponta a ponta, e depende do mantenedor.
+3. **Repositório sem remote** — nada foi publicado ainda; as tags v0.1.0 e v0.2.0 são locais.
+
+**Próximo:** rodar a validação física e, depois, planejar a v0.3.0 (Sincronização & Backend).
 
 ---
 
@@ -29,7 +38,7 @@ sem telemetria, sem envio de dados para a nuvem, 100% offline no aparelho. Dois 
 
 A leitura de contatos é local e efêmera: nomes e números da agenda nunca são armazenados nem
 saem do aparelho. Sincronização com backend (listas, números recebidos) é etapa futura
-(v0.2.0) — sempre opt-in, sempre assíncrona, nunca no caminho da decisão.
+(v0.3.0) — sempre opt-in, sempre assíncrona, nunca no caminho da decisão.
 
 ## Core Value
 
@@ -41,24 +50,30 @@ saem do aparelho. Sincronização com backend (listas, números recebidos) é et
 
 ### Validated
 
-(None yet — ship to validate)
+Todos os 81 requisitos v1 foram entregues e verificados no milestone v0.1 (arquivo completo em
+[`milestones/v0.1-REQUIREMENTS.md`](milestones/v0.1-REQUIREMENTS.md)).
+
+- ✓ **SCR** (11) — triagem, papel de call screening, resposta única — v0.1.0
+- ✓ **DEC** (5) — motor puro com precedência por origem e reason codes — v0.1.0
+- ✓ **NRM** (4) — normalização E.164 e máscara segura — v0.1.0
+- ✓ **CTT** (4) — leitura local e efêmera de contatos — v0.1.0
+- ✓ **WLT** (8) — whitelist com CRUD, busca, dedup, import/export — v0.1.0, import/export corrigido em v0.2.0
+- ✓ **HST** (7) — histórico opcional com retenção e ações — v0.1.0, filtro por decisão em v0.2.0
+- ✓ **NTF** (6) — notificação silenciosa opt-in — v0.1.0, NTF-05 (abrir o registro) fechado em v0.2.0
+- ✓ **DIA** (5) — modo discador opcional com reversão limpa — v0.1.0
+- ✓ **UIX** (13) — telas, pt-BR em resources, dark+dynamic, acessibilidade — v0.1.0, UIX-06 fechado em v0.2.0
+- ✓ **ENG** (4) — convite de avaliação na 5ª abertura, open source em destaque, doação — v0.1.0; endereços reais (Bitcoin + Liquid) e trava de checksum em v0.2.0
+- ✓ **PRV** (7) — sem INTERNET, logs mascarados, backup exclusion, R8, limpar tudo — v0.1.0
+- ✓ **QLT** (7) — suíte, lint/detekt, migrações, cobertura ≥ 80% — v0.1.0
 
 ### Active
 
-Detalhe completo em [`REQUIREMENTS.md`](REQUIREMENTS.md) — 81 requisitos v1. Por categoria:
+Nenhum requisito de código em aberto. O que resta do MVP é execução humana:
 
-- [ ] **SCR** (11): triagem — bloquear desconhecido antes de tocar, papel de call screening, resposta única < 5 s, resiliência do Service
-- [ ] **DEC** (5): motor de decisão puro com precedência por origem, reason codes e fallback explícito
-- [ ] **NRM** (4): normalização E.164 (libphonenumber), padrão BR, máscara segura
-- [ ] **CTT** (4): leitura local de contatos com permissão explicada, cache rápido e políticas por contato
-- [ ] **WLT** (8): whitelist pessoal — CRUD, busca, dedup, import/export, tratamento configurável
-- [ ] **HST** (7): histórico opcional — mínimo necessário, retenção, ações, fora de backup
-- [ ] **NTF** (6): notificação silenciosa opt-in, canal IMPORTANCE_LOW, mascarada, pós-resposta
-- [ ] **DIA** (5): modo discador opcional — ROLE_DIALER, InCallService mínimo, discagem, reversão limpa
-- [ ] **UIX** (13): telas do MVP, pt-BR em resources, dark+dynamic color, acessibilidade, honestidade, rebranding centralizado, seção de apoio
-- [ ] **ENG** (4): convite de avaliação/apoio na 5ª abertura (repete a cada 5 até aceitar), open source em destaque, doação Bitcoin
-- [ ] **PRV** (7): sem INTERNET no MVP, logs mascarados, backup exclusion, R8, validação de import, política de privacidade, limpar tudo
-- [ ] **QLT** (7): suíte da seção 13 + novos casos, lint/detekt/builds, migrações Room, roteiro Samsung, entregáveis, instrumentados, cobertura ≥ 80%
+- [ ] Rodar `docs/TESTE-FISICO-SAMSUNG.md` (51 cenários) em Samsung físico
+- [ ] Criar o remote do repositório e publicar as tags
+
+Requisitos da v0.3.0 (Sincronização & Backend) serão definidos com `/gsd:new-milestone`.
 
 ### Out of Scope
 
@@ -66,7 +81,7 @@ Detalhe completo em [`REQUIREMENTS.md`](REQUIREMENTS.md) — 81 requisitos v1. P
 - AccessibilityService, overlays, hacks de OEM — proibidos; só APIs oficiais
 - Filtrar chamadas de WhatsApp/Telegram/VoIP — fora do alcance do CallScreeningService; nunca prometer isso na UI
 - Gravação de chamadas — proibido
-- Rede no caminho da decisão — decisão é sempre local; sync (v0.2) é assíncrona e opt-in
+- Rede no caminho da decisão — decisão é sempre local; sync (v0.3.0) é assíncrona e opt-in
 - Servidor, login, analytics, publicidade, telemetria no MVP
 
 ---
@@ -140,4 +155,4 @@ adendos de 2026-07-28 no topo** (contatos, modo discador, apoio/avaliação, off
 | Links GitHub `ricardosierra/sentinela` | Repo ainda sem remote; convenção de compare-links exige URL | — Pending criação do remote |
 
 ---
-*Last updated: 2026-07-28 — adendos do produto (contatos, modo discador, apoio, offline-first); roadmap 9 fases, 81 requisitos*
+*Last updated: 2026-08-06 — após o milestone v0.1: 81 requisitos validados, auditoria retroativa das fases 8 e 9, release v0.2.0*

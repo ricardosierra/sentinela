@@ -52,7 +52,7 @@ usuário, e replicar volume, vibração, escalonamento e Não Perturbe seria amp
 
 | Permissão | Por que NÃO |
 |-----------|-------------|
-| `INTERNET` | MVP é 100% offline; ausência da permissão é prova técnica da promessa. Sync (v0.2.0) será opt-in, em release próprio, com atualização desta matriz |
+| `INTERNET` | MVP é 100% offline; ausência da permissão é prova técnica da promessa. Sync (v0.3.0) será opt-in, em release próprio, com atualização desta matriz |
 | `READ_CALL_LOG` / `WRITE_CALL_LOG` | Histórico próprio é interno e opcional; log nativo não é lido nem escrito diretamente |
 | `READ_SMS` | Fora de escopo |
 | `READ_PHONE_STATE` | Só com necessidade comprovada e documentada — hoje não há |

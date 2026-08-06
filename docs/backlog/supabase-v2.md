@@ -1,4 +1,4 @@
-# Backlog — Etapa 2: Sincronização & Backend (v0.2.0)
+# Backlog — Etapa 2: Sincronização & Backend (v0.3.0)
 
 > **Status:** backlog. NADA disto entra no MVP — o v0.1.0 não tem rede por design
 > (é a prova técnica da promessa de privacidade). O app deve **sempre** ser capaz de

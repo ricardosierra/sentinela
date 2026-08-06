@@ -12,7 +12,7 @@ App Android nativo e **open source** que impede chamadas de números desconhecid
 interromperem o usuário — sem propaganda, sem telemetria, sem nuvem, 100% offline.
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
 Dois modos: **filtro** (padrão, call screening puro) e **discador** (opcional, `ROLE_DIALER` +
-`InCallService`, habilita políticas por contato). Sync com backend é etapa v0.2.0 do produto —
+`InCallService`, habilita políticas por contato). Sync com backend é etapa v0.3.0 do produto —
 sempre opt-in, sempre assíncrona, nunca no caminho da decisão.
 
 ## Estado atual

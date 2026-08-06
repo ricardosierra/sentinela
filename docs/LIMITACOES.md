@@ -114,4 +114,4 @@
 - Sem app para tablet/Wear; retrato como orientação principal.
 - Import/export cobre só a whitelist (histórico fica no aparelho por decisão de privacidade).
 - Sem rede no MVP: sincronização de listas e envio opcional de números recebidos são a etapa
-  v0.2.0 (`backlog/supabase-v2.md`) — sempre opt-in, com o app 100% funcional offline.
+  v0.3.0 (`backlog/supabase-v2.md`) — sempre opt-in, com o app 100% funcional offline.

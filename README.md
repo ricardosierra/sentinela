@@ -127,7 +127,10 @@ Consulte nosso [Guia de Contribuição](CONTRIBUTING.md) para entender nossas co
 O Sentinela é mantido voluntariamente. Se o app te ajudou a recuperar a sua paz, considere apoiar:
 
 - ⭐ Dê uma estrela no repositório!
-- ☕ Faça uma doação (Endereço de Bitcoin no app na versão de produção).
+- ☕ Faça uma doação em **Bitcoin** (on-chain) ou **Liquid (L-BTC)** — os endereços ficam na tela
+  "Privacidade e sobre" do app, com botão de copiar. Eles moram só lá de propósito: endereço
+  copiado para vários lugares é endereço que um dia diverge, e doação para endereço errado não
+  tem volta.
 
 ---
 *Sentinela — O seu guardião offline. Criado com dedicação pela **SierraTecnologia** e **RicaSoluções**.*

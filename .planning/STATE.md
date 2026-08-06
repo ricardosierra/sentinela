@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
-status: milestone_complete
-stopped_at: Reconciliação das fases 8 e 9 concluída
-last_updated: "2026-08-06T00:00:00.000Z"
+status: unknown
+stopped_at: Completed 07-10-PLAN.md
+last_updated: "2026-08-06T04:24:22.791Z"
 last_activity: 2026-08-06
 progress:
   total_phases: 9
-  completed_phases: 9
-  total_plans: 47
-  completed_plans: 47
+  completed_phases: 7
+  total_plans: 46
+  completed_plans: 49
 ---
 
 # Project State
@@ -333,11 +333,13 @@ v0.1.0 saiu sem verificação. A auditoria retroativa encontrou 8 defeitos, todo
 
 ## Blockers/Concerns
 
-- **Endereço de doação em Bitcoin ausente por decisão (2026-08-06)** — a v0.1.0 publicou um
-  placeholder que o próprio código mandava não publicar. O botão foi removido. Para reativar,
-  o mantenedor precisa gerar o endereço numa carteira sob a custódia dele (BlueWallet,
-  Electrum, hardware wallet) e fornecer só a chave pública; gerar o endereço dentro de uma
-  conversa de agente exporia a chave privada e não serve para custodiar doação
+- ~~**Endereço de doação em Bitcoin ausente**~~ **RESOLVIDO 2026-08-06:** a v0.1.0 publicou um
+  placeholder que o próprio código mandava não publicar; o botão saiu da tela e o mantenedor
+  forneceu os endereços reais, gerados em carteira sob a custódia dele — Bitcoin on-chain e
+  Liquid (L-BTC). A trava contra a repetição do defeito é o `SupportAddressTest`, que recalcula
+  o checksum bech32/blech32 sobre a string que vai para o APK: um caractere trocado ao colar
+  reprova o build antes de virar dinheiro na carteira de um estranho
+
 - **Validação física obrigatória** — critérios de aceite centrais só fecham em Samsung físico (Phase 9), cenários 40-51. Correção 2026-07-29: pular o registro no histórico do telefone **não** é variação de OEM — é no-op do próprio Android para apps que não sejam de operadora; o que resta medir no aparelho é **onde** a chamada bloqueada aparece na One UI
 - **Modo discador é o maior risco técnico do MVP** — `InCallService` + elegibilidade ao papel + UX de chamada; pesquisa reforçada antes da Phase 6
 - ~~**Robolectric 4.16.1 suporta até SDK 36** — fixar a configuração de SDK dos testes em 36~~ **SUPERADO POR MEDICAO 2026-07-29 (Phase 05):** o teto real e a versao do **Java do projeto**, nao a do Robolectric — a versao 36 do Android exige Java 21 e o projeto roda em JDK 17. O valor correto e fixo em **35**, ja aplicado em todos os testes sob Robolectric

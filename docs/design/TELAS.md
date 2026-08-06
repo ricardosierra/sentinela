@@ -140,9 +140,15 @@ links para configurações do app e do canal de notificação.
 Seção **"Apoie o Sentinela"** (UIX-13/ENG-03), destaque visual do card:
 - Pitch: *"O Sentinela é open source: sem propaganda, sem telemetria, sem envio de dados
   para a nuvem — 100% offline, rodando no seu próprio celular."*
-- Ações: **Deixar um comentário de apoio** (avaliação) e **Doar em Bitcoin**
-  (endereço com botão copiar + toast "Endereço copiado!"; QR opcional).
-- O endereço vem de `support_bitcoin_address` — release bloqueado enquanto vazio.
+- Ações: **Deixar um comentário de apoio** (avaliação) e dois botões de copiar endereço de
+  doação — **Bitcoin** (on-chain) e **Liquid (L-BTC)** — cada um com toast
+  "Endereço copiado!"; QR opcional.
+- Acima dos botões, uma linha honesta: doação é opcional e o usuário deve conferir o endereço
+  antes de enviar. Nada de contagem, meta ou insistência — apoio não é dark pattern.
+- Os endereços vêm de `support_bitcoin_address` e `support_liquid_address`, que são a **única**
+  fonte deles no projeto: nenhum endereço literal em Kotlin, doc ou README. `SupportAddressTest`
+  recalcula o checksum dos dois (bech32 em `bc`, blech32 confidencial em `lq`) — endereço colado
+  errado reprova o build, porque doação para endereço errado não tem volta.
 
 ## 10. Proteção (Ajustes) — `ui/settings/SettingsScreen.kt` — implementada na Fase 7
 

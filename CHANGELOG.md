@@ -9,6 +9,17 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
+## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.0...master)
+
+### ✨ Novidades
+
+- [x] **Doação de volta na tela Sobre** — com os endereços oficiais do mantenedor, em **Bitcoin** (on-chain) e **Liquid (L-BTC)**, cada um com botão de copiar e uma linha lembrando de conferir o endereço antes de enviar; a v0.1.0 tinha publicado um placeholder e o botão ficou fora da tela até existir endereço real
+
+### 🔧 Técnico
+
+- [x] `strings.xml` é a **fonte única** dos endereços — nenhuma cópia em Kotlin, doc ou README, porque endereço duplicado é endereço que um dia diverge
+- [x] `SupportAddressTest` decodifica o valor que vai para o APK e confere alfabeto, checksum, rede e tamanho do payload (bech32 P2WPKH em `bc`; blech32 com chave de ofuscação de 33 bytes em `lq`), com um caso que corrompe um caractere para provar que o teste reprova. Erro de digitação em endereço de doação agora quebra o build em vez de mandar dinheiro de doador para um estranho
+
 ## [v0.2.0 (2026-08-06)](https://github.com/ricardosierra/sentinela/compare/v0.1.0...v0.2.0)
 
 ### ✨ Novidades

@@ -18,8 +18,9 @@
 
 1. **Endereço de doação placeholder publicado na v0.1.0.** O `strings.xml` trazia um endereço
    Bitcoin com o comentário `NUNCA publicar com endereço inventado` logo acima dele. Removido
-   em `a5c1363`, com o motivo registrado no lugar da string. Detalhes e o caminho para
-   reativar em `09-VERIFICATION.md`.
+   em `a5c1363` e depois substituído pelos endereços reais do mantenedor (Bitcoin on-chain e
+   Liquid), agora travados por `SupportAddressTest`, que confere o checksum sobre o valor que
+   vai para o APK. Detalhes em `09-VERIFICATION.md`.
 2. **Strings da tela Sobre em Kotlin.** Os dois diálogos de limpar-tudo tinham título e corpo
    embutidos no código. Movidos para `strings.xml` em `a5c1363`.
 

@@ -24,10 +24,11 @@ loja — a fase entrega o APK e o roteiro.
   Contador em DataStore (`AppOpenCounter`), nunca interrompe onboarding nem chamada.
 - Seção "Apoie o Sentinela" destaca open source, sem propaganda, sem telemetria, sem nuvem,
   100% offline, com comentário de apoio na loja.
-- **Doação em Bitcoin:** só existe com endereço real do mantenedor, gerado em carteira sob a
-  custódia dele. Enquanto não houver, o botão **não é publicado**. Publicar endereço inventado
-  ou placeholder é proibido pelo CLAUDE.md, e o erro é irreversível: a doação vai para um
-  terceiro e não volta. Decisão tomada na auditoria de 2026-08-06 (ver `09-VERIFICATION.md`).
+- **Doação:** só existe com endereço real do mantenedor, gerado em carteira sob a custódia
+  dele. Publicar endereço inventado ou placeholder é proibido pelo CLAUDE.md, e o erro é
+  irreversível. Entregue com dois destinos — Bitcoin on-chain e Liquid (L-BTC) — vivendo só em
+  `strings.xml` e travados por `SupportAddressTest` (checksum bech32/blech32 sobre o valor que
+  vai para o APK).
 
 ### Privacidade e sobre
 
@@ -82,5 +83,4 @@ ou VoIP, nem que o bloqueio é "100% garantido".
 ## Deferred Ideas
 
 - Publicar na Play Store — fora do MVP.
-- Endereço de doação em Bitcoin — bloqueado aguardando endereço real do mantenedor.
 </deferred>

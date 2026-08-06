@@ -20,7 +20,7 @@
    Silenciar / Nunca Silenciar. Whitelist pessoal: Nunca Silenciar (padrão) / Tocar /
    Bloquear / Silenciar. Desconhecidos: Bloquear (padrão) / Silenciar / Permitir.
 4. **Offline-first permanente.** O app funciona 100% offline, sempre. Online serve apenas
-   para sincronizar listas (etapa v0.2.0, fora do MVP — inclui envio opcional da lista de
+   para sincronizar listas (etapa v0.3.0, fora do MVP — inclui envio opcional da lista de
    números recebidos ao backend). Sincronização é opt-in, assíncrona e nunca participa da
    decisão de bloqueio.
 5. **Avaliação e apoio.** Na 5ª abertura do app, convidar o usuário a avaliar; se recusar,

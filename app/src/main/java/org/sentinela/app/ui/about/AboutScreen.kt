@@ -242,10 +242,53 @@ private fun SupportCard(context: Context) {
                 Text(stringResource(R.string.support_comment_cta))
             }
 
-            // O botão de doação em Bitcoin foi retirado de propósito. A v0.1.0 publicou um
-            // endereço placeholder que ninguém confirmou pertencer ao mantenedor, e doação para
-            // endereço errado não tem volta. Ele só reaparece quando houver endereço real gerado
-            // em carteira sob custódia do mantenedor. Detalhes na string removida, em strings.xml.
+            // Doação: os endereços saem de strings.xml, que é a única fonte deles no projeto.
+            // Nunca escreva um endereço literal aqui — a v0.1.0 publicou um placeholder e doação
+            // para endereço errado não tem volta.
+            Text(
+                text = stringResource(R.string.support_donate_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+
+            CopyAddressButton(
+                context = context,
+                label = stringResource(R.string.support_donate_bitcoin),
+                address = stringResource(R.string.support_bitcoin_address),
+                confirmation = stringResource(R.string.support_address_copied)
+            )
+
+            CopyAddressButton(
+                context = context,
+                label = stringResource(R.string.support_donate_liquid),
+                address = stringResource(R.string.support_liquid_address),
+                confirmation = stringResource(R.string.support_address_copied)
+            )
         }
+    }
+}
+
+/**
+ * Copia um endereço de doação para a área de transferência. O endereço chega pronto por
+ * parâmetro, sempre vindo de recurso: a tela não monta nem edita endereço.
+ */
+@Composable
+private fun CopyAddressButton(
+    context: Context,
+    label: String,
+    address: String,
+    confirmation: String,
+) {
+    OutlinedButton(
+        onClick = {
+            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setPrimaryClip(ClipData.newPlainText(label, address))
+            Toast.makeText(context, confirmation, Toast.LENGTH_SHORT).show()
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Icon(Icons.Outlined.ContentCopy, contentDescription = null)
+        Spacer(modifier = Modifier.padding(4.dp))
+        Text(label)
     }
 }

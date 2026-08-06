@@ -14,7 +14,7 @@ Nada abaixo pode ser afirmado na UI até existir de verdade.
 
 **Prometido no mockup:** boas-vindas / dashboard.
 **Estado real:** inexistente. O app não tem `INTERNET` no MVP.
-**Depende de:** backend + sincronização opt-in (já previsto como `v0.2.0`, ver
+**Depende de:** backend + sincronização opt-in (já previsto como `v0.3.0`, ver
 [`supabase-v2.md`](supabase-v2.md)).
 **Cuidados de privacidade que já estão travados pelo projeto:** sync sempre opt-in, sempre
 assíncrona, **nunca** no caminho da decisão; o app precisa continuar funcionando 100% offline.

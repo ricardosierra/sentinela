@@ -2,7 +2,7 @@
 phase: 09-apoio-privacidade-release-e-validacao-fisica
 verified: 2026-08-06T00:00:00Z
 status: human_needed
-score: 5/6 success criteria verified; critério 5 (validação em Samsung físico) exige o mantenedor e um aparelho
+score: 6/6 success criteria verified em código; critério 5 (validação em Samsung físico) exige o mantenedor e um aparelho
 ---
 
 # Phase 9: Apoio Privacidade Release e Validacao Fisica — Verification Report
@@ -23,13 +23,13 @@ nunca tinha sido verificada; a v0.1.0 foi tagueada sem esta passagem.
 | # | Truth (from ROADMAP) | Status | Evidence |
 |---|---|---|---|
 | 1 | Convite de avaliação na 5ª abertura; recusa reapresenta a cada 5; aceite encerra — coberto por teste | ✓ VERIFIED | `AppOpenCounter` + `DataStoreSettingsRepository.markRatingAccepted`; `HomeViewModel.onRatingAccepted` / `onRatingDismissed`; `RatingBottomSheet` na Home. Coberto por `AppOpenCounterTest`. Commit `5b1b577`. |
-| 2 | Seção "Apoie o Sentinela" com open source / sem propaganda / sem telemetria / sem nuvem / 100% offline, comentário de apoio e doação em Bitcoin (endereço real do mantenedor) | ⚠ PARCIAL — por decisão | A seção existe em `AboutScreen` com todos os destaques e o botão de comentário de apoio. **A doação em Bitcoin foi removida.** Ver "Achado crítico" abaixo. O critério exige "endereço real do mantenedor"; sem esse endereço, não publicar é a única leitura compatível com o critério e com o CLAUDE.md. |
+| 2 | Seção "Apoie o Sentinela" com open source / sem propaganda / sem telemetria / sem nuvem / 100% offline, comentário de apoio e doação em Bitcoin (endereço real do mantenedor) | ✓ VERIFIED (após correção) | A seção existe em `AboutScreen` com todos os destaques e o botão de comentário. A doação saiu da tela enquanto o endereço era o placeholder da v0.1.0 e voltou com os endereços **reais** do mantenedor — Bitcoin on-chain e Liquid (L-BTC) —, cada um com botão de copiar. Endereços vivem só em `strings.xml`; a tela nunca monta nem edita endereço. Travado por `SupportAddressTest`. |
 | 3 | Tela "Privacidade e sobre" lista dados, permissões, retenção, versão e limitações reais, com limpar-tudo funcional | ✓ VERIFIED | `AboutScreen.kt` + `AboutViewModel.kt`; limpar-tudo com duas confirmações (`about_clear_warning_*`, `about_clear_final_*`) chamando `onClearAllData`. Commit `40410d6`. |
 | 4 | `assembleRelease` gera APK minificado assinado; logs sensíveis ausentes do release; cobertura Kover ≥ 80% | ✓ VERIFIED | `app/build.gradle.kts`: `isMinifyEnabled = true`, `isShrinkResources = true`, `signingConfig` de release. `proguard-rules.pro` com `-assumenosideeffects class android.util.Log`. `./gradlew assembleRelease` verde em 2026-08-06; `koverVerify` verde. |
 | 5 | Roteiro `docs/TESTE-FISICO-SAMSUNG.md` executado em Samsung com resultados registrados ou pendências documentadas | ⚠ HUMAN NEEDED | O roteiro existe com 51 cenários, incluindo os do modo discador (69-72, commit `2515456`), e declara explicitamente que cada cenário é veredito pendente até rodar no aparelho. A alternativa "pendências documentadas" do critério está cumprida; a execução real **não**, e nenhum agente pode cumpri-la. |
 | 6 | Critérios da seção 16 do prompt verificados ou justificados, com relatório final (QLT-05) | ✓ VERIFIED | Este relatório mais `08-VERIFICATION.md` e o `.planning/PHASE_09_REPORT.md` original. Os itens que dependem de aparelho estão nomeados no critério 5 em vez de declarados verdes. |
 
-**Score:** 5/6 verificáveis em código. O critério 5 é o único aberto e depende do mantenedor.
+**Score:** 6/6 verificáveis em código. O critério 5 depende do mantenedor e de um aparelho.
 
 ## Achado crítico: endereço de doação publicado sem verificação
 
@@ -52,15 +52,25 @@ Isso viola a diretriz do CLAUDE.md ("a doação em Bitcoin usa o endereço do ma
 **nunca** publicar com endereço inventado ou placeholder") e o risco é irreversível: quem
 doasse estaria mandando dinheiro para um terceiro desconhecido, sem chance de estorno.
 
-**Resolução (2026-08-06):** o botão de doação foi removido da tela e a string foi retirada,
-com o motivo registrado no lugar dela (commit `a5c1363`). O usuário foi informado de que gerar
-um endereço aqui não é possível com segurança — gerar endereço é gerar chave privada, e uma
-chave que passa por uma conversa e por logs não serve para custodiar doação. O caminho
-registrado é o mantenedor gerar em carteira própria (BlueWallet, Electrum ou hardware wallet)
-e fornecer só o endereço público.
+**Resolução (2026-08-06), em duas etapas:**
 
-**Reativar exige as três coisas juntas:** a string em `strings.xml`, o botão em `AboutScreen`
-e a linha correspondente no CHANGELOG.
+1. O botão de doação saiu da tela e a string foi retirada (commit `a5c1363`). Gerar o endereço
+   dentro da conversa não era opção: gerar endereço é gerar chave privada, e uma chave que passa
+   por transcrição e logs não serve para custodiar doação.
+2. O mantenedor gerou os endereços em carteira própria e forneceu só a parte pública. A doação
+   voltou à tela com **dois** destinos — Bitcoin on-chain e Liquid (L-BTC) —, cada um com botão
+   de copiar.
+
+**A trava contra a repetição** é o que faltava na v0.1.0: nenhum teste olhava para essa string.
+Agora `SupportAddressTest` decodifica bech32 (BIP-173) e blech32 e confere, sobre o valor que
+vai para o APK, o alfabeto, a ausência de maiúscula/minúscula misturadas, o **checksum**, o
+prefixo de rede (`bc` / `lq`) e o tamanho do payload (20 bytes de P2WPKH; 33+20 no confidencial
+da Liquid). Há ainda um caso que reprova o placeholder da v0.1.0 nominalmente e outro que
+corrompe um caractere de propósito para provar que o teste morde. Um erro ao colar passa a
+quebrar o build antes de virar dinheiro na carteira de um estranho.
+
+**Estrutura que sustenta a trava:** os endereços existem em um único lugar, `strings.xml`, e a
+tela os recebe prontos por parâmetro — nunca monta, concatena ou edita endereço.
 
 ## Human Verification
 
@@ -72,9 +82,6 @@ e a linha correspondente no CHANGELOG.
    comportamento do `InCallService` em chamada real. Registrar os resultados no próprio
    roteiro.
 
-**Recomendado antes de publicar em qualquer lugar:**
-
-2. Fornecer o endereço Bitcoin real, se quiser a doação de volta na tela.
 
 ## Required Artifacts
 

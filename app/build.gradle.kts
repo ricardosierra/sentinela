@@ -64,6 +64,40 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
+
+            // Configuracao do processo que roda os testes. NAO confundir com o
+            // `org.gradle.jvmargs` do gradle.properties: aquele vale para o daemon do Gradle,
+            // este para quem executa a suite.
+            //
+            // O sintoma que isto resolve engana: quando o processo de teste morre, o Gradle NAO
+            // reporta falha de teste. Ele reporta `EOFException` — ou `NoSuchFileException` no
+            // arquivo de resultados parciais — sem relatorio nenhum, o que parece defeito no
+            // codigo testado e nao e. Pior: o arquivo de resultados fica truncado, e ai TODA
+            // execucao seguinte falha na leitura, mesmo uma que rodaria bem. Ao investigar,
+            // apague `app/build/test-results` antes de cada tentativa, senao o primeiro erro
+            // contamina o diagnostico dos proximos.
+            //
+            // O que foi MEDIDO em 2026-08-06, nesta ordem:
+            //  - heap 2g e 3g, com Metaspace 1g e 2g: a suite completa continua morrendo;
+            //  - `forkEvery` 15 e 5: continua morrendo;
+            //  - `forkEvery` 1: passa inteira.
+            //
+            // Ou seja, o gatilho NAO e memoria crescendo aos poucos — se fosse, mais heap ou
+            // mais Metaspace teria resolvido, e reciclar a cada 5 classes tambem. O que quebra e
+            // estado que sobrevive no processo de uma classe para a outra (o Robolectric monta um
+            // ambiente Android por classe e o agente do Kover instrumenta cada carregador de
+            // classes novo). Um processo por classe e o unico ajuste que fecha o caso.
+            //
+            // O preco e real e esta anotado de proposito: a suite passa de ~40s para ~8min,
+            // porque cada classe paga a partida de uma JVM. E gate de qualidade, nao laco de
+            // desenvolvimento; para rodar rapido durante o trabalho, filtre com `--tests`.
+            // Reduzir este numero exige medir de novo — nao mexa nele "para acelerar" sem rodar
+            // a suite inteira depois.
+            all {
+                it.maxHeapSize = "2g"
+                it.jvmArgs("-XX:MaxMetaspaceSize=1g")
+                it.setForkEvery(1)
+            }
         }
     }
 

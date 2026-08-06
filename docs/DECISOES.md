@@ -37,19 +37,31 @@ mockup sem regra fora do domínio.
 até aceite) e destaque: open source, sem propaganda, sem telemetria, sem nuvem, 100%
 offline, com pedido de comentário de apoio ou doação em Bitcoin.
 **Decisão:** contador local de aberturas (DataStore); convite nunca interrompe onboarding ou
-chamada; seção "Apoie o Sentinela" em Sobre. Endereço Bitcoin vem do mantenedor (string
+chamada; seção "Apoie o Sentinela" em Sobre. Endereço de doação vem do mantenedor (string
 vazia até lá — nunca inventar endereço). Licença open source a escolher (pendência).
 **Consequência:** engajamento sem telemetria; release bloqueado até endereço real e licença
 definidos.
 
-## 2026-07-28 — Offline-first permanente, sync como etapa v0.2.0
+## 2026-08-06 — Endereços oficiais de doação e checksum como gate de build
+
+**Contexto:** a v0.1.0 publicou um endereço placeholder e ele foi retirado da tela; o
+mantenedor forneceu os endereços oficiais (Bitcoin on-chain e Liquid confidencial).
+**Decisão:** os dois endereços entram em `strings.xml` como fonte única e voltam à tela Sobre
+como botões de copiar. Nenhuma cópia em Kotlin, README ou doc — endereço duplicado é endereço
+que diverge. `SupportAddressTest` decodifica o valor que vai para o APK e confere alfabeto,
+checksum, rede e tamanho do payload (bech32 P2WPKH em `bc`; blech32 com chave de ofuscação de
+33 bytes em `lq`), incluindo um caso que corrompe um caractere para provar que o teste morde.
+**Consequência:** um erro de digitação em endereço de doação reprova o build em vez de mandar
+dinheiro de doador para um estranho. Trocar endereço exige confirmação do mantenedor.
+
+## 2026-07-28 — Offline-first permanente, sync como etapa v0.3.0
 
 **Contexto:** adendo do produto — funcionar 100% offline sempre; online só para sincronizar
 listas (incluindo envio opcional de números recebidos), fora do MVP.
 **Decisão:** MVP sem INTERNET no manifest; repositórios por interface para a fonte remota
 plugar depois; decisão de bloqueio jamais espera rede.
 **Consequência:** promessa de privacidade tecnicamente verificável no MVP; matriz de
-permissões será revisada junto com a v0.2.0.
+permissões será revisada junto com a v0.3.0.
 
 ## 2026-07-27 — Bloquear desconhecidos sem ler contatos NO MODO FILTRO
 
