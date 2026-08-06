@@ -64,10 +64,30 @@ import kotlinx.coroutines.launch
 import org.sentinela.app.R
 import org.sentinela.app.data.local.BlockedCallEntry
 import org.sentinela.app.data.local.CallClassification
+import org.sentinela.app.domain.DecisionReason
 import org.sentinela.app.ui.components.CheckRow
 import org.sentinela.app.ui.components.SentinelaTopBar
 import org.sentinela.app.ui.components.SentinelaTopBarIconAction
 import org.sentinela.app.ui.theme.ShapeMedium
+
+/**
+ * Os dois eixos do filtro, em pares (valor, rótulo). Ficam em lista para que acrescentar uma
+ * opção não signifique repetir o bloco de clique — foi assim que o "fecha a folha ao escolher"
+ * acabou colado em cada linha na versão anterior, impedindo combinar período com decisão.
+ */
+private val PERIODOS = listOf(
+    HistoryFilter.ALL to R.string.history_filter_all,
+    HistoryFilter.TODAY to R.string.history_filter_today,
+    HistoryFilter.WEEK to R.string.history_filter_7days,
+    HistoryFilter.MONTH to R.string.history_filter_30days,
+)
+
+private val DECISOES = listOf(
+    HistoryDecisionFilter.ALL to R.string.history_decision_all,
+    HistoryDecisionFilter.UNCLASSIFIED to R.string.history_decision_unclassified,
+    HistoryDecisionFilter.LEGITIMATE to R.string.history_decision_legitimate,
+    HistoryDecisionFilter.UNWANTED to R.string.history_decision_unwanted,
+)
 
 private val ScreenHorizontalPadding = 16.dp
 private val ItemPadding = 16.dp
@@ -79,12 +99,16 @@ private val IconGap = 12.dp
 fun HistoryScreen(
     state: HistoryUiState,
     onFilterChanged: (HistoryFilter) -> Unit,
+    onDecisionFilterChanged: (HistoryDecisionFilter) -> Unit,
     onClearAll: () -> Unit,
     onAllowNumber: (Long, String?) -> Unit,
     onMarkUnwanted: (Long) -> Unit,
     onDeleteEntry: (Long) -> Unit,
     bottomBar: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    // O relógio entra por parâmetro para o tempo relativo de cada linha ser testável sem
+    // depender da hora da máquina que roda a suíte.
+    agoraUtcMillis: Long = System.currentTimeMillis(),
 ) {
     var showClearConfirm by remember { mutableStateOf(false) }
     var showFilterSheet by remember { mutableStateOf(false) }
@@ -133,7 +157,8 @@ fun HistoryScreen(
                         items = state.items,
                         onAllowNumber = onAllowNumber,
                         onMarkUnwanted = onMarkUnwanted,
-                        onDeleteEntry = onDeleteEntry
+                        onDeleteEntry = onDeleteEntry,
+                        agoraUtcMillis = agoraUtcMillis,
                     )
                 }
             }
@@ -144,7 +169,7 @@ fun HistoryScreen(
         AlertDialog(
             onDismissRequest = { showClearConfirm = false },
             title = { Text(text = stringResource(R.string.history_clear_all)) },
-            text = { Text(text = "Isso apagará todo o seu histórico de bloqueios. Deseja continuar?") },
+            text = { Text(text = stringResource(R.string.history_clear_confirm)) },
             confirmButton = {
                 TextButton(onClick = {
                     showClearConfirm = false
@@ -173,45 +198,47 @@ fun HistoryScreen(
                     bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
                 )
             ) {
-                val currentFilter = (state as? HistoryUiState.Content)?.filter ?: HistoryFilter.ALL
+                val conteudo = state as? HistoryUiState.Content
+                val currentFilter = conteudo?.filter ?: HistoryFilter.ALL
+                val currentDecision = conteudo?.decisionFilter ?: HistoryDecisionFilter.ALL
+
                 Text(
-                    text = "Período",
+                    text = stringResource(R.string.history_filter_period),
                     modifier = Modifier.padding(horizontal = ScreenHorizontalPadding, vertical = 8.dp),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                FilterRow(
-                    label = "Todo o histórico",
-                    selected = currentFilter == HistoryFilter.ALL,
-                    onClick = {
-                        onFilterChanged(HistoryFilter.ALL)
-                        scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
-                    }
+                PERIODOS.forEach { (filtro, rotulo) ->
+                    FilterRow(
+                        label = stringResource(rotulo),
+                        selected = currentFilter == filtro,
+                        onClick = { onFilterChanged(filtro) }
+                    )
+                }
+
+                Text(
+                    text = stringResource(R.string.history_filter_decision),
+                    modifier = Modifier.padding(horizontal = ScreenHorizontalPadding, vertical = 8.dp),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
-                FilterRow(
-                    label = "Hoje",
-                    selected = currentFilter == HistoryFilter.TODAY,
+                DECISOES.forEach { (filtro, rotulo) ->
+                    FilterRow(
+                        label = stringResource(rotulo),
+                        selected = currentDecision == filtro,
+                        onClick = { onDecisionFilterChanged(filtro) }
+                    )
+                }
+
+                TextButton(
                     onClick = {
-                        onFilterChanged(HistoryFilter.TODAY)
-                        scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
-                    }
-                )
-                FilterRow(
-                    label = "Últimos 7 dias",
-                    selected = currentFilter == HistoryFilter.WEEK,
-                    onClick = {
-                        onFilterChanged(HistoryFilter.WEEK)
-                        scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
-                    }
-                )
-                FilterRow(
-                    label = "Últimos 30 dias",
-                    selected = currentFilter == HistoryFilter.MONTH,
-                    onClick = {
-                        onFilterChanged(HistoryFilter.MONTH)
-                        scope.launch { sheetState.hide() }.invokeOnCompletion { showFilterSheet = false }
-                    }
-                )
+                        scope.launch { sheetState.hide() }
+                            .invokeOnCompletion { showFilterSheet = false }
+                    },
+                    modifier = Modifier.padding(horizontal = ScreenHorizontalPadding),
+                ) {
+                    Text(stringResource(R.string.action_confirm))
+                }
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
@@ -247,6 +274,7 @@ private fun HistoryContent(
     onAllowNumber: (Long, String?) -> Unit,
     onMarkUnwanted: (Long) -> Unit,
     onDeleteEntry: (Long) -> Unit,
+    agoraUtcMillis: Long,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(vertical = 8.dp),
@@ -255,10 +283,10 @@ private fun HistoryContent(
         items(items, key = { it.id }) { item ->
             HistoryItem(
                 entry = item,
+                agoraUtcMillis = agoraUtcMillis,
                 onAllowNumber = { onAllowNumber(item.id, item.numberE164) },
                 onMarkUnwanted = { onMarkUnwanted(item.id) },
                 onDeleteEntry = { onDeleteEntry(item.id) },
-                
             )
         }
     }
@@ -267,15 +295,16 @@ private fun HistoryContent(
 @Composable
 private fun HistoryItem(
     entry: BlockedCallEntry,
+    agoraUtcMillis: Long,
     onAllowNumber: () -> Unit,
     onMarkUnwanted: () -> Unit,
     onDeleteEntry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showMenu by remember { mutableStateOf(false) }
-    
+
     val icon = when (entry.reason) {
-        org.sentinela.app.domain.DecisionReason.PRIVATE_NUMBER -> Icons.Outlined.VisibilityOff
+        DecisionReason.PRIVATE_NUMBER -> Icons.Outlined.VisibilityOff
         else -> Icons.Outlined.Block
     }
 
@@ -312,14 +341,16 @@ private fun HistoryItem(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = entry.reason.name,
+                    text = stringResource(entry.reason.rotulo()),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            // Temporarily omitting real relative time for brevity
+            val tempo = tempoRelativo(entry.timestampUtcMillis, agoraUtcMillis)
             Text(
-                text = "Agora",
+                text = tempo.quantidade
+                    ?.let { stringResource(tempo.recurso, it) }
+                    ?: stringResource(tempo.recurso),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -329,7 +360,7 @@ private fun HistoryItem(
                 onDismissRequest = { showMenu = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Permitir (Whitelist)") },
+                    text = { Text(stringResource(R.string.history_action_allow_whitelist)) },
                     onClick = {
                         showMenu = false
                         onAllowNumber()
@@ -337,7 +368,7 @@ private fun HistoryItem(
                     leadingIcon = { Icon(Icons.Outlined.VerifiedUser, null) }
                 )
                 DropdownMenuItem(
-                    text = { Text("Marcar Indesejado") },
+                    text = { Text(stringResource(R.string.history_mark_unwanted)) },
                     onClick = {
                         showMenu = false
                         onMarkUnwanted()
@@ -345,7 +376,7 @@ private fun HistoryItem(
                     leadingIcon = { Icon(Icons.Outlined.Report, null) }
                 )
                 DropdownMenuItem(
-                    text = { Text("Excluir") },
+                    text = { Text(stringResource(R.string.history_action_delete)) },
                     onClick = {
                         showMenu = false
                         onDeleteEntry()
