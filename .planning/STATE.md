@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: milestone
-status: unknown
-stopped_at: Completed 07-11-PLAN.md
-last_updated: "2026-08-03T01:51:00.000Z"
-last_activity: 2026-08-03
+status: milestone_complete
+stopped_at: Reconciliação das fases 8 e 9 concluída
+last_updated: "2026-08-06T00:00:00.000Z"
+last_activity: 2026-08-06
 progress:
   total_phases: 9
-  completed_phases: 7
+  completed_phases: 9
   total_plans: 47
   completed_plans: 47
 ---
@@ -19,13 +19,32 @@ progress:
 
 See: `.planning/PROJECT.md` (updated 2026-07-28)
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
-**Current focus:** Phase 08 — UI Whitelist e Historico
-Last activity: 2026-08-03
+**Current focus:** Milestone v0.1.0 fechado — resta a validação física em Samsung
+Last activity: 2026-08-06
 
 ## Current Position
 
-Phase: 08 (UI Whitelist e Historico) — NOT STARTED
-Plan: 0 of ?
+Phase: 09 (Apoio, Privacidade, Release e Validação Física) — COMPLETE
+Todas as 9 fases estão fechadas. A única pendência do milestone é humana: executar
+`docs/TESTE-FISICO-SAMSUNG.md` (51 cenários) em aparelho Samsung.
+
+### Reconciliação de 2026-08-06
+
+As fases 8 e 9 tinham sido implementadas por commits diretos, fora do fluxo GSD, e a tag
+v0.1.0 saiu sem verificação. A auditoria retroativa encontrou 8 defeitos, todos corrigidos:
+
+| Defeito | Gravidade | Commit |
+|---|---|---|
+| `respondToCall` com dois pontos de resposta (regressão de `901d9d3`) | Crítica | `cabfbd1` |
+| Endereço Bitcoin placeholder publicado na v0.1.0 | Crítica | `a5c1363` |
+| Export da whitelist gravava `{"whitelist":[]}` fixo | Alta | `893fb63` |
+| Import da whitelist descartava o arquivo lido | Alta | `893fb63` |
+| Duplicado/inválido descartados sem aviso | Média | `893fb63` |
+| Filtro por decisão ausente no histórico | Média | `851f3c2` |
+| `"Agora"` fixo em toda linha do histórico | Média | `851f3c2` |
+| 557 arquivos de `.venv/` versionados | Média | `5a92e9f` |
+
+`scripts/verify-invariants.sh` estava vermelho em 3 blocos no master e agora passa nos 10.
 
 ## Snapshot
 
@@ -314,6 +333,11 @@ Plan: 0 of ?
 
 ## Blockers/Concerns
 
+- **Endereço de doação em Bitcoin ausente por decisão (2026-08-06)** — a v0.1.0 publicou um
+  placeholder que o próprio código mandava não publicar. O botão foi removido. Para reativar,
+  o mantenedor precisa gerar o endereço numa carteira sob a custódia dele (BlueWallet,
+  Electrum, hardware wallet) e fornecer só a chave pública; gerar o endereço dentro de uma
+  conversa de agente exporia a chave privada e não serve para custodiar doação
 - **Validação física obrigatória** — critérios de aceite centrais só fecham em Samsung físico (Phase 9), cenários 40-51. Correção 2026-07-29: pular o registro no histórico do telefone **não** é variação de OEM — é no-op do próprio Android para apps que não sejam de operadora; o que resta medir no aparelho é **onde** a chamada bloqueada aparece na One UI
 - **Modo discador é o maior risco técnico do MVP** — `InCallService` + elegibilidade ao papel + UX de chamada; pesquisa reforçada antes da Phase 6
 - ~~**Robolectric 4.16.1 suporta até SDK 36** — fixar a configuração de SDK dos testes em 36~~ **SUPERADO POR MEDICAO 2026-07-29 (Phase 05):** o teto real e a versao do **Java do projeto**, nao a do Robolectric — a versao 36 do Android exige Java 21 e o projeto roda em JDK 17. O valor correto e fixo em **35**, ja aplicado em todos os testes sob Robolectric

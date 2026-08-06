@@ -25,9 +25,9 @@ apoio/avaliação, privacidade, release e validação física Samsung.
 - [x] **Phase 4: Contatos do Aparelho** - READ_CONTACTS com explicação, lookup local cacheado e políticas por contato
 - [x] **Phase 5: Triagem Telecom Modo Filtro** - Service integrado ao motor, papel de call screening, proteções, chamada repetida e notificação silenciosa
 - [x] **Phase 6: Modo Discador Opcional** - ROLE_DIALER, InCallService mínimo, discagem e reversão limpa
-- [ ] **Phase 7: UI Onboarding e Home** - Fluxo de boas-vindas/permissões/políticas, dashboard e tela Proteção
-- [ ] **Phase 8: UI Whitelist e Historico** - CRUD com busca e import/export; histórico com filtros e ações
-- [ ] **Phase 9: Apoio Privacidade Release e Validacao Fisica** - Avaliação/apoio (5ª abertura), tela sobre, release R8, roteiro Samsung
+- [x] **Phase 7: UI Onboarding e Home** - Fluxo de boas-vindas/permissões/políticas, dashboard e tela Proteção
+- [x] **Phase 8: UI Whitelist e Historico** - CRUD com busca e import/export; histórico com filtros e ações
+- [x] **Phase 9: Apoio Privacidade Release e Validacao Fisica** - Avaliação/apoio (5ª abertura), tela sobre, release R8, roteiro Samsung
 
 ## Phase Details
 
@@ -187,7 +187,7 @@ Plans:
   3. Histórico filtra por período/decisão e cada registro permite: permitir (→ whitelist), marcar indesejado, excluir
   4. Tratamento da whitelist (Nunca Silenciar/Tocar/Bloquear/Silenciar) é configurável na UI
   5. Números aparecem sempre mascarados nas listas e notificações
-**Plans**: TBD
+**Plans**: n/a — executada fora do fluxo GSD; ver SUMMARY e VERIFICATION da fase
 
 ### Phase 9: Apoio Privacidade Release e Validacao Fisica
 **Goal**: MVP instalável, auditável e honesto: fluxo de apoio/avaliação respeitoso, política de privacidade embutida, release assinado com R8 e comportamento validado (ou documentado) em Samsung físico.
@@ -200,7 +200,7 @@ Plans:
   4. `assembleRelease` gera APK minificado assinado; logs sensíveis comprovadamente ausentes do release; cobertura Kover ≥ 80% em domain/dados
   5. Roteiro `docs/TESTE-FISICO-SAMSUNG.md` (incluindo cenários do modo discador) executado em Samsung com resultados registrados ou pendências documentadas
   6. Todos os critérios de aceite da seção 16 do prompt (com adendos) verificados ou justificados, com relatório final de entrega produzido (QLT-05)
-**Plans**: TBD
+**Plans**: n/a — executada fora do fluxo GSD; ver SUMMARY e VERIFICATION da fase
 
 ## Progress
 
@@ -224,8 +224,15 @@ manualmente pelo mantenedor. Nas fases 1–8 o verifier deve tratar esses itens 
 | 5 | v0.1.0 | 7/7 | Complete | 2026-07-29 |
 | 6 | v0.1.0 | 9/8 | Complete | 2026-07-30 |
 | 7 | v0.1.0 | 11/11 | Complete | 2026-07-30 |
-| 8 | v0.1.0 | 0/? | Not started | - |
-| 9 | v0.1.0 | 0/? | Not started | - |
+| 8 | v0.1.0 | n/a | Complete (reconciliado) | 2026-08-06 |
+| 9 | v0.1.0 | n/a | Complete (validação física pendente) | 2026-08-06 |
+
+**Nota sobre as fases 8 e 9 (reconciliação de 2026-08-06):** as duas foram implementadas por
+commits diretos, fora do fluxo GSD, e a v0.1.0 foi tagueada sem verificação. Não existem
+PLANs; os commits `6a6d087`..`7ddcad6` são o registro de execução. A auditoria retroativa
+encontrou 8 defeitos — incluindo a quebra do invariante de resposta única do
+`CallScreeningService` e um endereço de doação placeholder publicado — todos corrigidos antes
+de fechar as fases. Detalhes em `08-VERIFICATION.md` e `09-VERIFICATION.md`.
 
 ---
 *Last updated: 2026-07-28 — adendos do produto: contatos, modo discador, apoio/avaliação; roadmap expandido de 7 para 9 fases*
