@@ -180,9 +180,17 @@ class RespostaGravada {
 /** Notificador de teste: só registra o que foi pedido, sem tocar na plataforma. */
 class NotificadorGravado : BlockedCallNotifier {
     val enviadas = mutableListOf<BlockedCallEntry>()
+
+    /**
+     * Faz o trabalho posterior à resposta explodir. Existe para provar que uma falha DEPOIS de a
+     * decisão já ter saído não vira uma segunda resposta ao sistema — a regressão da Fase 8.
+     */
+    var explode: Boolean = false
+
     override fun ensureChannel() = Unit
     override fun notifyBlocked(entry: BlockedCallEntry) {
         enviadas += entry
+        if (explode) error("falha injetada no trabalho posterior à resposta")
     }
 }
 

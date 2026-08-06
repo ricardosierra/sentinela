@@ -4,8 +4,9 @@ package org.sentinela.app.telecom
 
 import android.telecom.Call
 import android.telecom.CallScreeningService
+import android.telecom.CallScreeningService.CallResponse
 import org.sentinela.app.SentinelaApp
-import org.sentinela.app.domain.CallDirection
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Ponto de entrada do sistema de telefonia. Camada fina de propósito: aqui só se monta a
@@ -57,28 +58,36 @@ class UnknownCallScreeningService : CallScreeningService() {
         // A triagem chega na thread principal e as consultas locais suspendem: o trabalho vai
         // para o escopo do processo, e a resposta ao sistema acontece dentro dele.
         deps.launchAfterResponse {
-            try {
-                kotlinx.coroutines.withTimeout(SCREENING_FALLBACK_TIMEOUT_MILLIS) {
-                    val chamada = deps.screenedCallFactory.from(callDetails)
-                    deps.screeningCoordinator.screen(
-                        call = chamada,
-                        respond = { decisao, configuracoes ->
-                            respondToCall(
-                                callDetails,
-                                deps.callResponseFactory.toResponse(decisao, configuracoes),
-                            )
-                        },
-                        afterResponse = deps.postScreeningWork::run,
-                    )
+            // Ponto ÚNICO de resposta ao sistema, e a guarda que o torna único de verdade.
+            //
+            // O coordenador já garante que `respond` roda no máximo uma vez por triagem, e já
+            // tem prazo próprio com decisão degradada e rede permissiva no `finally`. O que ele
+            // não pode cobrir é uma falha aqui fora, antes de a decisão existir. Daí a captura
+            // abaixo — que precisa passar pela MESMA guarda: sem ela, qualquer erro levantado
+            // DEPOIS de a decisão já ter saído (o trabalho pós-resposta, por exemplo) somaria uma
+            // segunda resposta "permitir" à mesma chamada de entrada, desfazendo em silêncio um
+            // bloqueio que já tinha sido decidido. Foi exatamente essa a regressão da Fase 8.
+            val respondeu = AtomicBoolean(false)
+            fun responder(resposta: CallResponse) {
+                if (respondeu.compareAndSet(false, true)) {
+                    respondToCall(callDetails, resposta)
                 }
+            }
+
+            try {
+                val chamada = deps.screenedCallFactory.from(callDetails)
+                deps.screeningCoordinator.screen(
+                    call = chamada,
+                    respond = { decisao, configuracoes ->
+                        responder(deps.callResponseFactory.toResponse(decisao, configuracoes))
+                    },
+                    afterResponse = deps.postScreeningWork::run,
+                )
             } catch (_: Throwable) {
-                // Falha catastrófica antes do coordenador ou timeout (ex: normalizador quebrou). Responde permitindo.
-                respondToCall(callDetails, CallScreeningService.CallResponse.Builder().build())
+                // Falha antes de a decisão sair (ex.: a montagem da chamada quebrou). Permitir é
+                // o padrão do projeto: barrar por defeito é a pior falha possível deste produto.
+                responder(CallResponse.Builder().build())
             }
         }
-    }
-
-    private companion object {
-        const val SCREENING_FALLBACK_TIMEOUT_MILLIS = 4_000L
     }
 }

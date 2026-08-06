@@ -87,6 +87,27 @@ class ScreeningServiceTest {
         assertEquals(false, harness.disallow(0))
     }
 
+    /**
+     * Regressão da Fase 8 (commit 901d9d3): o serviço passou a envolver a triagem inteira em um
+     * prazo externo com captura ampla que respondia de novo. Uma falha levantada DEPOIS de a
+     * decisão já ter saído somava uma segunda resposta "permitir" à mesma chamada de entrada —
+     * desfazendo em silêncio um bloqueio já decidido, porque o sistema ignora a segunda resposta
+     * sem avisar ninguém. A contagem é o único sintoma observável, por isso ela é o asserto.
+     */
+    @Test
+    fun `falha no trabalho posterior nao produz uma segunda resposta`() {
+        ambiente.settings.valor = ScreeningSettings(showOwnNotification = true)
+        ambiente.notificador.explode = true
+        val harness = harness()
+
+        harness.screen(handle = Uri.parse(TEL))
+
+        assertEquals(1, harness.responses.size)
+        // A decisão que chegou ao sistema continua sendo a de barrar, não a permissiva da rede.
+        assertTrue(harness.disallow(0))
+        assertTrue(harness.reject(0))
+    }
+
     @Test
     fun `duas chamadas seguidas produzem duas respostas, uma para cada`() {
         val harness = harness()
