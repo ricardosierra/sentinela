@@ -42,7 +42,7 @@ fun WhitelistAddEditDialog(
                 OutlinedTextField(
                     value = number,
                     onValueChange = { number = it },
-                    label = { Text("Número") },
+                    label = { Text(stringResource(R.string.whitelist_number_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
@@ -50,7 +50,7 @@ fun WhitelistAddEditDialog(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("Descrição (opcional)") },
+                    label = { Text(stringResource(R.string.whitelist_description_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )

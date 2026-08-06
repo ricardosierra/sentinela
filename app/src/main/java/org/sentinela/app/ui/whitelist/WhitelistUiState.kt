@@ -10,5 +10,6 @@ sealed interface WhitelistUiState {
         val query: String = "",
         val isSearching: Boolean = false
     ) : WhitelistUiState
-    data class Error(val message: String) : WhitelistUiState
+    /** O texto do erro sai de `strings.xml` na tela — mensagem em Kotlin não é traduzível. */
+    data object Error : WhitelistUiState
 }
