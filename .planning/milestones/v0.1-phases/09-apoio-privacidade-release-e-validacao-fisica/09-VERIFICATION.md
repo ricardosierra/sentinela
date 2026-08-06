@@ -22,11 +22,11 @@ nunca tinha sido verificada; a v0.1.0 foi tagueada sem esta passagem.
 
 | # | Truth (from ROADMAP) | Status | Evidence |
 |---|---|---|---|
-| 1 | Convite de avaliação na 5ª abertura; recusa reapresenta a cada 5; aceite encerra — coberto por teste | ✓ VERIFIED | `AppOpenCounter` + `DataStoreSettingsRepository.markRatingAccepted`; `HomeViewModel.onRatingAccepted` / `onRatingDismissed`; `RatingBottomSheet` na Home. Coberto por `AppOpenCounterTest`. Commit `5b1b577`. |
+| 1 | Convite de avaliação na 5ª abertura; recusa reapresenta a cada 5; aceite encerra — coberto por teste | ✓ VERIFIED | `AppOpenCounter` + `DataStoreSettingsRepository.markRatingAccepted`; `HomeViewModel.onRatingAccepted` / `onRatingDismissed`; `RatingBottomSheet` na Home. Coberto por `AppOpenCounterTest`. Commit `6266239`. |
 | 2 | Seção "Apoie o Sentinela" com open source / sem propaganda / sem telemetria / sem nuvem / 100% offline, comentário de apoio e doação em Bitcoin (endereço real do mantenedor) | ✓ VERIFIED (após correção) | A seção existe em `AboutScreen` com todos os destaques e o botão de comentário. A doação saiu da tela enquanto o endereço era o placeholder da v0.1.0 e voltou com os endereços **reais** do mantenedor — Bitcoin on-chain e Liquid (L-BTC) —, cada um com botão de copiar. Endereços vivem só em `strings.xml`; a tela nunca monta nem edita endereço. Travado por `SupportAddressTest`. |
-| 3 | Tela "Privacidade e sobre" lista dados, permissões, retenção, versão e limitações reais, com limpar-tudo funcional | ✓ VERIFIED | `AboutScreen.kt` + `AboutViewModel.kt`; limpar-tudo com duas confirmações (`about_clear_warning_*`, `about_clear_final_*`) chamando `onClearAllData`. Commit `40410d6`. |
+| 3 | Tela "Privacidade e sobre" lista dados, permissões, retenção, versão e limitações reais, com limpar-tudo funcional | ✓ VERIFIED | `AboutScreen.kt` + `AboutViewModel.kt`; limpar-tudo com duas confirmações (`about_clear_warning_*`, `about_clear_final_*`) chamando `onClearAllData`. Commit `acdecb0`. |
 | 4 | `assembleRelease` gera APK minificado assinado; logs sensíveis ausentes do release; cobertura Kover ≥ 80% | ✓ VERIFIED | `app/build.gradle.kts`: `isMinifyEnabled = true`, `isShrinkResources = true`, `signingConfig` de release. `proguard-rules.pro` com `-assumenosideeffects class android.util.Log`. `./gradlew assembleRelease` verde em 2026-08-06; `koverVerify` verde. |
-| 5 | Roteiro `docs/TESTE-FISICO-SAMSUNG.md` executado em Samsung com resultados registrados ou pendências documentadas | ⚠ HUMAN NEEDED | O roteiro existe com 51 cenários, incluindo os do modo discador (69-72, commit `2515456`), e declara explicitamente que cada cenário é veredito pendente até rodar no aparelho. A alternativa "pendências documentadas" do critério está cumprida; a execução real **não**, e nenhum agente pode cumpri-la. |
+| 5 | Roteiro `docs/TESTE-FISICO-SAMSUNG.md` executado em Samsung com resultados registrados ou pendências documentadas | ⚠ HUMAN NEEDED | O roteiro existe com 51 cenários, incluindo os do modo discador (69-72, commit `3c3e35f`), e declara explicitamente que cada cenário é veredito pendente até rodar no aparelho. A alternativa "pendências documentadas" do critério está cumprida; a execução real **não**, e nenhum agente pode cumpri-la. |
 | 6 | Critérios da seção 16 do prompt verificados ou justificados, com relatório final (QLT-05) | ✓ VERIFIED | Este relatório mais `08-VERIFICATION.md` e o `.planning/PHASE_09_REPORT.md` original. Os itens que dependem de aparelho estão nomeados no critério 5 em vez de declarados verdes. |
 
 **Score:** 6/6 verificáveis em código. O critério 5 depende do mantenedor e de um aparelho.
@@ -54,7 +54,7 @@ doasse estaria mandando dinheiro para um terceiro desconhecido, sem chance de es
 
 **Resolução (2026-08-06), em duas etapas:**
 
-1. O botão de doação saiu da tela e a string foi retirada (commit `a5c1363`). Gerar o endereço
+1. O botão de doação saiu da tela e a string foi retirada (commit `a1bba94`). Gerar o endereço
    dentro da conversa não era opção: gerar endereço é gerar chave privada, e uma chave que passa
    por transcrição e logs não serve para custodiar doação.
 2. O mantenedor gerou os endereços em carteira própria e forneceu só a parte pública. A doação
@@ -90,4 +90,4 @@ tela os recebe prontos por parâmetro — nunca monta, concatena ou edita endere
 | `09-CONTEXT.md` | ✓ (retroativo) |
 | `09-SUMMARY.md` | ✓ (retroativo) |
 | `09-VERIFICATION.md` | ✓ |
-| PLANs | ✗ — a fase não foi planejada pelo GSD; os commits `5b1b577`..`7ddcad6` são o registro real |
+| PLANs | ✗ — a fase não foi planejada pelo GSD; os commits `6266239`..`dce85b3` são o registro real |

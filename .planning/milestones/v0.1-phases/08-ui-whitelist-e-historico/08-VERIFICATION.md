@@ -33,19 +33,19 @@ código entregue.
 
 | # | Defeito | Severidade | Commit |
 |---|---|---|---|
-| 1 | Export gravava constante vazia, ignorando a lista | Alta — perda de dado silenciosa | `893fb63` |
-| 2 | Import lia o arquivo e descartava | Alta — funcionalidade inexistente | `893fb63` |
-| 3 | Duplicado/inválido descartados sem aviso | Média — critério 1 não cumprido | `893fb63` |
-| 4 | Filtro por decisão ausente | Média — critério 3 não cumprido | `851f3c2` |
-| 5 | `"Agora"` fixo em toda linha do histórico | Média — informação falsa na tela | `851f3c2` |
-| 6 | `reason.name` cru exibido ao usuário | Baixa — vazamento de código interno | `851f3c2` |
+| 1 | Export gravava constante vazia, ignorando a lista | Alta — perda de dado silenciosa | `46e2be8` |
+| 2 | Import lia o arquivo e descartava | Alta — funcionalidade inexistente | `46e2be8` |
+| 3 | Duplicado/inválido descartados sem aviso | Média — critério 1 não cumprido | `46e2be8` |
+| 4 | Filtro por decisão ausente | Média — critério 3 não cumprido | `f5f123a` |
+| 5 | `"Agora"` fixo em toda linha do histórico | Média — informação falsa na tela | `f5f123a` |
+| 6 | `reason.name` cru exibido ao usuário | Baixa — vazamento de código interno | `f5f123a` |
 
 ## Fora do escopo desta fase, causado por ela
 
 | Item | Severidade | Commit |
 |---|---|---|
-| `901d9d3` quebrou a resposta única do `CallScreeningService` | **Crítica** — invariante central do produto | `cabfbd1` |
-| `901d9d3` versionou 557 arquivos de `.venv/` | Média — higiene do repositório | `5a92e9f` |
+| `6fa8967` quebrou a resposta única do `CallScreeningService` | **Crítica** — invariante central do produto | `8af8478` |
+| `6fa8967` versionou 557 arquivos de `.venv/` | Média — higiene do repositório | `d2b1a50` |
 
 ## Required Artifacts
 
@@ -54,7 +54,7 @@ código entregue.
 | `08-CONTEXT.md` | ✓ (retroativo) |
 | `08-SUMMARY.md` | ✓ (retroativo) |
 | `08-VERIFICATION.md` | ✓ |
-| PLANs | ✗ — a fase não foi planejada pelo GSD; os commits `6a6d087`..`1d2caf4` são o registro real |
+| PLANs | ✗ — a fase não foi planejada pelo GSD; os commits `6a6d087`..`6631ef9` são o registro real |
 
 ## Human Verification
 

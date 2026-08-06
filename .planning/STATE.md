@@ -35,14 +35,14 @@ v0.1.0 saiu sem verificação. A auditoria retroativa encontrou 8 defeitos, todo
 
 | Defeito | Gravidade | Commit |
 |---|---|---|
-| `respondToCall` com dois pontos de resposta (regressão de `901d9d3`) | Crítica | `cabfbd1` |
-| Endereço Bitcoin placeholder publicado na v0.1.0 | Crítica | `a5c1363` |
-| Export da whitelist gravava `{"whitelist":[]}` fixo | Alta | `893fb63` |
-| Import da whitelist descartava o arquivo lido | Alta | `893fb63` |
-| Duplicado/inválido descartados sem aviso | Média | `893fb63` |
-| Filtro por decisão ausente no histórico | Média | `851f3c2` |
-| `"Agora"` fixo em toda linha do histórico | Média | `851f3c2` |
-| 557 arquivos de `.venv/` versionados | Média | `5a92e9f` |
+| `respondToCall` com dois pontos de resposta (regressão de `6fa8967`) | Crítica | `8af8478` |
+| Endereço Bitcoin placeholder publicado na v0.1.0 | Crítica | `a1bba94` |
+| Export da whitelist gravava `{"whitelist":[]}` fixo | Alta | `46e2be8` |
+| Import da whitelist descartava o arquivo lido | Alta | `46e2be8` |
+| Duplicado/inválido descartados sem aviso | Média | `46e2be8` |
+| Filtro por decisão ausente no histórico | Média | `f5f123a` |
+| `"Agora"` fixo em toda linha do histórico | Média | `f5f123a` |
+| 557 arquivos de `.venv/` versionados | Média | `d2b1a50` |
 
 `scripts/verify-invariants.sh` estava vermelho em 3 blocos no master e agora passa nos 10.
 

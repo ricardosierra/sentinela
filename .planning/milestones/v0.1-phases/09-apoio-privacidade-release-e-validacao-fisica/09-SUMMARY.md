@@ -7,22 +7,22 @@
 
 | Item | Onde | Commit |
 |---|---|---|
-| Convite de avaliação na 5ª abertura | `settings/AppOpenCounter`, `HomeViewModel`, `RatingBottomSheet` | `5b1b577` |
-| Tela Privacidade e Sobre + seção de apoio | `ui/about/` | `40410d6` |
-| Limpar tudo com duas confirmações | `AboutScreen` + `AboutViewModel` | `40410d6` |
+| Convite de avaliação na 5ª abertura | `settings/AppOpenCounter`, `HomeViewModel`, `RatingBottomSheet` | `6266239` |
+| Tela Privacidade e Sobre + seção de apoio | `ui/about/` | `acdecb0` |
+| Limpar tudo com duas confirmações | `AboutScreen` + `AboutViewModel` | `acdecb0` |
 | R8 / ProGuard e build de release assinado | `app/build.gradle.kts`, `proguard-rules.pro` | — |
-| Cenários 69-72 do modo discador no roteiro | `docs/TESTE-FISICO-SAMSUNG.md` | `2515456` |
-| CHANGELOG no formato Release Notes | `CHANGELOG.md` | `2515456`, `7ddcad6` |
+| Cenários 69-72 do modo discador no roteiro | `docs/TESTE-FISICO-SAMSUNG.md` | `3c3e35f` |
+| CHANGELOG no formato Release Notes | `CHANGELOG.md` | `3c3e35f`, `dce85b3` |
 
 ## Divergências encontradas na reconciliação
 
 1. **Endereço de doação placeholder publicado na v0.1.0.** O `strings.xml` trazia um endereço
    Bitcoin com o comentário `NUNCA publicar com endereço inventado` logo acima dele. Removido
-   em `a5c1363` e depois substituído pelos endereços reais do mantenedor (Bitcoin on-chain e
+   em `a1bba94` e depois substituído pelos endereços reais do mantenedor (Bitcoin on-chain e
    Liquid), agora travados por `SupportAddressTest`, que confere o checksum sobre o valor que
    vai para o APK. Detalhes em `09-VERIFICATION.md`.
 2. **Strings da tela Sobre em Kotlin.** Os dois diálogos de limpar-tudo tinham título e corpo
-   embutidos no código. Movidos para `strings.xml` em `a5c1363`.
+   embutidos no código. Movidos para `strings.xml` em `a1bba94`.
 
 ## Estado dos portões em 2026-08-06
 
