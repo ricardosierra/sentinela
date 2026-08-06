@@ -17,6 +17,15 @@
 -->
 <lint>
     <issue id="UnusedResources">
+        <!--
+          TODO: as cinco linhas abaixo estao VENCIDAS. A regra deste arquivo manda a fase apagar a
+          sua linha ao entregar as telas, e as Phases 8 e 9 fecharam com o milestone v0.1 — elas
+          deviam ter saido junto. Medido em 2026-08-06 com as chaves declaradas contra as
+          referenciadas em Kotlin e XML: continuam escondendo 3 chaves orfas de verdade —
+          `whitelist_about_title`, `history_title` e `history_end_of_list`. Apagar as cinco linhas
+          e entao resolver as 3 chaves (usar ou remover); `about_`, `support_` e `review_` ja estao
+          com zero orfas e saem sem custo nenhum.
+        -->
         <!-- Phase 8 — tela de whitelist pessoal (CRUD, busca, import/export) -->
         <ignore regexp="R\.string\.whitelist_" />
         <!-- Phase 8 — tela de historico de bloqueios (filtros, acoes por item) -->

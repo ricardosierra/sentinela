@@ -61,6 +61,10 @@ class DialerActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission(),
     ) { }
 
+    // TODO: falta `onNewIntent`. O manifest declara esta tela como `singleTop`, entao uma segunda
+    //  acao de discagem com a tela ja aberta reaproveita a instancia e NAO passa por `onCreate` — o
+    //  numero da nova intencao e ignorado em silencio e o campo continua com o anterior. CallActivity
+    //  ja trata isso corretamente; aqui ficou de fora.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.filterTouchesWhenObscured = true

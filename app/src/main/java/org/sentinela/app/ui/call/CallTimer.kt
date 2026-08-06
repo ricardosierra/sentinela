@@ -59,6 +59,9 @@ internal fun formatCallDuration(elapsedSeconds: Long): String {
 fun CallTimer(
     startedAtMillis: Long,
     modifier: Modifier = Modifier,
+    // TODO: relogio de PAREDE para medir duracao. Ajuste de hora pela operadora ou por NTP no meio
+    //  da ligacao faz o cronometro pular, andar para tras ou exibir duracao negativa. Duracao pede
+    //  relogio monotonico (`SystemClock.elapsedRealtime`), com `startedAtMillis` na mesma base.
     clock: () -> Long = System::currentTimeMillis,
 ) {
     var agora by remember { mutableLongStateOf(clock()) }

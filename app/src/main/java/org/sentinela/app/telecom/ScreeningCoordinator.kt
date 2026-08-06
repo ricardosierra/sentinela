@@ -110,6 +110,13 @@ class ScreeningCoordinator(
     private suspend fun decide(call: ScreenedCall): Pair<CallDecision, ScreeningSettings> {
         val key = (call.number as? ScreenedNumber.Valid)?.e164
         return try {
+            // TODO: este prazo NAO e garantia dura. `withTimeout` cancela de forma cooperativa, e o
+            //  ramo do contato termina em `ContactsContractLookupSource.probe`, que e uma chamada
+            //  BLOQUEANTE ao ContentResolver (binder + SQLite do provider) sem ponto de suspensao.
+            //  Provider de agenda travado segura o ramo alem de 1 s e o cancelamento so vale quando
+            //  ele retornar — justamente o cenario para o qual o prazo foi escrito. Isolar a sonda
+            //  com timeout proprio que possa abandonar o resultado (ex.: consulta em thread separada
+            //  cujo resultado e descartado) em vez de confiar no cancelamento cooperativo.
             withTimeout(timeoutMillis) {
                 coroutineScope {
                     val pedido = async { settings.snapshot() }

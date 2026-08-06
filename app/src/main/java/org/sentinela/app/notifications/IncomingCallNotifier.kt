@@ -89,6 +89,12 @@ class IncomingCallNotifier(
             // atender por ele.
             acoesDeChamadaRecebida(builder)
         }
+        // TODO: a intencao de tela cheia carrega ACTION_ANSWER, e o sistema a dispara SOZINHO com o
+        //  aparelho bloqueado — CallActivity le o extra e chama session.answer(), entao toda chamada
+        //  recebida com a tela travada e atendida sem o usuario tocar em nada. Ela deve abrir a tela
+        //  sem acao nenhuma (intencaoDeAcao aceita null exatamente para isso). Atencao: o teste
+        //  IncomingCallNotifierTest afirma hoje que este extra e ACTION_ANSWER — ele fixa o defeito
+        //  e precisa mudar junto.
         if (fullScreenAllowed()) {
             builder.setFullScreenIntent(intencaoDeAcao(ACTION_ANSWER, REQUEST_FULL_SCREEN), true)
         }

@@ -40,6 +40,9 @@ interface WhitelistDao {
     @Query("SELECT COUNT(*) FROM whitelist")
     fun count(): Flow<Int>
 
+    // TODO: os curingas do LIKE nao sao escapados. Digitar `%` na busca casa com a lista inteira e
+    //  `_` casa com qualquer caractere — o usuario ve resultado que nao pede. Nao e injecao (o Room
+    //  parametriza), e defeito de busca: falta `ESCAPE` com escape dos curingas na entrada.
     @Query(
         "SELECT * FROM whitelist " +
             "WHERE number_key LIKE '%' || :query || '%' " +

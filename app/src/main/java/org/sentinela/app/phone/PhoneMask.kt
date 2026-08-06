@@ -41,6 +41,10 @@ object PhoneMask {
         if (ndc == 0 || ndc >= digitos.length) return@runCatching degradada
 
         val resto = digitos.substring(ndc)
+        // TODO: com resto de exatamente 5 digitos a mascara nao esconde nada — `first()` mostra o
+        //  digito 1 e `takeLast(4)` mostra os digitos 2 a 5, ou seja o numero nacional INTEIRO, com
+        //  os asteriscos servindo so de enfeite. O piso precisa ser ULTIMOS + 2 (6 digitos) para
+        //  sobrar ao menos um digito coberto. Vale para log e UI, entao e vazamento de dado pessoal.
         if (resto.length < MIN_RESTO) return@runCatching degradada
 
         "+${parsed.countryCode} ${digitos.substring(0, ndc)} " +

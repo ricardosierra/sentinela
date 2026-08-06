@@ -161,6 +161,12 @@ class AppContainer(
         }
     }
 
+    // TODO: falta `withContext(Dispatchers.IO)` — `clearAllTables()` e bloqueante e o unico chamador
+    //  (AboutViewModel) usa `viewModelScope`, que e Main. O banco proibe acesso na thread principal
+    //  e a acao de apagar dados derruba o app sem apagar nada.
+    // TODO: limpar o DataStore nao invalida `DataStoreSettingsRepository.cached`, que e o snapshot
+    //  servido no caminho quente da triagem. Ate o collector reemitir, a decisao segue usando as
+    //  configuracoes antigas de dados que o usuario mandou apagar.
     suspend fun clearAllData() {
         database.clearAllTables()
         settingsDataStore.edit { it.clear() }

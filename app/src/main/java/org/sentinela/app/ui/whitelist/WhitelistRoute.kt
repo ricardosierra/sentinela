@@ -140,6 +140,14 @@ private fun rememberImportLauncher(
             runCatching {
                 withContext(Dispatchers.IO) {
                     context.contentResolver.openInputStream(origem)?.use { stream ->
+                        // TODO: `Reader.read(buffer)` e UMA leitura best-effort, nao `readText()`:
+                        //  ela devolve o que o stream tiver disponivel no momento (tipicamente 8 KB)
+                        //  mesmo com o arquivo maior. Backup vindo de provedor SAF baseado em pipe
+                        //  (Drive, por exemplo) chega truncado, o JSON quebra e o usuario ve
+                        //  "0 adicionados" como se fosse sucesso. Trocar por leitura em laco ate o
+                        //  fim, com teto explicito.
+                        // TODO: `CharArray(MAX_IMPORT_CHARS)` aloca 8 MB de heap em TODA importacao,
+                        //  inclusive para um arquivo de 200 bytes — dimensionar pelo que foi lido.
                         val buffer = CharArray(MAX_IMPORT_CHARS)
                         val lidos = stream.reader().read(buffer)
                         if (lidos <= 0) "" else String(buffer, 0, lidos)

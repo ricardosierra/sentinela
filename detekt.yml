@@ -16,6 +16,21 @@ style:
     ignoreAnnotated: ['Composable', 'Preview']
   MaxLineLength:
     maxLineLength: 120
+  # `ForbiddenComment` proíbe `TODO:` por padrão, e era por isso que o código não tinha nenhum: a
+  # convenção do projeto manda dívida para `docs/backlog/`. A revisão de 2026-08-06 marcou no
+  # próprio código os defeitos que a auditoria encontrou, porque um achado que descreve UMA linha
+  # perde o essencial quando vira parágrafo num documento distante — quem for mexer na linha
+  # precisa esbarrar no aviso. O backlog continua sendo o lugar de ideia e escopo; o marcador aqui
+  # é para defeito localizado, e some junto com a correção.
+  #
+  # `FIXME:` e `STOPSHIP:` continuam proibidos de propósito: eles não marcam dívida conhecida,
+  # marcam código que não deveria ter sido publicado — e essa proibição é que segura o release.
+  ForbiddenComment:
+    comments:
+      - reason: 'marcador de código que não deveria ser publicado'
+        value: 'FIXME:'
+      - reason: 'marcador de código que não deveria ser publicado'
+        value: 'STOPSHIP:'
 
 complexity:
   LongParameterList:

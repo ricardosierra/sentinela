@@ -1,3 +1,7 @@
+// REFACTOR: esta lista de 7 supressoes foi copiada igual para 9 arquivos do projeto. Aqui ela
+//  desliga `TooManyFunctions` e `LongMethod` num arquivo de UMA funcao, e `SwallowedException`
+//  bem onde o `catch (e: JSONException)` abaixo engole o erro que o usuario precisava ver.
+//  Suprimir regra por regra, no ponto de uso, como o resto do projeto ja faz.
 @file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements")
 
 package org.sentinela.app.data.local.export
@@ -36,6 +40,9 @@ object WhitelistImporter {
             val seenInFile = mutableSetOf<String>()
 
             for (i in 0 until limit) {
+                // TODO: `getJSONObject` lanca quando o elemento nao e objeto, e a captura la embaixo
+                //  descarta TODAS as entradas ja lidas — um item torto na posicao 500 joga fora os
+                //  499 validos. Usar `optJSONObject`, contar como invalido e seguir o laco.
                 val obj = array.getJSONObject(i)
                 val rawNumber = obj.optString("numberKey")
                 val desc = obj.optString("description", "").takeIf { it.isNotBlank() }
@@ -70,13 +77,19 @@ object WhitelistImporter {
                 )
             }
 
-            // Exceeded limit are considered ignored/invalid/duplicate?
-            // "limite 10.000". If more than limit, we just parse up to 10k. 
-            // We can add skipped ones to invalid? No, the requirement says "limite 10.000".
-            // So we just stop at limit.
+            // REFACTOR: comentarios de rascunho em ingles, com pergunta em aberto, num projeto cujo
+            //  codigo e todo comentado em portugues. Decidir e escrever a decisao, ou apagar.
+            // TODO: o que passa de MAX_IMPORT_LIMIT some sem contagem e sem aviso — um arquivo com
+            //  15.000 numeros importa 10.000 e o usuario acredita que levou a lista inteira.
+            //  Devolver o excedente no resultado para a tela poder avisar.
 
         } catch (e: JSONException) {
-            // Malformed JSON means everything else is invalid or we just return what we got so far
+            // TODO: arquivo corrompido devolve exatamente o mesmo que um arquivo vazio,
+            //  `(emptyList(), 0, 0)`, entao o ViewModel emite `Imported(0,0,0)` e o usuario le
+            //  "0 adicionados, 0 invalidos" — mensagem de SUCESSO para um arquivo ilegivel.
+            //  `WhitelistFeedback.ImportFailed` existe mas so e alcancado por falha de leitura do
+            //  stream, nunca por erro de formato. Viola o invariante do projeto de que erro de
+            //  importacao sempre avisa na tela. Precisa de um sinal de "malformado" no ImportResult.
             return ImportResult(emptyList(), 0, 0) // Or return current results if we want partial
         }
 
