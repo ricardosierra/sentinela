@@ -109,3 +109,6 @@ Thumbs.db
 stitch_silent_call_blocker.zip
 .bitcoin_private_key.pem
 .bitcoin_address.txt
+
+# Ambiente virtual Python (ferramenta local, nunca versionado)
+.venv/
