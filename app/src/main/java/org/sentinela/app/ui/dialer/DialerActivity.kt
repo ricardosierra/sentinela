@@ -7,6 +7,9 @@ import android.telecom.TelecomManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.sentinela.app.SentinelaApp
@@ -61,14 +64,20 @@ class DialerActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission(),
     ) { }
 
-    // TODO: falta `onNewIntent`. O manifest declara esta tela como `singleTop`, entao uma segunda
-    //  acao de discagem com a tela ja aberta reaproveita a instancia e NAO passa por `onCreate` — o
-    //  numero da nova intencao e ignorado em silencio e o campo continua com o anterior. CallActivity
-    //  ja trata isso corretamente; aqui ficou de fora.
+    /**
+     * Número da intenção corrente, como estado.
+     *
+     * Precisa ser estado, e não variável local do `onCreate`: a tela é `singleTop`, então uma
+     * segunda ação de discagem com ela já aberta é entregue em [onNewIntent] e nunca passa por
+     * `onCreate`. Como valor local, o número novo era descartado em silêncio e o campo continuava
+     * mostrando o anterior.
+     */
+    private var numeroRecebido by mutableStateOf("")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.filterTouchesWhenObscured = true
-        val numeroRecebido = numeroDaIntencao(intent)
+        numeroRecebido = numeroDaIntencao(intent)
         setContent {
             SentinelaTheme {
                 DialpadScreen(
@@ -78,6 +87,12 @@ class DialerActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        numeroRecebido = numeroDaIntencao(intent)
     }
 
     /**

@@ -32,6 +32,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -95,8 +96,12 @@ fun DialpadScreen(
     formatNumber: (String) -> String = { digitos -> digitos },
     suggestionFor: (String) -> String? = { null },
 ) {
-    var digitos by remember { mutableStateOf(initialNumber) }
-    var falhas by remember { mutableStateOf(0) }
+    // `rememberSaveable` com [initialNumber] de chave resolve dois defeitos de uma vez, e os dois
+    // são visíveis: sem persistência, girar o aparelho apagava o número já digitado; sem a chave,
+    // uma segunda ação de discagem (a tela é `singleTop`, então ela é reaproveitada) mantinha o
+    // número antigo no campo e ignorava o novo em silêncio.
+    var digitos by rememberSaveable(initialNumber) { mutableStateOf(initialNumber) }
+    var falhas by rememberSaveable { mutableStateOf(0) }
     val snackbar = remember { SnackbarHostState() }
     val mensagemDeFalha = stringResource(R.string.dialpad_error_failed)
     val acaoDeFalha = stringResource(R.string.dialpad_error_retry)

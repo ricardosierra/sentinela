@@ -109,14 +109,35 @@ class WhitelistBackupWiringTest {
         )
     }
 
-    /** Arquivo corrompido não pode gravar nada nem derrubar a tela. */
+    /**
+     * Arquivo corrompido não pode gravar nada, não pode derrubar a tela — e precisa AVISAR.
+     *
+     * A versão anterior deste teste exigia `Imported(0, 0, 0)`, ou seja, fixava o defeito: quem
+     * escolhesse o arquivo errado lia "0 adicionados, 0 já existiam, 0 inválidos", que é a mesma
+     * frase de um backup válido e vazio. O invariante do projeto manda erro de importação avisar na
+     * tela, então o resultado correto é falha explícita.
+     */
     @Test
-    fun `importacao de arquivo malformado nao grava nada`() = runTest {
+    fun `importacao de arquivo malformado avisa falha e nao grava nada`() = runTest {
         every { repository.observeAll() } returns flowOf(emptyList())
         coEvery { repository.upsert(any()) } returns Unit
 
         val viewModel = WhitelistViewModel(repository, normalizer)
         viewModel.import("isto não é json")
+        testScheduler.advanceUntilIdle()
+
+        coVerify(exactly = 0) { repository.upsert(any()) }
+        assertEquals(WhitelistFeedback.ImportFailed, viewModel.feedback.value)
+    }
+
+    /** Backup legítimo e vazio continua sendo sucesso — não pode virar aviso de falha. */
+    @Test
+    fun `importacao de backup valido e vazio nao vira aviso de falha`() = runTest {
+        every { repository.observeAll() } returns flowOf(emptyList())
+        coEvery { repository.upsert(any()) } returns Unit
+
+        val viewModel = WhitelistViewModel(repository, normalizer)
+        viewModel.import("""{ "version": 1, "whitelist": [] }""")
         testScheduler.advanceUntilIdle()
 
         coVerify(exactly = 0) { repository.upsert(any()) }

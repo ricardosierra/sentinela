@@ -1,5 +1,6 @@
 package org.sentinela.app.ui.call
 
+import android.os.SystemClock
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -59,10 +60,9 @@ internal fun formatCallDuration(elapsedSeconds: Long): String {
 fun CallTimer(
     startedAtMillis: Long,
     modifier: Modifier = Modifier,
-    // TODO: relogio de PAREDE para medir duracao. Ajuste de hora pela operadora ou por NTP no meio
-    //  da ligacao faz o cronometro pular, andar para tras ou exibir duracao negativa. Duracao pede
-    //  relogio monotonico (`SystemClock.elapsedRealtime`), com `startedAtMillis` na mesma base.
-    clock: () -> Long = System::currentTimeMillis,
+    // Monotônico, e na mesma base de `startedAtMillis` (ver `AppContainer`). Com relógio de parede,
+    // uma correção de hora no meio da ligação fazia o cronômetro saltar ou ficar negativo.
+    clock: () -> Long = SystemClock::elapsedRealtime,
 ) {
     var agora by remember { mutableLongStateOf(clock()) }
     LaunchedEffect(startedAtMillis) {

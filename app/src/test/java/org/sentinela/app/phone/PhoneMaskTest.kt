@@ -94,8 +94,16 @@ class PhoneMaskTest {
         }
     }
 
+    /**
+     * A versao anterior deste teto era `cc + ndc + 5` — e era ele que AUTORIZAVA o vazamento que
+     * este teste agora proibe: com resto nacional de exatamente cinco digitos, `<primeiro>****-
+     * <ultimos 4>` cobre os cinco, o numero nacional sai inteiro e o teto antigo dava verde.
+     * O criterio correto nao e um teto numerico e sim uma proibicao: ao menos um digito do numero
+     * nacional precisa ficar escondido, sempre. Numero curto de servico segue fora, por decisao
+     * explicita do projeto (nao e dado pessoal).
+     */
     @Test
-    fun `mascara expoe no maximo cc + ndc + 5 digitos`() {
+    fun `mascara sempre esconde ao menos um digito do numero nacional`() {
         val longos = listOf(
             "+5511987654321",
             "+551133334444",
@@ -103,13 +111,31 @@ class PhoneMaskTest {
             "+442071838750",
             "+558001234567",
             "+5540041234",
+            // Regressao: os quatro abaixo tem resto nacional de EXATAMENTE cinco digitos, que era o
+            // caso em que a forma completa expunha o numero inteiro. O da India e o mais claro:
+            // saia como "+91 98765 4****-3210", ou seja o NSN 9876543210 em peso. Nenhum dos seis
+            // numeros acima cai nessa faixa — por isso o defeito passou despercebido.
+            "+493012345",
+            "+390612345",
+            "+919876543210",
+            "+3581234567",
         )
         longos.forEach { e164 ->
             val parsed = util.parse(e164, null)
-            val ndc = util.getLengthOfNationalDestinationCode(parsed)
-            val teto = parsed.countryCode.toString().length + ndc + 5
-            val expostos = mask(e164).count(Char::isDigit)
-            assertTrue("$e164 expos $expostos digitos (teto $teto)", expostos <= teto)
+            val nacional = util.getNationalSignificantNumber(parsed)
+            val mascarado = mask(e164)
+            val expostosDoNacional =
+                mascarado.count(Char::isDigit) - parsed.countryCode.toString().length
+
+            assertTrue(
+                "$e164 expos $expostosDoNacional de ${nacional.length} digitos nacionais em " +
+                    "'$mascarado' — a mascara precisa esconder ao menos um",
+                expostosDoNacional < nacional.length,
+            )
+            assertFalse(
+                "$e164 vazou o numero nacional inteiro em '$mascarado'",
+                mascarado.filter(Char::isDigit).contains(nacional),
+            )
         }
     }
 

@@ -1,4 +1,4 @@
-@file:Suppress("LongMethod", "TooManyFunctions", "LongParameterList")
+@file:Suppress("LongMethod")
 
 package org.sentinela.app.ui.history
 

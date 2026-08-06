@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import org.sentinela.app.AppContainer
 
@@ -11,15 +12,28 @@ class AboutViewModel(
     private val clearDataFn: suspend () -> Unit
 ) : ViewModel() {
 
-    // TODO: `viewModelScope` roda em Dispatchers.Main e `clearDataFn` cai em
-    //  `SentinelaDatabase.clearAllTables()`, que e bloqueante — e o banco proibe acesso na thread
-    //  principal, entao lanca IllegalStateException. Como nao ha try/catch, apagar os dados derruba o
-    //  app e `onComplete()` nunca roda; o usuario fica sem apagar nada e sem aviso. Falta
-    //  `withContext(Dispatchers.IO)` na origem e tratamento de erro visivel nesta acao irreversivel.
-    fun clearAllData(onComplete: () -> Unit) {
+    /**
+     * Apagar tudo é irreversível e pode falhar (disco cheio, banco ocupado). A falha silenciosa era
+     * a pior saída possível: o usuário mandava apagar, a tela voltava ao início e ele acreditava que
+     * os dados tinham sumido. Por isso o resultado sai daqui e quem chama decide o que mostrar —
+     * navegar só faz sentido quando realmente apagou.
+     *
+     * A captura ampla é deliberada e o cancelamento é repassado: engolir `CancellationException`
+     * quebraria o encerramento do escopo do ViewModel.
+     */
+    // A exceção não é registrada de propósito: este projeto não escreve log de erro em release e
+    // o que o usuário precisa saber já sobe pelo `onResult(false)`, que vira aviso na tela.
+    @Suppress("TooGenericExceptionCaught", "SwallowedException")
+    fun clearAllData(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            clearDataFn()
-            onComplete()
+            try {
+                clearDataFn()
+                onResult(true)
+            } catch (cancelamento: CancellationException) {
+                throw cancelamento
+            } catch (erro: Throwable) {
+                onResult(false)
+            }
         }
     }
 

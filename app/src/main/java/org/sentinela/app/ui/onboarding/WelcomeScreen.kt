@@ -2,7 +2,6 @@
 // compartilhado: a contagem alta aqui e consequencia do proprio contrato de design — cada bloco da
 // tela vira um composable pequeno e nomeado, e as duas pre-visualizacoes exigidas somam mais duas
 // funcoes. Juntar blocos para caber no limite deixaria a tela pior de ler.
-@file:Suppress("TooManyFunctions")
 
 package org.sentinela.app.ui.onboarding
 

@@ -1,17 +1,18 @@
 package org.sentinela.app
 
 import android.content.Context
+import android.os.SystemClock
 import android.telephony.TelephonyManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sentinela.app.data.contacts.ContactKeyCache
 import org.sentinela.app.data.contacts.ContactLookupRepository
 import org.sentinela.app.data.contacts.ContactsContractLookupSource
@@ -161,15 +162,20 @@ class AppContainer(
         }
     }
 
-    // TODO: falta `withContext(Dispatchers.IO)` — `clearAllTables()` e bloqueante e o unico chamador
-    //  (AboutViewModel) usa `viewModelScope`, que e Main. O banco proibe acesso na thread principal
-    //  e a acao de apagar dados derruba o app sem apagar nada.
-    // TODO: limpar o DataStore nao invalida `DataStoreSettingsRepository.cached`, que e o snapshot
-    //  servido no caminho quente da triagem. Ate o collector reemitir, a decisao segue usando as
-    //  configuracoes antigas de dados que o usuario mandou apagar.
-    suspend fun clearAllData() {
+    /**
+     * Apaga banco e configurações.
+     *
+     * O despacho para disco é obrigatório e não é zelo: `clearAllTables()` é bloqueante e o único
+     * chamador é a tela Sobre, que roda em `viewModelScope` — ou seja, na thread principal. O banco
+     * recusa acesso por lá e lança, então a ação "limpar todos os dados" derrubava o aplicativo sem
+     * apagar coisa nenhuma.
+     *
+     * As configurações saem por [DataStoreSettingsRepository.clearAll], que zera o arquivo e o
+     * retrato em memória juntos — ver o KDoc de lá para o motivo.
+     */
+    suspend fun clearAllData() = withContext(Dispatchers.IO) {
         database.clearAllTables()
-        settingsDataStore.edit { it.clear() }
+        settingsRepository.clearAll()
     }
 
     /**
@@ -190,6 +196,10 @@ class AppContainer(
                 scope = appScope,
             ),
             normalizer = phoneNumberNormalizer,
+            // Escopo do PROCESSO, e não o de quem chama: é ele que permite abandonar uma sonda
+            // travada no provider da agenda em vez de segurar a resposta ao sistema de telefonia
+            // além do limite da plataforma. Ver o KDoc de `sondar`.
+            scope = appScope,
         )
     }
 
@@ -267,6 +277,11 @@ class AppContainer(
             // preguiçoso: esta referência só o constrói quando a primeira chamada fica ativa.
             notifications = { identity -> incomingCallNotifier.notifyOngoing(identity) },
             maskNumber = maskNumber,
+            // Relógio MONOTÔNICO para a duração da chamada. O de parede anda para trás quando a
+            // operadora ou o NTP corrigem a hora, e o cronômetro saltava ou exibia tempo negativo
+            // no meio da ligação. Injetado aqui porque o coordenador da sessão precisa continuar
+            // sem tipo da plataforma. A tela lê na MESMA base — mudar um lado exige mudar o outro.
+            clock = SystemClock::elapsedRealtime,
         )
     }
 

@@ -37,8 +37,36 @@ import org.sentinela.app.data.local.WhitelistEntry
  */
 private const val MAX_IMPORT_CHARS = 4 * 1024 * 1024
 
+/** Pedaço de leitura. Cresce a String conforme o arquivo, em vez de reservar o teto inteiro. */
+private const val PEDACO_DE_LEITURA = 8 * 1024
+
 private const val NOME_PADRAO_BACKUP = "sentinela_whitelist_backup.json"
 private const val TIPO_BACKUP = "application/json"
+
+/**
+ * Lê o fluxo até o fim, respeitando o teto.
+ *
+ * Existe porque `Reader.read(buffer)` é UMA leitura de melhor esforço, e não `readText()`: ela
+ * devolve o que estiver disponível naquele instante — tipicamente um pedaço de 8 KB — mesmo com o
+ * arquivo inteiro por vir. Provedor do seletor do sistema baseado em cano (o Drive, por exemplo)
+ * entrega justamente assim, então o backup chegava cortado no meio, o JSON quebrava e a tela
+ * anunciava "0 adicionados" como se tivesse dado certo. Ler em laço é o que torna a importação
+ * confiável fora do arquivo local pequeno.
+ *
+ * Passar do teto é ERRO, nunca corte silencioso: um JSON truncado no limite seria inválido de
+ * qualquer forma, e devolver o pedaço faria a tela culpar o formato do arquivo em vez do tamanho.
+ */
+private fun java.io.Reader.lerAteOTeto(teto: Int): String {
+    val texto = StringBuilder()
+    val pedaco = CharArray(PEDACO_DE_LEITURA)
+    while (true) {
+        val lidos = read(pedaco)
+        if (lidos < 0) break
+        texto.append(pedaco, 0, lidos)
+        require(texto.length <= teto) { "arquivo de importacao acima do teto de $teto caracteres" }
+    }
+    return texto.toString()
+}
 
 @Composable
 fun WhitelistRoute(
@@ -140,17 +168,7 @@ private fun rememberImportLauncher(
             runCatching {
                 withContext(Dispatchers.IO) {
                     context.contentResolver.openInputStream(origem)?.use { stream ->
-                        // TODO: `Reader.read(buffer)` e UMA leitura best-effort, nao `readText()`:
-                        //  ela devolve o que o stream tiver disponivel no momento (tipicamente 8 KB)
-                        //  mesmo com o arquivo maior. Backup vindo de provedor SAF baseado em pipe
-                        //  (Drive, por exemplo) chega truncado, o JSON quebra e o usuario ve
-                        //  "0 adicionados" como se fosse sucesso. Trocar por leitura em laco ate o
-                        //  fim, com teto explicito.
-                        // TODO: `CharArray(MAX_IMPORT_CHARS)` aloca 8 MB de heap em TODA importacao,
-                        //  inclusive para um arquivo de 200 bytes — dimensionar pelo que foi lido.
-                        val buffer = CharArray(MAX_IMPORT_CHARS)
-                        val lidos = stream.reader().read(buffer)
-                        if (lidos <= 0) "" else String(buffer, 0, lidos)
+                        stream.reader().lerAteOTeto(MAX_IMPORT_CHARS)
                     } ?: error("sem stream de leitura para o arquivo escolhido")
                 }
             }.onSuccess(onLido).onFailure { viewModel.onImportFailed() }
@@ -171,15 +189,23 @@ private fun WhitelistFeedbackEffect(
     val textoExportFalhou = stringResource(R.string.whitelist_export_failed)
     val textoImportFalhou = stringResource(R.string.whitelist_import_failed)
     val atual = feedback
-    val textoImportado = if (atual is WhitelistFeedback.Imported) {
-        stringResource(
+    // Quando o arquivo passa do limite, o aviso PRECISA dizer quantos ficaram de fora: com a
+    // mensagem curta, uma lista de 15.000 importava 10.000 e o usuário acreditava ter levado tudo.
+    val textoImportado = when {
+        atual !is WhitelistFeedback.Imported -> ""
+        atual.ignoredOverLimit > 0 -> stringResource(
+            R.string.whitelist_import_result_over_limit,
+            atual.added,
+            atual.duplicates,
+            atual.invalid,
+            atual.ignoredOverLimit,
+        )
+        else -> stringResource(
             R.string.whitelist_import_result,
             atual.added,
             atual.duplicates,
             atual.invalid,
         )
-    } else {
-        ""
     }
 
     LaunchedEffect(atual) {

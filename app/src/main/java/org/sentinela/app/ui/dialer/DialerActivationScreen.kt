@@ -1,8 +1,9 @@
+@file:Suppress("TooManyFunctions")
+
 // Supressao LOCAL, no molde do plano 06-01, em vez de afrouxar o detekt.yml compartilhado: a
 // contagem alta aqui e consequencia de duas exigencias do proprio contrato — cada ramo de estado
 // vira um composable pequeno e nomeado, e os cinco ramos mais a escala de fonte grande viram seis
 // pre-visualizacoes. Juntar ramos para caber no limite deixaria a tela pior.
-@file:Suppress("TooManyFunctions")
 
 package org.sentinela.app.ui.dialer
 

@@ -3,6 +3,7 @@ package org.sentinela.app.data.local.export
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -75,16 +76,65 @@ class WhitelistImportExportTest {
         assertTrue(!result.newEntities[1].enabled)
     }
 
+    /**
+     * Estes dois testes antes so exigiam lista vazia — e era exatamente isso que deixava o defeito
+     * passar: arquivo ilegivel e arquivo vazio produziam o MESMO resultado, e a tela anunciava
+     * "0 adicionados, 0 invalidos" para quem escolheu o arquivo errado. O que precisa ser afirmado
+     * nao e a lista vazia, e o sinal de MALFORMADO que faz a tela avisar de falha.
+     */
     @Test
-    fun `import handles empty json gracefully`() {
+    fun `arquivo vazio e reportado como malformado, nao como importacao vazia`() {
         val result = WhitelistImporter.parseJson("", emptySet(), normalizer, 0L)
         assertTrue(result.newEntities.isEmpty())
+        assertTrue("arquivo vazio precisa avisar falha", result.malformed)
     }
 
     @Test
-    fun `import handles malformed json gracefully`() {
+    fun `json corrompido e reportado como malformado`() {
         val result = WhitelistImporter.parseJson("{ malformed ", emptySet(), normalizer, 0L)
         assertTrue(result.newEntities.isEmpty())
+        assertTrue("json corrompido precisa avisar falha", result.malformed)
+    }
+
+    @Test
+    fun `arquivo sem a chave da lista e malformado`() {
+        val result = WhitelistImporter.parseJson("""{ "version": 1 }""", emptySet(), normalizer, 0L)
+        assertTrue("arquivo que nao e backup do app precisa avisar falha", result.malformed)
+    }
+
+    @Test
+    fun `backup valido e vazio NAO e malformado`() {
+        val result = WhitelistImporter.parseJson(
+            """{ "version": 1, "whitelist": [] }""",
+            emptySet(),
+            normalizer,
+            0L,
+        )
+        assertTrue(result.newEntities.isEmpty())
+        assertFalse("backup valido e vazio nao pode virar aviso de falha", result.malformed)
+    }
+
+    /**
+     * Regressao: `getJSONObject` lancava no elemento torto e a captura descartava TUDO que ja tinha
+     * sido lido. Um item invalido no meio do arquivo jogava fora os validos que vieram antes.
+     */
+    @Test
+    fun `elemento torto no meio do arquivo nao descarta os validos`() {
+        val json = """
+            {
+              "version": 1,
+              "whitelist": [
+                { "numberKey": "+12345" },
+                42,
+                { "numberKey": "+67890" }
+              ]
+            }
+        """.trimIndent()
+
+        val result = WhitelistImporter.parseJson(json, emptySet(), normalizer, 0L)
+        assertFalse("um item torto nao torna o arquivo inteiro invalido", result.malformed)
+        assertEquals(2, result.newEntities.size)
+        assertEquals(1, result.invalidSkipped)
     }
 
     @Test
@@ -124,5 +174,9 @@ class WhitelistImportExportTest {
         
         val result = WhitelistImporter.parseJson(sb.toString(), emptySet(), localNormalizer, 0L)
         assertEquals(limit, result.newEntities.size)
+        // O excedente precisa ser CONTADO, nao descartado em silencio: sem isso o usuario de uma
+        // lista de 15.000 via "10.000 adicionados" e acreditava ter importado tudo.
+        assertEquals(5, result.ignoredOverLimit)
+        assertFalse("passar do limite nao e arquivo invalido", result.malformed)
     }
 }

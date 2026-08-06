@@ -1,7 +1,8 @@
+@file:Suppress("MatchingDeclarationName")
+
 // Nome do arquivo em ingles, como o resto da camada de interface, e declaracao em pt-BR, como todo o
 // vocabulario de dominio do projeto. A regra que cobra a coincidencia dos dois e desligada AQUI, no
 // arquivo, em vez de afrouxada na configuracao compartilhada do analisador.
-@file:Suppress("MatchingDeclarationName")
 
 package org.sentinela.app.ui.navigation
 

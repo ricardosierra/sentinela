@@ -37,7 +37,13 @@ sealed interface WhitelistFeedback {
     data object Duplicate : WhitelistFeedback
     data object Exported : WhitelistFeedback
     data object ExportFailed : WhitelistFeedback
-    data class Imported(val added: Int, val duplicates: Int, val invalid: Int) : WhitelistFeedback
+    data class Imported(
+        val added: Int,
+        val duplicates: Int,
+        val invalid: Int,
+        /** Entradas descartadas por passar do limite. Zero na esmagadora maioria dos arquivos. */
+        val ignoredOverLimit: Int = 0,
+    ) : WhitelistFeedback
     data object ImportFailed : WhitelistFeedback
 }
 
@@ -139,6 +145,13 @@ class WhitelistViewModel(
                 normalizer = normalizer,
                 nowUtcMillis = clock(),
             )
+            // Arquivo ilegível sai por aqui, com aviso de FALHA. Antes ele seguia adiante e caía no
+            // mesmo `Imported(0, 0, 0)` de um backup válido e vazio — o usuário lia uma mensagem de
+            // sucesso depois de escolher o arquivo errado.
+            if (resultado.malformed) {
+                _feedback.value = WhitelistFeedback.ImportFailed
+                return@launch
+            }
             resultado.newEntities.forEach { entity ->
                 repository.upsert(
                     WhitelistEntry(
@@ -153,6 +166,7 @@ class WhitelistViewModel(
                 added = resultado.newEntities.size,
                 duplicates = resultado.duplicatesSkipped,
                 invalid = resultado.invalidSkipped,
+                ignoredOverLimit = resultado.ignoredOverLimit,
             )
         }
     }

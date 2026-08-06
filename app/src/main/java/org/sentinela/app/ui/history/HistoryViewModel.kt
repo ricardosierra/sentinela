@@ -1,4 +1,4 @@
-@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "TooGenericExceptionCaught", "UnusedPrivateProperty")
+@file:Suppress("MagicNumber")
 
 package org.sentinela.app.ui.history
 

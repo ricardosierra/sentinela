@@ -1,4 +1,4 @@
-@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException")
+@file:Suppress("LongMethod", "MaxLineLength")
 
 package org.sentinela.app.ui.whitelist
 

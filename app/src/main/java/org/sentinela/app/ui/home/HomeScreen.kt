@@ -1,8 +1,9 @@
+@file:Suppress("TooManyFunctions")
+
 // A home e a tela com mais estados do produto: onze compostas privadas pequenas, uma por bloco e uma
 // por estado degradado, sao a forma legivel de tratar a secao 8 inteira. Afrouxar as regras
 // compartilhadas do detekt por causa desta tela seria o preco errado — a supressao fica no arquivo,
 // no precedente que a Fase 7 ja abriu.
-@file:Suppress("LongParameterList", "TooManyFunctions")
 
 package org.sentinela.app.ui.home
 

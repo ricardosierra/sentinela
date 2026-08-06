@@ -6,36 +6,22 @@
   tinham sido escritos antes das telas. A medicao da Phase 7 (2026-07-30) mostrou que
   a supressao NUNCA foi necessaria para manter o build verde — a severidade e de aviso
   e a conversao de aviso em erro nao esta ligada. Ela servia para o relatorio nao ficar
-  ilegivel. Com as telas desta fase consumindo as chaves, o bloco cego virou esta lista.
+  ilegivel. Com as telas consumindo as chaves, o bloco cego virou uma lista por prefixo,
+  e cada fase deveria apagar a sua linha ao entregar as telas.
 
-  Cada linha abaixo silencia UM prefixo e nomeia a fase que vai consumi-lo. A fase
-  correspondente deve APAGAR a sua linha quando implementar as telas — se apagar e o
-  achado nao aparecer, e porque a chave ficou orfa de verdade.
+  As cinco linhas de prefixo (whitelist_, history_, about_, support_, review_) SAIRAM na
+  revisao de 2026-08-06: as Phases 8 e 9 haviam fechado com o milestone v0.1 e as
+  supressoes tinham sobrevivido a elas. Medido antes de remover, comparando as chaves
+  declaradas contra as referenciadas em Kotlin e XML: escondiam 3 chaves orfas de verdade
+  — whitelist_about_title, history_title e history_end_of_list —, que foram removidas do
+  strings.xml no mesmo trabalho. Os outros tres prefixos ja estavam com zero orfas.
 
-  Medido: 133 achados no total; com este estreitamento, 81. Os 52 silenciados sao
-  exatamente os das Phases 8 e 9.
+  Licao para quem for suprimir de novo: supressao com prazo precisa de dono e de data, e
+  quem apaga a linha precisa MEDIR o que ela escondia — nao apenas conferir se o build
+  segue verde, porque neste projeto a regra e aviso e nunca quebrou build nenhum.
 -->
 <lint>
     <issue id="UnusedResources">
-        <!--
-          TODO: as cinco linhas abaixo estao VENCIDAS. A regra deste arquivo manda a fase apagar a
-          sua linha ao entregar as telas, e as Phases 8 e 9 fecharam com o milestone v0.1 — elas
-          deviam ter saido junto. Medido em 2026-08-06 com as chaves declaradas contra as
-          referenciadas em Kotlin e XML: continuam escondendo 3 chaves orfas de verdade —
-          `whitelist_about_title`, `history_title` e `history_end_of_list`. Apagar as cinco linhas
-          e entao resolver as 3 chaves (usar ou remover); `about_`, `support_` e `review_` ja estao
-          com zero orfas e saem sem custo nenhum.
-        -->
-        <!-- Phase 8 — tela de whitelist pessoal (CRUD, busca, import/export) -->
-        <ignore regexp="R\.string\.whitelist_" />
-        <!-- Phase 8 — tela de historico de bloqueios (filtros, acoes por item) -->
-        <ignore regexp="R\.string\.history_" />
-        <!-- Phase 9 — tela sobre o app e politica de privacidade embutida -->
-        <ignore regexp="R\.string\.about_" />
-        <!-- Phase 9 — secao de apoio ao projeto e doacao -->
-        <ignore regexp="R\.string\.support_" />
-        <!-- Phase 9 — convite de avaliacao na 5a abertura -->
-        <ignore regexp="R\.string\.review_" />
 
         <!--
           Residuos reais do esqueleto, e nao texto de fase futura. Conduta escolhida

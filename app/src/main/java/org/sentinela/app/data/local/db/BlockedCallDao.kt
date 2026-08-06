@@ -1,4 +1,4 @@
-@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements")
+@file:Suppress("TooManyFunctions", "MaxLineLength")
 
 package org.sentinela.app.data.local.db
 

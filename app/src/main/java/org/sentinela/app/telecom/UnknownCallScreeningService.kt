@@ -1,4 +1,3 @@
-@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements")
 
 package org.sentinela.app.telecom
 

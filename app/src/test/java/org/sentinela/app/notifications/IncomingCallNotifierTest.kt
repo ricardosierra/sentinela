@@ -129,15 +129,18 @@ class IncomingCallNotifierTest {
     }
 
     @Test
-    fun `a intencao de tela cheia resolve para a tela de chamada e pede atender`() {
+    fun `a intencao de tela cheia abre a tela de chamada sem pedir acao nenhuma`() {
         val notification = publicarRecebida()
 
         val sombra = shadowOf(notification.fullScreenIntent)
         assertTrue(sombra.isActivityIntent)
         val intent = sombra.savedIntents.single()
         assertEquals("org.sentinela.app.ui.call.CallActivity", intent.component?.className)
-        assertEquals(
-            IncomingCallNotifier.ACTION_ANSWER,
+        // O sistema dispara esta intencao SOZINHO com o aparelho bloqueado. Qualquer acao no extra
+        // seria executada sem toque do usuario — com ACTION_ANSWER, toda chamada recebida com a tela
+        // travada era atendida automaticamente. Ausencia de extra e o que impede isso.
+        assertNull(
+            "a intencao de tela cheia nao pode carregar acao: o sistema a dispara sem toque",
             intent.getStringExtra(IncomingCallNotifier.EXTRA_CALL_ACTION),
         )
     }

@@ -180,6 +180,20 @@ class DataStoreSettingsRepository(
      */
     fun cachedSnapshot(): ScreeningSettings = cached ?: ScreeningSettings()
 
+    /**
+     * Apaga tudo e derruba o retrato em memória no MESMO passo.
+     *
+     * Zerar só o arquivo não bastava: [cached] alimenta o caminho quente da triagem e o collector
+     * do processo só o atualiza na emissão seguinte. Nessa janela a decisão continuaria usando as
+     * configurações que o usuário acabou de mandar apagar. Com o retrato nulo, [snapshot] relê e
+     * [cachedSnapshot] devolve os padrões do MVP, que são os mais conservadores — nos dois casos o
+     * dado apagado deixa de valer imediatamente.
+     */
+    suspend fun clearAll() {
+        dataStore.edit { it.clear() }
+        cached = null
+    }
+
     override suspend fun update(transform: (ScreeningSettings) -> ScreeningSettings) {
         dataStore.edit { prefs -> transform(prefs.toScreeningSettings()).writeInto(prefs) }
     }

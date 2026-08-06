@@ -34,7 +34,22 @@ class RoomWhitelistRepository(
         dao.observeAll().map { list -> list.map(WhitelistEntity::toDomain) }.conflate()
 
     override fun search(query: String): Flow<List<WhitelistEntry>> =
-        dao.search(query).map { list -> list.map(WhitelistEntity::toDomain) }.conflate()
+        dao.search(comCuringasNeutralizados(query))
+            .map { list -> list.map(WhitelistEntity::toDomain) }
+            .conflate()
+
+    /**
+     * Neutraliza os curingas do `LIKE` no que o usuário digitou.
+     *
+     * `%` e `_` são operadores da consulta, não texto: sem isto, buscar `%` casava com a lista
+     * inteira e `_` casava com qualquer caractere. A contrabarra sai primeiro, senão ela escaparia
+     * as barras que este mesmo método acabou de inserir. O caractere de escape é o declarado na
+     * cláusula `ESCAPE` do DAO — mudar um lado exige mudar o outro.
+     */
+    private fun comCuringasNeutralizados(bruto: String): String = bruto
+        .replace("\\", "\\\\")
+        .replace("%", "\\%")
+        .replace("_", "\\_")
 
     /**
      * Dedup (WLT-04): o indice UNICO em number_key garante a atomicidade, mas

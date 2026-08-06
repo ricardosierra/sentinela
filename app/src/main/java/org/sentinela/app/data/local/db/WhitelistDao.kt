@@ -40,13 +40,18 @@ interface WhitelistDao {
     @Query("SELECT COUNT(*) FROM whitelist")
     fun count(): Flow<Int>
 
-    // TODO: os curingas do LIKE nao sao escapados. Digitar `%` na busca casa com a lista inteira e
-    //  `_` casa com qualquer caractere — o usuario ve resultado que nao pede. Nao e injecao (o Room
-    //  parametriza), e defeito de busca: falta `ESCAPE` com escape dos curingas na entrada.
+    /**
+     * Busca por trecho do número ou da descrição.
+     *
+     * `ESCAPE` declarado, e o termo chega com os curingas já neutralizados por
+     * `RoomWhitelistRepository`: sem isso, digitar `%` casava com a lista inteira e `_` casava com
+     * qualquer caractere, então a busca devolvia resultado que o usuário não pediu. Não era brecha
+     * de injeção — o Room parametriza —, era a busca mentindo.
+     */
     @Query(
         "SELECT * FROM whitelist " +
-            "WHERE number_key LIKE '%' || :query || '%' " +
-            "OR description LIKE '%' || :query || '%' " +
+            "WHERE number_key LIKE '%' || :query || '%' ESCAPE '\\' " +
+            "OR description LIKE '%' || :query || '%' ESCAPE '\\' " +
             "ORDER BY created_at_utc_millis DESC",
     )
     fun search(query: String): Flow<List<WhitelistEntity>>

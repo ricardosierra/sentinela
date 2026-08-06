@@ -21,7 +21,16 @@ object PhoneMask {
     const val MASCARA_GENERICA = "+** ****"
 
     private const val ULTIMOS = 4
-    private const val MIN_RESTO = 5
+
+    /**
+     * Piso do resto nacional para a forma completa `<primeiro>****-<ultimos 4>`.
+     *
+     * Precisa ser [ULTIMOS] + 2, e não + 1: a forma mostra o primeiro dígito MAIS os quatro
+     * últimos, então um resto de exatamente cinco dígitos apareceria INTEIRO, com os asteriscos
+     * servindo de enfeite sobre nada. Com o piso em seis sobra sempre ao menos um dígito coberto.
+     * Abaixo do piso a saída cai na forma degradada, que esconde também o código de área.
+     */
+    private const val MIN_RESTO = ULTIMOS + 2
 
     fun mask(util: PhoneNumberUtil, value: String): String = runCatching {
         // 1. Codigo curto ANTES do parse: `parse("190", null)` lanca INVALID_COUNTRY_CODE e
@@ -41,10 +50,6 @@ object PhoneMask {
         if (ndc == 0 || ndc >= digitos.length) return@runCatching degradada
 
         val resto = digitos.substring(ndc)
-        // TODO: com resto de exatamente 5 digitos a mascara nao esconde nada — `first()` mostra o
-        //  digito 1 e `takeLast(4)` mostra os digitos 2 a 5, ou seja o numero nacional INTEIRO, com
-        //  os asteriscos servindo so de enfeite. O piso precisa ser ULTIMOS + 2 (6 digitos) para
-        //  sobrar ao menos um digito coberto. Vale para log e UI, entao e vazamento de dado pessoal.
         if (resto.length < MIN_RESTO) return@runCatching degradada
 
         "+${parsed.countryCode} ${digitos.substring(0, ndc)} " +

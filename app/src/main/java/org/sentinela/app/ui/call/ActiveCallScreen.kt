@@ -1,5 +1,6 @@
 package org.sentinela.app.ui.call
 
+import android.os.SystemClock
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -100,7 +101,10 @@ fun ActiveCallScreen(
     photo: ImageBitmap? = null,
     routes: Set<CallAudioRoute> = emptySet(),
     activeRoute: CallAudioRoute? = null,
-    now: () -> Long = System::currentTimeMillis,
+    // MESMA base do relógio que marca o início da chamada no `AppContainer`: subtrair instantes de
+    // bases diferentes daria uma duração sem sentido. Monotônico porque duração não pode andar para
+    // trás quando a hora do aparelho é corrigida durante a ligação.
+    now: () -> Long = SystemClock::elapsedRealtime,
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
         Column(

@@ -1,4 +1,3 @@
-@file:Suppress("LongMethod", "MaxLineLength", "TooManyFunctions", "ReturnCount", "MagicNumber", "SwallowedException", "LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
 
 package org.sentinela.app.domain
 

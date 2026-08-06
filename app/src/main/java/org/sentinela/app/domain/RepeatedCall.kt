@@ -1,6 +1,7 @@
+@file:Suppress("MatchingDeclarationName")
+
 // O arquivo agrupa o enum de consulta e a constante da janela, que só fazem
 // sentido juntos; por isso o nome do arquivo é o do conceito, não o do enum.
-@file:Suppress("MatchingDeclarationName")
 
 package org.sentinela.app.domain
 

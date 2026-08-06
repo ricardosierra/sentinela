@@ -119,7 +119,6 @@
     <string name="whitelist_title">Whitelist Pessoal</string>
     <string name="whitelist_search_placeholder">Buscar descrições ou números…</string>
     <string name="whitelist_section_allowed">Números Permitidos (%1$d)</string>
-    <string name="whitelist_about_title">Sobre a Whitelist</string>
     <string name="whitelist_about_desc">Números que você adicionou manualmente ou marcou como seguros. O tratamento deles segue a política configurada — no padrão (Nunca Silenciar), sempre tocam.</string>
     <string name="whitelist_add_number">Adicionar Número</string>
     <string name="whitelist_edit">Editar</string>
@@ -137,9 +136,9 @@
     <string name="whitelist_export_failed">Não foi possível salvar o backup.</string>
     <string name="whitelist_import_failed">Não foi possível ler o arquivo.</string>
     <string name="whitelist_import_result">%1$d adicionados, %2$d já existiam, %3$d inválidos.</string>
+    <string name="whitelist_import_result_over_limit">%1$d adicionados, %2$d já existiam, %3$d inválidos. %4$d ficaram de fora: o arquivo passa do limite de 10.000 números.</string>
 
     <!-- Histórico -->
-    <string name="history_title">Histórico do Sentinela</string>
     <string name="history_clear_all">Limpar tudo</string>
     <string name="history_filter_today">Hoje</string>
     <string name="history_filter_7days">7 dias</string>
@@ -150,7 +149,6 @@
     <string name="history_action_allow">Permitir</string>
     <string name="history_action_delete">Excluir</string>
     <string name="history_mark_unwanted">Marcar indesejado</string>
-    <string name="history_end_of_list">Fim do histórico recente</string>
     <string name="history_empty">Nenhuma chamada bloqueada ainda.</string>
     <string name="history_clear_confirm">Isso apagará todo o seu histórico de bloqueios. Deseja continuar?</string>
     <string name="history_filter_period">Período</string>
@@ -261,6 +259,8 @@
     <string name="about_clear_continue">Continuar</string>
     <string name="about_clear_final_title">Confirmação final</string>
     <string name="about_clear_final_body">Você tem certeza? Esta ação não pode ser desfeita e todos os dados locais serão perdidos permanentemente.</string>
+    <string name="about_clear_failed_title">Não foi possível apagar</string>
+    <string name="about_clear_failed_body">Seus dados continuam no aparelho. Tente de novo; se o erro repetir, feche e abra o aplicativo.</string>
 
     <!-- Notificações -->
     <string name="notification_channel_blocked">Chamadas bloqueadas</string>

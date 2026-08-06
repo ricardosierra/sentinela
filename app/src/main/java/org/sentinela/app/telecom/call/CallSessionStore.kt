@@ -69,6 +69,15 @@ class CallSessionStore(
     private val scope: CoroutineScope,
     private val notifications: OngoingCallNotifier? = null,
     private val maskNumber: (String) -> String? = { null },
+    /**
+     * Relógio repassado à sessão para marcar o início da chamada.
+     *
+     * Chega por parâmetro para o coordenador continuar puro — ele não pode importar tipo da
+     * plataforma, e é o `AppContainer` que injeta o relógio monotônico. Duração pede relógio que
+     * não ande para trás: com relógio de parede, um ajuste de hora pela operadora no meio da
+     * ligação fazia o cronômetro saltar ou exibir tempo negativo.
+     */
+    private val clock: () -> Long = System::currentTimeMillis,
 ) {
 
     private val retrato = MutableStateFlow(CallSnapshot())
@@ -116,7 +125,7 @@ class CallSessionStore(
      */
     fun attach(controls: CallControls) {
         detach()
-        val nova = CallSessionCoordinator(controls = controls, scope = scope)
+        val nova = CallSessionCoordinator(controls = controls, clock = clock, scope = scope)
         this.controls = controls
         session = nova
         espelho = scope.launch { nova.state.collect(::publicar) }
