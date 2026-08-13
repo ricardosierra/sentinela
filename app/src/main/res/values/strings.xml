@@ -59,7 +59,7 @@
     <string name="contacts_default_badge">Padrão</string>
     
     <string name="whatsapp_contacts_warning_title">Aviso sobre o WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">O WhatsApp permite salvar contatos apenas na nuvem dele. Pessoas salvas assim não existem na agenda do aparelho e, para o Sentinela, serão tratadas como "Desconhecido". Salve seus contatos na agenda oficial para que o bloqueador os reconheça.</string>
+    <string name="whatsapp_contacts_warning_desc">O WhatsApp permite salvar contatos apenas na nuvem dele. Pessoas salvas assim não existem na agenda do aparelho e, para o Sentinela, serão tratadas como \"Desconhecido\". Salve seus contatos na agenda oficial para que o bloqueador os reconheça.</string>
     <string name="whatsapp_history_hint">Dica: se for um contato do WhatsApp não salvo na agenda, use a opção acima para permitir.</string>
 
     <string name="contacts_permission_granted">Leitura da agenda concedida</string>
