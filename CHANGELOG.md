@@ -11,6 +11,10 @@
 
 ## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.1...master)
 
+### ✨ Novidades
+
+- [x] **Aviso sobre contato salvo só no WhatsApp** — quem tem o WhatsApp instalado passa a ver, no passo de contatos, que pessoa salva apenas dentro do WhatsApp não existe na agenda do aparelho e por isso chega como desconhecida; no histórico, o bloqueio de número desconhecido traz a mesma dica ao lado da ação de permitir. O aviso só aparece para quem tem o aplicativo instalado, e a checagem é local
+
 ## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
 
 ### ✨ Novidades
