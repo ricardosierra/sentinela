@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Benvinguda -->
+    <string name="welcome_headline">La teva primera línia de defensa contra el correu brossa.</string>
+    <string name="welcome_subtitle">Sentinela bloqueja les trucades de números desconeguts abans i tot que soni el telèfon.</string>
+    <string name="welcome_feature_local_title">Bloqueig local</string>
+    <string name="welcome_feature_local_desc">Processament directament al dispositiu.</string>
+    <string name="welcome_feature_silent_title">Silenciós</string>
+    <string name="welcome_feature_silent_desc">Sense tons ni vibracions no desitjades.</string>
+    <string name="welcome_feature_offline_title">Sense Internet</string>
+    <string name="welcome_feature_offline_desc">Privadesa total. No recollim els teus contactes.</string>
+    <string name="welcome_badge_native">Integració nativa</string>
+    <string name="welcome_cta">Comença la configuració</string>
+    <string name="welcome_cta_hint">Triga menys de 2 minuts.</string>
+    <string name="welcome_open_source" formatted="false">100% codi obert — sense publicitat, sense telemetria</string>
+
+    <!-- Configuració inicial: rol de filtratge de trucades -->
+    <string name="onboarding_role_disclaimer">En configurar-lo, concedeixes el permís de filtratge de trucades. Sentinela filtra les trucades de números desconeguts localment, sense enviar mai les teves dades fora del dispositiu.</string>
+    <string name="onboarding_role_cta">Configura ara</string>
+    <string name="onboarding_role_requesting">S\'està sol·licitant el permís…</string>
+    <string name="onboarding_step_indicator">Pas %1$d de %2$d</string>
+    <string name="onboarding_next">Següent</string>
+    <string name="onboarding_back">Enrere</string>
+    <string name="onboarding_finish">Finalitza la configuració</string>
+    <string name="onboarding_change_later">Pots canviar aquesta opció en qualsevol moment.</string>
+    <string name="onboarding_skip">Omet</string>
+    <string name="onboarding_role_title">Deixa que Sentinela s\'encarregui del filtratge</string>
+    <string name="onboarding_role_intro">Per filtrar trucades, Sentinela ha de ser l\'aplicació de filtratge de trucades predeterminada d\'Android. Ets tu qui ho concedeix i pots desfer-ho a la configuració del sistema quan vulguis.</string>
+    <string name="onboarding_role_denied">Sentinela no ha rebut el rol de filtratge de trucades. No es filtrarà cap trucada fins que el concedeixis: pots fer-ho ara o més tard, a la pantalla Protecció.</string>
+    <string name="onboarding_role_retry">Concedeix ara</string>
+    <string name="onboarding_scope_title">Què no fa Sentinela</string>
+    <string name="onboarding_scope_dnd">El mode «No molestis» del sistema continua tenint prioritat sobre la configuració de Sentinela.</string>
+
+    <!-- Configuració inicial: números desconeguts -->
+    <string name="unknown_title">Trucades desconegudes</string>
+    <string name="unknown_question">Com ha de tractar Sentinela els números que no són als teus contactes?</string>
+    <string name="unknown_option_block">Bloqueja</string>
+    <string name="unknown_option_block_desc">Rebutja la trucada a l\'instant.</string>
+    <string name="unknown_option_silence">Silencia</string>
+    <string name="unknown_option_silence_desc">La trucada arriba sense so ni vibració.</string>
+    <string name="unknown_option_allow">Permet</string>
+    <string name="unknown_option_allow_desc">Rep les trucades amb normalitat.</string>
+
+    <!-- Configuració inicial: contactes -->
+    <string name="contacts_title">I les persones de la teva llista de contactes?</string>
+    <string name="contacts_explainer">Defineix com ha de tractar Sentinela les trucades de qui ja coneixes. Ho pots canviar més endavant.</string>
+    <string name="contacts_permission_rationale" formatted="false">Per saber si qui truca és a la teva agenda, Sentinela ha de llegir els teus contactes. A diferència d\'altres aplicacions, no recollim els teus contactes. La lectura és 100% local: les dades no surten mai del dispositiu.</string>
+    <string name="contacts_option_ring">Sona</string>
+    <string name="contacts_option_ring_desc">Les trucades sonen amb normalitat al teu telèfon.</string>
+    <string name="contacts_option_block">Bloqueja</string>
+    <string name="contacts_option_block_desc">Bloqueja totes les trucades, segons el mode de bloqueig de Protecció.</string>
+    <string name="contacts_option_silence">Silencia</string>
+    <string name="contacts_option_silence_desc">El telèfon no vibra ni sona, però mostra la notificació.</string>
+    <string name="contacts_option_never_silence">No silenciïs mai</string>
+    <string name="contacts_option_never_silence_desc">Sentinela no silencia mai la teva llista de contactes. El «No molestis» del sistema continua vigent.</string>
+    <string name="contacts_default_badge">Predeterminat</string>
+
+    <string name="whatsapp_contacts_warning_title">Avís sobre WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp permet desar contactes només al seu propi núvol. Les persones desades així no existeixen a l\'agenda del dispositiu i, per a Sentinela, es tracten com a «Desconegut». Desa els teus contactes a l\'agenda oficial perquè el bloquejador els reconegui.</string>
+    <string name="whatsapp_history_hint">Consell: si és un contacte de WhatsApp que no està desat a l\'agenda, fes servir l\'opció de dalt per permetre\'l.</string>
+
+    <string name="contacts_permission_granted">Lectura de contactes concedida</string>
+    <string name="contacts_permission_denied">Sense la lectura de contactes, Sentinela no pot saber qui hi ha a la teva agenda: aquestes trucades es poden tractar com a desconegudes.</string>
+    <string name="contacts_permission_blocked">La lectura de contactes s\'ha denegat definitivament. Per concedir-la, obre la configuració de l\'aplicació.</string>
+    <string name="settings_block_private_desc">Les trucades sense identificació de número segueixen la política de bloqueig que has triat. No es pot saber qui ha trucat.</string>
+
+    <!-- Configuració inicial: llista personal -->
+    <string name="whitelist_setup_title">Configuració de la llista personal</string>
+    <string name="whitelist_setup_desc">La llista personal és la teva pròpia llista de números de confiança, separada de l\'agenda del telèfon.</string>
+    <string name="whitelist_setup_what_title">Què és la llista personal?</string>
+    <string name="whitelist_setup_what_desc">La llista personal són els números que has afegit manualment o has marcat com a segurs dins l\'aplicació.</string>
+    <string name="whitelist_setup_question">Com s\'ha de tractar la teva llista personal?</string>
+    <string name="whitelist_option_never_silence">No silenciïs mai</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela no silencia mai aquest origen. El «No molestis» del sistema continua vigent.</string>
+    <string name="whitelist_option_ring">Sona</string>
+    <string name="whitelist_option_ring_desc">Emet sempre un so.</string>
+    <string name="whitelist_option_block">Bloqueja</string>
+    <string name="whitelist_option_block_desc">Rebutja automàticament.</string>
+    <string name="whitelist_option_silence">Silencia</string>
+    <string name="whitelist_option_silence_desc">Només notificació visual.</string>
+    <string name="whitelist_setup_hint">Podràs canviar aquesta configuració i afegir números nous en qualsevol moment al menú Permesos.</string>
+
+    <!-- Configuració inicial: comprovació final -->
+    <string name="onboarding_summary_title_ok">Tot a punt</string>
+    <string name="onboarding_summary_title_partial">Gairebé a punt</string>
+    <string name="onboarding_summary_body">Revisa què ha quedat configurat. Pots canviar qualsevol element més tard, a la pantalla Protecció.</string>
+    <string name="onboarding_check_role">Filtratge de trucades predeterminat</string>
+    <string name="onboarding_check_contacts">Lectura de contactes</string>
+    <string name="onboarding_check_unknown">Números desconeguts</string>
+    <string name="onboarding_check_origins">Contactes i llista personal</string>
+    <string name="onboarding_check_granted">Concedit</string>
+    <string name="onboarding_check_missing">Absent</string>
+
+    <!-- Tauler -->
+    <string name="dashboard_protection_active">Protecció activa</string>
+    <string name="dashboard_protection_inactive">Protecció desactivada</string>
+    <string name="dashboard_monitoring">Supervisió en temps real</string>
+    <string name="dashboard_device_safe">El teu dispositiu està protegit contra trucades de números desconeguts.</string>
+    <string name="dashboard_role_missing">Sentinela no és l\'aplicació de filtratge de trucades predeterminada.</string>
+    <string name="dashboard_fix_configuration">Corregeix la configuració</string>
+    <string name="dashboard_total_blocked">Total bloquejat</string>
+    <string name="dashboard_blocked_today">Avui</string>
+    <string name="dashboard_last_blocked">Última trucada bloquejada</string>
+    <string name="dashboard_quick_whitelist">Llista personal</string>
+    <string name="dashboard_quick_history">Historial de bloquejos</string>
+    <string name="dashboard_protection_off_hint">No s\'està filtrant cap trucada.</string>
+    <string name="dashboard_contacts_missing">Sentinela no pot llegir la teva agenda. Les trucades de contactes es poden tractar com a desconegudes.</string>
+    <string name="dashboard_history_off">L\'historial està desactivat, així que no hi ha cap recompte de trucades bloquejades per mostrar.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Activa l\'historial</string>
+
+    <!-- Navegació inferior -->
+    <string name="nav_home">Inici</string>
+    <string name="nav_whitelist">Permesos</string>
+    <string name="nav_history">Historial</string>
+    <string name="nav_settings">Configuració</string>
+    <string name="nav_unavailable">Aquesta pantalla arribarà en una etapa posterior de l\'aplicació.</string>
+
+    <!-- Llista personal -->
+    <string name="whitelist_title">Llista personal</string>
+    <string name="whitelist_search_placeholder">Cerca descripcions o números…</string>
+    <string name="whitelist_section_allowed">Números permesos (%1$d)</string>
+    <string name="whitelist_about_desc">Números que has afegit manualment o has marcat com a segurs. Segueixen la política configurada: amb el valor predeterminat (No silenciïs mai), sempre sonen.</string>
+    <string name="whitelist_add_number">Afegeix un número</string>
+    <string name="whitelist_edit">Edita</string>
+    <string name="whitelist_delete">Suprimeix</string>
+    <string name="whitelist_export">Exporta la còpia de seguretat</string>
+    <string name="whitelist_import">Importa una còpia de seguretat</string>
+    <string name="whitelist_import_confirm">La importació combinarà els números del fitxer amb la teva llista actual. Vols continuar?</string>
+    <string name="whitelist_duplicate">Aquest número ja és a la llista personal.</string>
+    <string name="whitelist_number_label">Número</string>
+    <string name="whitelist_description_label">Descripció (opcional)</string>
+    <string name="whitelist_invalid_number">Número no vàlid. Fes servir un número brasiler amb prefix.</string>
+    <string name="whitelist_load_error">No s\'ha pogut carregar la llista personal.</string>
+    <string name="whitelist_added_from_history">Afegit des de l\'historial</string>
+    <string name="whitelist_export_ok">Còpia de seguretat de la llista personal desada.</string>
+    <string name="whitelist_export_failed">No s\'ha pogut desar la còpia de seguretat.</string>
+    <string name="whitelist_import_failed">No s\'ha pogut llegir el fitxer.</string>
+    <string name="whitelist_import_result">%1$d afegits, %2$d ja existien, %3$d no vàlids.</string>
+    <string name="whitelist_import_result_over_limit">%1$d afegits, %2$d ja existien, %3$d no vàlids. %4$d han quedat fora: el fitxer supera el límit de 10.000 números.</string>
+
+    <!-- Historial -->
+    <string name="history_clear_all">Esborra-ho tot</string>
+    <string name="history_filter_today">Avui</string>
+    <string name="history_filter_7days">7 dies</string>
+    <string name="history_filter_30days">30 dies</string>
+    <string name="history_unknown_number">Número desconegut</string>
+    <string name="history_private_number">Privat</string>
+    <string name="history_private_id">ID ocult</string>
+    <string name="history_action_allow">Permet</string>
+    <string name="history_action_delete">Suprimeix</string>
+    <string name="history_mark_unwanted">Marca com a no desitjada</string>
+    <string name="history_empty">Encara no hi ha trucades bloquejades.</string>
+    <string name="history_clear_confirm">Això esborrarà tot el teu historial de bloquejos. Vols continuar?</string>
+    <string name="history_filter_period">Període</string>
+    <string name="history_filter_all">Tot l\'historial</string>
+    <string name="history_action_allow_whitelist">Permet (afegeix a la llista personal)</string>
+
+    <!-- Historial: filtre per decisió -->
+    <string name="history_filter_decision">Decisió</string>
+    <string name="history_decision_all">Totes</string>
+    <string name="history_decision_unclassified">Sense classificar</string>
+    <string name="history_decision_legitimate">Marcades com a legítimes</string>
+    <string name="history_decision_unwanted">Marcades com a no desitjades</string>
+
+    <!-- Historial: motiu de la decisió -->
+    <string name="history_reason_outgoing_call">Trucada sortint</string>
+    <string name="history_reason_protection_disabled">Protecció desactivada</string>
+    <string name="history_reason_private_number">Número privat</string>
+    <string name="history_reason_contact">És als teus contactes</string>
+    <string name="history_reason_personal_whitelist">És a la teva llista personal</string>
+    <string name="history_reason_emergency_number">Número d\'emergència</string>
+    <string name="history_reason_repeated_call">Ha tornat a trucar just després</string>
+    <string name="history_reason_unknown_number">Número desconegut</string>
+    <string name="history_reason_invalid_number">Número no identificat</string>
+    <string name="history_reason_local_lookup_failure">Ha fallat la consulta local</string>
+    <string name="history_reason_fallback_policy">Política de reserva</string>
+
+    <!-- Historial: temps relatiu -->
+    <string name="history_time_now">Ara</string>
+    <string name="history_time_minutes">fa %1$d min</string>
+    <string name="history_time_hours">fa %1$d h</string>
+    <string name="history_time_days">fa %1$d d</string>
+
+    <!-- Protecció / Configuració -->
+    <string name="settings_title">Protecció</string>
+    <string name="settings_protection_toggle">Activa la protecció</string>
+    <string name="settings_unknown_policy">Números desconeguts</string>
+    <string name="settings_contacts_policy">Contactes de l\'agenda</string>
+    <string name="settings_whitelist_policy">Llista personal</string>
+    <string name="settings_block_private">Bloqueja els números privats</string>
+    <string name="settings_dialer_mode">Mode marcador (avançat)</string>
+    <string name="settings_dialer_mode_desc">Converteix Sentinela en l\'aplicació de telèfon predeterminada per aplicar les polítiques també als contactes. Pots revertir-ho en qualsevol moment.</string>
+    <string name="settings_mode_reject">Rebutja immediatament</string>
+    <string name="settings_mode_silent_voicemail">Desvia en silenci</string>
+    <string name="settings_hide_native_log">Demana que no es registri a l\'historial del telèfon</string>
+    <string name="settings_hide_native_log_desc">Android només atén aquesta petició per a aplicacions d\'operadora. Les trucades bloquejades continuen apareixent a l\'historial del telèfon, marcades com a bloquejades. El que sí que garanteix el bloqueig: no sona, no vibra, no mostra la pantalla de trucada i no genera avís de trucada perduda.</string>
+    <string name="settings_show_notification">Mostra una notificació silenciosa</string>
+    <string name="settings_fallback_policy">Què fer si hi ha una fallada</string>
+    <string name="settings_fallback_allow">Deixa sonar la trucada</string>
+    <string name="settings_fallback_block">Bloqueja</string>
+
+    <string name="settings_privacy_title">Privadesa</string>
+    <string name="settings_privacy_disclaimer">Sentinela és 100% fora de línia. A diferència d\'altres aplicacions, no recollim els teus contactes ni els enviem al núvol.</string>
+    <string name="settings_mask_numbers">Emmascara els números entrants</string>
+    <string name="settings_mask_numbers_desc">Amaga part dels números amb asteriscs (+55 11 9****-1234) a l\'historial, les notificacions i la pantalla d\'inici.</string>
+
+    <string name="settings_protection_toggle_desc">Desactivat, Sentinela no bloqueja, no silencia i no registra res. Les trucades segueixen el comportament normal del telèfon.</string>
+    <string name="settings_contacts_policy_note">Aquesta política s\'aplica mentre la lectura de contactes estigui concedida. Sense ella, els contactes cauen a la política d\'error.</string>
+    <string name="settings_block_mode_desc">Rebutjar immediatament dona senyal de comunicant a qui truca. Desviar en silenci envia la trucada a la bústia de veu, si la teva operadora té aquest servei.</string>
+    <string name="settings_repeated_call">La segona trucada seguida sona</string>
+    <string name="settings_repeated_call_desc">Si el mateix número torna a trucar pocs minuts després de ser bloquejat, la segona trucada sona. Serveix per a emergències de qui no és a la teva agenda.</string>
+    <string name="settings_history_enabled">Desa l\'historial de bloquejos</string>
+    <string name="settings_history_enabled_desc">L\'historial es queda només en aquest dispositiu i és el que permet auditar què ha bloquejat Sentinela. Desactivar-lo no esborra el que ja s\'ha desat.</string>
+    <string name="settings_history_off_kept">Historial desactivat. Els registres ja desats continuen al dispositiu.</string>
+    <string name="settings_retention_title">Desa els registres durant</string>
+    <string name="settings_retention_never">No desis</string>
+    <string name="settings_retention_7">7 dies</string>
+    <string name="settings_retention_30">30 dies</string>
+    <string name="settings_retention_90">90 dies</string>
+    <string name="settings_retention_manual">Fins que els suprimeixi</string>
+    <string name="settings_retention_never_confirm">Triar «No desis» esborra els registres existents i Sentinela deixa de registrar bloquejos nous. No es pot desfer.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Això esborra %1$d registre de trucada bloquejada d\'aquest dispositiu. No es pot desfer.</item>
+        <item quantity="other">Això esborra %1$d registres de trucades bloquejades d\'aquest dispositiu. No es pot desfer.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Si la consulta local falla, Sentinela ha de decidir tot sol. Permetre arrisca deixar passar una trucada no desitjada; bloquejar arrisca perdre una trucada que volies rebre.</string>
+
+    <!-- Privadesa i quant a -->
+    <string name="about_title">Privadesa i quant a</string>
+    <string name="about_data_local">Totes les dades es queden només en aquest dispositiu.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela és de codi obert: sense publicitat, sense telemetria, sense enviar dades al núvol — 100% fora de línia, funcionant al teu propi telèfon.</string>
+    <string name="about_clear_all_data">Esborra totes les dades</string>
+    <string name="about_version">Versió %1$s</string>
+    <string name="about_open_app_settings">Obre la configuració de l\'aplicació</string>
+    <string name="about_open_channel_settings">Configura el canal de notificació</string>
+
+    <!-- Suport i valoració -->
+    <string name="review_prompt_title">T\'agrada Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela és de codi obert, sense publicitat i 100% fora de línia. Una valoració o un comentari de suport ajuda molt el projecte.</string>
+    <string name="review_prompt_rate">Valora ara</string>
+    <string name="review_prompt_later">Ara no</string>
+    <string name="support_title">Dona suport a Sentinela</string>
+    <string name="support_comment_cta">Deixa un comentari de suport</string>
+    <string name="support_donate_hint">Donació opcional, directa a la cartera del mantenidor. Comprova l\'adreça abans d\'enviar.</string>
+    <string name="support_donate_bitcoin">Copia l\'adreça de Bitcoin</string>
+    <string name="support_donate_liquid">Copia l\'adreça de Liquid (L-BTC)</string>
+    <string name="support_address_copied">Adreça copiada!</string>
+
+    <!-- Esborra totes les dades -->
+    <string name="about_clear_warning_title">Atenció</string>
+    <string name="about_clear_warning_body">Això esborrarà el teu historial de bloquejos, la teva llista personal i tota la teva configuració. Vols continuar?</string>
+    <string name="about_clear_continue">Continua</string>
+    <string name="about_clear_final_title">Confirmació final</string>
+    <string name="about_clear_final_body">N\'estàs segur? Aquesta acció no es pot desfer i totes les dades locals es perdran permanentment.</string>
+    <string name="about_clear_failed_title">No s\'ha pogut esborrar</string>
+    <string name="about_clear_failed_body">Les teves dades continuen al dispositiu. Torna-ho a provar; si l\'error es repeteix, tanca i torna a obrir l\'aplicació.</string>
+
+    <!-- Notificacions -->
+    <string name="notification_channel_blocked">Trucades bloquejades</string>
+    <string name="notification_channel_blocked_desc">Avís discret que s\'ha bloquejat una trucada. Mai no sona, mai no vibra i mai no ocupa la pantalla.</string>
+    <string name="notification_blocked_title">Trucada bloquejada</string>
+    <string name="notification_blocked_masked">Trucada de %1$s bloquejada</string>
+    <string name="notification_blocked_anonymous">S\'ha bloquejat una trucada</string>
+
+    <!-- Activació de la notificació pròpia -->
+    <string name="settings_notification_enable">Avisa\'m quan es bloquegi una trucada</string>
+    <string name="settings_notification_enable_desc">Ve desactivat. En activar-lo, Sentinela demana el permís de notificacions del sistema. L\'avís és discret: no sona, no vibra i no ocupa la pantalla.</string>
+    <string name="settings_notification_identification_masked">Mostra el número emmascarat</string>
+    <string name="settings_notification_identification_anonymous">No mostris cap identificació</string>
+    <string name="notification_permission_rationale">Per avisar-te de les trucades bloquejades, Sentinela necessita el permís de notificacions. L\'avís és local i no mostra mai el número complet.</string>
+
+    <!-- Notificació de trucada (mode marcador) -->
+    <string name="notification_channel_call">Trucades en curs</string>
+    <string name="notification_channel_call_desc">Mostra la trucada entrant a pantalla completa i l\'avís de la trucada en curs. Només apareix quan Sentinela és el telèfon predeterminat.</string>
+    <string name="notification_call_incoming_title">Trucada entrant</string>
+    <string name="notification_call_ongoing_title">Trucada en curs</string>
+    <string name="notification_call_unknown_caller">Número no identificat</string>
+
+    <!-- Trucada: etiquetes d\'estat -->
+    <string name="call_incoming_state">Trucada entrant</string>
+    <string name="call_dialing_state">S\'està trucant…</string>
+    <string name="call_ringing_state">Sonant…</string>
+    <string name="call_active_state">En trucada</string>
+    <string name="call_ended_state">Trucada finalitzada</string>
+    <string name="call_failed_state">No s\'ha pogut completar la trucada</string>
+    <string name="call_unsupported_state">Trucada en curs</string>
+    <string name="call_unsupported_body">Aquesta versió de Sentinela no mostra els controls d\'aquest estat de la trucada. Penjar continua disponible a sota.</string>
+
+    <!-- Trucada: accions principals -->
+    <string name="call_action_answer">Respon</string>
+    <string name="call_action_reject">Rebutja</string>
+    <string name="call_action_hangup">Penja</string>
+    <string name="call_action_answer_description">Respon la trucada</string>
+    <string name="call_action_reject_description">Rebutja la trucada</string>
+    <string name="call_action_hangup_description">Penja la trucada</string>
+
+    <!-- Trucada: controls secundaris -->
+    <string name="call_control_mute">Silenci</string>
+    <string name="call_control_speaker">Altaveu</string>
+    <string name="call_control_keypad">Teclat</string>
+    <string name="call_control_mute_off_description">Silenci, desactivat</string>
+    <string name="call_control_mute_on_description">Silenci, activat</string>
+    <string name="call_control_speaker_off_description">Altaveu, desactivat</string>
+    <string name="call_control_speaker_on_description">Altaveu, activat</string>
+    <string name="call_control_keypad_closed_description">Teclat numèric, tancat</string>
+    <string name="call_control_keypad_open_description">Teclat numèric, obert</string>
+    <string name="call_control_unavailable_state">no disponible</string>
+
+    <!-- Trucada: xips d\'origen -->
+    <string name="call_origin_contact">Contacte</string>
+    <string name="call_origin_whitelist">Permès</string>
+    <string name="call_origin_unknown">Desconegut</string>
+    <string name="call_origin_private">Número privat</string>
+
+    <!-- Trucada: sortida d\'àudio -->
+    <string name="call_audio_route_title">Sortida d\'àudio</string>
+    <string name="call_audio_route_earpiece">Telèfon</string>
+    <string name="call_audio_route_speaker">Altaveu</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Auriculars</string>
+    <string name="call_audio_route_active_state">en ús</string>
+
+    <!-- Trucada: cronòmetre i teclat DTMF -->
+    <string name="call_timer_description">Durada de la trucada: %1$s</string>
+    <string name="call_keypad_close_description">Tanca el teclat</string>
+
+    <!-- Marcatge -->
+    <string name="dialpad_call">Truca</string>
+    <string name="dialpad_call_description">Truca a %1$s</string>
+    <string name="dialpad_delete_description">Esborra l\'últim dígit</string>
+    <string name="dialpad_clear_description">Esborra tot el número</string>
+    <string name="dialpad_error_failed">No s\'ha pogut iniciar la trucada.</string>
+    <string name="dialpad_error_retry">Torna-ho a provar</string>
+
+    <!-- Marcatge: tecles -->
+    <string name="dialpad_key_1_description">Tecla u</string>
+    <string name="dialpad_key_2_description">Tecla dos</string>
+    <string name="dialpad_key_3_description">Tecla tres</string>
+    <string name="dialpad_key_4_description">Tecla quatre</string>
+    <string name="dialpad_key_5_description">Tecla cinc</string>
+    <string name="dialpad_key_6_description">Tecla sis</string>
+    <string name="dialpad_key_7_description">Tecla set</string>
+    <string name="dialpad_key_8_description">Tecla vuit</string>
+    <string name="dialpad_key_9_description">Tecla nou</string>
+    <string name="dialpad_key_0_description">Tecla zero</string>
+    <string name="dialpad_key_star_description">Tecla asterisc</string>
+    <string name="dialpad_key_hash_description">Tecla coixinet</string>
+
+    <!-- Activació del mode marcador -->
+    <string name="dialer_activation_title">Vols convertir Sentinela en el teu telèfon predeterminat?</string>
+    <string name="dialer_activation_intro">En el mode marcador, Sentinela passa a rebre totes les trucades, incloses les de qui és a la teva agenda. És l\'única manera que les polítiques per origen valguin també per als teus contactes.</string>
+    <string name="dialer_activation_changes_title">Què canvia</string>
+    <string name="dialer_activation_change_1">Sentinela es converteix en la teva aplicació de telèfon: la pantalla de trucada i el teclat passen a ser els seus.</string>
+    <string name="dialer_activation_change_2">El filtratge passa a veure totes les trucades, no només les de números fora de l\'agenda.</string>
+    <string name="dialer_activation_change_3">La política que has triat per als contactes s\'aplica de debò. El valor predeterminat continua sent Sona: activar el mode marcador, tot sol, no bloqueja ningú.</string>
+    <string name="dialer_activation_unchanged_title">Què no canvia</string>
+    <string name="dialer_activation_unchanged_1">Les trucades continuen registrant-se a l\'historial del telèfon. Ser l\'aplicació de telèfon predeterminada no dona a Sentinela permís per ometre aquest registre: a Android, només poden fer-ho les aplicacions d\'operadora.</string>
+    <string name="dialer_activation_unchanged_2">El «No molestis» del sistema continua tenint prioritat sobre la configuració de Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Les trucades de WhatsApp, Telegram i altres aplicacions d\'Internet continuen fora de l\'abast de Sentinela.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela continua sent 100% fora de línia: cap trucada, número o contacte surt del dispositiu.</string>
+    <string name="dialer_activation_limit_calls">Una trucada alhora: la trucada en espera i la multiconferència no s\'admeten en aquesta versió.</string>
+    <string name="dialer_activation_contacts_required">El mode marcador necessita el permís de lectura de contactes. Sense ell, Sentinela no pot distingir els teus contactes i passaria a tractar tothom com a desconegut.</string>
+    <string name="dialer_activation_grant_contacts">Permet la lectura de contactes</string>
+    <string name="dialer_activation_cta">Tria Sentinela</string>
+    <string name="dialer_activation_cta_hint">Qui decideix és Android. Pots tornar enrere quan vulguis.</string>
+
+    <!-- Mode marcador ja actiu -->
+    <string name="dialer_active_chip">Actiu</string>
+    <string name="dialer_active_title">Sentinela és el teu telèfon predeterminat</string>
+    <string name="action_back">Enrere</string>
+    <string name="dialer_active_changes_title">Què és vigent ara</string>
+    <string name="dialer_activation_unavailable">Aquest dispositiu no ofereix el rol de telèfon predeterminat, normalment perquè no té telefonia. El mode filtre de Sentinela continua funcionant allà on hi hagi trucades telefòniques.</string>
+    <string name="dialer_revert_cta">Tria un altre telèfon</string>
+    <string name="dialer_revert_hint">En tornar a una altra aplicació de telèfon, el mode filtre de Sentinela continua funcionant amb normalitat, sense reinstal·lar ni reconfigurar res.</string>
+
+    <!-- Rol de marcador perdut -->
+    <string name="dialer_role_lost_title">Sentinela ha deixat de ser el telèfon predeterminat.</string>
+    <string name="dialer_role_lost_body">El mode filtre continua funcionant: les trucades de números fora de l\'agenda continuen filtrant-se.</string>
+    <string name="dialer_role_lost_action">Mira com reactivar-lo</string>
+
+    <!-- Genèrics -->
+    <string name="action_confirm">Confirma</string>
+    <string name="action_cancel">Cancel·la</string>
+    <string name="action_retry">Torna-ho a provar</string>
+    <string name="state_loading">S\'està carregant…</string>
+    <string name="state_error">Alguna cosa ha anat malament. Torna-ho a provar.</string>
+    <string name="state_on">Activat</string>
+    <string name="state_off">Desactivat</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Temps relatiu de la pantalla d\'inici -->
+    <string name="time_now">ara</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">fa %d min</item>
+        <item quantity="other">fa %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">fa %d h</item>
+        <item quantity="other">fa %d h</item>
+    </plurals>
+    <string name="time_yesterday">ahir</string>
+
+    <!-- Inici: lectura de l\'última bloquejada -->
+    <string name="dashboard_last_blocked_description">Última trucada bloquejada, %1$s, %2$s, %3$s</string>
+
+    <!-- Inici: excés d\'avisos -->
+    <string name="dashboard_more_warnings">Mostra tots els avisos</string>
+</resources>

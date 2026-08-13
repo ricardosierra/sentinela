@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Idioma padrão do app: pt-BR. Nenhum texto de UI é hardcoded em Kotlin. -->
+<!-- pt-BR explicito. Existe porque values/ (sem qualificador) PERDE para qualquer
+     values-pt-* na resolucao do Android: com values-pt-rPT presente, um aparelho em
+     pt-BR receberia portugues de Portugal. As strings translatable="false" ficam so
+     no values/ e chegam aqui por fallback. -->
 <resources>
-    <!-- Marca, não texto: "branding único: Sentinela". translatable="false" impede que
-         qualquer arquivo de tradução crie uma segunda grafia do nome do aplicativo. -->
-    <string name="app_name" translatable="false">Sentinela</string>
 
     <!-- Boas-vindas -->
     <string name="welcome_headline">Sua primeira linha de defesa contra spam.</string>
@@ -263,8 +263,6 @@
     <string name="support_donate_bitcoin">Copiar endereço Bitcoin</string>
     <string name="support_donate_liquid">Copiar endereço Liquid (L-BTC)</string>
     <string name="support_address_copied">Endereço copiado!</string>
-    <string name="support_bitcoin_address" translatable="false">bc1q7nlql56kczaq2ehxvl2d64hykanc2g4zyrzgtm</string>
-    <string name="support_liquid_address" translatable="false">lq1qq0sr0cgnp5z23q0u56xsr84vnfl3287wqegplr7mx58r495t4tkynfarmdl0vnj7ep8xt227x3y8a5j237tuvhkfegevs5w50</string>
 
     <!-- Limpar todos os dados: duas confirmações, porque a ação é irreversível. -->
     <string name="about_clear_warning_title">Atenção</string>
@@ -433,7 +431,6 @@
         <item quantity="other">há %d h</item>
     </plurals>
     <string name="time_yesterday">ontem</string>
-    <string name="time_date_short_pattern" translatable="false">dd/MM/yyyy</string>
 
     <!-- Home: leitura da última bloqueada — máscara, motivo real e tempo relativo -->
     <string name="dashboard_last_blocked_description">Última chamada bloqueada, %1$s, %2$s, %3$s</string>

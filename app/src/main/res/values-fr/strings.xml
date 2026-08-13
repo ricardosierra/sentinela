@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Bienvenue -->
+    <string name="welcome_headline">Votre première ligne de défense contre le spam.</string>
+    <string name="welcome_subtitle">Sentinela bloque les appels de numéros inconnus avant même que votre téléphone ne sonne.</string>
+    <string name="welcome_feature_local_title">Blocage local</string>
+    <string name="welcome_feature_local_desc">Traitement directement sur l\'appareil.</string>
+    <string name="welcome_feature_silent_title">Silencieux</string>
+    <string name="welcome_feature_silent_desc">Aucune sonnerie ni vibration indésirable.</string>
+    <string name="welcome_feature_offline_title">Sans Internet</string>
+    <string name="welcome_feature_offline_desc">Confidentialité totale. Nous ne collectons pas vos contacts.</string>
+    <string name="welcome_badge_native">Intégration native</string>
+    <string name="welcome_cta">Commencer la configuration</string>
+    <string name="welcome_cta_hint">Moins de 2 minutes.</string>
+    <string name="welcome_open_source" formatted="false">100% open source — sans publicité, sans télémétrie</string>
+
+    <!-- Intégration : rôle de filtrage d\'appels -->
+    <string name="onboarding_role_disclaimer">En procédant à la configuration, vous accordez l\'autorisation de filtrage des appels. Sentinela filtre les appels de numéros inconnus localement, sans jamais envoyer vos données hors de l\'appareil.</string>
+    <string name="onboarding_role_cta">Configurer maintenant</string>
+    <string name="onboarding_role_requesting">Demande d\'autorisation…</string>
+    <string name="onboarding_step_indicator">Étape %1$d sur %2$d</string>
+    <string name="onboarding_next">Suivant</string>
+    <string name="onboarding_back">Retour</string>
+    <string name="onboarding_finish">Terminer la configuration</string>
+    <string name="onboarding_change_later">Vous pouvez modifier ce réglage à tout moment.</string>
+    <string name="onboarding_skip">Ignorer</string>
+    <string name="onboarding_role_title">Laissez Sentinela s\'occuper du filtrage</string>
+    <string name="onboarding_role_intro">Pour filtrer les appels, Sentinela doit être l\'application de filtrage d\'appels par défaut d\'Android. C\'est vous qui l\'accordez, et vous pouvez l\'annuler dans les réglages du système quand vous voulez.</string>
+    <string name="onboarding_role_denied">Sentinela n\'a pas reçu le rôle de filtrage des appels. Aucun appel ne sera filtré tant que vous ne l\'aurez pas accordé — vous pouvez le faire maintenant ou plus tard, dans l\'écran Protection.</string>
+    <string name="onboarding_role_retry">Accorder maintenant</string>
+    <string name="onboarding_scope_title">Ce que Sentinela ne fait pas</string>
+    <string name="onboarding_scope_dnd">Le mode « Ne pas déranger » du système reste prioritaire sur les réglages de Sentinela.</string>
+
+    <!-- Intégration : numéros inconnus -->
+    <string name="unknown_title">Appels inconnus</string>
+    <string name="unknown_question">Comment Sentinela doit-il traiter les numéros qui ne sont pas dans vos contacts ?</string>
+    <string name="unknown_option_block">Bloquer</string>
+    <string name="unknown_option_block_desc">Refuse l\'appel instantanément.</string>
+    <string name="unknown_option_silence">Mettre en silence</string>
+    <string name="unknown_option_silence_desc">L\'appel arrive sans son ni vibration.</string>
+    <string name="unknown_option_allow">Autoriser</string>
+    <string name="unknown_option_allow_desc">Reçoit les appels normalement.</string>
+
+    <!-- Intégration : contacts -->
+    <string name="contacts_title">Et les personnes de votre liste de contacts ?</string>
+    <string name="contacts_explainer">Définissez la façon dont Sentinela doit traiter les appels des personnes que vous connaissez déjà. Vous pourrez le modifier plus tard.</string>
+    <string name="contacts_permission_rationale" formatted="false">Pour savoir si l\'appelant est dans votre répertoire, Sentinela doit lire vos contacts. Contrairement à d\'autres applications, nous ne collectons pas vos contacts. La lecture est 100% locale : les données ne quittent jamais l\'appareil.</string>
+    <string name="contacts_option_ring">Sonner</string>
+    <string name="contacts_option_ring_desc">Les appels sonnent normalement sur votre téléphone.</string>
+    <string name="contacts_option_block">Bloquer</string>
+    <string name="contacts_option_block_desc">Bloque tous les appels, selon le mode de blocage défini dans Protection.</string>
+    <string name="contacts_option_silence">Mettre en silence</string>
+    <string name="contacts_option_silence_desc">Le téléphone ne vibre ni ne sonne, mais affiche la notification.</string>
+    <string name="contacts_option_never_silence">Ne jamais mettre en silence</string>
+    <string name="contacts_option_never_silence_desc">Sentinela ne met jamais votre liste de contacts en silence. Le « Ne pas déranger » du système reste prioritaire.</string>
+    <string name="contacts_default_badge">Par défaut</string>
+
+    <string name="whatsapp_contacts_warning_title">À propos de WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp permet d\'enregistrer des contacts uniquement dans son propre cloud. Les personnes enregistrées ainsi n\'existent pas dans le répertoire de l\'appareil et, pour Sentinela, sont traitées comme « Inconnu ». Enregistrez vos contacts dans le répertoire officiel pour que le bloqueur les reconnaisse.</string>
+    <string name="whatsapp_history_hint">Astuce : s\'il s\'agit d\'un contact WhatsApp non enregistré dans le répertoire, utilisez l\'option ci-dessus pour l\'autoriser.</string>
+
+    <string name="contacts_permission_granted">Lecture des contacts accordée</string>
+    <string name="contacts_permission_denied">Sans la lecture des contacts, Sentinela ne peut pas savoir qui figure dans votre répertoire : ces appels peuvent être traités comme inconnus.</string>
+    <string name="contacts_permission_blocked">La lecture des contacts a été refusée définitivement. Pour l\'accorder, ouvrez les réglages de l\'application.</string>
+    <string name="settings_block_private_desc">Les appels sans identification de numéro suivent la politique de blocage que vous avez choisie. Impossible de savoir qui a appelé.</string>
+
+    <!-- Intégration : liste personnelle -->
+    <string name="whitelist_setup_title">Configuration de la liste personnelle</string>
+    <string name="whitelist_setup_desc">La liste personnelle est votre propre liste de numéros de confiance, distincte du répertoire du téléphone.</string>
+    <string name="whitelist_setup_what_title">Qu\'est-ce que la liste personnelle ?</string>
+    <string name="whitelist_setup_what_desc">La liste personnelle rassemble les numéros que vous avez ajoutés manuellement ou marqués comme sûrs dans l\'application.</string>
+    <string name="whitelist_setup_question">Comment traiter votre liste personnelle ?</string>
+    <string name="whitelist_option_never_silence">Ne jamais mettre en silence</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela ne met jamais cette source en silence. Le « Ne pas déranger » du système reste prioritaire.</string>
+    <string name="whitelist_option_ring">Sonner</string>
+    <string name="whitelist_option_ring_desc">Toujours émettre un son.</string>
+    <string name="whitelist_option_block">Bloquer</string>
+    <string name="whitelist_option_block_desc">Refuser automatiquement.</string>
+    <string name="whitelist_option_silence">Mettre en silence</string>
+    <string name="whitelist_option_silence_desc">Notification visuelle uniquement.</string>
+    <string name="whitelist_setup_hint">Vous pourrez modifier ces réglages et ajouter de nouveaux numéros à tout moment dans le menu Autorisés.</string>
+
+    <!-- Intégration : vérification finale -->
+    <string name="onboarding_summary_title_ok">Tout est prêt</string>
+    <string name="onboarding_summary_title_partial">Presque prêt</string>
+    <string name="onboarding_summary_body">Vérifiez ce qui a été configuré. Vous pourrez modifier chaque élément plus tard, dans l\'écran Protection.</string>
+    <string name="onboarding_check_role">Filtrage d\'appels par défaut</string>
+    <string name="onboarding_check_contacts">Lecture des contacts</string>
+    <string name="onboarding_check_unknown">Numéros inconnus</string>
+    <string name="onboarding_check_origins">Contacts et liste personnelle</string>
+    <string name="onboarding_check_granted">Accordé</string>
+    <string name="onboarding_check_missing">Absent</string>
+
+    <!-- Tableau de bord -->
+    <string name="dashboard_protection_active">Protection active</string>
+    <string name="dashboard_protection_inactive">Protection désactivée</string>
+    <string name="dashboard_monitoring">Surveillance en temps réel</string>
+    <string name="dashboard_device_safe">Votre appareil est protégé contre les appels de numéros inconnus.</string>
+    <string name="dashboard_role_missing">Sentinela n\'est pas l\'application de filtrage d\'appels par défaut.</string>
+    <string name="dashboard_fix_configuration">Corriger la configuration</string>
+    <string name="dashboard_total_blocked">Total bloqué</string>
+    <string name="dashboard_blocked_today">Aujourd\'hui</string>
+    <string name="dashboard_last_blocked">Dernier appel bloqué</string>
+    <string name="dashboard_quick_whitelist">Liste personnelle</string>
+    <string name="dashboard_quick_history">Historique des blocages</string>
+    <string name="dashboard_protection_off_hint">Aucun appel n\'est filtré.</string>
+    <string name="dashboard_contacts_missing">Sentinela ne peut pas lire votre répertoire. Les appels de contacts peuvent être traités comme inconnus.</string>
+    <string name="dashboard_history_off">L\'historique est désactivé, il n\'y a donc aucun décompte d\'appels bloqués à afficher.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Activer l\'historique</string>
+
+    <!-- Navigation inférieure -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_whitelist">Autorisés</string>
+    <string name="nav_history">Historique</string>
+    <string name="nav_settings">Réglages</string>
+    <string name="nav_unavailable">Cet écran arrivera à une étape ultérieure de l\'application.</string>
+
+    <!-- Liste personnelle -->
+    <string name="whitelist_title">Liste personnelle</string>
+    <string name="whitelist_search_placeholder">Rechercher des descriptions ou des numéros…</string>
+    <string name="whitelist_section_allowed">Numéros autorisés (%1$d)</string>
+    <string name="whitelist_about_desc">Numéros que vous avez ajoutés manuellement ou marqués comme sûrs. Ils suivent la politique configurée — par défaut (Ne jamais mettre en silence), ils sonnent toujours.</string>
+    <string name="whitelist_add_number">Ajouter un numéro</string>
+    <string name="whitelist_edit">Modifier</string>
+    <string name="whitelist_delete">Supprimer</string>
+    <string name="whitelist_export">Exporter la sauvegarde</string>
+    <string name="whitelist_import">Importer une sauvegarde</string>
+    <string name="whitelist_import_confirm">L\'import fusionnera les numéros du fichier avec votre liste actuelle. Continuer ?</string>
+    <string name="whitelist_duplicate">Ce numéro est déjà dans la liste personnelle.</string>
+    <string name="whitelist_number_label">Numéro</string>
+    <string name="whitelist_description_label">Description (facultatif)</string>
+    <string name="whitelist_invalid_number">Numéro non valide. Utilisez un numéro brésilien avec indicatif.</string>
+    <string name="whitelist_load_error">Échec du chargement de la liste personnelle.</string>
+    <string name="whitelist_added_from_history">Ajouté depuis l\'historique</string>
+    <string name="whitelist_export_ok">Sauvegarde de la liste personnelle enregistrée.</string>
+    <string name="whitelist_export_failed">Impossible d\'enregistrer la sauvegarde.</string>
+    <string name="whitelist_import_failed">Impossible de lire le fichier.</string>
+    <string name="whitelist_import_result">%1$d ajoutés, %2$d existaient déjà, %3$d non valides.</string>
+    <string name="whitelist_import_result_over_limit">%1$d ajoutés, %2$d existaient déjà, %3$d non valides. %4$d ont été laissés de côté : le fichier dépasse la limite de 10 000 numéros.</string>
+
+    <!-- Historique -->
+    <string name="history_clear_all">Tout effacer</string>
+    <string name="history_filter_today">Aujourd\'hui</string>
+    <string name="history_filter_7days">7 jours</string>
+    <string name="history_filter_30days">30 jours</string>
+    <string name="history_unknown_number">Numéro inconnu</string>
+    <string name="history_private_number">Privé</string>
+    <string name="history_private_id">Identifiant masqué</string>
+    <string name="history_action_allow">Autoriser</string>
+    <string name="history_action_delete">Supprimer</string>
+    <string name="history_mark_unwanted">Marquer comme indésirable</string>
+    <string name="history_empty">Aucun appel bloqué pour l\'instant.</string>
+    <string name="history_clear_confirm">Cela effacera tout votre historique de blocages. Voulez-vous continuer ?</string>
+    <string name="history_filter_period">Période</string>
+    <string name="history_filter_all">Tout l\'historique</string>
+    <string name="history_action_allow_whitelist">Autoriser (ajouter à la liste personnelle)</string>
+
+    <!-- Historique : filtre par décision -->
+    <string name="history_filter_decision">Décision</string>
+    <string name="history_decision_all">Tous</string>
+    <string name="history_decision_unclassified">Non classés</string>
+    <string name="history_decision_legitimate">Marqués comme légitimes</string>
+    <string name="history_decision_unwanted">Marqués comme indésirables</string>
+
+    <!-- Historique : motif de la décision -->
+    <string name="history_reason_outgoing_call">Appel sortant</string>
+    <string name="history_reason_protection_disabled">Protection désactivée</string>
+    <string name="history_reason_private_number">Numéro privé</string>
+    <string name="history_reason_contact">Dans vos contacts</string>
+    <string name="history_reason_personal_whitelist">Dans votre liste personnelle</string>
+    <string name="history_reason_emergency_number">Numéro d\'urgence</string>
+    <string name="history_reason_repeated_call">A rappelé juste après</string>
+    <string name="history_reason_unknown_number">Numéro inconnu</string>
+    <string name="history_reason_invalid_number">Numéro non identifié</string>
+    <string name="history_reason_local_lookup_failure">Échec de la recherche locale</string>
+    <string name="history_reason_fallback_policy">Politique de repli</string>
+
+    <!-- Historique : temps relatif -->
+    <string name="history_time_now">À l\'instant</string>
+    <string name="history_time_minutes">il y a %1$d min</string>
+    <string name="history_time_hours">il y a %1$d h</string>
+    <string name="history_time_days">il y a %1$d j</string>
+
+    <!-- Protection / Réglages -->
+    <string name="settings_title">Protection</string>
+    <string name="settings_protection_toggle">Activer la protection</string>
+    <string name="settings_unknown_policy">Numéros inconnus</string>
+    <string name="settings_contacts_policy">Contacts du répertoire</string>
+    <string name="settings_whitelist_policy">Liste personnelle</string>
+    <string name="settings_block_private">Bloquer les numéros privés</string>
+    <string name="settings_dialer_mode">Mode téléphone (avancé)</string>
+    <string name="settings_dialer_mode_desc">Fait de Sentinela l\'application téléphone par défaut afin d\'appliquer les politiques aussi aux contacts. Vous pouvez revenir en arrière à tout moment.</string>
+    <string name="settings_mode_reject">Refuser immédiatement</string>
+    <string name="settings_mode_silent_voicemail">Transférer en silence</string>
+    <string name="settings_hide_native_log">Demander à ne pas inscrire dans le journal d\'appels</string>
+    <string name="settings_hide_native_log_desc">Android n\'honore cette demande que pour les applications d\'opérateur. Les appels bloqués continuent d\'apparaître dans le journal d\'appels du téléphone, marqués comme bloqués. Ce que le blocage garantit : pas de sonnerie, pas de vibration, pas d\'écran d\'appel et aucun avis d\'appel manqué.</string>
+    <string name="settings_show_notification">Afficher une notification silencieuse</string>
+    <string name="settings_fallback_policy">Que faire en cas d\'échec</string>
+    <string name="settings_fallback_allow">Laisser l\'appel sonner</string>
+    <string name="settings_fallback_block">Bloquer</string>
+
+    <string name="settings_privacy_title">Confidentialité</string>
+    <string name="settings_privacy_disclaimer">Sentinela est 100% hors ligne. Contrairement à d\'autres applications, nous ne collectons pas vos contacts et ne les envoyons pas vers le cloud.</string>
+    <string name="settings_mask_numbers">Masquer les numéros entrants</string>
+    <string name="settings_mask_numbers_desc">Masque une partie des numéros par des astérisques (+55 11 9****-1234) dans l\'historique, les notifications et l\'écran d\'accueil.</string>
+
+    <string name="settings_protection_toggle_desc">Désactivé, Sentinela ne bloque pas, ne met pas en silence et n\'enregistre rien. Les appels suivent le comportement normal du téléphone.</string>
+    <string name="settings_contacts_policy_note">Cette politique s\'applique tant que la lecture des contacts est accordée. Sans elle, les contacts relèvent de la politique d\'erreur.</string>
+    <string name="settings_block_mode_desc">Refuser immédiatement donne une tonalité occupée à l\'appelant. Transférer en silence envoie l\'appel vers la messagerie vocale, si votre opérateur propose ce service.</string>
+    <string name="settings_repeated_call">Le deuxième appel consécutif sonne</string>
+    <string name="settings_repeated_call_desc">Si le même numéro rappelle quelques minutes après avoir été bloqué, le deuxième appel sonne. Cela sert aux urgences venant de personnes absentes de votre répertoire.</string>
+    <string name="settings_history_enabled">Conserver l\'historique des blocages</string>
+    <string name="settings_history_enabled_desc">L\'historique reste uniquement sur cet appareil et c\'est lui qui permet de vérifier ce que Sentinela a bloqué. Le désactiver n\'efface pas ce qui a déjà été enregistré.</string>
+    <string name="settings_history_off_kept">Historique désactivé. Les enregistrements déjà conservés restent sur l\'appareil.</string>
+    <string name="settings_retention_title">Conserver les enregistrements pendant</string>
+    <string name="settings_retention_never">Ne pas conserver</string>
+    <string name="settings_retention_7">7 jours</string>
+    <string name="settings_retention_30">30 jours</string>
+    <string name="settings_retention_90">90 jours</string>
+    <string name="settings_retention_manual">Jusqu\'à ce que je les supprime</string>
+    <string name="settings_retention_never_confirm">Choisir « Ne pas conserver » efface les enregistrements existants et Sentinela cesse d\'enregistrer les nouveaux blocages. Cette action est irréversible.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Cela efface %1$d enregistrement d\'appel bloqué de cet appareil. Cette action est irréversible.</item>
+        <item quantity="other">Cela efface %1$d enregistrements d\'appels bloqués de cet appareil. Cette action est irréversible.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Si la recherche locale échoue, Sentinela doit décider seul. Autoriser risque de laisser passer un appel indésirable ; bloquer risque de vous faire manquer un appel que vous vouliez recevoir.</string>
+
+    <!-- Confidentialité et à propos -->
+    <string name="about_title">Confidentialité et à propos</string>
+    <string name="about_data_local">Toutes les données restent uniquement sur cet appareil.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela est open source : sans publicité, sans télémétrie, sans envoi de données vers le cloud — 100% hors ligne, sur votre propre téléphone.</string>
+    <string name="about_clear_all_data">Effacer toutes les données</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_open_app_settings">Ouvrir les réglages de l\'application</string>
+    <string name="about_open_channel_settings">Configurer le canal de notification</string>
+
+    <!-- Soutien et évaluation -->
+    <string name="review_prompt_title">Sentinela vous plaît ?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela est open source, sans publicité et 100% hors ligne. Une évaluation ou un commentaire de soutien aide beaucoup le projet.</string>
+    <string name="review_prompt_rate">Évaluer maintenant</string>
+    <string name="review_prompt_later">Pas maintenant</string>
+    <string name="support_title">Soutenir Sentinela</string>
+    <string name="support_comment_cta">Laisser un commentaire de soutien</string>
+    <string name="support_donate_hint">Don facultatif, directement vers le portefeuille du mainteneur. Vérifiez l\'adresse avant d\'envoyer.</string>
+    <string name="support_donate_bitcoin">Copier l\'adresse Bitcoin</string>
+    <string name="support_donate_liquid">Copier l\'adresse Liquid (L-BTC)</string>
+    <string name="support_address_copied">Adresse copiée !</string>
+
+    <!-- Effacer toutes les données -->
+    <string name="about_clear_warning_title">Attention</string>
+    <string name="about_clear_warning_body">Cela effacera votre historique de blocages, votre liste personnelle et tous vos réglages. Voulez-vous continuer ?</string>
+    <string name="about_clear_continue">Continuer</string>
+    <string name="about_clear_final_title">Confirmation finale</string>
+    <string name="about_clear_final_body">Êtes-vous sûr ? Cette action est irréversible et toutes les données locales seront définitivement perdues.</string>
+    <string name="about_clear_failed_title">Effacement impossible</string>
+    <string name="about_clear_failed_body">Vos données sont toujours sur l\'appareil. Réessayez ; si l\'erreur se reproduit, fermez et rouvrez l\'application.</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_blocked">Appels bloqués</string>
+    <string name="notification_channel_blocked_desc">Avis discret indiquant qu\'un appel a été bloqué. Ne sonne jamais, ne vibre jamais et n\'occupe jamais l\'écran.</string>
+    <string name="notification_blocked_title">Appel bloqué</string>
+    <string name="notification_blocked_masked">Appel de %1$s bloqué</string>
+    <string name="notification_blocked_anonymous">Un appel a été bloqué</string>
+
+    <!-- Activation de la notification -->
+    <string name="settings_notification_enable">M\'avertir lorsqu\'un appel est bloqué</string>
+    <string name="settings_notification_enable_desc">Désactivé par défaut. À l\'activation, Sentinela demande l\'autorisation de notifications du système. L\'avis est discret : pas de son, pas de vibration, pas de prise d\'écran.</string>
+    <string name="settings_notification_identification_masked">Afficher le numéro masqué</string>
+    <string name="settings_notification_identification_anonymous">N\'afficher aucune identification</string>
+    <string name="notification_permission_rationale">Pour vous avertir des appels bloqués, Sentinela a besoin de l\'autorisation de notifications. L\'avis est local et n\'affiche jamais le numéro complet.</string>
+
+    <!-- Notification d\'appel (mode téléphone) -->
+    <string name="notification_channel_call">Appels en cours</string>
+    <string name="notification_channel_call_desc">Affiche l\'appel entrant en plein écran et l\'avis d\'appel en cours. N\'apparaît que lorsque Sentinela est le téléphone par défaut.</string>
+    <string name="notification_call_incoming_title">Appel entrant</string>
+    <string name="notification_call_ongoing_title">Appel en cours</string>
+    <string name="notification_call_unknown_caller">Numéro non identifié</string>
+
+    <!-- Appel : libellés d\'état -->
+    <string name="call_incoming_state">Appel entrant</string>
+    <string name="call_dialing_state">Appel en cours…</string>
+    <string name="call_ringing_state">Sonnerie…</string>
+    <string name="call_active_state">En communication</string>
+    <string name="call_ended_state">Appel terminé</string>
+    <string name="call_failed_state">Impossible d\'établir l\'appel</string>
+    <string name="call_unsupported_state">Appel en cours</string>
+    <string name="call_unsupported_body">Cette version de Sentinela n\'affiche pas les commandes pour cet état d\'appel. Raccrocher reste disponible ci-dessous.</string>
+
+    <!-- Appel : actions principales -->
+    <string name="call_action_answer">Répondre</string>
+    <string name="call_action_reject">Refuser</string>
+    <string name="call_action_hangup">Raccrocher</string>
+    <string name="call_action_answer_description">Répondre à l\'appel</string>
+    <string name="call_action_reject_description">Refuser l\'appel</string>
+    <string name="call_action_hangup_description">Raccrocher l\'appel</string>
+
+    <!-- Appel : commandes secondaires -->
+    <string name="call_control_mute">Muet</string>
+    <string name="call_control_speaker">Haut-parleur</string>
+    <string name="call_control_keypad">Clavier</string>
+    <string name="call_control_mute_off_description">Muet, désactivé</string>
+    <string name="call_control_mute_on_description">Muet, activé</string>
+    <string name="call_control_speaker_off_description">Haut-parleur, désactivé</string>
+    <string name="call_control_speaker_on_description">Haut-parleur, activé</string>
+    <string name="call_control_keypad_closed_description">Clavier numérique, fermé</string>
+    <string name="call_control_keypad_open_description">Clavier numérique, ouvert</string>
+    <string name="call_control_unavailable_state">indisponible</string>
+
+    <!-- Appel : puces d\'origine -->
+    <string name="call_origin_contact">Contact</string>
+    <string name="call_origin_whitelist">Autorisé</string>
+    <string name="call_origin_unknown">Inconnu</string>
+    <string name="call_origin_private">Numéro privé</string>
+
+    <!-- Appel : sortie audio -->
+    <string name="call_audio_route_title">Sortie audio</string>
+    <string name="call_audio_route_earpiece">Téléphone</string>
+    <string name="call_audio_route_speaker">Haut-parleur</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Casque</string>
+    <string name="call_audio_route_active_state">en cours d\'utilisation</string>
+
+    <!-- Appel : minuteur et clavier DTMF -->
+    <string name="call_timer_description">Durée de l\'appel : %1$s</string>
+    <string name="call_keypad_close_description">Fermer le clavier</string>
+
+    <!-- Composition -->
+    <string name="dialpad_call">Appeler</string>
+    <string name="dialpad_call_description">Appeler %1$s</string>
+    <string name="dialpad_delete_description">Effacer le dernier chiffre</string>
+    <string name="dialpad_clear_description">Effacer tout le numéro</string>
+    <string name="dialpad_error_failed">Impossible de démarrer l\'appel.</string>
+    <string name="dialpad_error_retry">Réessayer</string>
+
+    <!-- Composition : touches -->
+    <string name="dialpad_key_1_description">Touche un</string>
+    <string name="dialpad_key_2_description">Touche deux</string>
+    <string name="dialpad_key_3_description">Touche trois</string>
+    <string name="dialpad_key_4_description">Touche quatre</string>
+    <string name="dialpad_key_5_description">Touche cinq</string>
+    <string name="dialpad_key_6_description">Touche six</string>
+    <string name="dialpad_key_7_description">Touche sept</string>
+    <string name="dialpad_key_8_description">Touche huit</string>
+    <string name="dialpad_key_9_description">Touche neuf</string>
+    <string name="dialpad_key_0_description">Touche zéro</string>
+    <string name="dialpad_key_star_description">Touche étoile</string>
+    <string name="dialpad_key_hash_description">Touche dièse</string>
+
+    <!-- Activation du mode téléphone -->
+    <string name="dialer_activation_title">Faire de Sentinela votre téléphone par défaut ?</string>
+    <string name="dialer_activation_intro">En mode téléphone, Sentinela reçoit tous les appels — y compris ceux des personnes de votre répertoire. C\'est le seul moyen pour que les politiques par origine s\'appliquent aussi à vos contacts.</string>
+    <string name="dialer_activation_changes_title">Ce qui change</string>
+    <string name="dialer_activation_change_1">Sentinela devient votre application téléphone : l\'écran d\'appel et le clavier deviennent les siens.</string>
+    <string name="dialer_activation_change_2">Le filtrage voit désormais tous les appels, pas seulement ceux des numéros hors répertoire.</string>
+    <string name="dialer_activation_change_3">La politique que vous avez choisie pour les contacts est réellement appliquée. La valeur par défaut reste Sonner — activer le mode téléphone, à lui seul, ne bloque personne.</string>
+    <string name="dialer_activation_unchanged_title">Ce qui ne change pas</string>
+    <string name="dialer_activation_unchanged_1">Les appels continuent d\'être inscrits dans le journal d\'appels du téléphone. Être l\'application téléphone par défaut ne donne pas à Sentinela l\'autorisation d\'omettre cet enregistrement — sur Android, seules les applications d\'opérateur le peuvent.</string>
+    <string name="dialer_activation_unchanged_2">Le « Ne pas déranger » du système reste prioritaire sur les réglages de Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Les appels WhatsApp, Telegram et d\'autres applications Internet restent hors de portée de Sentinela.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela reste 100% hors ligne : aucun appel, numéro ou contact ne quitte l\'appareil.</string>
+    <string name="dialer_activation_limit_calls">Un appel à la fois : l\'appel en attente et la conférence ne sont pas pris en charge dans cette version.</string>
+    <string name="dialer_activation_contacts_required">Le mode téléphone a besoin de l\'autorisation de lecture des contacts. Sans elle, Sentinela ne peut pas distinguer vos contacts et traiterait tout le monde comme inconnu.</string>
+    <string name="dialer_activation_grant_contacts">Autoriser la lecture des contacts</string>
+    <string name="dialer_activation_cta">Choisir Sentinela</string>
+    <string name="dialer_activation_cta_hint">C\'est Android qui décide. Vous pouvez revenir en arrière quand vous voulez.</string>
+
+    <!-- Mode téléphone déjà actif -->
+    <string name="dialer_active_chip">Actif</string>
+    <string name="dialer_active_title">Sentinela est votre téléphone par défaut</string>
+    <string name="action_back">Retour</string>
+    <string name="dialer_active_changes_title">Ce qui s\'applique maintenant</string>
+    <string name="dialer_activation_unavailable">Cet appareil ne propose pas le rôle de téléphone par défaut — généralement parce qu\'il n\'a pas de téléphonie. Le mode filtre de Sentinela continue de fonctionner là où il y a des appels téléphoniques.</string>
+    <string name="dialer_revert_cta">Choisir un autre téléphone</string>
+    <string name="dialer_revert_hint">En revenant à une autre application téléphone, le mode filtre de Sentinela continue de fonctionner normalement — sans réinstallation ni reconfiguration.</string>
+
+    <!-- Rôle de téléphone perdu -->
+    <string name="dialer_role_lost_title">Sentinela n\'est plus le téléphone par défaut.</string>
+    <string name="dialer_role_lost_body">Le mode filtre continue de fonctionner : les appels de numéros hors répertoire sont toujours filtrés.</string>
+    <string name="dialer_role_lost_action">Voir comment réactiver</string>
+
+    <!-- Génériques -->
+    <string name="action_confirm">Confirmer</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="action_retry">Réessayer</string>
+    <string name="state_loading">Chargement…</string>
+    <string name="state_error">Une erreur est survenue. Réessayez.</string>
+    <string name="state_on">Activé</string>
+    <string name="state_off">Désactivé</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Temps relatif de l\'accueil -->
+    <string name="time_now">à l\'instant</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">il y a %d min</item>
+        <item quantity="other">il y a %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">il y a %d h</item>
+        <item quantity="other">il y a %d h</item>
+    </plurals>
+    <string name="time_yesterday">hier</string>
+
+    <!-- Accueil : lecture du dernier appel bloqué -->
+    <string name="dashboard_last_blocked_description">Dernier appel bloqué, %1$s, %2$s, %3$s</string>
+
+    <!-- Accueil : avis supplémentaires -->
+    <string name="dashboard_more_warnings">Voir tous les avis</string>
+</resources>
