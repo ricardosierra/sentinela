@@ -11,12 +11,15 @@ import kotlinx.coroutines.launch
 /**
  * Prazo para a interface confirmar que apresentou uma chamada recebida.
  *
- * Dois segundos são generosos para desenhar uma tela e curtos o bastante para o usuário ainda
- * poder atender: uma chamada toca por dezenas de segundos. Vencido o prazo sem confirmação, a
- * sessão falha ALTO, porque interface vinculada e congelada é o único modo de falha desta fase
- * que ninguém detecta — nem o sistema de telefonia, nem o usuário, que só vê uma tela parada.
+ * Cinco segundos são o teto razoável para garantir que aparelhos com cold start lento (RAM baixa,
+ * processo morto) e casos onde a `fullScreenIntent` é bloqueada por DND ainda consigam apresentar
+ * a tela antes do prazo. Uma chamada toca por dezenas de segundos, então 5 s são aceitáveis para
+ * o usuário e suficientes para cobrir os casos medidos em aparelhos reais.
+ *
+ * Vencido o prazo sem confirmação a sessão falha ALTO: interface vinculada e congelada é o único
+ * modo de falha desta fase que ninguém detecta — nem o sistema de telefonia, nem o usuário.
  */
-const val PRESENTATION_DEADLINE_MILLIS: Long = 2_000L
+const val PRESENTATION_DEADLINE_MILLIS: Long = 5_000L
 
 /** Falha alta: a chamada recebida não conseguiu ser apresentada dentro do prazo. */
 class CallPresentationTimeoutException(rawState: Int) : IllegalStateException(
