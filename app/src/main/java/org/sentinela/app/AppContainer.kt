@@ -276,6 +276,10 @@ class AppContainer(
             // para o estado ativo, e o armazém é o único que a conhece. O notificador continua
             // preguiçoso: esta referência só o constrói quando a primeira chamada fica ativa.
             notifications = { identity -> incomingCallNotifier.notifyOngoing(identity) },
+            // O mesmo notificador cancela o aviso nos estados terminais. Passar aqui garante que
+            // a notificação cai no instante exato da transição, mesmo que o InCallService seja
+            // reciclado antes de chamar `onCallRemoved`.
+            canceller = incomingCallNotifier,
             maskNumber = maskNumber,
             // Relógio MONOTÔNICO para a duração da chamada. O de parede anda para trás quando a
             // operadora ou o NTP corrigem a hora, e o cronômetro saltava ou exibia tempo negativo

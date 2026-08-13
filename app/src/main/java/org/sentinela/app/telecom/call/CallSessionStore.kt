@@ -7,6 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/** Estado de chamada que exige cancelamento imediato da notificação. */
+private val CallUiState.exigeCancel: Boolean
+    get() = this == CallUiState.Ended || this == CallUiState.Failed || this is CallUiState.Unsupported
+
 /**
  * Observador do retrato da sessão, para quem precisa reagir a cada mudança de estado sem
  * manter um coletor próprio.
@@ -69,6 +73,14 @@ class CallSessionStore(
     private val scope: CoroutineScope,
     private val notifications: OngoingCallNotifier? = null,
     private val maskNumber: (String) -> String? = { null },
+    /**
+     * Cancela a notificação de chamada quando a sessão vai para estado terminal.
+     *
+     * Existe aqui, e não só no `SentinelaInCallService`, porque o store é o único que conhece o
+     * instante exato da transição terminal: se o processo for reciclado entre o estado terminal
+     * ser publicado e o `onCallRemoved` do serviço ser chamado, a notificação ficaria presa.
+     */
+    private val canceller: CallNotificationCanceller? = null,
     /**
      * Relógio repassado à sessão para marcar o início da chamada.
      *
@@ -149,7 +161,13 @@ class CallSessionStore(
         opaqueCallId = null
     }
 
-    private var estadoAnterior: CallUiState = CallSnapshot().state
+    /**
+     * Nulo até o primeiro retrato publicado, e não o retrato ocioso: o retrato de partida já é
+     * `Ended`, e usá-lo como "anterior" engoliria o cancelamento de uma chamada que chega ao
+     * espelho já em estado terminal — o `StateFlow` conflaciona, e uma rejeição imediata pode
+     * publicar direto o estado final sem nunca ter publicado o ativo.
+     */
+    private var estadoAnterior: CallUiState? = null
 
     private fun publicar(novo: CallSnapshot) {
         retrato.value = novo
@@ -161,6 +179,12 @@ class CallSessionStore(
         // piscar durante a ligação.
         if (novo.state == CallUiState.Active && anterior != CallUiState.Active) {
             notifications?.notifyOngoing(avisoDe(novo.identity))
+        }
+        // Cancela a notificação no instante do estado terminal, independentemente do ciclo de vida
+        // do InCallService. Sem este cancel aqui, um processo reciclado entre a publicação do estado
+        // e o `onCallRemoved` do serviço deixa a notificação presa na barra indefinidamente.
+        if (novo.state.exigeCancel && anterior?.exigeCancel != true) {
+            canceller?.cancelCallNotification()
         }
     }
 
