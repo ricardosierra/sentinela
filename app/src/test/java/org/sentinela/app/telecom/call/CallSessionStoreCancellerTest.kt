@@ -33,6 +33,19 @@ class CallSessionStoreCancellerTest {
     )
 
     @Test
+    fun `vincular a sessao nao cancela o aviso da chamada que acabou de chegar`() = runTest {
+        // O retrato de partida do coordenador já é `Ended`, e o serviço publica o aviso da chamada
+        // recebida ANTES de vincular a sessão. Um cancelamento disparado por essa primeira emissão
+        // apagaria da barra o aviso da ligação que está tocando agora — o defeito exato que a
+        // guarda por chamada vinculada impede.
+        val store = store()
+        store.attach(controls)
+        advanceUntilIdle()
+
+        assertEquals(false, cancelChamado)
+    }
+
+    @Test
     fun `transicao para Ended cancela a notificacao`() = runTest {
         val store = store()
         store.attach(controls)

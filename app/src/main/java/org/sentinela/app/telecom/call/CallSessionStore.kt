@@ -137,6 +137,7 @@ class CallSessionStore(
      */
     fun attach(controls: CallControls) {
         detach()
+        avisoCancelado = false
         val nova = CallSessionCoordinator(controls = controls, clock = clock, scope = scope)
         this.controls = controls
         session = nova
@@ -161,13 +162,10 @@ class CallSessionStore(
         opaqueCallId = null
     }
 
-    /**
-     * Nulo até o primeiro retrato publicado, e não o retrato ocioso: o retrato de partida já é
-     * `Ended`, e usá-lo como "anterior" engoliria o cancelamento de uma chamada que chega ao
-     * espelho já em estado terminal — o `StateFlow` conflaciona, e uma rejeição imediata pode
-     * publicar direto o estado final sem nunca ter publicado o ativo.
-     */
-    private var estadoAnterior: CallUiState? = null
+    private var estadoAnterior: CallUiState = CallSnapshot().state
+
+    /** Uma vez por sessão: o cancelamento já saiu e não deve sair de novo. Rearmado no vínculo. */
+    private var avisoCancelado: Boolean = false
 
     private fun publicar(novo: CallSnapshot) {
         retrato.value = novo
@@ -180,10 +178,19 @@ class CallSessionStore(
         if (novo.state == CallUiState.Active && anterior != CallUiState.Active) {
             notifications?.notifyOngoing(avisoDe(novo.identity))
         }
-        // Cancela a notificação no instante do estado terminal, independentemente do ciclo de vida
-        // do InCallService. Sem este cancel aqui, um processo reciclado entre a publicação do estado
-        // e o `onCallRemoved` do serviço deixa a notificação presa na barra indefinidamente.
-        if (novo.state.exigeCancel && anterior?.exigeCancel != true) {
+        // Some com o aviso no instante em que a sessão chega a estado terminal, independentemente
+        // do ciclo de vida do serviço da plataforma. Sem isto, uma ligação que termina por mudança
+        // de estado deixa o aviso na barra até o serviço receber a remoção da chamada — que chega
+        // segundos depois, ou não chega, se o vínculo cair antes.
+        //
+        // A guarda é a existência de chamada nesta sessão, não o estado anterior. Dois motivos
+        // medidos: o retrato de partida do coordenador JÁ É terminal, e o aviso de chamada recebida
+        // é publicado pelo serviço ANTES de vincular a sessão — reagir à primeira emissão apagaria
+        // o aviso da chamada que acabou de chegar. E o fluxo conflacia: uma ligação recusada de
+        // imediato publica o terminal sem nunca ter publicado o ativo, e comparar com o estado
+        // anterior deixaria justamente esse aviso preso.
+        if (novo.state.exigeCancel && !avisoCancelado && opaqueCallId != null) {
+            avisoCancelado = true
             canceller?.cancelCallNotification()
         }
     }

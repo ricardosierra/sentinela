@@ -15,6 +15,10 @@
 
 - [x] **Aviso sobre contato salvo só no WhatsApp** — quem tem o WhatsApp instalado passa a ver, no passo de contatos, que pessoa salva apenas dentro do WhatsApp não existe na agenda do aparelho e por isso chega como desconhecida; no histórico, o bloqueio de número desconhecido traz a mesma dica ao lado da ação de permitir. O aviso só aparece para quem tem o aplicativo instalado, e a checagem é local
 
+### 🐛 Correções
+
+- [x] **Aviso da chamada recebida podia sumir da barra no instante em que ela chegava** — o cancelamento no `CallSessionStore` reagia à primeira emissão do fluxo, e o retrato de partida da sessão já nasce terminal; como o serviço publica o aviso **antes** de vincular a sessão, a corrida entre os dois apagava da barra a ligação que estava tocando. O cancelamento agora só vale depois de a chamada entrar na sessão e sai uma vez por sessão, com regressão que falha se a primeira emissão voltar a cancelar
+
 ## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
 
 ### ✨ Novidades
