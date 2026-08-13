@@ -120,6 +120,7 @@ fun SettingsScreen(
     onHistoryEnabledChange: (Boolean) -> Unit,
     onRetention: (RetentionPolicy) -> Unit,
     onClearHistory: () -> Unit,
+    onMaskNumbersChange: (Boolean) -> Unit,
     onFallback: (FallbackPolicy) -> Unit,
     onOpenAbout: () -> Unit,
     bottomBar: @Composable () -> Unit,
@@ -183,6 +184,7 @@ fun SettingsScreen(
                 onPedirLimpeza = { confirmarLimpeza = true },
             )
             GrupoDePoliticaDeFalha(state = state, onFallback = onFallback)
+            GrupoDePrivacidade(state = state, onMaskNumbersChange = onMaskNumbersChange)
             CartaoDeLimitacoes()
             GrupoDeDestinos(
                 state = state,
@@ -556,6 +558,22 @@ private fun GrupoDePoliticaDeFalha(state: SettingsUiState, onFallback: (Fallback
     }
 }
 
+@Composable
+private fun GrupoDePrivacidade(state: SettingsUiState, onMaskNumbersChange: (Boolean) -> Unit) {
+    SettingsGroup(title = stringResource(R.string.settings_privacy_title)) {
+        InfoBanner(
+            text = stringResource(R.string.settings_privacy_disclaimer),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
+        )
+        SettingSwitchRow(
+            label = stringResource(R.string.settings_mask_numbers),
+            description = stringResource(R.string.settings_mask_numbers_desc),
+            checked = state.settings.maskNumbers,
+            onCheckedChange = onMaskNumbersChange,
+        )
+    }
+}
+
 /**
  * Item 15 — as quatro honestidades, pelos identificadores de recurso originais.
  *
@@ -773,6 +791,7 @@ private fun TelaDeExemplo(state: SettingsUiState) {
         onHistoryEnabledChange = {},
         onRetention = {},
         onClearHistory = {},
+        onMaskNumbersChange = {},
         onFallback = {},
         onOpenAbout = {},
         bottomBar = {},

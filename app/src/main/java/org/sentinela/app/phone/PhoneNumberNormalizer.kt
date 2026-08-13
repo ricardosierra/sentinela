@@ -28,6 +28,9 @@ interface PhoneNumberNormalizer {
 
     /** Máscara segura para exibição/log (ex.: +55 11 9****-1234). Nunca lança. */
     fun mask(e164: String): String
+
+    /** Formata o número em Padrão Internacional. Nunca lança. */
+    fun formatInternational(e164: String): String
 }
 
 sealed interface NormalizationResult {

@@ -15,6 +15,7 @@ import androidx.compose.ui.test.isToggleable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -146,6 +147,7 @@ class ProtectionScreenTest {
                 onHistoryEnabledChange = { historicoLigado = it },
                 onRetention = { retencoes += it },
                 onClearHistory = { limpezas++ },
+                onMaskNumbersChange = {},
                 onFallback = { politicaDeFalha = it },
                 onOpenAbout = { aberturasDeSobre++ },
                 bottomBar = { },
@@ -155,6 +157,9 @@ class ProtectionScreenTest {
 
     private fun rolarAte(id: Int) =
         compose.onAllNodesWithText(texto(id)).onFirst().performScrollTo()
+
+    private fun rolarAteUltimo(id: Int) =
+        compose.onAllNodesWithText(texto(id)).onLast().performScrollTo()
 
     private fun nenhumDialogo() =
         assertEquals(0, compose.onAllNodes(isDialog()).fetchSemanticsNodes().size)
@@ -229,7 +234,7 @@ class ProtectionScreenTest {
     @Test
     fun `politica de erro emite a escolha sem confirmar`() {
         tela()
-        rolarAte(R.string.settings_fallback_block).performClick()
+        rolarAteUltimo(R.string.settings_fallback_block).performClick()
         nenhumDialogo()
         assertEquals(FallbackPolicy.BLOCK, politicaDeFalha)
     }

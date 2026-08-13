@@ -32,10 +32,17 @@ data class ScreeningSettings(
      */
     val repeatedCallBypassEnabled: Boolean = true,
     /**
-     * O que a notificação própria mostra quando está ligada. Padrão mascarado:
-     * o número completo nunca entra na notificação em nenhuma das opções.
+     * O que a notificação própria mostra quando está ligada. MASKED exibe o número no formato
+     * escolhido em [maskNumbers]; ANONYMOUS não mostra dígito algum. Na tela bloqueada a versão
+     * pública nunca carrega número, independentemente destas opções.
      */
     val notificationIdentification: NotificationIdentification = NotificationIdentification.MASKED,
+    /**
+     * Se exibe os números mascarados (com asteriscos) na interface, histórico e notificações.
+     * Desligado por padrão: sem os dígitos completos o usuário não reconhece quem ligou, e o
+     * número é dado do próprio dono do aparelho — a máscara continua obrigatória em log.
+     */
+    val maskNumbers: Boolean = false,
 )
 
 /**

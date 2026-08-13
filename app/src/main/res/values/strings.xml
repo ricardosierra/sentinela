@@ -199,6 +199,12 @@
     <string name="settings_fallback_policy">O que fazer se houver falha</string>
     <string name="settings_fallback_allow">Tocar a chamada</string>
     <string name="settings_fallback_block">Bloquear</string>
+
+    <string name="settings_privacy_title">Privacidade</string>
+    <string name="settings_privacy_disclaimer">O Sentinela é 100% offline. Diferente de outros apps, não coletamos sua agenda nem a enviamos para a nuvem.</string>
+    <string name="settings_mask_numbers">Mascarar números recebidos</string>
+    <string name="settings_mask_numbers_desc">Oculta parte dos números com asteriscos (+55 11 9****-1234) no histórico, notificações e tela inicial.</string>
+
     <string name="settings_protection_toggle_desc">Desligado, o Sentinela não bloqueia, não silencia e não registra nada. As chamadas seguem o comportamento normal do telefone.</string>
     <string name="settings_contacts_policy_note">Esta política vale enquanto a leitura da agenda estiver concedida. Sem ela, contatos caem na política de erro.</string>
     <string name="settings_block_mode_desc">Rejeitar imediatamente dá sinal de ocupado a quem liga. Encaminhar silenciosamente manda a chamada para a caixa postal, se a sua operadora tiver esse serviço.</string>

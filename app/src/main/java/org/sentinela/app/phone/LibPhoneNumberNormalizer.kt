@@ -67,6 +67,11 @@ class LibPhoneNumberNormalizer(
 
     override fun mask(e164: String): String = PhoneMask.mask(util, e164)
 
+    override fun formatInternational(e164: String): String = runCatching {
+        val parsed = util.parse(e164, null)
+        util.format(parsed, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
+    }.getOrDefault(e164)
+
     /**
      * Codigos curtos (190, 911) nao tem E.164: `190`/BR vira `+55190`, isValid=false, TOO_SHORT,
      * e `ShortNumberInfo` e inconstruivel no port -android (construtor package-private,

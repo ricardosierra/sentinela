@@ -16,10 +16,11 @@ import org.sentinela.app.ui.MainActivity
 /**
  * Notificação própria (NTF-01..NTF-05), silenciosa e opcional.
  *
- * A garantia de privacidade aqui NÃO é a visibilidade escolhida pelo usuário: é o fato de o
- * número completo nunca entrar no objeto de notificação. O conteúdo sai de
- * [BlockedCallEntry.maskedNumber], produzido pela máscara única [PhoneMask] — o campo com os
- * dígitos completos do registro jamais é lido nesta classe.
+ * A garantia de privacidade aqui NÃO é a visibilidade escolhida pelo usuário: é o fato de esta
+ * classe jamais ler o campo com os dígitos crus do registro. O conteúdo sai de
+ * [BlockedCallEntry.maskedNumber], produzido pela formatação única do aplicativo — mascarado ou
+ * completo conforme a opção de privacidade do usuário — e a versão pública, a única que a tela
+ * bloqueada mostra quando o conteúdo sensível está oculto, nunca carrega número.
  *
  * Todo o corpo roda dentro de `runCatching`: esta classe é chamada DEPOIS do respondToCall, e
  * uma falha ao notificar nunca pode escapar para o caminho da triagem.

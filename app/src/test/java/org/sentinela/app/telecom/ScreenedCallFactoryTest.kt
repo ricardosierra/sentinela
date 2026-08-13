@@ -103,6 +103,8 @@ class ScreenedCallFactoryTest {
             override fun nationalDigits(e164: String): String? = null
 
             override fun mask(e164: String): String = ""
+
+            override fun formatInternational(e164: String): String = e164
         }
 
         val resultado = ScreenedCallFactory(explosivo)

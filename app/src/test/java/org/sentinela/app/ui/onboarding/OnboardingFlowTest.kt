@@ -452,10 +452,11 @@ private fun ProtecaoDeTeste(
         onNotificationIdentification = { },
         onOpenDialerActivation = onOpenDialerActivation,
         onRepeatedCallChange = { },
-        onHistoryEnabledChange = { },
-        onRetention = { },
-        onClearHistory = { },
-        onFallback = { },
+        onHistoryEnabledChange = {},
+        onRetention = {},
+        onClearHistory = {},
+        onMaskNumbersChange = {},
+        onFallback = {},
         onOpenAbout = { },
         bottomBar = { 
             org.sentinela.app.ui.components.SentinelaBottomBar(

@@ -232,6 +232,7 @@ class DataStoreSettingsRepository(
         val CALL_PHONE_PERMISSION_ASKED = booleanPreferencesKey("call_phone_permission_asked")
         val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
         val RATING_ACCEPTED = booleanPreferencesKey("rating_accepted")
+        val MASK_NUMBERS = booleanPreferencesKey("mask_numbers")
     }
 
     private fun Preferences.toScreeningSettings(): ScreeningSettings {
@@ -257,6 +258,7 @@ class DataStoreSettingsRepository(
             notificationIdentification = NotificationIdentification.entries
                 .firstOrNull { it.name == this[Keys.NOTIFICATION_IDENTIFICATION] }
                 ?: padrao.notificationIdentification,
+            maskNumbers = this[Keys.MASK_NUMBERS] ?: padrao.maskNumbers,
         )
     }
 
@@ -284,5 +286,6 @@ class DataStoreSettingsRepository(
         // Nome do enum, nunca a posição: reordenar as constantes trocaria a configuração
         // já gravada do usuário (lição da Fase 3).
         prefs[Keys.NOTIFICATION_IDENTIFICATION] = notificationIdentification.name
+        prefs[Keys.MASK_NUMBERS] = maskNumbers
     }
 }

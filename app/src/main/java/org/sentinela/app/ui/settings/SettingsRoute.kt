@@ -89,6 +89,7 @@ internal fun SettingsRoute(
         onHistoryEnabledChange = dono::definirHistoricoLigado,
         onRetention = dono::definirRetencao,
         onClearHistory = dono::limparHistorico,
+        onMaskNumbersChange = dono::definirMascaraDeNumeros,
         onFallback = dono::definirPoliticaDeFalha,
         onOpenAbout = { nav.navigate(Rotas.SOBRE) { launchSingleTop = true } },
         bottomBar = bottomBar,

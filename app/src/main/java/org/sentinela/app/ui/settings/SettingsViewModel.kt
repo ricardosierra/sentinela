@@ -116,6 +116,9 @@ class SettingsViewModel(
     fun definirChamadaRepetidaToca(ligado: Boolean) =
         gravar { it.copy(repeatedCallBypassEnabled = ligado) }
 
+    fun definirMascaraDeNumeros(mascarar: Boolean) =
+        gravar { it.copy(maskNumbers = mascarar) }
+
     fun definirPoliticaDeFalha(politica: FallbackPolicy) =
         gravar { it.copy(fallbackPolicy = politica) }
 

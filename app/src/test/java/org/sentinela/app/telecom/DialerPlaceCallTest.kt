@@ -39,6 +39,8 @@ class DialerPlaceCallTest {
         override fun nationalDigits(e164: String): String? = NACIONAL
 
         override fun mask(e164: String): String = MASCARA
+
+        override fun formatInternational(e164: String): String = e164
     }
 
     private fun placer(

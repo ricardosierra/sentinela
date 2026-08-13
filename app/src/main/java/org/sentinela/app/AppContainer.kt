@@ -218,12 +218,20 @@ class AppContainer(
     }
 
     /**
-     * Máscara única de exibição, com os metadados de telefone já resolvidos. Exposta porque a
-     * camada de telefonia precisa mascarar a identidade **antes** de entregá-la ao aviso do
-     * sistema: quem publica notificação nunca recebe número cru.
+     * Formatação única de exibição, com os metadados de telefone já resolvidos. Respeita a opção
+     * de privacidade do usuário: máscara ligada produz `+55 11 9****-1234`; desligada, o número
+     * completo em formato internacional. Exposta porque a camada de telefonia formata a identidade
+     * **antes** de entregá-la ao aviso do sistema: quem publica notificação recebe o texto pronto
+     * e nunca decide formato. Log continua usando [PhoneMask] direto — a opção não alcança log.
      */
     val maskNumber: (String) -> String by lazy {
-        { numero -> PhoneMask.mask(phoneUtil, numero) }
+        { numero ->
+            if (settingsRepository.cachedSnapshot().maskNumbers) {
+                PhoneMask.mask(phoneUtil, numero)
+            } else {
+                phoneNumberNormalizer.formatInternational(numero)
+            }
+        }
     }
 
     /**
