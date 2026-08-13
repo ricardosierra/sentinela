@@ -153,11 +153,18 @@ internal fun CallHost(
     }
 
     // Chamada em curso engole o gesto de voltar: sair da tela por acidente com o telefone no ouvido
-    // deixaria o usuario sem controle nenhum sobre a ligacao.
-    BackHandler(enabled = !snapshot.state.isTerminal()) { }
+    // deixaria o usuário sem controle nenhum sobre a ligação.
+    // Unsupported é exceção deliberada: nele o botão de encerrar pode estar inoperante (código de
+    // estado que esta versão não conhece), e bloquear o Voltar deixaria o usuário completamente preso.
+    BackHandler(enabled = snapshot.state != CallUiState.Incoming
+            && !snapshot.state.isTerminal()
+            && snapshot.state !is CallUiState.Unsupported) { }
 
     LaunchedEffect(snapshot.state) {
-        if (snapshot.state.isTerminal()) {
+        // Unsupported é tratado como terminal para efeito de fechamento de tela: a notificação
+        // já foi cancelada no store, e manter a tela aberta num estado não suportado indefinidamente
+        // é o pior resultado possível (o usuário fica com a tela travada e a ligação no ar).
+        if (snapshot.state.isTerminal() || snapshot.state is CallUiState.Unsupported) {
             delay(CALL_ENDED_DISMISS_MILLIS)
             onFinish()
         }
