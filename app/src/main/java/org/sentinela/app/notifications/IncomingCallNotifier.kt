@@ -101,10 +101,15 @@ class IncomingCallNotifier(
         manager?.notify(CALL_NOTIFICATION_ID, builder.build())
     }
 
-    /** Chamada em curso: aviso persistente com a ação de encerrar. */
+    /** Chamada em curso: aviso persistente com a ação de encerrar. Silencioso na substituição. */
     fun notifyOngoing(identity: MaskedCallIdentity) {
         CallNotificationChannels.ensureCallChannel(context)
-        val builder = base(R.string.notification_call_ongoing_title, identity)
+        // Silencioso de propósito: esta notificação SUBSTITUI a de chamada recebida (mesmo ID).
+        // Sem `setOnlyAlertOnce(true)`, o sistema toca o som do canal novamente a cada substituição —
+        // causando um bip extra no momento em que o usuário atende. A chamada recebida já tocou
+        // o ringtone pelo fullScreenIntent e pelo canal de alta importância; aqui só se atualiza
+        // o conteúdo do aviso na barra sem disparar o som novamente.
+        val builder = base(R.string.notification_call_ongoing_title, identity).setOnlyAlertOnce(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             builder.setStyle(
                 NotificationCompat.CallStyle.forOngoingCall(

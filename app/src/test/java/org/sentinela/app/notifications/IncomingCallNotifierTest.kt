@@ -175,6 +175,22 @@ class IncomingCallNotifierTest {
     }
 
     @Test
+    @Config(sdk = [29])
+    fun `o aviso de chamada em curso e silencioso para nao bipar ao substituir`() {
+        // Regressão: sem setOnlyAlertOnce(true), a substituição do aviso de chamada recebida pelo aviso
+        // de chamada em curso disparava o som do canal novamente, causando um bip audível no
+        // momento em que o usuário atendia a ligação.
+        // Testado no SDK 29 (caminho compat, sem platform CallStyle) onde FLAG_ONLY_ALERT_ONCE
+        // é verificável diretamente via flags — o comportamento silent vale para ambas as versões.
+        val notification = publicarEmCurso()
+
+        assertTrue(
+            "o aviso de chamada em curso precisa ter FLAG_ONLY_ALERT_ONCE (setOnlyAlertOnce)",
+            notification.flags and Notification.FLAG_ONLY_ALERT_ONCE != 0,
+        )
+    }
+
+    @Test
     fun `nenhum campo da notificacao carrega a sequencia completa do numero`() {
         listOf(
             identidade,
