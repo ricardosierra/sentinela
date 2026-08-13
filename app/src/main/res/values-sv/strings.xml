@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Välkommen -->
+    <string name="welcome_headline">Din första försvarslinje mot skräpsamtal.</string>
+    <string name="welcome_subtitle">Sentinela blockerar samtal från okända nummer innan telefonen ens hinner ringa.</string>
+    <string name="welcome_feature_local_title">Lokal blockering</string>
+    <string name="welcome_feature_local_desc">Bearbetning direkt på enheten.</string>
+    <string name="welcome_feature_silent_title">Tyst</string>
+    <string name="welcome_feature_silent_desc">Inga oönskade ringsignaler eller vibrationer.</string>
+    <string name="welcome_feature_offline_title">Utan internet</string>
+    <string name="welcome_feature_offline_desc">Fullständig integritet. Vi samlar inte in dina kontakter.</string>
+    <string name="welcome_badge_native">Inbyggd integration</string>
+    <string name="welcome_cta">Starta konfigurationen</string>
+    <string name="welcome_cta_hint">Tar mindre än 2 minuter.</string>
+    <string name="welcome_open_source" formatted="false">100% öppen källkod — inga annonser, ingen telemetri</string>
+
+    <!-- Introduktion: rollen som samtalsfilter -->
+    <string name="onboarding_role_disclaimer">När du konfigurerar ger du behörighet för samtalsfiltrering. Sentinela filtrerar samtal från okända nummer lokalt, utan att någonsin skicka dina uppgifter utanför enheten.</string>
+    <string name="onboarding_role_cta">Konfigurera nu</string>
+    <string name="onboarding_role_requesting">Begär behörighet…</string>
+    <string name="onboarding_step_indicator">Steg %1$d av %2$d</string>
+    <string name="onboarding_next">Nästa</string>
+    <string name="onboarding_back">Tillbaka</string>
+    <string name="onboarding_finish">Slutför konfigurationen</string>
+    <string name="onboarding_change_later">Du kan ändra den här inställningen när som helst.</string>
+    <string name="onboarding_skip">Hoppa över</string>
+    <string name="onboarding_role_title">Låt Sentinela sköta filtreringen</string>
+    <string name="onboarding_role_intro">För att filtrera samtal måste Sentinela vara Androids standardapp för samtalsfiltrering. Det är du som ger behörigheten, och du kan ta tillbaka den i systeminställningarna när du vill.</string>
+    <string name="onboarding_role_denied">Sentinela fick inte rollen som samtalsfilter. Inga samtal filtreras förrän du ger behörigheten — du kan göra det nu eller senare, på skärmen Skydd.</string>
+    <string name="onboarding_role_retry">Ge behörighet nu</string>
+    <string name="onboarding_scope_title">Det här gör inte Sentinela</string>
+    <string name="onboarding_scope_dnd">Systemets \"Stör ej\" gäller fortfarande före Sentinelas inställningar.</string>
+
+    <!-- Introduktion: okända nummer -->
+    <string name="unknown_title">Okända samtal</string>
+    <string name="unknown_question">Hur ska Sentinela hantera nummer som inte finns bland dina kontakter?</string>
+    <string name="unknown_option_block">Blockera</string>
+    <string name="unknown_option_block_desc">Avvisar samtalet omedelbart.</string>
+    <string name="unknown_option_silence">Tysta</string>
+    <string name="unknown_option_silence_desc">Samtalet kommer in utan ljud och utan vibration.</string>
+    <string name="unknown_option_allow">Tillåt</string>
+    <string name="unknown_option_allow_desc">Tar emot samtal som vanligt.</string>
+
+    <!-- Introduktion: kontakter -->
+    <string name="contacts_title">Och personerna i din kontaktlista?</string>
+    <string name="contacts_explainer">Bestäm hur Sentinela ska hantera samtal från dem du redan känner. Du kan ändra det senare.</string>
+    <string name="contacts_permission_rationale" formatted="false">För att veta om den som ringer finns i din adressbok måste Sentinela läsa dina kontakter. Till skillnad från andra appar samlar vi inte in dina kontakter. Läsningen är 100% lokal: uppgifterna lämnar aldrig enheten.</string>
+    <string name="contacts_option_ring">Ring</string>
+    <string name="contacts_option_ring_desc">Samtalen ringer som vanligt i din telefon.</string>
+    <string name="contacts_option_block">Blockera</string>
+    <string name="contacts_option_block_desc">Blockerar alla samtal enligt blockeringsläget under Skydd.</string>
+    <string name="contacts_option_silence">Tysta</string>
+    <string name="contacts_option_silence_desc">Telefonen varken vibrerar eller ringer, men visar aviseringen.</string>
+    <string name="contacts_option_never_silence">Tysta aldrig</string>
+    <string name="contacts_option_never_silence_desc">Sentinela tystar aldrig din kontaktlista. Systemets \"Stör ej\" gäller fortfarande.</string>
+    <string name="contacts_default_badge">Standard</string>
+
+    <string name="whatsapp_contacts_warning_title">Om WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp låter dig spara kontakter enbart i sitt eget moln. Personer som sparats så finns inte i enhetens adressbok och behandlas av Sentinela som \"Okänd\". Spara dina kontakter i den officiella adressboken så att blockeraren känner igen dem.</string>
+    <string name="whatsapp_history_hint">Tips: om det är en WhatsApp-kontakt som inte är sparad i adressboken kan du använda alternativet ovan för att tillåta den.</string>
+
+    <string name="contacts_permission_granted">Åtkomst till kontakter beviljad</string>
+    <string name="contacts_permission_denied">Utan åtkomst till kontakter kan Sentinela inte veta vem som finns i din adressbok: de samtalen kan behandlas som okända.</string>
+    <string name="contacts_permission_blocked">Åtkomsten till kontakter nekades permanent. Öppna appens inställningar för att bevilja den.</string>
+    <string name="settings_block_private_desc">Samtal utan nummerpresentation följer den blockeringspolicy du valt. Det går inte att veta vem som ringde.</string>
+
+    <!-- Introduktion: personlig lista -->
+    <string name="whitelist_setup_title">Konfiguration av den personliga listan</string>
+    <string name="whitelist_setup_desc">Den personliga listan är din egen lista över betrodda nummer, skild från telefonens adressbok.</string>
+    <string name="whitelist_setup_what_title">Vad är den personliga listan?</string>
+    <string name="whitelist_setup_what_desc">Den personliga listan består av de nummer du lagt till manuellt eller markerat som säkra inne i appen.</string>
+    <string name="whitelist_setup_question">Hur ska din personliga lista hanteras?</string>
+    <string name="whitelist_option_never_silence">Tysta aldrig</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela tystar aldrig den här källan. Systemets \"Stör ej\" gäller fortfarande.</string>
+    <string name="whitelist_option_ring">Ring</string>
+    <string name="whitelist_option_ring_desc">Ge alltid ljud.</string>
+    <string name="whitelist_option_block">Blockera</string>
+    <string name="whitelist_option_block_desc">Avvisa automatiskt.</string>
+    <string name="whitelist_option_silence">Tysta</string>
+    <string name="whitelist_option_silence_desc">Endast visuell avisering.</string>
+    <string name="whitelist_setup_hint">Du kan ändra de här inställningarna och lägga till nya nummer när som helst i menyn Tillåtna.</string>
+
+    <!-- Introduktion: slutkontroll -->
+    <string name="onboarding_summary_title_ok">Allt klart</string>
+    <string name="onboarding_summary_title_partial">Nästan klart</string>
+    <string name="onboarding_summary_body">Kontrollera vad som blev konfigurerat. Du kan ändra varje punkt senare, på skärmen Skydd.</string>
+    <string name="onboarding_check_role">Standardsamtalsfiltrering</string>
+    <string name="onboarding_check_contacts">Åtkomst till kontakter</string>
+    <string name="onboarding_check_unknown">Okända nummer</string>
+    <string name="onboarding_check_origins">Kontakter och personlig lista</string>
+    <string name="onboarding_check_granted">Beviljad</string>
+    <string name="onboarding_check_missing">Saknas</string>
+
+    <!-- Översikt -->
+    <string name="dashboard_protection_active">Skydd aktivt</string>
+    <string name="dashboard_protection_inactive">Skydd avstängt</string>
+    <string name="dashboard_monitoring">Övervakning i realtid</string>
+    <string name="dashboard_device_safe">Din enhet är skyddad mot samtal från okända nummer.</string>
+    <string name="dashboard_role_missing">Sentinela är inte standardappen för samtalsfiltrering.</string>
+    <string name="dashboard_fix_configuration">Åtgärda konfigurationen</string>
+    <string name="dashboard_total_blocked">Totalt blockerade</string>
+    <string name="dashboard_blocked_today">I dag</string>
+    <string name="dashboard_last_blocked">Senaste blockerade samtalet</string>
+    <string name="dashboard_quick_whitelist">Personlig lista</string>
+    <string name="dashboard_quick_history">Blockeringshistorik</string>
+    <string name="dashboard_protection_off_hint">Inga samtal filtreras.</string>
+    <string name="dashboard_contacts_missing">Sentinela kan inte läsa din adressbok. Samtal från kontakter kan behandlas som okända.</string>
+    <string name="dashboard_history_off">Historiken är avstängd, så det finns ingen räkning av blockerade samtal att visa.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Slå på historiken</string>
+
+    <!-- Nedre navigering -->
+    <string name="nav_home">Start</string>
+    <string name="nav_whitelist">Tillåtna</string>
+    <string name="nav_history">Historik</string>
+    <string name="nav_settings">Inställningar</string>
+    <string name="nav_unavailable">Den här skärmen kommer i ett senare skede av appen.</string>
+
+    <!-- Personlig lista -->
+    <string name="whitelist_title">Personlig lista</string>
+    <string name="whitelist_search_placeholder">Sök beskrivningar eller nummer…</string>
+    <string name="whitelist_section_allowed">Tillåtna nummer (%1$d)</string>
+    <string name="whitelist_about_desc">Nummer som du lagt till manuellt eller markerat som säkra. De följer den policy du ställt in — med standardvärdet (Tysta aldrig) ringer de alltid.</string>
+    <string name="whitelist_add_number">Lägg till nummer</string>
+    <string name="whitelist_edit">Redigera</string>
+    <string name="whitelist_delete">Ta bort</string>
+    <string name="whitelist_export">Exportera säkerhetskopia</string>
+    <string name="whitelist_import">Importera säkerhetskopia</string>
+    <string name="whitelist_import_confirm">Importen sammanfogar numren i filen med din nuvarande lista. Vill du fortsätta?</string>
+    <string name="whitelist_duplicate">Det här numret finns redan i den personliga listan.</string>
+    <string name="whitelist_number_label">Nummer</string>
+    <string name="whitelist_description_label">Beskrivning (valfritt)</string>
+    <string name="whitelist_invalid_number">Ogiltigt nummer. Använd ett brasilianskt nummer med riktnummer.</string>
+    <string name="whitelist_load_error">Det gick inte att läsa in den personliga listan.</string>
+    <string name="whitelist_added_from_history">Tillagt från historiken</string>
+    <string name="whitelist_export_ok">Säkerhetskopia av den personliga listan sparad.</string>
+    <string name="whitelist_export_failed">Det gick inte att spara säkerhetskopian.</string>
+    <string name="whitelist_import_failed">Det gick inte att läsa filen.</string>
+    <string name="whitelist_import_result">%1$d tillagda, %2$d fanns redan, %3$d ogiltiga.</string>
+    <string name="whitelist_import_result_over_limit">%1$d tillagda, %2$d fanns redan, %3$d ogiltiga. %4$d kom inte med: filen överskrider gränsen på 10 000 nummer.</string>
+
+    <!-- Historik -->
+    <string name="history_clear_all">Rensa allt</string>
+    <string name="history_filter_today">I dag</string>
+    <string name="history_filter_7days">7 dagar</string>
+    <string name="history_filter_30days">30 dagar</string>
+    <string name="history_unknown_number">Okänt nummer</string>
+    <string name="history_private_number">Privat</string>
+    <string name="history_private_id">Dolt id</string>
+    <string name="history_action_allow">Tillåt</string>
+    <string name="history_action_delete">Ta bort</string>
+    <string name="history_mark_unwanted">Markera som oönskat</string>
+    <string name="history_empty">Inga blockerade samtal ännu.</string>
+    <string name="history_clear_confirm">Det här raderar hela din blockeringshistorik. Vill du fortsätta?</string>
+    <string name="history_filter_period">Period</string>
+    <string name="history_filter_all">Hela historiken</string>
+    <string name="history_action_allow_whitelist">Tillåt (lägg till i den personliga listan)</string>
+
+    <!-- Historik: filter efter beslut -->
+    <string name="history_filter_decision">Beslut</string>
+    <string name="history_decision_all">Alla</string>
+    <string name="history_decision_unclassified">Oklassificerade</string>
+    <string name="history_decision_legitimate">Markerade som legitima</string>
+    <string name="history_decision_unwanted">Markerade som oönskade</string>
+
+    <!-- Historik: skäl till beslutet -->
+    <string name="history_reason_outgoing_call">Utgående samtal</string>
+    <string name="history_reason_protection_disabled">Skydd avstängt</string>
+    <string name="history_reason_private_number">Privat nummer</string>
+    <string name="history_reason_contact">Finns i dina kontakter</string>
+    <string name="history_reason_personal_whitelist">Finns i din personliga lista</string>
+    <string name="history_reason_emergency_number">Nödnummer</string>
+    <string name="history_reason_repeated_call">Ringde igen direkt efteråt</string>
+    <string name="history_reason_unknown_number">Okänt nummer</string>
+    <string name="history_reason_invalid_number">Oidentifierat nummer</string>
+    <string name="history_reason_local_lookup_failure">Lokal sökning misslyckades</string>
+    <string name="history_reason_fallback_policy">Reservpolicy</string>
+
+    <!-- Historik: relativ tid -->
+    <string name="history_time_now">Nu</string>
+    <string name="history_time_minutes">för %1$d min sedan</string>
+    <string name="history_time_hours">för %1$d tim sedan</string>
+    <string name="history_time_days">för %1$d d sedan</string>
+
+    <!-- Skydd / Inställningar -->
+    <string name="settings_title">Skydd</string>
+    <string name="settings_protection_toggle">Slå på skyddet</string>
+    <string name="settings_unknown_policy">Okända nummer</string>
+    <string name="settings_contacts_policy">Kontakter i adressboken</string>
+    <string name="settings_whitelist_policy">Personlig lista</string>
+    <string name="settings_block_private">Blockera privata nummer</string>
+    <string name="settings_dialer_mode">Uppringningsläge (avancerat)</string>
+    <string name="settings_dialer_mode_desc">Gör Sentinela till standardtelefonapp så att policyerna gäller även för kontakter. Du kan ångra det när som helst.</string>
+    <string name="settings_mode_reject">Avvisa direkt</string>
+    <string name="settings_mode_silent_voicemail">Vidarekoppla tyst</string>
+    <string name="settings_hide_native_log">Be om att inte registreras i telefonens historik</string>
+    <string name="settings_hide_native_log_desc">Android tillmötesgår bara den begäran för operatörernas appar. Blockerade samtal syns fortfarande i telefonens samtalshistorik, markerade som blockerade. Det som blockeringen garanterar: den ringer inte, vibrerar inte, visar ingen samtalsskärm och ger ingen avisering om missat samtal.</string>
+    <string name="settings_show_notification">Visa tyst avisering</string>
+    <string name="settings_fallback_policy">Vad som ska ske vid fel</string>
+    <string name="settings_fallback_allow">Låt samtalet ringa</string>
+    <string name="settings_fallback_block">Blockera</string>
+
+    <string name="settings_privacy_title">Integritet</string>
+    <string name="settings_privacy_disclaimer">Sentinela är 100% offline. Till skillnad från andra appar samlar vi inte in dina kontakter och skickar dem inte till molnet.</string>
+    <string name="settings_mask_numbers">Maskera inkommande nummer</string>
+    <string name="settings_mask_numbers_desc">Döljer en del av numren med asterisker (+55 11 9****-1234) i historiken, i aviseringar och på startskärmen.</string>
+
+    <string name="settings_protection_toggle_desc">Avstängt blockerar Sentinela inte, tystar inte och registrerar ingenting. Samtalen följer telefonens normala beteende.</string>
+    <string name="settings_contacts_policy_note">Den här policyn gäller så länge åtkomsten till kontakter är beviljad. Utan den hamnar kontakter under felpolicyn.</string>
+    <string name="settings_block_mode_desc">Avvisa direkt ger upptagetton till den som ringer. Vidarekoppla tyst skickar samtalet till röstbrevlådan, om din operatör har den tjänsten.</string>
+    <string name="settings_repeated_call">Andra samtalet i rad ringer</string>
+    <string name="settings_repeated_call_desc">Om samma nummer ringer igen några minuter efter att ha blivit blockerat, ringer det andra samtalet. Det är till för nödsituationer från personer som inte finns i din adressbok.</string>
+    <string name="settings_history_enabled">Spara blockeringshistorik</string>
+    <string name="settings_history_enabled_desc">Historiken stannar bara på den här enheten och är det som gör det möjligt att granska vad Sentinela har blockerat. Att stänga av den raderar inte det som redan sparats.</string>
+    <string name="settings_history_off_kept">Historiken avstängd. De poster som redan sparats finns kvar på enheten.</string>
+    <string name="settings_retention_title">Spara poster i</string>
+    <string name="settings_retention_never">Spara inte</string>
+    <string name="settings_retention_7">7 dagar</string>
+    <string name="settings_retention_30">30 dagar</string>
+    <string name="settings_retention_90">90 dagar</string>
+    <string name="settings_retention_manual">Tills jag tar bort dem</string>
+    <string name="settings_retention_never_confirm">Att välja \"Spara inte\" raderar de befintliga posterna och Sentinela slutar registrera nya blockeringar. Det går inte att ångra.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Det här raderar %1$d post om blockerat samtal från den här enheten. Det går inte att ångra.</item>
+        <item quantity="other">Det här raderar %1$d poster om blockerade samtal från den här enheten. Det går inte att ångra.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Om den lokala sökningen misslyckas måste Sentinela bestämma själv. Att tillåta riskerar att släppa igenom ett oönskat samtal; att blockera riskerar att du missar ett samtal du ville få.</string>
+
+    <!-- Integritet och om -->
+    <string name="about_title">Integritet och om</string>
+    <string name="about_data_local">Alla uppgifter stannar bara på den här enheten.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela har öppen källkod: inga annonser, ingen telemetri, inga uppgifter skickade till molnet — 100% offline, i din egen telefon.</string>
+    <string name="about_clear_all_data">Rensa alla uppgifter</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_open_app_settings">Öppna appens inställningar</string>
+    <string name="about_open_channel_settings">Konfigurera aviseringskanal</string>
+
+    <!-- Stöd och betyg -->
+    <string name="review_prompt_title">Gillar du Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela har öppen källkod, är annonsfri och 100% offline. Ett betyg eller en stödjande kommentar hjälper projektet mycket.</string>
+    <string name="review_prompt_rate">Betygsätt nu</string>
+    <string name="review_prompt_later">Inte nu</string>
+    <string name="support_title">Stöd Sentinela</string>
+    <string name="support_comment_cta">Lämna en stödjande kommentar</string>
+    <string name="support_donate_hint">Frivillig donation direkt till underhållarens plånbok. Kontrollera adressen innan du skickar.</string>
+    <string name="support_donate_bitcoin">Kopiera Bitcoin-adress</string>
+    <string name="support_donate_liquid">Kopiera Liquid-adress (L-BTC)</string>
+    <string name="support_address_copied">Adressen kopierad!</string>
+
+    <!-- Rensa alla uppgifter -->
+    <string name="about_clear_warning_title">Varning</string>
+    <string name="about_clear_warning_body">Det här raderar din blockeringshistorik, din personliga lista och alla dina inställningar. Vill du fortsätta?</string>
+    <string name="about_clear_continue">Fortsätt</string>
+    <string name="about_clear_final_title">Slutlig bekräftelse</string>
+    <string name="about_clear_final_body">Är du säker? Den här åtgärden går inte att ångra och alla lokala uppgifter går förlorade permanent.</string>
+    <string name="about_clear_failed_title">Det gick inte att radera</string>
+    <string name="about_clear_failed_body">Dina uppgifter finns kvar på enheten. Försök igen; om felet upprepas, stäng och öppna appen på nytt.</string>
+
+    <!-- Aviseringar -->
+    <string name="notification_channel_blocked">Blockerade samtal</string>
+    <string name="notification_channel_blocked_desc">Diskret meddelande om att ett samtal blockerades. Den ger aldrig ljud, vibrerar aldrig och tar aldrig över skärmen.</string>
+    <string name="notification_blocked_title">Samtal blockerat</string>
+    <string name="notification_blocked_masked">Samtal från %1$s blockerat</string>
+    <string name="notification_blocked_anonymous">Ett samtal blockerades</string>
+
+    <!-- Aktivering av appens egen avisering -->
+    <string name="settings_notification_enable">Meddela mig när ett samtal blockeras</string>
+    <string name="settings_notification_enable_desc">Är avstängd från början. När du slår på den ber Sentinela om systemets aviseringsbehörighet. Meddelandet är diskret: inget ljud, ingen vibration och ingen övertagning av skärmen.</string>
+    <string name="settings_notification_identification_masked">Visa maskerat nummer</string>
+    <string name="settings_notification_identification_anonymous">Visa ingen identifiering</string>
+    <string name="notification_permission_rationale">För att meddela dig om blockerade samtal behöver Sentinela aviseringsbehörigheten. Meddelandet är lokalt och visar aldrig hela numret.</string>
+
+    <!-- Samtalsavisering (uppringningsläge) -->
+    <string name="notification_channel_call">Pågående samtal</string>
+    <string name="notification_channel_call_desc">Visar det inkommande samtalet i helskärm och meddelandet om det pågående samtalet. Visas bara när Sentinela är standardtelefonen.</string>
+    <string name="notification_call_incoming_title">Inkommande samtal</string>
+    <string name="notification_call_ongoing_title">Pågående samtal</string>
+    <string name="notification_call_unknown_caller">Oidentifierat nummer</string>
+
+    <!-- Samtal: statusetiketter -->
+    <string name="call_incoming_state">Inkommande samtal</string>
+    <string name="call_dialing_state">Ringer upp…</string>
+    <string name="call_ringing_state">Ringer…</string>
+    <string name="call_active_state">I samtal</string>
+    <string name="call_ended_state">Samtalet avslutat</string>
+    <string name="call_failed_state">Det gick inte att koppla samtalet</string>
+    <string name="call_unsupported_state">Pågående samtal</string>
+    <string name="call_unsupported_body">Den här versionen av Sentinela visar inte kontrollerna för det här samtalstillståndet. Du kan fortfarande lägga på nedan.</string>
+
+    <!-- Samtal: huvudåtgärder -->
+    <string name="call_action_answer">Svara</string>
+    <string name="call_action_reject">Avvisa</string>
+    <string name="call_action_hangup">Lägg på</string>
+    <string name="call_action_answer_description">Svara på samtalet</string>
+    <string name="call_action_reject_description">Avvisa samtalet</string>
+    <string name="call_action_hangup_description">Avsluta samtalet</string>
+
+    <!-- Samtal: sekundära kontroller -->
+    <string name="call_control_mute">Ljud av</string>
+    <string name="call_control_speaker">Högtalare</string>
+    <string name="call_control_keypad">Knappsats</string>
+    <string name="call_control_mute_off_description">Ljud av, inaktiverat</string>
+    <string name="call_control_mute_on_description">Ljud av, aktiverat</string>
+    <string name="call_control_speaker_off_description">Högtalare, inaktiverad</string>
+    <string name="call_control_speaker_on_description">Högtalare, aktiverad</string>
+    <string name="call_control_keypad_closed_description">Sifferknappsats, stängd</string>
+    <string name="call_control_keypad_open_description">Sifferknappsats, öppen</string>
+    <string name="call_control_unavailable_state">inte tillgänglig</string>
+
+    <!-- Samtal: ursprungsetiketter -->
+    <string name="call_origin_contact">Kontakt</string>
+    <string name="call_origin_whitelist">Tillåten</string>
+    <string name="call_origin_unknown">Okänd</string>
+    <string name="call_origin_private">Privat nummer</string>
+
+    <!-- Samtal: ljudutgång -->
+    <string name="call_audio_route_title">Ljudutgång</string>
+    <string name="call_audio_route_earpiece">Telefon</string>
+    <string name="call_audio_route_speaker">Högtalare</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Headset</string>
+    <string name="call_audio_route_active_state">används</string>
+
+    <!-- Samtal: tidtagning och DTMF-knappsats -->
+    <string name="call_timer_description">Samtalets längd: %1$s</string>
+    <string name="call_keypad_close_description">Stäng knappsatsen</string>
+
+    <!-- Uppringning -->
+    <string name="dialpad_call">Ring</string>
+    <string name="dialpad_call_description">Ring %1$s</string>
+    <string name="dialpad_delete_description">Ta bort sista siffran</string>
+    <string name="dialpad_clear_description">Ta bort hela numret</string>
+    <string name="dialpad_error_failed">Det gick inte att starta samtalet.</string>
+    <string name="dialpad_error_retry">Försök igen</string>
+
+    <!-- Uppringning: knappar -->
+    <string name="dialpad_key_1_description">Knapp ett</string>
+    <string name="dialpad_key_2_description">Knapp två</string>
+    <string name="dialpad_key_3_description">Knapp tre</string>
+    <string name="dialpad_key_4_description">Knapp fyra</string>
+    <string name="dialpad_key_5_description">Knapp fem</string>
+    <string name="dialpad_key_6_description">Knapp sex</string>
+    <string name="dialpad_key_7_description">Knapp sju</string>
+    <string name="dialpad_key_8_description">Knapp åtta</string>
+    <string name="dialpad_key_9_description">Knapp nio</string>
+    <string name="dialpad_key_0_description">Knapp noll</string>
+    <string name="dialpad_key_star_description">Stjärnknapp</string>
+    <string name="dialpad_key_hash_description">Fyrkantsknapp</string>
+
+    <!-- Aktivering av uppringningsläget -->
+    <string name="dialer_activation_title">Vill du göra Sentinela till din standardtelefon?</string>
+    <string name="dialer_activation_intro">I uppringningsläget tar Sentinela emot alla samtal — även från dem som finns i din adressbok. Det är enda sättet för policyerna per källa att gälla även för dina kontakter.</string>
+    <string name="dialer_activation_changes_title">Det här ändras</string>
+    <string name="dialer_activation_change_1">Sentinela blir din telefonapp: samtalsskärmen och knappsatsen blir appens egna.</string>
+    <string name="dialer_activation_change_2">Filtreringen börjar se alla samtal, inte bara de från nummer utanför adressboken.</string>
+    <string name="dialer_activation_change_3">Den policy du valt för kontakter tillämpas på riktigt. Standardvärdet är fortfarande Ring — att slå på uppringningsläget blockerar i sig ingen.</string>
+    <string name="dialer_activation_unchanged_title">Det här ändras inte</string>
+    <string name="dialer_activation_unchanged_1">Samtalen registreras fortfarande i telefonens samtalshistorik. Att vara standardtelefonapp ger inte Sentinela behörighet att utelämna den registreringen — på Android kan bara operatörernas appar det.</string>
+    <string name="dialer_activation_unchanged_2">Systemets \"Stör ej\" gäller fortfarande före Sentinelas inställningar.</string>
+    <string name="dialer_activation_unchanged_3">Samtal från WhatsApp, Telegram och andra internetappar ligger fortfarande utanför Sentinelas räckvidd.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela förblir 100% offline: inget samtal, nummer eller kontakt lämnar enheten.</string>
+    <string name="dialer_activation_limit_calls">Ett samtal i taget: samtal väntar och konferenssamtal stöds inte i den här versionen.</string>
+    <string name="dialer_activation_contacts_required">Uppringningsläget behöver behörighet att läsa kontakter. Utan den kan Sentinela inte skilja ut dina kontakter och skulle börja behandla alla som okända.</string>
+    <string name="dialer_activation_grant_contacts">Tillåt åtkomst till kontakter</string>
+    <string name="dialer_activation_cta">Välj Sentinela</string>
+    <string name="dialer_activation_cta_hint">Det är Android som bestämmer. Du kan gå tillbaka när du vill.</string>
+
+    <!-- Uppringningsläget redan aktivt -->
+    <string name="dialer_active_chip">Aktivt</string>
+    <string name="dialer_active_title">Sentinela är din standardtelefon</string>
+    <string name="action_back">Tillbaka</string>
+    <string name="dialer_active_changes_title">Det här gäller nu</string>
+    <string name="dialer_activation_unavailable">Den här enheten erbjuder inte rollen som standardtelefon — oftast för att den saknar telefoni. Sentinelas filterläge fungerar fortfarande där det finns telefonsamtal.</string>
+    <string name="dialer_revert_cta">Välj en annan telefon</string>
+    <string name="dialer_revert_hint">När du går tillbaka till en annan telefonapp fungerar Sentinelas filterläge fortfarande som vanligt — utan ominstallation och utan ny konfiguration.</string>
+
+    <!-- Telefonrollen förlorad -->
+    <string name="dialer_role_lost_title">Sentinela är inte längre standardtelefonen.</string>
+    <string name="dialer_role_lost_body">Filterläget fungerar fortfarande: samtal från nummer utanför adressboken filtreras alltjämt.</string>
+    <string name="dialer_role_lost_action">Se hur du aktiverar igen</string>
+
+    <!-- Allmänt -->
+    <string name="action_confirm">Bekräfta</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_retry">Försök igen</string>
+    <string name="state_loading">Läser in…</string>
+    <string name="state_error">Något gick fel. Försök igen.</string>
+    <string name="state_on">På</string>
+    <string name="state_off">Av</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Relativ tid på startskärmen -->
+    <string name="time_now">nu</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">för %d min sedan</item>
+        <item quantity="other">för %d min sedan</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">för %d tim sedan</item>
+        <item quantity="other">för %d tim sedan</item>
+    </plurals>
+    <string name="time_yesterday">i går</string>
+
+    <!-- Start: uppläsning av det senast blockerade -->
+    <string name="dashboard_last_blocked_description">Senaste blockerade samtalet, %1$s, %2$s, %3$s</string>
+
+    <!-- Start: fler varningar -->
+    <string name="dashboard_more_warnings">Visa alla varningar</string>
+</resources>

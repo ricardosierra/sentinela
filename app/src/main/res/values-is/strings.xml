@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Velkomin -->
+    <string name="welcome_headline">Fyrsta varnarlínan þín gegn ruslsímtölum.</string>
+    <string name="welcome_subtitle">Sentinela lokar á símtöl frá óþekktum númerum áður en síminn nær að hringja.</string>
+    <string name="welcome_feature_local_title">Staðbundin lokun</string>
+    <string name="welcome_feature_local_desc">Vinnsla beint í tækinu.</string>
+    <string name="welcome_feature_silent_title">Hljóðlaust</string>
+    <string name="welcome_feature_silent_desc">Engir óæskilegir hringitónar eða titringur.</string>
+    <string name="welcome_feature_offline_title">Án internets</string>
+    <string name="welcome_feature_offline_desc">Full friðhelgi. Við söfnum ekki tengiliðunum þínum.</string>
+    <string name="welcome_badge_native">Innbyggð samþætting</string>
+    <string name="welcome_cta">Hefja uppsetningu</string>
+    <string name="welcome_cta_hint">Tekur innan við 2 mínútur.</string>
+    <string name="welcome_open_source" formatted="false">100% opinn hugbúnaður — engar auglýsingar, engin fjarmæling</string>
+
+    <!-- Uppsetning: hlutverk símtalasíu -->
+    <string name="onboarding_role_disclaimer">Með uppsetningunni veitir þú heimild til símtalasíunar. Sentinela síar símtöl frá óþekktum númerum staðbundið, án þess að senda gögnin þín nokkurn tíma út úr tækinu.</string>
+    <string name="onboarding_role_cta">Setja upp núna</string>
+    <string name="onboarding_role_requesting">Bið um heimild…</string>
+    <string name="onboarding_step_indicator">Skref %1$d af %2$d</string>
+    <string name="onboarding_next">Áfram</string>
+    <string name="onboarding_back">Til baka</string>
+    <string name="onboarding_finish">Ljúka uppsetningu</string>
+    <string name="onboarding_change_later">Þú getur breytt þessari stillingu hvenær sem er.</string>
+    <string name="onboarding_skip">Sleppa</string>
+    <string name="onboarding_role_title">Láttu Sentinela sjá um síunina</string>
+    <string name="onboarding_role_intro">Til að sía símtöl þarf Sentinela að vera sjálfgefið símtalasíuforrit Android. Það ert þú sem veitir heimildina og þú getur afturkallað hana í kerfisstillingunum hvenær sem er.</string>
+    <string name="onboarding_role_denied">Sentinela fékk ekki hlutverk símtalasíu. Engin símtöl verða síuð fyrr en þú veitir heimildina — þú getur gert það núna eða síðar, á Vernd-skjánum.</string>
+    <string name="onboarding_role_retry">Veita núna</string>
+    <string name="onboarding_scope_title">Þetta gerir Sentinela ekki</string>
+    <string name="onboarding_scope_dnd">Stillingin „Ónáðið ekki“ í kerfinu gildir áfram framar stillingum Sentinela.</string>
+
+    <!-- Uppsetning: óþekkt númer -->
+    <string name="unknown_title">Óþekkt símtöl</string>
+    <string name="unknown_question">Hvernig á Sentinela að meðhöndla númer sem eru ekki í tengiliðunum þínum?</string>
+    <string name="unknown_option_block">Loka á</string>
+    <string name="unknown_option_block_desc">Hafnar símtalinu samstundis.</string>
+    <string name="unknown_option_silence">Þagga</string>
+    <string name="unknown_option_silence_desc">Símtalið kemur inn án hljóðs og án titrings.</string>
+    <string name="unknown_option_allow">Leyfa</string>
+    <string name="unknown_option_allow_desc">Tekur við símtölum með venjulegum hætti.</string>
+
+    <!-- Uppsetning: tengiliðir -->
+    <string name="contacts_title">En fólkið í tengiliðalistanum þínum?</string>
+    <string name="contacts_explainer">Ákveddu hvernig Sentinela á að meðhöndla símtöl frá þeim sem þú þekkir nú þegar. Þú getur breytt þessu síðar.</string>
+    <string name="contacts_permission_rationale" formatted="false">Til að vita hvort sá sem hringir sé í tengiliðunum þínum þarf Sentinela að lesa þá. Ólíkt öðrum forritum söfnum við ekki tengiliðunum þínum. Lesturinn er 100% staðbundinn: gögnin fara aldrei úr tækinu.</string>
+    <string name="contacts_option_ring">Hringja</string>
+    <string name="contacts_option_ring_desc">Símtöl hringja venjulega í símanum þínum.</string>
+    <string name="contacts_option_block">Loka á</string>
+    <string name="contacts_option_block_desc">Lokar á öll símtöl samkvæmt lokunarstillingunni undir Vernd.</string>
+    <string name="contacts_option_silence">Þagga</string>
+    <string name="contacts_option_silence_desc">Síminn hvorki titrar né hringir, en sýnir tilkynninguna.</string>
+    <string name="contacts_option_never_silence">Aldrei þagga</string>
+    <string name="contacts_option_never_silence_desc">Sentinela þaggar aldrei tengiliðalistann þinn. „Ónáðið ekki“ í kerfinu gildir áfram.</string>
+    <string name="contacts_default_badge">Sjálfgefið</string>
+
+    <string name="whatsapp_contacts_warning_title">Um WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp leyfir aðeins að vista tengiliði í eigin skýi. Fólk sem er vistað þannig er ekki til í tengiliðum tækisins og Sentinela meðhöndlar það sem „Óþekkt“. Vistaðu tengiliðina þína í opinberu tengiliðaskránni svo lokunin þekki þá.</string>
+    <string name="whatsapp_history_hint">Ábending: ef þetta er WhatsApp-tengiliður sem er ekki vistaður í tengiliðaskránni skaltu nota valkostinn hér að ofan til að leyfa hann.</string>
+
+    <string name="contacts_permission_granted">Aðgangur að tengiliðum veittur</string>
+    <string name="contacts_permission_denied">Án aðgangs að tengiliðum getur Sentinela ekki vitað hverjir eru í tengiliðunum þínum: þau símtöl geta verið meðhöndluð sem óþekkt.</string>
+    <string name="contacts_permission_blocked">Aðgangi að tengiliðum var hafnað varanlega. Opnaðu stillingar forritsins til að veita hann.</string>
+    <string name="settings_block_private_desc">Símtöl án númerabirtingar fylgja lokunarreglunni sem þú valdir. Ekki er hægt að vita hver hringdi.</string>
+
+    <!-- Uppsetning: persónulegur listi -->
+    <string name="whitelist_setup_title">Uppsetning persónulega listans</string>
+    <string name="whitelist_setup_desc">Persónulegi listinn er þinn eigin listi yfir treyst númer, aðskilinn frá tengiliðum símans.</string>
+    <string name="whitelist_setup_what_title">Hvað er persónulegi listinn?</string>
+    <string name="whitelist_setup_what_desc">Persónulegi listinn eru númerin sem þú bættir við handvirkt eða merktir sem örugg inni í forritinu.</string>
+    <string name="whitelist_setup_question">Hvernig á að meðhöndla persónulega listann þinn?</string>
+    <string name="whitelist_option_never_silence">Aldrei þagga</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela þaggar aldrei þessa uppsprettu. „Ónáðið ekki“ í kerfinu gildir áfram.</string>
+    <string name="whitelist_option_ring">Hringja</string>
+    <string name="whitelist_option_ring_desc">Gefa alltaf hljóð.</string>
+    <string name="whitelist_option_block">Loka á</string>
+    <string name="whitelist_option_block_desc">Hafna sjálfkrafa.</string>
+    <string name="whitelist_option_silence">Þagga</string>
+    <string name="whitelist_option_silence_desc">Aðeins sjónræn tilkynning.</string>
+    <string name="whitelist_setup_hint">Þú getur breytt þessum stillingum og bætt við nýjum númerum hvenær sem er í valmyndinni Leyfð.</string>
+
+    <!-- Uppsetning: lokayfirferð -->
+    <string name="onboarding_summary_title_ok">Allt tilbúið</string>
+    <string name="onboarding_summary_title_partial">Næstum tilbúið</string>
+    <string name="onboarding_summary_body">Farðu yfir það sem var sett upp. Þú getur breytt hverju atriði síðar, á Vernd-skjánum.</string>
+    <string name="onboarding_check_role">Sjálfgefin símtalasíun</string>
+    <string name="onboarding_check_contacts">Aðgangur að tengiliðum</string>
+    <string name="onboarding_check_unknown">Óþekkt númer</string>
+    <string name="onboarding_check_origins">Tengiliðir og persónulegur listi</string>
+    <string name="onboarding_check_granted">Veitt</string>
+    <string name="onboarding_check_missing">Vantar</string>
+
+    <!-- Yfirlit -->
+    <string name="dashboard_protection_active">Vernd virk</string>
+    <string name="dashboard_protection_inactive">Vernd óvirk</string>
+    <string name="dashboard_monitoring">Vöktun í rauntíma</string>
+    <string name="dashboard_device_safe">Tækið þitt er varið gegn símtölum frá óþekktum númerum.</string>
+    <string name="dashboard_role_missing">Sentinela er ekki sjálfgefið símtalasíuforrit.</string>
+    <string name="dashboard_fix_configuration">Laga uppsetninguna</string>
+    <string name="dashboard_total_blocked">Lokað samtals</string>
+    <string name="dashboard_blocked_today">Í dag</string>
+    <string name="dashboard_last_blocked">Síðasta lokaða símtalið</string>
+    <string name="dashboard_quick_whitelist">Persónulegur listi</string>
+    <string name="dashboard_quick_history">Lokunarsaga</string>
+    <string name="dashboard_protection_off_hint">Engin símtöl eru síuð.</string>
+    <string name="dashboard_contacts_missing">Sentinela getur ekki lesið tengiliðina þína. Símtöl frá tengiliðum geta verið meðhöndluð sem óþekkt.</string>
+    <string name="dashboard_history_off">Sagan er óvirk, svo það er engin talning á lokuðum símtölum til að sýna.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Kveikja á sögunni</string>
+
+    <!-- Neðri leiðsögn -->
+    <string name="nav_home">Heim</string>
+    <string name="nav_whitelist">Leyfð</string>
+    <string name="nav_history">Saga</string>
+    <string name="nav_settings">Stillingar</string>
+    <string name="nav_unavailable">Þessi skjár kemur á síðara stigi forritsins.</string>
+
+    <!-- Persónulegur listi -->
+    <string name="whitelist_title">Persónulegur listi</string>
+    <string name="whitelist_search_placeholder">Leita í lýsingum eða númerum…</string>
+    <string name="whitelist_section_allowed">Leyfð númer (%1$d)</string>
+    <string name="whitelist_about_desc">Númer sem þú bættir við handvirkt eða merktir sem örugg. Þau fylgja reglunni sem þú stilltir — með sjálfgefnu vali (Aldrei þagga) hringja þau alltaf.</string>
+    <string name="whitelist_add_number">Bæta við númeri</string>
+    <string name="whitelist_edit">Breyta</string>
+    <string name="whitelist_delete">Eyða</string>
+    <string name="whitelist_export">Flytja út afrit</string>
+    <string name="whitelist_import">Flytja inn afrit</string>
+    <string name="whitelist_import_confirm">Innflutningur sameinar númerin í skránni við núverandi lista þinn. Halda áfram?</string>
+    <string name="whitelist_duplicate">Þetta númer er þegar á persónulega listanum.</string>
+    <string name="whitelist_number_label">Númer</string>
+    <string name="whitelist_description_label">Lýsing (valfrjálst)</string>
+    <string name="whitelist_invalid_number">Ógilt númer. Notaðu brasilískt númer með svæðisnúmeri.</string>
+    <string name="whitelist_load_error">Ekki tókst að hlaða persónulega listanum.</string>
+    <string name="whitelist_added_from_history">Bætt við úr sögunni</string>
+    <string name="whitelist_export_ok">Afrit af persónulega listanum vistað.</string>
+    <string name="whitelist_export_failed">Ekki tókst að vista afritið.</string>
+    <string name="whitelist_import_failed">Ekki tókst að lesa skrána.</string>
+    <string name="whitelist_import_result">%1$d bætt við, %2$d voru þegar til, %3$d ógild.</string>
+    <string name="whitelist_import_result_over_limit">%1$d bætt við, %2$d voru þegar til, %3$d ógild. %4$d urðu eftir: skráin fer yfir mörkin sem eru 10.000 númer.</string>
+
+    <!-- Saga -->
+    <string name="history_clear_all">Hreinsa allt</string>
+    <string name="history_filter_today">Í dag</string>
+    <string name="history_filter_7days">7 dagar</string>
+    <string name="history_filter_30days">30 dagar</string>
+    <string name="history_unknown_number">Óþekkt númer</string>
+    <string name="history_private_number">Einkanúmer</string>
+    <string name="history_private_id">Falið auðkenni</string>
+    <string name="history_action_allow">Leyfa</string>
+    <string name="history_action_delete">Eyða</string>
+    <string name="history_mark_unwanted">Merkja sem óæskilegt</string>
+    <string name="history_empty">Engin lokuð símtöl enn.</string>
+    <string name="history_clear_confirm">Þetta eyðir allri lokunarsögunni þinni. Viltu halda áfram?</string>
+    <string name="history_filter_period">Tímabil</string>
+    <string name="history_filter_all">Öll sagan</string>
+    <string name="history_action_allow_whitelist">Leyfa (bæta á persónulega listann)</string>
+
+    <!-- Saga: sía eftir ákvörðun -->
+    <string name="history_filter_decision">Ákvörðun</string>
+    <string name="history_decision_all">Allar</string>
+    <string name="history_decision_unclassified">Óflokkaðar</string>
+    <string name="history_decision_legitimate">Merktar sem lögmætar</string>
+    <string name="history_decision_unwanted">Merktar sem óæskilegar</string>
+
+    <!-- Saga: ástæða ákvörðunar -->
+    <string name="history_reason_outgoing_call">Símtal út</string>
+    <string name="history_reason_protection_disabled">Vernd óvirk</string>
+    <string name="history_reason_private_number">Einkanúmer</string>
+    <string name="history_reason_contact">Er í tengiliðunum þínum</string>
+    <string name="history_reason_personal_whitelist">Er á persónulega listanum þínum</string>
+    <string name="history_reason_emergency_number">Neyðarnúmer</string>
+    <string name="history_reason_repeated_call">Hringdi aftur strax á eftir</string>
+    <string name="history_reason_unknown_number">Óþekkt númer</string>
+    <string name="history_reason_invalid_number">Óauðkennt númer</string>
+    <string name="history_reason_local_lookup_failure">Staðbundin uppfletting mistókst</string>
+    <string name="history_reason_fallback_policy">Varaleið</string>
+
+    <!-- Saga: afstæður tími -->
+    <string name="history_time_now">Núna</string>
+    <string name="history_time_minutes">fyrir %1$d mín.</string>
+    <string name="history_time_hours">fyrir %1$d klst.</string>
+    <string name="history_time_days">fyrir %1$d d.</string>
+
+    <!-- Vernd / Stillingar -->
+    <string name="settings_title">Vernd</string>
+    <string name="settings_protection_toggle">Kveikja á verndinni</string>
+    <string name="settings_unknown_policy">Óþekkt númer</string>
+    <string name="settings_contacts_policy">Tengiliðir í skránni</string>
+    <string name="settings_whitelist_policy">Persónulegur listi</string>
+    <string name="settings_block_private">Loka á einkanúmer</string>
+    <string name="settings_dialer_mode">Símtalsstilling (ítarlegt)</string>
+    <string name="settings_dialer_mode_desc">Gerir Sentinela að sjálfgefna símaforritinu svo reglurnar gildi líka um tengiliði. Þú getur snúið þessu við hvenær sem er.</string>
+    <string name="settings_mode_reject">Hafna strax</string>
+    <string name="settings_mode_silent_voicemail">Áframsenda hljóðlaust</string>
+    <string name="settings_hide_native_log">Biðja um að skrá ekki í símtalaskrána</string>
+    <string name="settings_hide_native_log_desc">Android verður aðeins við þeirri beiðni fyrir forrit símafyrirtækja. Lokuð símtöl birtast áfram í símtalaskránni, merkt sem lokuð. Það sem lokunin tryggir: hún hringir ekki, titrar ekki, sýnir ekki símtalsskjá og gefur enga tilkynningu um ósvarað símtal.</string>
+    <string name="settings_show_notification">Sýna hljóðlausa tilkynningu</string>
+    <string name="settings_fallback_policy">Hvað á að gera ef villa kemur upp</string>
+    <string name="settings_fallback_allow">Láta símtalið hringja</string>
+    <string name="settings_fallback_block">Loka á</string>
+
+    <string name="settings_privacy_title">Friðhelgi</string>
+    <string name="settings_privacy_disclaimer">Sentinela er 100% án nettengingar. Ólíkt öðrum forritum söfnum við ekki tengiliðunum þínum og sendum þá ekki í skýið.</string>
+    <string name="settings_mask_numbers">Hylja númer sem hringja inn</string>
+    <string name="settings_mask_numbers_desc">Felur hluta númeranna með stjörnum (+55 11 9****-1234) í sögunni, í tilkynningum og á heimaskjánum.</string>
+
+    <string name="settings_protection_toggle_desc">Slökkt lokar Sentinela ekki, þaggar ekki og skráir ekkert. Símtölin fylgja venjulegri hegðun símans.</string>
+    <string name="settings_contacts_policy_note">Þessi regla gildir á meðan aðgangur að tengiliðum er veittur. Án hans falla tengiliðir undir villuregluna.</string>
+    <string name="settings_block_mode_desc">Hafna strax gefur þeim sem hringir upptekið merki. Áframsenda hljóðlaust sendir símtalið í talhólfið, ef símafyrirtækið þitt býður þá þjónustu.</string>
+    <string name="settings_repeated_call">Annað símtal í röð hringir</string>
+    <string name="settings_repeated_call_desc">Ef sama númer hringir aftur fáeinum mínútum eftir að hafa verið lokað hringir annað símtalið. Það er fyrir neyðartilvik frá fólki sem er ekki í tengiliðunum þínum.</string>
+    <string name="settings_history_enabled">Geyma lokunarsögu</string>
+    <string name="settings_history_enabled_desc">Sagan helst aðeins í þessu tæki og er það sem gerir kleift að sannreyna hvað Sentinela hefur lokað á. Að slökkva á henni eyðir ekki því sem þegar var vistað.</string>
+    <string name="settings_history_off_kept">Sagan er óvirk. Þær færslur sem þegar voru vistaðar haldast í tækinu.</string>
+    <string name="settings_retention_title">Geyma færslur í</string>
+    <string name="settings_retention_never">Ekki geyma</string>
+    <string name="settings_retention_7">7 daga</string>
+    <string name="settings_retention_30">30 daga</string>
+    <string name="settings_retention_90">90 daga</string>
+    <string name="settings_retention_manual">Þar til ég eyði þeim</string>
+    <string name="settings_retention_never_confirm">Að velja „Ekki geyma“ eyðir núverandi færslum og Sentinela hættir að skrá nýjar lokanir. Þetta er ekki hægt að afturkalla.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Þetta eyðir %1$d færslu um lokað símtal úr þessu tæki. Þetta er ekki hægt að afturkalla.</item>
+        <item quantity="other">Þetta eyðir %1$d færslum um lokuð símtöl úr þessu tæki. Þetta er ekki hægt að afturkalla.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Ef staðbundna uppflettingin mistekst verður Sentinela að ákveða sjálft. Að leyfa á á hættu að hleypa óæskilegu símtali í gegn; að loka á á á hættu að þú missir af símtali sem þú vildir fá.</string>
+
+    <!-- Friðhelgi og um -->
+    <string name="about_title">Friðhelgi og um</string>
+    <string name="about_data_local">Öll gögn haldast aðeins í þessu tæki.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela er opinn hugbúnaður: engar auglýsingar, engin fjarmæling, engin gögn send í skýið — 100% án nettengingar, í þínum eigin síma.</string>
+    <string name="about_clear_all_data">Hreinsa öll gögn</string>
+    <string name="about_version">Útgáfa %1$s</string>
+    <string name="about_open_app_settings">Opna stillingar forritsins</string>
+    <string name="about_open_channel_settings">Stilla tilkynningarás</string>
+
+    <!-- Stuðningur og einkunn -->
+    <string name="review_prompt_title">Líkar þér við Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela er opinn hugbúnaður, auglýsingalaus og 100% án nettengingar. Einkunn eða styðjandi umsögn hjálpar verkefninu mikið.</string>
+    <string name="review_prompt_rate">Gefa einkunn núna</string>
+    <string name="review_prompt_later">Ekki núna</string>
+    <string name="support_title">Styðja Sentinela</string>
+    <string name="support_comment_cta">Skilja eftir styðjandi umsögn</string>
+    <string name="support_donate_hint">Valfrjálst framlag, beint í veski umsjónarmannsins. Athugaðu vistfangið áður en þú sendir.</string>
+    <string name="support_donate_bitcoin">Afrita Bitcoin-vistfang</string>
+    <string name="support_donate_liquid">Afrita Liquid-vistfang (L-BTC)</string>
+    <string name="support_address_copied">Vistfang afritað!</string>
+
+    <!-- Hreinsa öll gögn -->
+    <string name="about_clear_warning_title">Athugið</string>
+    <string name="about_clear_warning_body">Þetta eyðir lokunarsögunni þinni, persónulega listanum þínum og öllum stillingunum þínum. Viltu halda áfram?</string>
+    <string name="about_clear_continue">Halda áfram</string>
+    <string name="about_clear_final_title">Lokastaðfesting</string>
+    <string name="about_clear_final_body">Ertu viss? Þessa aðgerð er ekki hægt að afturkalla og öll staðbundin gögn tapast varanlega.</string>
+    <string name="about_clear_failed_title">Ekki tókst að eyða</string>
+    <string name="about_clear_failed_body">Gögnin þín eru enn í tækinu. Reyndu aftur; ef villan endurtekur sig skaltu loka forritinu og opna það aftur.</string>
+
+    <!-- Tilkynningar -->
+    <string name="notification_channel_blocked">Lokuð símtöl</string>
+    <string name="notification_channel_blocked_desc">Lágstemmd tilkynning um að lokað hafi verið á símtal. Hún gefur aldrei hljóð, titrar aldrei og tekur aldrei yfir skjáinn.</string>
+    <string name="notification_blocked_title">Lokað á símtal</string>
+    <string name="notification_blocked_masked">Lokað á símtal frá %1$s</string>
+    <string name="notification_blocked_anonymous">Lokað var á símtal</string>
+
+    <!-- Virkjun eigin tilkynningar -->
+    <string name="settings_notification_enable">Láta mig vita þegar lokað er á símtal</string>
+    <string name="settings_notification_enable_desc">Er sjálfgefið óvirkt. Þegar þú kveikir á því biður Sentinela um tilkynningaheimild kerfisins. Tilkynningin er lágstemmd: ekkert hljóð, enginn titringur og engin yfirtaka á skjánum.</string>
+    <string name="settings_notification_identification_masked">Sýna hulið númer</string>
+    <string name="settings_notification_identification_anonymous">Ekki sýna neina auðkenningu</string>
+    <string name="notification_permission_rationale">Til að láta þig vita um lokuð símtöl þarf Sentinela tilkynningaheimildina. Tilkynningin er staðbundin og sýnir aldrei númerið í heild.</string>
+
+    <!-- Símtalstilkynning (símtalsstilling) -->
+    <string name="notification_channel_call">Símtöl í gangi</string>
+    <string name="notification_channel_call_desc">Sýnir innhringingu á öllum skjánum og tilkynninguna um símtalið sem er í gangi. Birtist aðeins þegar Sentinela er sjálfgefni síminn.</string>
+    <string name="notification_call_incoming_title">Innhringing</string>
+    <string name="notification_call_ongoing_title">Símtal í gangi</string>
+    <string name="notification_call_unknown_caller">Óauðkennt númer</string>
+
+    <!-- Símtal: stöðumerki -->
+    <string name="call_incoming_state">Innhringing</string>
+    <string name="call_dialing_state">Hringi…</string>
+    <string name="call_ringing_state">Hringir…</string>
+    <string name="call_active_state">Í símtali</string>
+    <string name="call_ended_state">Símtali lokið</string>
+    <string name="call_failed_state">Ekki tókst að ljúka símtalinu</string>
+    <string name="call_unsupported_state">Símtal í gangi</string>
+    <string name="call_unsupported_body">Þessi útgáfa Sentinela sýnir ekki stýringar fyrir þetta ástand símtalsins. Þú getur enn lagt á hér fyrir neðan.</string>
+
+    <!-- Símtal: helstu aðgerðir -->
+    <string name="call_action_answer">Svara</string>
+    <string name="call_action_reject">Hafna</string>
+    <string name="call_action_hangup">Leggja á</string>
+    <string name="call_action_answer_description">Svara símtali</string>
+    <string name="call_action_reject_description">Hafna símtali</string>
+    <string name="call_action_hangup_description">Ljúka símtali</string>
+
+    <!-- Símtal: aukastýringar -->
+    <string name="call_control_mute">Hljóðnemi af</string>
+    <string name="call_control_speaker">Hátalari</string>
+    <string name="call_control_keypad">Talnaborð</string>
+    <string name="call_control_mute_off_description">Hljóðnemi af, óvirkt</string>
+    <string name="call_control_mute_on_description">Hljóðnemi af, virkt</string>
+    <string name="call_control_speaker_off_description">Hátalari, óvirkur</string>
+    <string name="call_control_speaker_on_description">Hátalari, virkur</string>
+    <string name="call_control_keypad_closed_description">Talnaborð, lokað</string>
+    <string name="call_control_keypad_open_description">Talnaborð, opið</string>
+    <string name="call_control_unavailable_state">ekki tiltækt</string>
+
+    <!-- Símtal: upprunamerki -->
+    <string name="call_origin_contact">Tengiliður</string>
+    <string name="call_origin_whitelist">Leyft</string>
+    <string name="call_origin_unknown">Óþekkt</string>
+    <string name="call_origin_private">Einkanúmer</string>
+
+    <!-- Símtal: hljóðúttak -->
+    <string name="call_audio_route_title">Hljóðúttak</string>
+    <string name="call_audio_route_earpiece">Sími</string>
+    <string name="call_audio_route_speaker">Hátalari</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Heyrnartól</string>
+    <string name="call_audio_route_active_state">í notkun</string>
+
+    <!-- Símtal: tímamælir og DTMF-talnaborð -->
+    <string name="call_timer_description">Lengd símtals: %1$s</string>
+    <string name="call_keypad_close_description">Loka talnaborði</string>
+
+    <!-- Val -->
+    <string name="dialpad_call">Hringja</string>
+    <string name="dialpad_call_description">Hringja í %1$s</string>
+    <string name="dialpad_delete_description">Eyða síðasta tölustaf</string>
+    <string name="dialpad_clear_description">Eyða öllu númerinu</string>
+    <string name="dialpad_error_failed">Ekki tókst að hefja símtalið.</string>
+    <string name="dialpad_error_retry">Reyna aftur</string>
+
+    <!-- Val: takkar -->
+    <string name="dialpad_key_1_description">Takki einn</string>
+    <string name="dialpad_key_2_description">Takki tveir</string>
+    <string name="dialpad_key_3_description">Takki þrír</string>
+    <string name="dialpad_key_4_description">Takki fjórir</string>
+    <string name="dialpad_key_5_description">Takki fimm</string>
+    <string name="dialpad_key_6_description">Takki sex</string>
+    <string name="dialpad_key_7_description">Takki sjö</string>
+    <string name="dialpad_key_8_description">Takki átta</string>
+    <string name="dialpad_key_9_description">Takki níu</string>
+    <string name="dialpad_key_0_description">Takki núll</string>
+    <string name="dialpad_key_star_description">Stjörnutakki</string>
+    <string name="dialpad_key_hash_description">Myllutakki</string>
+
+    <!-- Virkjun símtalsstillingar -->
+    <string name="dialer_activation_title">Á Sentinela að verða sjálfgefni síminn þinn?</string>
+    <string name="dialer_activation_intro">Í símtalsstillingu tekur Sentinela við öllum símtölum — líka frá þeim sem eru í tengiliðunum þínum. Það er eina leiðin til að reglurnar eftir uppruna gildi líka um tengiliðina þína.</string>
+    <string name="dialer_activation_changes_title">Hvað breytist</string>
+    <string name="dialer_activation_change_1">Sentinela verður símaforritið þitt: símtalsskjárinn og talnaborðið verða þess eigin.</string>
+    <string name="dialer_activation_change_2">Síunin fer að sjá öll símtöl, ekki aðeins þau frá númerum utan tengiliðaskrárinnar.</string>
+    <string name="dialer_activation_change_3">Reglan sem þú valdir fyrir tengiliði er raunverulega notuð. Sjálfgefið er áfram Hringja — að kveikja á símtalsstillingu lokar ekki eitt og sér á neinn.</string>
+    <string name="dialer_activation_unchanged_title">Hvað breytist ekki</string>
+    <string name="dialer_activation_unchanged_1">Símtöl eru áfram skráð í símtalaskrá símans. Að vera sjálfgefna símaforritið veitir Sentinela ekki heimild til að sleppa þeirri skráningu — í Android geta aðeins forrit símafyrirtækja það.</string>
+    <string name="dialer_activation_unchanged_2">„Ónáðið ekki“ í kerfinu gildir áfram framar stillingum Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Símtöl frá WhatsApp, Telegram og öðrum netforritum eru áfram utan seilingar Sentinela.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela helst 100% án nettengingar: ekkert símtal, númer eða tengiliður fer úr tækinu.</string>
+    <string name="dialer_activation_limit_calls">Eitt símtal í einu: símtal í bið og símafundur eru ekki studd í þessari útgáfu.</string>
+    <string name="dialer_activation_contacts_required">Símtalsstillingin þarf heimild til að lesa tengiliði. Án hennar getur Sentinela ekki greint tengiliðina þína og myndi fara að meðhöndla alla sem óþekkta.</string>
+    <string name="dialer_activation_grant_contacts">Leyfa lestur tengiliða</string>
+    <string name="dialer_activation_cta">Velja Sentinela</string>
+    <string name="dialer_activation_cta_hint">Það er Android sem ræður. Þú getur snúið til baka hvenær sem er.</string>
+
+    <!-- Símtalsstilling þegar virk -->
+    <string name="dialer_active_chip">Virk</string>
+    <string name="dialer_active_title">Sentinela er sjálfgefni síminn þinn</string>
+    <string name="action_back">Til baka</string>
+    <string name="dialer_active_changes_title">Hvað gildir núna</string>
+    <string name="dialer_activation_unavailable">Þetta tæki býður ekki upp á hlutverk sjálfgefins síma — yfirleitt af því að það hefur ekki símkerfi. Síunarstilling Sentinela virkar áfram þar sem símtöl eru.</string>
+    <string name="dialer_revert_cta">Velja annan síma</string>
+    <string name="dialer_revert_hint">Þegar þú ferð aftur í annað símaforrit virkar síunarstilling Sentinela áfram eðlilega — án enduruppsetningar og án nýrra stillinga.</string>
+
+    <!-- Símahlutverk tapað -->
+    <string name="dialer_role_lost_title">Sentinela er ekki lengur sjálfgefni síminn.</string>
+    <string name="dialer_role_lost_body">Síunarstillingin virkar áfram: símtöl frá númerum utan tengiliðaskrárinnar eru enn síuð.</string>
+    <string name="dialer_role_lost_action">Sjá hvernig á að virkja aftur</string>
+
+    <!-- Almennt -->
+    <string name="action_confirm">Staðfesta</string>
+    <string name="action_cancel">Hætta við</string>
+    <string name="action_retry">Reyna aftur</string>
+    <string name="state_loading">Hleð…</string>
+    <string name="state_error">Eitthvað fór úrskeiðis. Reyndu aftur.</string>
+    <string name="state_on">Kveikt</string>
+    <string name="state_off">Slökkt</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Afstæður tími á heimaskjá -->
+    <string name="time_now">núna</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">fyrir %d mín.</item>
+        <item quantity="other">fyrir %d mín.</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">fyrir %d klst.</item>
+        <item quantity="other">fyrir %d klst.</item>
+    </plurals>
+    <string name="time_yesterday">í gær</string>
+
+    <!-- Heim: upplestur á síðasta lokaða -->
+    <string name="dashboard_last_blocked_description">Síðasta lokaða símtalið, %1$s, %2$s, %3$s</string>
+
+    <!-- Heim: fleiri viðvaranir -->
+    <string name="dashboard_more_warnings">Sjá allar viðvaranir</string>
+</resources>

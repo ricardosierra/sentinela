@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Bun venit -->
+    <string name="welcome_headline">Prima ta linie de apărare împotriva spamului.</string>
+    <string name="welcome_subtitle">Sentinela blochează apelurile de la numere necunoscute înainte ca telefonul să sune.</string>
+    <string name="welcome_feature_local_title">Blocare locală</string>
+    <string name="welcome_feature_local_desc">Procesare direct pe dispozitiv.</string>
+    <string name="welcome_feature_silent_title">Silențios</string>
+    <string name="welcome_feature_silent_desc">Fără sonerii sau vibrații nedorite.</string>
+    <string name="welcome_feature_offline_title">Fără internet</string>
+    <string name="welcome_feature_offline_desc">Confidențialitate totală. Nu îți colectăm agenda.</string>
+    <string name="welcome_badge_native">Integrare nativă</string>
+    <string name="welcome_cta">Începe configurarea</string>
+    <string name="welcome_cta_hint">Durează mai puțin de 2 minute.</string>
+    <string name="welcome_open_source" formatted="false">100% open source — fără reclame, fără telemetrie</string>
+
+    <!-- Configurare: rolul de filtrare a apelurilor -->
+    <string name="onboarding_role_disclaimer">Prin configurare acorzi permisiunea de filtrare a apelurilor. Sentinela filtrează apelurile de la numere necunoscute local, fără să trimită vreodată datele tale în afara dispozitivului.</string>
+    <string name="onboarding_role_cta">Configurează acum</string>
+    <string name="onboarding_role_requesting">Se solicită permisiunea…</string>
+    <string name="onboarding_step_indicator">Pasul %1$d din %2$d</string>
+    <string name="onboarding_next">Înainte</string>
+    <string name="onboarding_back">Înapoi</string>
+    <string name="onboarding_finish">Finalizează configurarea</string>
+    <string name="onboarding_change_later">Poți schimba această setare oricând.</string>
+    <string name="onboarding_skip">Omite</string>
+    <string name="onboarding_role_title">Lasă Sentinela să se ocupe de filtrare</string>
+    <string name="onboarding_role_intro">Pentru a filtra apelurile, Sentinela trebuie să fie aplicația implicită de filtrare a apelurilor din Android. Tu ești cel care acordă acest lucru și îl poți retrage oricând din setările sistemului.</string>
+    <string name="onboarding_role_denied">Sentinela nu a primit rolul de filtrare a apelurilor. Niciun apel nu va fi filtrat până nu îl acorzi — poți face asta acum sau mai târziu, în ecranul Protecție.</string>
+    <string name="onboarding_role_retry">Acordă acum</string>
+    <string name="onboarding_scope_title">Ce nu face Sentinela</string>
+    <string name="onboarding_scope_dnd">Modul „Nu deranja” al sistemului rămâne prioritar față de setările Sentinela.</string>
+
+    <!-- Configurare: numere necunoscute -->
+    <string name="unknown_title">Apeluri necunoscute</string>
+    <string name="unknown_question">Cum trebuie să trateze Sentinela numerele care nu sunt în agenda ta?</string>
+    <string name="unknown_option_block">Blochează</string>
+    <string name="unknown_option_block_desc">Respinge apelul instantaneu.</string>
+    <string name="unknown_option_silence">Amuțește</string>
+    <string name="unknown_option_silence_desc">Apelul intră fără sunet și fără vibrație.</string>
+    <string name="unknown_option_allow">Permite</string>
+    <string name="unknown_option_allow_desc">Primește apelurile normal.</string>
+
+    <!-- Configurare: contacte -->
+    <string name="contacts_title">Și persoanele din lista ta de contacte?</string>
+    <string name="contacts_explainer">Stabilește cum trebuie să trateze Sentinela apelurile de la cei pe care îi cunoști deja. Poți schimba asta mai târziu.</string>
+    <string name="contacts_permission_rationale" formatted="false">Ca să știe dacă apelantul este în agenda ta, Sentinela trebuie să îți citească contactele. Spre deosebire de alte aplicații, nu îți colectăm agenda. Citirea este 100% locală: datele nu părăsesc niciodată dispozitivul.</string>
+    <string name="contacts_option_ring">Sună</string>
+    <string name="contacts_option_ring_desc">Apelurile sună normal pe telefonul tău.</string>
+    <string name="contacts_option_block">Blochează</string>
+    <string name="contacts_option_block_desc">Blochează toate apelurile, conform modului de blocare din Protecție.</string>
+    <string name="contacts_option_silence">Amuțește</string>
+    <string name="contacts_option_silence_desc">Telefonul nu vibrează și nu sună, dar afișează notificarea.</string>
+    <string name="contacts_option_never_silence">Nu amuți niciodată</string>
+    <string name="contacts_option_never_silence_desc">Sentinela nu îți amuțește niciodată lista de contacte. Modul „Nu deranja” al sistemului rămâne valabil.</string>
+    <string name="contacts_default_badge">Implicit</string>
+
+    <string name="whatsapp_contacts_warning_title">Atenție la WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp permite salvarea contactelor doar în propriul cloud. Persoanele salvate astfel nu există în agenda dispozitivului și, pentru Sentinela, sunt tratate ca „Necunoscut”. Salvează-ți contactele în agenda oficială, ca blocatorul să le recunoască.</string>
+    <string name="whatsapp_history_hint">Sfat: dacă este un contact WhatsApp nesalvat în agendă, folosește opțiunea de mai sus pentru a-l permite.</string>
+
+    <string name="contacts_permission_granted">Citirea contactelor a fost acordată</string>
+    <string name="contacts_permission_denied">Fără citirea contactelor, Sentinela nu poate ști cine este în agenda ta: acele apeluri pot fi tratate ca necunoscute.</string>
+    <string name="contacts_permission_blocked">Citirea contactelor a fost refuzată definitiv. Ca să o acorzi, deschide setările aplicației.</string>
+    <string name="settings_block_private_desc">Apelurile fără identificarea numărului urmează politica de blocare pe care ai ales-o. Nu se poate ști cine a sunat.</string>
+
+    <!-- Configurare: lista personală -->
+    <string name="whitelist_setup_title">Configurarea listei personale</string>
+    <string name="whitelist_setup_desc">Lista personală este propria ta listă de numere de încredere, separată de agenda telefonului.</string>
+    <string name="whitelist_setup_what_title">Ce este lista personală?</string>
+    <string name="whitelist_setup_what_desc">Lista personală cuprinde numerele pe care le-ai adăugat manual sau le-ai marcat ca sigure în aplicație.</string>
+    <string name="whitelist_setup_question">Cum să fie tratată lista ta personală?</string>
+    <string name="whitelist_option_never_silence">Nu amuți niciodată</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela nu amuțește niciodată această sursă. Modul „Nu deranja” al sistemului rămâne valabil.</string>
+    <string name="whitelist_option_ring">Sună</string>
+    <string name="whitelist_option_ring_desc">Emite întotdeauna un sunet.</string>
+    <string name="whitelist_option_block">Blochează</string>
+    <string name="whitelist_option_block_desc">Respinge automat.</string>
+    <string name="whitelist_option_silence">Amuțește</string>
+    <string name="whitelist_option_silence_desc">Doar notificare vizuală.</string>
+    <string name="whitelist_setup_hint">Vei putea schimba aceste setări și adăuga numere noi oricând, din meniul Permise.</string>
+
+    <!-- Configurare: verificare finală -->
+    <string name="onboarding_summary_title_ok">Totul e gata</string>
+    <string name="onboarding_summary_title_partial">Aproape gata</string>
+    <string name="onboarding_summary_body">Verifică ce a fost configurat. Poți schimba orice element mai târziu, în ecranul Protecție.</string>
+    <string name="onboarding_check_role">Filtrare implicită a apelurilor</string>
+    <string name="onboarding_check_contacts">Citirea contactelor</string>
+    <string name="onboarding_check_unknown">Numere necunoscute</string>
+    <string name="onboarding_check_origins">Contacte și listă personală</string>
+    <string name="onboarding_check_granted">Acordat</string>
+    <string name="onboarding_check_missing">Lipsește</string>
+
+    <!-- Panou -->
+    <string name="dashboard_protection_active">Protecție activă</string>
+    <string name="dashboard_protection_inactive">Protecție dezactivată</string>
+    <string name="dashboard_monitoring">Monitorizare în timp real</string>
+    <string name="dashboard_device_safe">Dispozitivul tău este protejat împotriva apelurilor de la numere necunoscute.</string>
+    <string name="dashboard_role_missing">Sentinela nu este aplicația implicită de filtrare a apelurilor.</string>
+    <string name="dashboard_fix_configuration">Corectează configurarea</string>
+    <string name="dashboard_total_blocked">Total blocate</string>
+    <string name="dashboard_blocked_today">Azi</string>
+    <string name="dashboard_last_blocked">Ultimul apel blocat</string>
+    <string name="dashboard_quick_whitelist">Listă personală</string>
+    <string name="dashboard_quick_history">Istoricul blocărilor</string>
+    <string name="dashboard_protection_off_hint">Niciun apel nu este filtrat.</string>
+    <string name="dashboard_contacts_missing">Sentinela nu îți poate citi agenda. Apelurile de la contacte pot fi tratate ca necunoscute.</string>
+    <string name="dashboard_history_off">Istoricul este dezactivat, așa că nu există un număr de apeluri blocate de afișat.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Activează istoricul</string>
+
+    <!-- Navigare inferioară -->
+    <string name="nav_home">Acasă</string>
+    <string name="nav_whitelist">Permise</string>
+    <string name="nav_history">Istoric</string>
+    <string name="nav_settings">Setări</string>
+    <string name="nav_unavailable">Acest ecran vine într-o etapă ulterioară a aplicației.</string>
+
+    <!-- Listă personală -->
+    <string name="whitelist_title">Listă personală</string>
+    <string name="whitelist_search_placeholder">Caută descrieri sau numere…</string>
+    <string name="whitelist_section_allowed">Numere permise (%1$d)</string>
+    <string name="whitelist_about_desc">Numere pe care le-ai adăugat manual sau le-ai marcat ca sigure. Urmează politica setată — la valoarea implicită (Nu amuți niciodată) sună întotdeauna.</string>
+    <string name="whitelist_add_number">Adaugă un număr</string>
+    <string name="whitelist_edit">Editează</string>
+    <string name="whitelist_delete">Șterge</string>
+    <string name="whitelist_export">Exportă copia de rezervă</string>
+    <string name="whitelist_import">Importă o copie de rezervă</string>
+    <string name="whitelist_import_confirm">Importul va îmbina numerele din fișier cu lista ta actuală. Continui?</string>
+    <string name="whitelist_duplicate">Acest număr este deja în lista personală.</string>
+    <string name="whitelist_number_label">Număr</string>
+    <string name="whitelist_description_label">Descriere (opțional)</string>
+    <string name="whitelist_invalid_number">Număr nevalid. Folosește un număr brazilian cu prefix.</string>
+    <string name="whitelist_load_error">Lista personală nu a putut fi încărcată.</string>
+    <string name="whitelist_added_from_history">Adăugat din istoric</string>
+    <string name="whitelist_export_ok">Copia de rezervă a listei personale a fost salvată.</string>
+    <string name="whitelist_export_failed">Copia de rezervă nu a putut fi salvată.</string>
+    <string name="whitelist_import_failed">Fișierul nu a putut fi citit.</string>
+    <string name="whitelist_import_result">%1$d adăugate, %2$d existau deja, %3$d nevalide.</string>
+    <string name="whitelist_import_result_over_limit">%1$d adăugate, %2$d existau deja, %3$d nevalide. %4$d au rămas pe dinafară: fișierul depășește limita de 10.000 de numere.</string>
+
+    <!-- Istoric -->
+    <string name="history_clear_all">Șterge tot</string>
+    <string name="history_filter_today">Azi</string>
+    <string name="history_filter_7days">7 zile</string>
+    <string name="history_filter_30days">30 de zile</string>
+    <string name="history_unknown_number">Număr necunoscut</string>
+    <string name="history_private_number">Privat</string>
+    <string name="history_private_id">ID ascuns</string>
+    <string name="history_action_allow">Permite</string>
+    <string name="history_action_delete">Șterge</string>
+    <string name="history_mark_unwanted">Marchează ca nedorit</string>
+    <string name="history_empty">Încă niciun apel blocat.</string>
+    <string name="history_clear_confirm">Astfel se va șterge tot istoricul tău de blocări. Vrei să continui?</string>
+    <string name="history_filter_period">Perioadă</string>
+    <string name="history_filter_all">Tot istoricul</string>
+    <string name="history_action_allow_whitelist">Permite (adaugă în lista personală)</string>
+
+    <!-- Istoric: filtru după decizie -->
+    <string name="history_filter_decision">Decizie</string>
+    <string name="history_decision_all">Toate</string>
+    <string name="history_decision_unclassified">Neclasificate</string>
+    <string name="history_decision_legitimate">Marcate ca legitime</string>
+    <string name="history_decision_unwanted">Marcate ca nedorite</string>
+
+    <!-- Istoric: motivul deciziei -->
+    <string name="history_reason_outgoing_call">Apel efectuat</string>
+    <string name="history_reason_protection_disabled">Protecție dezactivată</string>
+    <string name="history_reason_private_number">Număr privat</string>
+    <string name="history_reason_contact">Este în contactele tale</string>
+    <string name="history_reason_personal_whitelist">Este în lista ta personală</string>
+    <string name="history_reason_emergency_number">Număr de urgență</string>
+    <string name="history_reason_repeated_call">A sunat din nou imediat după</string>
+    <string name="history_reason_unknown_number">Număr necunoscut</string>
+    <string name="history_reason_invalid_number">Număr neidentificat</string>
+    <string name="history_reason_local_lookup_failure">Căutarea locală a eșuat</string>
+    <string name="history_reason_fallback_policy">Politică de rezervă</string>
+
+    <!-- Istoric: timp relativ -->
+    <string name="history_time_now">Acum</string>
+    <string name="history_time_minutes">acum %1$d min</string>
+    <string name="history_time_hours">acum %1$d h</string>
+    <string name="history_time_days">acum %1$d z</string>
+
+    <!-- Protecție / Setări -->
+    <string name="settings_title">Protecție</string>
+    <string name="settings_protection_toggle">Activează protecția</string>
+    <string name="settings_unknown_policy">Numere necunoscute</string>
+    <string name="settings_contacts_policy">Contacte din agendă</string>
+    <string name="settings_whitelist_policy">Listă personală</string>
+    <string name="settings_block_private">Blochează numerele private</string>
+    <string name="settings_dialer_mode">Mod apelare (avansat)</string>
+    <string name="settings_dialer_mode_desc">Face din Sentinela aplicația de telefon implicită, ca politicile să se aplice și contactelor. Poți reveni oricând.</string>
+    <string name="settings_mode_reject">Respinge imediat</string>
+    <string name="settings_mode_silent_voicemail">Redirecționează silențios</string>
+    <string name="settings_hide_native_log">Cere să nu se înregistreze în istoricul telefonului</string>
+    <string name="settings_hide_native_log_desc">Android onorează cererea doar pentru aplicațiile operatorilor. Apelurile blocate apar în continuare în istoricul telefonului, marcate ca blocate. Ce garantează blocarea: nu sună, nu vibrează, nu afișează ecranul de apel și nu generează notificare de apel pierdut.</string>
+    <string name="settings_show_notification">Afișează notificare silențioasă</string>
+    <string name="settings_fallback_policy">Ce să facă dacă apare o eroare</string>
+    <string name="settings_fallback_allow">Lasă apelul să sune</string>
+    <string name="settings_fallback_block">Blochează</string>
+
+    <string name="settings_privacy_title">Confidențialitate</string>
+    <string name="settings_privacy_disclaimer">Sentinela este 100% offline. Spre deosebire de alte aplicații, nu îți colectăm agenda și nu o trimitem în cloud.</string>
+    <string name="settings_mask_numbers">Maschează numerele primite</string>
+    <string name="settings_mask_numbers_desc">Ascunde o parte din numere cu asteriscuri (+55 11 9****-1234) în istoric, în notificări și pe ecranul principal.</string>
+
+    <string name="settings_protection_toggle_desc">Dezactivată, Sentinela nu blochează, nu amuțește și nu înregistrează nimic. Apelurile urmează comportamentul normal al telefonului.</string>
+    <string name="settings_contacts_policy_note">Această politică este valabilă cât timp citirea contactelor este acordată. Fără ea, contactele intră sub politica de eroare.</string>
+    <string name="settings_block_mode_desc">Respinge imediat dă ton de ocupat celui care sună. Redirecționează silențios trimite apelul la mesageria vocală, dacă operatorul tău oferă acest serviciu.</string>
+    <string name="settings_repeated_call">Al doilea apel la rând sună</string>
+    <string name="settings_repeated_call_desc">Dacă același număr sună din nou la câteva minute după ce a fost blocat, al doilea apel sună. Este pentru urgențe de la persoane care nu sunt în agenda ta.</string>
+    <string name="settings_history_enabled">Păstrează istoricul blocărilor</string>
+    <string name="settings_history_enabled_desc">Istoricul rămâne doar pe acest dispozitiv și este ceea ce îți permite să verifici ce a blocat Sentinela. Dezactivarea nu șterge ce a fost deja salvat.</string>
+    <string name="settings_history_off_kept">Istoric dezactivat. Înregistrările deja salvate rămân pe dispozitiv.</string>
+    <string name="settings_retention_title">Păstrează înregistrările timp de</string>
+    <string name="settings_retention_never">Nu păstra</string>
+    <string name="settings_retention_7">7 zile</string>
+    <string name="settings_retention_30">30 de zile</string>
+    <string name="settings_retention_90">90 de zile</string>
+    <string name="settings_retention_manual">Până le șterg eu</string>
+    <string name="settings_retention_never_confirm">Alegerea „Nu păstra” șterge înregistrările existente, iar Sentinela nu mai înregistrează blocări noi. Acțiunea nu poate fi anulată.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Astfel se șterge %1$d înregistrare de apel blocat de pe acest dispozitiv. Acțiunea nu poate fi anulată.</item>
+        <item quantity="few">Astfel se șterg %1$d înregistrări de apeluri blocate de pe acest dispozitiv. Acțiunea nu poate fi anulată.</item>
+        <item quantity="other">Astfel se șterg %1$d de înregistrări de apeluri blocate de pe acest dispozitiv. Acțiunea nu poate fi anulată.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Dacă interogarea locală eșuează, Sentinela trebuie să decidă singură. Permiterea riscă să lase să treacă un apel nedorit; blocarea riscă să pierzi un apel pe care voiai să îl primești.</string>
+
+    <!-- Confidențialitate și despre -->
+    <string name="about_title">Confidențialitate și despre</string>
+    <string name="about_data_local">Toate datele rămân doar pe acest dispozitiv.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela este open source: fără reclame, fără telemetrie, fără trimiterea datelor în cloud — 100% offline, rulând pe propriul tău telefon.</string>
+    <string name="about_clear_all_data">Șterge toate datele</string>
+    <string name="about_version">Versiunea %1$s</string>
+    <string name="about_open_app_settings">Deschide setările aplicației</string>
+    <string name="about_open_channel_settings">Configurează canalul de notificare</string>
+
+    <!-- Sprijin și evaluare -->
+    <string name="review_prompt_title">Îți place Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela este open source, fără reclame și 100% offline. O evaluare sau un comentariu de susținere ajută mult proiectul.</string>
+    <string name="review_prompt_rate">Evaluează acum</string>
+    <string name="review_prompt_later">Nu acum</string>
+    <string name="support_title">Susține Sentinela</string>
+    <string name="support_comment_cta">Lasă un comentariu de susținere</string>
+    <string name="support_donate_hint">Donație opțională, direct în portofelul întreținătorului. Verifică adresa înainte de a trimite.</string>
+    <string name="support_donate_bitcoin">Copiază adresa Bitcoin</string>
+    <string name="support_donate_liquid">Copiază adresa Liquid (L-BTC)</string>
+    <string name="support_address_copied">Adresă copiată!</string>
+
+    <!-- Ștergerea tuturor datelor -->
+    <string name="about_clear_warning_title">Atenție</string>
+    <string name="about_clear_warning_body">Astfel se va șterge istoricul tău de blocări, lista ta personală și toate setările tale. Vrei să continui?</string>
+    <string name="about_clear_continue">Continuă</string>
+    <string name="about_clear_final_title">Confirmare finală</string>
+    <string name="about_clear_final_body">Ești sigur? Această acțiune nu poate fi anulată și toate datele locale vor fi pierdute definitiv.</string>
+    <string name="about_clear_failed_title">Ștergerea nu a reușit</string>
+    <string name="about_clear_failed_body">Datele tale sunt încă pe dispozitiv. Încearcă din nou; dacă eroarea se repetă, închide și redeschide aplicația.</string>
+
+    <!-- Notificări -->
+    <string name="notification_channel_blocked">Apeluri blocate</string>
+    <string name="notification_channel_blocked_desc">Anunț discret că un apel a fost blocat. Nu sună niciodată, nu vibrează niciodată și nu ocupă niciodată ecranul.</string>
+    <string name="notification_blocked_title">Apel blocat</string>
+    <string name="notification_blocked_masked">Apel de la %1$s blocat</string>
+    <string name="notification_blocked_anonymous">Un apel a fost blocat</string>
+
+    <!-- Activarea notificării proprii -->
+    <string name="settings_notification_enable">Anunță-mă când se blochează un apel</string>
+    <string name="settings_notification_enable_desc">Vine dezactivat. La activare, Sentinela cere permisiunea de notificări a sistemului. Anunțul este discret: nu sună, nu vibrează și nu ocupă ecranul.</string>
+    <string name="settings_notification_identification_masked">Afișează numărul mascat</string>
+    <string name="settings_notification_identification_anonymous">Nu afișa nicio identificare</string>
+    <string name="notification_permission_rationale">Ca să te anunțe despre apelurile blocate, Sentinela are nevoie de permisiunea de notificări. Anunțul este local și nu afișează niciodată numărul complet.</string>
+
+    <!-- Notificare de apel (mod apelare) -->
+    <string name="notification_channel_call">Apeluri în curs</string>
+    <string name="notification_channel_call_desc">Afișează apelul primit pe ecran complet și anunțul apelului în curs. Apare doar când Sentinela este telefonul implicit.</string>
+    <string name="notification_call_incoming_title">Apel primit</string>
+    <string name="notification_call_ongoing_title">Apel în curs</string>
+    <string name="notification_call_unknown_caller">Număr neidentificat</string>
+
+    <!-- Apel: etichete de stare -->
+    <string name="call_incoming_state">Apel primit</string>
+    <string name="call_dialing_state">Se apelează…</string>
+    <string name="call_ringing_state">Sună…</string>
+    <string name="call_active_state">În convorbire</string>
+    <string name="call_ended_state">Apel încheiat</string>
+    <string name="call_failed_state">Apelul nu a putut fi realizat</string>
+    <string name="call_unsupported_state">Apel în curs</string>
+    <string name="call_unsupported_body">Această versiune a Sentinela nu afișează comenzile pentru această stare a apelului. Închiderea rămâne disponibilă mai jos.</string>
+
+    <!-- Apel: acțiuni principale -->
+    <string name="call_action_answer">Răspunde</string>
+    <string name="call_action_reject">Respinge</string>
+    <string name="call_action_hangup">Închide</string>
+    <string name="call_action_answer_description">Răspunde la apel</string>
+    <string name="call_action_reject_description">Respinge apelul</string>
+    <string name="call_action_hangup_description">Încheie apelul</string>
+
+    <!-- Apel: comenzi secundare -->
+    <string name="call_control_mute">Microfon oprit</string>
+    <string name="call_control_speaker">Difuzor</string>
+    <string name="call_control_keypad">Tastatură</string>
+    <string name="call_control_mute_off_description">Microfon oprit, dezactivat</string>
+    <string name="call_control_mute_on_description">Microfon oprit, activat</string>
+    <string name="call_control_speaker_off_description">Difuzor, dezactivat</string>
+    <string name="call_control_speaker_on_description">Difuzor, activat</string>
+    <string name="call_control_keypad_closed_description">Tastatură numerică, închisă</string>
+    <string name="call_control_keypad_open_description">Tastatură numerică, deschisă</string>
+    <string name="call_control_unavailable_state">indisponibil</string>
+
+    <!-- Apel: etichete de origine -->
+    <string name="call_origin_contact">Contact</string>
+    <string name="call_origin_whitelist">Permis</string>
+    <string name="call_origin_unknown">Necunoscut</string>
+    <string name="call_origin_private">Număr privat</string>
+
+    <!-- Apel: ieșire audio -->
+    <string name="call_audio_route_title">Ieșire audio</string>
+    <string name="call_audio_route_earpiece">Telefon</string>
+    <string name="call_audio_route_speaker">Difuzor</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Căști</string>
+    <string name="call_audio_route_active_state">în uz</string>
+
+    <!-- Apel: cronometru și tastatură DTMF -->
+    <string name="call_timer_description">Durata apelului: %1$s</string>
+    <string name="call_keypad_close_description">Închide tastatura</string>
+
+    <!-- Apelare -->
+    <string name="dialpad_call">Sună</string>
+    <string name="dialpad_call_description">Sună la %1$s</string>
+    <string name="dialpad_delete_description">Șterge ultima cifră</string>
+    <string name="dialpad_clear_description">Șterge tot numărul</string>
+    <string name="dialpad_error_failed">Apelul nu a putut fi inițiat.</string>
+    <string name="dialpad_error_retry">Încearcă din nou</string>
+
+    <!-- Apelare: taste -->
+    <string name="dialpad_key_1_description">Tasta unu</string>
+    <string name="dialpad_key_2_description">Tasta doi</string>
+    <string name="dialpad_key_3_description">Tasta trei</string>
+    <string name="dialpad_key_4_description">Tasta patru</string>
+    <string name="dialpad_key_5_description">Tasta cinci</string>
+    <string name="dialpad_key_6_description">Tasta șase</string>
+    <string name="dialpad_key_7_description">Tasta șapte</string>
+    <string name="dialpad_key_8_description">Tasta opt</string>
+    <string name="dialpad_key_9_description">Tasta nouă</string>
+    <string name="dialpad_key_0_description">Tasta zero</string>
+    <string name="dialpad_key_star_description">Tasta asterisc</string>
+    <string name="dialpad_key_hash_description">Tasta diez</string>
+
+    <!-- Activarea modului apelare -->
+    <string name="dialer_activation_title">Faci din Sentinela telefonul tău implicit?</string>
+    <string name="dialer_activation_intro">În modul apelare, Sentinela primește toate apelurile — inclusiv de la cei din agenda ta. Este singurul mod în care politicile pe sursă se aplică și contactelor tale.</string>
+    <string name="dialer_activation_changes_title">Ce se schimbă</string>
+    <string name="dialer_activation_change_1">Sentinela devine aplicația ta de telefon: ecranul de apel și tastatura devin ale ei.</string>
+    <string name="dialer_activation_change_2">Filtrarea începe să vadă toate apelurile, nu doar pe cele de la numere din afara agendei.</string>
+    <string name="dialer_activation_change_3">Politica pe care ai ales-o pentru contacte se aplică cu adevărat. Valoarea implicită rămâne Sună — activarea modului apelare, singură, nu blochează pe nimeni.</string>
+    <string name="dialer_activation_unchanged_title">Ce nu se schimbă</string>
+    <string name="dialer_activation_unchanged_1">Apelurile continuă să fie înregistrate în istoricul telefonului. Faptul de a fi aplicația de telefon implicită nu îi dă Sentinela permisiunea de a omite acea înregistrare — pe Android, doar aplicațiile operatorilor pot.</string>
+    <string name="dialer_activation_unchanged_2">Modul „Nu deranja” al sistemului rămâne prioritar față de setările Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Apelurile din WhatsApp, Telegram și alte aplicații de internet rămân în afara razei de acțiune a Sentinela.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela rămâne 100% offline: niciun apel, număr sau contact nu părăsește dispozitivul.</string>
+    <string name="dialer_activation_limit_calls">Un apel pe rând: apelul în așteptare și conferința nu sunt acceptate în această versiune.</string>
+    <string name="dialer_activation_contacts_required">Modul apelare are nevoie de permisiunea de citire a contactelor. Fără ea, Sentinela nu îți poate distinge contactele și ar trata pe toată lumea ca necunoscut.</string>
+    <string name="dialer_activation_grant_contacts">Permite citirea contactelor</string>
+    <string name="dialer_activation_cta">Alege Sentinela</string>
+    <string name="dialer_activation_cta_hint">Android decide. Poți reveni oricând.</string>
+
+    <!-- Mod apelare deja activ -->
+    <string name="dialer_active_chip">Activ</string>
+    <string name="dialer_active_title">Sentinela este telefonul tău implicit</string>
+    <string name="action_back">Înapoi</string>
+    <string name="dialer_active_changes_title">Ce este valabil acum</string>
+    <string name="dialer_activation_unavailable">Acest dispozitiv nu oferă rolul de telefon implicit — de obicei pentru că nu are telefonie. Modul filtru al Sentinela funcționează în continuare acolo unde există apeluri telefonice.</string>
+    <string name="dialer_revert_cta">Alege alt telefon</string>
+    <string name="dialer_revert_hint">Când revii la altă aplicație de telefon, modul filtru al Sentinela funcționează normal în continuare — fără reinstalare și fără reconfigurare.</string>
+
+    <!-- Rol de telefon pierdut -->
+    <string name="dialer_role_lost_title">Sentinela nu mai este telefonul implicit.</string>
+    <string name="dialer_role_lost_body">Modul filtru funcționează în continuare: apelurile de la numere din afara agendei sunt filtrate în continuare.</string>
+    <string name="dialer_role_lost_action">Vezi cum se reactivează</string>
+
+    <!-- Generice -->
+    <string name="action_confirm">Confirmă</string>
+    <string name="action_cancel">Anulează</string>
+    <string name="action_retry">Încearcă din nou</string>
+    <string name="state_loading">Se încarcă…</string>
+    <string name="state_error">Ceva nu a mers bine. Încearcă din nou.</string>
+    <string name="state_on">Pornit</string>
+    <string name="state_off">Oprit</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Timp relativ pe ecranul principal -->
+    <string name="time_now">acum</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">acum %d min</item>
+        <item quantity="few">acum %d min</item>
+        <item quantity="other">acum %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">acum %d h</item>
+        <item quantity="few">acum %d h</item>
+        <item quantity="other">acum %d h</item>
+    </plurals>
+    <string name="time_yesterday">ieri</string>
+
+    <!-- Acasă: citirea ultimului apel blocat -->
+    <string name="dashboard_last_blocked_description">Ultimul apel blocat, %1$s, %2$s, %3$s</string>
+
+    <!-- Acasă: avertismente suplimentare -->
+    <string name="dashboard_more_warnings">Vezi toate avertismentele</string>
+</resources>

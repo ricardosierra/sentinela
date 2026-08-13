@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Ongi etorri -->
+    <string name="welcome_headline">Spamaren aurkako zure lehen defentsa-lerroa.</string>
+    <string name="welcome_subtitle">Sentinela-k zenbaki ezezagunen deiak blokeatzen ditu telefonoak jo aurretik ere.</string>
+    <string name="welcome_feature_local_title">Blokeo lokala</string>
+    <string name="welcome_feature_local_desc">Prozesatzea gailuan bertan.</string>
+    <string name="welcome_feature_silent_title">Isila</string>
+    <string name="welcome_feature_silent_desc">Nahi ez diren tonurik eta dardararik gabe.</string>
+    <string name="welcome_feature_offline_title">Internetik gabe</string>
+    <string name="welcome_feature_offline_desc">Pribatutasun osoa. Ez ditugu zure kontaktuak biltzen.</string>
+    <string name="welcome_badge_native">Integrazio natiboa</string>
+    <string name="welcome_cta">Hasi konfigurazioa</string>
+    <string name="welcome_cta_hint">2 minutu baino gutxiago behar ditu.</string>
+    <string name="welcome_open_source" formatted="false">100% kode irekia — iragarkirik gabe, telemetriarik gabe</string>
+
+    <!-- Konfigurazioa: dei-iragazkiaren rola -->
+    <string name="onboarding_role_disclaimer">Konfiguratzean, dei-iragazkiaren baimena ematen duzu. Sentinela-k zenbaki ezezagunen deiak lokalean iragazten ditu, zure datuak inoiz gailutik kanpo bidali gabe.</string>
+    <string name="onboarding_role_cta">Konfiguratu orain</string>
+    <string name="onboarding_role_requesting">Baimena eskatzen…</string>
+    <string name="onboarding_step_indicator">%1$d/%2$d urratsa</string>
+    <string name="onboarding_next">Hurrengoa</string>
+    <string name="onboarding_back">Atzera</string>
+    <string name="onboarding_finish">Amaitu konfigurazioa</string>
+    <string name="onboarding_change_later">Ezarpen hau edonoiz alda dezakezu.</string>
+    <string name="onboarding_skip">Saltatu</string>
+    <string name="onboarding_role_title">Utzi Sentinela-ri iragazketaz arduratzen</string>
+    <string name="onboarding_role_intro">Deiak iragazteko, Sentinela izan behar da Android-en dei-iragazki lehenetsia. Zuk ematen duzu baimena, eta sistemaren ezarpenetan kendu dezakezu nahi duzunean.</string>
+    <string name="onboarding_role_denied">Sentinela-k ez du dei-iragazkiaren rola jaso. Ez da deirik iragaziko baimena eman arte — orain edo geroago egin dezakezu, Babesa pantailan.</string>
+    <string name="onboarding_role_retry">Eman orain</string>
+    <string name="onboarding_scope_title">Sentinela-k egiten ez duena</string>
+    <string name="onboarding_scope_dnd">Sistemaren «Ez molestatu» moduak Sentinela-ren ezarpenen gainetik jarraitzen du.</string>
+
+    <!-- Konfigurazioa: zenbaki ezezagunak -->
+    <string name="unknown_title">Dei ezezagunak</string>
+    <string name="unknown_question">Nola tratatu behar ditu Sentinela-k zure kontaktuetan ez dauden zenbakiak?</string>
+    <string name="unknown_option_block">Blokeatu</string>
+    <string name="unknown_option_block_desc">Deia berehala ukatzen du.</string>
+    <string name="unknown_option_silence">Isildu</string>
+    <string name="unknown_option_silence_desc">Deia soinurik eta dardararik gabe iristen da.</string>
+    <string name="unknown_option_allow">Baimendu</string>
+    <string name="unknown_option_allow_desc">Deiak normaltasunez jasotzen ditu.</string>
+
+    <!-- Konfigurazioa: kontaktuak -->
+    <string name="contacts_title">Eta zure kontaktu-zerrendako pertsonak?</string>
+    <string name="contacts_explainer">Zehaztu nola tratatu behar dituen Sentinela-k dagoeneko ezagutzen dituzunen deiak. Geroago alda dezakezu.</string>
+    <string name="contacts_permission_rationale" formatted="false">Deitzen duena zure agendan dagoen jakiteko, Sentinela-k zure kontaktuak irakurri behar ditu. Beste aplikazio batzuek ez bezala, ez ditugu zure kontaktuak biltzen. Irakurketa % 100 lokala da: datuak ez dira inoiz gailutik ateratzen.</string>
+    <string name="contacts_option_ring">Jo</string>
+    <string name="contacts_option_ring_desc">Deiek normaltasunez jotzen dute zure telefonoan.</string>
+    <string name="contacts_option_block">Blokeatu</string>
+    <string name="contacts_option_block_desc">Dei guztiak blokeatzen ditu, Babesa ataleko blokeo-moduaren arabera.</string>
+    <string name="contacts_option_silence">Isildu</string>
+    <string name="contacts_option_silence_desc">Telefonoak ez du dardara egiten ez jotzen, baina jakinarazpena erakusten du.</string>
+    <string name="contacts_option_never_silence">Ez isildu inoiz</string>
+    <string name="contacts_option_never_silence_desc">Sentinela-k ez du inoiz zure kontaktu-zerrenda isiltzen. Sistemaren «Ez molestatu» moduak indarrean jarraitzen du.</string>
+    <string name="contacts_default_badge">Lehenetsia</string>
+
+    <string name="whatsapp_contacts_warning_title">WhatsApp-i buruzko oharra</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp-ek bere hodeian bakarrik gordetzen uzten ditu kontaktuak. Horrela gordetako pertsonak ez daude gailuaren agendan eta, Sentinela-rentzat, «Ezezagun» gisa tratatzen dira. Gorde zure kontaktuak agenda ofizialean, blokeatzaileak ezagut ditzan.</string>
+    <string name="whatsapp_history_hint">Aholkua: agendan gorde gabeko WhatsApp kontaktu bat bada, erabili goiko aukera baimentzeko.</string>
+
+    <string name="contacts_permission_granted">Kontaktuak irakurtzeko baimena emanda</string>
+    <string name="contacts_permission_denied">Kontaktuak irakurtzeko baimenik gabe, Sentinela-k ezin du jakin nor dagoen zure agendan: dei horiek ezezagun gisa tratatu daitezke.</string>
+    <string name="contacts_permission_blocked">Kontaktuak irakurtzeko baimena behin betiko ukatu da. Emateko, ireki aplikazioaren ezarpenak.</string>
+    <string name="settings_block_private_desc">Zenbaki-identifikaziorik gabeko deiek zuk aukeratutako blokeo-politika jarraitzen dute. Ezin da jakin nork deitu duen.</string>
+
+    <!-- Konfigurazioa: zerrenda pertsonala -->
+    <string name="whitelist_setup_title">Zerrenda pertsonalaren konfigurazioa</string>
+    <string name="whitelist_setup_desc">Zerrenda pertsonala zure konfiantzazko zenbakien zerrenda da, telefonoaren agendatik bereizia.</string>
+    <string name="whitelist_setup_what_title">Zer da zerrenda pertsonala?</string>
+    <string name="whitelist_setup_what_desc">Zerrenda pertsonala aplikazioan eskuz gehitu edo seguru gisa markatu dituzun zenbakiek osatzen dute.</string>
+    <string name="whitelist_setup_question">Nola tratatu zure zerrenda pertsonala?</string>
+    <string name="whitelist_option_never_silence">Ez isildu inoiz</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela-k ez du inoiz jatorri hau isiltzen. Sistemaren «Ez molestatu» moduak indarrean jarraitzen du.</string>
+    <string name="whitelist_option_ring">Jo</string>
+    <string name="whitelist_option_ring_desc">Beti soinua egin.</string>
+    <string name="whitelist_option_block">Blokeatu</string>
+    <string name="whitelist_option_block_desc">Automatikoki ukatu.</string>
+    <string name="whitelist_option_silence">Isildu</string>
+    <string name="whitelist_option_silence_desc">Jakinarazpen bisuala soilik.</string>
+    <string name="whitelist_setup_hint">Ezarpen hauek aldatu eta zenbaki berriak gehitu ahal izango dituzu edonoiz, Baimenduak menuan.</string>
+
+    <!-- Konfigurazioa: azken egiaztapena -->
+    <string name="onboarding_summary_title_ok">Dena prest</string>
+    <string name="onboarding_summary_title_partial">Ia prest</string>
+    <string name="onboarding_summary_body">Berrikusi zer geratu den konfiguratuta. Edozein elementu alda dezakezu geroago, Babesa pantailan.</string>
+    <string name="onboarding_check_role">Dei-iragazki lehenetsia</string>
+    <string name="onboarding_check_contacts">Kontaktuak irakurtzea</string>
+    <string name="onboarding_check_unknown">Zenbaki ezezagunak</string>
+    <string name="onboarding_check_origins">Kontaktuak eta zerrenda pertsonala</string>
+    <string name="onboarding_check_granted">Emanda</string>
+    <string name="onboarding_check_missing">Falta da</string>
+
+    <!-- Panela -->
+    <string name="dashboard_protection_active">Babesa aktibo</string>
+    <string name="dashboard_protection_inactive">Babesa desaktibatuta</string>
+    <string name="dashboard_monitoring">Denbora errealeko jarraipena</string>
+    <string name="dashboard_device_safe">Zure gailua babestuta dago zenbaki ezezagunen deien aurka.</string>
+    <string name="dashboard_role_missing">Sentinela ez da dei-iragazki lehenetsia.</string>
+    <string name="dashboard_fix_configuration">Zuzendu konfigurazioa</string>
+    <string name="dashboard_total_blocked">Guztira blokeatuta</string>
+    <string name="dashboard_blocked_today">Gaur</string>
+    <string name="dashboard_last_blocked">Blokeatutako azken deia</string>
+    <string name="dashboard_quick_whitelist">Zerrenda pertsonala</string>
+    <string name="dashboard_quick_history">Blokeoen historia</string>
+    <string name="dashboard_protection_off_hint">Ez da deirik iragazten ari.</string>
+    <string name="dashboard_contacts_missing">Sentinela-k ezin du zure agenda irakurri. Kontaktuen deiak ezezagun gisa tratatu daitezke.</string>
+    <string name="dashboard_history_off">Historia desaktibatuta dago, beraz ez dago blokeatutako deien zenbaketarik erakusteko.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Aktibatu historia</string>
+
+    <!-- Beheko nabigazioa -->
+    <string name="nav_home">Hasiera</string>
+    <string name="nav_whitelist">Baimenduak</string>
+    <string name="nav_history">Historia</string>
+    <string name="nav_settings">Ezarpenak</string>
+    <string name="nav_unavailable">Pantaila hau aplikazioaren geroagoko etapa batean iritsiko da.</string>
+
+    <!-- Zerrenda pertsonala -->
+    <string name="whitelist_title">Zerrenda pertsonala</string>
+    <string name="whitelist_search_placeholder">Bilatu deskribapenak edo zenbakiak…</string>
+    <string name="whitelist_section_allowed">Baimendutako zenbakiak (%1$d)</string>
+    <string name="whitelist_about_desc">Eskuz gehitu edo seguru gisa markatu dituzun zenbakiak. Konfiguratutako politika jarraitzen dute — lehenetsian (Ez isildu inoiz), beti jotzen dute.</string>
+    <string name="whitelist_add_number">Gehitu zenbakia</string>
+    <string name="whitelist_edit">Editatu</string>
+    <string name="whitelist_delete">Ezabatu</string>
+    <string name="whitelist_export">Esportatu babeskopia</string>
+    <string name="whitelist_import">Inportatu babeskopia</string>
+    <string name="whitelist_import_confirm">Inportatzean fitxategiko zenbakiak zure uneko zerrendarekin bateratuko dira. Jarraitu?</string>
+    <string name="whitelist_duplicate">Zenbaki hau dagoeneko zerrenda pertsonalean dago.</string>
+    <string name="whitelist_number_label">Zenbakia</string>
+    <string name="whitelist_description_label">Deskribapena (aukerakoa)</string>
+    <string name="whitelist_invalid_number">Zenbaki baliogabea. Erabili Brasilgo zenbaki bat aurrezenbakiarekin.</string>
+    <string name="whitelist_load_error">Ezin izan da zerrenda pertsonala kargatu.</string>
+    <string name="whitelist_added_from_history">Historiatik gehituta</string>
+    <string name="whitelist_export_ok">Zerrenda pertsonalaren babeskopia gordeta.</string>
+    <string name="whitelist_export_failed">Ezin izan da babeskopia gorde.</string>
+    <string name="whitelist_import_failed">Ezin izan da fitxategia irakurri.</string>
+    <string name="whitelist_import_result">%1$d gehituta, %2$d lehendik zeuden, %3$d baliogabe.</string>
+    <string name="whitelist_import_result_over_limit">%1$d gehituta, %2$d lehendik zeuden, %3$d baliogabe. %4$d kanpoan geratu dira: fitxategiak 10.000 zenbakiko muga gainditzen du.</string>
+
+    <!-- Historia -->
+    <string name="history_clear_all">Garbitu dena</string>
+    <string name="history_filter_today">Gaur</string>
+    <string name="history_filter_7days">7 egun</string>
+    <string name="history_filter_30days">30 egun</string>
+    <string name="history_unknown_number">Zenbaki ezezaguna</string>
+    <string name="history_private_number">Pribatua</string>
+    <string name="history_private_id">ID ezkutua</string>
+    <string name="history_action_allow">Baimendu</string>
+    <string name="history_action_delete">Ezabatu</string>
+    <string name="history_mark_unwanted">Markatu nahi ez bezala</string>
+    <string name="history_empty">Oraindik ez dago blokeatutako deirik.</string>
+    <string name="history_clear_confirm">Honek zure blokeoen historia osoa ezabatuko du. Jarraitu nahi duzu?</string>
+    <string name="history_filter_period">Aldia</string>
+    <string name="history_filter_all">Historia osoa</string>
+    <string name="history_action_allow_whitelist">Baimendu (gehitu zerrenda pertsonalera)</string>
+
+    <!-- Historia: erabakiaren araberako iragazkia -->
+    <string name="history_filter_decision">Erabakia</string>
+    <string name="history_decision_all">Guztiak</string>
+    <string name="history_decision_unclassified">Sailkatu gabe</string>
+    <string name="history_decision_legitimate">Legezko gisa markatuta</string>
+    <string name="history_decision_unwanted">Nahi ez bezala markatuta</string>
+
+    <!-- Historia: erabakiaren arrazoia -->
+    <string name="history_reason_outgoing_call">Irteerako deia</string>
+    <string name="history_reason_protection_disabled">Babesa desaktibatuta</string>
+    <string name="history_reason_private_number">Zenbaki pribatua</string>
+    <string name="history_reason_contact">Zure kontaktuetan dago</string>
+    <string name="history_reason_personal_whitelist">Zure zerrenda pertsonalean dago</string>
+    <string name="history_reason_emergency_number">Larrialdi-zenbakia</string>
+    <string name="history_reason_repeated_call">Berehala deitu du berriro</string>
+    <string name="history_reason_unknown_number">Zenbaki ezezaguna</string>
+    <string name="history_reason_invalid_number">Zenbaki identifikatu gabea</string>
+    <string name="history_reason_local_lookup_failure">Kontsulta lokalak huts egin du</string>
+    <string name="history_reason_fallback_policy">Ordezko politika</string>
+
+    <!-- Historia: denbora erlatiboa -->
+    <string name="history_time_now">Orain</string>
+    <string name="history_time_minutes">duela %1$d min</string>
+    <string name="history_time_hours">duela %1$d h</string>
+    <string name="history_time_days">duela %1$d e</string>
+
+    <!-- Babesa / Ezarpenak -->
+    <string name="settings_title">Babesa</string>
+    <string name="settings_protection_toggle">Aktibatu babesa</string>
+    <string name="settings_unknown_policy">Zenbaki ezezagunak</string>
+    <string name="settings_contacts_policy">Agendako kontaktuak</string>
+    <string name="settings_whitelist_policy">Zerrenda pertsonala</string>
+    <string name="settings_block_private">Blokeatu zenbaki pribatuak</string>
+    <string name="settings_dialer_mode">Markagailu modua (aurreratua)</string>
+    <string name="settings_dialer_mode_desc">Sentinela telefono-aplikazio lehenetsi bihurtzen du, politikak kontaktuei ere aplikatzeko. Edonoiz atzera egin dezakezu.</string>
+    <string name="settings_mode_reject">Ukatu berehala</string>
+    <string name="settings_mode_silent_voicemail">Birbideratu isilean</string>
+    <string name="settings_hide_native_log">Eskatu telefonoaren historian ez erregistratzeko</string>
+    <string name="settings_hide_native_log_desc">Android-ek operadoreen aplikazioentzat bakarrik onartzen du eskaera hori. Blokeatutako deiak telefonoaren historian agertzen jarraitzen dute, blokeatu gisa markatuta. Blokeoak bermatzen duena: ez du jotzen, ez du dardara egiten, ez du dei-pantaila erakusten eta ez du galdutako deiaren abisurik sortzen.</string>
+    <string name="settings_show_notification">Erakutsi jakinarazpen isila</string>
+    <string name="settings_fallback_policy">Zer egin hutsegite bat gertatzen bada</string>
+    <string name="settings_fallback_allow">Utzi deiari jotzen</string>
+    <string name="settings_fallback_block">Blokeatu</string>
+
+    <string name="settings_privacy_title">Pribatutasuna</string>
+    <string name="settings_privacy_disclaimer">Sentinela % 100 lineaz kanpokoa da. Beste aplikazio batzuek ez bezala, ez ditugu zure kontaktuak biltzen ez hodeira bidaltzen.</string>
+    <string name="settings_mask_numbers">Maskaratu jasotako zenbakiak</string>
+    <string name="settings_mask_numbers_desc">Zenbakien zati bat izartxoekin ezkutatzen du (+55 11 9****-1234) historian, jakinarazpenetan eta hasierako pantailan.</string>
+
+    <string name="settings_protection_toggle_desc">Desaktibatuta, Sentinela-k ez du blokeatzen, ez du isiltzen eta ez du ezer erregistratzen. Deiek telefonoaren portaera normala jarraitzen dute.</string>
+    <string name="settings_contacts_policy_note">Politika hau agenda irakurtzeko baimena emanda dagoen bitartean balio du. Hori gabe, kontaktuak errore-politikara erortzen dira.</string>
+    <string name="settings_block_mode_desc">Berehala ukatzeak okupatuta seinalea ematen dio deitzen duenari. Isilean birbideratzeak deia ahots-postara bidaltzen du, zure operadoreak zerbitzu hori badu.</string>
+    <string name="settings_repeated_call">Segidako bigarren deiak jotzen du</string>
+    <string name="settings_repeated_call_desc">Zenbaki berak blokeatu eta minutu gutxira berriro deitzen badu, bigarren deiak jotzen du. Zure agendan ez daudenen larrialdietarako da.</string>
+    <string name="settings_history_enabled">Gorde blokeoen historia</string>
+    <string name="settings_history_enabled_desc">Historia gailu honetan bakarrik geratzen da eta Sentinela-k zer blokeatu duen auditatzeko aukera ematen du. Desaktibatzeak ez du dagoeneko gordetakoa ezabatzen.</string>
+    <string name="settings_history_off_kept">Historia desaktibatuta. Dagoeneko gordetako erregistroak gailuan jarraitzen dute.</string>
+    <string name="settings_retention_title">Gorde erregistroak honenbeste denboraz</string>
+    <string name="settings_retention_never">Ez gorde</string>
+    <string name="settings_retention_7">7 egun</string>
+    <string name="settings_retention_30">30 egun</string>
+    <string name="settings_retention_90">90 egun</string>
+    <string name="settings_retention_manual">Nik ezabatu arte</string>
+    <string name="settings_retention_never_confirm">«Ez gorde» aukeratzeak lehendik dauden erregistroak ezabatzen ditu eta Sentinela-k blokeo berririk ez du erregistratzen. Ezin da desegin.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Honek blokeatutako deiaren %1$d erregistro ezabatzen du gailu honetatik. Ezin da desegin.</item>
+        <item quantity="other">Honek blokeatutako deien %1$d erregistro ezabatzen ditu gailu honetatik. Ezin da desegin.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Kontsulta lokalak huts egiten badu, Sentinela-k bakarrik erabaki behar du. Baimentzeak nahi ez den dei bat pasatzen uzteko arriskua du; blokeatzeak jaso nahi zenuen dei bat galtzeko arriskua.</string>
+
+    <!-- Pribatutasuna eta honi buruz -->
+    <string name="about_title">Pribatutasuna eta honi buruz</string>
+    <string name="about_data_local">Datu guztiak gailu honetan bakarrik geratzen dira.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela kode irekikoa da: iragarkirik gabe, telemetriarik gabe, hodeira daturik bidali gabe — % 100 lineaz kanpo, zure telefonoan bertan.</string>
+    <string name="about_clear_all_data">Garbitu datu guztiak</string>
+    <string name="about_version">%1$s bertsioa</string>
+    <string name="about_open_app_settings">Ireki aplikazioaren ezarpenak</string>
+    <string name="about_open_channel_settings">Konfiguratu jakinarazpen-kanala</string>
+
+    <!-- Laguntza eta balorazioa -->
+    <string name="review_prompt_title">Gustatzen ari zaizu Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela kode irekikoa da, iragarkirik gabekoa eta % 100 lineaz kanpokoa. Balorazio batek edo laguntza-iruzkin batek asko laguntzen dio proiektuari.</string>
+    <string name="review_prompt_rate">Baloratu orain</string>
+    <string name="review_prompt_later">Orain ez</string>
+    <string name="support_title">Lagundu Sentinela</string>
+    <string name="support_comment_cta">Utzi laguntza-iruzkin bat</string>
+    <string name="support_donate_hint">Aukerako dohaintza, zuzenean mantentzailearen diru-zorrora. Egiaztatu helbidea bidali aurretik.</string>
+    <string name="support_donate_bitcoin">Kopiatu Bitcoin helbidea</string>
+    <string name="support_donate_liquid">Kopiatu Liquid helbidea (L-BTC)</string>
+    <string name="support_address_copied">Helbidea kopiatuta!</string>
+
+    <!-- Datu guztiak garbitu -->
+    <string name="about_clear_warning_title">Kontuz</string>
+    <string name="about_clear_warning_body">Honek zure blokeoen historia, zure zerrenda pertsonala eta zure ezarpen guztiak ezabatuko ditu. Jarraitu nahi duzu?</string>
+    <string name="about_clear_continue">Jarraitu</string>
+    <string name="about_clear_final_title">Azken baieztapena</string>
+    <string name="about_clear_final_body">Ziur zaude? Ekintza hau ezin da desegin eta datu lokal guztiak betiko galduko dira.</string>
+    <string name="about_clear_failed_title">Ezin izan da ezabatu</string>
+    <string name="about_clear_failed_body">Zure datuak gailuan jarraitzen dute. Saiatu berriro; errorea errepikatzen bada, itxi eta ireki berriro aplikazioa.</string>
+
+    <!-- Jakinarazpenak -->
+    <string name="notification_channel_blocked">Blokeatutako deiak</string>
+    <string name="notification_channel_blocked_desc">Dei bat blokeatu dela adierazten duen abisu diskretua. Ez du inoiz soinurik egiten, ez du inoiz dardara egiten eta ez du inoiz pantaila hartzen.</string>
+    <string name="notification_blocked_title">Deia blokeatuta</string>
+    <string name="notification_blocked_masked">%1$s zenbakiaren deia blokeatuta</string>
+    <string name="notification_blocked_anonymous">Dei bat blokeatu da</string>
+
+    <!-- Jakinarazpen propioaren aktibazioa -->
+    <string name="settings_notification_enable">Abisatu dei bat blokeatzen denean</string>
+    <string name="settings_notification_enable_desc">Desaktibatuta dator. Aktibatzean, Sentinela-k sistemaren jakinarazpen-baimena eskatzen du. Abisua diskretua da: ez du soinurik egiten, ez du dardara egiten eta ez du pantaila hartzen.</string>
+    <string name="settings_notification_identification_masked">Erakutsi zenbaki maskaratua</string>
+    <string name="settings_notification_identification_anonymous">Ez erakutsi identifikaziorik</string>
+    <string name="notification_permission_rationale">Blokeatutako deien berri emateko, Sentinela-k jakinarazpen-baimena behar du. Abisua lokala da eta ez du inoiz zenbaki osoa erakusten.</string>
+
+    <!-- Dei-jakinarazpena (markagailu modua) -->
+    <string name="notification_channel_call">Abian diren deiak</string>
+    <string name="notification_channel_call_desc">Jasotako deia pantaila osoan erakusten du eta abian den deiaren abisua. Sentinela telefono lehenetsia denean bakarrik agertzen da.</string>
+    <string name="notification_call_incoming_title">Jasotako deia</string>
+    <string name="notification_call_ongoing_title">Abian den deia</string>
+    <string name="notification_call_unknown_caller">Zenbaki identifikatu gabea</string>
+
+    <!-- Deia: egoera-etiketak -->
+    <string name="call_incoming_state">Jasotako deia</string>
+    <string name="call_dialing_state">Deitzen…</string>
+    <string name="call_ringing_state">Jotzen…</string>
+    <string name="call_active_state">Deian</string>
+    <string name="call_ended_state">Deia amaituta</string>
+    <string name="call_failed_state">Ezin izan da deia osatu</string>
+    <string name="call_unsupported_state">Abian den deia</string>
+    <string name="call_unsupported_body">Sentinela-ren bertsio honek ez ditu deiaren egoera honetako kontrolak erakusten. Esekitzeko aukera behean dago oraindik.</string>
+
+    <!-- Deia: ekintza nagusiak -->
+    <string name="call_action_answer">Erantzun</string>
+    <string name="call_action_reject">Ukatu</string>
+    <string name="call_action_hangup">Eseki</string>
+    <string name="call_action_answer_description">Erantzun deiari</string>
+    <string name="call_action_reject_description">Ukatu deia</string>
+    <string name="call_action_hangup_description">Amaitu deia</string>
+
+    <!-- Deia: bigarren mailako kontrolak -->
+    <string name="call_control_mute">Mututu</string>
+    <string name="call_control_speaker">Bozgorailua</string>
+    <string name="call_control_keypad">Teklatua</string>
+    <string name="call_control_mute_off_description">Mututu, desaktibatuta</string>
+    <string name="call_control_mute_on_description">Mututu, aktibatuta</string>
+    <string name="call_control_speaker_off_description">Bozgorailua, desaktibatuta</string>
+    <string name="call_control_speaker_on_description">Bozgorailua, aktibatuta</string>
+    <string name="call_control_keypad_closed_description">Zenbaki-teklatua, itxita</string>
+    <string name="call_control_keypad_open_description">Zenbaki-teklatua, irekita</string>
+    <string name="call_control_unavailable_state">ez dago erabilgarri</string>
+
+    <!-- Deia: jatorri-etiketak -->
+    <string name="call_origin_contact">Kontaktua</string>
+    <string name="call_origin_whitelist">Baimenduta</string>
+    <string name="call_origin_unknown">Ezezaguna</string>
+    <string name="call_origin_private">Zenbaki pribatua</string>
+
+    <!-- Deia: audio-irteera -->
+    <string name="call_audio_route_title">Audio-irteera</string>
+    <string name="call_audio_route_earpiece">Telefonoa</string>
+    <string name="call_audio_route_speaker">Bozgorailua</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Entzungailuak</string>
+    <string name="call_audio_route_active_state">erabiltzen</string>
+
+    <!-- Deia: kronometroa eta DTMF teklatua -->
+    <string name="call_timer_description">Deiaren iraupena: %1$s</string>
+    <string name="call_keypad_close_description">Itxi teklatua</string>
+
+    <!-- Markatzea -->
+    <string name="dialpad_call">Deitu</string>
+    <string name="dialpad_call_description">Deitu %1$s zenbakira</string>
+    <string name="dialpad_delete_description">Ezabatu azken digitua</string>
+    <string name="dialpad_clear_description">Ezabatu zenbaki osoa</string>
+    <string name="dialpad_error_failed">Ezin izan da deia hasi.</string>
+    <string name="dialpad_error_retry">Saiatu berriro</string>
+
+    <!-- Markatzea: teklak -->
+    <string name="dialpad_key_1_description">Bat tekla</string>
+    <string name="dialpad_key_2_description">Bi tekla</string>
+    <string name="dialpad_key_3_description">Hiru tekla</string>
+    <string name="dialpad_key_4_description">Lau tekla</string>
+    <string name="dialpad_key_5_description">Bost tekla</string>
+    <string name="dialpad_key_6_description">Sei tekla</string>
+    <string name="dialpad_key_7_description">Zazpi tekla</string>
+    <string name="dialpad_key_8_description">Zortzi tekla</string>
+    <string name="dialpad_key_9_description">Bederatzi tekla</string>
+    <string name="dialpad_key_0_description">Zero tekla</string>
+    <string name="dialpad_key_star_description">Izartxo tekla</string>
+    <string name="dialpad_key_hash_description">Traola tekla</string>
+
+    <!-- Markagailu moduaren aktibazioa -->
+    <string name="dialer_activation_title">Sentinela zure telefono lehenetsi bihurtu?</string>
+    <string name="dialer_activation_intro">Markagailu moduan, Sentinela-k dei guztiak jasotzen ditu — zure agendan daudenenak barne. Jatorriaren araberako politikak zure kontaktuei ere aplikatzeko modu bakarra da.</string>
+    <string name="dialer_activation_changes_title">Zer aldatzen den</string>
+    <string name="dialer_activation_change_1">Sentinela zure telefono-aplikazio bihurtzen da: dei-pantaila eta teklatua bereak izango dira.</string>
+    <string name="dialer_activation_change_2">Iragazketak dei guztiak ikusten hasiko da, ez soilik agendatik kanpoko zenbakienak.</string>
+    <string name="dialer_activation_change_3">Kontaktuentzat aukeratu duzun politika benetan aplikatzen da. Lehenetsia Jo izaten jarraitzen du — markagailu modua aktibatzeak, berez, ez du inor blokeatzen.</string>
+    <string name="dialer_activation_unchanged_title">Zer ez den aldatzen</string>
+    <string name="dialer_activation_unchanged_1">Deiak telefonoaren historian erregistratzen jarraitzen dute. Telefono-aplikazio lehenetsia izateak ez dio Sentinela-ri erregistro hori kentzeko baimenik ematen — Android-en, operadoreen aplikazioek bakarrik dezakete.</string>
+    <string name="dialer_activation_unchanged_2">Sistemaren «Ez molestatu» moduak Sentinela-ren ezarpenen gainetik jarraitzen du.</string>
+    <string name="dialer_activation_unchanged_3">WhatsApp, Telegram eta beste Interneteko aplikazioen deiak Sentinela-ren irismenetik kanpo jarraitzen dute.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela % 100 lineaz kanpokoa izaten jarraitzen du: ez dei, ez zenbaki, ez kontakturik ez da gailutik ateratzen.</string>
+    <string name="dialer_activation_limit_calls">Dei bat aldi berean: zain dagoen deia eta konferentzia ez dira onartzen bertsio honetan.</string>
+    <string name="dialer_activation_contacts_required">Markagailu moduak agenda irakurtzeko baimena behar du. Hori gabe, Sentinela-k ezin ditu zure kontaktuak bereizi eta guztiak ezezagun gisa tratatuko lituzke.</string>
+    <string name="dialer_activation_grant_contacts">Baimendu agenda irakurtzea</string>
+    <string name="dialer_activation_cta">Aukeratu Sentinela</string>
+    <string name="dialer_activation_cta_hint">Android-ek erabakitzen du. Nahi duzunean atzera egin dezakezu.</string>
+
+    <!-- Markagailu modua dagoeneko aktibo -->
+    <string name="dialer_active_chip">Aktibo</string>
+    <string name="dialer_active_title">Sentinela zure telefono lehenetsia da</string>
+    <string name="action_back">Atzera</string>
+    <string name="dialer_active_changes_title">Zer dagoen indarrean orain</string>
+    <string name="dialer_activation_unavailable">Gailu honek ez du telefono lehenetsiaren rola eskaintzen — normalean telefoniarik ez duelako. Sentinela-ren iragazki moduak telefono-deiak dauden lekuan funtzionatzen jarraitzen du.</string>
+    <string name="dialer_revert_cta">Aukeratu beste telefono bat</string>
+    <string name="dialer_revert_hint">Beste telefono-aplikazio batera itzultzean, Sentinela-ren iragazki moduak normaltasunez funtzionatzen jarraitzen du — ezer berrinstalatu edo birkonfiguratu gabe.</string>
+
+    <!-- Markagailu rola galduta -->
+    <string name="dialer_role_lost_title">Sentinela ez da jada telefono lehenetsia.</string>
+    <string name="dialer_role_lost_body">Iragazki moduak funtzionatzen jarraitzen du: agendatik kanpoko zenbakien deiak iragazten jarraitzen dute.</string>
+    <string name="dialer_role_lost_action">Ikusi nola berraktibatu</string>
+
+    <!-- Orokorrak -->
+    <string name="action_confirm">Berretsi</string>
+    <string name="action_cancel">Utzi</string>
+    <string name="action_retry">Saiatu berriro</string>
+    <string name="state_loading">Kargatzen…</string>
+    <string name="state_error">Zerbait gaizki joan da. Saiatu berriro.</string>
+    <string name="state_on">Piztuta</string>
+    <string name="state_off">Itzalita</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Hasierako pantailako denbora erlatiboa -->
+    <string name="time_now">orain</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">duela %d min</item>
+        <item quantity="other">duela %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">duela %d h</item>
+        <item quantity="other">duela %d h</item>
+    </plurals>
+    <string name="time_yesterday">atzo</string>
+
+    <!-- Hasiera: blokeatutako azkenaren irakurketa -->
+    <string name="dashboard_last_blocked_description">Blokeatutako azken deia, %1$s, %2$s, %3$s</string>
+
+    <!-- Hasiera: abisu gehiago -->
+    <string name="dashboard_more_warnings">Ikusi abisu guztiak</string>
+</resources>

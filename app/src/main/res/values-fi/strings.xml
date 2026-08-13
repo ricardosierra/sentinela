@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tervetuloa -->
+    <string name="welcome_headline">Ensimmäinen puolustuslinjasi roskapuheluita vastaan.</string>
+    <string name="welcome_subtitle">Sentinela estää tuntemattomista numeroista tulevat puhelut jo ennen kuin puhelin ehtii soida.</string>
+    <string name="welcome_feature_local_title">Paikallinen esto</string>
+    <string name="welcome_feature_local_desc">Käsittely suoraan laitteessa.</string>
+    <string name="welcome_feature_silent_title">Äänetön</string>
+    <string name="welcome_feature_silent_desc">Ei ei-toivottuja soittoääniä tai värinöitä.</string>
+    <string name="welcome_feature_offline_title">Ilman internetiä</string>
+    <string name="welcome_feature_offline_desc">Täysi yksityisyys. Emme kerää yhteystietojasi.</string>
+    <string name="welcome_badge_native">Natiivi integraatio</string>
+    <string name="welcome_cta">Aloita määritys</string>
+    <string name="welcome_cta_hint">Kestää alle 2 minuuttia.</string>
+    <string name="welcome_open_source" formatted="false">100% avointa lähdekoodia — ei mainoksia, ei telemetriaa</string>
+
+    <!-- Käyttöönotto: puhelunsuodatuksen rooli -->
+    <string name="onboarding_role_disclaimer">Määrittäessäsi tämän annat puhelunsuodatusluvan. Sentinela suodattaa tuntemattomista numeroista tulevat puhelut paikallisesti lähettämättä koskaan tietojasi laitteen ulkopuolelle.</string>
+    <string name="onboarding_role_cta">Määritä nyt</string>
+    <string name="onboarding_role_requesting">Pyydetään lupaa…</string>
+    <string name="onboarding_step_indicator">Vaihe %1$d / %2$d</string>
+    <string name="onboarding_next">Seuraava</string>
+    <string name="onboarding_back">Takaisin</string>
+    <string name="onboarding_finish">Viimeistele määritys</string>
+    <string name="onboarding_change_later">Voit muuttaa tätä asetusta milloin tahansa.</string>
+    <string name="onboarding_skip">Ohita</string>
+    <string name="onboarding_role_title">Anna Sentinelan hoitaa suodatus</string>
+    <string name="onboarding_role_intro">Puhelujen suodattamiseksi Sentinelan on oltava Androidin oletuspuhelunsuodatussovellus. Sinä annat luvan ja voit perua sen järjestelmän asetuksista milloin haluat.</string>
+    <string name="onboarding_role_denied">Sentinela ei saanut puhelunsuodatuksen roolia. Yhtään puhelua ei suodateta ennen kuin annat luvan — voit tehdä sen nyt tai myöhemmin Suojaus-näytöllä.</string>
+    <string name="onboarding_role_retry">Anna lupa nyt</string>
+    <string name="onboarding_scope_title">Mitä Sentinela ei tee</string>
+    <string name="onboarding_scope_dnd">Järjestelmän Älä häiritse -tila on edelleen etusijalla Sentinelan asetuksiin nähden.</string>
+
+    <!-- Käyttöönotto: tuntemattomat numerot -->
+    <string name="unknown_title">Tuntemattomat puhelut</string>
+    <string name="unknown_question">Miten Sentinelan tulisi käsitellä numeroita, joita ei ole yhteystiedoissasi?</string>
+    <string name="unknown_option_block">Estä</string>
+    <string name="unknown_option_block_desc">Hylkää puhelun välittömästi.</string>
+    <string name="unknown_option_silence">Vaimenna</string>
+    <string name="unknown_option_silence_desc">Puhelu saapuu ilman ääntä ja ilman värinää.</string>
+    <string name="unknown_option_allow">Salli</string>
+    <string name="unknown_option_allow_desc">Vastaanottaa puhelut normaalisti.</string>
+
+    <!-- Käyttöönotto: yhteystiedot -->
+    <string name="contacts_title">Entä yhteystietoluettelosi henkilöt?</string>
+    <string name="contacts_explainer">Määritä, miten Sentinelan tulee käsitellä jo tuntemiesi henkilöiden puheluita. Voit muuttaa tätä myöhemmin.</string>
+    <string name="contacts_permission_rationale" formatted="false">Tietääkseen, onko soittaja yhteystiedoissasi, Sentinelan on luettava yhteystietosi. Toisin kuin muut sovellukset, emme kerää yhteystietojasi. Lukeminen on 100% paikallista: tiedot eivät koskaan poistu laitteesta.</string>
+    <string name="contacts_option_ring">Soi</string>
+    <string name="contacts_option_ring_desc">Puhelut soivat normaalisti puhelimessasi.</string>
+    <string name="contacts_option_block">Estä</string>
+    <string name="contacts_option_block_desc">Estää kaikki puhelut Suojaus-kohdassa valitun estotilan mukaisesti.</string>
+    <string name="contacts_option_silence">Vaimenna</string>
+    <string name="contacts_option_silence_desc">Puhelin ei värise eikä soi, mutta näyttää ilmoituksen.</string>
+    <string name="contacts_option_never_silence">Älä vaimenna koskaan</string>
+    <string name="contacts_option_never_silence_desc">Sentinela ei vaimenna koskaan yhteystietoluetteloasi. Järjestelmän Älä häiritse -tila on edelleen voimassa.</string>
+    <string name="contacts_default_badge">Oletus</string>
+
+    <string name="whatsapp_contacts_warning_title">Huomio WhatsAppista</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp sallii yhteystietojen tallentamisen vain omaan pilveensä. Näin tallennettuja henkilöitä ei ole laitteen yhteystiedoissa, ja Sentinela käsittelee heitä tuntemattomina. Tallenna yhteystietosi laitteen viralliseen luetteloon, jotta esto tunnistaa heidät.</string>
+    <string name="whatsapp_history_hint">Vinkki: jos kyseessä on WhatsApp-yhteystieto, jota ei ole tallennettu laitteen luetteloon, salli se yllä olevalla valinnalla.</string>
+
+    <string name="contacts_permission_granted">Yhteystietojen lukuoikeus myönnetty</string>
+    <string name="contacts_permission_denied">Ilman yhteystietojen lukuoikeutta Sentinela ei voi tietää, kuka on yhteystiedoissasi: nämä puhelut voidaan käsitellä tuntemattomina.</string>
+    <string name="contacts_permission_blocked">Yhteystietojen lukuoikeus evättiin pysyvästi. Myöntääksesi sen avaa sovelluksen asetukset.</string>
+    <string name="settings_block_private_desc">Puhelut ilman numeronäyttöä noudattavat valitsemaasi estokäytäntöä. Ei ole mahdollista tietää, kuka soitti.</string>
+
+    <!-- Käyttöönotto: henkilökohtainen lista -->
+    <string name="whitelist_setup_title">Henkilökohtaisen listan määritys</string>
+    <string name="whitelist_setup_desc">Henkilökohtainen lista on oma luettelosi luotetuista numeroista, erillään puhelimen yhteystiedoista.</string>
+    <string name="whitelist_setup_what_title">Mikä on henkilökohtainen lista?</string>
+    <string name="whitelist_setup_what_desc">Henkilökohtainen lista koostuu numeroista, jotka olet lisännyt käsin tai merkinnyt turvallisiksi sovelluksessa.</string>
+    <string name="whitelist_setup_question">Miten henkilökohtaista listaasi käsitellään?</string>
+    <string name="whitelist_option_never_silence">Älä vaimenna koskaan</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela ei vaimenna koskaan tätä lähdettä. Järjestelmän Älä häiritse -tila on edelleen voimassa.</string>
+    <string name="whitelist_option_ring">Soi</string>
+    <string name="whitelist_option_ring_desc">Anna aina ääni.</string>
+    <string name="whitelist_option_block">Estä</string>
+    <string name="whitelist_option_block_desc">Hylkää automaattisesti.</string>
+    <string name="whitelist_option_silence">Vaimenna</string>
+    <string name="whitelist_option_silence_desc">Vain visuaalinen ilmoitus.</string>
+    <string name="whitelist_setup_hint">Voit muuttaa näitä asetuksia ja lisätä uusia numeroita milloin tahansa Sallitut-valikossa.</string>
+
+    <!-- Käyttöönotto: loppuvarmistus -->
+    <string name="onboarding_summary_title_ok">Kaikki valmista</string>
+    <string name="onboarding_summary_title_partial">Melkein valmista</string>
+    <string name="onboarding_summary_body">Tarkista, mitä on määritetty. Voit muuttaa mitä tahansa kohtaa myöhemmin Suojaus-näytöllä.</string>
+    <string name="onboarding_check_role">Oletuspuhelunsuodatus</string>
+    <string name="onboarding_check_contacts">Yhteystietojen lukuoikeus</string>
+    <string name="onboarding_check_unknown">Tuntemattomat numerot</string>
+    <string name="onboarding_check_origins">Yhteystiedot ja henkilökohtainen lista</string>
+    <string name="onboarding_check_granted">Myönnetty</string>
+    <string name="onboarding_check_missing">Puuttuu</string>
+
+    <!-- Yleisnäkymä -->
+    <string name="dashboard_protection_active">Suojaus käytössä</string>
+    <string name="dashboard_protection_inactive">Suojaus pois käytöstä</string>
+    <string name="dashboard_monitoring">Reaaliaikainen valvonta</string>
+    <string name="dashboard_device_safe">Laitteesi on suojattu tuntemattomista numeroista tulevilta puheluilta.</string>
+    <string name="dashboard_role_missing">Sentinela ei ole oletuspuhelunsuodatussovellus.</string>
+    <string name="dashboard_fix_configuration">Korjaa määritys</string>
+    <string name="dashboard_total_blocked">Estetty yhteensä</string>
+    <string name="dashboard_blocked_today">Tänään</string>
+    <string name="dashboard_last_blocked">Viimeisin estetty puhelu</string>
+    <string name="dashboard_quick_whitelist">Henkilökohtainen lista</string>
+    <string name="dashboard_quick_history">Estohistoria</string>
+    <string name="dashboard_protection_off_hint">Yhtään puhelua ei suodateta.</string>
+    <string name="dashboard_contacts_missing">Sentinela ei voi lukea yhteystietojasi. Yhteystietojen puhelut voidaan käsitellä tuntemattomina.</string>
+    <string name="dashboard_history_off">Historia on pois käytöstä, joten estettyjen puheluiden lukumäärää ei voi näyttää.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Ota historia käyttöön</string>
+
+    <!-- Alanavigointi -->
+    <string name="nav_home">Etusivu</string>
+    <string name="nav_whitelist">Sallitut</string>
+    <string name="nav_history">Historia</string>
+    <string name="nav_settings">Asetukset</string>
+    <string name="nav_unavailable">Tämä näyttö tulee sovelluksen myöhemmässä vaiheessa.</string>
+
+    <!-- Henkilökohtainen lista -->
+    <string name="whitelist_title">Henkilökohtainen lista</string>
+    <string name="whitelist_search_placeholder">Hae kuvauksia tai numeroita…</string>
+    <string name="whitelist_section_allowed">Sallitut numerot (%1$d)</string>
+    <string name="whitelist_about_desc">Numerot, jotka olet lisännyt käsin tai merkinnyt turvallisiksi. Ne noudattavat määrittämääsi käytäntöä — oletuksella (Älä vaimenna koskaan) ne soivat aina.</string>
+    <string name="whitelist_add_number">Lisää numero</string>
+    <string name="whitelist_edit">Muokkaa</string>
+    <string name="whitelist_delete">Poista</string>
+    <string name="whitelist_export">Vie varmuuskopio</string>
+    <string name="whitelist_import">Tuo varmuuskopio</string>
+    <string name="whitelist_import_confirm">Tuonti yhdistää tiedoston numerot nykyiseen listaasi. Jatketaanko?</string>
+    <string name="whitelist_duplicate">Tämä numero on jo henkilökohtaisella listalla.</string>
+    <string name="whitelist_number_label">Numero</string>
+    <string name="whitelist_description_label">Kuvaus (valinnainen)</string>
+    <string name="whitelist_invalid_number">Virheellinen numero. Käytä brasilialaista numeroa suuntanumeron kanssa.</string>
+    <string name="whitelist_load_error">Henkilökohtaisen listan lataaminen epäonnistui.</string>
+    <string name="whitelist_added_from_history">Lisätty historiasta</string>
+    <string name="whitelist_export_ok">Henkilökohtaisen listan varmuuskopio tallennettu.</string>
+    <string name="whitelist_export_failed">Varmuuskopion tallentaminen epäonnistui.</string>
+    <string name="whitelist_import_failed">Tiedoston lukeminen epäonnistui.</string>
+    <string name="whitelist_import_result">%1$d lisätty, %2$d oli jo olemassa, %3$d virheellistä.</string>
+    <string name="whitelist_import_result_over_limit">%1$d lisätty, %2$d oli jo olemassa, %3$d virheellistä. %4$d jäi pois: tiedosto ylittää 10 000 numeron rajan.</string>
+
+    <!-- Historia -->
+    <string name="history_clear_all">Tyhjennä kaikki</string>
+    <string name="history_filter_today">Tänään</string>
+    <string name="history_filter_7days">7 päivää</string>
+    <string name="history_filter_30days">30 päivää</string>
+    <string name="history_unknown_number">Tuntematon numero</string>
+    <string name="history_private_number">Yksityinen</string>
+    <string name="history_private_id">Piilotettu tunnus</string>
+    <string name="history_action_allow">Salli</string>
+    <string name="history_action_delete">Poista</string>
+    <string name="history_mark_unwanted">Merkitse ei-toivotuksi</string>
+    <string name="history_empty">Ei vielä estettyjä puheluita.</string>
+    <string name="history_clear_confirm">Tämä poistaa koko estohistoriasi. Haluatko jatkaa?</string>
+    <string name="history_filter_period">Ajanjakso</string>
+    <string name="history_filter_all">Koko historia</string>
+    <string name="history_action_allow_whitelist">Salli (lisää henkilökohtaiselle listalle)</string>
+
+    <!-- Historia: suodatus päätöksen mukaan -->
+    <string name="history_filter_decision">Päätös</string>
+    <string name="history_decision_all">Kaikki</string>
+    <string name="history_decision_unclassified">Luokittelemattomat</string>
+    <string name="history_decision_legitimate">Merkitty aidoiksi</string>
+    <string name="history_decision_unwanted">Merkitty ei-toivotuiksi</string>
+
+    <!-- Historia: päätöksen syy -->
+    <string name="history_reason_outgoing_call">Lähtevä puhelu</string>
+    <string name="history_reason_protection_disabled">Suojaus pois käytöstä</string>
+    <string name="history_reason_private_number">Yksityinen numero</string>
+    <string name="history_reason_contact">On yhteystiedoissasi</string>
+    <string name="history_reason_personal_whitelist">On henkilökohtaisella listallasi</string>
+    <string name="history_reason_emergency_number">Hätänumero</string>
+    <string name="history_reason_repeated_call">Soitti uudelleen heti perään</string>
+    <string name="history_reason_unknown_number">Tuntematon numero</string>
+    <string name="history_reason_invalid_number">Tunnistamaton numero</string>
+    <string name="history_reason_local_lookup_failure">Paikallinen haku epäonnistui</string>
+    <string name="history_reason_fallback_policy">Varakäytäntö</string>
+
+    <!-- Historia: suhteellinen aika -->
+    <string name="history_time_now">Nyt</string>
+    <string name="history_time_minutes">%1$d min sitten</string>
+    <string name="history_time_hours">%1$d t sitten</string>
+    <string name="history_time_days">%1$d pv sitten</string>
+
+    <!-- Suojaus / Asetukset -->
+    <string name="settings_title">Suojaus</string>
+    <string name="settings_protection_toggle">Ota suojaus käyttöön</string>
+    <string name="settings_unknown_policy">Tuntemattomat numerot</string>
+    <string name="settings_contacts_policy">Yhteystiedot</string>
+    <string name="settings_whitelist_policy">Henkilökohtainen lista</string>
+    <string name="settings_block_private">Estä yksityiset numerot</string>
+    <string name="settings_dialer_mode">Puhelintila (lisäasetus)</string>
+    <string name="settings_dialer_mode_desc">Tekee Sentinelasta oletuspuhelinsovelluksen, jotta käytännöt koskevat myös yhteystietoja. Voit perua tämän milloin tahansa.</string>
+    <string name="settings_mode_reject">Hylkää heti</string>
+    <string name="settings_mode_silent_voicemail">Ohjaa hiljaisesti eteenpäin</string>
+    <string name="settings_hide_native_log">Pyydä, ettei merkitä puhelinlokiin</string>
+    <string name="settings_hide_native_log_desc">Android noudattaa tätä pyyntöä vain operaattorisovelluksilta. Estetyt puhelut näkyvät edelleen puhelimen puhelulokissa estetyiksi merkittyinä. Mitä esto takaa: ei soi, ei värise, ei näytä puhelunäyttöä eikä anna ilmoitusta vastaamattomasta puhelusta.</string>
+    <string name="settings_show_notification">Näytä äänetön ilmoitus</string>
+    <string name="settings_fallback_policy">Mitä tehdään virhetilanteessa</string>
+    <string name="settings_fallback_allow">Anna puhelun soida</string>
+    <string name="settings_fallback_block">Estä</string>
+
+    <string name="settings_privacy_title">Yksityisyys</string>
+    <string name="settings_privacy_disclaimer">Sentinela on 100% offline. Toisin kuin muut sovellukset, emme kerää yhteystietojasi emmekä lähetä niitä pilveen.</string>
+    <string name="settings_mask_numbers">Peitä saapuvat numerot</string>
+    <string name="settings_mask_numbers_desc">Piilottaa osan numeroista tähdillä (+55 11 9****-1234) historiassa, ilmoituksissa ja aloitusnäytöllä.</string>
+
+    <string name="settings_protection_toggle_desc">Pois käytöstä Sentinela ei estä, ei vaimenna eikä tallenna mitään. Puhelut noudattavat puhelimen normaalia toimintaa.</string>
+    <string name="settings_contacts_policy_note">Tämä käytäntö on voimassa niin kauan kuin yhteystietojen lukuoikeus on myönnetty. Ilman sitä yhteystiedot kuuluvat virhekäytännön piiriin.</string>
+    <string name="settings_block_mode_desc">Hylkää heti antaa soittajalle varattu-äänen. Ohjaa hiljaisesti eteenpäin lähettää puhelun vastaajaan, jos operaattorillasi on tämä palvelu.</string>
+    <string name="settings_repeated_call">Toinen peräkkäinen puhelu soi</string>
+    <string name="settings_repeated_call_desc">Jos sama numero soittaa uudelleen muutaman minuutin kuluttua estosta, toinen puhelu soi. Tämä on tarkoitettu hätätilanteisiin henkilöiltä, joita ei ole yhteystiedoissasi.</string>
+    <string name="settings_history_enabled">Säilytä estohistoria</string>
+    <string name="settings_history_enabled_desc">Historia pysyy vain tässä laitteessa ja on se, minkä avulla voit tarkistaa, mitä Sentinela on estänyt. Poistaminen käytöstä ei poista jo tallennettua.</string>
+    <string name="settings_history_off_kept">Historia pois käytöstä. Jo tallennetut merkinnät pysyvät laitteessa.</string>
+    <string name="settings_retention_title">Säilytä merkinnät</string>
+    <string name="settings_retention_never">Älä säilytä</string>
+    <string name="settings_retention_7">7 päivää</string>
+    <string name="settings_retention_30">30 päivää</string>
+    <string name="settings_retention_90">90 päivää</string>
+    <string name="settings_retention_manual">Kunnes poistan ne</string>
+    <string name="settings_retention_never_confirm">Vaihtoehdon Älä säilytä valitseminen poistaa olemassa olevat merkinnät, eikä Sentinela enää tallenna uusia estoja. Tätä ei voi kumota.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Tämä poistaa %1$d estetyn puhelun merkinnän tästä laitteesta. Tätä ei voi kumota.</item>
+        <item quantity="other">Tämä poistaa %1$d estetyn puhelun merkintää tästä laitteesta. Tätä ei voi kumota.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Jos paikallinen haku epäonnistuu, Sentinelan on päätettävä itse. Salliminen riskeeraa ei-toivotun puhelun läpipääsyn; estäminen riskeeraa sen, että menetät puhelun, jonka halusit ottaa vastaan.</string>
+
+    <!-- Yksityisyys ja tietoja -->
+    <string name="about_title">Yksityisyys ja tietoja</string>
+    <string name="about_data_local">Kaikki tiedot pysyvät vain tässä laitteessa.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela on avointa lähdekoodia: ei mainoksia, ei telemetriaa, ei tietojen lähetystä pilveen — 100% offline, omassa puhelimessasi.</string>
+    <string name="about_clear_all_data">Tyhjennä kaikki tiedot</string>
+    <string name="about_version">Versio %1$s</string>
+    <string name="about_open_app_settings">Avaa sovelluksen asetukset</string>
+    <string name="about_open_channel_settings">Määritä ilmoituskanava</string>
+
+    <!-- Tuki ja arvostelu -->
+    <string name="review_prompt_title">Pidätkö Sentinelasta?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela on avointa lähdekoodia, mainokseton ja 100% offline. Arvostelu tai kannustava kommentti auttaa projektia paljon.</string>
+    <string name="review_prompt_rate">Arvostele nyt</string>
+    <string name="review_prompt_later">Ei nyt</string>
+    <string name="support_title">Tue Sentinelaa</string>
+    <string name="support_comment_cta">Jätä kannustava kommentti</string>
+    <string name="support_donate_hint">Vapaaehtoinen lahjoitus suoraan ylläpitäjän lompakkoon. Tarkista osoite ennen lähettämistä.</string>
+    <string name="support_donate_bitcoin">Kopioi Bitcoin-osoite</string>
+    <string name="support_donate_liquid">Kopioi Liquid-osoite (L-BTC)</string>
+    <string name="support_address_copied">Osoite kopioitu!</string>
+
+    <!-- Kaikkien tietojen tyhjennys -->
+    <string name="about_clear_warning_title">Huomio</string>
+    <string name="about_clear_warning_body">Tämä poistaa estohistoriasi, henkilökohtaisen listasi ja kaikki asetuksesi. Haluatko jatkaa?</string>
+    <string name="about_clear_continue">Jatka</string>
+    <string name="about_clear_final_title">Lopullinen vahvistus</string>
+    <string name="about_clear_final_body">Oletko varma? Tätä toimintoa ei voi kumota ja kaikki paikalliset tiedot menetetään pysyvästi.</string>
+    <string name="about_clear_failed_title">Poistaminen ei onnistunut</string>
+    <string name="about_clear_failed_body">Tietosi ovat edelleen laitteessa. Yritä uudelleen; jos virhe toistuu, sulje ja avaa sovellus uudelleen.</string>
+
+    <!-- Ilmoitukset -->
+    <string name="notification_channel_blocked">Estetyt puhelut</string>
+    <string name="notification_channel_blocked_desc">Huomaamaton ilmoitus siitä, että puhelu estettiin. Se ei koskaan soita ääntä, ei värise eikä vie näyttöä.</string>
+    <string name="notification_blocked_title">Puhelu estetty</string>
+    <string name="notification_blocked_masked">Puhelu numerosta %1$s estetty</string>
+    <string name="notification_blocked_anonymous">Puhelu estettiin</string>
+
+    <!-- Oman ilmoituksen käyttöönotto -->
+    <string name="settings_notification_enable">Ilmoita, kun puhelu estetään</string>
+    <string name="settings_notification_enable_desc">On oletuksena pois käytöstä. Kun otat sen käyttöön, Sentinela pyytää järjestelmän ilmoituslupaa. Ilmoitus on huomaamaton: ei ääntä, ei värinää eikä näytön valtausta.</string>
+    <string name="settings_notification_identification_masked">Näytä peitetty numero</string>
+    <string name="settings_notification_identification_anonymous">Älä näytä tunnistetta</string>
+    <string name="notification_permission_rationale">Ilmoittaakseen estetyistä puheluista Sentinela tarvitsee ilmoitusluvan. Ilmoitus on paikallinen eikä näytä koskaan koko numeroa.</string>
+
+    <!-- Puheluilmoitus (puhelintila) -->
+    <string name="notification_channel_call">Käynnissä olevat puhelut</string>
+    <string name="notification_channel_call_desc">Näyttää saapuvan puhelun koko näytöllä ja ilmoituksen käynnissä olevasta puhelusta. Näkyy vain, kun Sentinela on oletuspuhelin.</string>
+    <string name="notification_call_incoming_title">Saapuva puhelu</string>
+    <string name="notification_call_ongoing_title">Käynnissä oleva puhelu</string>
+    <string name="notification_call_unknown_caller">Tunnistamaton numero</string>
+
+    <!-- Puhelu: tilamerkinnät -->
+    <string name="call_incoming_state">Saapuva puhelu</string>
+    <string name="call_dialing_state">Soitetaan…</string>
+    <string name="call_ringing_state">Soi…</string>
+    <string name="call_active_state">Puhelussa</string>
+    <string name="call_ended_state">Puhelu päättyi</string>
+    <string name="call_failed_state">Puhelua ei voitu yhdistää</string>
+    <string name="call_unsupported_state">Käynnissä oleva puhelu</string>
+    <string name="call_unsupported_body">Tämä Sentinelan versio ei näytä tämän puhelutilan säätimiä. Puhelun lopettaminen on edelleen käytettävissä alla.</string>
+
+    <!-- Puhelu: päätoiminnot -->
+    <string name="call_action_answer">Vastaa</string>
+    <string name="call_action_reject">Hylkää</string>
+    <string name="call_action_hangup">Lopeta</string>
+    <string name="call_action_answer_description">Vastaa puheluun</string>
+    <string name="call_action_reject_description">Hylkää puhelu</string>
+    <string name="call_action_hangup_description">Lopeta puhelu</string>
+
+    <!-- Puhelu: toissijaiset säätimet -->
+    <string name="call_control_mute">Mykistys</string>
+    <string name="call_control_speaker">Kaiutin</string>
+    <string name="call_control_keypad">Näppäimistö</string>
+    <string name="call_control_mute_off_description">Mykistys, pois päältä</string>
+    <string name="call_control_mute_on_description">Mykistys, päällä</string>
+    <string name="call_control_speaker_off_description">Kaiutin, pois päältä</string>
+    <string name="call_control_speaker_on_description">Kaiutin, päällä</string>
+    <string name="call_control_keypad_closed_description">Numeronäppäimistö, suljettu</string>
+    <string name="call_control_keypad_open_description">Numeronäppäimistö, avattu</string>
+    <string name="call_control_unavailable_state">ei käytettävissä</string>
+
+    <!-- Puhelu: alkuperämerkinnät -->
+    <string name="call_origin_contact">Yhteystieto</string>
+    <string name="call_origin_whitelist">Sallittu</string>
+    <string name="call_origin_unknown">Tuntematon</string>
+    <string name="call_origin_private">Yksityinen numero</string>
+
+    <!-- Puhelu: äänen ulostulo -->
+    <string name="call_audio_route_title">Äänen ulostulo</string>
+    <string name="call_audio_route_earpiece">Puhelin</string>
+    <string name="call_audio_route_speaker">Kaiutin</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Kuulokkeet</string>
+    <string name="call_audio_route_active_state">käytössä</string>
+
+    <!-- Puhelu: ajastin ja DTMF-näppäimistö -->
+    <string name="call_timer_description">Puhelun kesto: %1$s</string>
+    <string name="call_keypad_close_description">Sulje näppäimistö</string>
+
+    <!-- Numeronvalinta -->
+    <string name="dialpad_call">Soita</string>
+    <string name="dialpad_call_description">Soita numeroon %1$s</string>
+    <string name="dialpad_delete_description">Poista viimeinen numero</string>
+    <string name="dialpad_clear_description">Poista koko numero</string>
+    <string name="dialpad_error_failed">Puhelua ei voitu aloittaa.</string>
+    <string name="dialpad_error_retry">Yritä uudelleen</string>
+
+    <!-- Numeronvalinta: näppäimet -->
+    <string name="dialpad_key_1_description">Näppäin yksi</string>
+    <string name="dialpad_key_2_description">Näppäin kaksi</string>
+    <string name="dialpad_key_3_description">Näppäin kolme</string>
+    <string name="dialpad_key_4_description">Näppäin neljä</string>
+    <string name="dialpad_key_5_description">Näppäin viisi</string>
+    <string name="dialpad_key_6_description">Näppäin kuusi</string>
+    <string name="dialpad_key_7_description">Näppäin seitsemän</string>
+    <string name="dialpad_key_8_description">Näppäin kahdeksan</string>
+    <string name="dialpad_key_9_description">Näppäin yhdeksän</string>
+    <string name="dialpad_key_0_description">Näppäin nolla</string>
+    <string name="dialpad_key_star_description">Tähtinäppäin</string>
+    <string name="dialpad_key_hash_description">Ristikkonäppäin</string>
+
+    <!-- Puhelintilan käyttöönotto -->
+    <string name="dialer_activation_title">Tehdäänkö Sentinelasta oletuspuhelimesi?</string>
+    <string name="dialer_activation_intro">Puhelintilassa Sentinela vastaanottaa kaikki puhelut — myös yhteystiedoissasi olevilta. Vain näin lähdekohtaiset käytännöt koskevat myös yhteystietojasi.</string>
+    <string name="dialer_activation_changes_title">Mikä muuttuu</string>
+    <string name="dialer_activation_change_1">Sentinelasta tulee puhelinsovelluksesi: puhelunäyttö ja näppäimistö ovat sen omat.</string>
+    <string name="dialer_activation_change_2">Suodatus alkaa nähdä kaikki puhelut, ei vain yhteystietojen ulkopuolisista numeroista tulevat.</string>
+    <string name="dialer_activation_change_3">Yhteystiedoille valitsemasi käytäntö otetaan todella käyttöön. Oletus on edelleen Soi — pelkkä puhelintilan käyttöönotto ei estä ketään.</string>
+    <string name="dialer_activation_unchanged_title">Mikä ei muutu</string>
+    <string name="dialer_activation_unchanged_1">Puhelut merkitään edelleen puhelimen puhelulokiin. Oletuspuhelinsovelluksena oleminen ei anna Sentinelalle lupaa jättää tätä merkintää pois — Androidissa vain operaattorisovellukset voivat.</string>
+    <string name="dialer_activation_unchanged_2">Järjestelmän Älä häiritse -tila on edelleen etusijalla Sentinelan asetuksiin nähden.</string>
+    <string name="dialer_activation_unchanged_3">WhatsAppin, Telegramin ja muiden internetsovellusten puhelut ovat edelleen Sentinelan ulottumattomissa.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela pysyy 100% offline-tilassa: yksikään puhelu, numero tai yhteystieto ei poistu laitteesta.</string>
+    <string name="dialer_activation_limit_calls">Yksi puhelu kerrallaan: koputus ja neuvottelupuhelu eivät ole tuettuja tässä versiossa.</string>
+    <string name="dialer_activation_contacts_required">Puhelintila tarvitsee yhteystietojen lukuoikeuden. Ilman sitä Sentinela ei voi erottaa yhteystietojasi ja alkaisi käsitellä kaikkia tuntemattomina.</string>
+    <string name="dialer_activation_grant_contacts">Salli yhteystietojen luku</string>
+    <string name="dialer_activation_cta">Valitse Sentinela</string>
+    <string name="dialer_activation_cta_hint">Android päättää. Voit palata takaisin milloin haluat.</string>
+
+    <!-- Puhelintila jo käytössä -->
+    <string name="dialer_active_chip">Käytössä</string>
+    <string name="dialer_active_title">Sentinela on oletuspuhelimesi</string>
+    <string name="action_back">Takaisin</string>
+    <string name="dialer_active_changes_title">Mikä on nyt voimassa</string>
+    <string name="dialer_activation_unavailable">Tämä laite ei tarjoa oletuspuhelimen roolia — yleensä siksi, ettei siinä ole puhelintoimintoja. Sentinelan suodatustila toimii edelleen siellä, missä on puheluita.</string>
+    <string name="dialer_revert_cta">Valitse toinen puhelin</string>
+    <string name="dialer_revert_hint">Kun palaat toiseen puhelinsovellukseen, Sentinelan suodatustila toimii edelleen normaalisti — ilman uudelleenasennusta ja ilman uutta määritystä.</string>
+
+    <!-- Puhelinrooli menetetty -->
+    <string name="dialer_role_lost_title">Sentinela ei ole enää oletuspuhelin.</string>
+    <string name="dialer_role_lost_body">Suodatustila toimii edelleen: yhteystietojen ulkopuolisista numeroista tulevat puhelut suodatetaan yhä.</string>
+    <string name="dialer_role_lost_action">Katso, miten otat sen uudelleen käyttöön</string>
+
+    <!-- Yleiset -->
+    <string name="action_confirm">Vahvista</string>
+    <string name="action_cancel">Peruuta</string>
+    <string name="action_retry">Yritä uudelleen</string>
+    <string name="state_loading">Ladataan…</string>
+    <string name="state_error">Jokin meni pieleen. Yritä uudelleen.</string>
+    <string name="state_on">Päällä</string>
+    <string name="state_off">Pois</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Aloitusnäytön suhteellinen aika -->
+    <string name="time_now">nyt</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%d min sitten</item>
+        <item quantity="other">%d min sitten</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">%d t sitten</item>
+        <item quantity="other">%d t sitten</item>
+    </plurals>
+    <string name="time_yesterday">eilen</string>
+
+    <!-- Aloitus: viimeisimmän estetyn luenta -->
+    <string name="dashboard_last_blocked_description">Viimeisin estetty puhelu, %1$s, %2$s, %3$s</string>
+
+    <!-- Aloitus: lisää varoituksia -->
+    <string name="dashboard_more_warnings">Näytä kaikki varoitukset</string>
+</resources>

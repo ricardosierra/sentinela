@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Velkommen -->
+    <string name="welcome_headline">Din første forsvarslinje mot spam.</string>
+    <string name="welcome_subtitle">Sentinela blokkerer anrop fra ukjente numre allerede før telefonen rekker å ringe.</string>
+    <string name="welcome_feature_local_title">Lokal blokkering</string>
+    <string name="welcome_feature_local_desc">Behandling direkte på enheten.</string>
+    <string name="welcome_feature_silent_title">Lydløs</string>
+    <string name="welcome_feature_silent_desc">Ingen uønskede ringetoner eller vibrasjoner.</string>
+    <string name="welcome_feature_offline_title">Uten internett</string>
+    <string name="welcome_feature_offline_desc">Full personvern. Vi samler ikke inn kontaktene dine.</string>
+    <string name="welcome_badge_native">Innebygd integrasjon</string>
+    <string name="welcome_cta">Start oppsettet</string>
+    <string name="welcome_cta_hint">Tar mindre enn 2 minutter.</string>
+    <string name="welcome_open_source" formatted="false">100% åpen kildekode — ingen reklame, ingen telemetri</string>
+
+    <!-- Oppsett: rollen som anropsfilter -->
+    <string name="onboarding_role_disclaimer">Når du setter det opp, gir du tillatelse til anropsfiltrering. Sentinela filtrerer anrop fra ukjente numre lokalt, uten noen gang å sende dataene dine ut av enheten.</string>
+    <string name="onboarding_role_cta">Sett opp nå</string>
+    <string name="onboarding_role_requesting">Ber om tillatelse…</string>
+    <string name="onboarding_step_indicator">Trinn %1$d av %2$d</string>
+    <string name="onboarding_next">Neste</string>
+    <string name="onboarding_back">Tilbake</string>
+    <string name="onboarding_finish">Fullfør oppsettet</string>
+    <string name="onboarding_change_later">Du kan endre denne innstillingen når som helst.</string>
+    <string name="onboarding_skip">Hopp over</string>
+    <string name="onboarding_role_title">La Sentinela ta seg av filtreringen</string>
+    <string name="onboarding_role_intro">For å filtrere anrop må Sentinela være Androids standardapp for anropsfiltrering. Det er du som gir tillatelsen, og du kan trekke den tilbake i systeminnstillingene når du vil.</string>
+    <string name="onboarding_role_denied">Sentinela fikk ikke rollen som anropsfilter. Ingen anrop blir filtrert før du gir tillatelsen — du kan gjøre det nå eller senere, på skjermen Beskyttelse.</string>
+    <string name="onboarding_role_retry">Gi tillatelse nå</string>
+    <string name="onboarding_scope_title">Dette gjør ikke Sentinela</string>
+    <string name="onboarding_scope_dnd">Systemets \"Ikke forstyrr\" gjelder fortsatt foran innstillingene i Sentinela.</string>
+
+    <!-- Oppsett: ukjente numre -->
+    <string name="unknown_title">Ukjente anrop</string>
+    <string name="unknown_question">Hvordan skal Sentinela håndtere numre som ikke står i kontaktene dine?</string>
+    <string name="unknown_option_block">Blokker</string>
+    <string name="unknown_option_block_desc">Avviser anropet umiddelbart.</string>
+    <string name="unknown_option_silence">Demp</string>
+    <string name="unknown_option_silence_desc">Anropet kommer inn uten lyd og uten vibrasjon.</string>
+    <string name="unknown_option_allow">Tillat</string>
+    <string name="unknown_option_allow_desc">Mottar anrop som vanlig.</string>
+
+    <!-- Oppsett: kontakter -->
+    <string name="contacts_title">Og personene i kontaktlisten din?</string>
+    <string name="contacts_explainer">Bestem hvordan Sentinela skal behandle anrop fra dem du allerede kjenner. Du kan endre det senere.</string>
+    <string name="contacts_permission_rationale" formatted="false">For å vite om den som ringer står i adresseboken din, må Sentinela lese kontaktene dine. I motsetning til andre apper samler vi ikke inn kontaktene dine. Lesingen er 100% lokal: dataene forlater aldri enheten.</string>
+    <string name="contacts_option_ring">Ring</string>
+    <string name="contacts_option_ring_desc">Anropene ringer som vanlig på telefonen din.</string>
+    <string name="contacts_option_block">Blokker</string>
+    <string name="contacts_option_block_desc">Blokkerer alle anrop, i tråd med blokkeringsmodusen under Beskyttelse.</string>
+    <string name="contacts_option_silence">Demp</string>
+    <string name="contacts_option_silence_desc">Telefonen verken vibrerer eller ringer, men viser varselet.</string>
+    <string name="contacts_option_never_silence">Demp aldri</string>
+    <string name="contacts_option_never_silence_desc">Sentinela demper aldri kontaktlisten din. Systemets \"Ikke forstyrr\" gjelder fortsatt.</string>
+    <string name="contacts_default_badge">Standard</string>
+
+    <string name="whatsapp_contacts_warning_title">Om WhatsApp</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp lar deg bare lagre kontakter i sin egen sky. Personer som er lagret slik, finnes ikke i adresseboken på enheten, og Sentinela behandler dem som \"Ukjent\". Lagre kontaktene dine i den offisielle adresseboken slik at blokkereren gjenkjenner dem.</string>
+    <string name="whatsapp_history_hint">Tips: hvis dette er en WhatsApp-kontakt som ikke er lagret i adresseboken, kan du bruke valget over for å tillate den.</string>
+
+    <string name="contacts_permission_granted">Tilgang til kontakter gitt</string>
+    <string name="contacts_permission_denied">Uten tilgang til kontakter kan ikke Sentinela vite hvem som står i adresseboken din: de anropene kan bli behandlet som ukjente.</string>
+    <string name="contacts_permission_blocked">Tilgangen til kontakter ble avslått permanent. Åpne appinnstillingene for å gi den.</string>
+    <string name="settings_block_private_desc">Anrop uten nummervisning følger blokkeringsregelen du har valgt. Det er ikke mulig å vite hvem som ringte.</string>
+
+    <!-- Oppsett: personlig liste -->
+    <string name="whitelist_setup_title">Oppsett av den personlige listen</string>
+    <string name="whitelist_setup_desc">Den personlige listen er din egen liste over numre du stoler på, atskilt fra adresseboken på telefonen.</string>
+    <string name="whitelist_setup_what_title">Hva er den personlige listen?</string>
+    <string name="whitelist_setup_what_desc">Den personlige listen består av numrene du har lagt til manuelt eller merket som trygge inne i appen.</string>
+    <string name="whitelist_setup_question">Hvordan skal den personlige listen din behandles?</string>
+    <string name="whitelist_option_never_silence">Demp aldri</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela demper aldri denne kilden. Systemets \"Ikke forstyrr\" gjelder fortsatt.</string>
+    <string name="whitelist_option_ring">Ring</string>
+    <string name="whitelist_option_ring_desc">Gi alltid lyd.</string>
+    <string name="whitelist_option_block">Blokker</string>
+    <string name="whitelist_option_block_desc">Avvis automatisk.</string>
+    <string name="whitelist_option_silence">Demp</string>
+    <string name="whitelist_option_silence_desc">Bare visuelt varsel.</string>
+    <string name="whitelist_setup_hint">Du kan endre disse innstillingene og legge til nye numre når som helst i menyen Tillatte.</string>
+
+    <!-- Oppsett: siste kontroll -->
+    <string name="onboarding_summary_title_ok">Alt er klart</string>
+    <string name="onboarding_summary_title_partial">Nesten klart</string>
+    <string name="onboarding_summary_body">Se over hva som ble satt opp. Du kan endre hvert punkt senere, på skjermen Beskyttelse.</string>
+    <string name="onboarding_check_role">Standard anropsfiltrering</string>
+    <string name="onboarding_check_contacts">Tilgang til kontakter</string>
+    <string name="onboarding_check_unknown">Ukjente numre</string>
+    <string name="onboarding_check_origins">Kontakter og personlig liste</string>
+    <string name="onboarding_check_granted">Gitt</string>
+    <string name="onboarding_check_missing">Mangler</string>
+
+    <!-- Oversikt -->
+    <string name="dashboard_protection_active">Beskyttelse aktiv</string>
+    <string name="dashboard_protection_inactive">Beskyttelse slått av</string>
+    <string name="dashboard_monitoring">Overvåking i sanntid</string>
+    <string name="dashboard_device_safe">Enheten din er beskyttet mot anrop fra ukjente numre.</string>
+    <string name="dashboard_role_missing">Sentinela er ikke standardappen for anropsfiltrering.</string>
+    <string name="dashboard_fix_configuration">Rett opp konfigurasjonen</string>
+    <string name="dashboard_total_blocked">Blokkert totalt</string>
+    <string name="dashboard_blocked_today">I dag</string>
+    <string name="dashboard_last_blocked">Siste blokkerte anrop</string>
+    <string name="dashboard_quick_whitelist">Personlig liste</string>
+    <string name="dashboard_quick_history">Blokkeringshistorikk</string>
+    <string name="dashboard_protection_off_hint">Ingen anrop blir filtrert.</string>
+    <string name="dashboard_contacts_missing">Sentinela kan ikke lese adresseboken din. Anrop fra kontakter kan bli behandlet som ukjente.</string>
+    <string name="dashboard_history_off">Historikken er slått av, så det finnes ingen telling av blokkerte anrop å vise.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Slå på historikk</string>
+
+    <!-- Nedre navigasjon -->
+    <string name="nav_home">Start</string>
+    <string name="nav_whitelist">Tillatte</string>
+    <string name="nav_history">Historikk</string>
+    <string name="nav_settings">Innstillinger</string>
+    <string name="nav_unavailable">Denne skjermen kommer i en senere fase av appen.</string>
+
+    <!-- Personlig liste -->
+    <string name="whitelist_title">Personlig liste</string>
+    <string name="whitelist_search_placeholder">Søk i beskrivelser eller numre…</string>
+    <string name="whitelist_section_allowed">Tillatte numre (%1$d)</string>
+    <string name="whitelist_about_desc">Numre du har lagt til manuelt eller merket som trygge. De følger regelen du har satt opp — med standardvalget (Demp aldri) ringer de alltid.</string>
+    <string name="whitelist_add_number">Legg til nummer</string>
+    <string name="whitelist_edit">Rediger</string>
+    <string name="whitelist_delete">Slett</string>
+    <string name="whitelist_export">Eksporter sikkerhetskopi</string>
+    <string name="whitelist_import">Importer sikkerhetskopi</string>
+    <string name="whitelist_import_confirm">Importen slår sammen numrene i filen med den nåværende listen din. Vil du fortsette?</string>
+    <string name="whitelist_duplicate">Dette nummeret står allerede i den personlige listen.</string>
+    <string name="whitelist_number_label">Nummer</string>
+    <string name="whitelist_description_label">Beskrivelse (valgfritt)</string>
+    <string name="whitelist_invalid_number">Ugyldig nummer. Bruk et brasiliansk nummer med retningsnummer.</string>
+    <string name="whitelist_load_error">Klarte ikke å laste den personlige listen.</string>
+    <string name="whitelist_added_from_history">Lagt til fra historikken</string>
+    <string name="whitelist_export_ok">Sikkerhetskopi av den personlige listen lagret.</string>
+    <string name="whitelist_export_failed">Klarte ikke å lagre sikkerhetskopien.</string>
+    <string name="whitelist_import_failed">Klarte ikke å lese filen.</string>
+    <string name="whitelist_import_result">%1$d lagt til, %2$d fantes allerede, %3$d ugyldige.</string>
+    <string name="whitelist_import_result_over_limit">%1$d lagt til, %2$d fantes allerede, %3$d ugyldige. %4$d kom ikke med: filen overskrider grensen på 10 000 numre.</string>
+
+    <!-- Historikk -->
+    <string name="history_clear_all">Tøm alt</string>
+    <string name="history_filter_today">I dag</string>
+    <string name="history_filter_7days">7 dager</string>
+    <string name="history_filter_30days">30 dager</string>
+    <string name="history_unknown_number">Ukjent nummer</string>
+    <string name="history_private_number">Privat</string>
+    <string name="history_private_id">Skjult ID</string>
+    <string name="history_action_allow">Tillat</string>
+    <string name="history_action_delete">Slett</string>
+    <string name="history_mark_unwanted">Merk som uønsket</string>
+    <string name="history_empty">Ingen blokkerte anrop ennå.</string>
+    <string name="history_clear_confirm">Dette sletter hele blokkeringshistorikken din. Vil du fortsette?</string>
+    <string name="history_filter_period">Periode</string>
+    <string name="history_filter_all">Hele historikken</string>
+    <string name="history_action_allow_whitelist">Tillat (legg til i den personlige listen)</string>
+
+    <!-- Historikk: filter etter avgjørelse -->
+    <string name="history_filter_decision">Avgjørelse</string>
+    <string name="history_decision_all">Alle</string>
+    <string name="history_decision_unclassified">Uklassifiserte</string>
+    <string name="history_decision_legitimate">Merket som legitime</string>
+    <string name="history_decision_unwanted">Merket som uønskede</string>
+
+    <!-- Historikk: årsak til avgjørelsen -->
+    <string name="history_reason_outgoing_call">Utgående anrop</string>
+    <string name="history_reason_protection_disabled">Beskyttelse slått av</string>
+    <string name="history_reason_private_number">Privat nummer</string>
+    <string name="history_reason_contact">Står i kontaktene dine</string>
+    <string name="history_reason_personal_whitelist">Står i den personlige listen din</string>
+    <string name="history_reason_emergency_number">Nødnummer</string>
+    <string name="history_reason_repeated_call">Ringte igjen rett etterpå</string>
+    <string name="history_reason_unknown_number">Ukjent nummer</string>
+    <string name="history_reason_invalid_number">Uidentifisert nummer</string>
+    <string name="history_reason_local_lookup_failure">Lokalt oppslag mislyktes</string>
+    <string name="history_reason_fallback_policy">Reserveregel</string>
+
+    <!-- Historikk: relativ tid -->
+    <string name="history_time_now">Nå</string>
+    <string name="history_time_minutes">for %1$d min siden</string>
+    <string name="history_time_hours">for %1$d t siden</string>
+    <string name="history_time_days">for %1$d d siden</string>
+
+    <!-- Beskyttelse / Innstillinger -->
+    <string name="settings_title">Beskyttelse</string>
+    <string name="settings_protection_toggle">Slå på beskyttelsen</string>
+    <string name="settings_unknown_policy">Ukjente numre</string>
+    <string name="settings_contacts_policy">Kontakter i adresseboken</string>
+    <string name="settings_whitelist_policy">Personlig liste</string>
+    <string name="settings_block_private">Blokker private numre</string>
+    <string name="settings_dialer_mode">Oppringingsmodus (avansert)</string>
+    <string name="settings_dialer_mode_desc">Gjør Sentinela til standard telefonapp slik at reglene også gjelder for kontakter. Du kan angre når som helst.</string>
+    <string name="settings_mode_reject">Avvis umiddelbart</string>
+    <string name="settings_mode_silent_voicemail">Viderekoble stille</string>
+    <string name="settings_hide_native_log">Be om å ikke bli registrert i anropsloggen</string>
+    <string name="settings_hide_native_log_desc">Android etterkommer bare den forespørselen for apper fra teleoperatører. Blokkerte anrop står fortsatt i anropsloggen på telefonen, merket som blokkerte. Det blokkeringen garanterer: den ringer ikke, vibrerer ikke, viser ingen anropsskjerm og gir ingen varsel om tapt anrop.</string>
+    <string name="settings_show_notification">Vis lydløst varsel</string>
+    <string name="settings_fallback_policy">Hva som skal skje ved feil</string>
+    <string name="settings_fallback_allow">La anropet ringe</string>
+    <string name="settings_fallback_block">Blokker</string>
+
+    <string name="settings_privacy_title">Personvern</string>
+    <string name="settings_privacy_disclaimer">Sentinela er 100% frakoblet. I motsetning til andre apper samler vi ikke inn kontaktene dine og sender dem ikke til skyen.</string>
+    <string name="settings_mask_numbers">Masker innkommende numre</string>
+    <string name="settings_mask_numbers_desc">Skjuler deler av numrene med stjerner (+55 11 9****-1234) i historikken, i varsler og på startskjermen.</string>
+
+    <string name="settings_protection_toggle_desc">Når den er av, blokkerer ikke Sentinela, demper ikke og registrerer ingenting. Anropene følger telefonens vanlige oppførsel.</string>
+    <string name="settings_contacts_policy_note">Denne regelen gjelder så lenge tilgangen til kontakter er gitt. Uten den faller kontakter inn under feilregelen.</string>
+    <string name="settings_block_mode_desc">Avvis umiddelbart gir opptattsignal til den som ringer. Viderekoble stille sender anropet til telefonsvareren, hvis operatøren din har den tjenesten.</string>
+    <string name="settings_repeated_call">Andre anrop på rad ringer</string>
+    <string name="settings_repeated_call_desc">Hvis det samme nummeret ringer igjen få minutter etter å ha blitt blokkert, ringer det andre anropet. Det er ment for nødsituasjoner fra folk som ikke står i adresseboken din.</string>
+    <string name="settings_history_enabled">Lagre blokkeringshistorikk</string>
+    <string name="settings_history_enabled_desc">Historikken blir bare på denne enheten og er det som gjør det mulig å etterprøve hva Sentinela har blokkert. Å slå den av sletter ikke det som allerede er lagret.</string>
+    <string name="settings_history_off_kept">Historikk slått av. Oppføringene som allerede er lagret, blir liggende på enheten.</string>
+    <string name="settings_retention_title">Lagre oppføringer i</string>
+    <string name="settings_retention_never">Ikke lagre</string>
+    <string name="settings_retention_7">7 dager</string>
+    <string name="settings_retention_30">30 dager</string>
+    <string name="settings_retention_90">90 dager</string>
+    <string name="settings_retention_manual">Til jeg sletter dem</string>
+    <string name="settings_retention_never_confirm">Å velge \"Ikke lagre\" sletter de eksisterende oppføringene, og Sentinela slutter å registrere nye blokkeringer. Det kan ikke angres.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Dette sletter %1$d oppføring om blokkert anrop fra denne enheten. Det kan ikke angres.</item>
+        <item quantity="other">Dette sletter %1$d oppføringer om blokkerte anrop fra denne enheten. Det kan ikke angres.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Hvis det lokale oppslaget mislykkes, må Sentinela bestemme selv. Å tillate risikerer å slippe gjennom et uønsket anrop; å blokkere risikerer at du går glipp av et anrop du ville ha.</string>
+
+    <!-- Personvern og om -->
+    <string name="about_title">Personvern og om</string>
+    <string name="about_data_local">Alle data blir bare værende på denne enheten.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela har åpen kildekode: ingen reklame, ingen telemetri, ingen data sendt til skyen — 100% frakoblet, på din egen telefon.</string>
+    <string name="about_clear_all_data">Tøm alle data</string>
+    <string name="about_version">Versjon %1$s</string>
+    <string name="about_open_app_settings">Åpne appinnstillingene</string>
+    <string name="about_open_channel_settings">Konfigurer varselkanal</string>
+
+    <!-- Støtte og vurdering -->
+    <string name="review_prompt_title">Liker du Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela har åpen kildekode, er reklamefri og 100% frakoblet. En vurdering eller en støttende kommentar hjelper prosjektet mye.</string>
+    <string name="review_prompt_rate">Vurder nå</string>
+    <string name="review_prompt_later">Ikke nå</string>
+    <string name="support_title">Støtt Sentinela</string>
+    <string name="support_comment_cta">Legg igjen en støttende kommentar</string>
+    <string name="support_donate_hint">Valgfri donasjon rett til vedlikeholderens lommebok. Sjekk adressen før du sender.</string>
+    <string name="support_donate_bitcoin">Kopier Bitcoin-adresse</string>
+    <string name="support_donate_liquid">Kopier Liquid-adresse (L-BTC)</string>
+    <string name="support_address_copied">Adressen er kopiert!</string>
+
+    <!-- Tøm alle data -->
+    <string name="about_clear_warning_title">Advarsel</string>
+    <string name="about_clear_warning_body">Dette sletter blokkeringshistorikken din, den personlige listen din og alle innstillingene dine. Vil du fortsette?</string>
+    <string name="about_clear_continue">Fortsett</string>
+    <string name="about_clear_final_title">Endelig bekreftelse</string>
+    <string name="about_clear_final_body">Er du sikker? Denne handlingen kan ikke angres, og alle lokale data går tapt for godt.</string>
+    <string name="about_clear_failed_title">Klarte ikke å slette</string>
+    <string name="about_clear_failed_body">Dataene dine ligger fortsatt på enheten. Prøv igjen; hvis feilen gjentar seg, lukk og åpne appen på nytt.</string>
+
+    <!-- Varsler -->
+    <string name="notification_channel_blocked">Blokkerte anrop</string>
+    <string name="notification_channel_blocked_desc">Diskret beskjed om at et anrop ble blokkert. Den gir aldri lyd, vibrerer aldri og tar aldri over skjermen.</string>
+    <string name="notification_blocked_title">Anrop blokkert</string>
+    <string name="notification_blocked_masked">Anrop fra %1$s blokkert</string>
+    <string name="notification_blocked_anonymous">Et anrop ble blokkert</string>
+
+    <!-- Aktivering av appens eget varsel -->
+    <string name="settings_notification_enable">Varsle meg når et anrop blokkeres</string>
+    <string name="settings_notification_enable_desc">Er av som standard. Når du slår den på, ber Sentinela om systemets varseltillatelse. Beskjeden er diskret: ingen lyd, ingen vibrasjon og ingen overtakelse av skjermen.</string>
+    <string name="settings_notification_identification_masked">Vis maskert nummer</string>
+    <string name="settings_notification_identification_anonymous">Ikke vis identifikasjon</string>
+    <string name="notification_permission_rationale">For å varsle deg om blokkerte anrop trenger Sentinela varseltillatelsen. Beskjeden er lokal og viser aldri hele nummeret.</string>
+
+    <!-- Anropsvarsel (oppringingsmodus) -->
+    <string name="notification_channel_call">Pågående anrop</string>
+    <string name="notification_channel_call_desc">Viser det innkommende anropet i fullskjerm og beskjeden om det pågående anropet. Vises bare når Sentinela er standardtelefonen.</string>
+    <string name="notification_call_incoming_title">Innkommende anrop</string>
+    <string name="notification_call_ongoing_title">Pågående anrop</string>
+    <string name="notification_call_unknown_caller">Uidentifisert nummer</string>
+
+    <!-- Anrop: statusetiketter -->
+    <string name="call_incoming_state">Innkommende anrop</string>
+    <string name="call_dialing_state">Ringer opp…</string>
+    <string name="call_ringing_state">Ringer…</string>
+    <string name="call_active_state">I samtale</string>
+    <string name="call_ended_state">Anropet er avsluttet</string>
+    <string name="call_failed_state">Anropet kunne ikke settes opp</string>
+    <string name="call_unsupported_state">Pågående anrop</string>
+    <string name="call_unsupported_body">Denne versjonen av Sentinela viser ikke kontrollene for denne anropstilstanden. Du kan fortsatt legge på nedenfor.</string>
+
+    <!-- Anrop: hovedhandlinger -->
+    <string name="call_action_answer">Svar</string>
+    <string name="call_action_reject">Avvis</string>
+    <string name="call_action_hangup">Legg på</string>
+    <string name="call_action_answer_description">Svar på anropet</string>
+    <string name="call_action_reject_description">Avvis anropet</string>
+    <string name="call_action_hangup_description">Avslutt anropet</string>
+
+    <!-- Anrop: sekundære kontroller -->
+    <string name="call_control_mute">Mikrofon av</string>
+    <string name="call_control_speaker">Høyttaler</string>
+    <string name="call_control_keypad">Tastatur</string>
+    <string name="call_control_mute_off_description">Mikrofon av, deaktivert</string>
+    <string name="call_control_mute_on_description">Mikrofon av, aktivert</string>
+    <string name="call_control_speaker_off_description">Høyttaler, deaktivert</string>
+    <string name="call_control_speaker_on_description">Høyttaler, aktivert</string>
+    <string name="call_control_keypad_closed_description">Talltastatur, lukket</string>
+    <string name="call_control_keypad_open_description">Talltastatur, åpent</string>
+    <string name="call_control_unavailable_state">ikke tilgjengelig</string>
+
+    <!-- Anrop: opphavsmerker -->
+    <string name="call_origin_contact">Kontakt</string>
+    <string name="call_origin_whitelist">Tillatt</string>
+    <string name="call_origin_unknown">Ukjent</string>
+    <string name="call_origin_private">Privat nummer</string>
+
+    <!-- Anrop: lydutgang -->
+    <string name="call_audio_route_title">Lydutgang</string>
+    <string name="call_audio_route_earpiece">Telefon</string>
+    <string name="call_audio_route_speaker">Høyttaler</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Hodesett</string>
+    <string name="call_audio_route_active_state">i bruk</string>
+
+    <!-- Anrop: stoppeklokke og DTMF-tastatur -->
+    <string name="call_timer_description">Anropets varighet: %1$s</string>
+    <string name="call_keypad_close_description">Lukk tastaturet</string>
+
+    <!-- Oppringing -->
+    <string name="dialpad_call">Ring</string>
+    <string name="dialpad_call_description">Ring %1$s</string>
+    <string name="dialpad_delete_description">Slett siste siffer</string>
+    <string name="dialpad_clear_description">Slett hele nummeret</string>
+    <string name="dialpad_error_failed">Anropet kunne ikke startes.</string>
+    <string name="dialpad_error_retry">Prøv igjen</string>
+
+    <!-- Oppringing: taster -->
+    <string name="dialpad_key_1_description">Tast én</string>
+    <string name="dialpad_key_2_description">Tast to</string>
+    <string name="dialpad_key_3_description">Tast tre</string>
+    <string name="dialpad_key_4_description">Tast fire</string>
+    <string name="dialpad_key_5_description">Tast fem</string>
+    <string name="dialpad_key_6_description">Tast seks</string>
+    <string name="dialpad_key_7_description">Tast sju</string>
+    <string name="dialpad_key_8_description">Tast åtte</string>
+    <string name="dialpad_key_9_description">Tast ni</string>
+    <string name="dialpad_key_0_description">Tast null</string>
+    <string name="dialpad_key_star_description">Stjernetast</string>
+    <string name="dialpad_key_hash_description">Firkanttast</string>
+
+    <!-- Aktivering av oppringingsmodus -->
+    <string name="dialer_activation_title">Vil du gjøre Sentinela til standardtelefonen din?</string>
+    <string name="dialer_activation_intro">I oppringingsmodus mottar Sentinela alle anrop — også fra dem som står i adresseboken din. Det er den eneste måten reglene per kilde også gjelder for kontaktene dine.</string>
+    <string name="dialer_activation_changes_title">Dette endrer seg</string>
+    <string name="dialer_activation_change_1">Sentinela blir telefonappen din: anropsskjermen og tastaturet blir appens egne.</string>
+    <string name="dialer_activation_change_2">Filtreringen begynner å se alle anrop, ikke bare dem fra numre utenfor adresseboken.</string>
+    <string name="dialer_activation_change_3">Regelen du valgte for kontakter, blir faktisk brukt. Standardvalget er fortsatt Ring — å slå på oppringingsmodus blokkerer i seg selv ingen.</string>
+    <string name="dialer_activation_unchanged_title">Dette endrer seg ikke</string>
+    <string name="dialer_activation_unchanged_1">Anropene blir fortsatt registrert i anropsloggen på telefonen. Å være standard telefonapp gir ikke Sentinela tillatelse til å utelate den registreringen — på Android kan bare apper fra teleoperatører gjøre det.</string>
+    <string name="dialer_activation_unchanged_2">Systemets \"Ikke forstyrr\" gjelder fortsatt foran innstillingene i Sentinela.</string>
+    <string name="dialer_activation_unchanged_3">Anrop fra WhatsApp, Telegram og andre internettapper er fortsatt utenfor Sentinelas rekkevidde.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela forblir 100% frakoblet: ingen anrop, numre eller kontakter forlater enheten.</string>
+    <string name="dialer_activation_limit_calls">Ett anrop om gangen: samtale venter og konferansesamtale støttes ikke i denne versjonen.</string>
+    <string name="dialer_activation_contacts_required">Oppringingsmodus trenger tillatelse til å lese kontakter. Uten den kan ikke Sentinela skille ut kontaktene dine og ville begynt å behandle alle som ukjente.</string>
+    <string name="dialer_activation_grant_contacts">Tillat tilgang til kontakter</string>
+    <string name="dialer_activation_cta">Velg Sentinela</string>
+    <string name="dialer_activation_cta_hint">Det er Android som bestemmer. Du kan gå tilbake når du vil.</string>
+
+    <!-- Oppringingsmodus allerede aktiv -->
+    <string name="dialer_active_chip">Aktiv</string>
+    <string name="dialer_active_title">Sentinela er standardtelefonen din</string>
+    <string name="action_back">Tilbake</string>
+    <string name="dialer_active_changes_title">Dette gjelder nå</string>
+    <string name="dialer_activation_unavailable">Denne enheten tilbyr ikke rollen som standardtelefon — som regel fordi den ikke har telefoni. Filtermodusen i Sentinela virker fortsatt der det finnes telefonanrop.</string>
+    <string name="dialer_revert_cta">Velg en annen telefon</string>
+    <string name="dialer_revert_hint">Når du går tilbake til en annen telefonapp, virker filtermodusen i Sentinela fortsatt som normalt — uten reinstallering og uten ny konfigurasjon.</string>
+
+    <!-- Telefonrollen tapt -->
+    <string name="dialer_role_lost_title">Sentinela er ikke lenger standardtelefonen.</string>
+    <string name="dialer_role_lost_body">Filtermodusen virker fortsatt: anrop fra numre utenfor adresseboken blir stadig filtrert.</string>
+    <string name="dialer_role_lost_action">Se hvordan du aktiverer på nytt</string>
+
+    <!-- Generelt -->
+    <string name="action_confirm">Bekreft</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_retry">Prøv igjen</string>
+    <string name="state_loading">Laster…</string>
+    <string name="state_error">Noe gikk galt. Prøv igjen.</string>
+    <string name="state_on">På</string>
+    <string name="state_off">Av</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Relativ tid på startskjermen -->
+    <string name="time_now">nå</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">for %d min siden</item>
+        <item quantity="other">for %d min siden</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">for %d t siden</item>
+        <item quantity="other">for %d t siden</item>
+    </plurals>
+    <string name="time_yesterday">i går</string>
+
+    <!-- Start: opplesing av det siste blokkerte -->
+    <string name="dashboard_last_blocked_description">Siste blokkerte anrop, %1$s, %2$s, %3$s</string>
+
+    <!-- Start: flere advarsler -->
+    <string name="dashboard_more_warnings">Se alle advarsler</string>
+</resources>
