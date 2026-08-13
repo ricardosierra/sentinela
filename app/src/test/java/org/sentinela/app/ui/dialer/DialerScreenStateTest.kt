@@ -3,7 +3,7 @@ package org.sentinela.app.ui.dialer
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -32,7 +32,7 @@ import org.sentinela.app.ui.theme.SentinelaTheme
  * dublado deixaria o caso de formatacao progressiva vacuoso.
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xxhdpi")
+@Config(sdk = [35], qualifiers = "pt-rBR-w411dp-h891dp-xxhdpi")
 class DialerScreenStateTest {
 
     @get:Rule

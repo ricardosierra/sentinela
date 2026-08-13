@@ -27,8 +27,8 @@ android {
         applicationId = sentinelaApplicationId
         minSdk = 29 // ROLE_CALL_SCREENING exige Android 10 (API 29)
         targetSdk = 37
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "0.2.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -97,6 +97,8 @@ android {
                 it.maxHeapSize = "2g"
                 it.jvmArgs("-XX:MaxMetaspaceSize=1g")
                 it.setForkEvery(1)
+                it.systemProperty("user.language", "pt")
+                it.systemProperty("user.country", "BR")
             }
         }
     }

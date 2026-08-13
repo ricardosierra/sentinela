@@ -18,7 +18,14 @@
    Origem: código do Telecom do Android (o filtro do serviço de triagem verifica a permissão
    de leitura de contatos antes de pular o vínculo).
    Roteiro físico: cenários 42 e 43 de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
-3. **Ocultar a chamada bloqueada do histórico nativo não funciona para apps de terceiros.**
+3. **Contatos salvos apenas no WhatsApp não são lidos.** O WhatsApp permite salvar contatos
+   apenas em sua própria nuvem, sem sincronizar com a agenda do Android (Contacts Provider).
+   Como esses contatos não existem no banco de dados do sistema, o Sentinela não consegue
+   identificá-los. Para o motor de triagem, eles são considerados "desconhecidos" e podem
+   ser bloqueados. A solução para o usuário é garantir que o contato seja salvo na agenda
+   do aparelho ou adicionado à whitelist do app. Essa limitação é imposta pela arquitetura
+   do WhatsApp/Android, não havendo API oficial para ler esses dados.
+4. **Ocultar a chamada bloqueada do histórico nativo não funciona para apps de terceiros.**
    Isso **não** é variação de fabricante: é decisão do próprio Android. O Telecom só honra o
    pedido de pular o registro quando o app de triagem é do tipo **operadora**; o Sentinela é
    do tipo escolhido pelo usuário, então a expressão avaliada pelo sistema é sempre
@@ -35,16 +42,16 @@
    Origem: código do Telecom do Android (cálculo de `shouldAddToCallLog` no filtro do serviço
    de triagem) mais o javadoc da própria API.
    Roteiro físico: cenários 40 e 41 de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
-4. **Janela de 5 s.** Se o aparelho estiver em condição extrema (I/O travado) e o app não
+5. **Janela de 5 s.** Se o aparelho estiver em condição extrema (I/O travado) e o app não
    responder a tempo, a plataforma deixa a chamada seguir — comportamento fail-open do
    Android, alinhado ao fallback padrão do app (permitir).
-5. **Papéis são únicos.** Só um app detém `ROLE_CALL_SCREENING` (e um o `ROLE_DIALER`);
+6. **Papéis são únicos.** Só um app detém `ROLE_CALL_SCREENING` (e um o `ROLE_DIALER`);
    instalar outro bloqueador/discador rouba o papel silenciosamente. A home detecta e
    oferece correção.
-6. **Caixa postal depende da operadora.** "Encaminhar silenciosamente" resulta em caixa
+7. **Caixa postal depende da operadora.** "Encaminhar silenciosamente" resulta em caixa
    postal apenas se a linha tiver o serviço; sem ele, para quem liga soa como chamada não
    atendida.
-7. **O app não consegue contornar o modo "Não Perturbe".** O Não Perturbe é avaliado por um
+8. **O app não consegue contornar o modo "Não Perturbe".** O Não Perturbe é avaliado por um
    filtro **separado e paralelo** ao da triagem, que consulta o gerenciador de notificações;
    nenhum campo da resposta de triagem chega até ele. A opção **"Nunca Silenciar"** significa
    que o **Sentinela** nunca silencia aquela origem — e **não** que a chamada vai tocar
@@ -54,7 +61,7 @@
    usuário — está descartada em definitivo.
    Origem: código do filtro de Não Perturbe do Telecom do Android.
    Roteiro físico: cenário 45 de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
-8. **Número oculto/restrito: sem efeito prático no modo filtro; no modo discador, nao verificado
+9. **Número oculto/restrito: sem efeito prático no modo filtro; no modo discador, nao verificado
    (nunca foi medido).** O que se sabe, por leitura da fonte do Telecom: sem handle o Android não
    aciona o serviço de triagem, então no **modo filtro** a opção "Bloquear números privados"
    existe e é honrada pelo motor, mas nunca é alcançada por uma chamada real.
@@ -69,18 +76,18 @@
    a copy da ativação lista o que muda e o que não muda, e número privado não está em nenhuma
    das duas listas.
    Roteiro físico: cenário **59** de [`TESTE-FISICO-SAMSUNG.md`](TESTE-FISICO-SAMSUNG.md).
-9. **Perder um papel do sistema encerra o processo do app.** Medido em execução na Fase 6, com o
-   motivo registrado pelo próprio sistema como mudança de permissão. Vale para o papel de
-   triagem e para o de telefone padrão, e vale igual quando é o **usuário** que escolhe outro
-   app de telefone nas configurações do sistema: o Sentinela é morto na hora, sem aviso e sem
-   chance de rodar código de despedida.
-   Consequências visíveis, nenhuma delas defeito: uma tela do Sentinela aberta no momento da
-   troca desaparece; e o app sempre volta em processo novo, por isso o estado do modo discador é
-   **derivado** de perguntas ao sistema e nunca de valor gravado — um valor gravado seria mentira
-   desde o primeiro instante. É também por isso que o app nunca desliga o modo desabilitando
-   componente próprio.
-   Uma chamada em curso **sobrevive** ao encerramento: o sistema de telefonia religa no discador
-   que vem no aparelho sozinho (medido). Roteiro físico: cenários **55** e **57**.
+10. **Perder um papel do sistema encerra o processo do app.** Medido em execução na Fase 6, com o
+    motivo registrado pelo próprio sistema como mudança de permissão. Vale para o papel de
+    triagem e para o de telefone padrão, e vale igual quando é o **usuário** que escolhe outro
+    app de telefone nas configurações do sistema: o Sentinela é morto na hora, sem aviso e sem
+    chance de rodar código de despedida.
+    Consequências visíveis, nenhuma delas defeito: uma tela do Sentinela aberta no momento da
+    troca desaparece; e o app sempre volta em processo novo, por isso o estado do modo discador é
+    **derivado** de perguntas ao sistema e nunca de valor gravado — um valor gravado seria mentira
+    desde o primeiro instante. É também por isso que o app nunca desliga o modo desabilitando
+    componente próprio.
+    Uma chamada em curso **sobrevive** ao encerramento: o sistema de telefonia religa no discador
+    que vem no aparelho sozinho (medido). Roteiro físico: cenários **55** e **57**.
 
 ## De OEM (Samsung/One UI) — a validar no roteiro físico
 

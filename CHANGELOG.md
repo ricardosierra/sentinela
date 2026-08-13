@@ -9,16 +9,30 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
-## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.0...master)
+## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.1...master)
+
+## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
 
 ### ✨ Novidades
 
 - [x] **Doação de volta na tela Sobre** — com os endereços oficiais do mantenedor, em **Bitcoin** (on-chain) e **Liquid (L-BTC)**, cada um com botão de copiar e uma linha lembrando de conferir o endereço antes de enviar; a v0.1.0 tinha publicado um placeholder e o botão ficou fora da tela até existir endereço real
+- [x] **Mascarar números recebidos** — nova opção em Proteção → Privacidade. Ligada, o número aparece como `+55 11 9****-1234` no histórico, nas notificações e na tela inicial; desligada (padrão), aparece completo, porque sem os dígitos o usuário não reconhece quem ligou. A máscara continua obrigatória em log, e a versão pública da notificação — a única que a tela bloqueada mostra — nunca carrega número em nenhuma das duas opções
+
+### 🐛 Correções
+
+- [x] **Notificação de chamada ficava presa na barra** — ao encerrar a ligação, o aviso "Chamada em curso" não saía da barra em aparelhos onde o processo era reciclado entre o estado terminal ser publicado e o `onCallRemoved` do serviço ser chamado; o cancelamento agora acontece no `CallSessionStore`, no instante exato da transição, independentemente do ciclo de vida do serviço
+- [x] **Discador demorava a tocar em aparelhos lentos** — o prazo de apresentação da tela de chamada era de 2 segundos, insuficiente para cold start em aparelhos com pouca RAM ou com `fullScreenIntent` bloqueada por DND; aumentado para 5 segundos, mantendo o mecanismo de falha rápida para tela congelada
+- [x] **Bipe extra ao atender a chamada** — a substituição da notificação "Chamada recebida" pela notificação "Chamada em curso" tocava o som do canal novamente; a notificação de chamada em curso agora entra com `setOnlyAlertOnce(true)`, que atualiza o conteúdo na barra sem redisparar o som do canal
+- [x] **Tela de chamada podia ficar aberta em estado não suportado** — quando a chamada ia para um estado que esta versão não desenha (ex.: espera), a tela nunca fechava e a notificação ficava presa; estado `Unsupported` agora é tratado como terminal para efeito de fechamento de tela e de cancelamento de notificação
+- [x] **Botão Voltar bloqueado em estado não suportado** — em estado `Unsupported`, o `BackHandler` impedia a saída da tela mesmo quando o botão de encerrar não funcionava, deixando o usuário preso; o Voltar agora é liberado nesse estado
 
 ### 🔧 Técnico
 
 - [x] `strings.xml` é a **fonte única** dos endereços — nenhuma cópia em Kotlin, doc ou README, porque endereço duplicado é endereço que um dia diverge
 - [x] `SupportAddressTest` decodifica o valor que vai para o APK e confere alfabeto, checksum, rede e tamanho do payload (bech32 P2WPKH em `bc`; blech32 com chave de ofuscação de 33 bytes em `lq`), com um caso que corrompe um caractere para provar que o teste reprova. Erro de digitação em endereço de doação agora quebra o build em vez de mandar dinheiro de doador para um estranho
+- [x] `CallSessionStoreCancellerTest` — regressão: canceller chamado exatamente uma vez na transição para `Ended` e para `Unsupported`, e ausência de canceller não lança em estado terminal
+- [x] **Ficha da Google Play em `docs/loja/`** — nome, descrição curta, descrição completa e novidades em 74 idiomas (8 blocos), mais ícone, banner e capturas geradas por script (`build-store-assets.py`, `capture-store-screenshots.sh`) a partir da mesma arte do launcher
+- [x] Locale dos testes fixado em `pt-BR` no `build.gradle.kts` — a JVM do desenvolvedor podia rodar a suíte em outro idioma e trocar formatação de número e data sem nenhum aviso
 
 ## [v0.2.0 (2026-08-06)](https://github.com/ricardosierra/sentinela/compare/v0.1.0...v0.2.0)
 

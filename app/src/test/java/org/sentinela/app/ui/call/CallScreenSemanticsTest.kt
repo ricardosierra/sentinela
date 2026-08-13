@@ -36,7 +36,7 @@ import org.sentinela.app.ui.assertTouchWidthIsAtLeast
  * do computador de teste; o que precisa ficar travado aqui e estrutura.
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [35])
+@Config(sdk = [35], qualifiers = "pt-rBR")
 class CallScreenSemanticsTest {
 
     @get:Rule

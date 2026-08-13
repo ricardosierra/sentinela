@@ -33,7 +33,7 @@ import org.sentinela.app.R
  * e daria falso verde.
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [35])
+@Config(sdk = [35], qualifiers = "zz")
 class Phase7StringsTest {
 
     private val context = ApplicationProvider.getApplicationContext<Context>()
