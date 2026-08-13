@@ -11,7 +11,7 @@
     <string name="welcome_feature_silent_title">Silencioso</string>
     <string name="welcome_feature_silent_desc">Sem toques ou vibrações indesejadas.</string>
     <string name="welcome_feature_offline_title">Sem Internet</string>
-    <string name="welcome_feature_offline_desc">Privacidade total offline.</string>
+    <string name="welcome_feature_offline_desc">Privacidade total. Não coletamos sua agenda.</string>
     <string name="welcome_badge_native">Integração Nativa</string>
     <string name="welcome_cta">Começar Configuração</string>
     <string name="welcome_cta_hint">Leva menos de 2 minutos.</string>
@@ -47,7 +47,7 @@
     <!-- Onboarding: contatos (política configurável) -->
     <string name="contacts_title">E as pessoas da sua lista de contatos?</string>
     <string name="contacts_explainer">Defina como o Sentinela deve tratar as chamadas de quem você já conhece. Você pode alterar isso depois.</string>
-    <string name="contacts_permission_rationale" formatted="false">Para saber se quem liga está na sua agenda, o Sentinela precisa ler seus contatos. A leitura é 100% local: nomes e números nunca são armazenados nem saem do aparelho.</string>
+    <string name="contacts_permission_rationale" formatted="false">Para saber se quem liga está na sua agenda, o Sentinela precisa ler seus contatos. Diferente de outros apps, não coletamos sua agenda. A leitura é 100% local: os dados nunca saem do aparelho.</string>
     <string name="contacts_option_ring">Tocar</string>
     <string name="contacts_option_ring_desc">As chamadas tocam normalmente no seu telefone.</string>
     <string name="contacts_option_block">Bloquear</string>
@@ -196,9 +196,9 @@
     <string name="settings_hide_native_log">Pedir para não registrar no histórico do telefone</string>
     <string name="settings_hide_native_log_desc">O Android só atende esse pedido para apps de operadora. Chamadas bloqueadas continuam aparecendo no histórico do telefone, marcadas como bloqueadas. O que o bloqueio garante: não toca, não vibra, não mostra a tela de chamada e não gera aviso de chamada perdida.</string>
     <string name="settings_show_notification">Exibir notificação silenciosa</string>
-    <string name="settings_fallback_policy">Política em caso de erro</string>
-    <string name="settings_fallback_allow">Permitir chamada (recomendado)</string>
-    <string name="settings_fallback_block">Bloquear chamada</string>
+    <string name="settings_fallback_policy">O que fazer se houver falha</string>
+    <string name="settings_fallback_allow">Tocar a chamada</string>
+    <string name="settings_fallback_block">Bloquear</string>
     <string name="settings_protection_toggle_desc">Desligado, o Sentinela não bloqueia, não silencia e não registra nada. As chamadas seguem o comportamento normal do telefone.</string>
     <string name="settings_contacts_policy_note">Esta política vale enquanto a leitura da agenda estiver concedida. Sem ela, contatos caem na política de erro.</string>
     <string name="settings_block_mode_desc">Rejeitar imediatamente dá sinal de ocupado a quem liga. Encaminhar silenciosamente manda a chamada para a caixa postal, se a sua operadora tiver esse serviço.</string>
