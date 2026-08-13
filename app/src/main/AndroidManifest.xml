@@ -25,6 +25,13 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
+    <!-- Permite verificar a instalação do WhatsApp para exibir alertas de compatibilidade
+         sobre contatos não sincronizados com o provedor do Android. -->
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+    </queries>
+
     <application
         android:name=".SentinelaApp"
         android:allowBackup="false"

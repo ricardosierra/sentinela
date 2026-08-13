@@ -14,6 +14,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import org.sentinela.app.platform.hasWhatsAppInstalled
 import org.sentinela.app.AppContainer
 import org.sentinela.app.platform.ContactsPermissionChecker
 import org.sentinela.app.platform.NotificationPermissionChecker
@@ -124,7 +125,10 @@ internal fun OnboardingRoute(container: AppContainer, nav: NavController, passo:
         voltar = { nav.popBackStack() },
         pular = { dono.pular(); nav.irParaHome() },
         concluir = { dono.concluir(); nav.irParaHome() },
-    ).let { acoes -> PassoDoOnboarding(passo = passo, estado = estado, acoes = acoes) }
+    ).let { acoes ->
+        val temWhatsApp = remember(context) { context.packageManager.hasWhatsAppInstalled() }
+        PassoDoOnboarding(passo = passo, estado = estado, acoes = acoes, temWhatsApp = temWhatsApp)
+    }
 }
 
 /**
@@ -154,7 +158,7 @@ internal class AcoesDoPasso(
  */
 @Composable
 @Suppress("LongMethod")
-internal fun PassoDoOnboarding(passo: Int, estado: OnboardingUiState, acoes: AcoesDoPasso) {
+internal fun PassoDoOnboarding(passo: Int, estado: OnboardingUiState, acoes: AcoesDoPasso, temWhatsApp: Boolean) {
     val config = estado.settings
     when (passo) {
         PASSO_DO_PAPEL -> RoleStepScreen(
@@ -175,6 +179,7 @@ internal fun PassoDoOnboarding(passo: Int, estado: OnboardingUiState, acoes: Aco
             permission = estado.contactsPermission,
             selected = config.contactsPolicy,
             blockPrivate = config.blockPrivateNumbers,
+            hasWhatsApp = temWhatsApp,
             onSelect = { politica -> acoes.gravar { it.copy(contactsPolicy = politica) } },
             onBlockPrivateChange = { bloquear ->
                 acoes.gravar { it.copy(blockPrivateNumbers = bloquear) }

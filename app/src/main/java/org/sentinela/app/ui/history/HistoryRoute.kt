@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.platform.LocalContext
+import org.sentinela.app.platform.hasWhatsAppInstalled
 import org.sentinela.app.AppContainer
 import org.sentinela.app.R
 
@@ -38,8 +40,12 @@ fun HistoryRoute(
     // `strings.xml` — e não de um literal dentro do dono de estado.
     val rotuloOrigem = stringResource(R.string.whitelist_added_from_history)
 
+    val context = LocalContext.current
+    val temWhatsApp = androidx.compose.runtime.remember(context) { context.packageManager.hasWhatsAppInstalled() }
+
     HistoryScreen(
         state = state,
+        hasWhatsApp = temWhatsApp,
         onFilterChanged = viewModel::setFilter,
         onDecisionFilterChanged = viewModel::setDecisionFilter,
         onClearAll = viewModel::clearAll,

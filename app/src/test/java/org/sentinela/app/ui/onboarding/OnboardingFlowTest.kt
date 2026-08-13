@@ -120,6 +120,7 @@ class OnboardingFlowTest {
                         PassoDoOnboarding(
                             passo = indice,
                             estado = atual,
+                            temWhatsApp = false,
                             acoes = AcoesDoPasso(
                                 pedirPapel = { papeisPedidos += 1 },
                                 pedirAgenda = { agendasPedidas += 1 },

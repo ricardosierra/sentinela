@@ -104,6 +104,7 @@ private val DestructiveMinTarget = 48.dp
 @Composable
 fun SettingsScreen(
     state: SettingsUiState,
+    hasWhatsApp: Boolean = false,
     onBack: () -> Unit,
     onProtectionChange: (Boolean) -> Unit,
     onFixRole: () -> Unit,
@@ -159,7 +160,7 @@ fun SettingsScreen(
                 onBlockPrivateChange = onBlockPrivateChange,
                 onBlockMode = onBlockMode,
             )
-            GrupoDeContatos(state = state, onContactsPolicy = onContactsPolicy)
+            GrupoDeContatos(state = state, hasWhatsApp = hasWhatsApp, onContactsPolicy = onContactsPolicy)
             GrupoDaListaPessoal(state = state, onWhitelistPolicy = onWhitelistPolicy)
             GrupoDeNotificacao(
                 state = state,
@@ -346,7 +347,11 @@ private fun GrupoDeDesconhecidos(
 
 /** Item 3 — as quatro políticas de contato, mais a nota do pré-requisito da agenda. */
 @Composable
-private fun GrupoDeContatos(state: SettingsUiState, onContactsPolicy: (OriginPolicy) -> Unit) {
+private fun GrupoDeContatos(
+    state: SettingsUiState,
+    hasWhatsApp: Boolean,
+    onContactsPolicy: (OriginPolicy) -> Unit
+) {
     SettingsGroup(title = stringResource(R.string.settings_contacts_policy)) {
         EscolhaUnica {
             OpcaoDePolitica(
@@ -376,6 +381,14 @@ private fun GrupoDeContatos(state: SettingsUiState, onContactsPolicy: (OriginPol
                 icon = Icons.Outlined.Phone,
                 selected = state.settings.contactsPolicy == OriginPolicy.NEVER_SILENCE,
                 onClick = { onContactsPolicy(OriginPolicy.NEVER_SILENCE) },
+            )
+        }
+        if (hasWhatsApp) {
+            InfoBanner(
+                text = stringResource(R.string.whatsapp_contacts_warning_desc),
+                actionLabel = null,
+                onAction = null,
+                modifier = Modifier.padding(top = 8.dp)
             )
         }
         NotaDoGrupo(text = stringResource(R.string.settings_contacts_policy_note))
@@ -775,6 +788,7 @@ private fun SettingsScreenDialerUnavailablePreview() {
 private fun TelaDeExemplo(state: SettingsUiState) {
     SettingsScreen(
         state = state,
+        hasWhatsApp = true,
         onBack = {},
         onProtectionChange = {},
         onFixRole = {},

@@ -47,6 +47,7 @@
 - [`backlog/locales-config-incompleto.md`](backlog/locales-config-incompleto.md) — `pl`, `th`, `tr` e `vi` estão traduzidos mas fora do `locales_config.xml`
 - [`backlog/pt-br-caindo-em-pt-pt.md`](backlog/pt-br-caindo-em-pt-pt.md) — **bloqueia lançamento**: aparelho em pt-BR recebe a interface em português de Portugal
 - [`backlog/capacidades-prometidas-nos-mockups.md`](backlog/capacidades-prometidas-nos-mockups.md) — 5 capacidades que os mockups anunciam e o MVP não tem (base global, criptografia, filtros inteligentes, classificação de fraude, lista de spam); copy honesta no MVP, capacidades em versões posteriores
+- [`backlog/ideia-captcha-voz.md`](backlog/ideia-captcha-voz.md) — ideia de usuário para CAPTCHA por voz (bloqueado por limitações de permissões e áudio do Android)
 
 ## Planejamento (GSD)
 

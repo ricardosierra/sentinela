@@ -114,6 +114,7 @@ fun ContactsPolicyStepScreen(
     permission: ContactsPermissionState,
     selected: OriginPolicy,
     blockPrivate: Boolean,
+    hasWhatsApp: Boolean = false,
     onSelect: (OriginPolicy) -> Unit,
     onBlockPrivateChange: (Boolean) -> Unit,
     onGrantContacts: () -> Unit,
@@ -136,6 +137,7 @@ fun ContactsPolicyStepScreen(
             permission = permission,
             selected = selected,
             blockPrivate = blockPrivate,
+            hasWhatsApp = hasWhatsApp,
             onSelect = onSelect,
             onBlockPrivateChange = onBlockPrivateChange,
             onGrantContacts = onGrantContacts,
@@ -164,6 +166,7 @@ private fun ConteudoDoPasso(
     permission: ContactsPermissionState,
     selected: OriginPolicy,
     blockPrivate: Boolean,
+    hasWhatsApp: Boolean,
     onSelect: (OriginPolicy) -> Unit,
     onBlockPrivateChange: (Boolean) -> Unit,
     onGrantContacts: () -> Unit,
@@ -193,6 +196,14 @@ private fun ConteudoDoPasso(
             onGrantContacts = onGrantContacts,
             onOpenAppSettings = onOpenAppSettings,
         )
+        if (hasWhatsApp) {
+            Spacer(modifier = Modifier.height(BlockGap))
+            InfoBanner(
+                text = stringResource(R.string.whatsapp_contacts_warning_desc),
+                actionLabel = null,
+                onAction = null
+            )
+        }
         Spacer(modifier = Modifier.height(BlockGap))
         OpcoesDeContatos(selected = selected, onSelect = onSelect)
         Spacer(modifier = Modifier.height(BlockGap))
@@ -377,6 +388,7 @@ private fun ContactsPolicyStepPreview(
                 permission = permission,
                 selected = OriginPolicy.RING,
                 blockPrivate = true,
+                hasWhatsApp = true,
                 onSelect = {},
                 onBlockPrivateChange = {},
                 onGrantContacts = {},

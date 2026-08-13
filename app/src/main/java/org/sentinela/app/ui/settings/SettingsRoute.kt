@@ -13,6 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import org.sentinela.app.AppContainer
+import org.sentinela.app.platform.hasWhatsAppInstalled
 import org.sentinela.app.platform.ContactsPermissionChecker
 import org.sentinela.app.telecom.DialerRoleManager
 import org.sentinela.app.telecom.ScreeningRoleManager
@@ -71,8 +72,11 @@ internal fun SettingsRoute(
         ActivityResultContracts.StartActivityForResult(),
     ) { dono.reconsultarPapeis() }
 
+    val temWhatsApp = remember(context) { context.packageManager.hasWhatsAppInstalled() }
+
     SettingsScreen(
         state = estado,
+        hasWhatsApp = temWhatsApp,
         onBack = { nav.popBackStack() },
         onProtectionChange = dono::definirProtecao,
         onFixRole = { dono.intencaoDePedidoDoPapel()?.let(seletorDePapel::launch) },

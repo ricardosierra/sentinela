@@ -100,6 +100,7 @@ private val IconGap = 12.dp
 @Composable
 fun HistoryScreen(
     state: HistoryUiState,
+    hasWhatsApp: Boolean = false,
     onFilterChanged: (HistoryFilter) -> Unit,
     onDecisionFilterChanged: (HistoryDecisionFilter) -> Unit,
     onClearAll: () -> Unit,
@@ -158,6 +159,7 @@ fun HistoryScreen(
                 is HistoryUiState.Content -> {
                     HistoryContent(
                         items = state.items,
+                        hasWhatsApp = hasWhatsApp,
                         onAllowNumber = onAllowNumber,
                         onMarkUnwanted = onMarkUnwanted,
                         onDeleteEntry = onDeleteEntry,
@@ -275,6 +277,7 @@ private fun HistoryEmptyState() {
 @Composable
 private fun HistoryContent(
     items: List<BlockedCallEntry>,
+    hasWhatsApp: Boolean,
     onAllowNumber: (Long, String?) -> Unit,
     onMarkUnwanted: (Long) -> Unit,
     onDeleteEntry: (Long) -> Unit,
@@ -299,6 +302,7 @@ private fun HistoryContent(
         items(items, key = { it.id }) { item ->
             HistoryItem(
                 entry = item,
+                hasWhatsApp = hasWhatsApp,
                 agoraUtcMillis = agoraUtcMillis,
                 onAllowNumber = { onAllowNumber(item.id, item.numberE164) },
                 onMarkUnwanted = { onMarkUnwanted(item.id) },
@@ -311,6 +315,7 @@ private fun HistoryContent(
 @Composable
 private fun HistoryItem(
     entry: BlockedCallEntry,
+    hasWhatsApp: Boolean,
     agoraUtcMillis: Long,
     onAllowNumber: () -> Unit,
     onMarkUnwanted: () -> Unit,
@@ -399,6 +404,20 @@ private fun HistoryItem(
                     },
                     leadingIcon = { Icon(Icons.Outlined.Delete, null) }
                 )
+                if (hasWhatsApp && entry.reason == DecisionReason.UNKNOWN_NUMBER) {
+                    androidx.compose.material3.HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+                    DropdownMenuItem(
+                        text = { 
+                            Text(
+                                text = stringResource(R.string.whatsapp_history_hint),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            ) 
+                        },
+                        onClick = { },
+                        enabled = false
+                    )
+                }
             }
         }
     }
