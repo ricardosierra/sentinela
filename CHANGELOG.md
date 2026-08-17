@@ -19,6 +19,11 @@
 
 - [x] **Aviso da chamada recebida podia sumir da barra no instante em que ela chegava** — o cancelamento no `CallSessionStore` reagia à primeira emissão do fluxo, e o retrato de partida da sessão já nasce terminal; como o serviço publica o aviso **antes** de vincular a sessão, a corrida entre os dois apagava da barra a ligação que estava tocando. O cancelamento agora só vale depois de a chamada entrar na sessão e sai uma vez por sessão, com regressão que falha se a primeira emissão voltar a cancelar
 
+### 🔧 Técnico
+
+- [x] **Idiomas do APK integrados ao Android** — `pt-BR` deixou de cair em `pt-PT`, os 20 locales traduzidos agora aparecem no seletor de idioma por app e `verify-locales.py` bloqueia chaves ou placeholders divergentes; a ficha da Play continua validada separadamente nos 74 idiomas
+- [x] **Publicação da Google Play automatizada** — tags SemVer validam qualidade, assinam AAB, verificam o APK release sem `INTERNET`, geram os 74 listings e publicam pelo Play Developer API; promoções entre tracks e rollout gradual usam a mesma automação, com Environment obrigatório antes de produção
+
 ## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
 
 ### ✨ Novidades

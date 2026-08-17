@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 
 plugins {
     alias(libs.plugins.android.application)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kover)
+    alias(libs.plugins.play.publisher)
 }
 
 // Identidade centralizada para permitir rebranding (ver docs/DECISOES.md)
@@ -19,6 +21,22 @@ val keystoreProperties = Properties().apply {
     }
 }
 
+// O CI injeta a versão a partir da tag vX.Y.Z. Localmente, o valor versionado
+// abaixo continua sendo a fonte de verdade para desenvolvimento.
+val ciVersionCode = providers.environmentVariable("SENTINELA_VERSION_CODE").orNull
+    ?.toIntOrNull()
+    ?.also { require(it > 0) { "SENTINELA_VERSION_CODE deve ser positivo" } }
+val ciVersionName = providers.environmentVariable("SENTINELA_VERSION_NAME").orNull
+
+// Valores por propriedade deixam a mesma build publicar em tracks diferentes
+// sem trocar fonte. O workflow usa draft no canal interno por padrão.
+val playTrack = providers.gradleProperty("playTrack").orElse("internal").get()
+val playReleaseStatus = providers.gradleProperty("playReleaseStatus").orElse("DRAFT").get()
+    .uppercase()
+val playUserFraction = providers.gradleProperty("playUserFraction").orNull?.toDoubleOrNull()
+val parsedPlayReleaseStatus = runCatching { ReleaseStatus.valueOf(playReleaseStatus) }
+    .getOrElse { error("playReleaseStatus inválido: $playReleaseStatus") }
+
 android {
     namespace = sentinelaApplicationId
     compileSdk = 37
@@ -27,8 +45,8 @@ android {
         applicationId = sentinelaApplicationId
         minSdk = 29 // ROLE_CALL_SCREENING exige Android 10 (API 29)
         targetSdk = 37
-        versionCode = 3
-        versionName = "0.2.1"
+        versionCode = ciVersionCode ?: 3
+        versionName = ciVersionName ?: "0.2.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -129,6 +147,19 @@ android {
             // notes publicadas para a 9.3.1.
             "AndroidGradlePluginVersion",
         )
+    }
+}
+
+play {
+    // A Play aceita apps novos somente como AAB. Nunca publicar APK por engano.
+    defaultToAppBundles.set(true)
+    track.set(playTrack)
+    releaseStatus.set(parsedPlayReleaseStatus)
+    if (parsedPlayReleaseStatus == ReleaseStatus.IN_PROGRESS) {
+        require(playUserFraction != null && playUserFraction in 0.0..1.0) {
+            "playUserFraction entre 0 e 1 é obrigatório para rollout em progresso"
+        }
+        userFraction.set(playUserFraction)
     }
 }
 

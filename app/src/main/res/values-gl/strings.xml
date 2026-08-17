@@ -202,7 +202,7 @@
     <string name="settings_fallback_block">Bloquear</string>
 
     <string name="settings_privacy_title">Privacidade</string>
-    <string name="settings_privacy_disclaimer">Sentinela é 100% sen conexión. A diferenza doutras aplicacións, non recollemos os teus contactos nin os enviamos á nube.</string>
+    <string name="settings_privacy_disclaimer">Sentinela é 100%% sen conexión. A diferenza doutras aplicacións, non recollemos os teus contactos nin os enviamos á nube.</string>
     <string name="settings_mask_numbers">Enmascarar os números entrantes</string>
     <string name="settings_mask_numbers_desc">Agocha parte dos números con asteriscos (+55 11 9****-1234) no historial, nas notificacións e na pantalla de inicio.</string>
 

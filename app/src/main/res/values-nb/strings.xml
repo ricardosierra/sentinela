@@ -202,7 +202,7 @@
     <string name="settings_fallback_block">Blokker</string>
 
     <string name="settings_privacy_title">Personvern</string>
-    <string name="settings_privacy_disclaimer">Sentinela er 100% frakoblet. I motsetning til andre apper samler vi ikke inn kontaktene dine og sender dem ikke til skyen.</string>
+    <string name="settings_privacy_disclaimer">Sentinela er 100%% frakoblet. I motsetning til andre apper samler vi ikke inn kontaktene dine og sender dem ikke til skyen.</string>
     <string name="settings_mask_numbers">Masker innkommende numre</string>
     <string name="settings_mask_numbers_desc">Skjuler deler av numrene med stjerner (+55 11 9****-1234) i historikken, i varsler og på startskjermen.</string>
 

@@ -105,6 +105,9 @@ Thumbs.db
 /graphify-output/
 /graphify-cache/
 
+# Metadados temporários da Play, derivados de docs/loja/ pelo script de publicação.
+/app/src/main/play/
+
 # Design de referência (zip original fica fora; extraído vive em docs/design/telas)
 stitch_silent_call_blocker.zip
 .bitcoin_private_key.pem

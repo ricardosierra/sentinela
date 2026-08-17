@@ -23,6 +23,7 @@
 
 ## Loja (Google Play)
 
+- [`PLAY-STORE-AUTOMACAO.md`](PLAY-STORE-AUTOMACAO.md) — preparação única e CI/CD seguro da Play Developer API
 - [`loja/PLAY-STORE.md`](loja/PLAY-STORE.md) — índice da ficha da loja; texto por idioma em blocos
 - `loja/ficha/bloco-NN.md` — nome, descrição curta, descrição completa e novidades, 10 idiomas por bloco
 - [`loja/graficos/README.md`](loja/graficos/README.md) — ícone, banner e capturas: como são gerados e o que a loja exige

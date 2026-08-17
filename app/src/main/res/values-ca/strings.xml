@@ -202,7 +202,7 @@
     <string name="settings_fallback_block">Bloqueja</string>
 
     <string name="settings_privacy_title">Privadesa</string>
-    <string name="settings_privacy_disclaimer">Sentinela és 100% fora de línia. A diferència d\'altres aplicacions, no recollim els teus contactes ni els enviem al núvol.</string>
+    <string name="settings_privacy_disclaimer">Sentinela és 100%% fora de línia. A diferència d\'altres aplicacions, no recollim els teus contactes ni els enviem al núvol.</string>
     <string name="settings_mask_numbers">Emmascara els números entrants</string>
     <string name="settings_mask_numbers_desc">Amaga part dels números amb asteriscs (+55 11 9****-1234) a l\'historial, les notificacions i la pantalla d\'inici.</string>
 

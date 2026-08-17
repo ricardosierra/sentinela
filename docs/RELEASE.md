@@ -91,6 +91,11 @@ Android App Bundle. O APK continua válido para distribuição direta, mas é re
 ./gradlew bundleRelease   # app/build/outputs/bundle/release/app-release.aab
 ```
 
+Depois da configuração única da conta, a publicação normal é feita pelo workflow
+[`google-play.yml`](../.github/workflows/google-play.yml). Ele envia AAB, ficha e gráficos pelo API,
+sempre como rascunho no track interno quando uma tag `vX.Y.Z` é criada. A preparação de credenciais,
+tracks e aprovações de produção está em [`PLAY-STORE-AUTOMACAO.md`](PLAY-STORE-AUTOMACAO.md).
+
 O `.aab` sai assinado com a chave de upload; o Google reassina com a chave de distribuição
 (Play App Signing). O aviso PKIX do `jarsigner -verify` é esperado para keystore autoassinado
 e não indica problema.
