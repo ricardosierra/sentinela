@@ -1,0 +1,58 @@
+Telefonoak jo du. Beste zenbaki bat, ezagutzen ez duzuna.
+
+Zorrak kobratzeko robota. Zure bankukoa dela dioen norbait. Salmenta-deia. Larunbat goizeko zortzietan inkesta bat. Erantzun egiten duzu garrantzitsua den zerbait galtzeko beldurrez — eta galtzen duzun bakarra, berriro ere, zure denbora da.
+
+Sentinela horri amaiera emateko dago, arau bakar batekin:
+
+ZURE KONTAKTUETAN EZ BADAGO ETA ZURE ZERRENDA PERTSONALEAN EZ BADAGO, EZ ZAITU ETENGO.
+
+Ez du jotzen. Ez du bibratzen. Ez du deiaren pantailarik erakusten. Ez du galdutako deiaren jakinarazpenik ematen.
+
+🔒 MARKETIN-TESTU HUTSA EZ DEN PRIBATUTASUNA
+
+Sentinela interneterako baimenik gabe argitaratzen da. Ez da «ez dugu erabiltzen» moduko promes bat: aplikazioa teknikoki ezgai da ezer inora bidaltzeko.
+
+• Zero telemetria, zero iragarki, kontu bat ere sortu beharrik ez
+• Zure kontaktuak memorian bakarrik irakurtzen dira, deiaren unean — izenak, argazkiak eta zenbakiak ez dira inoiz gordetzen eta ez dira inoiz bidaltzen
+• Zure zenbaki osoa ez da inoiz erregistroan edo jakinarazpenean agertzen, maskaratuta baizik: +34 6** *** 123
+• Zure datuak Androiden babeskopia automatikotik kanpo geratzen dira
+• Hegazkin moduan funtzionatzen du. Estaldurarik gabe funtzionatzen du. Beti funtzionatzen du, lineaz kanpo
+• Kode irekia — lerroz lerro auditagarria
+
+⚙️ ZUK ERABAKITZEN DUZU, EZ ALGORITMO BATEK
+
+Hodeiko spam datu-baseak ez du zure ordez aukeratzen. Zuk zehazten duzu jatorri bakoitzaren araua, eta bakoitzak Jo, Isilarazi, Blokeatu edo Inoiz ez isilarazi onartzen ditu:
+
+• Agendako kontaktuak → Jo (lehenetsia)
+• Zure zerrenda pertsonala → Inoiz ez isilarazi (lehenetsia)
+• Zenbaki ezezagunak → Blokeatu (lehenetsia)
+
+⭐ ZERRENDA PERTSONALA
+
+Zure medikua, eskola, banatzailea, gaur zain zauden zenbaki hori bera. Gehitu, bilatu, editatu. Esportatu fitxategi batera eta inportatu berriro telefonoz aldatzean — babeskopia zurea da eta zurekin geratzen da.
+
+📋 HISTORIA AUKERAZKOA
+
+Ikusi zer gelditu den, noiz eta zergatik — hizkera argian, ez barne-kode batean. Markatu dei bat legezko gisa eta bidali zerrenda pertsonalera ukitu bakar batez. Iragazi alditik eta erabakitik. Aukeratu atxikipena: inoiz ez gorde, 7, 30, 90 egun edo eskuz garbitu. Itzalita, ez da ezertxo ere idazten.
+
+📞 TELEFONO MODUA (AUKERAZKOA)
+
+Nahi izanez gero, Sentinela zure telefono-aplikazioa bihurtzen da: deiaren pantaila garbia, formatua zuzenean egiten duen teklatua, deiaren kronometroa, mutu, bozgorailua eta tonu-teklatua. Orduan zure arauak kontaktuentzat ere balio dute. Aukerazkoa da, edonoiz atzera bota daiteke Androiden ezarpenetatik, eta aplikazioak oso ondo funtzionatzen du hori gabe.
+
+🎨 IZAN BEHAR DUEN MODUAN EGINA
+
+Material 3, gai iluna eta zure horma-paperetik hartutako kolore dinamikoak. Iragarkirik gabe, «premium bertsiorik» gabe, harpidetza-hormarik gabe, oker ukitzeko amarrurik gabe.
+
+🚫 SENTINELAK EGITEN EZ DUENA
+
+Nahiago dugu instalatu aurretik esan:
+
+• Ez ditu WhatsApp, Telegram edo beste aplikazio batzuen deiak iragazten — Androidek ez dizkie dei horiek iragazte-aplikazioei ematen
+• Ez du nork deitzen duen identifikatzen: hemen ez dago spam datu-baserik, eta nahita da
+• Ez du blokeatutako deia sistemaren telefono-aplikazioaren erregistrotik ezabatzen — Androidek operadoreen aplikazioei baino ez die hori uzten. Deiak ez du jotzen eta ez du jakinarazten, baina erregistroa hor geratzen da
+• Ez du Androiden «Ez molestatu» modua saihesten
+• Ez du deirik grabatzen, ez du SMSrik irakurtzen eta ez du zure dei-erregistroa irakurtzen
+
+📱 Android 10 edo berriagoa behar du — sistemaren beraren eskakizuna deiak iragazteko rolerako.
+
+Sentinela. Zuk zeuk ezarritako isiltasuna.

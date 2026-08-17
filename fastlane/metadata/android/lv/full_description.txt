@@ -1,0 +1,58 @@
+Telefons zvana. Atkal numurs, ko nepazīstat.
+
+Parādu piedziņas robots. Kāds, kas izliekas par jūsu bankas darbinieku. Pārdošanas zvans. Aptauja sestdienas rītā astoņos. Jūs atbildat bailēs nepalaist garām ko svarīgu — un atkal zaudējat vienīgi savu laiku.
+
+Sentinela pastāv, lai tam pieliktu punktu. Ar vienu vienīgu noteikumu:
+
+JA NUMURA NAV JŪSU KONTAKTOS UN NAV JŪSU PERSONĪGAJĀ SARAKSTĀ, TAS JŪS NETRAUCĒ.
+
+Nezvana. Nevibrē. Nerāda zvana ekrānu. Nepaziņo par neatbildētu zvanu.
+
+🔒 PRIVĀTUMS, KAS NAV TIKAI REKLĀMAS TEKSTS
+
+Sentinela tiek publicēta bez interneta atļaujas. Tas nav solījums «mēs to neizmantojam»: lietotne tehniski nespēj neko nekur nosūtīt.
+
+• Nulle telemetrijas, nulle reklāmu, neviens konts, ko izveidot
+• Jūsu kontakti tiek lasīti tikai atmiņā, zvana brīdī — vārdi, fotoattēli un numuri nekad netiek saglabāti un nekad netiek nosūtīti
+• Jūsu pilnais numurs nekad neparādās žurnālā vai paziņojumā, tikai maskēts: +371 2*** *123
+• Jūsu dati ir izslēgti no Android automātiskās dublēšanas
+• Darbojas lidojuma režīmā. Darbojas bez signāla. Darbojas vienmēr, bezsaistē
+• Atvērtais pirmkods — pārbaudāms rindiņu pa rindiņai
+
+⚙️ IZLEMJAT JŪS, NEVIS ALGORITMS
+
+Neviena mākoņa surogātnumuru datubāze neizvēlas jūsu vietā. Noteikumu katrai izcelsmei nosakāt jūs, un katrs pieņem Zvanīt, Apklusināt, Bloķēt vai Nekad neapklusināt:
+
+• Kontakti no adrešu grāmatas → Zvanīt (noklusējums)
+• Jūsu personīgais saraksts → Nekad neapklusināt (noklusējums)
+• Nezināmi numuri → Bloķēt (noklusējums)
+
+⭐ PERSONĪGAIS SARAKSTS
+
+Jūsu ārsts, skola, kurjers, tieši tas numurs, ko šodien gaidāt. Pievienojiet, meklējiet, rediģējiet. Eksportējiet failā un importējiet atpakaļ, kad maināt telefonu — dublējums ir jūsu un paliek pie jums.
+
+📋 NEOBLIGĀTA VĒSTURE
+
+Redziet, kas tika apturēts, kad un kāpēc — saprotamā valodā, nevis iekšējā kodā. Atzīmējiet zvanu kā likumīgu un ar vienu pieskārienu nosūtiet to uz personīgo sarakstu. Filtrējiet pēc perioda un pēc lēmuma. Izvēlieties glabāšanu: nekad, 7, 30, 90 dienas vai dzēšana ar roku. Izslēgta — netiek ierakstīts pilnīgi nekas.
+
+📞 TELEFONA REŽĪMS (NEOBLIGĀTS)
+
+Ja vēlaties, Sentinela kļūst par jūsu telefona lietotni: tīrs zvana ekrāns, tastatūra ar tūlītēju formatēšanu, sarunas taimeris, mikrofona izslēgšana, skaļrunis un toņu tastatūra. Tad jūsu noteikumi attiecas arī uz kontaktiem. Tas ir neobligāti, jebkurā brīdī atgriežams Android iestatījumos, un lietotne lieliski darbojas arī bez tā.
+
+🎨 IZVEIDOTA TĀ, KĀ VAJAG
+
+Material 3, tumšā tēma un dinamiskas krāsas no jūsu fona attēla. Bez reklāmām, bez «premium versijas», bez abonēšanas sienas, bez viltībām, kas liktu pieskarties nepareizajā vietā.
+
+🚫 KO SENTINELA NEDARA
+
+Labāk pasakām pirms instalēšanas:
+
+• Tā nefiltrē WhatsApp, Telegram vai citu lietotņu zvanus — Android šos zvanus filtrēšanas lietotnēm nenodod
+• Tā nenosaka, kas zvana: šeit nav surogātnumuru datubāzes, un tas ir apzināti
+• Tā nedzēš bloķēto zvanu no sistēmas telefona lietotnes žurnāla — Android to atļauj tikai operatoru lietotnēm. Zvans nezvana un nepaziņo, bet ieraksts paliek
+• Tā neapiet Android režīmu «Netraucēt»
+• Tā neieraksta sarunas, nelasa īsziņas un nelasa jūsu zvanu žurnālu
+
+📱 Nepieciešams Android 10 vai jaunāks — pašas sistēmas prasība zvanu filtrēšanas lomai.
+
+Sentinela. Klusums, ko iestatījāt jūs pats.

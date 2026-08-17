@@ -1,0 +1,58 @@
+Telefon dzwoni. To kolejny numer, którego nie znasz.
+
+Robot windykacyjny. Ktoś udający pracownika twojego banku. Telemarketing. Ankieta o ósmej rano w sobotę. Odbierasz ze strachu, że przegapisz coś ważnego — i znowu tracisz tylko swój czas.
+
+Sentinela powstała, żeby z tym skończyć, dzięki jednej zasadzie:
+
+JEŚLI NIE MA GO W TWOICH KONTAKTACH ANI NA TWOJEJ LIŚCIE OSOBISTEJ, NIE PRZERYWA CI.
+
+Nie dzwoni. Nie wibruje. Nie pokazuje ekranu połączenia. Nie powiadamia o nieodebranym.
+
+🔒 PRYWATNOŚĆ, KTÓRA NIE JEST TYLKO HASŁEM REKLAMOWYM
+
+Sentinela jest publikowana bez uprawnienia do internetu. To nie obietnica w stylu „nie korzystamy z niego": aplikacja jest technicznie niezdolna do wysłania czegokolwiek gdziekolwiek.
+
+• Zero telemetrii, zero reklam, zero kont do zakładania
+• Twoje kontakty są odczytywane wyłącznie w pamięci, w chwili połączenia — imiona, zdjęcia i numery nigdy nie są zapisywane ani wysyłane
+• Twój pełny numer nigdy nie pojawia się w logu ani w powiadomieniu, tylko zamaskowany: +48 5** *** 123
+• Twoje dane są wyłączone z automatycznej kopii zapasowej Androida
+• Działa w trybie samolotowym. Działa bez zasięgu. Działa zawsze, offline
+• Otwarty kod — możliwy do sprawdzenia linijka po linijce
+
+⚙️ TO TY DECYDUJESZ, NIE ALGORYTM
+
+Żadna chmurowa baza spamu nie wybiera za ciebie. Sam ustawiasz zasadę dla każdego źródła, a każda przyjmuje Dzwoń, Wycisz, Blokuj lub Nigdy nie wyciszaj:
+
+• Kontakty z książki adresowej → Dzwoń (domyślnie)
+• Twoja lista osobista → Nigdy nie wyciszaj (domyślnie)
+• Nieznane numery → Blokuj (domyślnie)
+
+⭐ LISTA OSOBISTA
+
+Lekarz, szkoła, kurier, ten jeden numer, na który czekasz dzisiaj. Dodaj, wyszukaj, edytuj. Wyeksportuj do pliku i zaimportuj z powrotem przy zmianie telefonu — kopia jest twoja i zostaje u ciebie.
+
+📋 OPCJONALNA HISTORIA
+
+Zobacz, co zostało zatrzymane, kiedy i dlaczego — zwykłym językiem, nie wewnętrznym kodem. Oznacz połączenie jako prawidłowe i jednym dotknięciem wyślij je na listę osobistą. Filtruj według okresu i według decyzji. Wybierz czas przechowywania: nigdy, 7, 30, 90 dni albo czyszczenie ręczne. Wyłączona — nic nie jest zapisywane.
+
+📞 TRYB TELEFONU (OPCJONALNY)
+
+Jeśli chcesz, Sentinela staje się twoją aplikacją telefonu: czysty ekran połączenia, klawiatura z formatowaniem na żywo, licznik czasu, wyciszenie, głośnik i klawiatura tonowa. Wtedy twoje zasady obejmują także kontakty. Jest dobrowolny, odwracalny w każdej chwili w ustawieniach Androida, a aplikacja świetnie działa i bez niego.
+
+🎨 ZROBIONA TAK, JAK POWINNA
+
+Material 3, ciemny motyw i dynamiczne kolory z twojej tapety. Bez reklam, bez „wersji premium", bez ściany subskrypcji, bez sztuczek, które mają cię skłonić do kliknięcia nie tam.
+
+🚫 CZEGO SENTINELA NIE ROBI
+
+Wolimy powiedzieć to przed instalacją:
+
+• Nie filtruje połączeń z WhatsAppa, Telegrama ani innych aplikacji — Android nie przekazuje takich połączeń aplikacjom filtrującym
+• Nie identyfikuje dzwoniącego: nie ma tu bazy spamu i to jest celowe
+• Nie usuwa zablokowanego połączenia z rejestru systemowej aplikacji telefonu — Android pozwala na to tylko aplikacjom operatorów. Połączenie nie dzwoni i nie powiadamia, ale wpis zostaje
+• Nie omija trybu „Nie przeszkadzać" w Androidzie
+• Nie nagrywa rozmów, nie czyta SMS-ów i nie czyta twojego rejestru połączeń
+
+📱 Wymaga Androida 10 lub nowszego — to wymóg samego systemu dla roli filtrowania połączeń.
+
+Sentinela. Cisza, którą sam ustawiłeś.

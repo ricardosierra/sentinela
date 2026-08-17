@@ -1,0 +1,58 @@
+Telefonen ringer. Ännu ett nummer du inte känner igen.
+
+En inkassorobot. Någon som låtsas vara från din bank. Ett säljsamtal. En enkät klockan åtta på lördagsmorgonen. Du svarar av rädsla för att missa något viktigt — och det enda du förlorar är din tid, igen.
+
+Sentinela finns för att få slut på det, med en enda regel:
+
+FINNS DET INTE I DINA KONTAKTER ELLER PÅ DIN PERSONLIGA LISTA, STÖR DET DIG INTE.
+
+Ingen ringsignal. Ingen vibration. Ingen samtalsskärm. Ingen avisering om missat samtal.
+
+🔒 INTEGRITET SOM INTE BARA ÄR MARKNADSFÖRINGSTEXT
+
+Sentinela publiceras utan internetbehörighet. Det är inte ett löfte om att "vi använder den inte": appen är tekniskt oförmögen att skicka någonting någonstans.
+
+• Noll telemetri, noll annonser, inget konto att skapa
+• Dina kontakter läses bara i minnet, i samtalsögonblicket — namn, foton och nummer sparas aldrig och skickas aldrig
+• Ditt fullständiga nummer syns aldrig i en logg eller avisering, bara maskerat: +46 7** *** 123
+• Dina data är undantagna från Androids automatiska säkerhetskopiering
+• Fungerar i flygplansläge. Fungerar utan täckning. Fungerar alltid, offline
+• Öppen källkod — går att granska rad för rad
+
+⚙️ DU BESTÄMMER, INTE EN ALGORITM
+
+Ingen spamdatabas i molnet väljer åt dig. Du sätter regeln för varje ursprung, och varje regel tar Ring, Tysta, Blockera eller Tysta aldrig:
+
+• Kontakter i adressboken → Ring (standard)
+• Din personliga lista → Tysta aldrig (standard)
+• Okända nummer → Blockera (standard)
+
+⭐ PERSONLIG LISTA
+
+Din läkare, skolan, budet, just det numret du väntar på idag. Lägg till, sök, redigera. Exportera till en fil och importera tillbaka när du byter telefon — säkerhetskopian är din och stannar hos dig.
+
+📋 VALFRI HISTORIK
+
+Se vad som stoppades, när och varför — på vanlig svenska, inte som en intern kod. Markera ett samtal som legitimt och skicka det till din personliga lista med en tryckning. Filtrera på period och på beslut. Välj lagringstid: spara aldrig, 7, 30, 90 dagar eller rensa för hand. Avstängd skrivs ingenting alls.
+
+📞 TELEFONLÄGE (VALFRITT)
+
+Om du vill blir Sentinela din telefonapp: en ren samtalsskärm, knappsats med formatering i realtid, samtalstid, ljud av, högtalare och tonval. Då gäller dina regler även för kontakter. Det är frivilligt, går att ångra när som helst i Android-inställningarna, och appen fungerar utmärkt utan det.
+
+🎨 BYGGD SOM DEN SKA VARA
+
+Material 3, mörkt tema och dynamiska färger från din bakgrundsbild. Inga annonser, ingen "premiumversion", ingen prenumerationsvägg, inga knep för att få dig att trycka fel.
+
+🚫 VAD SENTINELA INTE GÖR
+
+Vi säger det hellre innan du installerar:
+
+• Den filtrerar inte samtal från WhatsApp, Telegram eller andra appar — Android lämnar inte över de samtalen till filtreringsappar
+• Den identifierar inte vem som ringer: det finns ingen spamdatabas här, och det är med flit
+• Den raderar inte det blockerade samtalet ur systemets telefonapp — Android tillåter det bara för operatörsappar. Samtalet ringer inte och aviserar inte, men posten blir kvar
+• Den kringgår inte Androids "Stör ej"
+• Den spelar inte in samtal, läser inte sms och läser inte din samtalslista
+
+📱 Kräver Android 10 eller senare — systemets eget krav för rollen som samtalsfiltrering.
+
+Sentinela. Tystnaden du själv ställde in.

@@ -1,0 +1,58 @@
+Tumutunog ang telepono. Isa na namang numerong hindi mo kilala.
+
+Robot na nangongolekta ng utang. May nagpapanggap na taga-bangko mo. Cold call na pambenta. Survey ng alas-otso ng umaga tuwing Sabado. Sinasagot mo dahil natatakot kang may mapalampas na mahalaga — at ang tanging nawawala sa iyo, muli, ay ang oras mo.
+
+Umiiral ang Sentinela para tapusin iyon, sa isang panuntunan lang:
+
+KUNG WALA SA MGA CONTACT MO AT WALA SA PERSONAL MONG LISTAHAN, HINDI KA NITO ISTOTORBO.
+
+Walang tunog. Walang vibrate. Walang call screen. Walang abiso ng missed call.
+
+🔒 PRIVACY NA HINDI LANG PANG-MARKETING
+
+Inilalabas ang Sentinela nang walang permiso sa internet. Hindi ito pangakong "hindi namin ginagamit": teknikal na hindi kayang magpadala ng kahit ano kahit saan ng app na ito.
+
+• Zero telemetry, zero ad, walang account na gagawin
+• Binabasa lang sa memory ang mga contact mo, sa mismong sandali ng tawag — pangalan, larawan at numero ay hindi kailanman iniimbak at hindi kailanman ipinapadala
+• Hindi lumalabas ang buong numero mo sa log o abiso, laging nakatakip: +63 9**-***-1234
+• Hindi kasama ang data mo sa awtomatikong backup ng Android
+• Gumagana sa airplane mode. Gumagana kahit walang signal. Laging gumagana, offline
+• Open source — masusuri nang linya-linya
+
+⚙️ IKAW ANG NAGPAPASYA, HINDI ANG ALGORITHM
+
+Walang spam database sa cloud na pumipili para sa iyo. Ikaw ang nagtatakda ng panuntunan sa bawat pinagmulan, at tumatanggap ang bawat isa ng Tumunog, I-silence, Harangin, o Huwag Kailanman I-silence:
+
+• Mga contact sa phonebook → Tumunog (default)
+• Personal mong listahan → Huwag Kailanman I-silence (default)
+• Di-kilalang numero → Harangin (default)
+
+⭐ PERSONAL NA LISTAHAN
+
+Ang doktor mo, ang paaralan, ang delivery rider, iyong isang numerong hinihintay mo ngayon. Idagdag, hanapin, i-edit. I-export sa isang file at i-import pabalik kapag nagpalit ka ng telepono — sa iyo ang backup at sa iyo ito mananatili.
+
+📋 OPSYONAL NA KASAYSAYAN
+
+Tingnan kung ano ang napigil, kailan, at bakit — sa malinaw na salita, hindi internal na code. Markahan ang isang tawag bilang lehitimo at ipadala sa personal mong listahan sa isang tap. Salain ayon sa panahon at ayon sa desisyon. Piliin ang tagal ng pag-iimbak: huwag itago, 7, 30, 90 araw, o burahin nang manu-mano. Kapag naka-off, wala talagang naisusulat.
+
+📞 DIALER MODE (OPSYONAL)
+
+Kung gusto mo, nagiging phone app mo ang Sentinela: malinis na call screen, dialpad na naka-format habang nagta-type, timer ng tawag, mute, speaker at tone keypad. Sa puntong iyon, umiiral din ang mga panuntunan mo para sa mga contact. Opsyonal ito, maibabalik anumang oras sa Android settings, at gumagana nang maayos ang app kahit wala ito.
+
+🎨 GINAWA SA PARAANG DAPAT
+
+Material 3, dark theme at dynamic na kulay mula sa wallpaper mo. Walang ad, walang "premium version", walang subscription wall, walang panlilinlang para mapindot mo ang maling bagay.
+
+🚫 ANG HINDI GINAGAWA NG SENTINELA
+
+Mas gusto naming sabihin bago ka mag-install:
+
+• Hindi nito sinasala ang mga tawag sa WhatsApp, Telegram o ibang app — hindi ibinibigay ng Android ang mga tawag na iyon sa mga screening app
+• Hindi nito tinutukoy kung sino ang tumatawag: walang spam database dito, at sinadya iyon
+• Hindi nito nabubura ang hinarang na tawag sa call log ng phone app ng sistema — mga app lang ng telecom ang pinapayagan ng Android na gawin iyon. Hindi tutunog at hindi mag-aabiso ang tawag, pero mananatili ang tala
+• Hindi nito nilulusutan ang "Do Not Disturb" ng Android
+• Hindi ito nagre-record ng tawag, hindi nagbabasa ng SMS, at hindi binabasa ang call log mo
+
+📱 Kailangan ng Android 10 pataas — kahilingan mismo ng sistema para sa papel ng call screening.
+
+Sentinela. Ang katahimikang ikaw mismo ang nagtakda.

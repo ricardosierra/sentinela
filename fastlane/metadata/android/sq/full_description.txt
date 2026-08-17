@@ -1,0 +1,58 @@
+Telefoni bie. Sërish një numër që nuk e njihni.
+
+Një robot arkëtimi. Dikush që shtiret si punonjës i bankës suaj. Një telefonatë shitjeje. Një anketë të shtunën në orën tetë të mëngjesit. Përgjigjeni nga frika se mos humbisni diçka të rëndësishme — dhe e vetmja gjë që humbni, sërish, është koha juaj.
+
+Sentinela ekziston për t'i dhënë fund kësaj, me një rregull të vetëm:
+
+NËSE NUK ËSHTË NË KONTAKTET TUAJA DHE AS NË LISTËN TUAJ PERSONALE, NUK JU NDËRPRET.
+
+Nuk bie. Nuk dridhet. Nuk shfaq ekran telefonate. Nuk njofton për telefonatë të humbur.
+
+🔒 PRIVATËSI QË NUK ËSHTË THJESHT TEKST REKLAME
+
+Sentinela publikohet pa lejen e internetit. Nuk është një premtim i tipit "nuk e përdorim": aplikacioni është teknikisht i paaftë të dërgojë çfarëdo gjëje kudo qoftë.
+
+• Zero telemetri, zero reklama, asnjë llogari për të krijuar
+• Kontaktet tuaja lexohen vetëm në memorie, në çastin e telefonatës — emrat, fotot dhe numrat nuk ruhen kurrë dhe nuk dërgohen kurrë
+• Numri juaj i plotë nuk shfaqet kurrë në një regjistër apo njoftim, vetëm i maskuar: +355 6* *** 123
+• Të dhënat tuaja janë përjashtuar nga kopja rezervë automatike e Android
+• Punon në modalitetin e fluturimit. Punon pa sinjal. Punon gjithmonë, pa internet
+• Kod i hapur — i auditueshëm rresht pas rreshti
+
+⚙️ VENDOSNI JU, JO NJË ALGORITËM
+
+Asnjë bazë të dhënash spami në re nuk zgjedh për ju. Rregullin për çdo burim e caktoni ju, dhe secili pranon Bjer, Hesht, Blloko ose Kurrë mos hesht:
+
+• Kontaktet e agjendës → Bjer (parazgjedhje)
+• Lista juaj personale → Kurrë mos hesht (parazgjedhje)
+• Numrat e panjohur → Blloko (parazgjedhje)
+
+⭐ LISTA PERSONALE
+
+Mjeku juaj, shkolla, korrieri, pikërisht ai numër që po prisni sot. Shtoni, kërkoni, ndryshoni. Eksportojeni në një skedar dhe importojeni sërish kur ndërroni telefon — kopja është e juaja dhe mbetet me ju.
+
+📋 HISTORIK OPSIONAL
+
+Shihni çfarë u ndal, kur dhe pse — në gjuhë të qartë, jo në kod të brendshëm. Shënojeni një telefonatë si të ligjshme dhe dërgojeni në listën personale me një prekje. Filtroni sipas periudhës dhe sipas vendimit. Zgjidhni ruajtjen: kurrë, 7, 30, 90 ditë ose fshirje me dorë. Kur është e fikur, nuk shkruhet absolutisht asgjë.
+
+📞 MODALITETI I TELEFONIT (OPSIONAL)
+
+Nëse dëshironi, Sentinela bëhet aplikacioni juaj i telefonit: ekran telefonate i pastër, tastierë me formatim në çast, kohëmatës, heqje zëri, altoparlant dhe tastierë tonesh. Atëherë rregullat tuaja vlejnë edhe për kontaktet. Është opsionale, e kthyeshme në çdo çast nga cilësimet e Android, dhe aplikacioni punon shumë mirë edhe pa të.
+
+🎨 NDËRTUAR SIÇ DUHET
+
+Material 3, temë e errët dhe ngjyra dinamike nga sfondi juaj. Pa reklama, pa "version premium", pa mur abonimi, pa dredhi që t'ju bëjnë të prekni ku nuk duhet.
+
+🚫 ÇFARË NUK BËN SENTINELA
+
+Preferojmë ta themi para se ta instaloni:
+
+• Nuk filtron telefonatat nga WhatsApp, Telegram apo aplikacione të tjera — Android nuk ua kalon ato telefonata aplikacioneve të filtrimit
+• Nuk identifikon kush po telefonon: këtu nuk ka bazë të dhënash spami, dhe kjo është me qëllim
+• Nuk e fshin telefonatën e bllokuar nga regjistri i aplikacionit të telefonit të sistemit — Android ua lejon këtë vetëm aplikacioneve të operatorëve. Telefonata nuk bie dhe nuk ju njofton, por shënimi mbetet
+• Nuk e anashkalon modalitetin "Mos shqetëso" të Android
+• Nuk regjistron telefonata, nuk lexon SMS dhe nuk lexon regjistrin tuaj të telefonatave
+
+📱 Kërkon Android 10 ose më të ri — kërkesë e vetë sistemit për rolin e filtrimit të telefonatave.
+
+Sentinela. Qetësia që e caktuat vetë.

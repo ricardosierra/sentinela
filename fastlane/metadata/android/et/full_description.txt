@@ -1,0 +1,58 @@
+Telefon heliseb. Jälle number, keda te ei tunne.
+
+Võlgade sissenõudmise robot. Keegi, kes teeskleb, et helistab teie pangast. Müügikõne. Küsitlus laupäeva hommikul kell kaheksa. Te vastate hirmust midagi olulist maha magada — ja kaotate taas ainult oma aja.
+
+Sentinela on olemas selleks, et sellele lõpp teha. Reegel on üksainus:
+
+KUI NUMBRIT POLE TEIE KONTAKTIDES EGA TEIE ISIKLIKUS LOENDIS, EI KATKESTA SEE TEID.
+
+Ei helise. Ei vibreeri. Ei näita kõneekraani. Ei teata vastamata kõnest.
+
+🔒 PRIVAATSUS, MIS POLE PELGALT REKLAAMITEKST
+
+Sentinela avaldatakse ilma internetiloata. See ei ole lubadus stiilis „me ei kasuta seda": rakendus on tehniliselt võimetu midagi kuhugi saatma.
+
+• Null telemeetriat, null reklaami, ühtegi kontot pole vaja luua
+• Teie kontakte loetakse ainult mälus, kõne saabumise hetkel — nimesid, fotosid ega numbreid ei salvestata kunagi ega saadeta kunagi
+• Teie täisnumber ei ilmu kunagi logisse ega teatisse, ainult maskeeritult: +372 5*** *123
+• Teie andmed on Androidi automaatsest varundusest välja jäetud
+• Töötab lennukirežiimis. Töötab levita. Töötab alati, võrguühenduseta
+• Avatud lähtekood — kontrollitav rida-realt
+
+⚙️ OTSUSTATE TEIE, MITTE ALGORITM
+
+Ükski pilves olev rämpsnumbrite andmebaas ei vali teie eest. Reegli iga päritolu jaoks määrate teie ja iga reegel võtab vastu Helise, Vaigista, Blokeeri või Ära kunagi vaigista:
+
+• Telefoniraamatu kontaktid → Helise (vaikimisi)
+• Teie isiklik loend → Ära kunagi vaigista (vaikimisi)
+• Tundmatud numbrid → Blokeeri (vaikimisi)
+
+⭐ ISIKLIK LOEND
+
+Teie arst, kool, kuller, just see number, mida te täna ootate. Lisage, otsige, muutke. Eksportige faili ja importige tagasi, kui telefoni vahetate — varukoopia on teie oma ja jääb teie kätte.
+
+📋 VALIKULINE AJALUGU
+
+Vaadake, mis peatati, millal ja miks — arusaadavas keeles, mitte sisemise koodina. Märkige kõne õigustatuks ja saatke see ühe puudutusega isiklikku loendisse. Filtreerige perioodi ja otsuse järgi. Valige säilitamine: mitte kunagi, 7, 30, 90 päeva või käsitsi kustutamine. Väljalülitatuna ei kirjutata absoluutselt midagi.
+
+📞 TELEFONIREŽIIM (VALIKULINE)
+
+Kui soovite, saab Sentinelast teie telefonirakendus: puhas kõneekraan, jooksva vormindusega valimisklahvistik, kõnetaimer, vaigistus, valjuhääldi ja toonklahvistik. Siis kehtivad teie reeglid ka kontaktidele. See on vabatahtlik, Androidi seadetes igal ajal tagasi pööratav, ja rakendus töötab suurepäraselt ka ilma selleta.
+
+🎨 TEHTUD NII, NAGU PEAB
+
+Material 3, tume teema ja dünaamilised värvid teie taustapildilt. Ilma reklaamideta, ilma „premium-versioonita", ilma tellimusmüürita, ilma trikkideta, mis paneksid teid valesse kohta puudutama.
+
+🚫 MIDA SENTINELA EI TEE
+
+Ütleme selle pigem enne paigaldamist:
+
+• See ei filtreeri WhatsAppi, Telegrami ega teiste rakenduste kõnesid — Android ei anna neid kõnesid filtreerimisrakendustele üle
+• See ei tuvasta, kes helistab: siin ei ole rämpsnumbrite andmebaasi, ja see on taotluslik
+• See ei kustuta blokeeritud kõnet süsteemi telefonirakenduse kõnelogist — Android lubab seda ainult operaatorite rakendustele. Kõne ei helise ega teata, kuid kirje jääb alles
+• See ei hiili mööda Androidi režiimist „Mitte segada"
+• See ei salvesta kõnesid, ei loe SMS-e ega loe teie kõnelogi
+
+📱 Nõuab Androidi versiooni 10 või uuemat — süsteemi enda nõue kõnede filtreerimise rolli jaoks.
+
+Sentinela. Vaikus, mille te ise seadistasite.

@@ -1,0 +1,58 @@
+Das Telefon klingelt. Schon wieder eine Nummer, die Sie nicht kennen.
+
+Ein Inkasso-Roboter. Jemand, der behauptet, von Ihrer Bank zu sein. Ein Verkaufsanruf. Eine Umfrage um 8 Uhr am Samstag. Sie gehen ran, aus Angst, etwas Wichtiges zu verpassen — und verlieren wieder nur Ihre Zeit.
+
+Sentinela gibt es, um damit Schluss zu machen. Mit einer einzigen Regel:
+
+WER NICHT IN IHREN KONTAKTEN ODER IHRER PERSÖNLICHEN LISTE STEHT, UNTERBRICHT SIE NICHT.
+
+Kein Klingeln. Keine Vibration. Kein Anrufbildschirm. Kein Hinweis auf einen verpassten Anruf.
+
+🔒 DATENSCHUTZ, DER NICHT NUR WERBETEXT IST
+
+Sentinela wird ohne die Internet-Berechtigung veröffentlicht. Das ist kein Versprechen im Sinne von „wir nutzen sie nicht": die App ist technisch außerstande, irgendetwas irgendwohin zu senden.
+
+• Null Telemetrie, null Werbung, kein Konto anzulegen
+• Ihre Kontakte werden nur im Arbeitsspeicher gelesen, im Moment des Anrufs — Namen, Fotos und Nummern werden nie gespeichert und nie gesendet
+• Ihre vollständige Nummer erscheint nie in einem Protokoll oder einer Benachrichtigung, nur maskiert: +49 15* *** 123
+• Ihre Daten sind vom automatischen Android-Backup ausgenommen
+• Funktioniert im Flugmodus. Funktioniert ohne Empfang. Funktioniert immer, offline
+• Open Source — Zeile für Zeile überprüfbar
+
+⚙️ SIE ENTSCHEIDEN, NICHT EIN ALGORITHMUS
+
+Keine Spam-Datenbank in der Cloud, die für Sie entscheidet. Sie legen die Regel je Herkunft fest, und jede akzeptiert Klingeln, Stummschalten, Blockieren oder Nie stummschalten:
+
+• Kontakte aus Ihrem Adressbuch → Klingeln (Standard)
+• Ihre persönliche Liste → Nie stummschalten (Standard)
+• Unbekannte Nummern → Blockieren (Standard)
+
+⭐ PERSÖNLICHE LISTE
+
+Ihre Ärztin, die Schule, der Paketbote, genau die Nummer, auf die Sie heute warten. Hinzufügen, suchen, bearbeiten. In eine Datei exportieren und beim Handywechsel zurück importieren — die Sicherung gehört Ihnen und bleibt bei Ihnen.
+
+📋 OPTIONALER VERLAUF
+
+Sehen Sie, was gestoppt wurde, wann und warum — in klarer Sprache, nicht als interner Code. Markieren Sie einen Anruf als legitim und schicken Sie ihn mit einem Tippen in Ihre persönliche Liste. Filtern Sie nach Zeitraum und nach Entscheidung. Wählen Sie die Aufbewahrung: nie speichern, 7, 30, 90 Tage oder manuell löschen. Ausgeschaltet wird überhaupt nichts geschrieben.
+
+📞 TELEFON-MODUS (OPTIONAL)
+
+Wenn Sie möchten, wird Sentinela Ihre Telefon-App: ein aufgeräumter Anrufbildschirm, ein Wählfeld mit Live-Formatierung, Gesprächsdauer, Stumm, Lautsprecher und Tonwahltastatur. Dann gelten Ihre Regeln auch für Kontakte. Es ist freiwillig, jederzeit über die Android-Einstellungen umkehrbar, und die App funktioniert auch ohne bestens.
+
+🎨 SO GEBAUT, WIE ES SEIN SOLL
+
+Material 3, dunkles Design und dynamische Farben aus Ihrem Hintergrundbild. Keine Werbung, keine „Premium-Version", keine Abo-Schranke, keine Tricks, die Sie zum falschen Tippen bringen.
+
+🚫 WAS SENTINELA NICHT TUT
+
+Wir sagen es lieber vor der Installation:
+
+• Es filtert keine Anrufe von WhatsApp, Telegram oder anderen Apps — Android übergibt diese Anrufe nicht an Filter-Apps
+• Es identifiziert nicht, wer anruft: hier gibt es keine Spam-Datenbank, und das ist Absicht
+• Es löscht den blockierten Anruf nicht aus der Anrufliste der System-Telefon-App — Android erlaubt das nur Mobilfunkanbieter-Apps. Der Anruf klingelt nicht und benachrichtigt Sie nicht, aber der Eintrag bleibt
+• Es umgeht nicht den Modus „Nicht stören" von Android
+• Es zeichnet keine Anrufe auf, liest keine SMS und liest Ihre Anrufliste nicht
+
+📱 Erfordert Android 10 oder neuer — Vorgabe des Systems selbst für die Rolle zur Anrufprüfung.
+
+Sentinela. Die Stille, die Sie eingestellt haben.

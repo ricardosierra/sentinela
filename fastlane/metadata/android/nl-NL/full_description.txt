@@ -1,0 +1,58 @@
+De telefoon gaat. Alweer een nummer dat je niet kent.
+
+Een incassorobot. Iemand die doet alsof hij van je bank is. Een verkooppraatje. Een enquête om acht uur op zaterdagochtend. Je neemt op uit angst iets belangrijks te missen — en het enige wat je kwijtraakt is weer je tijd.
+
+Sentinela bestaat om daar een eind aan te maken, met één regel:
+
+STAAT HET NIET IN JE CONTACTEN OF JE PERSOONLIJKE LIJST, DAN ONDERBREEKT HET JE NIET.
+
+Geen beltoon. Geen trilling. Geen belscherm. Geen melding van een gemiste oproep.
+
+🔒 PRIVACY DIE NIET ALLEEN MARKETINGTEKST IS
+
+Sentinela wordt gepubliceerd zonder de internettoestemming. Dat is geen belofte in de trant van "we gebruiken het niet": de app is technisch niet in staat om ook maar iets ergens heen te sturen.
+
+• Nul telemetrie, nul advertenties, geen account nodig
+• Je contacten worden alleen in het geheugen gelezen, op het moment van de oproep — namen, foto's en nummers worden nooit opgeslagen en nooit verstuurd
+• Je volledige nummer verschijnt nooit in een logboek of melding, alleen gemaskeerd: +31 6** *** 123
+• Je gegevens vallen buiten de automatische back-up van Android
+• Werkt in vliegtuigmodus. Werkt zonder bereik. Werkt altijd, offline
+• Open source — regel voor regel te controleren
+
+⚙️ JIJ BESLIST, GEEN ALGORITME
+
+Geen spamdatabase in de cloud die voor jou kiest. Jij bepaalt de regel per herkomst, en elke regel kent Overgaan, Dempen, Blokkeren of Nooit dempen:
+
+• Contacten uit je adresboek → Overgaan (standaard)
+• Je persoonlijke lijst → Nooit dempen (standaard)
+• Onbekende nummers → Blokkeren (standaard)
+
+⭐ PERSOONLIJKE LIJST
+
+Je huisarts, de school, de bezorger, precies dat ene nummer waar je vandaag op wacht. Toevoegen, zoeken, bewerken. Exporteer naar een bestand en importeer het terug als je van telefoon wisselt — de back-up is van jou en blijft bij jou.
+
+📋 OPTIONELE GESCHIEDENIS
+
+Zie wat is tegengehouden, wanneer en waarom — in gewone taal, niet in een interne code. Markeer een oproep als legitiem en stuur hem met één tik naar je persoonlijke lijst. Filter op periode en op beslissing. Kies de bewaartermijn: nooit bewaren, 7, 30, 90 dagen, of handmatig wissen. Uitgeschakeld wordt er helemaal niets weggeschreven.
+
+📞 TELEFOONMODUS (OPTIONEEL)
+
+Als je wilt, wordt Sentinela je telefoon-app: een rustig belscherm, een toetsenblok dat het nummer live opmaakt, gespreksduur, dempen, luidspreker en toonkiezen. Dan gelden je regels ook voor contacten. Het is optioneel, op elk moment terug te draaien via de Android-instellingen, en de app werkt prima zonder.
+
+🎨 GEMAAKT ZOALS HET HOORT
+
+Material 3, donker thema en dynamische kleuren uit je achtergrond. Geen advertenties, geen "premium versie", geen abonnementsmuur, geen trucjes om je op de verkeerde knop te laten tikken.
+
+🚫 WAT SENTINELA NIET DOET
+
+We zeggen het liever vóór je installeert:
+
+• Het filtert geen oproepen van WhatsApp, Telegram of andere apps — Android geeft die oproepen niet door aan filter-apps
+• Het identificeert niet wie er belt: er is hier geen spamdatabase, en dat is met opzet
+• Het verwijdert de geblokkeerde oproep niet uit het logboek van de telefoon-app van het systeem — Android staat dat alleen toe aan apps van providers. De oproep gaat niet over en meldt niets, maar de regel in het logboek blijft
+• Het omzeilt "Niet storen" van Android niet
+• Het neemt geen gesprekken op, leest geen sms en leest je oproepgeschiedenis niet
+
+📱 Vereist Android 10 of nieuwer — een eis van het systeem zelf voor de rol van oproepfiltering.
+
+Sentinela. De stilte die jij hebt ingesteld.

@@ -1,0 +1,58 @@
+Síminn hringir. Enn eitt númerið sem þú þekkir ekki.
+
+Innheimtuvélmenni. Einhver sem þykist vera frá bankanum þínum. Sölusímtal. Könnun klukkan átta á laugardagsmorgni. Þú svarar af ótta við að missa af einhverju mikilvægu — og það eina sem þú tapar, enn og aftur, er tíminn þinn.
+
+Sentinela er til til að binda enda á þetta. Reglan er aðeins ein:
+
+SÉ NÚMERIÐ HVORKI Í TENGILIÐUNUM ÞÍNUM NÉ Á ÞÍNUM PERSÓNULEGA LISTA, TRUFLAR ÞAÐ ÞIG EKKI.
+
+Hringir ekki. Titrar ekki. Sýnir ekki símtalsskjá. Tilkynnir ekki ósvarað símtal.
+
+🔒 PERSÓNUVERND SEM ER EKKI BARA MARKAÐSTEXTI
+
+Sentinela er gefið út án nettengingarheimildar. Þetta er ekki loforð um að „við notum hana ekki": forritið er tæknilega ófært um að senda nokkuð nokkurt.
+
+• Núll fjarmælingar, núll auglýsingar, enginn aðgangur sem þarf að stofna
+• Tengiliðirnir þínir eru einungis lesnir í minni, á augnabliki símtalsins — nöfn, myndir og númer eru aldrei vistuð og aldrei send
+• Fullt númer þitt birtist aldrei í annál eða tilkynningu, aðeins hulið: +354 *** 1234
+• Gögnin þín eru undanskilin sjálfvirku öryggisafriti Android
+• Virkar í flugstillingu. Virkar án sambands. Virkar alltaf, ónettengt
+• Opinn hugbúnaður — hægt að rýna línu fyrir línu
+
+⚙️ ÞÚ RÆÐUR, EKKI REIKNIRIT
+
+Enginn ruslnúmeragrunnur í skýinu velur fyrir þig. Þú setur regluna fyrir hvern uppruna og hver þeirra tekur við Hringja, Þagga, Loka á eða Aldrei þagga:
+
+• Tengiliðir úr símaskránni → Hringja (sjálfgefið)
+• Þinn persónulegi listi → Aldrei þagga (sjálfgefið)
+• Óþekkt númer → Loka á (sjálfgefið)
+
+⭐ PERSÓNULEGUR LISTI
+
+Læknirinn þinn, skólinn, sendillinn, einmitt það númer sem þú bíður eftir í dag. Bættu við, leitaðu, breyttu. Fluttu út í skrá og inn aftur þegar þú skiptir um síma — afritið er þitt og verður áfram hjá þér.
+
+📋 VALFRJÁLS SAGA
+
+Sjáðu hvað var stöðvað, hvenær og hvers vegna — á skýru máli, ekki sem innri kóði. Merktu símtal sem lögmætt og sendu það á persónulega listann með einni snertingu. Síaðu eftir tímabili og eftir ákvörðun. Veldu geymslu: aldrei, 7, 30, 90 dagar eða handvirk hreinsun. Slökkt er ekkert skrifað.
+
+📞 SÍMASTILLING (VALFRJÁLS)
+
+Ef þú vilt verður Sentinela símaforritið þitt: hreinn símtalsskjái, talnaborð með jafnóðum sniði, tímamælir, hljóðnemi af, hátalari og tónaborð. Þá gilda reglurnar þínar líka fyrir tengiliði. Þetta er valfrjálst, hægt að afturkalla hvenær sem er í Android-stillingum, og forritið virkar prýðilega án þess.
+
+🎨 GERT EINS OG ÞAÐ Á AÐ VERA
+
+Material 3, dökkt þema og breytilegir litir úr veggfóðrinu þínu. Engar auglýsingar, engin „úrvalsútgáfa", enginn áskriftarveggur, engin brögð til að fá þig til að ýta á rangan stað.
+
+🚫 HVAÐ SENTINELA GERIR EKKI
+
+Við segjum það frekar áður en þú setur það upp:
+
+• Það síar ekki símtöl úr WhatsApp, Telegram eða öðrum forritum — Android afhendir þau símtöl ekki síunarforritum
+• Það greinir ekki hver hringir: hér er enginn ruslnúmeragrunnur, og það er af ásetningi
+• Það eyðir ekki lokaða símtalinu úr símtalaskrá símaforrits kerfisins — Android leyfir það aðeins forritum símafyrirtækja. Símtalið hringir ekki og tilkynnir ekki, en færslan stendur eftir
+• Það sniðgengur ekki „Ónáðið ekki" í Android
+• Það tekur ekki upp símtöl, les ekki SMS og les ekki símtalaskrána þína
+
+📱 Krefst Android 10 eða nýrri — krafa kerfisins sjálfs fyrir hlutverk símtalasíunar.
+
+Sentinela. Þögnin sem þú stilltir sjálf.

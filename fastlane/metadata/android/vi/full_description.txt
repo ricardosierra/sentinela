@@ -1,0 +1,58 @@
+Điện thoại reo. Lại một số bạn không hề biết.
+
+Robot đòi nợ. Kẻ giả danh nhân viên ngân hàng. Cuộc gọi chào bán. Khảo sát lúc tám giờ sáng thứ Bảy. Bạn bắt máy vì sợ bỏ lỡ việc quan trọng — và thứ duy nhất bạn mất, lần nữa, là thời gian của mình.
+
+Sentinela ra đời để chấm dứt chuyện đó, chỉ với một quy tắc:
+
+KHÔNG CÓ TRONG DANH BẠ VÀ KHÔNG CÓ TRONG DANH SÁCH RIÊNG CỦA BẠN THÌ KHÔNG LÀM PHIỀN BẠN.
+
+Không đổ chuông. Không rung. Không hiện màn hình cuộc gọi. Không báo cuộc gọi nhỡ.
+
+🔒 QUYỀN RIÊNG TƯ KHÔNG CHỈ LÀ LỜI QUẢNG CÁO
+
+Sentinela được phát hành mà không có quyền truy cập Internet. Đây không phải lời hứa kiểu "chúng tôi không dùng đâu": ứng dụng về mặt kỹ thuật không thể gửi bất cứ thứ gì đi bất cứ đâu.
+
+• Không đo từ xa, không quảng cáo, không tài khoản nào phải tạo
+• Danh bạ của bạn chỉ được đọc trong bộ nhớ, ngay lúc có cuộc gọi — tên, ảnh và số điện thoại không bao giờ được lưu và không bao giờ được gửi đi
+• Số đầy đủ của bạn không bao giờ xuất hiện trong nhật ký hay thông báo, luôn được che: +84 9**-***-123
+• Dữ liệu của bạn nằm ngoài bản sao lưu tự động của Android
+• Chạy được ở chế độ máy bay. Chạy được khi mất sóng. Luôn chạy, ngoại tuyến
+• Mã nguồn mở — kiểm tra được từng dòng
+
+⚙️ BẠN QUYẾT ĐỊNH, KHÔNG PHẢI THUẬT TOÁN
+
+Không có cơ sở dữ liệu spam trên đám mây nào chọn thay bạn. Bạn đặt quy tắc cho từng nguồn, và mỗi quy tắc nhận Đổ chuông, Tắt tiếng, Chặn hoặc Không bao giờ tắt tiếng:
+
+• Danh bạ trong máy → Đổ chuông (mặc định)
+• Danh sách riêng của bạn → Không bao giờ tắt tiếng (mặc định)
+• Số lạ → Chặn (mặc định)
+
+⭐ DANH SÁCH RIÊNG
+
+Bác sĩ của bạn, trường học, người giao hàng, đúng cái số mà hôm nay bạn đang chờ. Thêm, tìm, sửa. Xuất ra một tệp và nhập lại khi đổi điện thoại — bản sao lưu là của bạn và ở lại với bạn.
+
+📋 LỊCH SỬ TÙY CHỌN
+
+Xem cái gì đã bị chặn, khi nào và vì sao — bằng ngôn ngữ dễ hiểu, không phải mã nội bộ. Đánh dấu một cuộc gọi là hợp lệ và đưa nó vào danh sách riêng chỉ với một chạm. Lọc theo khoảng thời gian và theo quyết định. Chọn thời gian lưu: không lưu, 7, 30, 90 ngày, hoặc tự xóa bằng tay. Tắt đi thì không có gì được ghi lại cả.
+
+📞 CHẾ ĐỘ GỌI ĐIỆN (TÙY CHỌN)
+
+Nếu muốn, Sentinela trở thành ứng dụng điện thoại của bạn: màn hình cuộc gọi gọn gàng, bàn phím định dạng số ngay khi bấm, đồng hồ đếm thời gian, tắt tiếng, loa ngoài và bàn phím âm tần. Khi đó quy tắc của bạn áp dụng cho cả danh bạ. Đây là tùy chọn, có thể đổi lại bất cứ lúc nào trong cài đặt Android, và ứng dụng vẫn chạy rất tốt khi không bật.
+
+🎨 LÀM ĐÚNG NHƯ NÓ NÊN LÀ
+
+Material 3, giao diện tối và màu động lấy từ hình nền của bạn. Không quảng cáo, không "bản cao cấp", không tường thu phí, không mẹo dụ bạn chạm nhầm chỗ.
+
+🚫 NHỮNG GÌ SENTINELA KHÔNG LÀM
+
+Chúng tôi muốn nói trước khi bạn cài:
+
+• Không lọc cuộc gọi WhatsApp, Telegram hay ứng dụng khác — Android không chuyển những cuộc gọi đó cho ứng dụng lọc
+• Không xác định ai đang gọi: ở đây không có cơ sở dữ liệu spam, và đó là chủ ý
+• Không xóa được cuộc gọi bị chặn khỏi nhật ký của ứng dụng điện thoại hệ thống — Android chỉ cho phép ứng dụng của nhà mạng làm việc đó. Cuộc gọi không đổ chuông, không báo, nhưng bản ghi vẫn nằm đó
+• Không lách chế độ "Không làm phiền" của Android
+• Không ghi âm cuộc gọi, không đọc tin nhắn, không đọc nhật ký cuộc gọi của bạn
+
+📱 Cần Android 10 trở lên — đây là yêu cầu của chính hệ thống đối với vai trò lọc cuộc gọi.
+
+Sentinela. Sự yên tĩnh do chính bạn đặt ra.

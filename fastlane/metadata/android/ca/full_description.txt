@@ -1,0 +1,58 @@
+Sona el telèfon. Un altre número que no coneixes.
+
+Un robot de cobraments. Algú que es fa passar pel teu banc. Una trucada comercial. Una enquesta a les vuit del matí d'un dissabte. Contestes per por de perdre't alguna cosa important — i l'únic que perds, un cop més, és el teu temps.
+
+Sentinela existeix per acabar amb això, amb una sola regla:
+
+SI NO ÉS ALS TEUS CONTACTES NI A LA TEVA LLISTA PERSONAL, NO T'INTERROMP.
+
+No sona. No vibra. No mostra la pantalla de trucada. No avisa de trucada perduda.
+
+🔒 PRIVACITAT QUE NO ÉS NOMÉS TEXT DE MÀRQUETING
+
+Sentinela es publica sense el permís d'internet. No és una promesa del tipus «no el fem servir»: l'aplicació és tècnicament incapaç d'enviar res enlloc.
+
+• Zero telemetria, zero anuncis, cap compte per crear
+• Els teus contactes es llegeixen només en memòria, en el moment de la trucada — noms, fotos i números no es desen mai i no s'envien mai
+• El teu número complet no apareix mai en cap registre ni notificació, només emmascarat: +34 6** *** 123
+• Les teves dades queden excloses de la còpia de seguretat automàtica d'Android
+• Funciona en mode avió. Funciona sense cobertura. Funciona sempre, fora de línia
+• Codi obert — auditable línia per línia
+
+⚙️ DECIDEIXES TU, NO UN ALGORISME
+
+Cap base de dades de brossa al núvol tria per tu. Tu defineixes la política de cada origen, i cadascuna accepta Sonar, Silenciar, Bloquejar o No silenciar mai:
+
+• Contactes de l'agenda → Sonar (predeterminat)
+• La teva llista personal → No silenciar mai (predeterminat)
+• Números desconeguts → Bloquejar (predeterminat)
+
+⭐ LLISTA PERSONAL
+
+El teu metge, l'escola, el repartidor, aquell número que esperes avui. Afegeix, cerca, edita. Exporta a un fitxer i importa'l de nou quan canviïs de telèfon — la còpia és teva i es queda amb tu.
+
+📋 HISTORIAL OPCIONAL
+
+Mira què s'ha aturat, quan i per què — en llenguatge clar, no en codi intern. Marca una trucada com a legítima i envia-la a la llista personal amb un sol toc. Filtra per període i per decisió. Tria la retenció: no desar mai, 7, 30, 90 dies o esborrar a mà. Desactivat, no s'escriu absolutament res.
+
+📞 MODE TELÈFON (OPCIONAL)
+
+Si vols, Sentinela esdevé la teva aplicació de telèfon: pantalla de trucada neta, teclat amb format en directe, cronòmetre, silenci, altaveu i teclat de tons. Llavors les teves regles s'apliquen també als contactes. És opcional, reversible en qualsevol moment des dels ajustos d'Android, i l'aplicació funciona molt bé sense.
+
+🎨 FETA COM CAL
+
+Material 3, tema fosc i colors dinàmics del teu fons de pantalla. Sense anuncis, sense «versió premium», sense mur de subscripció, sense trampes perquè toquis on no toca.
+
+🚫 QUÈ NO FA SENTINELA
+
+Preferim dir-ho abans que l'instal·lis:
+
+• No filtra trucades de WhatsApp, Telegram ni altres aplicacions — Android no lliura aquestes trucades a les aplicacions de filtratge
+• No identifica qui truca: aquí no hi ha cap base de dades de brossa, i és a propòsit
+• No esborra la trucada bloquejada del registre de l'aplicació de telèfon del sistema — Android només ho permet a les aplicacions d'operadora. La trucada no sona ni t'avisa, però el registre es queda
+• No evita el mode «No molestar» d'Android
+• No enregistra trucades, no llegeix SMS i no llegeix el teu registre de trucades
+
+📱 Requereix Android 10 o superior — exigència del sistema mateix per al rol de filtratge de trucades.
+
+Sentinela. El silenci que has configurat tu.

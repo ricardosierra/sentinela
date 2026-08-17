@@ -1,0 +1,58 @@
+Telefon zvoní. Zase číslo, které neznáte.
+
+Vymáhací robot. Někdo, kdo se vydává za vaši banku. Nabídka po telefonu. Průzkum v sobotu v osm ráno. Zvednete to ze strachu, že přijdete o něco důležitého — a přijdete zase jen o svůj čas.
+
+Sentinela existuje proto, aby s tím skoncovala. Má jediné pravidlo:
+
+POKUD ČÍSLO NENÍ VE VAŠICH KONTAKTECH ANI VE VAŠEM OSOBNÍM SEZNAMU, NEVYRUŠÍ VÁS.
+
+Nezvoní. Nevibruje. Neukáže obrazovku hovoru. Neupozorní na zmeškaný hovor.
+
+🔒 SOUKROMÍ, KTERÉ NENÍ JEN MARKETINGOVÝ TEXT
+
+Sentinela se vydává bez oprávnění k internetu. Není to slib ve smyslu „nepoužíváme ho": aplikace je technicky neschopná cokoli kamkoli odeslat.
+
+• Nula telemetrie, nula reklam, žádný účet k založení
+• Vaše kontakty se čtou jen v paměti, v okamžiku hovoru — jména, fotky a čísla se nikdy neukládají a nikdy neodesílají
+• Vaše celé číslo se nikdy neobjeví v logu ani v oznámení, jen zamaskované: +420 *** *** 123
+• Vaše data jsou vyňata z automatické zálohy Androidu
+• Funguje v režimu letadlo. Funguje bez signálu. Funguje vždycky, offline
+• Otevřený kód — auditovatelný řádek po řádku
+
+⚙️ ROZHODUJETE VY, NE ALGORITMUS
+
+Žádná cloudová databáze spamu nevybírá za vás. Pravidlo pro každý původ nastavujete vy a každé přijímá Zvonit, Ztlumit, Blokovat nebo Nikdy neztlumit:
+
+• Kontakty v adresáři → Zvonit (výchozí)
+• Váš osobní seznam → Nikdy neztlumit (výchozí)
+• Neznámá čísla → Blokovat (výchozí)
+
+⭐ OSOBNÍ SEZNAM
+
+Lékař, škola, kurýr, přesně to číslo, na které dnes čekáte. Přidejte, najděte, upravte. Vyexportujte do souboru a při výměně telefonu naimportujte zpátky — záloha je vaše a zůstává u vás.
+
+📋 VOLITELNÁ HISTORIE
+
+Uvidíte, co bylo zastaveno, kdy a proč — srozumitelně, ne interním kódem. Označte hovor jako legitimní a jedním klepnutím ho pošlete do osobního seznamu. Filtrujte podle období a podle rozhodnutí. Zvolte uchování: nikdy neuchovávat, 7, 30, 90 dní nebo mazat ručně. Vypnuto se nezapisuje vůbec nic.
+
+📞 REŽIM TELEFONU (VOLITELNÝ)
+
+Pokud chcete, Sentinela se stane vaší aplikací Telefon: čistá obrazovka hovoru, klávesnice s průběžným formátováním, měřič délky hovoru, ztlumení mikrofonu, hlasitý odposlech a tónová klávesnice. Vaše pravidla pak platí i pro kontakty. Je to dobrovolné, kdykoli vratné v nastavení Androidu a aplikace bez toho funguje výborně.
+
+🎨 UDĚLANÁ TAK, JAK MÁ BÝT
+
+Material 3, tmavý motiv a dynamické barvy z vaší tapety. Bez reklam, bez „prémiové verze", bez předplatné zdi, bez triků, které vás mají donutit klepnout jinam.
+
+🚫 CO SENTINELA NEDĚLÁ
+
+Radši to řekneme dřív, než ji nainstalujete:
+
+• Nefiltruje hovory z WhatsAppu, Telegramu ani jiných aplikací — Android tyto hovory filtrovacím aplikacím nepředává
+• Neurčuje, kdo volá: databáze spamu tu není, a je to záměr
+• Nemaže blokovaný hovor ze seznamu hovorů systémové aplikace Telefon — Android to dovoluje jen aplikacím operátorů. Hovor nezazvoní a neupozorní, ale záznam zůstane
+• Neobchází režim „Nerušit" v Androidu
+• Nenahrává hovory, nečte SMS a nečte váš seznam hovorů
+
+📱 Vyžaduje Android 10 nebo novější — požadavek samotného systému pro roli filtrování hovorů.
+
+Sentinela. Ticho, které jste si nastavili sami.

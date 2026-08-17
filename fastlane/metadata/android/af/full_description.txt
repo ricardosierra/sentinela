@@ -1,0 +1,58 @@
+Die foon lui. Nog 'n nommer wat jy nie ken nie.
+
+'n Skuldinvorderingsrobot. Iemand wat voorgee hy bel van jou bank af. 'n Verkoopsoproep. 'n Opname om agtuur op 'n Saterdagoggend. Jy antwoord uit vrees dat jy iets belangriks misloop — en al wat jy weer verloor, is jou tyd.
+
+Sentinela bestaan om daaraan 'n einde te maak, met net een reël:
+
+AS DIT NIE IN JOU KONTAKTE OF OP JOU PERSOONLIKE LYS IS NIE, ONDERBREEK DIT JOU NIE.
+
+Lui nie. Vibreer nie. Wys nie 'n oproepskerm nie. Gee nie kennis van 'n gemiste oproep nie.
+
+🔒 PRIVAATHEID WAT NIE NET BEMARKINGSTEKS IS NIE
+
+Sentinela word sonder die internettoestemming gepubliseer. Dit is nie 'n belofte van "ons gebruik dit nie": die program is tegnies nie in staat om enigiets enige plek heen te stuur nie.
+
+• Nul telemetrie, nul advertensies, geen rekening om te skep nie
+• Jou kontakte word slegs in geheue gelees, op die oomblik van die oproep — name, foto's en nommers word nooit gestoor en nooit gestuur nie
+• Jou volle nommer verskyn nooit in 'n logboek of kennisgewing nie, net gemasker: +27 8*-***-1234
+• Jou data word uitgesluit van Android se outomatiese rugsteun
+• Werk in vliegtuigmodus. Werk sonder sein. Werk altyd, vanlyn
+• Oopbron — reël vir reël nagaanbaar
+
+⚙️ JY BESLUIT, NIE 'N ALGORITME NIE
+
+Geen strooidatabasis in die wolk kies namens jou nie. Jy stel die reël vir elke oorsprong, en elkeen aanvaar Lui, Demp, Blokkeer of Moet nooit demp nie:
+
+• Kontakte in jou adresboek → Lui (verstek)
+• Jou persoonlike lys → Moet nooit demp nie (verstek)
+• Onbekende nommers → Blokkeer (verstek)
+
+⭐ PERSOONLIKE LYS
+
+Jou dokter, die skool, die afleweringsman, presies daardie nommer waarop jy vandag wag. Voeg by, soek, wysig. Voer uit na 'n lêer en voer weer in wanneer jy van foon verwissel — die rugsteun is joune en bly by jou.
+
+📋 OPSIONELE GESKIEDENIS
+
+Sien wat gestop is, wanneer en hoekom — in duidelike taal, nie 'n interne kode nie. Merk 'n oproep as wettig en stuur dit met een tik na jou persoonlike lys. Filter volgens tydperk en volgens besluit. Kies die bewaartermyn: nooit, 7, 30, 90 dae, of met die hand uitvee. Afgeskakel word daar hoegenaamd niks geskryf nie.
+
+📞 FOONMODUS (OPSIONEEL)
+
+As jy wil, word Sentinela jou foonprogram: 'n skoon oproepskerm, 'n sleutelbord wat die nommer dadelik formatteer, oproeptydhouer, demp, luidspreker en toonsleutelbord. Dan geld jou reëls ook vir kontakte. Dit is opsioneel, enige tyd omkeerbaar in Android se instellings, en die program werk uitstekend daarsonder.
+
+🎨 GEBOU SOOS DIT HOORT
+
+Material 3, donker tema en dinamiese kleure uit jou muurpapier. Geen advertensies, geen "premiumweergawe", geen intekenmuur, geen truuks om jou op die verkeerde plek te laat tik nie.
+
+🚫 WAT SENTINELA NIE DOEN NIE
+
+Ons sê dit liewer voordat jy dit installeer:
+
+• Dit filter nie oproepe van WhatsApp, Telegram of ander programme nie — Android gee daardie oproepe nie aan filterprogramme oor nie
+• Dit identifiseer nie wie bel nie: daar is geen strooidatabasis hier nie, en dit is doelbewus
+• Dit vee nie die geblokkeerde oproep uit die stelsel se foonprogram se oproeplys nie — Android laat dit net vir netwerkverskaffers se programme toe. Die oproep sal nie lui of kennis gee nie, maar die inskrywing bly
+• Dit omseil nie Android se "Moenie steur nie"-modus nie
+• Dit neem nie oproepe op nie, lees nie SMS'e nie, en lees nie jou oproeplys nie
+
+📱 Vereis Android 10 of nuwer — die stelsel se eie vereiste vir die oproepfiltreringsrol.
+
+Sentinela. Die stilte wat jy self opgestel het.

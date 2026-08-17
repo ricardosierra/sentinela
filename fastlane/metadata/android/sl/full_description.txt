@@ -1,0 +1,58 @@
+Telefon zvoni. Spet številka, ki je ne poznate.
+
+Robot za izterjavo. Nekdo, ki se pretvarja, da kliče z vaše banke. Prodajni klic. Anketa ob osmih zjutraj v soboto. Dvignete iz strahu, da bi zamudili nekaj pomembnega — in spet izgubite samo svoj čas.
+
+Sentinela obstaja, da s tem opravi. Pravilo je eno samo:
+
+ČE ŠTEVILKE NI MED VAŠIMI STIKI IN NE NA VAŠEM OSEBNEM SEZNAMU, VAS NE PREKINJA.
+
+Ne zvoni. Ne vibrira. Ne prikaže zaslona klica. Ne obvesti o neodgovorjenem klicu.
+
+🔒 ZASEBNOST, KI NI LE OGLASNO BESEDILO
+
+Sentinela je objavljena brez dovoljenja za internet. To ni obljuba v smislu »ne uporabljamo ga«: aplikacija tehnično ni sposobna poslati ničesar nikamor.
+
+• Nič telemetrije, nič oglasov, nobenega računa za ustvarjanje
+• Vaši stiki se berejo samo v pomnilniku, v trenutku klica — imena, fotografije in številke se nikoli ne shranijo in nikoli ne pošljejo
+• Vaša celotna številka se nikoli ne pojavi v dnevniku ali obvestilu, samo zakrita: +386 4* *** 123
+• Vaši podatki so izvzeti iz samodejne varnostne kopije Androida
+• Deluje v načinu za letalo. Deluje brez signala. Deluje vedno, brez povezave
+• Odprta koda — preverljiva vrstico za vrstico
+
+⚙️ ODLOČATE VI, NE ALGORITEM
+
+Nobena zbirka neželenih številk v oblaku ne izbira namesto vas. Pravilo za vsak izvor določite vi, vsako pa sprejme Zvoni, Utišaj, Blokiraj ali Nikoli ne utišaj:
+
+• Stiki iz imenika → Zvoni (privzeto)
+• Vaš osebni seznam → Nikoli ne utišaj (privzeto)
+• Neznane številke → Blokiraj (privzeto)
+
+⭐ OSEBNI SEZNAM
+
+Vaš zdravnik, šola, dostavljavec, prav tista številka, ki jo danes čakate. Dodajte, poiščite, uredite. Izvozite v datoteko in ob menjavi telefona uvozite nazaj — varnostna kopija je vaša in ostane pri vas.
+
+📋 NEOBVEZNA ZGODOVINA
+
+Poglejte, kaj je bilo ustavljeno, kdaj in zakaj — v razumljivem jeziku, ne v notranji kodi. Označite klic kot legitimen in ga z enim dotikom pošljite na osebni seznam. Filtrirajte po obdobju in po odločitvi. Izberite hrambo: nikoli, 7, 30, 90 dni ali ročno brisanje. Ko je izklopljena, se ne zapiše prav nič.
+
+📞 NAČIN TELEFONA (NEOBVEZEN)
+
+Če želite, Sentinela postane vaša aplikacija za telefon: čist zaslon klica, tipkovnica s sprotnim oblikovanjem, števec trajanja, izklop mikrofona, zvočnik in tonska tipkovnica. Takrat vaša pravila veljajo tudi za stike. Je neobvezen, kadar koli preklican v nastavitvah Androida, aplikacija pa tudi brez njega odlično deluje.
+
+🎨 NAREJENA, KOT MORA BITI
+
+Material 3, temna tema in dinamične barve z vašega ozadja. Brez oglasov, brez »premium različice«, brez zidu naročnine, brez trikov, da bi se dotaknili napačnega mesta.
+
+🚫 ČESA SENTINELA NE POČNE
+
+Raje povemo, preden jo namestite:
+
+• Ne filtrira klicev iz WhatsAppa, Telegrama ali drugih aplikacij — Android teh klicev ne izroči aplikacijam za filtriranje
+• Ne ugotavlja, kdo kliče: tu ni zbirke neželenih številk in to je namerno
+• Ne izbriše blokiranega klica iz dnevnika sistemske aplikacije za telefon — Android to dovoli samo aplikacijam operaterjev. Klic ne zvoni in ne obvesti, a zapis ostane
+• Ne zaobide načina »Ne moti« v Androidu
+• Ne snema klicev, ne bere SMS-ov in ne bere vašega seznama klicev
+
+📱 Zahteva Android 10 ali novejši — zahteva samega sistema za vlogo filtriranja klicev.
+
+Sentinela. Tišina, ki ste jo nastavili sami.

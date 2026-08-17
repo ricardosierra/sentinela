@@ -1,0 +1,58 @@
+Telefonen ringer. Nok et nummer du ikke kjenner.
+
+En inkassorobot. Noen som utgir seg for å ringe fra banken din. Et salgsanrop. En undersøkelse klokka åtte lørdag morgen. Du svarer i frykt for å gå glipp av noe viktig — og det eneste du taper, er tiden din, igjen.
+
+Sentinela finnes for å få slutt på det, med én eneste regel:
+
+STÅR DET IKKE I KONTAKTENE DINE ELLER PÅ DIN PERSONLIGE LISTE, AVBRYTER DET DEG IKKE.
+
+Ingen ringetone. Ingen vibrasjon. Ingen anropsskjerm. Ingen varsel om tapt anrop.
+
+🔒 PERSONVERN SOM IKKE BARE ER MARKEDSFØRINGSTEKST
+
+Sentinela publiseres uten internett-tillatelsen. Det er ikke et løfte om at "vi bruker den ikke": appen er teknisk ute av stand til å sende noe som helst noe sted.
+
+• Null telemetri, null annonser, ingen konto å opprette
+• Kontaktene dine leses bare i minnet, i det øyeblikket anropet kommer — navn, bilder og numre lagres aldri og sendes aldri
+• Hele nummeret ditt dukker aldri opp i en logg eller et varsel, bare maskert: +47 ** ** 12 34
+• Dataene dine er utelatt fra Androids automatiske sikkerhetskopi
+• Virker i flymodus. Virker uten dekning. Virker alltid, frakoblet
+• Åpen kildekode — kan granskes linje for linje
+
+⚙️ DU BESTEMMER, IKKE EN ALGORITME
+
+Ingen spamdatabase i skyen velger for deg. Du setter regelen for hvert opphav, og hver regel tar Ring, Demp, Blokker eller Aldri demp:
+
+• Kontakter i adresseboken → Ring (standard)
+• Din personlige liste → Aldri demp (standard)
+• Ukjente numre → Blokker (standard)
+
+⭐ PERSONLIG LISTE
+
+Legen din, skolen, budet, akkurat det nummeret du venter på i dag. Legg til, søk, rediger. Eksporter til en fil og importer tilbake når du bytter telefon — sikkerhetskopien er din og blir hos deg.
+
+📋 VALGFRI HISTORIKK
+
+Se hva som ble stoppet, når og hvorfor — på vanlig norsk, ikke som en intern kode. Merk et anrop som legitimt og send det til den personlige listen med ett trykk. Filtrer på periode og på avgjørelse. Velg lagringstid: aldri lagre, 7, 30, 90 dager eller tøm manuelt. Avslått skrives ingenting i det hele tatt.
+
+📞 TELEFONMODUS (VALGFRITT)
+
+Hvis du vil, blir Sentinela telefonappen din: en ryddig anropsskjerm, tastatur med formatering underveis, samtaletid, lyd av, høyttaler og tonetastatur. Da gjelder reglene dine også for kontakter. Det er frivillig, kan angres når som helst i Android-innstillingene, og appen fungerer utmerket uten.
+
+🎨 LAGET SLIK DEN SKAL VÆRE
+
+Material 3, mørkt tema og dynamiske farger fra bakgrunnsbildet ditt. Ingen annonser, ingen "premiumversjon", ingen abonnementsvegg, ingen triks for å få deg til å trykke feil.
+
+🚫 HVA SENTINELA IKKE GJØR
+
+Vi sier det heller før du installerer:
+
+• Den filtrerer ikke anrop fra WhatsApp, Telegram eller andre apper — Android gir ikke de anropene videre til filtreringsapper
+• Den identifiserer ikke hvem som ringer: det finnes ingen spamdatabase her, og det er med vilje
+• Den sletter ikke det blokkerte anropet fra loggen i systemets telefonapp — Android tillater det bare for operatørapper. Anropet ringer ikke og varsler ikke, men oppføringen blir stående
+• Den omgår ikke Androids "Ikke forstyrr"
+• Den tar ikke opp samtaler, leser ikke SMS og leser ikke anropsloggen din
+
+📱 Krever Android 10 eller nyere — systemets eget krav for rollen som anropsfiltrering.
+
+Sentinela. Stillheten du selv satte opp.

@@ -1,0 +1,58 @@
+Puhelin soi. Taas numero, jota et tunne.
+
+Perintärobotti. Joku, joka esittää pankkisi työntekijää. Myyntipuhelu. Kysely lauantaiaamuna kahdeksalta. Vastaat peläten menettäväsi jotain tärkeää — ja menetät taas vain aikaasi.
+
+Sentinela on olemassa tehdäkseen tästä lopun. Sääntöjä on yksi:
+
+JOS NUMERO EI OLE YHTEYSTIEDOISSASI EIKÄ OMALLA LISTALLASI, SE EI KESKEYTÄ SINUA.
+
+Ei soittoääntä. Ei värinää. Ei puhelunäyttöä. Ei ilmoitusta vastaamattomasta puhelusta.
+
+🔒 YKSITYISYYS, JOKA EI OLE PELKKÄÄ MAINOSTEKSTIÄ
+
+Sentinela julkaistaan ilman internet-oikeutta. Tämä ei ole lupaus siitä, ettemme käytä sitä: sovellus on teknisesti kyvytön lähettämään mitään minnekään.
+
+• Nolla telemetriaa, nolla mainoksia, ei tiliä luotavaksi
+• Yhteystietosi luetaan vain muistissa, puhelun hetkellä — nimiä, kuvia ja numeroita ei koskaan tallenneta eikä koskaan lähetetä
+• Koko numerosi ei näy koskaan lokissa eikä ilmoituksessa, vain peitettynä: +358 4* *** 1234
+• Tietosi on rajattu Androidin automaattisen varmuuskopioinnin ulkopuolelle
+• Toimii lentotilassa. Toimii ilman kenttää. Toimii aina, ilman verkkoa
+• Avoin lähdekoodi — tarkastettavissa rivi riviltä
+
+⚙️ SINÄ PÄÄTÄT, ET ALGORITMI
+
+Mikään pilvessä oleva roskapostitietokanta ei valitse puolestasi. Määrität säännön jokaiselle alkuperälle, ja jokainen hyväksyy Soi, Vaimenna, Estä tai Älä koskaan vaimenna:
+
+• Yhteystiedot puhelimessasi → Soi (oletus)
+• Oma listasi → Älä koskaan vaimenna (oletus)
+• Tuntemattomat numerot → Estä (oletus)
+
+⭐ OMA LISTA
+
+Lääkärisi, koulu, lähetti, juuri se numero, jota odotat tänään. Lisää, hae, muokkaa. Vie tiedostoon ja tuo takaisin, kun vaihdat puhelinta — varmuuskopio on sinun ja pysyy sinulla.
+
+📋 VALINNAINEN HISTORIA
+
+Näe mikä pysäytettiin, milloin ja miksi — selkokielellä, ei sisäisenä koodina. Merkitse puhelu aidoksi ja lähetä se omalle listallesi yhdellä napautuksella. Suodata jakson ja päätöksen mukaan. Valitse säilytys: älä koskaan säilytä, 7, 30, 90 päivää tai tyhjennä käsin. Pois päältä mitään ei kirjoiteta lainkaan.
+
+📞 PUHELINTILA (VALINNAINEN)
+
+Halutessasi Sentinelasta tulee puhelinsovelluksesi: selkeä puhelunäyttö, näppäimistö reaaliaikaisella muotoilulla, puhelun kesto, mykistys, kaiutin ja äänitaajuusnäppäimistö. Silloin sääntösi koskevat myös yhteystietoja. Se on vapaaehtoista, peruttavissa milloin tahansa Androidin asetuksista, ja sovellus toimii mainiosti ilmankin.
+
+🎨 TEHTY NIIN KUIN KUULUU
+
+Material 3, tumma teema ja dynaamiset värit taustakuvastasi. Ei mainoksia, ei "premium-versiota", ei tilausmuuria, ei kikkoja, jotka saisivat sinut painamaan väärää kohtaa.
+
+🚫 MITÄ SENTINELA EI TEE
+
+Sanomme tämän mieluummin ennen kuin asennat:
+
+• Se ei suodata WhatsAppin, Telegramin tai muiden sovellusten puheluita — Android ei anna niitä puheluita suodatussovelluksille
+• Se ei tunnista soittajaa: täällä ei ole roskapostitietokantaa, ja se on tarkoituksellista
+• Se ei poista estettyä puhelua järjestelmän puhelinsovelluksen lokista — Android sallii sen vain operaattorisovelluksille. Puhelu ei soi eikä ilmoita, mutta merkintä jää
+• Se ei ohita Androidin "Älä häiritse" -tilaa
+• Se ei nauhoita puheluita, ei lue tekstiviestejä eikä lue puheluhistoriaasi
+
+📱 Vaatii Android 10:n tai uudemman — järjestelmän oma vaatimus puhelujen suodatusroolille.
+
+Sentinela. Hiljaisuus, jonka itse määritit.

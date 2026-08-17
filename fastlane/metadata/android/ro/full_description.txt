@@ -1,0 +1,58 @@
+Sună telefonul. Încă un număr pe care nu-l cunoașteți.
+
+Un robot de recuperare a creanțelor. Cineva care se dă drept angajat al băncii dumneavoastră. Un apel de vânzări. Un sondaj sâmbătă la ora opt dimineața. Răspundeți de teamă să nu pierdeți ceva important — și tot ce pierdeți, din nou, este timpul dumneavoastră.
+
+Sentinela există ca să pună capăt acestui lucru, cu o singură regulă:
+
+DACĂ NU ESTE ÎN AGENDĂ ȘI NICI ÎN LISTA DUMNEAVOASTRĂ PERSONALĂ, NU VĂ ÎNTRERUPE.
+
+Nu sună. Nu vibrează. Nu afișează ecranul de apel. Nu anunță apel pierdut.
+
+🔒 CONFIDENȚIALITATE CARE NU E DOAR TEXT DE MARKETING
+
+Sentinela se publică fără permisiunea de internet. Nu e o promisiune de tipul „nu o folosim": aplicația este incapabilă tehnic să trimită ceva undeva.
+
+• Zero telemetrie, zero reclame, niciun cont de creat
+• Contactele sunt citite doar în memorie, în momentul apelului — numele, fotografiile și numerele nu sunt niciodată salvate și niciodată trimise
+• Numărul complet nu apare niciodată într-un jurnal sau într-o notificare, ci doar mascat: +40 7** *** 123
+• Datele dumneavoastră sunt excluse din copia de rezervă automată Android
+• Funcționează în modul avion. Funcționează fără semnal. Funcționează mereu, offline
+• Sursă deschisă — poate fi verificată linie cu linie
+
+⚙️ DUMNEAVOASTRĂ DECIDEȚI, NU UN ALGORITM
+
+Nicio bază de date de spam din cloud nu alege în locul dumneavoastră. Stabiliți regula pentru fiecare origine, iar fiecare acceptă Sună, Fără sonor, Blochează sau Niciodată fără sonor:
+
+• Contactele din agendă → Sună (implicit)
+• Lista dumneavoastră personală → Niciodată fără sonor (implicit)
+• Numere necunoscute → Blochează (implicit)
+
+⭐ LISTA PERSONALĂ
+
+Medicul dumneavoastră, școala, curierul, exact numărul pe care îl așteptați astăzi. Adăugați, căutați, modificați. Exportați într-un fișier și importați înapoi când schimbați telefonul — copia este a dumneavoastră și rămâne la dumneavoastră.
+
+📋 ISTORIC OPȚIONAL
+
+Vedeți ce a fost oprit, când și de ce — în limbaj clar, nu într-un cod intern. Marcați un apel ca fiind legitim și trimiteți-l în lista personală cu o singură atingere. Filtrați după perioadă și după decizie. Alegeți păstrarea: niciodată, 7, 30, 90 de zile sau ștergere manuală. Dezactivat, nu se scrie absolut nimic.
+
+📞 MOD TELEFON (OPȚIONAL)
+
+Dacă doriți, Sentinela devine aplicația dumneavoastră de telefon: ecran de apel curat, tastatură cu formatare în timp real, cronometru, microfon oprit, difuzor și taste cu tonuri. Atunci regulile se aplică și contactelor. Este opțional, reversibil oricând din setările Android, iar aplicația funcționează foarte bine și fără el.
+
+🎨 FĂCUTĂ AȘA CUM TREBUIE
+
+Material 3, temă întunecată și culori dinamice din imaginea de fundal. Fără reclame, fără „versiune premium", fără zid de abonament, fără trucuri care să vă facă să atingeți unde nu trebuie.
+
+🚫 CE NU FACE SENTINELA
+
+Preferăm să vă spunem înainte de instalare:
+
+• Nu filtrează apelurile din WhatsApp, Telegram sau alte aplicații — Android nu predă acele apeluri aplicațiilor de filtrare
+• Nu identifică cine sună: aici nu există o bază de date de spam, iar acest lucru este intenționat
+• Nu șterge apelul blocat din jurnalul aplicației de telefon a sistemului — Android permite asta doar aplicațiilor operatorilor. Apelul nu sună și nu vă notifică, dar înregistrarea rămâne
+• Nu ocolește modul „Nu deranja" din Android
+• Nu înregistrează apeluri, nu citește SMS-uri și nu vă citește jurnalul de apeluri
+
+📱 Necesită Android 10 sau mai nou — cerință a sistemului însuși pentru rolul de filtrare a apelurilor.
+
+Sentinela. Liniștea pe care ați configurat-o dumneavoastră.

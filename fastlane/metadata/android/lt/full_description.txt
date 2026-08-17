@@ -1,0 +1,58 @@
+Skamba telefonas. Vėl numeris, kurio nepažįstate.
+
+Skolų išieškojimo robotas. Kažkas apsimetantis jūsų banko darbuotoju. Pardavimo skambutis. Apklausa šeštadienį aštuntą ryto. Atsiliepiate bijodami praleisti ką nors svarbaus — ir vėl prarandate tik savo laiką.
+
+Sentinela sukurta tam, kad tai baigtųsi. Taisyklė tik viena:
+
+JEI NUMERIO NĖRA JŪSŲ KONTAKTUOSE IR NĖRA JŪSŲ ASMENINIAME SĄRAŠE, JIS JŪSŲ NETRUKDO.
+
+Neskamba. Nevibruoja. Nerodo skambučio ekrano. Nepraneša apie praleistą skambutį.
+
+🔒 PRIVATUMAS, KURIS NĖRA VIEN REKLAMINIS TEKSTAS
+
+Sentinela publikuojama be interneto leidimo. Tai ne pažadas „mes jo nenaudojame": programėlė techniškai negali nieko niekur išsiųsti.
+
+• Nulis telemetrijos, nulis reklamų, jokios paskyros kurti nereikia
+• Jūsų kontaktai skaitomi tik atmintyje, skambučio metu — vardai, nuotraukos ir numeriai niekada neįrašomi ir niekada neišsiunčiami
+• Visas jūsų numeris niekada nepasirodo žurnale ar pranešime, tik užmaskuotas: +370 6** ***23
+• Jūsų duomenys neįtraukiami į automatinę Android atsarginę kopiją
+• Veikia lėktuvo režimu. Veikia be ryšio. Veikia visada, neprisijungus
+• Atviras kodas — patikrinamas eilutė po eilutės
+
+⚙️ SPRENDŽIATE JŪS, O NE ALGORITMAS
+
+Jokia šlamšto numerių duomenų bazė debesyje nesirenka už jus. Taisyklę kiekvienam šaltiniui nustatote jūs, o kiekviena priima Skambėti, Nutildyti, Blokuoti arba Niekada nenutildyti:
+
+• Kontaktai iš telefonų knygos → Skambėti (numatyta)
+• Jūsų asmeninis sąrašas → Niekada nenutildyti (numatyta)
+• Nežinomi numeriai → Blokuoti (numatyta)
+
+⭐ ASMENINIS SĄRAŠAS
+
+Jūsų gydytojas, mokykla, kurjeris, būtent tas numeris, kurio šiandien laukiate. Pridėkite, suraskite, redaguokite. Eksportuokite į failą ir importuokite atgal keisdami telefoną — atsarginė kopija yra jūsų ir lieka pas jus.
+
+📋 NEPRIVALOMA ISTORIJA
+
+Pamatykite, kas buvo sustabdyta, kada ir kodėl — aiškia kalba, o ne vidiniu kodu. Pažymėkite skambutį kaip teisėtą ir vienu palietimu nusiųskite jį į asmeninį sąrašą. Filtruokite pagal laikotarpį ir pagal sprendimą. Pasirinkite saugojimą: niekada, 7, 30, 90 dienų arba trinti ranka. Išjungus neįrašoma visiškai nieko.
+
+📞 TELEFONO REŽIMAS (NEPRIVALOMAS)
+
+Jei norite, Sentinela tampa jūsų telefono programėle: tvarkingas skambučio ekranas, klaviatūra su formatavimu rašant, pokalbio laikmatis, mikrofono išjungimas, garsiakalbis ir tonų klaviatūra. Tada jūsų taisyklės galioja ir kontaktams. Tai neprivaloma, bet kada atšaukiama Android nustatymuose, o programėlė puikiai veikia ir be to.
+
+🎨 PADARYTA TAIP, KAIP TURI BŪTI
+
+Material 3, tamsi tema ir dinaminės spalvos iš jūsų fono. Jokių reklamų, jokios „premium versijos", jokios prenumeratos sienos, jokių gudrybių, kad paliestumėte ne ten.
+
+🚫 KO SENTINELA NEDARO
+
+Verčiau pasakome prieš įdiegiant:
+
+• Ji nefiltruoja WhatsApp, Telegram ar kitų programėlių skambučių — Android tų skambučių filtravimo programėlėms neperduoda
+• Ji nenustato, kas skambina: čia nėra šlamšto duomenų bazės, ir tai sąmoninga
+• Ji neištrina užblokuoto skambučio iš sistemos telefono programėlės žurnalo — Android tai leidžia tik operatorių programėlėms. Skambutis neskamba ir nepraneša, bet įrašas lieka
+• Ji neapeina Android režimo „Netrukdyti"
+• Ji neįrašinėja pokalbių, neskaito SMS ir neskaito jūsų skambučių žurnalo
+
+📱 Reikia Android 10 arba naujesnės — tai pačios sistemos reikalavimas skambučių filtravimo vaidmeniui.
+
+Sentinela. Tyla, kurią nustatėte patys.

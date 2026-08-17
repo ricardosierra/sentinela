@@ -1,0 +1,58 @@
+Telefon çalıyor. Yine tanımadığınız bir numara.
+
+Tahsilat robotu. Bankanızdan arıyormuş gibi yapan biri. Soğuk satış araması. Cumartesi sabahı 8'de anket. Önemli bir şeyi kaçırma korkusuyla açıyorsunuz — ve yine sadece vaktinizi kaybediyorsunuz.
+
+Sentinela buna son vermek için var. Tek bir kuralla:
+
+REHBERİNİZDE VE KİŞİSEL LİSTENİZDE YOKSA, SİZİ RAHATSIZ ETMEZ.
+
+Çalmaz. Titremez. Arama ekranı göstermez. Cevapsız arama uyarısı vermez.
+
+🔒 SADECE PAZARLAMA CÜMLESİ OLMAYAN GİZLİLİK
+
+Sentinela internet izni olmadan yayınlanır. Bu, "kullanmıyoruz" sözü değil: uygulama teknik olarak hiçbir şeyi hiçbir yere gönderemez.
+
+• Sıfır telemetri, sıfır reklam, açılacak hesap yok
+• Rehberiniz yalnızca bellekte, aramanın olduğu anda okunur — isim, fotoğraf ve numara asla saklanmaz ve asla gönderilmez
+• Tam numaranız hiçbir kayıtta veya bildirimde görünmez, yalnızca maskeli: +90 5** *** 12 34
+• Verileriniz Android'in otomatik yedeklemesinin dışında tutulur
+• Uçak modunda çalışır. Çekmediğinde çalışır. Her zaman çalışır, çevrimdışı
+• Açık kaynak — satır satır denetlenebilir
+
+⚙️ KARARI SİZ VERİRSİNİZ, ALGORİTMA DEĞİL
+
+Sizin yerinize seçim yapan bulut tabanlı spam veritabanı yok. Her kaynağın kuralını siz belirlersiniz ve her biri Çal, Sessize Al, Engelle veya Asla Sessize Alma seçeneklerini kabul eder:
+
+• Rehberdeki kişiler → Çal (varsayılan)
+• Kişisel listeniz → Asla Sessize Alma (varsayılan)
+• Bilinmeyen numaralar → Engelle (varsayılan)
+
+⭐ KİŞİSEL LİSTE
+
+Doktorunuz, okul, kurye, bugün beklediğiniz o numara. Ekleyin, arayın, düzenleyin. Bir dosyaya aktarın ve telefon değiştirdiğinizde geri alın — yedek sizindir ve sizde kalır.
+
+📋 İSTEĞE BAĞLI GEÇMİŞ
+
+Neyin durdurulduğunu, ne zaman ve neden olduğunu görün — iç kodla değil, açık bir dille. Bir aramayı meşru olarak işaretleyip tek dokunuşla kişisel listeye gönderin. Döneme ve karara göre filtreleyin. Saklama süresini seçin: hiç saklama, 7, 30, 90 gün veya elle temizleme. Kapalıyken hiçbir şey yazılmaz.
+
+📞 TELEFON MODU (İSTEĞE BAĞLI)
+
+İsterseniz Sentinela telefon uygulamanız olur: sade bir arama ekranı, anlık biçimlendirmeli tuş takımı, süre sayacı, sessiz, hoparlör ve tonlu tuş takımı. O zaman kurallarınız rehberdeki kişiler için de geçerli olur. İsteğe bağlıdır, Android ayarlarından istediğiniz an geri alınır ve uygulama onsuz da gayet iyi çalışır.
+
+🎨 OLMASI GEREKTİĞİ GİBİ YAPILDI
+
+Material 3, koyu tema ve duvar kâğıdınızdan gelen dinamik renkler. Reklam yok, "premium sürüm" yok, abonelik duvarı yok, yanlış yere dokunmanızı sağlayacak hile yok.
+
+🚫 SENTINELA'NIN YAPMADIKLARI
+
+Kurmadan önce söylemeyi tercih ediyoruz:
+
+• WhatsApp, Telegram veya diğer uygulamaların aramalarını filtrelemez — Android bu aramaları filtreleme uygulamalarına vermez
+• Kimin aradığını tespit etmez: burada spam veritabanı yoktur, bu bilinçli bir tercihtir
+• Engellenen aramayı sistemin telefon uygulamasının kayıtlarından silmez — Android buna yalnızca operatör uygulamalarında izin verir. Arama çalmaz ve bildirim vermez, ama kayıt orada kalır
+• Android'in "Rahatsız Etmeyin" modunu atlatmaz
+• Aramaları kaydetmez, SMS okumaz ve arama kayıtlarınızı okumaz
+
+📱 Android 10 veya üzeri gerekir; bu, arama filtreleme rolü için sistemin kendi şartıdır.
+
+Sentinela. Sizin ayarladığınız sessizlik.

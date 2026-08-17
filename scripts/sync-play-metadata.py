@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LISTING_SOURCE = ROOT / "docs/loja/ficha"
 GRAPHICS_SOURCE = ROOT / "docs/loja/graficos"
 METADATA_TARGET = ROOT / "app/src/main/play"
+FDROID_TARGET = ROOT / "fastlane/metadata/android"
 EXPECTED_LISTINGS = 74
 MAX_LENGTHS = {
     "title": 30,
@@ -168,6 +169,39 @@ def sync(listings: list[Listing], target: Path, graphics_source: Path) -> None:
     copy_graphics(target, graphics_source)
 
 
+def copy_graphics_fdroid(target: Path, graphics_source: Path) -> None:
+    locale_sources = {"pt-BR": "pt-BR", "en-US": "en", "es-419": "es"}
+    for locale, source_locale in locale_sources.items():
+        destination = target / locale / "images"
+
+        def copy(source: Path, category: str, new_name: str | None = None) -> None:
+            category_dir = destination if category == "" else destination / category
+            category_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, category_dir / (new_name or source.name))
+
+        copy(graphics_source / "icone-512.png", "", "icon.png")
+        copy(graphics_source / f"feature-graphic-{locale}.png", "", "featureGraphic.png")
+        for source_device, category in (
+            ("telefone", "phoneScreenshots"),
+            ("tablet7", "sevenInchScreenshots"),
+            ("tablet10", "tenInchScreenshots"),
+        ):
+            source_dir = graphics_source / "screenshots" / source_device / source_locale
+            for source in sorted(source_dir.glob("*.png")):
+                copy(source, category)
+
+
+def sync_fdroid(listings: list[Listing], target: Path, graphics_source: Path) -> None:
+    if target.exists():
+        shutil.rmtree(target)
+    for listing in listings:
+        base = target / listing.locale
+        write_text(base / "title.txt", listing.title)
+        write_text(base / "short_description.txt", listing.short_description)
+        write_text(base / "full_description.txt", listing.full_description)
+    copy_graphics_fdroid(target, graphics_source)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="valida fontes sem escrever metadados")
@@ -177,11 +211,12 @@ def main() -> int:
         require_graphics(GRAPHICS_SOURCE)
         if not args.check:
             sync(listings, METADATA_TARGET, GRAPHICS_SOURCE)
+            sync_fdroid(listings, FDROID_TARGET, GRAPHICS_SOURCE)
     except (OSError, ValueError) as error:
         print(f"erro: {error}", file=sys.stderr)
         return 1
 
-    action = "validada" if args.check else f"gerada em {METADATA_TARGET.relative_to(ROOT)}"
+    action = "validada" if args.check else f"gerada em {METADATA_TARGET.relative_to(ROOT)} e {FDROID_TARGET.relative_to(ROOT)}"
     print(f"ficha da Play {action}: {len(listings)} idiomas")
     return 0
 

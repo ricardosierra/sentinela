@@ -1,0 +1,58 @@
+Il telefon suna. Anc in numer che ti na enconuschas betg.
+
+In robot che incassescha debits. Insatgi che finge d'esser da tia banca. Ina clamada da vendita. In'enquista a las otg la damaun da sonda. Ti respundas per tema da mancar insatge impurtant — e l'unic che ti perdas, danovamain, è tes temp.
+
+Sentinela exista per far la fin da quai, cun ina suletta regla:
+
+SCHE EL NA STAT BETG EN TES CONTACTS NI SIN TIA GLISTA PERSUNALA, NA T'INTERRUMPA EL BETG.
+
+Na suna betg. Na vibrescha betg. Na mussa nagina fanestra da clamada. Na dat nagina communicaziun da clamada mancada.
+
+🔒 PROTECZIUN DA DATAS CHE NA È BETG MO IN TEXT DA RECLAMA
+
+Sentinela vegn publitgada senza il dretg d'internet. Quai n'è betg ina empermischun da "nus n'al duvrain betg": l'applicaziun n'è tecnicamain betg abla da trametter insatge eninsanua.
+
+• Nulla telemetria, nullas reclamas, nagin conto da crear
+• Tes contacts vegnan legids mo en la memoria, en il mument da la clamada — nums, fotos e numers na vegnan mai memorisads e mai tramess
+• Tes numer cumplet na cumpara mai en in protocol u en ina communicaziun, mo mascrà: +41 7* *** 12 34
+• Tias datas èn excludidas da la copia da segirezza automatica d'Android
+• Funcziunescha en il modus d'aviun. Funcziunescha senza rait. Funcziunescha adina, offline
+• Code avert — controllabel lingia per lingia
+
+⚙️ TI DECIDAS, BETG IN ALGORITMUS
+
+Nagina banca da datas da spam en il cloud tscherna per tai. Ti fixeschas la regla per mintga origin, e mintgina accepta Sunar, Zuppentar, Bloccar u Mai zuppentar:
+
+• Contacts da tes cudesch da telefon → Sunar (standard)
+• Tia glista persunala → Mai zuppentar (standard)
+• Numers nunenconuschents → Bloccar (standard)
+
+⭐ GLISTA PERSUNALA
+
+Tes medi, la scola, il purtader, precis quel numer che ti spetgas oz. Agiunta, tschertga, modifitgescha. Exportescha en in file ed importescha danovamain cur che ti mides il telefon — la copia è tia e resta tar tai.
+
+📋 ISTORGIA FACULTATIVA
+
+Guarda tge ch'è vegnì fermà, cura e pertge — en ina lingua clera, betg en in code intern. Marchescha ina clamada sco legitima e tramet ella sin tia glista persunala cun in sulet tut. Filtrescha tenor perioda e tenor decisiun. Tscherna la durada da conservaziun: mai, 7, 30, 90 dis u stizzar a maun. Sche quai è deactivà na vegn scrit propi nagut.
+
+📞 MODUS TELEFON (FACULTATIV)
+
+Sche ti vuls, daventa Sentinela tia applicaziun da telefon: ina fanestra da clamada netta, in tastaturin che formatescha il numer directamain, in temp-mesirader, mut, altparlader ed in tastaturin da tuns. Lura valan tias reglas era per ils contacts. Quai è facultativ, revocabel da tut temp en las preferenzas d'Android, e l'applicaziun funcziunescha fitg bain senza quai.
+
+🎨 FATG SCO QUAI STO ESSER
+
+Material 3, tema stgira e colurs dinamicas da tes fund. Naginas reclamas, nagina "versiun premium", nagina mira d'abunament, nagins tricks per che ti smatgias en il fals lieu.
+
+🚫 TGE CHE SENTINELA NA FA BETG
+
+Nus preferin da dir quai avant che ti l'installeschas:
+
+• Ella na filtrescha betg clamadas da WhatsApp, Telegram u autras applicaziuns — Android na consegna betg questas clamadas a las applicaziuns da filtraziun
+• Ella n'identifitgescha betg tgi che clama: qua n'exista nagina banca da datas da spam, e quai è intenziunà
+• Ella na stizza betg la clamada bloccada dal protocol da l'applicaziun da telefon dal sistem — Android permetta quai mo a las applicaziuns d'operaturs. La clamada na suna betg e n'annunzia betg, ma l'endataziun resta
+• Ella n'evitescha betg il modus "Betg disturbar" d'Android
+• Ella na registrescha naginas clamadas, na legia nagins SMS e na legia betg tes protocol da clamadas
+
+📱 Dumonda Android 10 u pli nov — pretensiun dal sistem sez per il rolla da filtraziun da clamadas.
+
+Sentinela. Il silenzi che ti has configurà sez.

@@ -1,0 +1,58 @@
+Telefon zəng çalır. Yenə tanımadığınız bir nömrə.
+
+Borc yığan robot. Özünü bankınızın işçisi kimi göstərən biri. Satış zəngi. Şənbə səhəri saat səkkizdə sorğu. Vacib bir şeyi qaçırmaqdan qorxub cavab verirsiniz — və yenə itirdiyiniz yeganə şey öz vaxtınız olur.
+
+Sentinela buna son qoymaq üçün var. Qaydası birdir:
+
+NÖMRƏ NƏ KONTAKTLARINIZDA, NƏ DƏ ŞƏXSİ SİYAHINIZDA YOXDURSA, SİZİ NARAHAT ETMİR.
+
+Zəng çalmır. Titrəmir. Zəng ekranı göstərmir. Buraxılmış zəng bildirişi vermir.
+
+🔒 SADƏCƏ REKLAM MƏTNİ OLMAYAN MƏXFİLİK
+
+Sentinela internet icazəsi olmadan dərc olunur. Bu, "istifadə etmirik" vədi deyil: tətbiq texniki olaraq heç nəyi heç yerə göndərə bilmir.
+
+• Sıfır telemetriya, sıfır reklam, yaradılacaq heç bir hesab yoxdur
+• Kontaktlarınız yalnız yaddaşda, zəngin gəldiyi anda oxunur — adlar, şəkillər və nömrələr heç vaxt saxlanmır və heç vaxt göndərilmir
+• Tam nömrəniz jurnalda və ya bildirişdə heç vaxt görünmür, yalnız maskalanmış şəkildə: +994 5* *** 12 34
+• Məlumatlarınız Android-in avtomatik ehtiyat nüsxəsindən kənarda saxlanılır
+• Təyyarə rejimində işləyir. Şəbəkəsiz işləyir. Həmişə işləyir, oflayn
+• Açıq mənbə — sətir-sətir yoxlanıla bilər
+
+⚙️ QƏRARI SİZ VERİRSİNİZ, ALQORİTM YOX
+
+Buludda heç bir spam bazası sizin əvəzinizə seçim etmir. Hər mənbənin qaydasını siz təyin edirsiniz və hər biri Zəng çalsın, Səssiz, Blokla və ya Heç vaxt səssizləşdirmə variantlarını qəbul edir:
+
+• Telefon kitabçasındakı kontaktlar → Zəng çalsın (ilkin)
+• Şəxsi siyahınız → Heç vaxt səssizləşdirmə (ilkin)
+• Naməlum nömrələr → Blokla (ilkin)
+
+⭐ ŞƏXSİ SİYAHI
+
+Həkiminiz, məktəb, kuryer, bu gün gözlədiyiniz həmin nömrə. Əlavə edin, axtarın, dəyişin. Fayla ixrac edin və telefonu dəyişəndə geri idxal edin — ehtiyat nüsxə sizindir və sizdə qalır.
+
+📋 İSTƏYƏ BAĞLI TARİXÇƏ
+
+Nəyin dayandırıldığını, nə vaxt və niyə olduğunu görün — daxili kodla deyil, aydın dillə. Zəngi qanuni kimi işarələyin və bir toxunuşla şəxsi siyahıya göndərin. Dövrə və qərara görə süzgəcdən keçirin. Saxlama müddətini seçin: heç vaxt, 7, 30, 90 gün və ya əl ilə silmə. Söndürülmüş halda ümumiyyətlə heç nə yazılmır.
+
+📞 TELEFON REJİMİ (İSTƏYƏ BAĞLI)
+
+İstəsəniz, Sentinela telefon tətbiqinizə çevrilir: səliqəli zəng ekranı, yazdıqca formatlaşdıran nömrə lövhəsi, danışıq taymeri, səssiz rejim, dinamik və ton klaviaturası. Onda qaydalarınız kontaktlara da şamil olunur. Bu, istəyə bağlıdır, Android parametrlərindən istənilən vaxt geri qaytarıla bilər və tətbiq onsuz da əla işləyir.
+
+🎨 OLMALI OLDUĞU KİMİ HAZIRLANIB
+
+Material 3, tünd tema və divar kağızınızdan alınan dinamik rənglər. Reklamsız, "premium versiya" olmadan, abunə divarı olmadan, sizi səhv yerə toxunmağa vadar edən hiylələr olmadan.
+
+🚫 SENTINELA NƏ ETMİR
+
+Quraşdırmadan əvvəl demək istəyirik:
+
+• WhatsApp, Telegram və ya digər tətbiqlərin zənglərini süzmür — Android bu zəngləri süzgəc tətbiqlərinə vermir
+• Kimin zəng etdiyini müəyyən etmir: burada spam bazası yoxdur və bu qəsdəndir
+• Bloklanmış zəngi sistemin telefon tətbiqinin jurnalından silmir — Android buna yalnız operator tətbiqlərinə icazə verir. Zəng çalmır və bildiriş vermir, amma qeyd orada qalır
+• Android-in "Narahat etmə" rejimini keçmir
+• Zəngləri yazmır, SMS oxumur və zəng jurnalınızı oxumur
+
+📱 Android 10 və ya daha yeni tələb olunur — zəng süzgəci rolu üçün sistemin öz tələbidir.
+
+Sentinela. Özünüzün qurduğu sükut.

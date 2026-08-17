@@ -1,0 +1,58 @@
+Ponsel berdering. Lagi-lagi nomor yang tidak Anda kenal.
+
+Robot penagih utang. Orang yang mengaku dari bank Anda. Telepon penawaran. Survei jam delapan pagi di hari Sabtu. Anda angkat karena takut melewatkan sesuatu yang penting — dan yang hilang lagi-lagi cuma waktu Anda.
+
+Sentinela ada untuk mengakhiri itu, dengan satu aturan saja:
+
+KALAU TIDAK ADA DI KONTAK ANDA DAN TIDAK ADA DI DAFTAR PRIBADI ANDA, DIA TIDAK MENGGANGGU ANDA.
+
+Tidak berdering. Tidak bergetar. Tidak menampilkan layar panggilan. Tidak memberi notifikasi panggilan tak terjawab.
+
+🔒 PRIVASI YANG BUKAN SEKADAR KALIMAT PEMASARAN
+
+Sentinela dirilis tanpa izin internet. Ini bukan janji "kami tidak memakainya": aplikasinya secara teknis tidak mampu mengirim apa pun ke mana pun.
+
+• Nol telemetri, nol iklan, nol akun yang harus dibuat
+• Kontak Anda dibaca hanya di memori, pada saat panggilan masuk — nama, foto, dan nomor tidak pernah disimpan dan tidak pernah dikirim
+• Nomor lengkap Anda tidak pernah muncul di log atau notifikasi, selalu disamarkan: +62 81*-****-1234
+• Data Anda dikecualikan dari cadangan otomatis Android
+• Jalan di mode pesawat. Jalan tanpa sinyal. Jalan terus, offline
+• Sumber terbuka — bisa diperiksa baris per baris
+
+⚙️ ANDA YANG MEMUTUSKAN, BUKAN ALGORITMA
+
+Tidak ada basis data spam di cloud yang memilih untuk Anda. Anda yang menetapkan aturan tiap asal, dan tiap aturan menerima Berdering, Senyapkan, Blokir, atau Jangan Pernah Senyapkan:
+
+• Kontak di buku telepon → Berdering (bawaan)
+• Daftar pribadi Anda → Jangan Pernah Senyapkan (bawaan)
+• Nomor tak dikenal → Blokir (bawaan)
+
+⭐ DAFTAR PRIBADI
+
+Dokter Anda, sekolah, kurir, satu nomor yang Anda tunggu hari ini. Tambah, cari, ubah. Ekspor ke sebuah berkas dan impor kembali saat ganti ponsel — cadangannya milik Anda dan tetap di tangan Anda.
+
+📋 RIWAYAT OPSIONAL
+
+Lihat apa yang dihentikan, kapan, dan kenapa — dengan bahasa yang jelas, bukan kode internal. Tandai sebuah panggilan sebagai sah dan kirim ke daftar pribadi dengan sekali ketuk. Saring berdasarkan periode dan berdasarkan keputusan. Pilih masa simpan: tidak pernah disimpan, 7, 30, 90 hari, atau hapus manual. Kalau dimatikan, tidak ada apa pun yang ditulis.
+
+📞 MODE PENELEPON (OPSIONAL)
+
+Kalau mau, Sentinela menjadi aplikasi telepon Anda: layar panggilan yang bersih, papan tombol dengan format langsung, penghitung durasi, bisu, pengeras suara, dan tombol nada. Saat itu aturan Anda berlaku juga untuk kontak. Ini opsional, bisa dikembalikan kapan saja dari setelan Android, dan aplikasinya bekerja dengan baik tanpa itu.
+
+🎨 DIBUAT SEBAGAIMANA MESTINYA
+
+Material 3, tema gelap, dan warna dinamis dari wallpaper Anda. Tanpa iklan, tanpa "versi premium", tanpa dinding langganan, tanpa jebakan yang membuat Anda salah ketuk.
+
+🚫 YANG TIDAK DILAKUKAN SENTINELA
+
+Kami lebih suka mengatakannya sebelum Anda memasang:
+
+• Tidak menyaring panggilan WhatsApp, Telegram, atau aplikasi lain — Android tidak menyerahkan panggilan seperti itu ke aplikasi penyaring
+• Tidak mengidentifikasi siapa yang menelepon: di sini tidak ada basis data spam, dan itu disengaja
+• Tidak menghapus panggilan yang diblokir dari log aplikasi telepon bawaan sistem — Android hanya mengizinkan itu untuk aplikasi operator. Panggilannya tidak berdering dan tidak memberi notifikasi, tapi catatannya tetap ada
+• Tidak mengakali mode "Jangan Ganggu" milik Android
+• Tidak merekam panggilan, tidak membaca SMS, dan tidak membaca log panggilan Anda
+
+📱 Butuh Android 10 atau lebih baru — syarat dari sistem itu sendiri untuk peran penyaringan panggilan.
+
+Sentinela. Ketenangan yang Anda atur sendiri.

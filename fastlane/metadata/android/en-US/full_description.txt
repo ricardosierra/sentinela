@@ -1,0 +1,58 @@
+Your phone rings. It's another number you don't recognize.
+
+A debt-collection robot. Someone pretending to be your bank. A cold sales call. A survey at 8am on a Saturday. You pick up because you're afraid of missing something important — and all you lose is your time, again.
+
+Sentinela exists to end that, using one rule:
+
+IF IT'S NOT IN YOUR CONTACTS OR YOUR PERSONAL LIST, IT DOESN'T INTERRUPT YOU.
+
+No ring. No vibration. No call screen. No missed-call alert.
+
+🔒 PRIVACY THAT ISN'T JUST MARKETING COPY
+
+Sentinela ships without the internet permission. This isn't a promise that "we don't use it": the app is technically incapable of sending anything anywhere.
+
+• Zero telemetry, zero ads, zero accounts to create
+• Your contacts are read in memory only, at the moment of the call — names, photos and numbers are never stored and never sent
+• Your full number never appears in a log or a notification, only masked: +1 555 ***-1234
+• Your data is excluded from Android's automatic backup
+• Works in airplane mode. Works with no signal. Works forever, offline
+• Open source — auditable line by line
+
+⚙️ YOU DECIDE, NOT AN ALGORITHM
+
+No cloud spam database choosing for you. You set the policy for each origin, and each one accepts Ring, Silence, Block or Never Silence:
+
+• Contacts in your address book → Ring (default)
+• Your personal list → Never Silence (default)
+• Unknown numbers → Block (default)
+
+⭐ PERSONAL LIST
+
+Your doctor, your kid's school, the delivery driver, that one number you're waiting on today. Add it, search it, edit it. Export it to a file and import it back when you switch phones — the backup is yours and it stays with you.
+
+📋 OPTIONAL HISTORY
+
+See what was stopped, when, and why — in plain language, not an internal code. Mark a call as legitimate and send it to your personal list with one tap. Filter by period and by decision. Choose retention: never keep, 7, 30, 90 days, or clear it by hand. Turned off, nothing is written at all.
+
+📞 OPTIONAL DIALER MODE
+
+If you want, Sentinela becomes your phone app: a clean in-call screen, a dialer with live number formatting, call timer, mute, speaker and touch-tone keypad. Your policies then apply to contacts too. It's opt-in, reversible at any time from Android settings, and the app works perfectly well without it.
+
+🎨 BUILT THE WAY IT SHOULD BE
+
+Material 3, dark theme and dynamic colors from your wallpaper. No ads, no "premium tier", no subscription wall, no dark pattern trying to make you tap the wrong thing.
+
+🚫 WHAT SENTINELA DOES NOT DO
+
+We'd rather tell you before you install:
+
+• It does not filter WhatsApp, Telegram or other app calls — Android does not hand those calls to screening apps
+• It does not identify who's calling: there is no spam database here, and that's on purpose
+• It does not erase the blocked call from your system phone app's call log — Android only allows that for carrier apps. The call won't ring or notify you, but the entry stays there
+• It does not bypass Android's Do Not Disturb
+• It does not record calls, read SMS, or read your call log
+
+📱 Requires Android 10 or newer — the system's own requirement for the call screening role.
+
+Sentinela. The silence you configured.

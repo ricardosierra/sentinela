@@ -1,0 +1,58 @@
+Suena el teléfono. Es otro número que no conoces.
+
+Un robot de cobros. Alguien que dice ser de tu banco. Una llamada comercial. Una encuesta a las 8 de la mañana un sábado. Lo coges por miedo a perderte algo importante — y lo único que pierdes es tu tiempo, otra vez.
+
+Sentinela existe para acabar con eso, con una sola regla:
+
+SI NO ESTÁ EN TUS CONTACTOS NI EN TU LISTA PERSONAL, NO TE INTERRUMPE.
+
+No suena. No vibra. No muestra pantalla de llamada. No avisa de llamada perdida.
+
+🔒 PRIVACIDAD QUE NO ES SOLO TEXTO DE MARKETING
+
+Sentinela se publica sin el permiso de internet. No es una promesa de "no lo usamos": la aplicación es técnicamente incapaz de enviar nada a ninguna parte.
+
+• Cero telemetría, cero anuncios, cero cuentas que crear
+• Tus contactos se leen solo en memoria, en el momento de la llamada — nombres, fotos y números nunca se almacenan ni se envían
+• Tu número completo nunca aparece en un registro ni en una notificación: solo enmascarado, tipo +34 6** *** 123
+• Tus datos quedan fuera de la copia de seguridad automática de Android
+• Funciona en modo avión. Funciona sin cobertura. Funciona siempre, sin conexión
+• Código abierto — auditable línea por línea
+
+⚙️ DECIDES TÚ, NO UN ALGORITMO
+
+Nada de una base de spam en la nube eligiendo por ti. Tú defines la política de cada origen, y cada una admite Sonar, Silenciar, Bloquear o Nunca Silenciar:
+
+• Contactos de tu agenda → Sonar (por defecto)
+• Tu lista personal → Nunca Silenciar (por defecto)
+• Desconocidos → Bloquear (por defecto)
+
+⭐ LISTA PERSONAL
+
+Tu médico, el colegio, el repartidor, ese número que estás esperando hoy. Añádelo, búscalo, edítalo. Expórtalo a un archivo e impórtalo de vuelta cuando cambies de móvil — la copia es tuya y se queda contigo.
+
+📋 HISTORIAL OPCIONAL
+
+Mira qué se detuvo, cuándo y por qué — en lenguaje claro, no en un código interno. Marca una llamada como legítima y mándala a tu lista personal con un toque. Filtra por período y por decisión. Elige la retención: no guardar nunca, 7, 30, 90 días o borrar a mano. Apagado, no se escribe absolutamente nada.
+
+📞 MODO MARCADOR (OPCIONAL)
+
+Si quieres, Sentinela se convierte en tu aplicación de teléfono: pantalla de llamada limpia, marcador con formato en vivo, cronómetro, silencio, altavoz y teclado de tonos. Entonces tus políticas también se aplican a los contactos. Es opcional, reversible en cualquier momento desde los ajustes de Android, y la aplicación funciona muy bien sin él.
+
+🎨 HECHA COMO DEBE SER
+
+Material 3, tema oscuro y colores dinámicos de tu fondo de pantalla. Sin publicidad, sin "versión premium", sin muro de suscripción, sin trampas para que toques donde no querías.
+
+🚫 LO QUE SENTINELA NO HACE
+
+Preferimos decírtelo antes de que la instales:
+
+• No filtra llamadas de WhatsApp, Telegram u otras aplicaciones — Android no entrega esas llamadas a las apps de filtrado
+• No identifica quién llama: aquí no hay base de datos de spam, y es a propósito
+• No borra la llamada bloqueada del registro de la aplicación de teléfono del sistema — Android solo se lo permite a las apps de operadora. La llamada no suena ni te notifica, pero el registro se queda ahí
+• No evita el modo "No molestar" de Android
+• No graba llamadas, no lee SMS y no lee tu registro de llamadas
+
+📱 Requiere Android 10 o superior, exigencia del propio sistema para el rol de filtrado de llamadas.
+
+Sentinela. El silencio que tú configuraste.

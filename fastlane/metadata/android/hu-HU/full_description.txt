@@ -1,0 +1,58 @@
+Csörög a telefon. Megint egy szám, amelyet nem ismer.
+
+Behajtórobot. Valaki, aki a bankja munkatársának adja ki magát. Értékesítési hívás. Kérdőív szombat reggel nyolckor. Felveszi, mert fél, hogy valami fontosat elszalaszt — és megint csak az idejét veszíti el.
+
+A Sentinela azért van, hogy ennek véget vessen. Egyetlen szabállyal:
+
+HA NINCS BENNE A NÉVJEGYZÉKÉBEN ÉS A SAJÁT LISTÁJÁBAN SEM, AKKOR NEM ZAVARJA ÖNT.
+
+Nem csörög. Nem rezeg. Nem jelenít meg hívásképernyőt. Nem értesít nem fogadott hívásról.
+
+🔒 ADATVÉDELEM, AMI NEM CSAK MARKETINGSZÖVEG
+
+A Sentinela internetjogosultság nélkül jelenik meg. Ez nem olyan ígéret, hogy „nem használjuk": az alkalmazás technikailag képtelen bármit bárhová elküldeni.
+
+• Nulla telemetria, nulla reklám, nulla létrehozandó fiók
+• A névjegyeit csak a memóriában olvassa be, a hívás pillanatában — nevek, fényképek és számok soha nem kerülnek tárolásra és soha nem kerülnek elküldésre
+• A teljes száma soha nem jelenik meg naplóban vagy értesítésben, csak maszkolva: +36 30 *** 1234
+• Az adatai ki vannak zárva az Android automatikus biztonsági mentéséből
+• Működik repülő üzemmódban. Működik térerő nélkül. Mindig működik, offline
+• Nyílt forráskódú — soronként ellenőrizhető
+
+⚙️ ÖN DÖNT, NEM EGY ALGORITMUS
+
+Semmilyen felhőben lévő spamadatbázis nem választ Ön helyett. Minden forráshoz Ön állítja be a szabályt, és mindegyik elfogadja a Csörögjön, Némítás, Tiltás vagy Soha ne némítsa lehetőséget:
+
+• A telefonkönyv névjegyei → Csörögjön (alapértelmezett)
+• Az Ön saját listája → Soha ne némítsa (alapértelmezett)
+• Ismeretlen számok → Tiltás (alapértelmezett)
+
+⭐ SAJÁT LISTA
+
+Az orvosa, az iskola, a futár, pontosan az a szám, amelyre ma vár. Vegye fel, keresse ki, szerkessze. Exportálja fájlba, és telefonváltáskor importálja vissza — a mentés az Öné, és Önnél is marad.
+
+📋 OPCIONÁLIS ELŐZMÉNYEK
+
+Nézze meg, mi lett megállítva, mikor és miért — érthető nyelven, nem belső kóddal. Jelöljön meg egy hívást jogosnak, és egyetlen koppintással küldje a saját listájára. Szűrjön időszak és döntés szerint. Válassza ki a megőrzést: soha, 7, 30, 90 nap, vagy kézi törlés. Kikapcsolva egyáltalán semmi nem íródik ki.
+
+📞 TELEFON MÓD (OPCIONÁLIS)
+
+Ha szeretné, a Sentinela lesz a telefonalkalmazása: letisztult hívásképernyő, élő formázású tárcsázó, hívásidőzítő, némítás, kihangosítás és hangfrekvenciás billentyűzet. Ekkor a szabályai a névjegyekre is vonatkoznak. Ez választható, bármikor visszavonható az Android beállításaiban, és az alkalmazás enélkül is remekül működik.
+
+🎨 ÚGY MEGÉPÍTVE, AHOGY KELL
+
+Material 3, sötét téma és dinamikus színek a háttérképéből. Nincs reklám, nincs „prémium verzió", nincs előfizetési fal, nincs trükk, amivel rossz helyre koppintana.
+
+🚫 AMIT A SENTINELA NEM CSINÁL
+
+Inkább telepítés előtt mondjuk el:
+
+• Nem szűri a WhatsApp, Telegram vagy más alkalmazások hívásait — az Android nem adja át ezeket a hívásokat a szűrőalkalmazásoknak
+• Nem azonosítja, ki hív: itt nincs spamadatbázis, és ez szándékos
+• Nem törli a letiltott hívást a rendszer telefonalkalmazásának hívásnaplójából — az Android ezt csak a szolgáltatói alkalmazásoknak engedi. A hívás nem csörög és nem értesít, de a bejegyzés ott marad
+• Nem kerüli meg az Android „Ne zavarjanak" módját
+• Nem rögzíti a hívásokat, nem olvas SMS-t, és nem olvassa a hívásnaplóját
+
+📱 Android 10 vagy újabb szükséges — ez magának a rendszernek a követelménye a hívásszűrő szerephez.
+
+Sentinela. A csend, amit Ön állított be.

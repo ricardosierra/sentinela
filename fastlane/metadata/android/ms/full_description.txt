@@ -1,0 +1,58 @@
+Telefon berdering. Sekali lagi nombor yang anda tidak kenal.
+
+Robot kutipan hutang. Seseorang yang berpura-pura dari bank anda. Panggilan jualan. Kaji selidik pukul lapan pagi hari Sabtu. Anda menjawab kerana takut terlepas sesuatu yang penting — dan yang hilang, sekali lagi, hanyalah masa anda.
+
+Sentinela wujud untuk menamatkan hal itu, dengan satu peraturan sahaja:
+
+KALAU TIADA DALAM KENALAN ANDA DAN TIADA DALAM SENARAI PERIBADI ANDA, IA TIDAK MENGGANGGU ANDA.
+
+Tidak berdering. Tidak bergetar. Tidak memaparkan skrin panggilan. Tidak memberi notifikasi panggilan terlepas.
+
+🔒 PRIVASI YANG BUKAN SEKADAR AYAT PEMASARAN
+
+Sentinela diterbitkan tanpa kebenaran internet. Ini bukan janji "kami tidak menggunakannya": aplikasi ini secara teknikal tidak mampu menghantar apa-apa ke mana-mana.
+
+• Sifar telemetri, sifar iklan, tiada akaun untuk dibuka
+• Kenalan anda dibaca dalam ingatan sahaja, pada saat panggilan masuk — nama, foto dan nombor tidak pernah disimpan dan tidak pernah dihantar
+• Nombor penuh anda tidak pernah muncul dalam log atau notifikasi, sentiasa ditutup: +60 1*-***-1234
+• Data anda dikecualikan daripada sandaran automatik Android
+• Berfungsi dalam mod pesawat. Berfungsi tanpa liputan. Sentiasa berfungsi, luar talian
+• Sumber terbuka — boleh diaudit baris demi baris
+
+⚙️ ANDA YANG MEMUTUSKAN, BUKAN ALGORITMA
+
+Tiada pangkalan data spam di awan yang memilih untuk anda. Anda menetapkan peraturan bagi setiap asal, dan setiap satu menerima Berdering, Senyapkan, Sekat atau Jangan Sesekali Senyapkan:
+
+• Kenalan dalam buku telefon → Berdering (lalai)
+• Senarai peribadi anda → Jangan Sesekali Senyapkan (lalai)
+• Nombor tak dikenali → Sekat (lalai)
+
+⭐ SENARAI PERIBADI
+
+Doktor anda, sekolah, penghantar, nombor yang anda tunggu hari ini. Tambah, cari, ubah. Eksport ke fail dan import semula apabila anda tukar telefon — sandaran itu milik anda dan kekal dengan anda.
+
+📋 SEJARAH PILIHAN
+
+Lihat apa yang dihentikan, bila dan mengapa — dalam bahasa yang jelas, bukan kod dalaman. Tandakan panggilan sebagai sah dan hantar ke senarai peribadi dengan satu ketikan. Tapis mengikut tempoh dan mengikut keputusan. Pilih tempoh simpanan: jangan sekali simpan, 7, 30, 90 hari, atau padam sendiri. Jika dimatikan, tiada apa-apa pun yang ditulis.
+
+📞 MOD PENDAIL (PILIHAN)
+
+Jika mahu, Sentinela menjadi aplikasi telefon anda: skrin panggilan yang kemas, papan dail dengan pemformatan serta-merta, pemasa panggilan, senyap, pembesar suara dan papan kekunci nada. Ketika itu peraturan anda turut terpakai kepada kenalan. Ia pilihan, boleh dipatahbalikkan bila-bila masa dari tetapan Android, dan aplikasi berfungsi dengan baik tanpanya.
+
+🎨 DIBINA SEBAGAIMANA SEPATUTNYA
+
+Material 3, tema gelap dan warna dinamik dari kertas dinding anda. Tiada iklan, tiada "versi premium", tiada tembok langganan, tiada helah untuk membuat anda menekan tempat yang salah.
+
+🚫 APA YANG SENTINELA TIDAK BUAT
+
+Kami lebih suka memberitahu sebelum anda memasang:
+
+• Ia tidak menapis panggilan WhatsApp, Telegram atau aplikasi lain — Android tidak menyerahkan panggilan sebegitu kepada aplikasi penapis
+• Ia tidak mengenal pasti siapa yang memanggil: tiada pangkalan data spam di sini, dan itu memang disengajakan
+• Ia tidak memadam panggilan yang disekat daripada log aplikasi telefon sistem — Android hanya membenarkan itu untuk aplikasi pembekal rangkaian. Panggilan tidak berdering dan tidak memberi notifikasi, tetapi catatannya kekal
+• Ia tidak memintas mod "Jangan Ganggu" Android
+• Ia tidak merakam panggilan, tidak membaca SMS dan tidak membaca log panggilan anda
+
+📱 Memerlukan Android 10 atau lebih baharu — syarat sistem itu sendiri untuk peranan penapisan panggilan.
+
+Sentinela. Kesunyian yang anda tetapkan sendiri.
