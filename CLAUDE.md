@@ -121,6 +121,7 @@ Se duas fontes divergirem, o código manda. Corrija a documentação viva no mes
 | Limitações da plataforma | [`docs/LIMITACOES.md`](docs/LIMITACOES.md) |
 | Estado e próximas fases | `.planning/{STATE,ROADMAP,REQUIREMENTS}.md` |
 | Fechar versão | [`docs/RELEASE.md`](docs/RELEASE.md) |
+| Publicar no F-Droid | [`docs/F-DROID.md`](docs/F-DROID.md) |
 | Validação em aparelho | [`docs/TESTE-FISICO-SAMSUNG.md`](docs/TESTE-FISICO-SAMSUNG.md) |
 
 Em conflito, vale a regra mais restritiva para produção: privacidade, permissão mínima e resposta
@@ -138,6 +139,11 @@ commit. **NUNCA** commite com autoria de bot — sempre a autoria real configura
 caracteres. Não use `--no-verify` sem pedido explícito. Branch padrão: `master`. Tags semver
 anotadas `vX.Y.Z`; primeira release é `v0.1.0`; `v1.0.0` fica reservado para maturidade real em
 produção.
+
+**F-Droid.** Submissões ao `fdroiddata` exigem seguir o template `App inclusion` no corpo do
+Merge Request, título `New app: <Nome>`, um único app por MR/branch, repositório de código 100%
+público e metadados no repositório (`fastlane/metadata/android`). MR sem template é fechado
+sumariamente pelos mantenedores. Detalhes em [`docs/F-DROID.md`](docs/F-DROID.md).
 
 **Changelog.** `CHANGELOG.md` segue o formato **Release Notes** do usuário: título
 `# Release Notes`, `---`, `## [Futuro]`, `## [Unreleased](...)`, cabeçalhos

@@ -1,35 +1,32 @@
 # F-Droid: Submissão e Publicação
 
-A estrutura de metadados multilíngues para o F-Droid já foi configurada no repositório do Sentinela. O script `scripts/sync-play-metadata.py` agora exporta a estrutura `fastlane/metadata/android` exigida pelo F-Droid.
+Guia oficial para publicação do Sentinela no catálogo do [F-Droid](https://f-droid.org).
 
-## Como publicar (Passo a Passo)
+## Regras e Invariantes de Submissão
 
-1. Faça login na sua conta no [GitLab](https://gitlab.com).
-2. Acesse o repositório oficial de dados do F-Droid: [https://gitlab.com/fdroid/fdroiddata](https://gitlab.com/fdroid/fdroiddata).
-3. Faça um **Fork** do repositório para a sua conta.
-4. No seu fork, acesse a pasta `metadata/` e crie um novo arquivo chamado `org.sentinela.app.yml`.
-5. Cole o conteúdo da receita abaixo no arquivo e salve (faça o commit na master do seu fork ou em uma nova branch).
-6. Abra um **Merge Request** do seu fork apontando para o repositório original `fdroid/fdroiddata`.
+1. **Template obrigatório:** Toda submissão de novo aplicativo no GitLab (`fdroid/fdroiddata`) **precisa** utilizar o template de Merge Request **`App inclusion`** e preencher todos os checkboxes obrigatórios. **MRs sem template ou com descrição vazia são fechados sumariamente pelos mantenedores** (conforme ocorrido no MR !46052: *"Closing because Merge Request template is not followed"*).
+2. **Formato do título:** O título do Merge Request deve seguir estritamente o padrão `New app: Sentinela` (ou `New app: org.sentinela.app`).
+3. **Um aplicativo por MR:** Nunca misture múltiplos aplicativos no mesmo Merge Request ou branch. Cada aplicativo precisa de seu próprio branch e MR isolado.
+4. **Repositório 100% público:** O código-fonte declarado em `Repo:` precisa ser acessível publicamente de forma anônima. Se o repositório for privado ou inacessível, o runner do CI do F-Droid falha com `Authentication failed for 'https://github.com/...'` ao tentar clonar.
+5. **Metadados via Fastlane:** O Sentinela versiona a árvore `fastlane/metadata/android/` diretamente no repositório Git. O F-Droid extrai título, descrições e gráficos em todos os 74 idiomas automaticamente — **não** adicione descrições redundantes dentro do `fdroiddata`.
 
-O bot do F-Droid irá iniciar uma pipeline para validar e construir o app automaticamente.
+---
 
-## Receita do F-Droid (`org.sentinela.app.yml`)
+## Receita do F-Droid (`metadata/org.sentinela.app.yml`)
+
+Arquivo a ser incluído em `metadata/org.sentinela.app.yml` no repositório `fdroiddata`:
 
 ```yaml
 Categories:
+  - Phone & SMS
   - Security
-  - Phone
 License: MIT
 AuthorName: Ricardo Sierra
 SourceCode: https://github.com/ricardosierra/sentinela
 IssueTracker: https://github.com/ricardosierra/sentinela/issues
 Changelog: https://github.com/ricardosierra/sentinela/blob/master/CHANGELOG.md
 
-# F-Droid lerá o nome e as descrições em dezenas de idiomas direto de "fastlane/metadata/android" do repo
 AutoName: Sentinela
-Summary: Bloqueador local de chamadas desconhecidas para Android
-Description: |-
-  App Android nativo e open source que impede chamadas de números desconhecidos de interromperem o usuário — sem propaganda, sem telemetria, sem nuvem, 100% offline.
 
 RepoType: git
 Repo: https://github.com/ricardosierra/sentinela.git
@@ -43,8 +40,50 @@ Builds:
       - yes
 
 AutoUpdateMode: Version v%v
-UpdateCheckMode: Tags
-UpdateCheckData: v([0-9.]+)
+UpdateCheckMode: Tags ^v([0-9.]+)$
 ```
 
-> **Nota**: Não é necessário adicionar os textos traduzidos manualmente nesta receita, pois os servidores do F-Droid extrairão automaticamente a pasta `fastlane/metadata/android` que nós geramos e commitamos no repositório.
+---
+
+## Template para a Descrição do Merge Request
+
+Ao abrir o Merge Request no GitLab em `https://gitlab.com/fdroid/fdroiddata/-/merge_requests/new`, selecione o template **`App inclusion`** ou cole o seguinte conteúdo na descrição:
+
+```markdown
+## Required
+
+* [x] The app complies with the [inclusion criteria](https://f-droid.org/docs/Inclusion_Policy)
+* [x] The original app author has been notified (and does not oppose the inclusion)
+* [x] All related [fdroiddata](https://gitlab.com/fdroid/fdroiddata/issues) and [RFP issues](https://gitlab.com/fdroid/rfp/issues) have been referenced in this merge request
+* [x] Builds with `fdroid build` and all pipelines pass
+* [x] There is an issue tracker and contact info of the author so that we can report bugs and contact the author.
+
+## Strongly Recommended
+
+* [x] The upstream app source code repo contains the app metadata _(summary/description/images/changelog/etc)_ in a [Fastlane](https://gitlab.com/snippets/1895688) or [Triple-T](https://gitlab.com/snippets/1901490) folder structure
+* [x] Releases are tagged and auto update is enabled
+
+## Suggested
+
+* [ ] External repos are added as git submodules instead of srclibs
+* [ ] Enable [Reproducible Builds](https://f-droid.org/docs/Reproducible_Builds)
+* [ ] Multiple apks for native code
+
+/label ~"New App"
+```
+
+---
+
+## Passo a Passo para Submissão
+
+1. No seu fork `ricardosierra/fdroiddata`:
+   - Crie uma branch isolada (ex: `add-sentinela`).
+   - Adicione apenas o arquivo `metadata/org.sentinela.app.yml`.
+   - Faça o commit: `git commit -m "Add org.sentinela.app"`.
+   - Envie para o seu fork: `git push origin add-sentinela`.
+2. Abra o Merge Request:
+   - **Origem (Source):** `ricardosierra/fdroiddata` branch `add-sentinela`
+   - **Destino (Target):** `fdroid/fdroiddata` branch `master`
+   - **Título:** `New app: Sentinela`
+   - **Descrição:** Utilize o template `App inclusion` preenchido acima.
+3. Aguarde o pipeline do CI rodar. Com o repositório público e sem conflito de outros apps, o `fdroid build` validará o build com sucesso.

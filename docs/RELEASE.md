@@ -108,3 +108,8 @@ e não indica problema.
   simples possível: nenhum dado coletado, nenhum dado transmitido, nada de rede
   (ver [`PRIVACIDADE.md`](PRIVACIDADE.md)).
 - `targetSdk` dentro da janela vigente da política (hoje o projeto está em 37).
+
+**F-Droid:** Catálogo FOSS compilado diretamente do código-fonte pelo servidor de build do F-Droid.
+- Receita e inclusão: gerenciado via Merge Request no repositório oficial `fdroid/fdroiddata`.
+- Invariantes obrigatórios: template `App inclusion` no corpo do MR, 1 app por MR, repositório 100% público e metadados no repositório (`fastlane/metadata/android/`).
+- Instruções completas e template pronto em [`F-DROID.md`](F-DROID.md).
