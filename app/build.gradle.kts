@@ -45,8 +45,10 @@ android {
         applicationId = sentinelaApplicationId
         minSdk = 29 // ROLE_CALL_SCREENING exige Android 10 (API 29)
         targetSdk = 37
-        versionCode = ciVersionCode ?: 3
-        versionName = ciVersionName ?: "0.2.1"
+        versionCode = 3
+        versionName = "0.2.1"
+        ciVersionCode?.let { versionCode = it }
+        ciVersionName?.let { versionName = it }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
