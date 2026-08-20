@@ -152,6 +152,11 @@ android {
             "AndroidGradlePluginVersion",
         )
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 }
 
 play {
@@ -164,12 +169,6 @@ play {
             "playUserFraction entre 0 e 1 é obrigatório para rollout em progresso"
         }
         userFraction.set(playUserFraction)
-    }
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
