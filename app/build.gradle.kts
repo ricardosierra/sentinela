@@ -38,11 +38,11 @@ val parsedPlayReleaseStatus = runCatching { ReleaseStatus.valueOf(playReleaseSta
     .getOrElse { error("playReleaseStatus inválido: $playReleaseStatus") }
 
 android {
-    namespace = "org.sentinela.app"
+    namespace = sentinelaApplicationId
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "org.sentinela.app"
+        applicationId = sentinelaApplicationId
         minSdk = 29 // ROLE_CALL_SCREENING exige Android 10 (API 29)
         targetSdk = 37
         versionCode = 4
