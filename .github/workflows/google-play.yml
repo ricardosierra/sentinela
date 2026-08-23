@@ -61,30 +61,22 @@ concurrency:
   group: google-play-${{ inputs.track || 'internal' }}
   cancel-in-progress: false
 
+# Ordem deliberada: tag -> CI -> publicação. O passo mais barato reprova
+# primeiro, e nada é assinado nem enviado à Play antes de detekt, lint, testes,
+# cobertura, build e invariantes passarem sobre ESTE commit.
 jobs:
-  publish:
-    name: Validar, assinar e publicar
+  version:
+    name: Validar tag e calcular versionCode
     runs-on: ubuntu-latest
-    # Crie estes Environments no GitHub. "play-production" deve ter revisão
-    # obrigatória, para que a publicação pública nunca seja um push acidental.
-    environment: play-${{ inputs.track || 'internal' }}
+    outputs:
+      name: ${{ steps.version.outputs.name }}
+      code: ${{ steps.version.outputs.code }}
     env:
       RELEASE_VERSION: ${{ inputs.version || github.ref_name }}
-      PLAY_TRACK: ${{ inputs.track || 'internal' }}
-      PLAY_SOURCE_TRACK: ${{ inputs.source_track || 'internal' }}
-      PLAY_RELEASE_STATUS: ${{ inputs.release_status || 'DRAFT' }}
-      PLAY_USER_FRACTION: ${{ inputs.user_fraction || '0.1' }}
-      ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-          cache: gradle
 
       - name: Validar tag e calcular versionCode
         id: version
@@ -112,13 +104,57 @@ jobs:
           echo "name=$version" >> "$GITHUB_OUTPUT"
           echo "code=$version_code" >> "$GITHUB_OUTPUT"
 
-      - name: Validar metadados e qualidade
+  ci:
+    name: CI
+    needs: version
+    # `promote` move um AAB JÁ publicado entre tracks — não há código novo para
+    # verificar, então esse caminho dispensa a CI (e o job `publish` aceita o
+    # resultado `skipped`).
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.operation == 'publish' }}
+    uses: ./.github/workflows/ci.yml
+    # A CI mede cobertura sem gate em push e PR; no caminho de release ela
+    # também aplica o `koverVerify` que já estava versionado.
+    with:
+      coverage-gate: true
+
+  publish:
+    name: Assinar e publicar
+    needs: [version, ci]
+    # `needs` sozinho pularia a publicação quando a CI é pulada (caminho
+    # `promote`). A condição explícita aceita sucesso e pulo da CI, exige
+    # sucesso da validação da tag e barra falha e cancelamento.
+    if: ${{ !cancelled() && needs.version.result == 'success' && needs.ci.result != 'failure' && needs.ci.result != 'cancelled' }}
+    runs-on: ubuntu-latest
+    # Crie estes Environments no GitHub. "play-production" deve ter revisão
+    # obrigatória, para que a publicação pública nunca seja um push acidental.
+    environment: play-${{ inputs.track || 'internal' }}
+    env:
+      PLAY_TRACK: ${{ inputs.track || 'internal' }}
+      PLAY_SOURCE_TRACK: ${{ inputs.source_track || 'internal' }}
+      PLAY_RELEASE_STATUS: ${{ inputs.release_status || 'DRAFT' }}
+      PLAY_USER_FRACTION: ${{ inputs.user_fraction || '0.1' }}
+      ANDROID_PUBLISHER_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      # detekt, lint, testes unitários, gate de cobertura, build debug e
+      # `scripts/verify-invariants.sh` já rodaram no job `ci`, sobre este mesmo
+      # commit, antes deste job existir. Aqui sobra só o que é específico da
+      # loja e não faz sentido cobrar de toda pull request.
+      - name: Validar metadados da loja
         if: github.event_name != 'workflow_dispatch' || inputs.operation == 'publish'
         run: |
           set -euo pipefail
           python3 scripts/verify-locales.py
           python3 scripts/sync-play-metadata.py --check
-          ./gradlew testDebugUnitTest lint detekt koverVerify
 
       - name: Materializar chave de upload
         if: github.event_name != 'workflow_dispatch' || inputs.operation == 'publish'
@@ -148,12 +184,15 @@ jobs:
       - name: Gerar e verificar artefatos release
         if: github.event_name != 'workflow_dispatch' || inputs.operation == 'publish'
         env:
-          SENTINELA_VERSION_NAME: ${{ steps.version.outputs.name }}
-          SENTINELA_VERSION_CODE: ${{ steps.version.outputs.code }}
+          SENTINELA_VERSION_NAME: ${{ needs.version.outputs.name }}
+          SENTINELA_VERSION_CODE: ${{ needs.version.outputs.code }}
+        # `verify-invariants.sh` saiu daqui de propósito: ele lê o manifest
+        # mergeado do DEBUG e os relatórios de detekt e lint, que este job não
+        # gera mais — quem os produz, e quem roda o script, é o job `ci`, sobre
+        # este mesmo commit. Aqui fica só a verificação do artefato release.
         run: |
           set -euo pipefail
           ./gradlew assembleRelease bundleRelease
-          ./scripts/verify-invariants.sh
           ./scripts/verify-release-artifact.sh
 
       - name: Gerar metadados para a Play
@@ -163,8 +202,8 @@ jobs:
       - name: Publicar bundle, textos e gráficos
         if: github.event_name != 'workflow_dispatch' || inputs.operation == 'publish'
         env:
-          SENTINELA_VERSION_NAME: ${{ steps.version.outputs.name }}
-          SENTINELA_VERSION_CODE: ${{ steps.version.outputs.code }}
+          SENTINELA_VERSION_NAME: ${{ needs.version.outputs.name }}
+          SENTINELA_VERSION_CODE: ${{ needs.version.outputs.code }}
         shell: bash
         run: |
           set -euo pipefail
@@ -187,7 +226,7 @@ jobs:
             echo "Secret ausente: GOOGLE_PLAY_SERVICE_ACCOUNT_JSON" >&2
             exit 1
           fi
-          promote_args=(--from-track "$PLAY_SOURCE_TRACK" --promote-track "$PLAY_TRACK" --release-status "$PLAY_RELEASE_STATUS" --version-code "${{ steps.version.outputs.code }}")
+          promote_args=(--from-track "$PLAY_SOURCE_TRACK" --promote-track "$PLAY_TRACK" --release-status "$PLAY_RELEASE_STATUS" --version-code "${{ needs.version.outputs.code }}")
           if [[ "$PLAY_RELEASE_STATUS" == "IN_PROGRESS" ]]; then
             promote_args+=(--user-fraction "$PLAY_USER_FRACTION")
           fi
