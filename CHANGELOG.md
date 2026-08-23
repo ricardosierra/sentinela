@@ -9,7 +9,31 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
-## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.1...master)
+## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.3...master)
+
+## [v0.2.3 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.2...v0.2.3)
+
+### ✨ Novidades
+
+- [x] **Tcheco, estoniano e polonês na interface** — as três traduções já viajavam dentro do APK publicado, mas nunca tinham entrado no repositório; agora são 20 idiomas versionados, cada um com as mesmas 324 entradas traduzíveis da base
+
+### 🎨 Melhorias
+
+- [x] **Seletor de idioma por app do Android** — `android:localeConfig` liga o aplicativo ao `locales_config.xml`, e os 20 idiomas traduzidos passam a aparecer em Configurações → Apps → Sentinela → Idioma; antes, quem quisesse o Sentinela em outro idioma precisava trocar o idioma do aparelho inteiro, e a tradução que já existia ficava invisível para quem procurava por ela
+
+### 🐛 Correções
+
+- [x] **O APK publicado não podia ser reproduzido a partir do repositório** — os recursos de `cs`, `et` e `pl` e o `locales_config.xml` estavam no binário da v0.2.2 e não no versionamento, porque o release saiu de uma árvore de trabalho suja; nenhuma verificação de build reprodutível tinha como dar certo enquanto o commit e o binário descrevessem apps diferentes
+- [x] **Símbolos nativos divergiam entre a máquina do mantenedor e o F-Droid** — o AGP só remove os símbolos de depuração dos `.so` quando encontra um NDK instalado: aqui `libdatastore_shared_counter.so` saía de 10360 para 7784 bytes em `arm64-v8a`, enquanto o buildserver do F-Droid avisava *"Unable to strip the following libraries"* e empacotava o arquivo inteiro — mesmo commit, dois APKs diferentes. `keepDebugSymbols` desliga a remoção dos dois lados e torna o byte idêntico em qualquer máquina
+
+### 🔧 Técnico
+
+- [x] **`scripts/verify-locales.py`** — falha se um idioma declarado não tiver `strings.xml`, se um `strings.xml` não estiver declarado, se as chaves divergirem da base ou se um placeholder mudar de forma; `verify-invariants.sh` passa a chamá-lo, então o desvio quebra o build em vez de aparecer meses depois numa captura de tela
+- [x] **`libandroidx.graphics.path.so` ficou de fora da regra de propósito** — ela é citada no mesmo aviso do F-Droid, mas já vem sem símbolos dentro do próprio `.aar` (10096 bytes na origem e no APK), então a ausência de NDK nunca mudou um byte dela e mantê-la na lista só esconderia o motivo real da falha
+- [x] **Política de segurança e templates de issue** — `SECURITY.md` define o canal privado (Security Advisory do GitHub), o escopo e o prazo pretendido de resposta; os formulários de bug e de feature pedem relatório sem número, contato ou dump, e a issue em branco foi desligada para empurrar vulnerabilidade ao canal privado
+- [x] **Credenciais da Google Play fora do repositório** — o `.gitignore` passa a barrar `.secrets/` e qualquer JSON de service account, e o guia de publicação injeta o segredo pelo ambiente a partir de um caminho externo ao projeto
+
+## [v0.2.2 (2026-08-20)](https://github.com/ricardosierra/sentinela/compare/v0.2.1...v0.2.2)
 
 ### ✨ Novidades
 
@@ -21,7 +45,8 @@
 
 ### 🔧 Técnico
 
-- [x] **Idiomas do APK integrados ao Android** — `pt-BR` deixou de cair em `pt-PT`, os 20 locales traduzidos agora aparecem no seletor de idioma por app e `verify-locales.py` bloqueia chaves ou placeholders divergentes; a ficha da Play continua validada separadamente nos 74 idiomas
+- [x] **`pt-BR` deixou de cair em `pt-PT`** — as strings brasileiras ganharam `values-pt-rBR/` próprio; enquanto moravam só no `values/` sem qualificador, a variante `values-pt-rPT` vencia o padrão na resolução do Android e o mercado principal do app recebia português europeu
+- [x] **Metadados legíveis pelo scanner do F-Droid** — `applicationId`, `namespace`, `versionCode` e `versionName` voltaram a ser literais entre aspas, que é o que o leitor de metadados do F-Droid consegue extrair, e a toolchain rígida deu lugar a `compileOptions` Java 17 para o build subir com o JDK do buildserver
 - [x] **Publicação da Google Play automatizada** — tags SemVer validam qualidade, assinam AAB, verificam o APK release sem `INTERNET`, geram os 74 listings e publicam pelo Play Developer API; promoções entre tracks e rollout gradual usam a mesma automação, com Environment obrigatório antes de produção
 
 ## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
