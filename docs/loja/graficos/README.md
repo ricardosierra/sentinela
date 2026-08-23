@@ -69,17 +69,15 @@ detecta e dispensa).
 - **Tablet mostra o layout esticado**, que é o que um tablet realmente mostra: o app não tem
   layout de duas colunas. A captura não promete o que o app não faz.
 
-## Pendências
+## Estado
 
-**As capturas em `pt-BR/` estão em português de Portugal.** Não é erro da captura: o app entrega
-pt-PT para quem pede pt-BR, porque as strings brasileiras moram no `values/` sem qualificador e
-a variante `values-pt-rPT` ganha do default na resolução do Android. Diagnóstico e correção em
-[`../../backlog/pt-br-caindo-em-pt-pt.md`](../../backlog/pt-br-caindo-em-pt-pt.md). Depois de
-corrigir, refazer só esse idioma:
+O problema de `pt-BR` cair em `pt-PT` foi corrigido com `values-pt-rBR` e a configuração explícita
+de locales. Depois de qualquer mudança de UI ou tradução, reinstale o APK recompilado e refaça as
+capturas afetadas com `scripts/capture-store-screenshots.sh`.
 
-```bash
-./scripts/capture-store-screenshots.sh pt-BR
-```
+As capturas versionadas de `pt-BR` ainda não devem ser publicadas como novas: a tentativa de
+regenerá-las neste ambiente foi interrompida por diálogos de “System UI/Messages isn't responding”
+do emulador. Repita o roteiro em um emulador estável antes do envio ao Play Console.
 
 **Arte final do ícone.** O vetor de origem se declara provisório:
 *"Escudo Silent Guardian — placeholder do MVP; arte final na fase de UI."* Trocar o vetor e rodar
