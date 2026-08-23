@@ -1,9 +1,8 @@
-@file:Suppress("TooManyFunctions")
-
 package org.sentinela.app.ui.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -90,7 +89,6 @@ import org.sentinela.app.ui.theme.SentinelaTheme
  * mensageiro seguem fora do alcance e nada sai do aparelho. Duas cópias divergiriam, e a cópia
  * errada é sempre a que promete demais.
  */
-@Suppress("LongMethod")
 @Composable
 fun SettingsScreen(
     state: SettingsUiState,
@@ -129,81 +127,131 @@ fun SettingsScreen(
         bottomBar = bottomBar,
         snackbarHost = { SnackbarHost(hostState = avisos) },
     ) { areaInterna ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(areaInterna)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = ScreenHorizontalPadding),
-            verticalArrangement = Arrangement.spacedBy(GroupGap),
-        ) {
-            GrupoDeProtecao(
-                state = state,
-                onProtectionChange = onProtectionChange,
-                onFixRole = onFixRole,
-                onHideNativeLogChange = onHideNativeLogChange,
-                onRepeatedCallChange = onRepeatedCallChange,
-            )
-            GrupoDeDesconhecidos(
-                state = state,
-                onUnknownPolicy = onUnknownPolicy,
-                onBlockPrivateChange = onBlockPrivateChange,
-                onBlockMode = onBlockMode,
-            )
-            GrupoDeContatos(state = state, hasWhatsApp = hasWhatsApp, onContactsPolicy = onContactsPolicy)
-            GrupoDaListaPessoal(state = state, onWhitelistPolicy = onWhitelistPolicy)
-            GrupoDeNotificacao(
-                state = state,
-                onNotificationChange = onNotificationChange,
-                onNotificationIdentification = onNotificationIdentification,
-            )
-            GrupoDeHistorico(
-                state = state,
-                onHistoryEnabledChange = { ligado ->
-                    onHistoryEnabledChange(ligado)
-                    // Desligar o histórico NÃO apaga nada, então não confirma; só informa que os
-                    // registros já guardados continuam no aparelho.
-                    if (!ligado) escopo.launch { avisos.showSnackbar(historicoDesligadoMantem) }
-                },
-                onRetention = { politica ->
-                    if (politica == RetentionPolicy.NEVER_STORE) {
-                        confirmarNaoGuardar = true
-                    } else {
-                        onRetention(politica)
-                    }
-                },
-                onPedirLimpeza = { confirmarLimpeza = true },
-            )
-            GrupoDePoliticaDeFalha(state = state, onFallback = onFallback)
-            GrupoDePrivacidade(state = state, onMaskNumbersChange = onMaskNumbersChange)
-            CartaoDeLimitacoes()
-            GrupoDeDestinos(
-                state = state,
-                onOpenDialerActivation = onOpenDialerActivation,
-                onOpenAbout = onOpenAbout,
-            )
-            Spacer(modifier = Modifier.height(BottomGap))
-        }
+        ConteudoDaProtecao(
+            state = state,
+            hasWhatsApp = hasWhatsApp,
+            areaInterna = areaInterna,
+            onProtectionChange = onProtectionChange,
+            onFixRole = onFixRole,
+            onUnknownPolicy = onUnknownPolicy,
+            onContactsPolicy = onContactsPolicy,
+            onWhitelistPolicy = onWhitelistPolicy,
+            onBlockPrivateChange = onBlockPrivateChange,
+            onBlockMode = onBlockMode,
+            onHideNativeLogChange = onHideNativeLogChange,
+            onNotificationChange = onNotificationChange,
+            onNotificationIdentification = onNotificationIdentification,
+            onRepeatedCallChange = onRepeatedCallChange,
+            onHistoryEnabledChange = onHistoryEnabledChange,
+            onRetention = onRetention,
+            onMaskNumbersChange = onMaskNumbersChange,
+            onFallback = onFallback,
+            onOpenDialerActivation = onOpenDialerActivation,
+            onOpenAbout = onOpenAbout,
+            onPedirLimpeza = { confirmarLimpeza = true },
+            onPedirNaoGuardar = { confirmarNaoGuardar = true },
+            onAvisarHistoricoDesligado = { escopo.launch { avisos.showSnackbar(historicoDesligadoMantem) } },
+        )
     }
 
-    if (confirmarLimpeza) {
-        ConfirmacaoDeLimpeza(
-            registros = state.historyRecordCount,
-            onConfirm = {
-                confirmarLimpeza = false
-                onClearHistory()
-            },
-            onDismiss = { confirmarLimpeza = false },
+    ConfirmacoesDaProtecao(
+        pedindoLimpeza = confirmarLimpeza,
+        pedindoNaoGuardar = confirmarNaoGuardar,
+        registros = state.historyRecordCount,
+        onFecharLimpeza = { confirmarLimpeza = false },
+        onFecharNaoGuardar = { confirmarNaoGuardar = false },
+        onLimpar = onClearHistory,
+        onNaoGuardar = { onRetention(RetentionPolicy.NEVER_STORE) },
+    )
+}
+
+/**
+ * As dez secoes na ordem do contrato de interface, e nada alem disso.
+ *
+ * Esta composta e SEM ESTADO de proposito: os dois sinalizadores de confirmacao e o hospedeiro de
+ * avisos temporarios ficam em [SettingsScreen], porque sao mecanismo de container, e chegam aqui
+ * como as tres intencoes [onPedirLimpeza], [onPedirNaoGuardar] e [onAvisarHistoricoDesligado].
+ *
+ * As duas unicas traducoes de intencao que sobraram aqui sao as do grupo de historico, e as duas
+ * dizem a mesma regra por caminhos diferentes: desligar o historico NAO apaga nada, entao avisa em
+ * vez de confirmar; escolher nao guardar registro nenhum APAGA, entao pede confirmacao em vez de
+ * gravar. Elas moram junto do grupo que as usa, e nao no container, para que a ordem "avisa" versus
+ * "confirma" seja legivel ao lado da chamada que a produz.
+ */
+@Composable
+private fun ConteudoDaProtecao(
+    state: SettingsUiState,
+    hasWhatsApp: Boolean,
+    areaInterna: PaddingValues,
+    onProtectionChange: (Boolean) -> Unit,
+    onFixRole: () -> Unit,
+    onUnknownPolicy: (OriginPolicy) -> Unit,
+    onContactsPolicy: (OriginPolicy) -> Unit,
+    onWhitelistPolicy: (OriginPolicy) -> Unit,
+    onBlockPrivateChange: (Boolean) -> Unit,
+    onBlockMode: (BlockMode) -> Unit,
+    onHideNativeLogChange: (Boolean) -> Unit,
+    onNotificationChange: (Boolean) -> Unit,
+    onNotificationIdentification: (NotificationIdentification) -> Unit,
+    onRepeatedCallChange: (Boolean) -> Unit,
+    onHistoryEnabledChange: (Boolean) -> Unit,
+    onRetention: (RetentionPolicy) -> Unit,
+    onMaskNumbersChange: (Boolean) -> Unit,
+    onFallback: (FallbackPolicy) -> Unit,
+    onOpenDialerActivation: () -> Unit,
+    onOpenAbout: () -> Unit,
+    onPedirLimpeza: () -> Unit,
+    onPedirNaoGuardar: () -> Unit,
+    onAvisarHistoricoDesligado: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(areaInterna)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = ScreenHorizontalPadding),
+        verticalArrangement = Arrangement.spacedBy(GroupGap),
+    ) {
+        GrupoDeProtecao(
+            state = state,
+            onProtectionChange = onProtectionChange,
+            onFixRole = onFixRole,
+            onHideNativeLogChange = onHideNativeLogChange,
+            onRepeatedCallChange = onRepeatedCallChange,
         )
-    }
-    if (confirmarNaoGuardar) {
-        ConfirmacaoDeNaoGuardar(
-            onConfirm = {
-                confirmarNaoGuardar = false
-                onRetention(RetentionPolicy.NEVER_STORE)
-            },
-            onDismiss = { confirmarNaoGuardar = false },
+        GrupoDeDesconhecidos(
+            state = state,
+            onUnknownPolicy = onUnknownPolicy,
+            onBlockPrivateChange = onBlockPrivateChange,
+            onBlockMode = onBlockMode,
         )
+        GrupoDeContatos(state = state, hasWhatsApp = hasWhatsApp, onContactsPolicy = onContactsPolicy)
+        GrupoDaListaPessoal(state = state, onWhitelistPolicy = onWhitelistPolicy)
+        GrupoDeNotificacao(
+            state = state,
+            onNotificationChange = onNotificationChange,
+            onNotificationIdentification = onNotificationIdentification,
+        )
+        GrupoDeHistorico(
+            state = state,
+            onHistoryEnabledChange = { ligado ->
+                onHistoryEnabledChange(ligado)
+                if (!ligado) onAvisarHistoricoDesligado()
+            },
+            onRetention = { politica ->
+                if (politica == RetentionPolicy.NEVER_STORE) onPedirNaoGuardar() else onRetention(politica)
+            },
+            onPedirLimpeza = onPedirLimpeza,
+        )
+        GrupoDePoliticaDeFalha(state = state, onFallback = onFallback)
+        GrupoDePrivacidade(state = state, onMaskNumbersChange = onMaskNumbersChange)
+        CartaoDeLimitacoes()
+        GrupoDeDestinos(
+            state = state,
+            onOpenDialerActivation = onOpenDialerActivation,
+            onOpenAbout = onOpenAbout,
+        )
+        Spacer(modifier = Modifier.height(BottomGap))
     }
 }
 

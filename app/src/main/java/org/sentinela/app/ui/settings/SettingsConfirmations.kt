@@ -91,3 +91,42 @@ private fun ConfirmacaoDeNaoGuardarPreview() {
         ConfirmacaoDeNaoGuardar(onConfirm = {}, onDismiss = {})
     }
 }
+
+/**
+ * Hospedeiro das duas confirmacoes: decide qual delas esta aberta, sem guardar nada.
+ *
+ * Os dois sinalizadores continuam em `SettingsScreen`, que e o container. O que existe aqui e a
+ * traducao de "aberta" para "desenhada", e a garantia de que fechar vem ANTES de agir nos dois
+ * caminhos de confirmar — se a acao viesse primeiro, uma recomposicao no meio dela reencontraria o
+ * dialogo aberto sobre um historico ja apagado.
+ */
+@Composable
+internal fun ConfirmacoesDaProtecao(
+    pedindoLimpeza: Boolean,
+    pedindoNaoGuardar: Boolean,
+    registros: Long,
+    onFecharLimpeza: () -> Unit,
+    onFecharNaoGuardar: () -> Unit,
+    onLimpar: () -> Unit,
+    onNaoGuardar: () -> Unit,
+) {
+    if (pedindoLimpeza) {
+        ConfirmacaoDeLimpeza(
+            registros = registros,
+            onConfirm = {
+                onFecharLimpeza()
+                onLimpar()
+            },
+            onDismiss = onFecharLimpeza,
+        )
+    }
+    if (pedindoNaoGuardar) {
+        ConfirmacaoDeNaoGuardar(
+            onConfirm = {
+                onFecharNaoGuardar()
+                onNaoGuardar()
+            },
+            onDismiss = onFecharNaoGuardar,
+        )
+    }
+}
