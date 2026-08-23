@@ -227,48 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/**
- * Item 8 — a notificação própria e as duas formas de identificação.
- *
- * As sub-opções só existem com o interruptor ligado: oferecer a escolha de COMO identificar algo que
- * não será mostrado é pedir decisão sem efeito.
- */
-@Composable
-private fun GrupoDeNotificacao(
-    state: SettingsUiState,
-    onNotificationChange: (Boolean) -> Unit,
-    onNotificationIdentification: (NotificationIdentification) -> Unit,
-) {
-    SettingsGroup(title = stringResource(R.string.settings_show_notification)) {
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_notification_enable),
-            description = stringResource(R.string.settings_notification_enable_desc),
-            checked = state.settings.showOwnNotification,
-            onCheckedChange = onNotificationChange,
-        )
-        if (state.settings.showOwnNotification) {
-            EscolhaUnica {
-                OpcaoDePolitica(
-                    title = stringResource(R.string.settings_notification_identification_masked),
-                    description = stringResource(R.string.notification_channel_blocked_desc),
-                    icon = Icons.Outlined.Info,
-                    selected = state.settings.notificationIdentification ==
-                        NotificationIdentification.MASKED,
-                    onClick = { onNotificationIdentification(NotificationIdentification.MASKED) },
-                )
-                OpcaoDePolitica(
-                    title = stringResource(R.string.settings_notification_identification_anonymous),
-                    description = stringResource(R.string.notification_blocked_anonymous),
-                    icon = Icons.Outlined.NotificationsOff,
-                    selected = state.settings.notificationIdentification ==
-                        NotificationIdentification.ANONYMOUS,
-                    onClick = { onNotificationIdentification(NotificationIdentification.ANONYMOUS) },
-                )
-            }
-        }
-    }
-}
-
 /** Itens 11, 12 e 13 — o histórico local, a janela de retenção e a limpeza. */
 @Composable
 private fun GrupoDeHistorico(
