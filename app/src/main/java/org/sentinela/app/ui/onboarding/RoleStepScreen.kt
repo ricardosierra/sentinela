@@ -69,21 +69,12 @@ import org.sentinela.app.ui.theme.ShapeMedium
 import org.sentinela.app.ui.theme.ShapePill
 
 private val ScreenPadding = 16.dp
-private val TopBarToHeroGap = 32.dp
-private val HeroCircleSize = 96.dp
-private val HeroIconSize = 64.dp
-private val HeroToTitleGap = 24.dp
-private val TitleToChipGap = 12.dp
 private val TitleToIntroGap = 16.dp
 private val IntroToStripGap = 24.dp
 private val StripToHonestyGap = 24.dp
 private val StripHeight = 80.dp
 private val StripIconSize = 16.dp
 private val StripIconToTextGap = 8.dp
-private val ChipHorizontalPadding = 12.dp
-private val ChipVerticalPadding = 6.dp
-private val ChipIconSize = 16.dp
-private val ChipIconToTextGap = 8.dp
 private val CtaGradientHeight = 32.dp
 private val CtaHeight = 56.dp
 private val CtaIconGap = 8.dp
@@ -92,16 +83,12 @@ private val ProgressIndicatorSize = 20.dp
 private val ProgressStrokeWidth = 2.dp
 private val BannerToCtaGap = 16.dp
 private val FooterBottomGap = 32.dp
-private val HeroFloatAmplitude = 4.dp
 
 /** Largura do corpo em relacao a tela, conforme o contrato de design. */
 private const val INTRO_WIDTH_FRACTION = 0.85f
 
 /** Alfa dos containers de destaque leve — hero, faixa de contexto e chip de ativo. */
 private const val CONTAINER_ALPHA = 0.20f
-
-/** Ciclo da flutuacao decorativa do hero, em milissegundos (mockup: 6 s). */
-private const val FLOAT_CYCLE_MILLIS = 6_000
 
 /**
  * Duracao da transicao entre passos do onboarding, em milissegundos.
@@ -182,9 +169,9 @@ fun RoleStepScreen(
                 .padding(horizontal = ScreenPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Hero()
-            Titulo()
-            if (state.screeningRoleHeld) ChipDeAtivo()
+            HeroDoPapel()
+            TituloDoPapel()
+            if (state.screeningRoleHeld) ChipDePapelAtivo()
             Intro()
             FaixaDeContexto()
             CartaoDeEscopo()
@@ -199,95 +186,6 @@ fun RoleStepScreen(
 
 /** Numero deste passo no fluxo. O total chega pelo estado, nunca por literal aqui. */
 private const val PASSO_DO_PAPEL = 1
-
-@Composable
-private fun Hero() {
-    val movimentoReduzido = rememberMotionReduced()
-    val transicao = rememberInfiniteTransition(label = "flutuacao-do-hero")
-    val fase by transicao.animateFloat(
-        initialValue = -1f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = FLOAT_CYCLE_MILLIS, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse,
-        ),
-        label = "fase-da-flutuacao",
-    )
-    val cores = MaterialTheme.colorScheme
-    Box(
-        modifier = Modifier
-            .padding(top = TopBarToHeroGap)
-            .clearAndSetSemantics {}
-            .graphicsLayer {
-                translationY = if (movimentoReduzido) 0f else fase * HeroFloatAmplitude.toPx()
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Surface(
-            modifier = Modifier.size(HeroCircleSize),
-            shape = CircleShape,
-            color = cores.primaryContainer.copy(alpha = CONTAINER_ALPHA),
-        ) {}
-        Icon(
-            imageVector = Icons.Filled.Shield,
-            contentDescription = null,
-            modifier = Modifier.size(HeroIconSize),
-            tint = cores.primary,
-        )
-    }
-}
-
-@Composable
-private fun Titulo() {
-    Text(
-        text = stringResource(R.string.onboarding_role_title),
-        modifier = Modifier
-            .padding(top = HeroToTitleGap)
-            .semantics { heading() },
-        style = MaterialTheme.typography.headlineMedium,
-        color = MaterialTheme.colorScheme.onSurface,
-        textAlign = TextAlign.Center,
-    )
-}
-
-/**
- * Chip de papel concedido, anunciado como regiao viva educada.
- *
- * A cor vem de [CallAccept], literal fora do esquema: a partir do nivel 31 o tema troca o esquema
- * INTEIRO por um derivado do papel de parede, e deixar o papel de parede decidir a cor de
- * "concedido" foi o defeito que a Fase 6 mediu.
- */
-@Composable
-private fun ChipDeAtivo() {
-    Surface(
-        modifier = Modifier
-            .padding(top = TitleToChipGap)
-            .semantics { liveRegion = LiveRegionMode.Polite },
-        shape = ShapePill,
-        color = CallAccept.copy(alpha = CONTAINER_ALPHA),
-        contentColor = MaterialTheme.colorScheme.onSurface,
-    ) {
-        Row(
-            modifier = Modifier.padding(
-                horizontal = ChipHorizontalPadding,
-                vertical = ChipVerticalPadding,
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.CheckCircle,
-                contentDescription = null,
-                modifier = Modifier.size(ChipIconSize),
-                tint = CallAccept,
-            )
-            Text(
-                text = stringResource(R.string.dialer_active_chip),
-                modifier = Modifier.padding(start = ChipIconToTextGap),
-                style = MaterialTheme.typography.labelMedium,
-            )
-        }
-    }
-}
 
 @Composable
 private fun Intro() {
