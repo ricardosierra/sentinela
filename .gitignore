@@ -120,3 +120,13 @@ stitch_silent_call_blocker.zip
 
 # Ambiente virtual Python (ferramenta local, nunca versionado)
 .venv/
+
+# Sujeira recorrente na RAIZ do repositorio. Verificado em 2026-08-23: NENHUM
+# destes arquivos estava rastreado — todos ja caem nos padroes acima. A lista
+# fica nominal para quem procurar pelo nome antes de acrescentar regra duplicada.
+#   dialer_fail.log, test_output.log  -> *.log
+#   java_pid*.hprof                   -> *.hprof (dump de OOM do daemon do Gradle,
+#                                        gerado por -XX:+HeapDumpOnOutOfMemoryError)
+#   sentinela-debug.apk               -> *.apk (copia da raiz feita por build.sh)
+#   sentinela-v*-release.aab/.apk     -> *.aab e *.apk (artefato publicado mora em releases/)
+#   stitch_silent_call_blocker.zip    -> ja listado nominalmente acima
