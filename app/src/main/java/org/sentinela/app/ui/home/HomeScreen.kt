@@ -69,8 +69,6 @@ import org.sentinela.app.ui.theme.ShapeMedium
 
 private val ScreenPadding = 16.dp
 private val BlockGap = 24.dp
-private val StatGap = 16.dp
-private val QuickActionGap = 12.dp
 private val BottomGap = 32.dp
 
 private const val TRAVERSAL_HERO = 1f
@@ -238,52 +236,6 @@ private fun CorpoDaHome(
             modifier = Modifier.ordemDeTravessia(TRAVERSAL_ATALHOS),
         )
         Spacer(modifier = Modifier.height(BottomGap))
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun RatingBottomSheet(
-    onAccept: () -> Unit,
-    onDismiss: () -> Unit,
-) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = sheetState,
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(ScreenPadding)
-                .padding(bottom = BottomGap),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = stringResource(R.string.review_prompt_title),
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.height(StatGap))
-            Text(
-                text = stringResource(R.string.review_prompt_body),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(modifier = Modifier.height(BlockGap))
-            Button(
-                onClick = onAccept,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = stringResource(R.string.review_prompt_rate))
-            }
-            Spacer(modifier = Modifier.height(QuickActionGap))
-            TextButton(
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = stringResource(R.string.review_prompt_later))
-            }
-        }
     }
 }
 
