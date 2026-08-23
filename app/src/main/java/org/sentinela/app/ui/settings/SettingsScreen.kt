@@ -227,56 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/** Item 3 — as quatro políticas de contato, mais a nota do pré-requisito da agenda. */
-@Composable
-private fun GrupoDeContatos(
-    state: SettingsUiState,
-    hasWhatsApp: Boolean,
-    onContactsPolicy: (OriginPolicy) -> Unit
-) {
-    SettingsGroup(title = stringResource(R.string.settings_contacts_policy)) {
-        EscolhaUnica {
-            OpcaoDePolitica(
-                title = stringResource(R.string.contacts_option_ring),
-                description = stringResource(R.string.contacts_option_ring_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.contactsPolicy == OriginPolicy.RING,
-                onClick = { onContactsPolicy(OriginPolicy.RING) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.contacts_option_block),
-                description = stringResource(R.string.contacts_option_block_desc),
-                icon = Icons.Outlined.Block,
-                selected = state.settings.contactsPolicy == OriginPolicy.BLOCK,
-                onClick = { onContactsPolicy(OriginPolicy.BLOCK) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.contacts_option_silence),
-                description = stringResource(R.string.contacts_option_silence_desc),
-                icon = Icons.Outlined.NotificationsOff,
-                selected = state.settings.contactsPolicy == OriginPolicy.SILENCE,
-                onClick = { onContactsPolicy(OriginPolicy.SILENCE) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.contacts_option_never_silence),
-                description = stringResource(R.string.contacts_option_never_silence_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.contactsPolicy == OriginPolicy.NEVER_SILENCE,
-                onClick = { onContactsPolicy(OriginPolicy.NEVER_SILENCE) },
-            )
-        }
-        if (hasWhatsApp) {
-            InfoBanner(
-                text = stringResource(R.string.whatsapp_contacts_warning_desc),
-                actionLabel = null,
-                onAction = null,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-        }
-        NotaDoGrupo(text = stringResource(R.string.settings_contacts_policy_note))
-    }
-}
-
 /** Item 4 — as quatro políticas da lista pessoal. */
 @Composable
 private fun GrupoDaListaPessoal(state: SettingsUiState, onWhitelistPolicy: (OriginPolicy) -> Unit) {
