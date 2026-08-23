@@ -41,12 +41,22 @@ android {
     namespace = "org.sentinela.app" // sentinelaApplicationId
     compileSdk = 37
 
+    // O AGP embute no bloco de assinatura do APK um blob assinado com a arvore de
+    // dependencias, destinado a Play Store. O scanner do F-Droid reprova qualquer
+    // bloco extra de assinatura ("Found extra signing block 'Dependency metadata'")
+    // porque e conteudo opaco que nao sai do codigo-fonte, entao nao ha como
+    // reproduzi-lo nem audita-lo. Desligar nao muda o app, so remove o blob.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     defaultConfig {
         applicationId = "org.sentinela.app" // sentinelaApplicationId
         minSdk = 29 // ROLE_CALL_SCREENING exige Android 10 (API 29)
         targetSdk = 37
-        versionCode = 5
-        versionName = "0.2.3"
+        versionCode = 6
+        versionName = "0.2.4"
         ciVersionCode?.let { versionCode = it }
         ciVersionName?.let { versionName = it }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

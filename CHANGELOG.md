@@ -9,7 +9,13 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
-## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.3...master)
+## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.4...master)
+
+## [v0.2.4 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.3...v0.2.4)
+
+### 🐛 Correções
+
+- [x] **Bloco de metadados de dependências removido do APK** — o AGP embute no bloco de assinatura um blob assinado com a árvore de dependências, feito para a Play Store; o scanner do F-Droid reprova qualquer bloco extra de assinatura (`Found extra signing block 'Dependency metadata'`) porque é conteúdo opaco que não deriva do código-fonte e não pode ser reproduzido nem auditado. `dependenciesInfo` desligado nas duas saídas
 
 ## [v0.2.3 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.2...v0.2.3)
 
