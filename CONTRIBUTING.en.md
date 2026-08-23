@@ -31,6 +31,12 @@ Please follow the guidelines in [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md) (in
   bash scripts/verify-invariants.sh # Architectural integrity checks
   ```
 - We require 80%+ code coverage on the domain and telephony packages.
+- These same commands run on their own for every push and every pull request, via the
+  [`ci.yml`](.github/workflows/ci.yml) workflow — running them locally gets you the answer
+  sooner, it does not replace CI. Every run attaches the detekt, lint, test and coverage
+  reports. On a pull request coverage is **measured and published, not failed**; the 80% gate
+  (`koverVerify`) is applied on the release path, which calls this same CI before signing
+  anything.
 
 ## 5. Commit Standards
 

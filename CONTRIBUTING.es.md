@@ -31,6 +31,12 @@ Por favor, sigue las directrices en [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md)
   bash scripts/verify-invariants.sh # Verificaciones de integridad arquitectónica
   ```
 - Exigimos un 80%+ de cobertura de código en los paquetes de dominio y telefonía.
+- Esos mismos comandos se ejecutan solos en cada push y cada pull request, mediante el flujo de
+  trabajo [`ci.yml`](.github/workflows/ci.yml) — ejecutarlos localmente adelanta el resultado, no
+  lo sustituye. Cada ejecución adjunta los informes de detekt, lint, pruebas y cobertura. En una
+  pull request la cobertura se **mide y se publica, no se reprueba**; la verificación del 80%
+  (`koverVerify`) se aplica en la ruta de publicación, que llama a esa misma CI antes de firmar
+  nada.
 
 ## 5. Estándares de Commits
 

@@ -30,7 +30,12 @@ Siga as orientações em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md):
   ./gradlew lint detekt             # Análise de qualidade de código
   bash scripts/verify-invariants.sh # Scripts de integridade arquitetural
   ```
-- Exigimos 80%+ de cobertura de código no pacote de domínio e telefonia. 
+- Exigimos 80%+ de cobertura de código no pacote de domínio e telefonia.
+- Esses mesmos comandos rodam sozinhos em toda push e toda pull request, pelo workflow
+  [`ci.yml`](.github/workflows/ci.yml) — rodar localmente antecipa o resultado, não o substitui.
+  Cada execução anexa os relatórios de detekt, lint, testes e cobertura. Em pull request a
+  cobertura é **medida e publicada, não reprovada**; o gate de 80% (`koverVerify`) é aplicado no
+  caminho de publicação, que chama essa mesma CI antes de assinar qualquer coisa.
 
 ## 5. Padrão de Commits
 
