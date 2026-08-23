@@ -227,29 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/** Item 14 — o que fazer quando a consulta local falha, com o custo dos dois lados. */
-@Composable
-private fun GrupoDePoliticaDeFalha(state: SettingsUiState, onFallback: (FallbackPolicy) -> Unit) {
-    SettingsGroup(title = stringResource(R.string.settings_fallback_policy)) {
-        EscolhaUnica {
-            OpcaoDePolitica(
-                title = stringResource(R.string.settings_fallback_allow),
-                description = stringResource(R.string.settings_fallback_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.fallbackPolicy == FallbackPolicy.ALLOW,
-                onClick = { onFallback(FallbackPolicy.ALLOW) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.settings_fallback_block),
-                description = stringResource(R.string.settings_fallback_desc),
-                icon = Icons.Outlined.Block,
-                selected = state.settings.fallbackPolicy == FallbackPolicy.BLOCK,
-                onClick = { onFallback(FallbackPolicy.BLOCK) },
-            )
-        }
-    }
-}
-
 @Composable
 private fun GrupoDePrivacidade(state: SettingsUiState, onMaskNumbersChange: (Boolean) -> Unit) {
     SettingsGroup(title = stringResource(R.string.settings_privacy_title)) {
