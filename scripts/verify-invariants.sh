@@ -18,6 +18,12 @@ fail() { echo "FAIL: $*"; FAILURES=$((FAILURES + 1)); }
 ok()   { echo "ok:   $*"; }
 skip() { echo "skip: $*"; }
 
+if python3 scripts/verify-locales.py; then
+  ok "recursos traduzidos e configuração de locales coerentes"
+else
+  fail "recursos traduzidos ou configuração de locales inválidos"
+fi
+
 M=app/build/intermediates/merged_manifest/debug/processDebugMainManifest/AndroidManifest.xml
 if [ ! -f "$M" ]; then
   echo "Manifest mergeado ausente. Rode ./gradlew assembleDebug antes." >&2

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Uvítání -->
+    <string name="welcome_headline">Vaše první obranná linie proti spamu.</string>
+    <string name="welcome_subtitle">Sentinela blokuje hovory z neznámých čísel dřív, než telefon vůbec stihne zazvonit.</string>
+    <string name="welcome_feature_local_title">Místní blokování</string>
+    <string name="welcome_feature_local_desc">Zpracování přímo v zařízení.</string>
+    <string name="welcome_feature_silent_title">Tiché</string>
+    <string name="welcome_feature_silent_desc">Žádné nechtěné vyzvánění ani vibrace.</string>
+    <string name="welcome_feature_offline_title">Bez internetu</string>
+    <string name="welcome_feature_offline_desc">Naprosté soukromí. Vaše kontakty neshromažďujeme.</string>
+    <string name="welcome_badge_native">Nativní integrace</string>
+    <string name="welcome_cta">Zahájit nastavení</string>
+    <string name="welcome_cta_hint">Trvá méně než 2 minuty.</string>
+    <string name="welcome_open_source" formatted="false">100% otevřený zdrojový kód — bez reklam, bez telemetrie</string>
+
+    <!-- Uvedení do provozu: role filtrování hovorů -->
+    <string name="onboarding_role_disclaimer">Nastavením udělujete oprávnění k filtrování hovorů. Sentinela filtruje hovory z neznámých čísel místně, aniž by kdy odeslala vaše data mimo zařízení.</string>
+    <string name="onboarding_role_cta">Nastavit teď</string>
+    <string name="onboarding_role_requesting">Žádám o oprávnění…</string>
+    <string name="onboarding_step_indicator">Krok %1$d z %2$d</string>
+    <string name="onboarding_next">Další</string>
+    <string name="onboarding_back">Zpět</string>
+    <string name="onboarding_finish">Dokončit nastavení</string>
+    <string name="onboarding_change_later">Toto nastavení můžete kdykoli změnit.</string>
+    <string name="onboarding_skip">Přeskočit</string>
+    <string name="onboarding_role_title">Nechte filtrování na Sentinele</string>
+    <string name="onboarding_role_intro">Aby mohla Sentinela filtrovat hovory, musí být výchozí aplikací Androidu pro filtrování hovorů. Oprávnění udělujete vy a můžete ho kdykoli odebrat v nastavení systému.</string>
+    <string name="onboarding_role_denied">Sentinela nezískala roli filtrování hovorů. Dokud oprávnění neudělíte, nebude filtrován žádný hovor — můžete to udělat teď nebo později na obrazovce Ochrana.</string>
+    <string name="onboarding_role_retry">Udělit teď</string>
+    <string name="onboarding_scope_title">Co Sentinela nedělá</string>
+    <string name="onboarding_scope_dnd">Systémový režim „Nerušit“ má i nadále přednost před nastavením Sentinely.</string>
+
+    <!-- Uvedení do provozu: neznámá čísla -->
+    <string name="unknown_title">Neznámé hovory</string>
+    <string name="unknown_question">Jak má Sentinela nakládat s čísly, která nemáte v kontaktech?</string>
+    <string name="unknown_option_block">Blokovat</string>
+    <string name="unknown_option_block_desc">Hovor okamžitě odmítne.</string>
+    <string name="unknown_option_silence">Ztlumit</string>
+    <string name="unknown_option_silence_desc">Hovor přijde bez zvuku a bez vibrací.</string>
+    <string name="unknown_option_allow">Povolit</string>
+    <string name="unknown_option_allow_desc">Přijímá hovory jako obvykle.</string>
+
+    <!-- Uvedení do provozu: kontakty -->
+    <string name="contacts_title">A co lidé ve vašem seznamu kontaktů?</string>
+    <string name="contacts_explainer">Určete, jak má Sentinela nakládat s hovory od lidí, které už znáte. Můžete to změnit později.</string>
+    <string name="contacts_permission_rationale" formatted="false">Aby Sentinela věděla, jestli je volající ve vašem seznamu, musí přečíst vaše kontakty. Na rozdíl od jiných aplikací vaše kontakty neshromažďujeme. Čtení je 100% místní: data nikdy neopustí zařízení.</string>
+    <string name="contacts_option_ring">Vyzvánět</string>
+    <string name="contacts_option_ring_desc">Hovory ve vašem telefonu vyzvánějí jako obvykle.</string>
+    <string name="contacts_option_block">Blokovat</string>
+    <string name="contacts_option_block_desc">Blokuje všechny hovory podle režimu blokování v části Ochrana.</string>
+    <string name="contacts_option_silence">Ztlumit</string>
+    <string name="contacts_option_silence_desc">Telefon nevibruje ani nevyzvání, ale zobrazí oznámení.</string>
+    <string name="contacts_option_never_silence">Nikdy neztlumovat</string>
+    <string name="contacts_option_never_silence_desc">Sentinela nikdy neztlumí váš seznam kontaktů. Systémový režim „Nerušit“ nadále platí.</string>
+    <string name="contacts_default_badge">Výchozí</string>
+
+    <string name="whatsapp_contacts_warning_title">Upozornění k WhatsAppu</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp umožňuje ukládat kontakty jen do vlastního cloudu. Lidé uložení tímto způsobem v seznamu kontaktů zařízení neexistují a Sentinela je považuje za „Neznámé“. Uložte kontakty do oficiálního seznamu, aby je blokování rozpoznalo.</string>
+    <string name="whatsapp_history_hint">Tip: pokud jde o kontakt z WhatsAppu, který není uložený v seznamu kontaktů, povolte ho volbou výše.</string>
+
+    <string name="contacts_permission_granted">Přístup ke kontaktům udělen</string>
+    <string name="contacts_permission_denied">Bez přístupu ke kontaktům nemůže Sentinela vědět, kdo je ve vašem seznamu: takové hovory mohou být považovány za neznámé.</string>
+    <string name="contacts_permission_blocked">Přístup ke kontaktům byl trvale odepřen. Udělíte ho v nastavení aplikace.</string>
+    <string name="settings_block_private_desc">Hovory bez identifikace čísla se řídí pravidlem blokování, které jste zvolili. Není možné zjistit, kdo volal.</string>
+
+    <!-- Uvedení do provozu: osobní seznam -->
+    <string name="whitelist_setup_title">Nastavení osobního seznamu</string>
+    <string name="whitelist_setup_desc">Osobní seznam je váš vlastní seznam důvěryhodných čísel, oddělený od seznamu kontaktů telefonu.</string>
+    <string name="whitelist_setup_what_title">Co je osobní seznam?</string>
+    <string name="whitelist_setup_what_desc">Osobní seznam tvoří čísla, která jste přidali ručně nebo označili v aplikaci jako bezpečná.</string>
+    <string name="whitelist_setup_question">Jak nakládat s vaším osobním seznamem?</string>
+    <string name="whitelist_option_never_silence">Nikdy neztlumovat</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela tento zdroj nikdy neztlumí. Systémový režim „Nerušit“ nadále platí.</string>
+    <string name="whitelist_option_ring">Vyzvánět</string>
+    <string name="whitelist_option_ring_desc">Vždy přehrát zvuk.</string>
+    <string name="whitelist_option_block">Blokovat</string>
+    <string name="whitelist_option_block_desc">Automaticky odmítnout.</string>
+    <string name="whitelist_option_silence">Ztlumit</string>
+    <string name="whitelist_option_silence_desc">Pouze vizuální oznámení.</string>
+    <string name="whitelist_setup_hint">Tato nastavení můžete změnit a nová čísla přidat kdykoli v nabídce Povolená.</string>
+
+    <!-- Uvedení do provozu: závěrečná kontrola -->
+    <string name="onboarding_summary_title_ok">Vše je hotovo</string>
+    <string name="onboarding_summary_title_partial">Skoro hotovo</string>
+    <string name="onboarding_summary_body">Zkontrolujte, co bylo nastaveno. Každou položku můžete později změnit na obrazovce Ochrana.</string>
+    <string name="onboarding_check_role">Výchozí filtrování hovorů</string>
+    <string name="onboarding_check_contacts">Přístup ke kontaktům</string>
+    <string name="onboarding_check_unknown">Neznámá čísla</string>
+    <string name="onboarding_check_origins">Kontakty a osobní seznam</string>
+    <string name="onboarding_check_granted">Uděleno</string>
+    <string name="onboarding_check_missing">Chybí</string>
+
+    <!-- Přehled -->
+    <string name="dashboard_protection_active">Ochrana aktivní</string>
+    <string name="dashboard_protection_inactive">Ochrana vypnutá</string>
+    <string name="dashboard_monitoring">Sledování v reálném čase</string>
+    <string name="dashboard_device_safe">Vaše zařízení je chráněno před hovory z neznámých čísel.</string>
+    <string name="dashboard_role_missing">Sentinela není výchozí aplikací pro filtrování hovorů.</string>
+    <string name="dashboard_fix_configuration">Opravit konfiguraci</string>
+    <string name="dashboard_total_blocked">Celkem zablokováno</string>
+    <string name="dashboard_blocked_today">Dnes</string>
+    <string name="dashboard_last_blocked">Poslední zablokovaný hovor</string>
+    <string name="dashboard_quick_whitelist">Osobní seznam</string>
+    <string name="dashboard_quick_history">Historie blokování</string>
+    <string name="dashboard_protection_off_hint">Nefiltruje se žádný hovor.</string>
+    <string name="dashboard_contacts_missing">Sentinela nemůže číst váš seznam kontaktů. Hovory od kontaktů mohou být považovány za neznámé.</string>
+    <string name="dashboard_history_off">Historie je vypnutá, takže není co zobrazit jako počet zablokovaných hovorů.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Zapnout historii</string>
+
+    <!-- Spodní navigace -->
+    <string name="nav_home">Domů</string>
+    <string name="nav_whitelist">Povolená</string>
+    <string name="nav_history">Historie</string>
+    <string name="nav_settings">Nastavení</string>
+    <string name="nav_unavailable">Tato obrazovka přijde v pozdější fázi aplikace.</string>
+
+    <!-- Osobní seznam -->
+    <string name="whitelist_title">Osobní seznam</string>
+    <string name="whitelist_search_placeholder">Hledat popisy nebo čísla…</string>
+    <string name="whitelist_section_allowed">Povolená čísla (%1$d)</string>
+    <string name="whitelist_about_desc">Čísla, která jste přidali ručně nebo označili jako bezpečná. Řídí se nastaveným pravidlem — při výchozí hodnotě (Nikdy neztlumovat) vždy vyzvánějí.</string>
+    <string name="whitelist_add_number">Přidat číslo</string>
+    <string name="whitelist_edit">Upravit</string>
+    <string name="whitelist_delete">Smazat</string>
+    <string name="whitelist_export">Exportovat zálohu</string>
+    <string name="whitelist_import">Importovat zálohu</string>
+    <string name="whitelist_import_confirm">Import sloučí čísla ze souboru s vaším současným seznamem. Pokračovat?</string>
+    <string name="whitelist_duplicate">Toto číslo už v osobním seznamu je.</string>
+    <string name="whitelist_number_label">Číslo</string>
+    <string name="whitelist_description_label">Popis (nepovinné)</string>
+    <string name="whitelist_invalid_number">Neplatné číslo. Použijte brazilské číslo s předvolbou.</string>
+    <string name="whitelist_load_error">Osobní seznam se nepodařilo načíst.</string>
+    <string name="whitelist_added_from_history">Přidáno z historie</string>
+    <string name="whitelist_export_ok">Záloha osobního seznamu uložena.</string>
+    <string name="whitelist_export_failed">Zálohu se nepodařilo uložit.</string>
+    <string name="whitelist_import_failed">Soubor se nepodařilo přečíst.</string>
+    <string name="whitelist_import_result">%1$d přidáno, %2$d už existovalo, %3$d neplatných.</string>
+    <string name="whitelist_import_result_over_limit">%1$d přidáno, %2$d už existovalo, %3$d neplatných. %4$d zůstalo mimo: soubor překračuje limit 10 000 čísel.</string>
+
+    <!-- Historie -->
+    <string name="history_clear_all">Vymazat vše</string>
+    <string name="history_filter_today">Dnes</string>
+    <string name="history_filter_7days">7 dní</string>
+    <string name="history_filter_30days">30 dní</string>
+    <string name="history_unknown_number">Neznámé číslo</string>
+    <string name="history_private_number">Soukromé</string>
+    <string name="history_private_id">Skryté ID</string>
+    <string name="history_action_allow">Povolit</string>
+    <string name="history_action_delete">Smazat</string>
+    <string name="history_mark_unwanted">Označit jako nechtěné</string>
+    <string name="history_empty">Zatím žádné zablokované hovory.</string>
+    <string name="history_clear_confirm">Tím se smaže celá vaše historie blokování. Chcete pokračovat?</string>
+    <string name="history_filter_period">Období</string>
+    <string name="history_filter_all">Celá historie</string>
+    <string name="history_action_allow_whitelist">Povolit (přidat do osobního seznamu)</string>
+
+    <!-- Historie: filtr podle rozhodnutí -->
+    <string name="history_filter_decision">Rozhodnutí</string>
+    <string name="history_decision_all">Všechny</string>
+    <string name="history_decision_unclassified">Nezařazené</string>
+    <string name="history_decision_legitimate">Označené jako oprávněné</string>
+    <string name="history_decision_unwanted">Označené jako nechtěné</string>
+
+    <!-- Historie: důvod rozhodnutí -->
+    <string name="history_reason_outgoing_call">Odchozí hovor</string>
+    <string name="history_reason_protection_disabled">Ochrana vypnutá</string>
+    <string name="history_reason_private_number">Soukromé číslo</string>
+    <string name="history_reason_contact">Je ve vašich kontaktech</string>
+    <string name="history_reason_personal_whitelist">Je ve vašem osobním seznamu</string>
+    <string name="history_reason_emergency_number">Tísňové číslo</string>
+    <string name="history_reason_repeated_call">Hned poté volal znovu</string>
+    <string name="history_reason_unknown_number">Neznámé číslo</string>
+    <string name="history_reason_invalid_number">Neidentifikované číslo</string>
+    <string name="history_reason_local_lookup_failure">Místní dotaz selhal</string>
+    <string name="history_reason_fallback_policy">Záložní pravidlo</string>
+
+    <!-- Historie: relativní čas -->
+    <string name="history_time_now">Teď</string>
+    <string name="history_time_minutes">před %1$d min</string>
+    <string name="history_time_hours">před %1$d h</string>
+    <string name="history_time_days">před %1$d d</string>
+
+    <!-- Ochrana / Nastavení -->
+    <string name="settings_title">Ochrana</string>
+    <string name="settings_protection_toggle">Zapnout ochranu</string>
+    <string name="settings_unknown_policy">Neznámá čísla</string>
+    <string name="settings_contacts_policy">Kontakty ze seznamu</string>
+    <string name="settings_whitelist_policy">Osobní seznam</string>
+    <string name="settings_block_private">Blokovat soukromá čísla</string>
+    <string name="settings_dialer_mode">Režim telefonu (pokročilé)</string>
+    <string name="settings_dialer_mode_desc">Udělá ze Sentinely výchozí aplikaci telefonu, aby se pravidla vztahovala i na kontakty. Kdykoli to můžete vrátit.</string>
+    <string name="settings_mode_reject">Odmítnout ihned</string>
+    <string name="settings_mode_silent_voicemail">Přesměrovat potichu</string>
+    <string name="settings_hide_native_log">Požádat o nezaznamenání do historie telefonu</string>
+    <string name="settings_hide_native_log_desc">Android této žádosti vyhoví jen u aplikací operátorů. Zablokované hovory se v historii hovorů telefonu nadále objevují, označené jako zablokované. Co blokování zaručuje: nezvoní, nevibruje, nezobrazí obrazovku hovoru a nevytvoří upozornění na zmeškaný hovor.</string>
+    <string name="settings_show_notification">Zobrazit tiché oznámení</string>
+    <string name="settings_fallback_policy">Co dělat při chybě</string>
+    <string name="settings_fallback_allow">Nechat hovor vyzvánět</string>
+    <string name="settings_fallback_block">Blokovat</string>
+
+    <string name="settings_privacy_title">Soukromí</string>
+    <string name="settings_privacy_disclaimer">Sentinela funguje 100% offline. Na rozdíl od jiných aplikací vaše kontakty neshromažďujeme ani je neposíláme do cloudu.</string>
+    <string name="settings_mask_numbers">Maskovat příchozí čísla</string>
+    <string name="settings_mask_numbers_desc">Skryje část čísel hvězdičkami (+55 11 9****-1234) v historii, v oznámeních a na domovské obrazovce.</string>
+
+    <string name="settings_protection_toggle_desc">Vypnutá Sentinela neblokuje, neztlumuje a nic nezaznamenává. Hovory se chovají jako obvykle v telefonu.</string>
+    <string name="settings_contacts_policy_note">Toto pravidlo platí, dokud je udělen přístup ke kontaktům. Bez něj kontakty spadají pod chybové pravidlo.</string>
+    <string name="settings_block_mode_desc">Okamžité odmítnutí dá volajícímu obsazovací tón. Tiché přesměrování pošle hovor do hlasové schránky, pokud ji váš operátor nabízí.</string>
+    <string name="settings_repeated_call">Druhý hovor v řadě vyzvání</string>
+    <string name="settings_repeated_call_desc">Pokud stejné číslo zavolá znovu pár minut po zablokování, druhý hovor vyzvání. Slouží to pro naléhavé případy od lidí, které nemáte v seznamu kontaktů.</string>
+    <string name="settings_history_enabled">Uchovávat historii blokování</string>
+    <string name="settings_history_enabled_desc">Historie zůstává jen v tomto zařízení a je to ona, co umožňuje ověřit, co Sentinela zablokovala. Vypnutí nesmaže to, co už bylo uloženo.</string>
+    <string name="settings_history_off_kept">Historie vypnutá. Již uložené záznamy zůstávají v zařízení.</string>
+    <string name="settings_retention_title">Uchovávat záznamy po dobu</string>
+    <string name="settings_retention_never">Neuchovávat</string>
+    <string name="settings_retention_7">7 dní</string>
+    <string name="settings_retention_30">30 dní</string>
+    <string name="settings_retention_90">90 dní</string>
+    <string name="settings_retention_manual">Dokud je nesmažu</string>
+    <string name="settings_retention_never_confirm">Volba „Neuchovávat“ smaže stávající záznamy a Sentinela přestane zaznamenávat nová blokování. Nelze to vrátit zpět.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">Tím se z tohoto zařízení smaže %1$d záznam o zablokovaném hovoru. Nelze to vrátit zpět.</item>
+        <item quantity="few">Tím se z tohoto zařízení smažou %1$d záznamy o zablokovaných hovorech. Nelze to vrátit zpět.</item>
+        <item quantity="many">Tím se z tohoto zařízení smaže %1$d záznamu o zablokovaných hovorech. Nelze to vrátit zpět.</item>
+        <item quantity="other">Tím se z tohoto zařízení smaže %1$d záznamů o zablokovaných hovorech. Nelze to vrátit zpět.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Pokud místní dotaz selže, musí se Sentinela rozhodnout sama. Povolení riskuje, že projde nechtěný hovor; blokování riskuje, že přijdete o hovor, který jste chtěli přijmout.</string>
+
+    <!-- Soukromí a o aplikaci -->
+    <string name="about_title">Soukromí a o aplikaci</string>
+    <string name="about_data_local">Všechna data zůstávají pouze v tomto zařízení.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela má otevřený zdrojový kód: bez reklam, bez telemetrie, bez odesílání dat do cloudu — 100% offline, ve vašem vlastním telefonu.</string>
+    <string name="about_clear_all_data">Vymazat všechna data</string>
+    <string name="about_version">Verze %1$s</string>
+    <string name="about_open_app_settings">Otevřít nastavení aplikace</string>
+    <string name="about_open_channel_settings">Nastavit kanál oznámení</string>
+
+    <!-- Podpora a hodnocení -->
+    <string name="review_prompt_title">Líbí se vám Sentinela?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela má otevřený zdrojový kód, je bez reklam a 100% offline. Hodnocení nebo vstřícný komentář projektu hodně pomůže.</string>
+    <string name="review_prompt_rate">Ohodnotit teď</string>
+    <string name="review_prompt_later">Teď ne</string>
+    <string name="support_title">Podpořte Sentinelu</string>
+    <string name="support_comment_cta">Zanechat vstřícný komentář</string>
+    <string name="support_donate_hint">Dobrovolný příspěvek přímo do peněženky správce. Před odesláním adresu zkontrolujte.</string>
+    <string name="support_donate_bitcoin">Kopírovat adresu Bitcoin</string>
+    <string name="support_donate_liquid">Kopírovat adresu Liquid (L-BTC)</string>
+    <string name="support_address_copied">Adresa zkopírována!</string>
+
+    <!-- Vymazání všech dat -->
+    <string name="about_clear_warning_title">Pozor</string>
+    <string name="about_clear_warning_body">Tím se smaže vaše historie blokování, váš osobní seznam a všechna vaše nastavení. Chcete pokračovat?</string>
+    <string name="about_clear_continue">Pokračovat</string>
+    <string name="about_clear_final_title">Konečné potvrzení</string>
+    <string name="about_clear_final_body">Jste si jistí? Tuto akci nelze vrátit zpět a všechna místní data budou trvale ztracena.</string>
+    <string name="about_clear_failed_title">Nepodařilo se smazat</string>
+    <string name="about_clear_failed_body">Vaše data jsou stále v zařízení. Zkuste to znovu; pokud se chyba opakuje, zavřete a znovu otevřete aplikaci.</string>
+
+    <!-- Oznámení -->
+    <string name="notification_channel_blocked">Zablokované hovory</string>
+    <string name="notification_channel_blocked_desc">Nenápadné upozornění, že hovor byl zablokován. Nikdy nevydá zvuk, nevibruje a nezabírá obrazovku.</string>
+    <string name="notification_blocked_title">Hovor zablokován</string>
+    <string name="notification_blocked_masked">Hovor od %1$s zablokován</string>
+    <string name="notification_blocked_anonymous">Jeden hovor byl zablokován</string>
+
+    <!-- Zapnutí vlastního oznámení -->
+    <string name="settings_notification_enable">Upozornit, když je hovor zablokován</string>
+    <string name="settings_notification_enable_desc">Ve výchozím stavu vypnuto. Po zapnutí si Sentinela vyžádá systémové oprávnění k oznámením. Upozornění je nenápadné: bez zvuku, bez vibrací a bez zabrání obrazovky.</string>
+    <string name="settings_notification_identification_masked">Zobrazit maskované číslo</string>
+    <string name="settings_notification_identification_anonymous">Nezobrazovat žádnou identifikaci</string>
+    <string name="notification_permission_rationale">Aby vás Sentinela mohla upozornit na zablokované hovory, potřebuje oprávnění k oznámením. Upozornění je místní a nikdy nezobrazí celé číslo.</string>
+
+    <!-- Oznámení o hovoru (režim telefonu) -->
+    <string name="notification_channel_call">Probíhající hovory</string>
+    <string name="notification_channel_call_desc">Zobrazuje příchozí hovor na celé obrazovce a upozornění na probíhající hovor. Objeví se jen tehdy, když je Sentinela výchozím telefonem.</string>
+    <string name="notification_call_incoming_title">Příchozí hovor</string>
+    <string name="notification_call_ongoing_title">Probíhající hovor</string>
+    <string name="notification_call_unknown_caller">Neidentifikované číslo</string>
+
+    <!-- Hovor: štítky stavu -->
+    <string name="call_incoming_state">Příchozí hovor</string>
+    <string name="call_dialing_state">Vytáčím…</string>
+    <string name="call_ringing_state">Vyzvání…</string>
+    <string name="call_active_state">Probíhá hovor</string>
+    <string name="call_ended_state">Hovor ukončen</string>
+    <string name="call_failed_state">Hovor se nepodařilo uskutečnit</string>
+    <string name="call_unsupported_state">Probíhající hovor</string>
+    <string name="call_unsupported_body">Tato verze Sentinely nezobrazuje ovládací prvky pro tento stav hovoru. Zavěsit lze i nadále níže.</string>
+
+    <!-- Hovor: hlavní akce -->
+    <string name="call_action_answer">Přijmout</string>
+    <string name="call_action_reject">Odmítnout</string>
+    <string name="call_action_hangup">Zavěsit</string>
+    <string name="call_action_answer_description">Přijmout hovor</string>
+    <string name="call_action_reject_description">Odmítnout hovor</string>
+    <string name="call_action_hangup_description">Ukončit hovor</string>
+
+    <!-- Hovor: vedlejší ovládání -->
+    <string name="call_control_mute">Ztlumit mikrofon</string>
+    <string name="call_control_speaker">Reproduktor</string>
+    <string name="call_control_keypad">Klávesnice</string>
+    <string name="call_control_mute_off_description">Ztlumení mikrofonu, vypnuto</string>
+    <string name="call_control_mute_on_description">Ztlumení mikrofonu, zapnuto</string>
+    <string name="call_control_speaker_off_description">Reproduktor, vypnutý</string>
+    <string name="call_control_speaker_on_description">Reproduktor, zapnutý</string>
+    <string name="call_control_keypad_closed_description">Číselná klávesnice, zavřená</string>
+    <string name="call_control_keypad_open_description">Číselná klávesnice, otevřená</string>
+    <string name="call_control_unavailable_state">nedostupné</string>
+
+    <!-- Hovor: štítky původu -->
+    <string name="call_origin_contact">Kontakt</string>
+    <string name="call_origin_whitelist">Povolený</string>
+    <string name="call_origin_unknown">Neznámý</string>
+    <string name="call_origin_private">Soukromé číslo</string>
+
+    <!-- Hovor: zvukový výstup -->
+    <string name="call_audio_route_title">Zvukový výstup</string>
+    <string name="call_audio_route_earpiece">Telefon</string>
+    <string name="call_audio_route_speaker">Reproduktor</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Náhlavní souprava</string>
+    <string name="call_audio_route_active_state">se používá</string>
+
+    <!-- Hovor: stopky a klávesnice DTMF -->
+    <string name="call_timer_description">Délka hovoru: %1$s</string>
+    <string name="call_keypad_close_description">Zavřít klávesnici</string>
+
+    <!-- Vytáčení -->
+    <string name="dialpad_call">Volat</string>
+    <string name="dialpad_call_description">Volat %1$s</string>
+    <string name="dialpad_delete_description">Smazat poslední číslici</string>
+    <string name="dialpad_clear_description">Smazat celé číslo</string>
+    <string name="dialpad_error_failed">Hovor se nepodařilo zahájit.</string>
+    <string name="dialpad_error_retry">Zkusit znovu</string>
+
+    <!-- Vytáčení: klávesy -->
+    <string name="dialpad_key_1_description">Klávesa jedna</string>
+    <string name="dialpad_key_2_description">Klávesa dva</string>
+    <string name="dialpad_key_3_description">Klávesa tři</string>
+    <string name="dialpad_key_4_description">Klávesa čtyři</string>
+    <string name="dialpad_key_5_description">Klávesa pět</string>
+    <string name="dialpad_key_6_description">Klávesa šest</string>
+    <string name="dialpad_key_7_description">Klávesa sedm</string>
+    <string name="dialpad_key_8_description">Klávesa osm</string>
+    <string name="dialpad_key_9_description">Klávesa devět</string>
+    <string name="dialpad_key_0_description">Klávesa nula</string>
+    <string name="dialpad_key_star_description">Klávesa hvězdička</string>
+    <string name="dialpad_key_hash_description">Klávesa křížek</string>
+
+    <!-- Zapnutí režimu telefonu -->
+    <string name="dialer_activation_title">Udělat ze Sentinely váš výchozí telefon?</string>
+    <string name="dialer_activation_intro">V režimu telefonu přijímá Sentinela všechny hovory — i od lidí ve vašem seznamu kontaktů. Jen tak platí pravidla podle zdroje i pro vaše kontakty.</string>
+    <string name="dialer_activation_changes_title">Co se mění</string>
+    <string name="dialer_activation_change_1">Sentinela se stane vaší aplikací telefonu: obrazovka hovoru a klávesnice budou její.</string>
+    <string name="dialer_activation_change_2">Filtrování začne vidět všechny hovory, nejen ty z čísel mimo seznam kontaktů.</string>
+    <string name="dialer_activation_change_3">Pravidlo, které jste zvolili pro kontakty, se opravdu uplatní. Výchozí hodnota je stále Vyzvánět — samotné zapnutí režimu telefonu nikoho neblokuje.</string>
+    <string name="dialer_activation_unchanged_title">Co se nemění</string>
+    <string name="dialer_activation_unchanged_1">Hovory se nadále zaznamenávají do historie hovorů telefonu. Být výchozí aplikací telefonu nedává Sentinele oprávnění tento záznam vynechat — v Androidu to mohou jen aplikace operátorů.</string>
+    <string name="dialer_activation_unchanged_2">Systémový režim „Nerušit“ má i nadále přednost před nastavením Sentinely.</string>
+    <string name="dialer_activation_unchanged_3">Hovory z WhatsAppu, Telegramu a dalších internetových aplikací zůstávají mimo dosah Sentinely.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela zůstává 100% offline: žádný hovor, číslo ani kontakt neopustí zařízení.</string>
+    <string name="dialer_activation_limit_calls">Jeden hovor najednou: čekající hovor a konference nejsou v této verzi podporovány.</string>
+    <string name="dialer_activation_contacts_required">Režim telefonu potřebuje oprávnění ke čtení kontaktů. Bez něj Sentinela nedokáže vaše kontakty rozlišit a začala by všechny považovat za neznámé.</string>
+    <string name="dialer_activation_grant_contacts">Povolit čtení kontaktů</string>
+    <string name="dialer_activation_cta">Zvolit Sentinelu</string>
+    <string name="dialer_activation_cta_hint">Rozhoduje Android. Můžete se kdykoli vrátit.</string>
+
+    <!-- Režim telefonu už aktivní -->
+    <string name="dialer_active_chip">Aktivní</string>
+    <string name="dialer_active_title">Sentinela je váš výchozí telefon</string>
+    <string name="action_back">Zpět</string>
+    <string name="dialer_active_changes_title">Co teď platí</string>
+    <string name="dialer_activation_unavailable">Toto zařízení nenabízí roli výchozího telefonu — obvykle proto, že nemá telefonii. Režim filtru Sentinely funguje dál tam, kde jsou telefonní hovory.</string>
+    <string name="dialer_revert_cta">Zvolit jiný telefon</string>
+    <string name="dialer_revert_hint">Když se vrátíte k jiné aplikaci telefonu, režim filtru Sentinely funguje dál běžným způsobem — bez přeinstalace a bez nového nastavování.</string>
+
+    <!-- Ztráta role telefonu -->
+    <string name="dialer_role_lost_title">Sentinela už není výchozím telefonem.</string>
+    <string name="dialer_role_lost_body">Režim filtru funguje dál: hovory z čísel mimo seznam kontaktů se stále filtrují.</string>
+    <string name="dialer_role_lost_action">Podívejte se, jak ho znovu zapnout</string>
+
+    <!-- Obecné -->
+    <string name="action_confirm">Potvrdit</string>
+    <string name="action_cancel">Zrušit</string>
+    <string name="action_retry">Zkusit znovu</string>
+    <string name="state_loading">Načítání…</string>
+    <string name="state_error">Něco se pokazilo. Zkuste to znovu.</string>
+    <string name="state_on">Zapnuto</string>
+    <string name="state_off">Vypnuto</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Relativní čas na domovské obrazovce -->
+    <string name="time_now">teď</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">před %d min</item>
+        <item quantity="few">před %d min</item>
+        <item quantity="many">před %d min</item>
+        <item quantity="other">před %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">před %d h</item>
+        <item quantity="few">před %d h</item>
+        <item quantity="many">před %d h</item>
+        <item quantity="other">před %d h</item>
+    </plurals>
+    <string name="time_yesterday">včera</string>
+
+    <!-- Domů: přečtení posledního zablokovaného -->
+    <string name="dashboard_last_blocked_description">Poslední zablokovaný hovor, %1$s, %2$s, %3$s</string>
+
+    <!-- Domů: další upozornění -->
+    <string name="dashboard_more_warnings">Zobrazit všechna upozornění</string>
+</resources>

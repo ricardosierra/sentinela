@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tere tulemast -->
+    <string name="welcome_headline">Sinu esimene kaitseliin rämpskõnede vastu.</string>
+    <string name="welcome_subtitle">Sentinela blokeerib tundmatutelt numbritelt tulevad kõned juba enne, kui telefon jõuab heliseda.</string>
+    <string name="welcome_feature_local_title">Kohalik blokeerimine</string>
+    <string name="welcome_feature_local_desc">Töötlemine otse seadmes.</string>
+    <string name="welcome_feature_silent_title">Vaikne</string>
+    <string name="welcome_feature_silent_desc">Ei mingeid soovimatuid helinaid ega vibratsiooni.</string>
+    <string name="welcome_feature_offline_title">Ilma internetita</string>
+    <string name="welcome_feature_offline_desc">Täielik privaatsus. Me ei kogu sinu kontakte.</string>
+    <string name="welcome_badge_native">Natiivne lõimimine</string>
+    <string name="welcome_cta">Alusta seadistamist</string>
+    <string name="welcome_cta_hint">Võtab vähem kui 2 minutit.</string>
+    <string name="welcome_open_source" formatted="false">100% avatud lähtekoodiga — reklaamideta, telemeetriata</string>
+
+    <!-- Seadistamine: kõnede filtreerimise roll -->
+    <string name="onboarding_role_disclaimer">Seadistades annad kõnede filtreerimise loa. Sentinela filtreerib tundmatutelt numbritelt tulevad kõned kohapeal, saatmata kunagi sinu andmeid seadmest välja.</string>
+    <string name="onboarding_role_cta">Seadista kohe</string>
+    <string name="onboarding_role_requesting">Küsin luba…</string>
+    <string name="onboarding_step_indicator">Samm %1$d / %2$d</string>
+    <string name="onboarding_next">Edasi</string>
+    <string name="onboarding_back">Tagasi</string>
+    <string name="onboarding_finish">Lõpeta seadistamine</string>
+    <string name="onboarding_change_later">Saad seda seadet igal ajal muuta.</string>
+    <string name="onboarding_skip">Jäta vahele</string>
+    <string name="onboarding_role_title">Lase Sentinelal filtreerimisega tegeleda</string>
+    <string name="onboarding_role_intro">Kõnede filtreerimiseks peab Sentinela olema Androidi vaikimisi kõnefiltri rakendus. Loa annad sina ja saad selle süsteemi seadetes igal ajal tagasi võtta.</string>
+    <string name="onboarding_role_denied">Sentinela ei saanud kõnefiltri rolli. Ühtki kõnet ei filtreerita enne, kui loa annad — saad seda teha kohe või hiljem, kuval Kaitse.</string>
+    <string name="onboarding_role_retry">Anna luba kohe</string>
+    <string name="onboarding_scope_title">Mida Sentinela ei tee</string>
+    <string name="onboarding_scope_dnd">Süsteemi režiim „Mitte segada“ kehtib endiselt Sentinela seadetest üle.</string>
+
+    <!-- Seadistamine: tundmatud numbrid -->
+    <string name="unknown_title">Tundmatud kõned</string>
+    <string name="unknown_question">Kuidas peaks Sentinela käsitlema numbreid, mida sinu kontaktides ei ole?</string>
+    <string name="unknown_option_block">Blokeeri</string>
+    <string name="unknown_option_block_desc">Lükkab kõne kohe tagasi.</string>
+    <string name="unknown_option_silence">Vaigista</string>
+    <string name="unknown_option_silence_desc">Kõne saabub ilma helita ja ilma vibratsioonita.</string>
+    <string name="unknown_option_allow">Luba</string>
+    <string name="unknown_option_allow_desc">Võtab kõnesid vastu tavapäraselt.</string>
+
+    <!-- Seadistamine: kontaktid -->
+    <string name="contacts_title">Ja inimesed sinu kontaktiloendis?</string>
+    <string name="contacts_explainer">Määra, kuidas Sentinela peaks käsitlema kõnesid neilt, keda juba tunned. Saad seda hiljem muuta.</string>
+    <string name="contacts_permission_rationale" formatted="false">Et teada, kas helistaja on sinu kontaktides, peab Sentinela neid lugema. Erinevalt teistest rakendustest me sinu kontakte ei kogu. Lugemine on 100% kohalik: andmed ei lahku kunagi seadmest.</string>
+    <string name="contacts_option_ring">Helise</string>
+    <string name="contacts_option_ring_desc">Kõned helisevad sinu telefonis tavapäraselt.</string>
+    <string name="contacts_option_block">Blokeeri</string>
+    <string name="contacts_option_block_desc">Blokeerib kõik kõned vastavalt jaotises Kaitse valitud blokeerimisrežiimile.</string>
+    <string name="contacts_option_silence">Vaigista</string>
+    <string name="contacts_option_silence_desc">Telefon ei vibreeri ega helise, kuid näitab teavitust.</string>
+    <string name="contacts_option_never_silence">Ära kunagi vaigista</string>
+    <string name="contacts_option_never_silence_desc">Sentinela ei vaigista kunagi sinu kontaktiloendit. Süsteemi „Mitte segada“ kehtib endiselt.</string>
+    <string name="contacts_default_badge">Vaikimisi</string>
+
+    <string name="whatsapp_contacts_warning_title">Märkus WhatsAppi kohta</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp lubab kontakte salvestada ainult oma pilve. Nii salvestatud inimesi seadme kontaktides ei ole ja Sentinela käsitleb neid kui „Tundmatu“. Salvesta oma kontaktid ametlikku kontaktiraamatusse, et blokeerija neid ära tunneks.</string>
+    <string name="whatsapp_history_hint">Nõuanne: kui tegemist on WhatsAppi kontaktiga, mida ei ole kontaktiraamatusse salvestatud, kasuta selle lubamiseks ülalolevat valikut.</string>
+
+    <string name="contacts_permission_granted">Kontaktide lugemise luba antud</string>
+    <string name="contacts_permission_denied">Ilma kontaktide lugemiseta ei saa Sentinela teada, kes on sinu kontaktides: neid kõnesid võidakse käsitleda tundmatutena.</string>
+    <string name="contacts_permission_blocked">Kontaktide lugemine keelati lõplikult. Loa andmiseks ava rakenduse seaded.</string>
+    <string name="settings_block_private_desc">Numbrikuvata kõned järgivad sinu valitud blokeerimisreeglit. Ei ole võimalik teada, kes helistas.</string>
+
+    <!-- Seadistamine: isiklik loend -->
+    <string name="whitelist_setup_title">Isikliku loendi seadistamine</string>
+    <string name="whitelist_setup_desc">Isiklik loend on sinu enda usaldusväärsete numbrite loend, eraldi telefoni kontaktiraamatust.</string>
+    <string name="whitelist_setup_what_title">Mis on isiklik loend?</string>
+    <string name="whitelist_setup_what_desc">Isiklik loend koosneb numbritest, mille lisasid käsitsi või märkisid rakenduses turvaliseks.</string>
+    <string name="whitelist_setup_question">Kuidas sinu isiklikku loendit käsitleda?</string>
+    <string name="whitelist_option_never_silence">Ära kunagi vaigista</string>
+    <string name="whitelist_option_never_silence_desc">Sentinela ei vaigista kunagi seda allikat. Süsteemi „Mitte segada“ kehtib endiselt.</string>
+    <string name="whitelist_option_ring">Helise</string>
+    <string name="whitelist_option_ring_desc">Anna alati heli.</string>
+    <string name="whitelist_option_block">Blokeeri</string>
+    <string name="whitelist_option_block_desc">Lükka automaatselt tagasi.</string>
+    <string name="whitelist_option_silence">Vaigista</string>
+    <string name="whitelist_option_silence_desc">Ainult visuaalne teavitus.</string>
+    <string name="whitelist_setup_hint">Saad neid seadeid muuta ja uusi numbreid lisada igal ajal menüüs Lubatud.</string>
+
+    <!-- Seadistamine: lõppkontroll -->
+    <string name="onboarding_summary_title_ok">Kõik valmis</string>
+    <string name="onboarding_summary_title_partial">Peaaegu valmis</string>
+    <string name="onboarding_summary_body">Vaata üle, mis sai seadistatud. Saad iga punkti hiljem muuta kuval Kaitse.</string>
+    <string name="onboarding_check_role">Vaikimisi kõnede filtreerimine</string>
+    <string name="onboarding_check_contacts">Kontaktide lugemine</string>
+    <string name="onboarding_check_unknown">Tundmatud numbrid</string>
+    <string name="onboarding_check_origins">Kontaktid ja isiklik loend</string>
+    <string name="onboarding_check_granted">Antud</string>
+    <string name="onboarding_check_missing">Puudub</string>
+
+    <!-- Ülevaade -->
+    <string name="dashboard_protection_active">Kaitse aktiivne</string>
+    <string name="dashboard_protection_inactive">Kaitse välja lülitatud</string>
+    <string name="dashboard_monitoring">Reaalajas jälgimine</string>
+    <string name="dashboard_device_safe">Sinu seade on kaitstud tundmatutelt numbritelt tulevate kõnede eest.</string>
+    <string name="dashboard_role_missing">Sentinela ei ole vaikimisi kõnefiltri rakendus.</string>
+    <string name="dashboard_fix_configuration">Paranda seadistus</string>
+    <string name="dashboard_total_blocked">Blokeeritud kokku</string>
+    <string name="dashboard_blocked_today">Täna</string>
+    <string name="dashboard_last_blocked">Viimane blokeeritud kõne</string>
+    <string name="dashboard_quick_whitelist">Isiklik loend</string>
+    <string name="dashboard_quick_history">Blokeerimiste ajalugu</string>
+    <string name="dashboard_protection_off_hint">Ühtki kõnet ei filtreerita.</string>
+    <string name="dashboard_contacts_missing">Sentinela ei saa sinu kontakte lugeda. Kontaktidelt tulevaid kõnesid võidakse käsitleda tundmatutena.</string>
+    <string name="dashboard_history_off">Ajalugu on välja lülitatud, seega ei ole blokeeritud kõnede arvu, mida näidata.</string>
+    <string name="dashboard_history_off_value">—</string>
+    <string name="dashboard_history_off_action">Lülita ajalugu sisse</string>
+
+    <!-- Alumine navigatsioon -->
+    <string name="nav_home">Avaleht</string>
+    <string name="nav_whitelist">Lubatud</string>
+    <string name="nav_history">Ajalugu</string>
+    <string name="nav_settings">Seaded</string>
+    <string name="nav_unavailable">See kuva tuleb rakenduse hilisemas etapis.</string>
+
+    <!-- Isiklik loend -->
+    <string name="whitelist_title">Isiklik loend</string>
+    <string name="whitelist_search_placeholder">Otsi kirjeldusi või numbreid…</string>
+    <string name="whitelist_section_allowed">Lubatud numbrid (%1$d)</string>
+    <string name="whitelist_about_desc">Numbrid, mille lisasid käsitsi või märkisid turvaliseks. Nad järgivad sinu seatud reeglit — vaikeväärtusega (Ära kunagi vaigista) helisevad nad alati.</string>
+    <string name="whitelist_add_number">Lisa number</string>
+    <string name="whitelist_edit">Muuda</string>
+    <string name="whitelist_delete">Kustuta</string>
+    <string name="whitelist_export">Ekspordi varukoopia</string>
+    <string name="whitelist_import">Impordi varukoopia</string>
+    <string name="whitelist_import_confirm">Import liidab faili numbrid sinu praeguse loendiga. Kas jätkata?</string>
+    <string name="whitelist_duplicate">See number on juba isiklikus loendis.</string>
+    <string name="whitelist_number_label">Number</string>
+    <string name="whitelist_description_label">Kirjeldus (valikuline)</string>
+    <string name="whitelist_invalid_number">Vigane number. Kasuta Brasiilia numbrit suunakoodiga.</string>
+    <string name="whitelist_load_error">Isikliku loendi laadimine ebaõnnestus.</string>
+    <string name="whitelist_added_from_history">Lisatud ajaloost</string>
+    <string name="whitelist_export_ok">Isikliku loendi varukoopia salvestatud.</string>
+    <string name="whitelist_export_failed">Varukoopiat ei õnnestunud salvestada.</string>
+    <string name="whitelist_import_failed">Faili ei õnnestunud lugeda.</string>
+    <string name="whitelist_import_result">%1$d lisatud, %2$d olid juba olemas, %3$d vigased.</string>
+    <string name="whitelist_import_result_over_limit">%1$d lisatud, %2$d olid juba olemas, %3$d vigased. %4$d jäid välja: fail ületab 10 000 numbri piiri.</string>
+
+    <!-- Ajalugu -->
+    <string name="history_clear_all">Tühjenda kõik</string>
+    <string name="history_filter_today">Täna</string>
+    <string name="history_filter_7days">7 päeva</string>
+    <string name="history_filter_30days">30 päeva</string>
+    <string name="history_unknown_number">Tundmatu number</string>
+    <string name="history_private_number">Privaatne</string>
+    <string name="history_private_id">Peidetud ID</string>
+    <string name="history_action_allow">Luba</string>
+    <string name="history_action_delete">Kustuta</string>
+    <string name="history_mark_unwanted">Märgi soovimatuks</string>
+    <string name="history_empty">Blokeeritud kõnesid veel ei ole.</string>
+    <string name="history_clear_confirm">See kustutab kogu sinu blokeerimiste ajaloo. Kas soovid jätkata?</string>
+    <string name="history_filter_period">Periood</string>
+    <string name="history_filter_all">Kogu ajalugu</string>
+    <string name="history_action_allow_whitelist">Luba (lisa isiklikku loendisse)</string>
+
+    <!-- Ajalugu: filter otsuse järgi -->
+    <string name="history_filter_decision">Otsus</string>
+    <string name="history_decision_all">Kõik</string>
+    <string name="history_decision_unclassified">Liigitamata</string>
+    <string name="history_decision_legitimate">Märgitud õigustatuks</string>
+    <string name="history_decision_unwanted">Märgitud soovimatuks</string>
+
+    <!-- Ajalugu: otsuse põhjus -->
+    <string name="history_reason_outgoing_call">Väljuv kõne</string>
+    <string name="history_reason_protection_disabled">Kaitse välja lülitatud</string>
+    <string name="history_reason_private_number">Privaatne number</string>
+    <string name="history_reason_contact">On sinu kontaktides</string>
+    <string name="history_reason_personal_whitelist">On sinu isiklikus loendis</string>
+    <string name="history_reason_emergency_number">Hädaabinumber</string>
+    <string name="history_reason_repeated_call">Helistas kohe uuesti</string>
+    <string name="history_reason_unknown_number">Tundmatu number</string>
+    <string name="history_reason_invalid_number">Tuvastamata number</string>
+    <string name="history_reason_local_lookup_failure">Kohalik päring ebaõnnestus</string>
+    <string name="history_reason_fallback_policy">Varureegel</string>
+
+    <!-- Ajalugu: suhteline aeg -->
+    <string name="history_time_now">Nüüd</string>
+    <string name="history_time_minutes">%1$d min tagasi</string>
+    <string name="history_time_hours">%1$d t tagasi</string>
+    <string name="history_time_days">%1$d p tagasi</string>
+
+    <!-- Kaitse / Seaded -->
+    <string name="settings_title">Kaitse</string>
+    <string name="settings_protection_toggle">Lülita kaitse sisse</string>
+    <string name="settings_unknown_policy">Tundmatud numbrid</string>
+    <string name="settings_contacts_policy">Kontaktiraamatu kontaktid</string>
+    <string name="settings_whitelist_policy">Isiklik loend</string>
+    <string name="settings_block_private">Blokeeri privaatsed numbrid</string>
+    <string name="settings_dialer_mode">Helistaja režiim (edasijõudnutele)</string>
+    <string name="settings_dialer_mode_desc">Muudab Sentinela vaikimisi telefonirakenduseks, et reeglid kehtiksid ka kontaktidele. Saad selle igal ajal tagasi pöörata.</string>
+    <string name="settings_mode_reject">Lükka kohe tagasi</string>
+    <string name="settings_mode_silent_voicemail">Suuna vaikselt edasi</string>
+    <string name="settings_hide_native_log">Palu mitte kanda telefoni kõnelogisse</string>
+    <string name="settings_hide_native_log_desc">Android täidab selle palve ainult operaatorite rakendustele. Blokeeritud kõned ilmuvad endiselt telefoni kõnelogisse, märgituna blokeerituks. Mida blokeerimine tagab: ei helise, ei vibreeri, ei näita kõnekuva ega tekita vastamata kõne teavitust.</string>
+    <string name="settings_show_notification">Näita vaikset teavitust</string>
+    <string name="settings_fallback_policy">Mida teha tõrke korral</string>
+    <string name="settings_fallback_allow">Lase kõnel heliseda</string>
+    <string name="settings_fallback_block">Blokeeri</string>
+
+    <string name="settings_privacy_title">Privaatsus</string>
+    <string name="settings_privacy_disclaimer">Sentinela on 100% võrguühenduseta. Erinevalt teistest rakendustest me ei kogu sinu kontakte ega saada neid pilve.</string>
+    <string name="settings_mask_numbers">Varja saabuvad numbrid</string>
+    <string name="settings_mask_numbers_desc">Peidab osa numbritest tärnidega (+55 11 9****-1234) ajaloos, teavitustes ja avakuval.</string>
+
+    <string name="settings_protection_toggle_desc">Välja lülitatuna Sentinela ei blokeeri, ei vaigista ega salvesta midagi. Kõned järgivad telefoni tavapärast käitumist.</string>
+    <string name="settings_contacts_policy_note">See reegel kehtib seni, kuni kontaktide lugemise luba on antud. Ilma selleta langevad kontaktid tõrkereegli alla.</string>
+    <string name="settings_block_mode_desc">Kohe tagasi lükkamine annab helistajale kinnise tooni. Vaikselt edasi suunamine saadab kõne kõneposti, kui sinu operaatoril on see teenus.</string>
+    <string name="settings_repeated_call">Teine järjestikune kõne heliseb</string>
+    <string name="settings_repeated_call_desc">Kui sama number helistab uuesti mõni minut pärast blokeerimist, siis teine kõne heliseb. See on mõeldud hädaolukordadeks inimestelt, keda sinu kontaktides ei ole.</string>
+    <string name="settings_history_enabled">Säilita blokeerimiste ajalugu</string>
+    <string name="settings_history_enabled_desc">Ajalugu jääb ainult sellesse seadmesse ja on see, mis võimaldab kontrollida, mida Sentinela on blokeerinud. Väljalülitamine ei kustuta juba salvestatut.</string>
+    <string name="settings_history_off_kept">Ajalugu välja lülitatud. Juba salvestatud kirjed jäävad seadmesse.</string>
+    <string name="settings_retention_title">Säilita kirjeid</string>
+    <string name="settings_retention_never">Ära säilita</string>
+    <string name="settings_retention_7">7 päeva</string>
+    <string name="settings_retention_30">30 päeva</string>
+    <string name="settings_retention_90">90 päeva</string>
+    <string name="settings_retention_manual">Kuni ma need kustutan</string>
+    <string name="settings_retention_never_confirm">Valiku „Ära säilita“ tegemine kustutab olemasolevad kirjed ja Sentinela lõpetab uute blokeerimiste salvestamise. Seda ei saa tagasi võtta.</string>
+    <plurals name="settings_clear_history_confirm">
+        <item quantity="one">See kustutab sellest seadmest %1$d blokeeritud kõne kirje. Seda ei saa tagasi võtta.</item>
+        <item quantity="other">See kustutab sellest seadmest %1$d blokeeritud kõne kirjet. Seda ei saa tagasi võtta.</item>
+    </plurals>
+    <string name="settings_fallback_desc">Kui kohalik päring ebaõnnestub, peab Sentinela ise otsustama. Lubamine riskib soovimatu kõne läbilaskmisega; blokeerimine riskib sellega, et jääd ilma kõnest, mida soovisid vastu võtta.</string>
+
+    <!-- Privaatsus ja teave -->
+    <string name="about_title">Privaatsus ja teave</string>
+    <string name="about_data_local">Kõik andmed jäävad ainult sellesse seadmesse.</string>
+    <string name="about_opensource_pitch" formatted="false">Sentinela on avatud lähtekoodiga: reklaamideta, telemeetriata, andmeid pilve saatmata — 100% võrguühenduseta, sinu enda telefonis.</string>
+    <string name="about_clear_all_data">Tühjenda kõik andmed</string>
+    <string name="about_version">Versioon %1$s</string>
+    <string name="about_open_app_settings">Ava rakenduse seaded</string>
+    <string name="about_open_channel_settings">Seadista teavituskanal</string>
+
+    <!-- Toetus ja hinnang -->
+    <string name="review_prompt_title">Kas Sentinela meeldib sulle?</string>
+    <string name="review_prompt_body" formatted="false">Sentinela on avatud lähtekoodiga, reklaamivaba ja 100% võrguühenduseta. Hinnang või toetav kommentaar aitab projekti väga.</string>
+    <string name="review_prompt_rate">Anna hinnang kohe</string>
+    <string name="review_prompt_later">Mitte praegu</string>
+    <string name="support_title">Toeta Sentinelat</string>
+    <string name="support_comment_cta">Jäta toetav kommentaar</string>
+    <string name="support_donate_hint">Vabatahtlik annetus otse hooldaja rahakotti. Kontrolli aadressi enne saatmist.</string>
+    <string name="support_donate_bitcoin">Kopeeri Bitcoini aadress</string>
+    <string name="support_donate_liquid">Kopeeri Liquidi aadress (L-BTC)</string>
+    <string name="support_address_copied">Aadress kopeeritud!</string>
+
+    <!-- Kõikide andmete tühjendamine -->
+    <string name="about_clear_warning_title">Tähelepanu</string>
+    <string name="about_clear_warning_body">See kustutab sinu blokeerimiste ajaloo, isikliku loendi ja kõik sinu seaded. Kas soovid jätkata?</string>
+    <string name="about_clear_continue">Jätka</string>
+    <string name="about_clear_final_title">Lõplik kinnitus</string>
+    <string name="about_clear_final_body">Kas oled kindel? Seda toimingut ei saa tagasi võtta ja kõik kohalikud andmed lähevad jäädavalt kaotsi.</string>
+    <string name="about_clear_failed_title">Kustutamine ebaõnnestus</string>
+    <string name="about_clear_failed_body">Sinu andmed on endiselt seadmes. Proovi uuesti; kui viga kordub, sulge rakendus ja ava see uuesti.</string>
+
+    <!-- Teavitused -->
+    <string name="notification_channel_blocked">Blokeeritud kõned</string>
+    <string name="notification_channel_blocked_desc">Diskreetne märguanne, et kõne blokeeriti. See ei tee kunagi häält, ei vibreeri ega võta ekraani üle.</string>
+    <string name="notification_blocked_title">Kõne blokeeritud</string>
+    <string name="notification_blocked_masked">Kõne numbrilt %1$s blokeeritud</string>
+    <string name="notification_blocked_anonymous">Üks kõne blokeeriti</string>
+
+    <!-- Oma teavituse sisselülitamine -->
+    <string name="settings_notification_enable">Teavita mind, kui kõne blokeeritakse</string>
+    <string name="settings_notification_enable_desc">On vaikimisi välja lülitatud. Sisselülitamisel küsib Sentinela süsteemi teavitusluba. Märguanne on diskreetne: ei heli, ei vibratsiooni ega ekraani ülevõtmist.</string>
+    <string name="settings_notification_identification_masked">Näita varjatud numbrit</string>
+    <string name="settings_notification_identification_anonymous">Ära näita mingit tuvastust</string>
+    <string name="notification_permission_rationale">Blokeeritud kõnedest teavitamiseks vajab Sentinela teavitusluba. Märguanne on kohalik ega näita kunagi tervet numbrit.</string>
+
+    <!-- Kõneteavitus (helistaja režiim) -->
+    <string name="notification_channel_call">Käimasolevad kõned</string>
+    <string name="notification_channel_call_desc">Näitab saabuvat kõnet täisekraanil ja käimasoleva kõne märguannet. Ilmub ainult siis, kui Sentinela on vaiketelefon.</string>
+    <string name="notification_call_incoming_title">Saabuv kõne</string>
+    <string name="notification_call_ongoing_title">Käimasolev kõne</string>
+    <string name="notification_call_unknown_caller">Tuvastamata number</string>
+
+    <!-- Kõne: olekusildid -->
+    <string name="call_incoming_state">Saabuv kõne</string>
+    <string name="call_dialing_state">Helistan…</string>
+    <string name="call_ringing_state">Heliseb…</string>
+    <string name="call_active_state">Kõne käib</string>
+    <string name="call_ended_state">Kõne lõppes</string>
+    <string name="call_failed_state">Kõnet ei õnnestunud ühendada</string>
+    <string name="call_unsupported_state">Käimasolev kõne</string>
+    <string name="call_unsupported_body">See Sentinela versioon ei näita selle kõneoleku juhtnuppe. Kõne lõpetamine on allpool endiselt saadaval.</string>
+
+    <!-- Kõne: põhitoimingud -->
+    <string name="call_action_answer">Vasta</string>
+    <string name="call_action_reject">Lükka tagasi</string>
+    <string name="call_action_hangup">Lõpeta</string>
+    <string name="call_action_answer_description">Vasta kõnele</string>
+    <string name="call_action_reject_description">Lükka kõne tagasi</string>
+    <string name="call_action_hangup_description">Lõpeta kõne</string>
+
+    <!-- Kõne: teisesed juhtnupud -->
+    <string name="call_control_mute">Vaigista</string>
+    <string name="call_control_speaker">Valjuhääldi</string>
+    <string name="call_control_keypad">Klahvistik</string>
+    <string name="call_control_mute_off_description">Vaigista, välja lülitatud</string>
+    <string name="call_control_mute_on_description">Vaigista, sisse lülitatud</string>
+    <string name="call_control_speaker_off_description">Valjuhääldi, välja lülitatud</string>
+    <string name="call_control_speaker_on_description">Valjuhääldi, sisse lülitatud</string>
+    <string name="call_control_keypad_closed_description">Numbriklahvistik, suletud</string>
+    <string name="call_control_keypad_open_description">Numbriklahvistik, avatud</string>
+    <string name="call_control_unavailable_state">pole saadaval</string>
+
+    <!-- Kõne: päritolusildid -->
+    <string name="call_origin_contact">Kontakt</string>
+    <string name="call_origin_whitelist">Lubatud</string>
+    <string name="call_origin_unknown">Tundmatu</string>
+    <string name="call_origin_private">Privaatne number</string>
+
+    <!-- Kõne: heliväljund -->
+    <string name="call_audio_route_title">Heliväljund</string>
+    <string name="call_audio_route_earpiece">Telefon</string>
+    <string name="call_audio_route_speaker">Valjuhääldi</string>
+    <string name="call_audio_route_bluetooth">Bluetooth</string>
+    <string name="call_audio_route_headset">Peakomplekt</string>
+    <string name="call_audio_route_active_state">kasutusel</string>
+
+    <!-- Kõne: taimer ja DTMF-klahvistik -->
+    <string name="call_timer_description">Kõne kestus: %1$s</string>
+    <string name="call_keypad_close_description">Sulge klahvistik</string>
+
+    <!-- Valimine -->
+    <string name="dialpad_call">Helista</string>
+    <string name="dialpad_call_description">Helista numbrile %1$s</string>
+    <string name="dialpad_delete_description">Kustuta viimane number</string>
+    <string name="dialpad_clear_description">Kustuta kogu number</string>
+    <string name="dialpad_error_failed">Kõnet ei õnnestunud alustada.</string>
+    <string name="dialpad_error_retry">Proovi uuesti</string>
+
+    <!-- Valimine: klahvid -->
+    <string name="dialpad_key_1_description">Klahv üks</string>
+    <string name="dialpad_key_2_description">Klahv kaks</string>
+    <string name="dialpad_key_3_description">Klahv kolm</string>
+    <string name="dialpad_key_4_description">Klahv neli</string>
+    <string name="dialpad_key_5_description">Klahv viis</string>
+    <string name="dialpad_key_6_description">Klahv kuus</string>
+    <string name="dialpad_key_7_description">Klahv seitse</string>
+    <string name="dialpad_key_8_description">Klahv kaheksa</string>
+    <string name="dialpad_key_9_description">Klahv üheksa</string>
+    <string name="dialpad_key_0_description">Klahv null</string>
+    <string name="dialpad_key_star_description">Tärniklahv</string>
+    <string name="dialpad_key_hash_description">Trelliklahv</string>
+
+    <!-- Helistaja režiimi sisselülitamine -->
+    <string name="dialer_activation_title">Kas teha Sentinelast sinu vaiketelefon?</string>
+    <string name="dialer_activation_intro">Helistaja režiimis võtab Sentinela vastu kõik kõned — ka nendelt, kes on sinu kontaktides. See on ainus viis, kuidas allikapõhised reeglid kehtivad ka sinu kontaktidele.</string>
+    <string name="dialer_activation_changes_title">Mis muutub</string>
+    <string name="dialer_activation_change_1">Sentinelast saab sinu telefonirakendus: kõnekuva ja klahvistik on selle omad.</string>
+    <string name="dialer_activation_change_2">Filtreerimine hakkab nägema kõiki kõnesid, mitte ainult neid, mis tulevad kontaktiraamatuvälistelt numbritelt.</string>
+    <string name="dialer_activation_change_3">Kontaktidele valitud reegel rakendub tegelikult. Vaikeväärtus on endiselt Helise — helistaja režiimi sisselülitamine üksi ei blokeeri kedagi.</string>
+    <string name="dialer_activation_unchanged_title">Mis ei muutu</string>
+    <string name="dialer_activation_unchanged_1">Kõned jäävad telefoni kõnelogisse kirja. Vaikimisi telefonirakendus olemine ei anna Sentinelale luba seda kirjet välja jätta — Androidis saavad seda teha ainult operaatorite rakendused.</string>
+    <string name="dialer_activation_unchanged_2">Süsteemi „Mitte segada“ kehtib endiselt Sentinela seadetest üle.</string>
+    <string name="dialer_activation_unchanged_3">WhatsAppi, Telegrami ja teiste internetirakenduste kõned jäävad endiselt Sentinela haardeulatusest välja.</string>
+    <string name="dialer_activation_unchanged_4" formatted="false">Sentinela jääb 100% võrguühenduseta: ükski kõne, number ega kontakt ei lahku seadmest.</string>
+    <string name="dialer_activation_limit_calls">Üks kõne korraga: koputus ja konverentskõne ei ole selles versioonis toetatud.</string>
+    <string name="dialer_activation_contacts_required">Helistaja režiim vajab kontaktide lugemise luba. Ilma selleta ei suuda Sentinela sinu kontakte eristada ja hakkaks kõiki tundmatutena käsitlema.</string>
+    <string name="dialer_activation_grant_contacts">Luba kontaktide lugemine</string>
+    <string name="dialer_activation_cta">Vali Sentinela</string>
+    <string name="dialer_activation_cta_hint">Otsustab Android. Saad igal ajal tagasi minna.</string>
+
+    <!-- Helistaja režiim juba aktiivne -->
+    <string name="dialer_active_chip">Aktiivne</string>
+    <string name="dialer_active_title">Sentinela on sinu vaiketelefon</string>
+    <string name="action_back">Tagasi</string>
+    <string name="dialer_active_changes_title">Mis praegu kehtib</string>
+    <string name="dialer_activation_unavailable">See seade ei paku vaiketelefoni rolli — tavaliselt seetõttu, et sellel puudub telefonivõimekus. Sentinela filtrirežiim töötab edasi seal, kus telefonikõned on.</string>
+    <string name="dialer_revert_cta">Vali teine telefon</string>
+    <string name="dialer_revert_hint">Kui lähed tagasi teise telefonirakenduse juurde, töötab Sentinela filtrirežiim edasi tavapäraselt — ilma uuesti paigaldamata ja ilma uuesti seadistamata.</string>
+
+    <!-- Telefonirolli kaotamine -->
+    <string name="dialer_role_lost_title">Sentinela ei ole enam vaiketelefon.</string>
+    <string name="dialer_role_lost_body">Filtrirežiim töötab edasi: kontaktiraamatuväliste numbrite kõnesid filtreeritakse endiselt.</string>
+    <string name="dialer_role_lost_action">Vaata, kuidas uuesti sisse lülitada</string>
+
+    <!-- Üldine -->
+    <string name="action_confirm">Kinnita</string>
+    <string name="action_cancel">Loobu</string>
+    <string name="action_retry">Proovi uuesti</string>
+    <string name="state_loading">Laadin…</string>
+    <string name="state_error">Midagi läks valesti. Proovi uuesti.</string>
+    <string name="state_on">Sees</string>
+    <string name="state_off">Väljas</string>
+    <string name="state_label_with_value">%1$s, %2$s</string>
+
+    <!-- Avakuva suhteline aeg -->
+    <string name="time_now">nüüd</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%d min tagasi</item>
+        <item quantity="other">%d min tagasi</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">%d t tagasi</item>
+        <item quantity="other">%d t tagasi</item>
+    </plurals>
+    <string name="time_yesterday">eile</string>
+
+    <!-- Avaleht: viimase blokeeritu ettelugemine -->
+    <string name="dashboard_last_blocked_description">Viimane blokeeritud kõne, %1$s, %2$s, %3$s</string>
+
+    <!-- Avaleht: rohkem hoiatusi -->
+    <string name="dashboard_more_warnings">Vaata kõiki hoiatusi</string>
+</resources>

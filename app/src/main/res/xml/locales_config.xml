@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Idiomas com interface traduzida e empacotada no APK.
+    Não listar um idioma sem strings.xml correspondente: isso faria o seletor do
+    Android oferecer uma tradução que, na prática, seria apenas o fallback pt-BR.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="pt-BR" />
+    <locale android:name="pt-PT" />
+    <locale android:name="en" />
+    <locale android:name="es" />
+    <locale android:name="fr" />
+    <locale android:name="de" />
+    <locale android:name="it" />
+    <locale android:name="nl" />
+    <locale android:name="pl" />
+    <locale android:name="cs" />
+    <locale android:name="da" />
+    <locale android:name="nb" />
+    <locale android:name="fi" />
+    <locale android:name="sv" />
+    <locale android:name="ro" />
+    <locale android:name="et" />
+    <locale android:name="ca" />
+    <locale android:name="gl" />
+    <locale android:name="eu" />
+    <locale android:name="is" />
+</locale-config>
