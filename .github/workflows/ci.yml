@@ -1,0 +1,196 @@
+name: CI
+
+# Gate de qualidade do repositorio. Roda em TODO push e TODA pull request, e e
+# reaproveitado pelo workflow de publicacao (`workflow_call`) para que subir na
+# Play nunca seja o primeiro momento em que o codigo e verificado.
+#
+# Nota sobre execucao dupla: um push num branch COM pull request aberta dispara
+# este workflow duas vezes (evento `push` e evento `pull_request`). O repositorio
+# e publico, entao minuto de runner e gratuito e o custo e so de relogio; quem
+# quiser cortar pela metade troca `branches: ["**"]` por `branches: [master]`.
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      instrumented:
+        description: "Rodar tambem a suite instrumentada em emulador (lenta)"
+        required: false
+        default: false
+        type: boolean
+  workflow_call:
+    inputs:
+      coverage-gate:
+        description: "Alem do relatorio, aplicar o gate koverVerify (minimo de 80% ja versionado em app/build.gradle.kts)"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  # Cancelar so em pull request: uma execucao disparada pela publicacao nunca
+  # pode ser interrompida por outra coisa que chegue depois.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    name: Qualidade — detekt, lint, testes, cobertura e build
+    runs-on: ubuntu-latest
+    # A suite unitaria recicla a JVM a cada classe (`forkEvery(1)` em
+    # app/build.gradle.kts, decisao medida em 2026-08-06), entao ela custa
+    # minutos e nao segundos. O teto existe para nao deixar um travamento
+    # queimar horas de runner.
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      # Os passos de qualidade usam `!cancelled()` de proposito: um detekt
+      # vermelho NAO impede lint e testes de rodarem, entao uma unica execucao
+      # mostra todos os problemas em vez de um por vez. O job continua reprovado
+      # — passo que falhou reprova o job inteiro.
+      - name: detekt (detekt.yml na raiz)
+        if: ${{ !cancelled() }}
+        run: ./gradlew detekt
+
+      - name: Lint do Android (debug)
+        if: ${{ !cancelled() }}
+        run: ./gradlew lintDebug
+
+      # Testes e relatorio de cobertura na MESMA invocacao: as tarefas do Kover
+      # dependem da tarefa de teste, e separa-las em dois passos faria a suite
+      # inteira rodar duas vezes quando o primeiro passo falhasse.
+      - name: Testes unitarios e relatorio de cobertura
+        if: ${{ !cancelled() }}
+        run: ./gradlew testDebugUnitTest koverXmlReport koverHtmlReport
+
+      # SEM gate por padrao: em push e pull request a cobertura e medida e
+      # publicada, nunca reprovada. O gate de 80% que ja existe versionado
+      # entra apenas quando o chamador pede (a publicacao pede).
+      - name: Gate de cobertura (koverVerify)
+        if: ${{ !cancelled() && inputs.coverage-gate }}
+        run: ./gradlew koverVerify
+
+      - name: Cobertura no resumo do job
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          report="app/build/reports/kover/report.xml"
+          if [ ! -f "$report" ]; then
+            echo "Relatorio de cobertura ausente ($report) — provavelmente a suite falhou antes." >&2
+            exit 0
+          fi
+          python3 - "$report" <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import sys
+          import xml.etree.ElementTree as ET
+
+          root = ET.parse(sys.argv[1]).getroot()
+          rows = []
+          for counter in root.findall("counter"):
+              missed = int(counter.get("missed", "0"))
+              covered = int(counter.get("covered", "0"))
+              total = missed + covered
+              pct = (covered * 100.0 / total) if total else 0.0
+              rows.append((counter.get("type", "?"), covered, total, pct))
+
+          print("## Cobertura (Kover) — medida, sem gate\n")
+          print("Denominador: os pacotes declarados no bloco `kover` de `app/build.gradle.kts`.\n")
+          print("| Metrica | Coberto | Total | % |")
+          print("| --- | ---: | ---: | ---: |")
+          for name, covered, total, pct in rows:
+              print(f"| {name} | {covered} | {total} | {pct:.2f}% |")
+          print("\nRelatorio completo (HTML e XML) no artifact `relatorios-de-qualidade`.")
+          PY
+
+      - name: Build debug (assembleDebug)
+        if: ${{ !cancelled() }}
+        run: ./gradlew assembleDebug
+
+      # Roda depois do build porque le o manifest MERGEADO e os relatorios de
+      # detekt e lint gerados acima. Sao os invariantes de privacidade e de
+      # permissao do projeto — o unico lugar onde eles sao verificados.
+      - name: Invariantes do projeto
+        if: ${{ !cancelled() }}
+        run: bash scripts/verify-invariants.sh
+
+      - name: Publicar relatorios
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-de-qualidade
+          path: |
+            app/build/reports/detekt/
+            app/build/reports/lint-results-debug.html
+            app/build/reports/lint-results-debug.xml
+            app/build/reports/tests/testDebugUnitTest/
+            app/build/test-results/testDebugUnitTest/
+            app/build/reports/kover/
+          if-no-files-found: warn
+          retention-days: 14
+
+  instrumented:
+    name: Testes instrumentados (emulador — manual)
+    # NUNCA roda em push nem em pull request: emulador leva dezenas de minutos e
+    # nao pode travar revisao de codigo. Para disparar: aba Actions -> CI ->
+    # "Run workflow" com a caixa `instrumented` marcada.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.instrumented }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SENTINELA_AVD: sentinela_ci_api35
+      SYSTEM_IMAGE: "system-images;android-35;google_apis;x86_64"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      # Sem acesso a /dev/kvm o emulador cai para emulacao por software e
+      # estoura qualquer timeout razoavel.
+      - name: Habilitar KVM
+        run: |
+          set -euo pipefail
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Criar AVD
+        run: |
+          set -euo pipefail
+          sdkmanager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          avdmanager="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
+          yes | "$sdkmanager" --licenses > /dev/null 2>&1 || true
+          "$sdkmanager" --install "$SYSTEM_IMAGE" "platform-tools" "emulator" > /dev/null
+          echo no | "$avdmanager" create avd --force -n "$SENTINELA_AVD" -k "$SYSTEM_IMAGE"
+
+      # Mesmo script usado na maquina do mantenedor: ele sobe o emulador
+      # headless, espera `sys.boot_completed`, apaga XML antigo (falso-verde) e
+      # derruba o emulador no fim.
+      - name: Rodar suite instrumentada
+        run: bash scripts/run-instrumented-tests.sh
+
+      - name: Publicar relatorios instrumentados
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-instrumentados
+          path: |
+            app/build/reports/androidTests/
+            app/build/outputs/androidTest-results/
+          if-no-files-found: warn
+          retention-days: 14
