@@ -227,63 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/** Itens 2, 5 e 6 — o tratamento de quem não está na agenda nem na lista pessoal. */
-@Composable
-private fun GrupoDeDesconhecidos(
-    state: SettingsUiState,
-    onUnknownPolicy: (OriginPolicy) -> Unit,
-    onBlockPrivateChange: (Boolean) -> Unit,
-    onBlockMode: (BlockMode) -> Unit,
-) {
-    SettingsGroup(title = stringResource(R.string.settings_unknown_policy)) {
-        EscolhaUnica {
-            OpcaoDePolitica(
-                title = stringResource(R.string.unknown_option_block),
-                description = stringResource(R.string.unknown_option_block_desc),
-                icon = Icons.Outlined.Block,
-                selected = state.settings.unknownPolicy == OriginPolicy.BLOCK,
-                onClick = { onUnknownPolicy(OriginPolicy.BLOCK) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.unknown_option_silence),
-                description = stringResource(R.string.unknown_option_silence_desc),
-                icon = Icons.Outlined.NotificationsOff,
-                selected = state.settings.unknownPolicy == OriginPolicy.SILENCE,
-                onClick = { onUnknownPolicy(OriginPolicy.SILENCE) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.unknown_option_allow),
-                description = stringResource(R.string.unknown_option_allow_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.unknownPolicy == OriginPolicy.RING,
-                onClick = { onUnknownPolicy(OriginPolicy.RING) },
-            )
-        }
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_block_private),
-            description = stringResource(R.string.settings_block_private_desc),
-            checked = state.settings.blockPrivateNumbers,
-            onCheckedChange = onBlockPrivateChange,
-        )
-        EscolhaUnica {
-            OpcaoDePolitica(
-                title = stringResource(R.string.settings_mode_reject),
-                description = stringResource(R.string.settings_block_mode_desc),
-                icon = Icons.Outlined.Block,
-                selected = state.settings.blockMode == BlockMode.REJECT,
-                onClick = { onBlockMode(BlockMode.REJECT) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.settings_mode_silent_voicemail),
-                description = stringResource(R.string.settings_block_mode_desc),
-                icon = Icons.Outlined.Voicemail,
-                selected = state.settings.blockMode == BlockMode.SILENT_VOICEMAIL,
-                onClick = { onBlockMode(BlockMode.SILENT_VOICEMAIL) },
-            )
-        }
-    }
-}
-
 /** Item 3 — as quatro políticas de contato, mais a nota do pré-requisito da agenda. */
 @Composable
 private fun GrupoDeContatos(
