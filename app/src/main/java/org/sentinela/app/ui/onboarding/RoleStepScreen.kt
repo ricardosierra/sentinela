@@ -1,9 +1,3 @@
-@file:Suppress("TooManyFunctions")
-
-// Supressao LOCAL, no molde de DialerActivationScreen.kt, em vez de afrouxar o detekt.yml
-// compartilhado: os tres ramos de estado do papel mais os blocos nomeados do contrato de design
-// somam funcoes pequenas de proposito. Juntar ramos para caber no limite deixaria a tela pior.
-
 package org.sentinela.app.ui.onboarding
 
 import androidx.compose.animation.core.LinearEasing
