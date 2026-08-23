@@ -69,14 +69,6 @@ import org.sentinela.app.ui.theme.ShapeMedium
 import org.sentinela.app.ui.theme.ShapePill
 
 private val ScreenPadding = 16.dp
-private val CtaGradientHeight = 32.dp
-private val CtaHeight = 56.dp
-private val CtaIconGap = 8.dp
-private val CtaToDisclaimerGap = 16.dp
-private val ProgressIndicatorSize = 20.dp
-private val ProgressStrokeWidth = 2.dp
-private val BannerToCtaGap = 16.dp
-private val FooterBottomGap = 32.dp
 
 /**
  * Duracao da transicao entre passos do onboarding, em milissegundos.
@@ -142,7 +134,7 @@ fun RoleStepScreen(
 ) {
     Column(modifier = modifier.fillMaxSize().safeDrawingPadding()) {
         SentinelaTopBar(
-            center = { StepHeader(step = PASSO_DO_PAPEL, total = state.totalSteps) },
+            center = { StepHeader(step = NUMERO_DE_EXIBICAO_DO_PASSO, total = state.totalSteps) },
             actions = {
                 SentinelaTopBarTextAction(
                     label = stringResource(R.string.onboarding_skip),
@@ -164,7 +156,7 @@ fun RoleStepScreen(
             FaixaDeContextoDoPapel()
             CartaoDeEscopoDoPapel()
         }
-        Rodape(
+        RodapeDoPapel(
             state = state,
             onRequestRole = onRequestRole,
             onNext = onNext,
@@ -172,99 +164,16 @@ fun RoleStepScreen(
     }
 }
 
-/** Numero deste passo no fluxo. O total chega pelo estado, nunca por literal aqui. */
-private const val PASSO_DO_PAPEL = 1
-
 /**
- * Rodape fixo: o aviso de papel negado, o botao e o esclarecimento.
+ * Numero DE EXIBICAO deste passo, contado a partir de 1. O total chega pelo estado, nunca por
+ * literal aqui.
  *
- * O botao e filho direto deste [Column], que **nao** mescla semantica. Envolve-lo num container que
- * mescle apagaria em silencio o estado desabilitado do ramo de pedido em curso.
+ * Ele se chamava `PASSO_DO_PAPEL`, e `OnboardingRoute.kt` tem um `PASSO_DO_PAPEL` proprio que vale
+ * 0 — aquele e o INDICE do passo no fluxo, contado a partir de zero. Dois nomes iguais com valores
+ * diferentes no mesmo pacote eram um convite a erro; este aqui e o "1" de "passo 1 de 6" que o
+ * usuario le.
  */
-@Composable
-private fun Rodape(
-    state: OnboardingUiState,
-    onRequestRole: () -> Unit,
-    onNext: () -> Unit,
-) {
-    val cores = MaterialTheme.colorScheme
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(CtaGradientHeight)
-            .background(Brush.verticalGradient(listOf(Color.Transparent, cores.surface))),
-    )
-    Column(
-        modifier = Modifier.padding(horizontal = ScreenPadding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        if (state.roleDenied) {
-            InfoBanner(
-                text = stringResource(R.string.onboarding_role_denied),
-                modifier = Modifier
-                    .padding(bottom = BannerToCtaGap)
-                    .semantics { liveRegion = LiveRegionMode.Polite },
-                actionLabel = stringResource(R.string.onboarding_role_retry),
-                onAction = onRequestRole,
-            )
-        }
-        BotaoDoPasso(state = state, onRequestRole = onRequestRole, onNext = onNext)
-        Text(
-            text = stringResource(R.string.onboarding_role_disclaimer),
-            modifier = Modifier
-                .padding(top = CtaToDisclaimerGap, bottom = FooterBottomGap)
-                .fillMaxWidth(),
-            style = MaterialTheme.typography.bodyMedium,
-            color = cores.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-        )
-    }
-}
-
-@Composable
-private fun BotaoDoPasso(
-    state: OnboardingUiState,
-    onRequestRole: () -> Unit,
-    onNext: () -> Unit,
-) {
-    val cores = MaterialTheme.colorScheme
-    val pedindo = state.roleRequestInFlight
-    val avanca = state.screeningRoleHeld || state.roleDenied
-    val rotulo = when {
-        pedindo -> stringResource(R.string.onboarding_role_requesting)
-        avanca -> stringResource(R.string.onboarding_next)
-        else -> stringResource(R.string.onboarding_role_cta)
-    }
-    Button(
-        onClick = if (avanca) onNext else onRequestRole,
-        modifier = Modifier
-            .fillMaxWidth()
-            .requiredHeight(CtaHeight),
-        enabled = !pedindo,
-        shape = ShapePill,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = cores.primary,
-            contentColor = cores.onPrimary,
-        ),
-    ) {
-        if (pedindo) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .size(ProgressIndicatorSize)
-                    .padding(end = CtaIconGap),
-                strokeWidth = ProgressStrokeWidth,
-            )
-        }
-        Text(text = rotulo, style = MaterialTheme.typography.labelLarge)
-        if (!pedindo) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = null,
-                modifier = Modifier.padding(start = CtaIconGap),
-            )
-        }
-    }
-}
+private const val NUMERO_DE_EXIBICAO_DO_PASSO = 1
 
 @Preview(widthDp = 411, heightDp = 891)
 @Composable
@@ -272,7 +181,7 @@ private fun RoleStepPendingPreview() {
     SentinelaTheme(darkTheme = true, dynamicColor = false) {
         Surface {
             RoleStepScreen(
-                state = OnboardingUiState(step = PASSO_DO_PAPEL),
+                state = OnboardingUiState(step = NUMERO_DE_EXIBICAO_DO_PASSO),
                 onRequestRole = {},
                 onNext = {},
                 onSkip = {},
@@ -287,7 +196,7 @@ private fun RoleStepGrantedPreview() {
     SentinelaTheme(darkTheme = true, dynamicColor = false) {
         Surface {
             RoleStepScreen(
-                state = OnboardingUiState(step = PASSO_DO_PAPEL, screeningRoleHeld = true),
+                state = OnboardingUiState(step = NUMERO_DE_EXIBICAO_DO_PASSO, screeningRoleHeld = true),
                 onRequestRole = {},
                 onNext = {},
                 onSkip = {},
@@ -302,7 +211,7 @@ private fun RoleStepDeniedPreview() {
     SentinelaTheme(darkTheme = true, dynamicColor = false) {
         Surface {
             RoleStepScreen(
-                state = OnboardingUiState(step = PASSO_DO_PAPEL, roleDenied = true),
+                state = OnboardingUiState(step = NUMERO_DE_EXIBICAO_DO_PASSO, roleDenied = true),
                 onRequestRole = {},
                 onNext = {},
                 onSkip = {},
