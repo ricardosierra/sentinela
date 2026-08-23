@@ -11,6 +11,14 @@
 
 ## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.4...master)
 
+### 🔧 Técnico
+
+- [x] **CI em todo push e toda pull request** — `.github/workflows/ci.yml` roda detekt (com o `detekt.yml` da raiz), `lintDebug`, os testes unitários, o relatório de cobertura, `assembleDebug` e `scripts/verify-invariants.sh` em JDK 17 com cache do Gradle. Os 97 arquivos de teste do repositório existiam desde o começo e nunca tinham rodado fora da máquina do mantenedor: até aqui, esquecer de rodar a suite localmente bastava para um bloqueio de chamada quebrado chegar ao usuário
+- [x] **Publicar deixou de ser o primeiro momento em que o código é verificado** — `google-play.yml` virou três jobs em ordem: validar a tag, rodar a CI sobre o commit dela e só então assinar e enviar. A CI entra como workflow reutilizável (`workflow_call`), então é literalmente o mesmo arquivo que roda nas pull requests — não uma cópia que envelhece. O caminho `promote`, que só move um AAB já publicado entre tracks, continua dispensando a CI
+- [x] **Relatórios de qualidade como artifact do job** — detekt, lint, testes e cobertura (XML e HTML) ficam anexados a cada execução por 14 dias, e o percentual de cobertura sai também no resumo do job, sem precisar baixar nada. **Nenhum limiar novo foi inventado**: o gate `koverVerify` de 80% continua exatamente onde estava, ligado no caminho de release e desligado em push e pull request
+- [x] **Suite instrumentada em job separado e manual** — os 18 arquivos de `androidTest` sobem emulador só quando alguém pede (Actions → CI → *Run workflow* com `instrumented` marcado), reaproveitando `scripts/run-instrumented-tests.sh`. Emulador leva dezenas de minutos e não pode travar revisão de código
+- [x] **Raiz do repositório limpa** — saíram um heap dump de OOM de 370 MB (`java_pid96271.hprof`, de antes do `forkEvery(1)` que resolveu o caso), `dialer_fail.log`, `test_output.log`, o APK de depuração e o zip de design já extraído em `docs/design/telas`; o AAB e o APK da v0.2.0 foram para `releases/`, junto do mapping da mesma versão. Nenhum dos sete estava rastreado pelo Git e todos já caíam nos padrões do `.gitignore`, que agora traz a lista nominal para evitar regra duplicada
+
 ## [v0.2.4 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.3...v0.2.4)
 
 ### 🐛 Correções

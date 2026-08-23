@@ -29,7 +29,9 @@ O que já existe no código:
 - **Contatos:** `ContactLookupRepository` com sonda dupla e cache — nada de identidade toca disco.
 - **Modo discador:** `SentinelaInCallService`, `CallSessionCoordinator`, telas de chamada e discagem, papel reversível pelo seletor do sistema.
 - **UI:** onboarding, Home, Proteção, Whitelist (CRUD, busca, import/export por SAF), Histórico (filtro por período **e** por decisão, tempo relativo, motivo em pt-BR), Privacidade e Sobre, convite de avaliação.
-- **Qualidade:** gate `koverVerify` em 80%, lint e detekt zerados, `scripts/verify-invariants.sh` com 10 blocos verdes.
+- **Qualidade:** gate `koverVerify` em 80%, lint e detekt zerados, `scripts/verify-invariants.sh` com 10 blocos verdes
+  — tudo rodando em CI (`.github/workflows/ci.yml`) a cada push e pull request, e a publicação na Play chama a
+  mesma CI antes de assinar qualquer coisa.
 
 Correções recentes que viraram invariante — **não regredir**:
 
