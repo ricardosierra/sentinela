@@ -227,22 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-@Composable
-private fun GrupoDePrivacidade(state: SettingsUiState, onMaskNumbersChange: (Boolean) -> Unit) {
-    SettingsGroup(title = stringResource(R.string.settings_privacy_title)) {
-        InfoBanner(
-            text = stringResource(R.string.settings_privacy_disclaimer),
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
-        )
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_mask_numbers),
-            description = stringResource(R.string.settings_mask_numbers_desc),
-            checked = state.settings.maskNumbers,
-            onCheckedChange = onMaskNumbersChange,
-        )
-    }
-}
-
 /**
  * Item 15 — as quatro honestidades, pelos identificadores de recurso originais.
  *
