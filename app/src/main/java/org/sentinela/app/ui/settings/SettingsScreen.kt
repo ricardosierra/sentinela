@@ -227,43 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/** Item 4 — as quatro políticas da lista pessoal. */
-@Composable
-private fun GrupoDaListaPessoal(state: SettingsUiState, onWhitelistPolicy: (OriginPolicy) -> Unit) {
-    SettingsGroup(title = stringResource(R.string.settings_whitelist_policy)) {
-        EscolhaUnica {
-            OpcaoDePolitica(
-                title = stringResource(R.string.whitelist_option_never_silence),
-                description = stringResource(R.string.whitelist_option_never_silence_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.whitelistPolicy == OriginPolicy.NEVER_SILENCE,
-                onClick = { onWhitelistPolicy(OriginPolicy.NEVER_SILENCE) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.whitelist_option_ring),
-                description = stringResource(R.string.whitelist_option_ring_desc),
-                icon = Icons.Outlined.Phone,
-                selected = state.settings.whitelistPolicy == OriginPolicy.RING,
-                onClick = { onWhitelistPolicy(OriginPolicy.RING) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.whitelist_option_block),
-                description = stringResource(R.string.whitelist_option_block_desc),
-                icon = Icons.Outlined.Block,
-                selected = state.settings.whitelistPolicy == OriginPolicy.BLOCK,
-                onClick = { onWhitelistPolicy(OriginPolicy.BLOCK) },
-            )
-            OpcaoDePolitica(
-                title = stringResource(R.string.whitelist_option_silence),
-                description = stringResource(R.string.whitelist_option_silence_desc),
-                icon = Icons.Outlined.NotificationsOff,
-                selected = state.settings.whitelistPolicy == OriginPolicy.SILENCE,
-                onClick = { onWhitelistPolicy(OriginPolicy.SILENCE) },
-            )
-        }
-    }
-}
-
 /**
  * Item 8 — a notificação própria e as duas formas de identificação.
  *
