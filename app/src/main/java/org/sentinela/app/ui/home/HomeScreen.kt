@@ -241,28 +241,6 @@ private fun CorpoDaHome(
     }
 }
 
-@Composable
-private fun BlocoDeAtalhos(
-    onOpenWhitelist: () -> Unit,
-    onOpenHistory: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(QuickActionGap)) {
-        QuickActionRow(
-            label = stringResource(R.string.dashboard_quick_whitelist),
-            icon = Icons.AutoMirrored.Outlined.FormatListBulleted,
-            iconContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            onClick = onOpenWhitelist,
-        )
-        QuickActionRow(
-            label = stringResource(R.string.dashboard_quick_history),
-            icon = Icons.Outlined.History,
-            iconContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-            onClick = onOpenHistory,
-        )
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RatingBottomSheet(
