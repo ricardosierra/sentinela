@@ -70,11 +70,8 @@ import org.sentinela.app.ui.theme.ShapeMedium
 private val ScreenPadding = 16.dp
 private val BlockGap = 24.dp
 private val StatGap = 16.dp
-private val HeaderToCardGap = 12.dp
 private val QuickActionGap = 12.dp
 private val BottomGap = 32.dp
-private val EmptyCardPadding = 20.dp
-private val EmptyIconSize = 32.dp
 
 private const val TRAVERSAL_HERO = 1f
 private const val TRAVERSAL_AVISOS = 2f
@@ -241,76 +238,6 @@ private fun CorpoDaHome(
             modifier = Modifier.ordemDeTravessia(TRAVERSAL_ATALHOS),
         )
         Spacer(modifier = Modifier.height(BottomGap))
-    }
-}
-
-@Composable
-private fun BlocoDaUltimaBloqueada(
-    state: HomeUiState,
-    nowUtcMillis: Long,
-    onOpenHistory: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val ultima = state.lastBlocked
-    val tempo = ultima?.let { relativeTimeLabel(it.timestampUtcMillis, nowUtcMillis) }
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = stringResource(R.string.dashboard_last_blocked),
-                modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            if (tempo != null) {
-                Text(
-                    text = tempo,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(HeaderToCardGap))
-        if (ultima != null && tempo != null) {
-            LastBlockedCard(
-                maskedNumber = ultima.maskedNumber,
-                reasonLabel = stringResource(ultima.reasonLabelRes),
-                relativeTime = tempo,
-                onClick = onOpenHistory,
-            )
-        } else {
-            CartaoVazio()
-        }
-    }
-}
-
-/** Estado vazio da ultima bloqueada: historico ligado e nada bloqueado ainda. */
-@Composable
-private fun CartaoVazio() {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = ShapeMedium,
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
-    ) {
-        Row(
-            modifier = Modifier.padding(EmptyCardPadding),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Shield,
-                contentDescription = null,
-                modifier = Modifier.requiredSize(EmptyIconSize),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text = stringResource(R.string.history_empty),
-                modifier = Modifier.padding(start = StatGap),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
     }
 }
 
