@@ -74,6 +74,22 @@ android {
         }
     }
 
+    // Reprodutibilidade do F-Droid: o AGP so consegue remover os simbolos de depuracao dos .so
+    // quando acha um NDK instalado. A maquina do mantenedor tem NDK e reduz
+    // libdatastore_shared_counter.so de 10360 para 7784 bytes (arm64); o buildserver do F-Droid
+    // nao tem, avisa "Unable to strip the following libraries" e empacota o arquivo inteiro — dois
+    // APKs diferentes a partir do mesmo commit, que e exatamente o que o build reprodutivel proibe.
+    // Manter os simbolos nos dois lados torna o resultado identico em qualquer maquina.
+    //
+    // Somente esta biblioteca precisa da regra: libandroidx.graphics.path.so, citada no mesmo aviso,
+    // JA vem removida dentro do proprio .aar (10096 bytes na origem e no APK), entao a remocao do
+    // AGP nunca teve efeito sobre ela e a ausencia de NDK nao muda o byte dela.
+    packaging {
+        jniLibs {
+            keepDebugSymbols += setOf("**/libdatastore_shared_counter.so")
+        }
+    }
+
     buildFeatures {
         compose = true
         // Ligado no plano 06-06 para que a chave do extra de ação da notificação de chamada saia
