@@ -227,57 +227,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
     )
 }
 
-/**
- * Itens 1, 1b, 7 e 10 — o que a proteção faz e o que ela honestamente não faz.
- *
- * O grupo fica tingido quando a proteção está desligada. A tinta nunca é o único sinal: o
- * interruptor anuncia o próprio estado e a explicação permanente diz o que "desligado" significa.
- *
- * A linha do papel do sistema é a MESMA verdade da home, colocada no lugar onde se conserta. A ação
- * de correção só aparece quando o aparelho oferece o papel: botão que não pode dar em nada é pior
- * que a ausência dele.
- */
-@Composable
-private fun GrupoDeProtecao(
-    state: SettingsUiState,
-    onProtectionChange: (Boolean) -> Unit,
-    onFixRole: () -> Unit,
-    onHideNativeLogChange: (Boolean) -> Unit,
-    onRepeatedCallChange: (Boolean) -> Unit,
-) {
-    SettingsGroup(
-        title = stringResource(R.string.dashboard_monitoring),
-        tinted = !state.settings.protectionEnabled,
-    ) {
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_protection_toggle),
-            description = stringResource(R.string.settings_protection_toggle_desc),
-            checked = state.settings.protectionEnabled,
-            onCheckedChange = onProtectionChange,
-        )
-        if (!state.screeningRoleHeld) {
-            InfoBanner(
-                text = stringResource(R.string.dashboard_role_missing),
-                actionLabel = stringResource(R.string.dashboard_fix_configuration)
-                    .takeIf { state.screeningRoleAvailable },
-                onAction = onFixRole.takeIf { state.screeningRoleAvailable },
-            )
-        }
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_hide_native_log),
-            description = stringResource(R.string.settings_hide_native_log_desc),
-            checked = state.settings.hideFromNativeCallLog,
-            onCheckedChange = onHideNativeLogChange,
-        )
-        SettingSwitchRow(
-            label = stringResource(R.string.settings_repeated_call),
-            description = stringResource(R.string.settings_repeated_call_desc),
-            checked = state.settings.repeatedCallBypassEnabled,
-            onCheckedChange = onRepeatedCallChange,
-        )
-    }
-}
-
 /** Itens 2, 5 e 6 — o tratamento de quem não está na agenda nem na lista pessoal. */
 @Composable
 private fun GrupoDeDesconhecidos(
