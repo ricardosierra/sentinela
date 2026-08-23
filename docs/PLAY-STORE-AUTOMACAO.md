@@ -48,6 +48,17 @@ Nunca versione a chave, `keystore.properties` ou o JSON. O workflow cria os dois
 runner efêmero; o Gradle Play Publisher lê o JSON em
 `ANDROID_PUBLISHER_CREDENTIALS`, sem arquivo de credencial no repositório.
 
+Para publicar localmente, salve o JSON fora deste projeto e injete-o somente no processo da tarefa:
+
+```bash
+PLAY_CREDENTIALS_FILE="/caminho/fora-do-projeto/google-play-service-account.json"
+ANDROID_PUBLISHER_CREDENTIALS="$(< "$PLAY_CREDENTIALS_FILE")" \
+  ./gradlew publishReleaseBundle publishReleaseListing
+```
+
+No CI, use o segredo `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` do Environment correspondente. Nunca cole o
+JSON em Kotlin, Gradle, Markdown, `.env`, commit ou mensagem.
+
 ## Operação
 
 Uma tag `vX.Y.Z` dispara automaticamente a publicação como **DRAFT** no track `internal`.

@@ -47,6 +47,11 @@ captures/
 app/keystore/
 keystore.properties
 
+# Credenciais do Google Play (ficam fora do repositório e entram somente por ambiente).
+.secrets/
+google-play-service-account*.json
+*-service-account*.json
+
 # Arquivos de mapeamento ProGuard/R8
 mapping*.txt
 releases/mapping-*.txt
