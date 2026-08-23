@@ -245,26 +245,6 @@ private fun CorpoDaHome(
 }
 
 @Composable
-private fun BlocoDeEstatisticas(state: HomeUiState, modifier: Modifier = Modifier) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(StatGap)) {
-        StatCard(
-            label = stringResource(R.string.dashboard_total_blocked),
-            value = state.totalBlocked,
-            icon = Icons.Outlined.Block,
-            accent = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.weight(1f),
-        )
-        StatCard(
-            label = stringResource(R.string.dashboard_blocked_today),
-            value = state.blockedToday,
-            icon = Icons.Outlined.Today,
-            accent = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.weight(1f),
-        )
-    }
-}
-
-@Composable
 private fun BlocoDaUltimaBloqueada(
     state: HomeUiState,
     nowUtcMillis: Long,
