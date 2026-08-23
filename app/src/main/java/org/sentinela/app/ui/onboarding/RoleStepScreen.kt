@@ -69,12 +69,6 @@ import org.sentinela.app.ui.theme.ShapeMedium
 import org.sentinela.app.ui.theme.ShapePill
 
 private val ScreenPadding = 16.dp
-private val TitleToIntroGap = 16.dp
-private val IntroToStripGap = 24.dp
-private val StripToHonestyGap = 24.dp
-private val StripHeight = 80.dp
-private val StripIconSize = 16.dp
-private val StripIconToTextGap = 8.dp
 private val CtaGradientHeight = 32.dp
 private val CtaHeight = 56.dp
 private val CtaIconGap = 8.dp
@@ -83,12 +77,6 @@ private val ProgressIndicatorSize = 20.dp
 private val ProgressStrokeWidth = 2.dp
 private val BannerToCtaGap = 16.dp
 private val FooterBottomGap = 32.dp
-
-/** Largura do corpo em relacao a tela, conforme o contrato de design. */
-private const val INTRO_WIDTH_FRACTION = 0.85f
-
-/** Alfa dos containers de destaque leve — hero, faixa de contexto e chip de ativo. */
-private const val CONTAINER_ALPHA = 0.20f
 
 /**
  * Duracao da transicao entre passos do onboarding, em milissegundos.
@@ -172,9 +160,9 @@ fun RoleStepScreen(
             HeroDoPapel()
             TituloDoPapel()
             if (state.screeningRoleHeld) ChipDePapelAtivo()
-            Intro()
-            FaixaDeContexto()
-            CartaoDeEscopo()
+            IntroDoPapel()
+            FaixaDeContextoDoPapel()
+            CartaoDeEscopoDoPapel()
         }
         Rodape(
             state = state,
@@ -186,84 +174,6 @@ fun RoleStepScreen(
 
 /** Numero deste passo no fluxo. O total chega pelo estado, nunca por literal aqui. */
 private const val PASSO_DO_PAPEL = 1
-
-@Composable
-private fun Intro() {
-    Text(
-        text = stringResource(R.string.onboarding_role_intro),
-        modifier = Modifier
-            .padding(top = TitleToIntroGap)
-            .fillMaxWidth(INTRO_WIDTH_FRACTION),
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        textAlign = TextAlign.Center,
-    )
-}
-
-/** Faixa de contexto: o gradiente tonal que substitui a imagem remota do mockup. */
-@Composable
-private fun FaixaDeContexto() {
-    val cores = MaterialTheme.colorScheme
-    Surface(
-        modifier = Modifier
-            .padding(top = IntroToStripGap)
-            .fillMaxWidth(),
-        shape = ShapeMedium,
-        color = cores.surfaceContainerLow,
-        contentColor = cores.onSurface,
-    ) {
-        Row(
-            modifier = Modifier
-                .height(StripHeight)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color.Transparent,
-                            cores.primaryContainer.copy(alpha = CONTAINER_ALPHA),
-                        ),
-                    ),
-                )
-                .padding(horizontal = ScreenPadding),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.VerifiedUser,
-                contentDescription = null,
-                modifier = Modifier.size(StripIconSize),
-                tint = cores.primary,
-            )
-            Text(
-                text = stringResource(R.string.welcome_badge_native),
-                modifier = Modifier.padding(start = StripIconToTextGap),
-                style = MaterialTheme.typography.labelMedium,
-                color = cores.primary,
-            )
-        }
-    }
-}
-
-/**
- * O aviso obrigatorio de escopo.
- *
- * As tres frases chegam por identificador de recurso, na ordem do contrato de design. Nenhuma delas
- * e reescrita aqui: elas sao a traducao das medicoes das Fases 5 e 6, e reescreve-las e o caminho de
- * volta a promessa falsa.
- */
-@Composable
-private fun CartaoDeEscopo() {
-    HonestyCard(
-        title = stringResource(R.string.onboarding_scope_title),
-        items = listOf(
-            stringResource(R.string.dialer_activation_unchanged_3),
-            stringResource(R.string.onboarding_scope_dnd),
-            stringResource(R.string.settings_hide_native_log_desc),
-        ),
-        itemIcon = Icons.Outlined.Info,
-        modifier = Modifier.padding(top = StripToHonestyGap, bottom = FooterBottomGap),
-        itemIconTint = MaterialTheme.colorScheme.onSurfaceVariant,
-    )
-}
 
 /**
  * Rodape fixo: o aviso de papel negado, o botao e o esclarecimento.
