@@ -228,25 +228,6 @@ private fun BarraDaProtecao(onBack: () -> Unit) {
 }
 
 /**
- * Item 15 — as quatro honestidades, pelos identificadores de recurso originais.
- *
- * Ver o KDoc de [SettingsScreen]: nenhuma destas frases é reescrita aqui.
- */
-@Composable
-private fun CartaoDeLimitacoes() {
-    HonestyCard(
-        title = stringResource(R.string.dialer_activation_unchanged_title),
-        items = listOf(
-            stringResource(R.string.dialer_activation_unchanged_1),
-            stringResource(R.string.dialer_activation_unchanged_2),
-            stringResource(R.string.dialer_activation_unchanged_3),
-            stringResource(R.string.dialer_activation_unchanged_4),
-        ),
-        itemIcon = Icons.Outlined.Info,
-    )
-}
-
-/**
  * Itens 9 e 16 — as duas linhas que levam para fora desta tela.
  *
  * **Item 9.** A linha navega para a tela de ativação do modo discador, que já existe desde a Fase 6
