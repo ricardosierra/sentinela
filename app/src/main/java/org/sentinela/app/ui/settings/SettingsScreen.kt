@@ -4,7 +4,6 @@ package org.sentinela.app.ui.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,18 +49,10 @@ import org.sentinela.app.settings.ScreeningSettings
 import org.sentinela.app.telecom.call.DialerModeState
 import org.sentinela.app.ui.components.HonestyCard
 import org.sentinela.app.ui.components.InfoBanner
-import org.sentinela.app.ui.components.OptionCard
 import org.sentinela.app.ui.components.SentinelaTopBar
 import org.sentinela.app.ui.components.SentinelaTopBarIconAction
 import org.sentinela.app.ui.components.SettingSwitchRow
-import org.sentinela.app.ui.components.optionCardGroup
 import org.sentinela.app.ui.theme.SentinelaTheme
-
-private val ScreenHorizontalPadding = 16.dp
-private val GroupGap = 24.dp
-private val ItemGap = 16.dp
-private val BottomGap = 32.dp
-private val DestructiveMinTarget = 48.dp
 
 /**
  * Tela Proteção: os dezesseis itens da §9 do contrato de interface, agrupados, com explicação
@@ -711,45 +701,6 @@ private fun ConfirmacaoDeNaoGuardar(onConfirm: () -> Unit, onDismiss: () -> Unit
                 Text(text = stringResource(R.string.action_cancel))
             }
         },
-    )
-}
-
-/**
- * Grupo de alternativas de escolha única. Usa o modificador compartilhado de 07-03 — reescrever o
- * declarador de grupo selecionável aqui seria a duplicação que aquele plano proibiu.
- */
-@Composable
-private fun EscolhaUnica(content: @Composable ColumnScope.() -> Unit) {
-    Column(
-        modifier = Modifier.optionCardGroup(),
-        verticalArrangement = Arrangement.spacedBy(ItemGap),
-        content = content,
-    )
-}
-
-@Composable
-private fun OpcaoDePolitica(
-    title: String,
-    description: String,
-    icon: ImageVector,
-    selected: Boolean,
-    onClick: () -> Unit,
-) {
-    OptionCard(
-        title = title,
-        description = description,
-        icon = icon,
-        selected = selected,
-        onClick = onClick,
-    )
-}
-
-@Composable
-private fun NotaDoGrupo(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.bodySmall,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
 }
 
