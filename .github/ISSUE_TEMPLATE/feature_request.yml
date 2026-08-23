@@ -1,0 +1,33 @@
+name: Ideia de melhoria
+description: Proponha uma melhoria alinhada ao escopo e à privacidade do Sentinela.
+title: "[Ideia] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema que você quer resolver
+      description: Descreva a situação, não apenas a solução imaginada.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Privacidade e limitações
+      description: Qual permissão, dado, papel do sistema ou comportamento de OEM seria afetado?
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Escopo
+      options:
+        - label: A proposta não depende de Internet, telemetria ou base externa para decidir chamadas.
+          required: true
