@@ -76,9 +76,6 @@ private val BottomGap = 32.dp
 private val EmptyCardPadding = 20.dp
 private val EmptyIconSize = 32.dp
 
-/** No maximo dois avisos ao mesmo tempo. O terceiro empurraria o conteudo real fora da tela. */
-private const val MAX_BANNERS = 2
-
 private const val TRAVERSAL_HERO = 1f
 private const val TRAVERSAL_AVISOS = 2f
 private const val TRAVERSAL_ESTATISTICAS = 3f
@@ -145,15 +142,17 @@ fun HomeScreen(
         )
     }
 
-    val avisos = avisosDaHome(
-        state = state,
-        onFixRole = onFixRole,
-        onGrantContacts = onGrantContacts,
-        onOpenAppSettings = onOpenAppSettings,
-        onEnableHistory = onEnableHistory,
-        onRetryHistory = onRetryHistory,
-        onOpenDialerActivation = onOpenDialerActivation,
-    )
+    val avisos = avisosDaHome(state)
+    val executarAviso: (AcaoDoAviso) -> Unit = { acao ->
+        when (acao) {
+            AcaoDoAviso.CORRIGIR_PAPEL -> onFixRole()
+            AcaoDoAviso.PEDIR_AGENDA -> onGrantContacts()
+            AcaoDoAviso.ABRIR_CONFIGURACOES_DO_APLICATIVO -> onOpenAppSettings()
+            AcaoDoAviso.LIGAR_HISTORICO -> onEnableHistory()
+            AcaoDoAviso.TENTAR_LEITURA_DE_NOVO -> onRetryHistory()
+            AcaoDoAviso.ABRIR_ATIVACAO_DO_DISCADOR -> onOpenDialerActivation()
+        }
+    }
     Surface(modifier = modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(
@@ -173,6 +172,7 @@ fun HomeScreen(
                 CorpoDaHome(
                     state = state,
                     avisos = avisos,
+                    onAcaoDeAviso = executarAviso,
                     nowUtcMillis = nowUtcMillis,
                     onProtectionChange = onProtectionChange,
                     onOpenSettings = onOpenSettings,
@@ -197,6 +197,7 @@ fun HomeScreen(
 private fun CorpoDaHome(
     state: HomeUiState,
     avisos: List<AvisoDaHome>,
+    onAcaoDeAviso: (AcaoDoAviso) -> Unit,
     nowUtcMillis: Long,
     onProtectionChange: (Boolean) -> Unit,
     onOpenSettings: () -> Unit,
@@ -214,6 +215,7 @@ private fun CorpoDaHome(
             Spacer(modifier = Modifier.height(BlockGap))
             BlocoDeAvisos(
                 avisos = avisos,
+                onAcao = onAcaoDeAviso,
                 onOpenSettings = onOpenSettings,
                 modifier = Modifier.ordemDeTravessia(TRAVERSAL_AVISOS),
             )
@@ -239,106 +241,6 @@ private fun CorpoDaHome(
             modifier = Modifier.ordemDeTravessia(TRAVERSAL_ATALHOS),
         )
         Spacer(modifier = Modifier.height(BottomGap))
-    }
-}
-
-/** Um aviso da home, ja resolvido em texto e acao. */
-private data class AvisoDaHome(
-    val text: String,
-    val actionLabel: String?,
-    val onAction: (() -> Unit)?,
-)
-
-/**
- * Os avisos que o estado atual justifica, na ordem de precedencia ditada pelo contrato.
- *
- * Dois ramos merecem registro, porque nao sao acabamento:
- *
- * - **Protecao desligada pelo usuario nao gera aviso.** E escolha, nao erro, e alarmar alguem pela
- *   propria decisao e pressao. O cartao principal ja mostra o estado, e as estatisticas continuam
- *   visiveis.
- * - **Sem o papel disponivel no aparelho, o botao de correcao NAO aparece.** A intencao de pedido nao
- *   existe ali, o toque nao resolveria nada, e oferecer um botao inerte e pior que nao oferecer.
- */
-@Composable
-private fun avisosDaHome(
-    state: HomeUiState,
-    onFixRole: () -> Unit,
-    onGrantContacts: () -> Unit,
-    onOpenAppSettings: () -> Unit,
-    onEnableHistory: () -> Unit,
-    onRetryHistory: () -> Unit,
-    onOpenDialerActivation: () -> Unit,
-): List<AvisoDaHome> {
-    val avisos = mutableListOf<AvisoDaHome>()
-    if (!state.screeningRoleHeld) {
-        avisos += AvisoDaHome(
-            text = stringResource(R.string.dashboard_role_missing),
-            actionLabel = if (state.screeningRoleAvailable) {
-                stringResource(R.string.dashboard_fix_configuration)
-            } else {
-                null
-            },
-            onAction = if (state.screeningRoleAvailable) onFixRole else null,
-        )
-    }
-    if (state.contactsPermission != ContactsPermissionState.GRANTED) {
-        val definitiva = state.contactsPermission == ContactsPermissionState.DENIED_PERMANENTLY
-        avisos += AvisoDaHome(
-            text = stringResource(R.string.dashboard_contacts_missing),
-            actionLabel = stringResource(
-                if (definitiva) R.string.about_open_app_settings
-                else R.string.dialer_activation_grant_contacts,
-            ),
-            onAction = if (definitiva) onOpenAppSettings else onGrantContacts,
-        )
-    }
-    if (!state.historyEnabled) {
-        avisos += AvisoDaHome(
-            text = stringResource(R.string.dashboard_history_off),
-            actionLabel = stringResource(R.string.dashboard_history_off_action),
-            onAction = onEnableHistory,
-        )
-    }
-    if (state.readError) {
-        avisos += AvisoDaHome(
-            text = stringResource(R.string.state_error),
-            actionLabel = stringResource(R.string.action_retry),
-            onAction = onRetryHistory,
-        )
-    }
-    if (state.dialerMode == DialerModeState.ROLE_LOST) {
-        avisos += AvisoDaHome(
-            text = stringResource(R.string.dialer_role_lost_body),
-            actionLabel = stringResource(R.string.dialer_role_lost_action),
-            onAction = onOpenDialerActivation,
-        )
-    }
-    return avisos
-}
-
-@Composable
-private fun BlocoDeAvisos(
-    avisos: List<AvisoDaHome>,
-    onOpenSettings: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(QuickActionGap)) {
-        avisos.take(MAX_BANNERS).forEach { aviso ->
-            InfoBanner(
-                text = aviso.text,
-                actionLabel = aviso.actionLabel,
-                onAction = aviso.onAction,
-            )
-        }
-        if (avisos.size > MAX_BANNERS) {
-            TextButton(onClick = onOpenSettings) {
-                Text(
-                    text = stringResource(R.string.dashboard_more_warnings),
-                    style = MaterialTheme.typography.labelLarge,
-                )
-            }
-        }
     }
 }
 
