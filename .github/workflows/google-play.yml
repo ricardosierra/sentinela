@@ -92,8 +92,18 @@ jobs:
           minor="${BASH_REMATCH[2]}"
           patch="${BASH_REMATCH[3]}"
           version_code=$((10#$major * 1000000 + 10#$minor * 1000 + 10#$patch))
-          if (( version_code < 4 )); then
-            echo "versionCode calculado precisa ser maior que o valor versionado atual (3)" >&2
+          # A guarda le o valor versionado em vez de repetir um literal. Ela citava
+          # "(3)" com o fonte ja em 6 e comparava contra 4 fixo: passava sempre e nao
+          # protegia mais nada. O grep casa a MESMA forma literal que o scanner do
+          # F-Droid exige em app/build.gradle.kts (`versionCode = <n>`), entao os dois
+          # leitores enxergam o mesmo numero.
+          versioned_code="$(grep -Eo '^[[:space:]]*versionCode = [0-9]+' app/build.gradle.kts | grep -Eo '[0-9]+' | head -1 || true)"
+          if [[ -z "$versioned_code" ]]; then
+            echo "Nao foi possivel ler versionCode de app/build.gradle.kts" >&2
+            exit 1
+          fi
+          if (( version_code <= versioned_code )); then
+            echo "versionCode calculado ($version_code) precisa ser maior que o valor versionado em app/build.gradle.kts ($versioned_code)" >&2
             exit 1
           fi
           tag_commit="$(git rev-parse "v$version^{commit}")"
