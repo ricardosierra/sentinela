@@ -21,12 +21,6 @@ on:
         default: false
         type: boolean
   workflow_call:
-    inputs:
-      coverage-gate:
-        description: "Alem do relatorio, aplicar o gate koverVerify (minimo de 80% ja versionado em app/build.gradle.kts)"
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -74,11 +68,17 @@ jobs:
         if: ${{ !cancelled() }}
         run: ./gradlew testDebugUnitTest koverXmlReport koverHtmlReport
 
-      # SEM gate por padrao: em push e pull request a cobertura e medida e
-      # publicada, nunca reprovada. O gate de 80% que ja existe versionado
-      # entra apenas quando o chamador pede (a publicacao pede).
+      # Gate de verdade, em TODO push e TODA pull request. Ele ficou atras de um
+      # `inputs.coverage-gate` ate 2026-08-24, e `inputs` so existe em
+      # workflow_dispatch/workflow_call: em pull request a expressao era vazia e o
+      # passo era pulado — o gate versionado nunca reprovava uma revisao.
+      #
+      # Ligar e barato porque a cobertura medida esta muito acima do piso: 96,31%
+      # de linhas, 94,21% de instrucoes, 83,80% de ramos contra minBound(80) em
+      # app/build.gradle.kts. Quem baixar a cobertura do denominador declarado la
+      # descobre no proprio PR, nao na publicacao.
       - name: Gate de cobertura (koverVerify)
-        if: ${{ !cancelled() && inputs.coverage-gate }}
+        if: ${{ !cancelled() }}
         run: ./gradlew koverVerify
 
       - name: Cobertura no resumo do job

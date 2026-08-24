@@ -112,10 +112,6 @@ jobs:
     # resultado `skipped`).
     if: ${{ github.event_name != 'workflow_dispatch' || inputs.operation == 'publish' }}
     uses: ./.github/workflows/ci.yml
-    # A CI mede cobertura sem gate em push e PR; no caminho de release ela
-    # também aplica o `koverVerify` que já estava versionado.
-    with:
-      coverage-gate: true
 
   publish:
     name: Assinar e publicar
