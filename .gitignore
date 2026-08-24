@@ -115,6 +115,12 @@ Thumbs.db
 
 # Design de referência (zip original fica fora; extraído vive em docs/design/telas)
 stitch_silent_call_blocker.zip
+
+# As duas linhas abaixo continuam aqui como rede de seguranca, mas o par de chaves
+# NAO mora mais na raiz: em 2026-08-24 ele foi movido para ~/.secrets/sentinela/ com
+# permissao 600. Um .gitignore nao impede `git add -f`, e chave privada de carteira
+# nao tem por que morar dentro de arvore de trabalho de repositorio publico. Se o
+# arquivo reaparecer aqui, estas linhas evitam o commit acidental.
 .bitcoin_private_key.pem
 .bitcoin_address.txt
 
