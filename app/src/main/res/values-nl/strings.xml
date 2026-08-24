@@ -3,7 +3,7 @@
 
     <!-- Welkom -->
     <string name="welcome_headline">Je eerste verdedigingslinie tegen spam.</string>
-    <string name="welcome_subtitle">Sentinela blokkeert oproepen van onbekende nummers nog voordat je telefoon overgaat.</string>
+    <string name="welcome_subtitle">Sentinela blokkeert oproepen van nummers buiten je contacten voordat je telefoon overgaat.</string>
     <string name="welcome_feature_local_title">Lokaal blokkeren</string>
     <string name="welcome_feature_local_desc">Verwerking rechtstreeks op het toestel.</string>
     <string name="welcome_feature_silent_title">Stil</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% opensource — geen advertenties, geen telemetrie</string>
 
     <!-- Onboarding: rol voor oproepfiltering -->
-    <string name="onboarding_role_disclaimer">Door dit in te stellen geef je toestemming voor oproepfiltering. Sentinela filtert oproepen van onbekende nummers lokaal, zonder je gegevens ooit van het toestel te sturen.</string>
+    <string name="onboarding_role_disclaimer">Bij het instellen verleen je de toestemming voor Call Screening. Sentinela filtert oproepen van nummers buiten je contacten lokaal, zonder ooit je gegevens te verzenden.</string>
     <string name="onboarding_role_cta">Nu instellen</string>
     <string name="onboarding_role_requesting">Toestemming aanvragen…</string>
     <string name="onboarding_step_indicator">Stap %1$d van %2$d</string>
@@ -33,7 +33,7 @@
     <string name="onboarding_scope_dnd">De stand \'Niet storen\' van het systeem gaat nog steeds boven de instellingen van Sentinela.</string>
 
     <!-- Onboarding: onbekende nummers -->
-    <string name="unknown_title">Onbekende oproepen</string>
+    <string name="unknown_title">Nummers buiten contacten</string>
     <string name="unknown_question">Hoe moet Sentinela omgaan met nummers die niet in je contacten staan?</string>
     <string name="unknown_option_block">Blokkeren</string>
     <string name="unknown_option_block_desc">Weigert de oproep onmiddellijk.</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Standaard</string>
 
     <string name="whatsapp_contacts_warning_title">Let op bij WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp laat je contacten alleen in zijn eigen cloud opslaan. Zo opgeslagen personen bestaan niet in het adresboek van het toestel en worden door Sentinela als \'Onbekend\' behandeld. Sla je contacten op in het officiële adresboek zodat de blokkeerder ze herkent.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp staat toe contacten alleen in de cloud op te slaan. Mensen die zo zijn opgeslagen bestaan niet in het adresboek van het apparaat en worden voor Sentinela behandeld als \"Buiten contacten\". Sla je contacten op in het officiële adresboek zodat de blokkering ze herkent.</string>
     <string name="whatsapp_history_hint">Tip: als dit een WhatsApp-contact is dat niet in het adresboek staat, gebruik dan de optie hierboven om het toe te staan.</string>
 
     <string name="contacts_permission_granted">Toegang tot contacten verleend</string>
-    <string name="contacts_permission_denied">Zonder toegang tot contacten kan Sentinela niet weten wie er in je adresboek staat: die oproepen kunnen als onbekend worden behandeld.</string>
+    <string name="contacts_permission_denied">Zonder toegang tot het adresboek kan Sentinela niet weten wie er in je contacten staat: die oproepen kunnen worden behandeld als nummers buiten contacten.</string>
     <string name="contacts_permission_blocked">Toegang tot contacten is definitief geweigerd. Open de app-instellingen om die alsnog te geven.</string>
     <string name="settings_block_private_desc">Oproepen zonder nummerweergave volgen het blokkeerbeleid dat je hebt gekozen. Het is niet te achterhalen wie er belde.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Bekijk wat er is ingesteld. Je kunt elk onderdeel later wijzigen in het scherm Beveiliging.</string>
     <string name="onboarding_check_role">Standaard oproepfiltering</string>
     <string name="onboarding_check_contacts">Toegang tot contacten</string>
-    <string name="onboarding_check_unknown">Onbekende nummers</string>
+    <string name="onboarding_check_unknown">Nummers buiten contacten</string>
     <string name="onboarding_check_origins">Contacten en persoonlijke lijst</string>
     <string name="onboarding_check_granted">Verleend</string>
     <string name="onboarding_check_missing">Ontbreekt</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Beveiliging actief</string>
     <string name="dashboard_protection_inactive">Beveiliging uitgeschakeld</string>
     <string name="dashboard_monitoring">Realtimebewaking</string>
-    <string name="dashboard_device_safe">Je toestel is beschermd tegen oproepen van onbekende nummers.</string>
+    <string name="dashboard_device_safe">Je apparaat is beschermd tegen oproepen van nummers buiten je contacten.</string>
     <string name="dashboard_role_missing">Sentinela is niet de standaard-app voor oproepfiltering.</string>
     <string name="dashboard_fix_configuration">Configuratie herstellen</string>
     <string name="dashboard_total_blocked">Totaal geblokkeerd</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Persoonlijke lijst</string>
     <string name="dashboard_quick_history">Blokkeergeschiedenis</string>
     <string name="dashboard_protection_off_hint">Er wordt geen enkele oproep gefilterd.</string>
-    <string name="dashboard_contacts_missing">Sentinela kan je adresboek niet lezen. Oproepen van contacten kunnen als onbekend worden behandeld.</string>
+    <string name="dashboard_contacts_missing">Sentinela kan je adresboek niet lezen. Oproepen van contacten kunnen worden behandeld als nummers buiten contacten.</string>
     <string name="dashboard_history_off">De geschiedenis staat uit, dus er is geen telling van geblokkeerde oproepen om te tonen.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Geschiedenis inschakelen</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Vandaag</string>
     <string name="history_filter_7days">7 dagen</string>
     <string name="history_filter_30days">30 dagen</string>
-    <string name="history_unknown_number">Onbekend nummer</string>
+    <string name="history_unknown_number">Buiten contacten</string>
     <string name="history_private_number">Privé</string>
     <string name="history_private_id">Verborgen id</string>
     <string name="history_action_allow">Toestaan</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Staat in je persoonlijke lijst</string>
     <string name="history_reason_emergency_number">Noodnummer</string>
     <string name="history_reason_repeated_call">Belde meteen daarna opnieuw</string>
-    <string name="history_reason_unknown_number">Onbekend nummer</string>
+    <string name="history_reason_unknown_number">Niet in contactenlijst</string>
     <string name="history_reason_invalid_number">Niet-geïdentificeerd nummer</string>
     <string name="history_reason_local_lookup_failure">Lokale opzoeking mislukt</string>
     <string name="history_reason_fallback_policy">Terugvalbeleid</string>
@@ -186,7 +186,7 @@
     <!-- Beveiliging / Instellingen -->
     <string name="settings_title">Beveiliging</string>
     <string name="settings_protection_toggle">Beveiliging inschakelen</string>
-    <string name="settings_unknown_policy">Onbekende nummers</string>
+    <string name="settings_unknown_policy">Nummers buiten contacten</string>
     <string name="settings_contacts_policy">Contacten uit het adresboek</string>
     <string name="settings_whitelist_policy">Persoonlijke lijst</string>
     <string name="settings_block_private">Privénummers blokkeren</string>
@@ -311,7 +311,7 @@
     <!-- Oproep: herkomstlabels -->
     <string name="call_origin_contact">Contact</string>
     <string name="call_origin_whitelist">Toegestaan</string>
-    <string name="call_origin_unknown">Onbekend</string>
+    <string name="call_origin_unknown">Buiten contacten</string>
     <string name="call_origin_private">Privénummer</string>
 
     <!-- Oproep: audio-uitvoer -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">Oproepen van WhatsApp, Telegram en andere internet-apps blijven buiten het bereik van Sentinela.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela blijft 100% offline: geen enkele oproep, nummer of contact verlaat het toestel.</string>
     <string name="dialer_activation_limit_calls">Eén oproep tegelijk: wisselgesprek en telefonische vergadering worden in deze versie niet ondersteund.</string>
-    <string name="dialer_activation_contacts_required">De beltoetsmodus heeft de toestemming nodig om contacten te lezen. Zonder die toestemming kan Sentinela je contacten niet onderscheiden en zou het iedereen als onbekend behandelen.</string>
+    <string name="dialer_activation_contacts_required">Kiezer-modus vereist toestemming om het adresboek te lezen. Zonder die toestemming kan Sentinela je contacten niet onderscheiden en zou iedereen als buiten contacten worden behandeld.</string>
     <string name="dialer_activation_grant_contacts">Toegang tot contacten toestaan</string>
     <string name="dialer_activation_cta">Sentinela kiezen</string>
     <string name="dialer_activation_cta_hint">Android beslist. Je kunt altijd terug.</string>

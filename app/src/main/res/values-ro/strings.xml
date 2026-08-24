@@ -3,7 +3,7 @@
 
     <!-- Bun venit -->
     <string name="welcome_headline">Prima ta linie de apărare împotriva spamului.</string>
-    <string name="welcome_subtitle">Sentinela blochează apelurile de la numere necunoscute înainte ca telefonul să sune.</string>
+    <string name="welcome_subtitle">Sentinela blochează apelurile de la numere din afara contactelor înainte ca telefonul să sune.</string>
     <string name="welcome_feature_local_title">Blocare locală</string>
     <string name="welcome_feature_local_desc">Procesare direct pe dispozitiv.</string>
     <string name="welcome_feature_silent_title">Silențios</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% open source — fără reclame, fără telemetrie</string>
 
     <!-- Configurare: rolul de filtrare a apelurilor -->
-    <string name="onboarding_role_disclaimer">Prin configurare acorzi permisiunea de filtrare a apelurilor. Sentinela filtrează apelurile de la numere necunoscute local, fără să trimită vreodată datele tale în afara dispozitivului.</string>
+    <string name="onboarding_role_disclaimer">La configurare, acorzi permisiunea de Call Screening. Sentinela va filtra apelurile de la numere din afara contactelor local, fără a trimite date de pe dispozitiv.</string>
     <string name="onboarding_role_cta">Configurează acum</string>
     <string name="onboarding_role_requesting">Se solicită permisiunea…</string>
     <string name="onboarding_step_indicator">Pasul %1$d din %2$d</string>
@@ -33,8 +33,8 @@
     <string name="onboarding_scope_dnd">Modul „Nu deranja” al sistemului rămâne prioritar față de setările Sentinela.</string>
 
     <!-- Configurare: numere necunoscute -->
-    <string name="unknown_title">Apeluri necunoscute</string>
-    <string name="unknown_question">Cum trebuie să trateze Sentinela numerele care nu sunt în agenda ta?</string>
+    <string name="unknown_title">Numere din afara contactelor</string>
+    <string name="unknown_question">Cum ar trebui să gestioneze Sentinela numerele care nu sunt în contactele tale?</string>
     <string name="unknown_option_block">Blochează</string>
     <string name="unknown_option_block_desc">Respinge apelul instantaneu.</string>
     <string name="unknown_option_silence">Amuțește</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Implicit</string>
 
     <string name="whatsapp_contacts_warning_title">Atenție la WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp permite salvarea contactelor doar în propriul cloud. Persoanele salvate astfel nu există în agenda dispozitivului și, pentru Sentinela, sunt tratate ca „Necunoscut”. Salvează-ți contactele în agenda oficială, ca blocatorul să le recunoască.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp permite salvarea contactelor doar în cloudul său. Persoanele salvate astfel nu există în agenda dispozitivului și vor fi tratate de Sentinela ca \"În afara contactelor\". Salvează-ți contactele în agenda oficială pentru ca blocatorul să le recunoască.</string>
     <string name="whatsapp_history_hint">Sfat: dacă este un contact WhatsApp nesalvat în agendă, folosește opțiunea de mai sus pentru a-l permite.</string>
 
     <string name="contacts_permission_granted">Citirea contactelor a fost acordată</string>
-    <string name="contacts_permission_denied">Fără citirea contactelor, Sentinela nu poate ști cine este în agenda ta: acele apeluri pot fi tratate ca necunoscute.</string>
+    <string name="contacts_permission_denied">Fără acces la agendă, Sentinela nu poate ști cine este în contactele tale: aceste apeluri pot fi tratate ca numere din afara contactelor.</string>
     <string name="contacts_permission_blocked">Citirea contactelor a fost refuzată definitiv. Ca să o acorzi, deschide setările aplicației.</string>
     <string name="settings_block_private_desc">Apelurile fără identificarea numărului urmează politica de blocare pe care ai ales-o. Nu se poate ști cine a sunat.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Verifică ce a fost configurat. Poți schimba orice element mai târziu, în ecranul Protecție.</string>
     <string name="onboarding_check_role">Filtrare implicită a apelurilor</string>
     <string name="onboarding_check_contacts">Citirea contactelor</string>
-    <string name="onboarding_check_unknown">Numere necunoscute</string>
+    <string name="onboarding_check_unknown">Numere din afara contactelor</string>
     <string name="onboarding_check_origins">Contacte și listă personală</string>
     <string name="onboarding_check_granted">Acordat</string>
     <string name="onboarding_check_missing">Lipsește</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Protecție activă</string>
     <string name="dashboard_protection_inactive">Protecție dezactivată</string>
     <string name="dashboard_monitoring">Monitorizare în timp real</string>
-    <string name="dashboard_device_safe">Dispozitivul tău este protejat împotriva apelurilor de la numere necunoscute.</string>
+    <string name="dashboard_device_safe">Dispozitivul tău este protejat împotriva apelurilor de la numere din afara contactelor tale.</string>
     <string name="dashboard_role_missing">Sentinela nu este aplicația implicită de filtrare a apelurilor.</string>
     <string name="dashboard_fix_configuration">Corectează configurarea</string>
     <string name="dashboard_total_blocked">Total blocate</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Listă personală</string>
     <string name="dashboard_quick_history">Istoricul blocărilor</string>
     <string name="dashboard_protection_off_hint">Niciun apel nu este filtrat.</string>
-    <string name="dashboard_contacts_missing">Sentinela nu îți poate citi agenda. Apelurile de la contacte pot fi tratate ca necunoscute.</string>
+    <string name="dashboard_contacts_missing">Sentinela nu poate citi agenda ta. Apelurile de la contacte pot fi tratate ca numere din afara contactelor.</string>
     <string name="dashboard_history_off">Istoricul este dezactivat, așa că nu există un număr de apeluri blocate de afișat.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Activează istoricul</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Azi</string>
     <string name="history_filter_7days">7 zile</string>
     <string name="history_filter_30days">30 de zile</string>
-    <string name="history_unknown_number">Număr necunoscut</string>
+    <string name="history_unknown_number">În afara contactelor</string>
     <string name="history_private_number">Privat</string>
     <string name="history_private_id">ID ascuns</string>
     <string name="history_action_allow">Permite</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Este în lista ta personală</string>
     <string name="history_reason_emergency_number">Număr de urgență</string>
     <string name="history_reason_repeated_call">A sunat din nou imediat după</string>
-    <string name="history_reason_unknown_number">Număr necunoscut</string>
+    <string name="history_reason_unknown_number">Nu este în lista de contacte</string>
     <string name="history_reason_invalid_number">Număr neidentificat</string>
     <string name="history_reason_local_lookup_failure">Căutarea locală a eșuat</string>
     <string name="history_reason_fallback_policy">Politică de rezervă</string>
@@ -186,7 +186,7 @@
     <!-- Protecție / Setări -->
     <string name="settings_title">Protecție</string>
     <string name="settings_protection_toggle">Activează protecția</string>
-    <string name="settings_unknown_policy">Numere necunoscute</string>
+    <string name="settings_unknown_policy">Numere din afara contactelor</string>
     <string name="settings_contacts_policy">Contacte din agendă</string>
     <string name="settings_whitelist_policy">Listă personală</string>
     <string name="settings_block_private">Blochează numerele private</string>
@@ -312,7 +312,7 @@
     <!-- Apel: etichete de origine -->
     <string name="call_origin_contact">Contact</string>
     <string name="call_origin_whitelist">Permis</string>
-    <string name="call_origin_unknown">Necunoscut</string>
+    <string name="call_origin_unknown">În afara contactelor</string>
     <string name="call_origin_private">Număr privat</string>
 
     <!-- Apel: ieșire audio -->
@@ -362,7 +362,7 @@
     <string name="dialer_activation_unchanged_3">Apelurile din WhatsApp, Telegram și alte aplicații de internet rămân în afara razei de acțiune a Sentinela.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela rămâne 100% offline: niciun apel, număr sau contact nu părăsește dispozitivul.</string>
     <string name="dialer_activation_limit_calls">Un apel pe rând: apelul în așteptare și conferința nu sunt acceptate în această versiune.</string>
-    <string name="dialer_activation_contacts_required">Modul apelare are nevoie de permisiunea de citire a contactelor. Fără ea, Sentinela nu îți poate distinge contactele și ar trata pe toată lumea ca necunoscut.</string>
+    <string name="dialer_activation_contacts_required">Modul apelare necesită permisiunea de citire a agendei. Fără ea, Sentinela nu poate distinge contactele tale și i-ar trata pe toți ca fiind în afara contactelor.</string>
     <string name="dialer_activation_grant_contacts">Permite citirea contactelor</string>
     <string name="dialer_activation_cta">Alege Sentinela</string>
     <string name="dialer_activation_cta_hint">Android decide. Poți reveni oricând.</string>

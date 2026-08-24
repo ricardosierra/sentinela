@@ -3,7 +3,7 @@
 
     <!-- Bienvenue -->
     <string name="welcome_headline">Votre première ligne de défense contre le spam.</string>
-    <string name="welcome_subtitle">Sentinela bloque les appels de numéros inconnus avant même que votre téléphone ne sonne.</string>
+    <string name="welcome_subtitle">Sentinela bloque les appels de numéros hors de vos contacts avant même que votre téléphone ne sonne.</string>
     <string name="welcome_feature_local_title">Blocage local</string>
     <string name="welcome_feature_local_desc">Traitement directement sur l\'appareil.</string>
     <string name="welcome_feature_silent_title">Silencieux</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% open source — sans publicité, sans télémétrie</string>
 
     <!-- Intégration : rôle de filtrage d\'appels -->
-    <string name="onboarding_role_disclaimer">En procédant à la configuration, vous accordez l\'autorisation de filtrage des appels. Sentinela filtre les appels de numéros inconnus localement, sans jamais envoyer vos données hors de l\'appareil.</string>
+    <string name="onboarding_role_disclaimer">Lors de la configuration, vous accordez l\'autorisation Call Screening. Sentinela filtrera localement les appels de numéros hors de vos contacts, sans jamais envoyer vos données hors de l\'appareil.</string>
     <string name="onboarding_role_cta">Configurer maintenant</string>
     <string name="onboarding_role_requesting">Demande d\'autorisation…</string>
     <string name="onboarding_step_indicator">Étape %1$d sur %2$d</string>
@@ -33,7 +33,7 @@
     <string name="onboarding_scope_dnd">Le mode « Ne pas déranger » du système reste prioritaire sur les réglages de Sentinela.</string>
 
     <!-- Intégration : numéros inconnus -->
-    <string name="unknown_title">Appels inconnus</string>
+    <string name="unknown_title">Numéros hors contacts</string>
     <string name="unknown_question">Comment Sentinela doit-il traiter les numéros qui ne sont pas dans vos contacts ?</string>
     <string name="unknown_option_block">Bloquer</string>
     <string name="unknown_option_block_desc">Refuse l\'appel instantanément.</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Par défaut</string>
 
     <string name="whatsapp_contacts_warning_title">À propos de WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp permet d\'enregistrer des contacts uniquement dans son propre cloud. Les personnes enregistrées ainsi n\'existent pas dans le répertoire de l\'appareil et, pour Sentinela, sont traitées comme « Inconnu ». Enregistrez vos contacts dans le répertoire officiel pour que le bloqueur les reconnaisse.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp permet d\'enregistrer des contacts uniquement dans son cloud. Les personnes ainsi enregistrées n\'existent pas dans le répertoire de l\'appareil et seront traitées par Sentinela comme « Hors contacts ». Enregistrez vos contacts dans le répertoire officiel pour que le bloqueur les reconnaisse.</string>
     <string name="whatsapp_history_hint">Astuce : s\'il s\'agit d\'un contact WhatsApp non enregistré dans le répertoire, utilisez l\'option ci-dessus pour l\'autoriser.</string>
 
     <string name="contacts_permission_granted">Lecture des contacts accordée</string>
-    <string name="contacts_permission_denied">Sans la lecture des contacts, Sentinela ne peut pas savoir qui figure dans votre répertoire : ces appels peuvent être traités comme inconnus.</string>
+    <string name="contacts_permission_denied">Sans accès au répertoire, Sentinela ne peut pas savoir qui est dans vos contacts : ces appels peuvent être traités comme des numéros hors contacts.</string>
     <string name="contacts_permission_blocked">La lecture des contacts a été refusée définitivement. Pour l\'accorder, ouvrez les réglages de l\'application.</string>
     <string name="settings_block_private_desc">Les appels sans identification de numéro suivent la politique de blocage que vous avez choisie. Impossible de savoir qui a appelé.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Vérifiez ce qui a été configuré. Vous pourrez modifier chaque élément plus tard, dans l\'écran Protection.</string>
     <string name="onboarding_check_role">Filtrage d\'appels par défaut</string>
     <string name="onboarding_check_contacts">Lecture des contacts</string>
-    <string name="onboarding_check_unknown">Numéros inconnus</string>
+    <string name="onboarding_check_unknown">Numéros hors contacts</string>
     <string name="onboarding_check_origins">Contacts et liste personnelle</string>
     <string name="onboarding_check_granted">Accordé</string>
     <string name="onboarding_check_missing">Absent</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Protection active</string>
     <string name="dashboard_protection_inactive">Protection désactivée</string>
     <string name="dashboard_monitoring">Surveillance en temps réel</string>
-    <string name="dashboard_device_safe">Votre appareil est protégé contre les appels de numéros inconnus.</string>
+    <string name="dashboard_device_safe">Votre appareil est protégé contre les appels de numéros hors de vos contacts.</string>
     <string name="dashboard_role_missing">Sentinela n\'est pas l\'application de filtrage d\'appels par défaut.</string>
     <string name="dashboard_fix_configuration">Corriger la configuration</string>
     <string name="dashboard_total_blocked">Total bloqué</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Liste personnelle</string>
     <string name="dashboard_quick_history">Historique des blocages</string>
     <string name="dashboard_protection_off_hint">Aucun appel n\'est filtré.</string>
-    <string name="dashboard_contacts_missing">Sentinela ne peut pas lire votre répertoire. Les appels de contacts peuvent être traités comme inconnus.</string>
+    <string name="dashboard_contacts_missing">Sentinela ne peut pas lire votre répertoire. Les appels de contacts peuvent être traités comme des numéros hors contacts.</string>
     <string name="dashboard_history_off">L\'historique est désactivé, il n\'y a donc aucun décompte d\'appels bloqués à afficher.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Activer l\'historique</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Aujourd\'hui</string>
     <string name="history_filter_7days">7 jours</string>
     <string name="history_filter_30days">30 jours</string>
-    <string name="history_unknown_number">Numéro inconnu</string>
+    <string name="history_unknown_number">Hors contacts</string>
     <string name="history_private_number">Privé</string>
     <string name="history_private_id">Identifiant masqué</string>
     <string name="history_action_allow">Autoriser</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Dans votre liste personnelle</string>
     <string name="history_reason_emergency_number">Numéro d\'urgence</string>
     <string name="history_reason_repeated_call">A rappelé juste après</string>
-    <string name="history_reason_unknown_number">Numéro inconnu</string>
+    <string name="history_reason_unknown_number">Pas dans la liste de contacts</string>
     <string name="history_reason_invalid_number">Numéro non identifié</string>
     <string name="history_reason_local_lookup_failure">Échec de la recherche locale</string>
     <string name="history_reason_fallback_policy">Politique de repli</string>
@@ -186,7 +186,7 @@
     <!-- Protection / Réglages -->
     <string name="settings_title">Protection</string>
     <string name="settings_protection_toggle">Activer la protection</string>
-    <string name="settings_unknown_policy">Numéros inconnus</string>
+    <string name="settings_unknown_policy">Numéros hors contacts</string>
     <string name="settings_contacts_policy">Contacts du répertoire</string>
     <string name="settings_whitelist_policy">Liste personnelle</string>
     <string name="settings_block_private">Bloquer les numéros privés</string>
@@ -311,7 +311,7 @@
     <!-- Appel : puces d\'origine -->
     <string name="call_origin_contact">Contact</string>
     <string name="call_origin_whitelist">Autorisé</string>
-    <string name="call_origin_unknown">Inconnu</string>
+    <string name="call_origin_unknown">Hors contacts</string>
     <string name="call_origin_private">Numéro privé</string>
 
     <!-- Appel : sortie audio -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">Les appels WhatsApp, Telegram et d\'autres applications Internet restent hors de portée de Sentinela.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela reste 100% hors ligne : aucun appel, numéro ou contact ne quitte l\'appareil.</string>
     <string name="dialer_activation_limit_calls">Un appel à la fois : l\'appel en attente et la conférence ne sont pas pris en charge dans cette version.</string>
-    <string name="dialer_activation_contacts_required">Le mode téléphone a besoin de l\'autorisation de lecture des contacts. Sans elle, Sentinela ne peut pas distinguer vos contacts et traiterait tout le monde comme inconnu.</string>
+    <string name="dialer_activation_contacts_required">Le mode numéroteur nécessite l\'autorisation de lecture du répertoire. Sans elle, Sentinela ne peut pas distinguer vos contacts et traiterait tout le monde comme hors contacts.</string>
     <string name="dialer_activation_grant_contacts">Autoriser la lecture des contacts</string>
     <string name="dialer_activation_cta">Choisir Sentinela</string>
     <string name="dialer_activation_cta_hint">C\'est Android qui décide. Vous pouvez revenir en arrière quand vous voulez.</string>

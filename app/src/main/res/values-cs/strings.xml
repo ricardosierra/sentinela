@@ -3,7 +3,7 @@
 
     <!-- Uvítání -->
     <string name="welcome_headline">Vaše první obranná linie proti spamu.</string>
-    <string name="welcome_subtitle">Sentinela blokuje hovory z neznámých čísel dřív, než telefon vůbec stihne zazvonit.</string>
+    <string name="welcome_subtitle">Sentinela blokuje hovory z čísel mimo vaše kontakty ještě předtím, než telefon zazvoní.</string>
     <string name="welcome_feature_local_title">Místní blokování</string>
     <string name="welcome_feature_local_desc">Zpracování přímo v zařízení.</string>
     <string name="welcome_feature_silent_title">Tiché</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% otevřený zdrojový kód — bez reklam, bez telemetrie</string>
 
     <!-- Uvedení do provozu: role filtrování hovorů -->
-    <string name="onboarding_role_disclaimer">Nastavením udělujete oprávnění k filtrování hovorů. Sentinela filtruje hovory z neznámých čísel místně, aniž by kdy odeslala vaše data mimo zařízení.</string>
+    <string name="onboarding_role_disclaimer">Při nastavení udělíte oprávnění Call Screening. Sentinela bude filtrovat hovory z čísel mimo vaše kontakty lokálně, aniž by vaše data opustila zařízení.</string>
     <string name="onboarding_role_cta">Nastavit teď</string>
     <string name="onboarding_role_requesting">Žádám o oprávnění…</string>
     <string name="onboarding_step_indicator">Krok %1$d z %2$d</string>
@@ -33,8 +33,8 @@
     <string name="onboarding_scope_dnd">Systémový režim „Nerušit“ má i nadále přednost před nastavením Sentinely.</string>
 
     <!-- Uvedení do provozu: neznámá čísla -->
-    <string name="unknown_title">Neznámé hovory</string>
-    <string name="unknown_question">Jak má Sentinela nakládat s čísly, která nemáte v kontaktech?</string>
+    <string name="unknown_title">Čísla mimo kontakty</string>
+    <string name="unknown_question">Jak má Sentinela naložit s čísly, která nemáte v kontaktech?</string>
     <string name="unknown_option_block">Blokovat</string>
     <string name="unknown_option_block_desc">Hovor okamžitě odmítne.</string>
     <string name="unknown_option_silence">Ztlumit</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Výchozí</string>
 
     <string name="whatsapp_contacts_warning_title">Upozornění k WhatsAppu</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp umožňuje ukládat kontakty jen do vlastního cloudu. Lidé uložení tímto způsobem v seznamu kontaktů zařízení neexistují a Sentinela je považuje za „Neznámé“. Uložte kontakty do oficiálního seznamu, aby je blokování rozpoznalo.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp umožňuje ukládat kontakty pouze do svého cloudu. Lidé uložení tímto způsobem v zařízení neexistují a Sentinela je bude považovat za \"Mimo kontakty\". Uložte si kontakty do oficiálního seznamu, aby je blokátor rozpoznal.</string>
     <string name="whatsapp_history_hint">Tip: pokud jde o kontakt z WhatsAppu, který není uložený v seznamu kontaktů, povolte ho volbou výše.</string>
 
     <string name="contacts_permission_granted">Přístup ke kontaktům udělen</string>
-    <string name="contacts_permission_denied">Bez přístupu ke kontaktům nemůže Sentinela vědět, kdo je ve vašem seznamu: takové hovory mohou být považovány za neznámé.</string>
+    <string name="contacts_permission_denied">Bez přístupu k adresáři Sentinela nepozná, kdo je ve vašich kontaktech: tyto hovory mohou být zpracovány jako čísla mimo kontakty.</string>
     <string name="contacts_permission_blocked">Přístup ke kontaktům byl trvale odepřen. Udělíte ho v nastavení aplikace.</string>
     <string name="settings_block_private_desc">Hovory bez identifikace čísla se řídí pravidlem blokování, které jste zvolili. Není možné zjistit, kdo volal.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Zkontrolujte, co bylo nastaveno. Každou položku můžete později změnit na obrazovce Ochrana.</string>
     <string name="onboarding_check_role">Výchozí filtrování hovorů</string>
     <string name="onboarding_check_contacts">Přístup ke kontaktům</string>
-    <string name="onboarding_check_unknown">Neznámá čísla</string>
+    <string name="onboarding_check_unknown">Čísla mimo kontakty</string>
     <string name="onboarding_check_origins">Kontakty a osobní seznam</string>
     <string name="onboarding_check_granted">Uděleno</string>
     <string name="onboarding_check_missing">Chybí</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Ochrana aktivní</string>
     <string name="dashboard_protection_inactive">Ochrana vypnutá</string>
     <string name="dashboard_monitoring">Sledování v reálném čase</string>
-    <string name="dashboard_device_safe">Vaše zařízení je chráněno před hovory z neznámých čísel.</string>
+    <string name="dashboard_device_safe">Vaše zařízení je chráněno před hovory z čísel mimo vaše kontakty.</string>
     <string name="dashboard_role_missing">Sentinela není výchozí aplikací pro filtrování hovorů.</string>
     <string name="dashboard_fix_configuration">Opravit konfiguraci</string>
     <string name="dashboard_total_blocked">Celkem zablokováno</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Osobní seznam</string>
     <string name="dashboard_quick_history">Historie blokování</string>
     <string name="dashboard_protection_off_hint">Nefiltruje se žádný hovor.</string>
-    <string name="dashboard_contacts_missing">Sentinela nemůže číst váš seznam kontaktů. Hovory od kontaktů mohou být považovány za neznámé.</string>
+    <string name="dashboard_contacts_missing">Sentinela nemůže číst váš adresář. Hovory od kontaktů mohou být zpracovány jako čísla mimo kontakty.</string>
     <string name="dashboard_history_off">Historie je vypnutá, takže není co zobrazit jako počet zablokovaných hovorů.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Zapnout historii</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Dnes</string>
     <string name="history_filter_7days">7 dní</string>
     <string name="history_filter_30days">30 dní</string>
-    <string name="history_unknown_number">Neznámé číslo</string>
+    <string name="history_unknown_number">Mimo kontakty</string>
     <string name="history_private_number">Soukromé</string>
     <string name="history_private_id">Skryté ID</string>
     <string name="history_action_allow">Povolit</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Je ve vašem osobním seznamu</string>
     <string name="history_reason_emergency_number">Tísňové číslo</string>
     <string name="history_reason_repeated_call">Hned poté volal znovu</string>
-    <string name="history_reason_unknown_number">Neznámé číslo</string>
+    <string name="history_reason_unknown_number">Není v seznamu kontaktů</string>
     <string name="history_reason_invalid_number">Neidentifikované číslo</string>
     <string name="history_reason_local_lookup_failure">Místní dotaz selhal</string>
     <string name="history_reason_fallback_policy">Záložní pravidlo</string>
@@ -186,7 +186,7 @@
     <!-- Ochrana / Nastavení -->
     <string name="settings_title">Ochrana</string>
     <string name="settings_protection_toggle">Zapnout ochranu</string>
-    <string name="settings_unknown_policy">Neznámá čísla</string>
+    <string name="settings_unknown_policy">Čísla mimo kontakty</string>
     <string name="settings_contacts_policy">Kontakty ze seznamu</string>
     <string name="settings_whitelist_policy">Osobní seznam</string>
     <string name="settings_block_private">Blokovat soukromá čísla</string>
@@ -313,7 +313,7 @@
     <!-- Hovor: štítky původu -->
     <string name="call_origin_contact">Kontakt</string>
     <string name="call_origin_whitelist">Povolený</string>
-    <string name="call_origin_unknown">Neznámý</string>
+    <string name="call_origin_unknown">Mimo kontakty</string>
     <string name="call_origin_private">Soukromé číslo</string>
 
     <!-- Hovor: zvukový výstup -->
@@ -363,7 +363,7 @@
     <string name="dialer_activation_unchanged_3">Hovory z WhatsAppu, Telegramu a dalších internetových aplikací zůstávají mimo dosah Sentinely.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela zůstává 100% offline: žádný hovor, číslo ani kontakt neopustí zařízení.</string>
     <string name="dialer_activation_limit_calls">Jeden hovor najednou: čekající hovor a konference nejsou v této verzi podporovány.</string>
-    <string name="dialer_activation_contacts_required">Režim telefonu potřebuje oprávnění ke čtení kontaktů. Bez něj Sentinela nedokáže vaše kontakty rozlišit a začala by všechny považovat za neznámé.</string>
+    <string name="dialer_activation_contacts_required">Režim vytáčení vyžaduje oprávnění ke čtení adresáře. Bez něj Sentinela nerozpozná vaše kontakty a zacházel by se všemi jako s čísly mimo kontakty.</string>
     <string name="dialer_activation_grant_contacts">Povolit čtení kontaktů</string>
     <string name="dialer_activation_cta">Zvolit Sentinelu</string>
     <string name="dialer_activation_cta_hint">Rozhoduje Android. Můžete se kdykoli vrátit.</string>

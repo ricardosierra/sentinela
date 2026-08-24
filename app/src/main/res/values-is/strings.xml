@@ -3,7 +3,7 @@
 
     <!-- Velkomin -->
     <string name="welcome_headline">Fyrsta varnarlínan þín gegn ruslsímtölum.</string>
-    <string name="welcome_subtitle">Sentinela lokar á símtöl frá óþekktum númerum áður en síminn nær að hringja.</string>
+    <string name="welcome_subtitle">Sentinela lokar á símtöl frá númerum sem ekki eru í tengiliðum áður en síminn hringir.</string>
     <string name="welcome_feature_local_title">Staðbundin lokun</string>
     <string name="welcome_feature_local_desc">Vinnsla beint í tækinu.</string>
     <string name="welcome_feature_silent_title">Hljóðlaust</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% opinn hugbúnaður — engar auglýsingar, engin fjarmæling</string>
 
     <!-- Uppsetning: hlutverk símtalasíu -->
-    <string name="onboarding_role_disclaimer">Með uppsetningunni veitir þú heimild til símtalasíunar. Sentinela síar símtöl frá óþekktum númerum staðbundið, án þess að senda gögnin þín nokkurn tíma út úr tækinu.</string>
+    <string name="onboarding_role_disclaimer">Við uppsetningu veitir þú Call Screening leyfi. Sentinela síar símtöl frá númerum utan tengiliða staðvært án þess að senda gögn frá tækinu.</string>
     <string name="onboarding_role_cta">Setja upp núna</string>
     <string name="onboarding_role_requesting">Bið um heimild…</string>
     <string name="onboarding_step_indicator">Skref %1$d af %2$d</string>
@@ -33,7 +33,7 @@
     <string name="onboarding_scope_dnd">Stillingin „Ónáðið ekki“ í kerfinu gildir áfram framar stillingum Sentinela.</string>
 
     <!-- Uppsetning: óþekkt númer -->
-    <string name="unknown_title">Óþekkt símtöl</string>
+    <string name="unknown_title">Númer utan tengiliða</string>
     <string name="unknown_question">Hvernig á Sentinela að meðhöndla númer sem eru ekki í tengiliðunum þínum?</string>
     <string name="unknown_option_block">Loka á</string>
     <string name="unknown_option_block_desc">Hafnar símtalinu samstundis.</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Sjálfgefið</string>
 
     <string name="whatsapp_contacts_warning_title">Um WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp leyfir aðeins að vista tengiliði í eigin skýi. Fólk sem er vistað þannig er ekki til í tengiliðum tækisins og Sentinela meðhöndlar það sem „Óþekkt“. Vistaðu tengiliðina þína í opinberu tengiliðaskránni svo lokunin þekki þá.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp leyfir að vista tengiliði eingöngu í skýinu sínu. Fólk sem vistað er þannig er ekki í tengiliðaskrá tækisins og verður meðhöndlað af Sentinela sem \"Utan tengiliða\". Vistaðu tengiliði í opinberu tengiliðaskránni svo útilokunin þekki þá.</string>
     <string name="whatsapp_history_hint">Ábending: ef þetta er WhatsApp-tengiliður sem er ekki vistaður í tengiliðaskránni skaltu nota valkostinn hér að ofan til að leyfa hann.</string>
 
     <string name="contacts_permission_granted">Aðgangur að tengiliðum veittur</string>
-    <string name="contacts_permission_denied">Án aðgangs að tengiliðum getur Sentinela ekki vitað hverjir eru í tengiliðunum þínum: þau símtöl geta verið meðhöndluð sem óþekkt.</string>
+    <string name="contacts_permission_denied">Án aðgangs að tengiliðaskrá getur Sentinela ekki vitað hver er í tengiliðunum þínum: þessi símtöl gætu verið meðhöndluð sem númer utan tengiliða.</string>
     <string name="contacts_permission_blocked">Aðgangi að tengiliðum var hafnað varanlega. Opnaðu stillingar forritsins til að veita hann.</string>
     <string name="settings_block_private_desc">Símtöl án númerabirtingar fylgja lokunarreglunni sem þú valdir. Ekki er hægt að vita hver hringdi.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Farðu yfir það sem var sett upp. Þú getur breytt hverju atriði síðar, á Vernd-skjánum.</string>
     <string name="onboarding_check_role">Sjálfgefin símtalasíun</string>
     <string name="onboarding_check_contacts">Aðgangur að tengiliðum</string>
-    <string name="onboarding_check_unknown">Óþekkt númer</string>
+    <string name="onboarding_check_unknown">Númer utan tengiliða</string>
     <string name="onboarding_check_origins">Tengiliðir og persónulegur listi</string>
     <string name="onboarding_check_granted">Veitt</string>
     <string name="onboarding_check_missing">Vantar</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Vernd virk</string>
     <string name="dashboard_protection_inactive">Vernd óvirk</string>
     <string name="dashboard_monitoring">Vöktun í rauntíma</string>
-    <string name="dashboard_device_safe">Tækið þitt er varið gegn símtölum frá óþekktum númerum.</string>
+    <string name="dashboard_device_safe">Tækið þitt er varið gegn símtölum frá númerum sem ekki eru í tengiliðum.</string>
     <string name="dashboard_role_missing">Sentinela er ekki sjálfgefið símtalasíuforrit.</string>
     <string name="dashboard_fix_configuration">Laga uppsetninguna</string>
     <string name="dashboard_total_blocked">Lokað samtals</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Persónulegur listi</string>
     <string name="dashboard_quick_history">Lokunarsaga</string>
     <string name="dashboard_protection_off_hint">Engin símtöl eru síuð.</string>
-    <string name="dashboard_contacts_missing">Sentinela getur ekki lesið tengiliðina þína. Símtöl frá tengiliðum geta verið meðhöndluð sem óþekkt.</string>
+    <string name="dashboard_contacts_missing">Sentinela getur ekki lesið tengiliðaskrána þína. Símtöl frá tengiliðum gætu verið meðhöndluð sem númer utan tengiliða.</string>
     <string name="dashboard_history_off">Sagan er óvirk, svo það er engin talning á lokuðum símtölum til að sýna.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Kveikja á sögunni</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Í dag</string>
     <string name="history_filter_7days">7 dagar</string>
     <string name="history_filter_30days">30 dagar</string>
-    <string name="history_unknown_number">Óþekkt númer</string>
+    <string name="history_unknown_number">Utan tengiliða</string>
     <string name="history_private_number">Einkanúmer</string>
     <string name="history_private_id">Falið auðkenni</string>
     <string name="history_action_allow">Leyfa</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Er á persónulega listanum þínum</string>
     <string name="history_reason_emergency_number">Neyðarnúmer</string>
     <string name="history_reason_repeated_call">Hringdi aftur strax á eftir</string>
-    <string name="history_reason_unknown_number">Óþekkt númer</string>
+    <string name="history_reason_unknown_number">Ekki í tengiliðaskrá</string>
     <string name="history_reason_invalid_number">Óauðkennt númer</string>
     <string name="history_reason_local_lookup_failure">Staðbundin uppfletting mistókst</string>
     <string name="history_reason_fallback_policy">Varaleið</string>
@@ -186,7 +186,7 @@
     <!-- Vernd / Stillingar -->
     <string name="settings_title">Vernd</string>
     <string name="settings_protection_toggle">Kveikja á verndinni</string>
-    <string name="settings_unknown_policy">Óþekkt númer</string>
+    <string name="settings_unknown_policy">Númer utan tengiliða</string>
     <string name="settings_contacts_policy">Tengiliðir í skránni</string>
     <string name="settings_whitelist_policy">Persónulegur listi</string>
     <string name="settings_block_private">Loka á einkanúmer</string>
@@ -311,7 +311,7 @@
     <!-- Símtal: upprunamerki -->
     <string name="call_origin_contact">Tengiliður</string>
     <string name="call_origin_whitelist">Leyft</string>
-    <string name="call_origin_unknown">Óþekkt</string>
+    <string name="call_origin_unknown">Utan tengiliða</string>
     <string name="call_origin_private">Einkanúmer</string>
 
     <!-- Símtal: hljóðúttak -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">Símtöl frá WhatsApp, Telegram og öðrum netforritum eru áfram utan seilingar Sentinela.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela helst 100% án nettengingar: ekkert símtal, númer eða tengiliður fer úr tækinu.</string>
     <string name="dialer_activation_limit_calls">Eitt símtal í einu: símtal í bið og símafundur eru ekki studd í þessari útgáfu.</string>
-    <string name="dialer_activation_contacts_required">Símtalsstillingin þarf heimild til að lesa tengiliði. Án hennar getur Sentinela ekki greint tengiliðina þína og myndi fara að meðhöndla alla sem óþekkta.</string>
+    <string name="dialer_activation_contacts_required">Hringistilling krefst leyfis til að lesa tengiliðaskrá. Án þess getur Sentinela ekki greint tengiliðina þína og myndi meðhöndla alla sem utan tengiliða.</string>
     <string name="dialer_activation_grant_contacts">Leyfa lestur tengiliða</string>
     <string name="dialer_activation_cta">Velja Sentinela</string>
     <string name="dialer_activation_cta_hint">Það er Android sem ræður. Þú getur snúið til baka hvenær sem er.</string>

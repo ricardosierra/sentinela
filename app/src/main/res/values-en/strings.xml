@@ -3,7 +3,7 @@
 
     <!-- Welcome -->
     <string name="welcome_headline">Your first line of defence against spam.</string>
-    <string name="welcome_subtitle">Sentinela blocks calls from unknown numbers before your phone even rings.</string>
+    <string name="welcome_subtitle">Sentinela blocks calls from numbers outside your contacts before your phone even rings.</string>
     <string name="welcome_feature_local_title">Local blocking</string>
     <string name="welcome_feature_local_desc">Processed right on your device.</string>
     <string name="welcome_feature_silent_title">Silent</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% open source — no ads, no telemetry</string>
 
     <!-- Onboarding: call screening role -->
-    <string name="onboarding_role_disclaimer">By setting up, you grant the call screening permission. Sentinela filters calls from unknown numbers locally, without ever sending your data off the device.</string>
+    <string name="onboarding_role_disclaimer">When setting up, you grant the Call Screening permission. Sentinela will filter calls from numbers outside your contacts locally, without ever sending your data off the device.</string>
     <string name="onboarding_role_cta">Set up now</string>
     <string name="onboarding_role_requesting">Requesting permission…</string>
     <string name="onboarding_step_indicator">Step %1$d of %2$d</string>
@@ -33,7 +33,7 @@
     <string name="onboarding_scope_dnd">The system\'s \"Do Not Disturb\" still overrides Sentinela\'s settings.</string>
 
     <!-- Onboarding: unknown numbers -->
-    <string name="unknown_title">Unknown calls</string>
+    <string name="unknown_title">Numbers Outside Contacts</string>
     <string name="unknown_question">How should Sentinela handle numbers that are not in your contacts?</string>
     <string name="unknown_option_block">Block</string>
     <string name="unknown_option_block_desc">Rejects the call instantly.</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Default</string>
 
     <string name="whatsapp_contacts_warning_title">About WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp lets you save contacts in its own cloud only. People saved that way do not exist in the device\'s contacts and, to Sentinela, are treated as \"Unknown\". Save your contacts in the phone\'s address book so the blocker recognises them.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp allows saving contacts only in its cloud. People saved that way do not exist in the device address book and, for Sentinela, will be treated as \"Outside contacts\". Save your contacts in the official address book so the blocker recognizes them.</string>
     <string name="whatsapp_history_hint">Tip: if this is a WhatsApp contact not saved in your address book, use the option above to allow it.</string>
 
     <string name="contacts_permission_granted">Contacts access granted</string>
-    <string name="contacts_permission_denied">Without contacts access, Sentinela cannot tell who is in your contacts: those calls may be treated as unknown.</string>
+    <string name="contacts_permission_denied">Without address book access, Sentinela cannot know who is in your contacts: those calls may be treated as numbers outside contacts.</string>
     <string name="contacts_permission_blocked">Contacts access was permanently denied. To grant it, open the app settings.</string>
     <string name="settings_block_private_desc">Calls with no caller ID follow the blocking policy you chose. There is no way to know who called.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Review what has been set up. You can change any item later, on the Protection screen.</string>
     <string name="onboarding_check_role">Default call screening</string>
     <string name="onboarding_check_contacts">Contacts access</string>
-    <string name="onboarding_check_unknown">Unknown numbers</string>
+    <string name="onboarding_check_unknown">Numbers outside contacts</string>
     <string name="onboarding_check_origins">Contacts and personal list</string>
     <string name="onboarding_check_granted">Granted</string>
     <string name="onboarding_check_missing">Missing</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Protection active</string>
     <string name="dashboard_protection_inactive">Protection off</string>
     <string name="dashboard_monitoring">Real-time monitoring</string>
-    <string name="dashboard_device_safe">Your device is protected against calls from unknown numbers.</string>
+    <string name="dashboard_device_safe">Your device is protected against calls from numbers outside your contacts.</string>
     <string name="dashboard_role_missing">Sentinela is not the default call screening app.</string>
     <string name="dashboard_fix_configuration">Fix configuration</string>
     <string name="dashboard_total_blocked">Total blocked</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Personal list</string>
     <string name="dashboard_quick_history">Blocking history</string>
     <string name="dashboard_protection_off_hint">No call is being screened.</string>
-    <string name="dashboard_contacts_missing">Sentinela cannot read your contacts. Calls from contacts may be treated as unknown.</string>
+    <string name="dashboard_contacts_missing">Sentinela cannot read your address book. Calls from contacts may be treated as numbers outside contacts.</string>
     <string name="dashboard_history_off">History is off, so there is no blocked call count to show.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Turn history on</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Today</string>
     <string name="history_filter_7days">7 days</string>
     <string name="history_filter_30days">30 days</string>
-    <string name="history_unknown_number">Unknown number</string>
+    <string name="history_unknown_number">Outside Contacts</string>
     <string name="history_private_number">Private</string>
     <string name="history_private_id">Hidden ID</string>
     <string name="history_action_allow">Allow</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">In your personal list</string>
     <string name="history_reason_emergency_number">Emergency number</string>
     <string name="history_reason_repeated_call">Called again right after</string>
-    <string name="history_reason_unknown_number">Unknown number</string>
+    <string name="history_reason_unknown_number">Not in contacts list</string>
     <string name="history_reason_invalid_number">Unidentified number</string>
     <string name="history_reason_local_lookup_failure">Local lookup failed</string>
     <string name="history_reason_fallback_policy">Fallback policy</string>
@@ -186,7 +186,7 @@
     <!-- Protection / Settings -->
     <string name="settings_title">Protection</string>
     <string name="settings_protection_toggle">Turn protection on</string>
-    <string name="settings_unknown_policy">Unknown numbers</string>
+    <string name="settings_unknown_policy">Numbers outside contacts</string>
     <string name="settings_contacts_policy">Phone contacts</string>
     <string name="settings_whitelist_policy">Personal list</string>
     <string name="settings_block_private">Block private numbers</string>
@@ -311,7 +311,7 @@
     <!-- Call: origin chips -->
     <string name="call_origin_contact">Contact</string>
     <string name="call_origin_whitelist">Allowed</string>
-    <string name="call_origin_unknown">Unknown</string>
+    <string name="call_origin_unknown">Outside contacts</string>
     <string name="call_origin_private">Private number</string>
 
     <!-- Call: audio output -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">Calls from WhatsApp, Telegram and other Internet apps remain out of Sentinela\'s reach.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela stays 100% offline: no call, number or contact leaves the device.</string>
     <string name="dialer_activation_limit_calls">One call at a time: call waiting and conference calls are not supported in this version.</string>
-    <string name="dialer_activation_contacts_required">Dialer mode needs the contacts read permission. Without it, Sentinela cannot tell your contacts apart and would start treating everyone as unknown.</string>
+    <string name="dialer_activation_contacts_required">Dialer mode requires address book read permission. Without it, Sentinela cannot distinguish your contacts and would treat everyone as outside contacts.</string>
     <string name="dialer_activation_grant_contacts">Allow contacts access</string>
     <string name="dialer_activation_cta">Choose Sentinela</string>
     <string name="dialer_activation_cta_hint">Android is the one that decides. You can go back whenever you want.</string>

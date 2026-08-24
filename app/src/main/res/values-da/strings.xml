@@ -3,7 +3,7 @@
 
     <!-- Velkommen -->
     <string name="welcome_headline">Din første forsvarslinje mod spam.</string>
-    <string name="welcome_subtitle">Sentinela blokerer opkald fra ukendte numre, allerede før din telefon ringer.</string>
+    <string name="welcome_subtitle">Sentinela blokerer opkald fra numre uden for dine kontakter, før telefonen ringer.</string>
     <string name="welcome_feature_local_title">Lokal blokering</string>
     <string name="welcome_feature_local_desc">Behandling direkte på enheden.</string>
     <string name="welcome_feature_silent_title">Lydløs</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% open source — ingen reklamer, ingen telemetri</string>
 
     <!-- Opsætning: rollen som opkaldsfilter -->
-    <string name="onboarding_role_disclaimer">Når du sætter det op, giver du tilladelse til opkaldsfiltrering. Sentinela filtrerer opkald fra ukendte numre lokalt uden nogensinde at sende dine data væk fra enheden.</string>
+    <string name="onboarding_role_disclaimer">Ved opsætning giver du tilladelse til Call Screening. Sentinela filtrerer opkald fra numre uden for dine kontakter lokalt uden nogensinde at sende data væk fra enheden.</string>
     <string name="onboarding_role_cta">Sæt op nu</string>
     <string name="onboarding_role_requesting">Anmoder om tilladelse…</string>
     <string name="onboarding_step_indicator">Trin %1$d af %2$d</string>
@@ -33,8 +33,8 @@
     <string name="onboarding_scope_dnd">Systemets \"Forstyr ikke\" gælder stadig frem for Sentinelas indstillinger.</string>
 
     <!-- Opsætning: ukendte numre -->
-    <string name="unknown_title">Ukendte opkald</string>
-    <string name="unknown_question">Hvordan skal Sentinela håndtere numre, der ikke står i dine kontakter?</string>
+    <string name="unknown_title">Numre uden for kontakter</string>
+    <string name="unknown_question">Hvordan skal Sentinela håndtere numre, der ikke er i dine kontakter?</string>
     <string name="unknown_option_block">Blokér</string>
     <string name="unknown_option_block_desc">Afviser opkaldet med det samme.</string>
     <string name="unknown_option_silence">Sæt på lydløs</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Standard</string>
 
     <string name="whatsapp_contacts_warning_title">Bemærk om WhatsApp</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp lader dig kun gemme kontakter i sin egen sky. Personer, der er gemt sådan, findes ikke i enhedens adressebog og behandles af Sentinela som \"Ukendt\". Gem dine kontakter i den officielle adressebog, så blokeringen kan genkende dem.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp giver mulighed for kun at gemme kontakter i sin sky. Personer, der er gemt på denne måde, findes ikke i enhedens adressebog og vil for Sentinela blive behandlet som \"Uden for kontakter\". Gem dine kontakter i den officielle adressebog, så blokeringen genkender dem.</string>
     <string name="whatsapp_history_hint">Tip: Hvis det er en WhatsApp-kontakt, der ikke er gemt i adressebogen, kan du bruge muligheden ovenfor til at tillade den.</string>
 
     <string name="contacts_permission_granted">Adgang til kontakter givet</string>
-    <string name="contacts_permission_denied">Uden adgang til kontakter kan Sentinela ikke vide, hvem der står i din adressebog: de opkald kan blive behandlet som ukendte.</string>
+    <string name="contacts_permission_denied">Uden adgang til adressebogen kan Sentinela ikke vide, hvem der er i dine kontakter: disse opkald kan blive behandlet som numre uden for kontakter.</string>
     <string name="contacts_permission_blocked">Adgang til kontakter er afvist permanent. Åbn appens indstillinger for at give den.</string>
     <string name="settings_block_private_desc">Opkald uden nummervisning følger den blokeringspolitik, du har valgt. Det er ikke muligt at se, hvem der ringede.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Se, hvad der er sat op. Du kan ændre hvert punkt senere på skærmen Beskyttelse.</string>
     <string name="onboarding_check_role">Standardopkaldsfiltrering</string>
     <string name="onboarding_check_contacts">Adgang til kontakter</string>
-    <string name="onboarding_check_unknown">Ukendte numre</string>
+    <string name="onboarding_check_unknown">Numre uden for kontakter</string>
     <string name="onboarding_check_origins">Kontakter og personlig liste</string>
     <string name="onboarding_check_granted">Givet</string>
     <string name="onboarding_check_missing">Mangler</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Beskyttelse aktiv</string>
     <string name="dashboard_protection_inactive">Beskyttelse slået fra</string>
     <string name="dashboard_monitoring">Overvågning i realtid</string>
-    <string name="dashboard_device_safe">Din enhed er beskyttet mod opkald fra ukendte numre.</string>
+    <string name="dashboard_device_safe">Din enhed er beskyttet mod opkald fra numre uden for dine kontakter.</string>
     <string name="dashboard_role_missing">Sentinela er ikke standardappen til opkaldsfiltrering.</string>
     <string name="dashboard_fix_configuration">Ret konfigurationen</string>
     <string name="dashboard_total_blocked">Blokeret i alt</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Personlig liste</string>
     <string name="dashboard_quick_history">Blokeringshistorik</string>
     <string name="dashboard_protection_off_hint">Der bliver ikke filtreret nogen opkald.</string>
-    <string name="dashboard_contacts_missing">Sentinela kan ikke læse din adressebog. Opkald fra kontakter kan blive behandlet som ukendte.</string>
+    <string name="dashboard_contacts_missing">Sentinela kan ikke læse din adressebog. Opkald fra kontakter kan blive behandlet som numre uden for kontakter.</string>
     <string name="dashboard_history_off">Historikken er slået fra, så der er ingen optælling af blokerede opkald at vise.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Slå historik til</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">I dag</string>
     <string name="history_filter_7days">7 dage</string>
     <string name="history_filter_30days">30 dage</string>
-    <string name="history_unknown_number">Ukendt nummer</string>
+    <string name="history_unknown_number">Uden for kontakter</string>
     <string name="history_private_number">Privat</string>
     <string name="history_private_id">Skjult id</string>
     <string name="history_action_allow">Tillad</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">Står på din personlige liste</string>
     <string name="history_reason_emergency_number">Nødnummer</string>
     <string name="history_reason_repeated_call">Ringede igen lige efter</string>
-    <string name="history_reason_unknown_number">Ukendt nummer</string>
+    <string name="history_reason_unknown_number">Ikke i kontaktlisten</string>
     <string name="history_reason_invalid_number">Uidentificeret nummer</string>
     <string name="history_reason_local_lookup_failure">Lokalt opslag mislykkedes</string>
     <string name="history_reason_fallback_policy">Reservepolitik</string>
@@ -186,7 +186,7 @@
     <!-- Beskyttelse / Indstillinger -->
     <string name="settings_title">Beskyttelse</string>
     <string name="settings_protection_toggle">Slå beskyttelse til</string>
-    <string name="settings_unknown_policy">Ukendte numre</string>
+    <string name="settings_unknown_policy">Numre uden for kontakter</string>
     <string name="settings_contacts_policy">Kontakter i adressebogen</string>
     <string name="settings_whitelist_policy">Personlig liste</string>
     <string name="settings_block_private">Blokér private numre</string>
@@ -311,7 +311,7 @@
     <!-- Opkald: oprindelsesmærker -->
     <string name="call_origin_contact">Kontakt</string>
     <string name="call_origin_whitelist">Tilladt</string>
-    <string name="call_origin_unknown">Ukendt</string>
+    <string name="call_origin_unknown">Uden for kontakter</string>
     <string name="call_origin_private">Privat nummer</string>
 
     <!-- Opkald: lydudgang -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">Opkald fra WhatsApp, Telegram og andre internetapps er stadig uden for Sentinelas rækkevidde.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela forbliver 100% offline: intet opkald, nummer eller kontakt forlader enheden.</string>
     <string name="dialer_activation_limit_calls">Ét opkald ad gangen: banke på og telefonmøde understøttes ikke i denne version.</string>
-    <string name="dialer_activation_contacts_required">Opkaldstilstand kræver tilladelse til at læse kontakter. Uden den kan Sentinela ikke skelne dine kontakter og ville begynde at behandle alle som ukendte.</string>
+    <string name="dialer_activation_contacts_required">Opkaldstilstand kræver tilladelse til at læse adressebogen. Uden den kan Sentinela ikke kende forskel på dine kontakter og ville behandle alle som uden for kontakter.</string>
     <string name="dialer_activation_grant_contacts">Tillad adgang til kontakter</string>
     <string name="dialer_activation_cta">Vælg Sentinela</string>
     <string name="dialer_activation_cta_hint">Det er Android, der bestemmer. Du kan gå tilbage, når du vil.</string>

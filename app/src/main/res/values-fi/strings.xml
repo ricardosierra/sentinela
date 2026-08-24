@@ -3,7 +3,7 @@
 
     <!-- Tervetuloa -->
     <string name="welcome_headline">Ensimmäinen puolustuslinjasi roskapuheluita vastaan.</string>
-    <string name="welcome_subtitle">Sentinela estää tuntemattomista numeroista tulevat puhelut jo ennen kuin puhelin ehtii soida.</string>
+    <string name="welcome_subtitle">Sentinela estää puhelut yhteystietojesi ulkopuolisista numeroista ennen puhelimen soimista.</string>
     <string name="welcome_feature_local_title">Paikallinen esto</string>
     <string name="welcome_feature_local_desc">Käsittely suoraan laitteessa.</string>
     <string name="welcome_feature_silent_title">Äänetön</string>
@@ -16,7 +16,7 @@
     <string name="welcome_open_source" formatted="false">100% avointa lähdekoodia — ei mainoksia, ei telemetriaa</string>
 
     <!-- Käyttöönotto: puhelunsuodatuksen rooli -->
-    <string name="onboarding_role_disclaimer">Määrittäessäsi tämän annat puhelunsuodatusluvan. Sentinela suodattaa tuntemattomista numeroista tulevat puhelut paikallisesti lähettämättä koskaan tietojasi laitteen ulkopuolelle.</string>
+    <string name="onboarding_role_disclaimer">Määrityksen yhteydessä myönnät Call Screening -luvan. Sentinela suodattaa puhelut yhteystietojen ulkopuolisista numeroista paikallisesti lähettämättä tietojasi laitteelta.</string>
     <string name="onboarding_role_cta">Määritä nyt</string>
     <string name="onboarding_role_requesting">Pyydetään lupaa…</string>
     <string name="onboarding_step_indicator">Vaihe %1$d / %2$d</string>
@@ -33,8 +33,8 @@
     <string name="onboarding_scope_dnd">Järjestelmän Älä häiritse -tila on edelleen etusijalla Sentinelan asetuksiin nähden.</string>
 
     <!-- Käyttöönotto: tuntemattomat numerot -->
-    <string name="unknown_title">Tuntemattomat puhelut</string>
-    <string name="unknown_question">Miten Sentinelan tulisi käsitellä numeroita, joita ei ole yhteystiedoissasi?</string>
+    <string name="unknown_title">Yhteystietojen ulkopuoliset numerot</string>
+    <string name="unknown_question">Miten Sentinelan tulisi käsitellä numeroita, jotka eivät ole yhteystiedoissasi?</string>
     <string name="unknown_option_block">Estä</string>
     <string name="unknown_option_block_desc">Hylkää puhelun välittömästi.</string>
     <string name="unknown_option_silence">Vaimenna</string>
@@ -57,11 +57,11 @@
     <string name="contacts_default_badge">Oletus</string>
 
     <string name="whatsapp_contacts_warning_title">Huomio WhatsAppista</string>
-    <string name="whatsapp_contacts_warning_desc">WhatsApp sallii yhteystietojen tallentamisen vain omaan pilveensä. Näin tallennettuja henkilöitä ei ole laitteen yhteystiedoissa, ja Sentinela käsittelee heitä tuntemattomina. Tallenna yhteystietosi laitteen viralliseen luetteloon, jotta esto tunnistaa heidät.</string>
+    <string name="whatsapp_contacts_warning_desc">WhatsApp sallii yhteystietojen tallentamisen vain omaan pilveensä. Tällä tavalla tallennetut henkilöt eivät ole laitteen osoitekirjassa, ja Sentinela käsittelee heitä tilassa \"Yhteystietojen ulkopuolella\". Tallenna yhteystietosi viralliseen osoitekirjaan, jotta esto tunnistaa ne.</string>
     <string name="whatsapp_history_hint">Vinkki: jos kyseessä on WhatsApp-yhteystieto, jota ei ole tallennettu laitteen luetteloon, salli se yllä olevalla valinnalla.</string>
 
     <string name="contacts_permission_granted">Yhteystietojen lukuoikeus myönnetty</string>
-    <string name="contacts_permission_denied">Ilman yhteystietojen lukuoikeutta Sentinela ei voi tietää, kuka on yhteystiedoissasi: nämä puhelut voidaan käsitellä tuntemattomina.</string>
+    <string name="contacts_permission_denied">Ilman osoitekirjan lukuoikeutta Sentinela ei voi tietää, kuka on yhteystiedoissasi: näitä puheluita saatetaan käsitellä yhteystietojen ulkopuolisina numeroina.</string>
     <string name="contacts_permission_blocked">Yhteystietojen lukuoikeus evättiin pysyvästi. Myöntääksesi sen avaa sovelluksen asetukset.</string>
     <string name="settings_block_private_desc">Puhelut ilman numeronäyttöä noudattavat valitsemaasi estokäytäntöä. Ei ole mahdollista tietää, kuka soitti.</string>
 
@@ -87,7 +87,7 @@
     <string name="onboarding_summary_body">Tarkista, mitä on määritetty. Voit muuttaa mitä tahansa kohtaa myöhemmin Suojaus-näytöllä.</string>
     <string name="onboarding_check_role">Oletuspuhelunsuodatus</string>
     <string name="onboarding_check_contacts">Yhteystietojen lukuoikeus</string>
-    <string name="onboarding_check_unknown">Tuntemattomat numerot</string>
+    <string name="onboarding_check_unknown">Yhteystietojen ulkopuoliset numerot</string>
     <string name="onboarding_check_origins">Yhteystiedot ja henkilökohtainen lista</string>
     <string name="onboarding_check_granted">Myönnetty</string>
     <string name="onboarding_check_missing">Puuttuu</string>
@@ -96,7 +96,7 @@
     <string name="dashboard_protection_active">Suojaus käytössä</string>
     <string name="dashboard_protection_inactive">Suojaus pois käytöstä</string>
     <string name="dashboard_monitoring">Reaaliaikainen valvonta</string>
-    <string name="dashboard_device_safe">Laitteesi on suojattu tuntemattomista numeroista tulevilta puheluilta.</string>
+    <string name="dashboard_device_safe">Laitteesi on suojattu puheluilta, jotka tulevat yhteystietojesi ulkopuolisista numeroista.</string>
     <string name="dashboard_role_missing">Sentinela ei ole oletuspuhelunsuodatussovellus.</string>
     <string name="dashboard_fix_configuration">Korjaa määritys</string>
     <string name="dashboard_total_blocked">Estetty yhteensä</string>
@@ -105,7 +105,7 @@
     <string name="dashboard_quick_whitelist">Henkilökohtainen lista</string>
     <string name="dashboard_quick_history">Estohistoria</string>
     <string name="dashboard_protection_off_hint">Yhtään puhelua ei suodateta.</string>
-    <string name="dashboard_contacts_missing">Sentinela ei voi lukea yhteystietojasi. Yhteystietojen puhelut voidaan käsitellä tuntemattomina.</string>
+    <string name="dashboard_contacts_missing">Sentinela ei voi lukea osoitekirjaasi. Yhteystietojen puheluita saatetaan käsitellä yhteystietojen ulkopuolisina numeroina.</string>
     <string name="dashboard_history_off">Historia on pois käytöstä, joten estettyjen puheluiden lukumäärää ei voi näyttää.</string>
     <string name="dashboard_history_off_value">—</string>
     <string name="dashboard_history_off_action">Ota historia käyttöön</string>
@@ -145,7 +145,7 @@
     <string name="history_filter_today">Tänään</string>
     <string name="history_filter_7days">7 päivää</string>
     <string name="history_filter_30days">30 päivää</string>
-    <string name="history_unknown_number">Tuntematon numero</string>
+    <string name="history_unknown_number">Yhteystietojen ulkopuolella</string>
     <string name="history_private_number">Yksityinen</string>
     <string name="history_private_id">Piilotettu tunnus</string>
     <string name="history_action_allow">Salli</string>
@@ -172,7 +172,7 @@
     <string name="history_reason_personal_whitelist">On henkilökohtaisella listallasi</string>
     <string name="history_reason_emergency_number">Hätänumero</string>
     <string name="history_reason_repeated_call">Soitti uudelleen heti perään</string>
-    <string name="history_reason_unknown_number">Tuntematon numero</string>
+    <string name="history_reason_unknown_number">Ei yhteystietoluettelossa</string>
     <string name="history_reason_invalid_number">Tunnistamaton numero</string>
     <string name="history_reason_local_lookup_failure">Paikallinen haku epäonnistui</string>
     <string name="history_reason_fallback_policy">Varakäytäntö</string>
@@ -186,7 +186,7 @@
     <!-- Suojaus / Asetukset -->
     <string name="settings_title">Suojaus</string>
     <string name="settings_protection_toggle">Ota suojaus käyttöön</string>
-    <string name="settings_unknown_policy">Tuntemattomat numerot</string>
+    <string name="settings_unknown_policy">Yhteystietojen ulkopuoliset numerot</string>
     <string name="settings_contacts_policy">Yhteystiedot</string>
     <string name="settings_whitelist_policy">Henkilökohtainen lista</string>
     <string name="settings_block_private">Estä yksityiset numerot</string>
@@ -311,7 +311,7 @@
     <!-- Puhelu: alkuperämerkinnät -->
     <string name="call_origin_contact">Yhteystieto</string>
     <string name="call_origin_whitelist">Sallittu</string>
-    <string name="call_origin_unknown">Tuntematon</string>
+    <string name="call_origin_unknown">Yhteystietojen ulkopuolella</string>
     <string name="call_origin_private">Yksityinen numero</string>
 
     <!-- Puhelu: äänen ulostulo -->
@@ -361,7 +361,7 @@
     <string name="dialer_activation_unchanged_3">WhatsAppin, Telegramin ja muiden internetsovellusten puhelut ovat edelleen Sentinelan ulottumattomissa.</string>
     <string name="dialer_activation_unchanged_4" formatted="false">Sentinela pysyy 100% offline-tilassa: yksikään puhelu, numero tai yhteystieto ei poistu laitteesta.</string>
     <string name="dialer_activation_limit_calls">Yksi puhelu kerrallaan: koputus ja neuvottelupuhelu eivät ole tuettuja tässä versiossa.</string>
-    <string name="dialer_activation_contacts_required">Puhelintila tarvitsee yhteystietojen lukuoikeuden. Ilman sitä Sentinela ei voi erottaa yhteystietojasi ja alkaisi käsitellä kaikkia tuntemattomina.</string>
+    <string name="dialer_activation_contacts_required">Valintatila vaatii osoitekirjan lukuoikeuden. Ilman sitä Sentinela ei voi erottaa yhteystietojasi ja käsittelisi kaikkia yhteystietojen ulkopuolisina.</string>
     <string name="dialer_activation_grant_contacts">Salli yhteystietojen luku</string>
     <string name="dialer_activation_cta">Valitse Sentinela</string>
     <string name="dialer_activation_cta_hint">Android päättää. Voit palata takaisin milloin haluat.</string>
