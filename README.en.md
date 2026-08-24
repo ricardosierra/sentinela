@@ -3,7 +3,7 @@
 
   <h1>🛡️ Sentinela (Sentinel)</h1>
   
-  <p><b>Local unknown call blocker for Android — 100% Offline and Private.</b></p>
+  <p><b>Local non-contact call blocker for Android — 100% Offline and Private.</b></p>
   
   <p>
     <i>Developed and maintained by <b>SierraTecnologia</b> and <b>RicaSoluções</b></i>
@@ -32,7 +32,7 @@ If a number isn't in your contacts or your personal whitelist, the call won't ri
 Sentinela operates in **two protection modes**:
 
 - 🛡️ **Filter Mode (Default)**
-  The app acts as a background screening service (`ROLE_CALL_SCREENING`). Android only forwards calls from **unknown** numbers for analysis. Contacts ring normally. Unknown numbers without a whitelist entry are instantly blocked or silenced.
+  The app acts as a background screening service (`ROLE_CALL_SCREENING`). Calls from numbers not in your contacts or personal list are filtered locally. Contacts ring normally. Numbers outside your contacts are instantly blocked or silenced.
   
 - 📞 **Dialer Mode (Advanced)**
   Sentinela replaces your default phone app (`ROLE_DIALER`). This provides full protection over **all** calls, allowing you to configure policies (Block, Silence, Ring) even for specific contacts. It includes a clean, modern dialer interface.
@@ -44,7 +44,7 @@ Sentinela operates in **two protection modes**:
 ```mermaid
 graph LR
     A[Incoming Call] --> B[Decision Engine]
-    B --> C{Known?}
+    B --> C{In Contacts / Whitelist?}
     C -->|Yes| D[Allow Ringing]
     C -->|No| E[Block / Silence]
     E --> F[Offline History]

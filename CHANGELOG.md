@@ -11,6 +11,10 @@
 
 ## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.4...master)
 
+### 🎨 Melhorias
+
+- [x] **Nomenclatura clara sobre bloqueio de números fora dos contatos** — substituição de termos ambíguos ("número desconhecido", que gerava confusão com número privado/sem identificador de chamada) por "números fora dos contatos" e "fora da lista de contatos" em todas as 20 traduções do aplicativo Android, nos READMEs e nas fichas da Play Store e F-Droid em todos os 74 idiomas suportados
+
 ### 🔧 Técnico
 
 - [x] **As três telas gigantes viraram uma seção por arquivo** — `SettingsScreen.kt` (813 linhas), `HomeScreen.kt` (612) e `RoleStepScreen.kt` (504) eram os três maiores arquivos de produção do repositório. Cada seção mudou para arquivo próprio com `@Preview` — dez na tela Proteção, quatro blocos na home, três no passo do papel — e os três arquivos caíram para 320, 200 e 173 linhas. Nenhum comportamento mudou: a assinatura pública de `SettingsScreen` continua idêntica, e `ProtectionScreenTest`, `HomeScreenStateTest` e `WelcomeAndRoleStepTest` passaram sem uma linha de alteração — foram eles a prova disso a cada passo

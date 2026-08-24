@@ -25,7 +25,7 @@ Ingen spamdatabase i skyen velger for deg. Du setter regelen for hvert opphav, o
 
 • Kontakter i adresseboken → Ring (standard)
 • Din personlige liste → Aldri demp (standard)
-• Ukjente numre → Blokker (standard)
+• Numre utenfor kontakter → Blokker (standard)
 
 ⭐ PERSONLIG LISTE
 

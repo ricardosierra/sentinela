@@ -25,7 +25,7 @@ Aucune base de spam dans le cloud ne choisit à votre place. Vous définissez la
 
 • Contacts de votre répertoire → Sonner (par défaut)
 • Votre liste personnelle → Ne jamais mettre en silence (par défaut)
-• Numéros inconnus → Bloquer (par défaut)
+• Numéros hors contacts → Bloquer (par défaut)
 
 ⭐ LISTE PERSONNELLE
 

@@ -25,7 +25,7 @@ Nobena zbirka neželenih številk v oblaku ne izbira namesto vas. Pravilo za vsa
 
 • Stiki iz imenika → Zvoni (privzeto)
 • Vaš osebni seznam → Nikoli ne utišaj (privzeto)
-• Neznane številke → Blokiraj (privzeto)
+• Številke zunaj stikov → Blokiraj (privzeto)
 
 ⭐ OSEBNI SEZNAM
 

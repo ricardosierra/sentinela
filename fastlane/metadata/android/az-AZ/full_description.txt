@@ -25,7 +25,7 @@ Buludda heç bir spam bazası sizin əvəzinizə seçim etmir. Hər mənbənin q
 
 • Telefon kitabçasındakı kontaktlar → Zəng çalsın (ilkin)
 • Şəxsi siyahınız → Heç vaxt səssizləşdirmə (ilkin)
-• Naməlum nömrələr → Blokla (ilkin)
+• Kontaktlardan kənar nömrələr → Blokla (ilkin)
 
 ⭐ ŞƏXSİ SİYAHI
 

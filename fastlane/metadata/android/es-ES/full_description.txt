@@ -25,7 +25,7 @@ Nada de una base de spam en la nube eligiendo por ti. Tú defines la política d
 
 • Contactos de tu agenda → Sonar (por defecto)
 • Tu lista personal → Nunca Silenciar (por defecto)
-• Desconocidos → Bloquear (por defecto)
+• Números fuera de contactos → Bloquear (por defecto)
 
 ⭐ LISTA PERSONAL
 

@@ -21,7 +21,7 @@ Sentinela — блокировка офлайн
 **Descrição curta**
 
 ```
-Неизвестные номера не звонят. 100% офлайн, без рекламы и без облака.
+Звонки не из контактов не звонят. 100% офлайн, без рекламы и без облака.
 ```
 
 **Descrição completa**
@@ -54,7 +54,7 @@ Sentinela публикуется без разрешения на доступ �
 
 • Контакты из адресной книги → Звонить (по умолчанию)
 • Ваш личный список → Никогда не заглушать (по умолчанию)
-• Неизвестные номера → Блокировать (по умолчанию)
+• Номера не из контактов → Блокировать (по умолчанию)
 
 ⭐ ЛИЧНЫЙ СПИСОК
 
@@ -92,8 +92,8 @@ Sentinela. Тишина, которую настроили вы.
 ```
 Первая публичная версия Sentinela.
 
-• Блокировка неизвестных до первого гудка
-• Правила по источнику: контакты, личный список и неизвестные
+• Блокировка номеров не из контактов до первого гудка
+• Правила по источнику: контакты, личный список и вне контактов
 • Личный список с поиском, импортом и экспортом
 • История по желанию, с фильтром по периоду и по решению
 • Режим телефона по желанию, со своим экраном вызова
@@ -116,7 +116,7 @@ Sentinela — Çevrimdışı Engelle
 **Descrição curta**
 
 ```
-Bilinmeyen numaralar çalmaz. %100 çevrimdışı, reklamsız ve bulutsuz.
+Rehber dışı numaralar çalmaz. %100 çevrimdışı, reklamsız ve bulutsuz.
 ```
 
 **Descrição completa**
@@ -149,7 +149,7 @@ Sizin yerinize seçim yapan bulut tabanlı spam veritabanı yok. Her kaynağın 
 
 • Rehberdeki kişiler → Çal (varsayılan)
 • Kişisel listeniz → Asla Sessize Alma (varsayılan)
-• Bilinmeyen numaralar → Engelle (varsayılan)
+• Rehber dışı numaralar → Engelle (varsayılan)
 
 ⭐ KİŞİSEL LİSTE
 
@@ -211,7 +211,7 @@ Sentinela — Offlineblockering
 **Descrição curta**
 
 ```
-Okända nummer ringer inte. 100 % offline, utan annonser och utan moln.
+Samtal utanför kontakter ringer inte. 100 % offline, utan annonser.
 ```
 
 **Descrição completa**
@@ -244,7 +244,7 @@ Ingen spamdatabas i molnet väljer åt dig. Du sätter regeln för varje ursprun
 
 • Kontakter i adressboken → Ring (standard)
 • Din personliga lista → Tysta aldrig (standard)
-• Okända nummer → Blockera (standard)
+• Nummer utanför kontakter → Blockera (standard)
 
 ⭐ PERSONLIG LISTA
 
@@ -283,7 +283,7 @@ Sentinela. Tystnaden du själv ställde in.
 Första publika versionen av Sentinela.
 
 • Okända blockeras före första ringsignalen
-• Regler per ursprung: kontakter, personlig lista och okända
+• Regler per ursprung: kontakter, personlig lista och utanför kontakter
 • Personlig lista med sökning, import och export
 • Valfri historik, filtrerbar på period och på beslut
 • Valfritt telefonläge med egen samtalsskärm
@@ -306,7 +306,7 @@ Sentinela — Offline blokering
 **Descrição curta**
 
 ```
-Ukendte numre ringer ikke. 100 % offline, uden reklamer og uden sky.
+Opkald uden for kontakter ringer ikke. 100 % offline, uden reklamer.
 ```
 
 **Descrição completa**
@@ -401,7 +401,7 @@ Sentinela — Frakoblet blokk
 **Descrição curta**
 
 ```
-Ukjente numre ringer ikke. 100 % frakoblet, uten annonser og uten sky.
+Anrop utenfor kontakter ringer ikke. 100 % frakoblet, uten annonser.
 ```
 
 **Descrição completa**
@@ -434,7 +434,7 @@ Ingen spamdatabase i skyen velger for deg. Du setter regelen for hvert opphav, o
 
 • Kontakter i adresseboken → Ring (standard)
 • Din personlige liste → Aldri demp (standard)
-• Ukjente numre → Blokker (standard)
+• Numre utenfor kontakter → Blokker (standard)
 
 ⭐ PERSONLIG LISTE
 
@@ -472,7 +472,7 @@ Sentinela. Stillheten du selv satte opp.
 ```
 Første offentlige versjon av Sentinela.
 
-• Ukjente blokkeres før første ringetone
+• Numre utenfor kontakter blokkeres før første ringetone
 • Regler per opphav: kontakter, personlig liste og ukjente
 • Personlig liste med søk, import og eksport
 • Valgfri historikk, filtrerbar på periode og avgjørelse
@@ -496,7 +496,7 @@ Sentinela — Estä ilman verkkoa
 **Descrição curta**
 
 ```
-Tuntemattomat numerot eivät soi. 100 % offline, ei mainoksia, ei pilveä.
+Yhteystietojen ulkopuoliset puhelut eivät soi. 100 % offline, ei mainoksia.
 ```
 
 **Descrição completa**
@@ -529,7 +529,7 @@ Mikään pilvessä oleva roskapostitietokanta ei valitse puolestasi. Määrität
 
 • Yhteystiedot puhelimessasi → Soi (oletus)
 • Oma listasi → Älä koskaan vaimenna (oletus)
-• Tuntemattomat numerot → Estä (oletus)
+• Yhteystietojen ulkopuoliset numerot → Estä (oletus)
 
 ⭐ OMA LISTA
 
@@ -567,7 +567,7 @@ Sentinela. Hiljaisuus, jonka itse määritit.
 ```
 Sentinelan ensimmäinen julkinen versio.
 
-• Tuntemattomat estetään ennen ensimmäistä soittoa
+• Yhteystietojen ulkopuoliset numerot estetään ennen ensimmäistä soittoa
 • Säännöt alkuperän mukaan: yhteystiedot, oma lista ja tuntemattomat
 • Oma lista haulla, tuonnilla ja viennillä
 • Valinnainen historia, suodatus jakson ja päätöksen mukaan
@@ -591,7 +591,7 @@ Sentinela — Blokování offline
 **Descrição curta**
 
 ```
-Neznámá čísla nezvoní. 100 % offline, bez reklam a bez cloudu.
+Hovory mimo kontakty nezvoní. 100 % offline, bez reklam a bez cloudu.
 ```
 
 **Descrição completa**
@@ -624,7 +624,7 @@ Sentinela se vydává bez oprávnění k internetu. Není to slib ve smyslu „n
 
 • Kontakty v adresáři → Zvonit (výchozí)
 • Váš osobní seznam → Nikdy neztlumit (výchozí)
-• Neznámá čísla → Blokovat (výchozí)
+• Čísla mimo kontakty → Blokovat (výchozí)
 
 ⭐ OSOBNÍ SEZNAM
 
@@ -686,7 +686,7 @@ Sentinela — блокування офлайн
 **Descrição curta**
 
 ```
-Невідомі номери не дзвонять. 100% офлайн, без реклами й без хмари.
+Дзвінки не з контактів не дзвонять. 100% офлайн, без реклами й хмари.
 ```
 
 **Descrição completa**
@@ -719,7 +719,7 @@ Sentinela публікується без дозволу на інтернет. 
 
 • Контакти з адресної книги → Дзвонити (типово)
 • Ваш особистий список → Ніколи не приглушувати (типово)
-• Невідомі номери → Блокувати (типово)
+• Номери не з контактів → Блокувати (типово)
 
 ⭐ ОСОБИСТИЙ СПИСОК
 
@@ -757,8 +757,8 @@ Sentinela. Тиша, яку налаштували ви.
 ```
 Перша публічна версія Sentinela.
 
-• Блокування невідомих до першого гудка
-• Правила за джерелом: контакти, особистий список і невідомі
+• Блокування номерів не з контактів до першого гудка
+• Правила за джерелом: контакти, особистий список і поза контактами
 • Особистий список із пошуком, імпортом та експортом
 • Журнал за бажанням, із фільтром за періодом і за рішенням
 • Режим телефона за бажанням, із власним екраном виклику
@@ -781,7 +781,7 @@ Sentinela — 离线陌生来电拦截
 **Descrição curta**
 
 ```
-陌生号码不会响铃。100% 离线运行，无广告、无云端、无追踪。
+非通讯录来电不会响铃。100% 离线运行，无广告、无云端、无追踪。
 ```
 
 **Descrição completa**
@@ -814,7 +814,7 @@ Sentinela 在发布时根本没有申请联网权限。这不是"我们不会用
 
 • 通讯录联系人 → 响铃（默认）
 • 你的个人名单 → 永不静音（默认）
-• 陌生号码 → 拦截（默认）
+• 非通讯录号码 → 拦截（默认）
 
 ⭐ 个人名单
 
@@ -878,7 +878,7 @@ Sentinela — 離線陌生來電封鎖
 **Descrição curta**
 
 ```
-陌生號碼不會響鈴。100% 離線運作，無廣告、無雲端、無追蹤。
+非通訊錄來電不會響鈴。100% 離線運作，無廣告、無雲端、無追蹤。
 ```
 
 **Descrição completa**
@@ -911,7 +911,7 @@ Sentinela 發布時根本沒有申請連網權限。這不是「我們不會用�
 
 • 通訊錄聯絡人 → 響鈴（預設）
 • 你的個人清單 → 永不靜音（預設）
-• 陌生號碼 → 封鎖（預設）
+• 非通訊錄號碼 → 封鎖（預設）
 
 ⭐ 個人清單
 

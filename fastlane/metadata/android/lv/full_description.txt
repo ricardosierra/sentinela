@@ -25,7 +25,7 @@ Neviena mākoņa surogātnumuru datubāze neizvēlas jūsu vietā. Noteikumu kat
 
 • Kontakti no adrešu grāmatas → Zvanīt (noklusējums)
 • Jūsu personīgais saraksts → Nekad neapklusināt (noklusējums)
-• Nezināmi numuri → Bloķēt (noklusējums)
+• Numuri ārpus kontaktiem → Bloķēt (noklusējums)
 
 ⭐ PERSONĪGAIS SARAKSTS
 

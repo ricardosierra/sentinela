@@ -21,7 +21,7 @@ Sentinela — Φραγή offline
 **Descrição curta**
 
 ```
-Οι άγνωστοι αριθμοί δεν χτυπούν. 100% εκτός σύνδεσης, χωρίς διαφημίσεις.
+Κλήσεις εκτός επαφών δεν χτυπούν. 100% εκτός σύνδεσης, χωρίς διαφημίσεις.
 ```
 
 **Descrição completa**
@@ -93,7 +93,7 @@ Sentinela. Η ησυχία που ρυθμίσατε εσείς.
 Πρώτη δημόσια έκδοση του Sentinela.
 
 • Φραγή αγνώστων πριν από το πρώτο κουδούνισμα
-• Κανόνες ανά προέλευση: επαφές, προσωπική λίστα και άγνωστοι
+• Κανόνες ανά προέλευση: επαφές, προσωπική λίστα και εκτός επαφών
 • Προσωπική λίστα με αναζήτηση, εισαγωγή και εξαγωγή
 • Προαιρετικό ιστορικό, με φίλτρο ανά περίοδο και ανά απόφαση
 • Προαιρετική λειτουργία τηλεφώνου, με δική της οθόνη κλήσης
@@ -116,7 +116,7 @@ Sentinela — Offline hívásszűrő
 **Descrição curta**
 
 ```
-Az ismeretlen számok nem csörögnek. 100% offline, reklám és felhő nélkül.
+A névjegyeken kívüli hívások nem csörögnek. 100% offline, reklámmentes.
 ```
 
 **Descrição completa**
@@ -211,7 +211,7 @@ Sentinela — Blocare offline
 **Descrição curta**
 
 ```
-Numerele necunoscute nu sună. 100% offline, fără reclame și fără cloud.
+Apelurile din afara contactelor nu sună. 100% offline, fără reclame.
 ```
 
 **Descrição completa**
@@ -244,7 +244,7 @@ Nicio bază de date de spam din cloud nu alege în locul dumneavoastră. Stabili
 
 • Contactele din agendă → Sună (implicit)
 • Lista dumneavoastră personală → Niciodată fără sonor (implicit)
-• Numere necunoscute → Blochează (implicit)
+• Numere din afara contactelor → Blochează (implicit)
 
 ⭐ LISTA PERSONALĂ
 
@@ -306,7 +306,7 @@ Sentinela — Офлайн блокиране
 **Descrição curta**
 
 ```
-Непознатите номера не звънят. 100% офлайн, без реклами и без облак.
+Обаждания извън контактите не звънят. 100% офлайн, без реклами и облак.
 ```
 
 **Descrição completa**
@@ -339,7 +339,7 @@ Sentinela се публикува без разрешение за интерн�
 
 • Контакти от указателя → Звънене (по подразбиране)
 • Вашият личен списък → Никога не заглушавай (по подразбиране)
-• Непознати номера → Блокиране (по подразбиране)
+• Номера извън контактите → Блокиране (по подразбиране)
 
 ⭐ ЛИЧЕН СПИСЪК
 
@@ -377,7 +377,7 @@ Sentinela. Тишината, която сами настроихте.
 ```
 Първа публична версия на Sentinela.
 
-• Блокиране на непознати преди първото позвъняване
+• Блокиране на номера извън контактите преди първото позвъняване
 • Правила по източник: контакти, личен списък и непознати
 • Личен списък с търсене, внасяне и изнасяне
 • История по избор, с филтър по период и по решение
@@ -401,7 +401,7 @@ Sentinela — Blokovanie offline
 **Descrição curta**
 
 ```
-Neznáme čísla nezvonia. 100 % offline, bez reklám a bez cloudu.
+Hovory mimo kontaktov nezvonia. 100 % offline, bez reklám a bez cloudu.
 ```
 
 **Descrição completa**
@@ -434,7 +434,7 @@ Sentinela sa vydáva bez povolenia na internet. Nie je to sľub v zmysle „nepo
 
 • Kontakty v adresári → Zvoniť (predvolené)
 • Váš osobný zoznam → Nikdy nestlmiť (predvolené)
-• Neznáme čísla → Blokovať (predvolené)
+• Čísla mimo kontaktov → Blokovať (predvolené)
 
 ⭐ OSOBNÝ ZOZNAM
 
@@ -496,7 +496,7 @@ Sentinela — Blokiranje offline
 **Descrição curta**
 
 ```
-Nepoznati brojevi ne zvone. 100 % offline, bez oglasa i bez oblaka.
+Pozivi izvan kontakata ne zvone. 100 % offline, bez oglasa i bez oblaka.
 ```
 
 **Descrição completa**
@@ -529,7 +529,7 @@ Nikakva baza neželjenih brojeva u oblaku ne bira umjesto vas. Pravilo za svaki 
 
 • Kontakti iz imenika → Zvoni (zadano)
 • Vaš osobni popis → Nikad ne utišavaj (zadano)
-• Nepoznati brojevi → Blokiraj (zadano)
+• Brojevi izvan kontakata → Blokiraj (zadano)
 
 ⭐ OSOBNI POPIS
 
@@ -567,7 +567,7 @@ Sentinela. Tišina koju ste sami postavili.
 ```
 Prva javna verzija Sentinele.
 
-• Blokiranje nepoznatih prije prvog zvona
+• Blokiranje brojeva izvan kontakata prije prvog zvona
 • Pravila po izvoru: kontakti, osobni popis i nepoznati
 • Osobni popis s pretraživanjem, uvozom i izvozom
 • Neobavezna povijest, filtriranje po razdoblju i po odluci
@@ -591,7 +591,7 @@ Sentinela — Блокирање офлајн
 **Descrição curta**
 
 ```
-Непознати бројеви не звоне. 100% офлајн, без огласа и без облака.
+Позиви ван контаката не звоне. 100% офлајн, без огласа и без облака.
 ```
 
 **Descrição completa**
@@ -624,7 +624,7 @@ Sentinela се објављује без дозволе за интернет. �
 
 • Контакти из именика → Звони (подразумевано)
 • Ваша лична листа → Никад не утишавај (подразумевано)
-• Непознати бројеви → Блокирај (подразумевано)
+• Бројеви ван контаката → Блокирај (подразумевано)
 
 ⭐ ЛИЧНА ЛИСТА
 
@@ -662,7 +662,7 @@ Sentinela. Тишина коју сте сами подесили.
 ```
 Прва јавна верзија Sentinela.
 
-• Блокирање непознатих пре првог звона
+• Блокирање бројева ван контаката пре првог звона
 • Правила по извору: контакти, лична листа и непознати
 • Лична листа са претрагом, увозом и извозом
 • Историја по жељи, филтрирање по периоду и по одлуци
@@ -686,7 +686,7 @@ Sentinela — Blokada brez neta
 **Descrição curta**
 
 ```
-Neznane številke ne zvonijo. 100 % brez povezave, brez oglasov in oblaka.
+Klici zunaj stikov ne zvonijo. 100 % brez povezave, brez oglasov.
 ```
 
 **Descrição completa**
@@ -719,7 +719,7 @@ Nobena zbirka neželenih številk v oblaku ne izbira namesto vas. Pravilo za vsa
 
 • Stiki iz imenika → Zvoni (privzeto)
 • Vaš osebni seznam → Nikoli ne utišaj (privzeto)
-• Neznane številke → Blokiraj (privzeto)
+• Številke zunaj stikov → Blokiraj (privzeto)
 
 ⭐ OSEBNI SEZNAM
 
@@ -757,7 +757,7 @@ Sentinela. Tišina, ki ste jo nastavili sami.
 ```
 Prva javna različica Sentinele.
 
-• Blokiranje neznanih pred prvim zvonjenjem
+• Blokiranje številk zunaj stikov pred prvim zvonjenjem
 • Pravila po izvoru: stiki, osebni seznam in neznani
 • Osebni seznam z iskanjem, uvozom in izvozom
 • Neobvezna zgodovina, filtriranje po obdobju in po odločitvi
@@ -781,7 +781,7 @@ Sentinela — Bezsaistes bloķis
 **Descrição curta**
 
 ```
-Nezināmi numuri nezvana. 100 % bezsaistē, bez reklāmām un mākoņa.
+Zvani ārpus kontaktiem nezvana. 100 % bezsaistē, bez reklāmām un mākoņa.
 ```
 
 **Descrição completa**
@@ -814,7 +814,7 @@ Neviena mākoņa surogātnumuru datubāze neizvēlas jūsu vietā. Noteikumu kat
 
 • Kontakti no adrešu grāmatas → Zvanīt (noklusējums)
 • Jūsu personīgais saraksts → Nekad neapklusināt (noklusējums)
-• Nezināmi numuri → Bloķēt (noklusējums)
+• Numuri ārpus kontaktiem → Bloķēt (noklusējums)
 
 ⭐ PERSONĪGAIS SARAKSTS
 
@@ -852,7 +852,7 @@ Sentinela. Klusums, ko iestatījāt jūs pats.
 ```
 Pirmā publiskā Sentinela versija.
 
-• Nezināmo bloķēšana pirms pirmā zvana signāla
+• Ārpus kontaktu numuru bloķēšana pirms pirmā zvana signāla
 • Noteikumi pēc izcelsmes: kontakti, personīgais saraksts, nezināmie
 • Personīgais saraksts ar meklēšanu, importu un eksportu
 • Neobligāta vēsture, filtrējama pēc perioda un pēc lēmuma
@@ -876,7 +876,7 @@ Sentinela — Blokavimas
 **Descrição curta**
 
 ```
-Nežinomi numeriai neskamba. 100 % neprisijungus, be reklamų ir debesies.
+Skambučiai ne iš kontaktų neskamba. 100 % neprisijungus, be reklamų.
 ```
 
 **Descrição completa**

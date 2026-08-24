@@ -25,7 +25,7 @@ Tiada pangkalan data spam di awan yang memilih untuk anda. Anda menetapkan perat
 
 • Kenalan dalam buku telefon → Berdering (lalai)
 • Senarai peribadi anda → Jangan Sesekali Senyapkan (lalai)
-• Nombor tak dikenali → Sekat (lalai)
+• Nombor luar kenalan → Sekat (lalai)
 
 ⭐ SENARAI PERIBADI
 

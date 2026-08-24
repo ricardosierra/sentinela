@@ -3,7 +3,7 @@
 
   <h1>🛡️ Sentinela (Centinela)</h1>
   
-  <p><b>Bloqueador local de llamadas desconocidas para Android — 100% Offline y Privado.</b></p>
+  <p><b>Bloqueador local de llamadas fuera de contactos para Android — 100% Offline y Privado.</b></p>
   
   <p>
     <i>Desarrollado y mantenido por <b>SierraTecnologia</b> y <b>RicaSoluções</b></i>
@@ -32,7 +32,7 @@ Si el número no está en tus contactos ni en tu lista blanca personal, la llama
 Sentinela opera en **dos modos de protección**:
 
 - 🛡️ **Modo Filtro (Por defecto)**
-  La aplicación actúa en segundo plano como servicio de detección (`ROLE_CALL_SCREENING`). Android solo reenvía llamadas de números **desconocidos** para su análisis. Los contactos de tu agenda suenan normalmente. Los números desconocidos son bloqueados o silenciados instantáneamente.
+  La aplicación actúa en segundo plano como servicio de detección (`ROLE_CALL_SCREENING`). Las llamadas de números fuera de la agenda y fuera de la lista de permitidos se filtran localmente. Los contactos de tu agenda suenan normalmente. Los números fuera de tus contactos son bloqueados o silenciados instantáneamente.
   
 - 📞 **Modo Marcador (Avanzado)**
   Sentinela reemplaza tu aplicación de teléfono predeterminada (`ROLE_DIALER`). Esto proporciona protección total sobre **todas** las llamadas, permitiéndote configurar políticas (Bloquear, Silenciar, Sonar) incluso para contactos específicos. Incluye una interfaz de marcación limpia y moderna.
@@ -44,7 +44,7 @@ Sentinela opera en **dos modos de protección**:
 ```mermaid
 graph LR
     A[Llamada Entrante] --> B[Motor de Decisión]
-    B --> C{¿Conocido?}
+    B --> C{¿En Contactos / Whitelist?}
     C -->|Sí| D[Permitir Sonar]
     C -->|No| E[Bloquear / Silenciar]
     E --> F[Historial Offline]

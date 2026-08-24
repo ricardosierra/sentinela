@@ -25,7 +25,7 @@ Geen spamdatabase in de cloud die voor jou kiest. Jij bepaalt de regel per herko
 
 • Contacten uit je adresboek → Overgaan (standaard)
 • Je persoonlijke lijst → Nooit dempen (standaard)
-• Onbekende nummers → Blokkeren (standaard)
+• Nummers buiten contacten → Blokkeren (standaard)
 
 ⭐ PERSOONLIJKE LIJST
 

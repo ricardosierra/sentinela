@@ -25,7 +25,7 @@ Sizin yerinize seçim yapan bulut tabanlı spam veritabanı yok. Her kaynağın 
 
 • Rehberdeki kişiler → Çal (varsayılan)
 • Kişisel listeniz → Asla Sessize Alma (varsayılan)
-• Bilinmeyen numaralar → Engelle (varsayılan)
+• Rehber dışı numaralar → Engelle (varsayılan)
 
 ⭐ KİŞİSEL LİSTE
 

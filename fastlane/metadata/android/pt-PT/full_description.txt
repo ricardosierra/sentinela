@@ -25,7 +25,7 @@ Nada de bases de spam na nuvem a escolher por si. Define a política de cada ori
 
 • Contactos da sua lista → Tocar (predefinição)
 • A sua lista pessoal → Nunca Silenciar (predefinição)
-• Desconhecidos → Bloquear (predefinição)
+• Números fora dos contactos → Bloquear (predefinição)
 
 ⭐ LISTA PESSOAL
 

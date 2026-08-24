@@ -25,7 +25,7 @@ Không có cơ sở dữ liệu spam trên đám mây nào chọn thay bạn. B�
 
 • Danh bạ trong máy → Đổ chuông (mặc định)
 • Danh sách riêng của bạn → Không bao giờ tắt tiếng (mặc định)
-• Số lạ → Chặn (mặc định)
+• Số ngoài danh bạ → Chặn (mặc định)
 
 ⭐ DANH SÁCH RIÊNG
 

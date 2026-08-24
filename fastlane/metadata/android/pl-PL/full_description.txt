@@ -25,7 +25,7 @@ Sentinela jest publikowana bez uprawnienia do internetu. To nie obietnica w styl
 
 • Kontakty z książki adresowej → Dzwoń (domyślnie)
 • Twoja lista osobista → Nigdy nie wyciszaj (domyślnie)
-• Nieznane numery → Blokuj (domyślnie)
+• Numery spoza kontaktów → Blokuj (domyślnie)
 
 ⭐ LISTA OSOBISTA
 

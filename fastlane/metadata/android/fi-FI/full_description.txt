@@ -25,7 +25,7 @@ Mikään pilvessä oleva roskapostitietokanta ei valitse puolestasi. Määrität
 
 • Yhteystiedot puhelimessasi → Soi (oletus)
 • Oma listasi → Älä koskaan vaimenna (oletus)
-• Tuntemattomat numerot → Estä (oletus)
+• Yhteystietojen ulkopuoliset numerot → Estä (oletus)
 
 ⭐ OMA LISTA
 

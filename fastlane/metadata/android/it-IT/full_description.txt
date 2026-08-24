@@ -25,7 +25,7 @@ Nessun database di spam nel cloud che sceglie per te. Definisci la regola di ogn
 
 • Contatti in rubrica → Squilla (predefinito)
 • La tua lista personale → Non silenziare mai (predefinito)
-• Numeri sconosciuti → Blocca (predefinito)
+• Numeri fuori dai contatti → Blocca (predefinito)
 
 ⭐ LISTA PERSONALE
 

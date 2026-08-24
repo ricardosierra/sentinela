@@ -25,7 +25,7 @@ Ingen spamdatabas i molnet väljer åt dig. Du sätter regeln för varje ursprun
 
 • Kontakter i adressboken → Ring (standard)
 • Din personliga lista → Tysta aldrig (standard)
-• Okända nummer → Blockera (standard)
+• Nummer utanför kontakter → Blockera (standard)
 
 ⭐ PERSONLIG LISTA
 

@@ -21,7 +21,7 @@ Sentinela — Kõnetõke
 **Descrição curta**
 
 ```
-Tundmatud numbrid ei helise. 100% võrguühenduseta, reklaamide ja pilveta.
+Kontaktidevälised kõned ei helise. 100% võrguühenduseta, reklaamideta.
 ```
 
 **Descrição completa**
@@ -54,7 +54,7 @@ Sentinela avaldatakse ilma internetiloata. See ei ole lubadus stiilis „me ei k
 
 • Telefoniraamatu kontaktid → Helise (vaikimisi)
 • Teie isiklik loend → Ära kunagi vaigista (vaikimisi)
-• Tundmatud numbrid → Blokeeri (vaikimisi)
+• Kontaktidevälised numbrid → Blokeeri (vaikimisi)
 
 ⭐ ISIKLIK LOEND
 
@@ -92,7 +92,7 @@ Sentinela. Vaikus, mille te ise seadistasite.
 ```
 Sentinela esimene avalik versioon.
 
-• Tundmatute blokeerimine enne esimest helinat
+• Kontaktideväliste numbrite blokeerimine enne esimest helinat
 • Reeglid päritolu järgi: kontaktid, isiklik loend ja tundmatud
 • Isiklik loend otsingu, impordi ja ekspordiga
 • Valikuline ajalugu, filtreeritav perioodi ja otsuse järgi
@@ -116,7 +116,7 @@ Sentinela — Ónettengd lokun
 **Descrição curta**
 
 ```
-Óþekkt númer hringja ekki. 100% ónettengt, án auglýsinga og skýs.
+Símtöl utan tengiliða hringja ekki. 100% ónettengt, án auglýsinga.
 ```
 
 **Descrição completa**
@@ -149,7 +149,7 @@ Enginn ruslnúmeragrunnur í skýinu velur fyrir þig. Þú setur regluna fyrir 
 
 • Tengiliðir úr símaskránni → Hringja (sjálfgefið)
 • Þinn persónulegi listi → Aldrei þagga (sjálfgefið)
-• Óþekkt númer → Loka á (sjálfgefið)
+• Númer utan tengiliða → Loka á (sjálfgefið)
 
 ⭐ PERSÓNULEGUR LISTI
 
@@ -188,7 +188,7 @@ Sentinela. Þögnin sem þú stilltir sjálf.
 Fyrsta opinbera útgáfa Sentinela.
 
 • Óþekktum lokað fyrir fyrsta hringingu
-• Reglur eftir uppruna: tengiliðir, persónulegur listi og óþekktir
+• Reglur eftir uppruna: tengiliðir, persónulegur listi og utan tengiliða
 • Persónulegur listi með leit, innflutningi og útflutningi
 • Valfrjáls saga, síanleg eftir tímabili og ákvörðun
 • Valfrjáls símastilling með eigin símtalsskjá
@@ -211,7 +211,7 @@ Sentinela — Bloqueig offline
 **Descrição curta**
 
 ```
-Els números desconeguts no sonen. 100% fora de línia, sense anuncis.
+Les trucades fora de contactes no sonen. 100% fora de línia, sense anuncis.
 ```
 
 **Descrição completa**
@@ -282,7 +282,7 @@ Sentinela. El silenci que has configurat tu.
 ```
 Primera versió pública de Sentinela.
 
-• Bloqueig de desconeguts abans del primer to
+• Bloqueig de números fora de contactes abans del primer to
 • Regles per origen: contactes, llista personal i desconeguts
 • Llista personal amb cerca, importació i exportació
 • Historial opcional, filtrable per període i per decisió
@@ -306,7 +306,7 @@ Sentinela — Bloqueo offline
 **Descrição curta**
 
 ```
-Os números descoñecidos non soan. 100% sen conexión, sen anuncios.
+Chamadas fóra de contactos non soan. 100% sen conexión, sen anuncios.
 ```
 
 **Descrição completa**
@@ -377,7 +377,7 @@ Sentinela. O silencio que configuraches ti.
 ```
 Primeira versión pública de Sentinela.
 
-• Bloqueo de descoñecidos antes do primeiro ton
+• Bloqueo de números fóra de contactos antes do primeiro ton
 • Regras por orixe: contactos, lista persoal e descoñecidos
 • Lista persoal con busca, importación e exportación
 • Historial opcional, filtrábel por período e por decisión
@@ -401,7 +401,7 @@ Sentinela — Blokeo offline
 **Descrição curta**
 
 ```
-Zenbaki ezezagunek ez dute jotzen. %100 lineaz kanpo, iragarkirik gabe.
+Kontaktuetatik kanpoko deiek ez dute jotzen. %100 lineaz kanpo.
 ```
 
 **Descrição completa**
@@ -496,7 +496,7 @@ Sentinela — Офлајн блокирање
 **Descrição curta**
 
 ```
-Непознатите броеви не ѕвонат. 100% офлајн, без реклами и без облак.
+Повици надвор од контактите не ѕвонат. 100% офлајн, без реклами.
 ```
 
 **Descrição completa**
@@ -529,7 +529,7 @@ Sentinela се објавува без дозвола за интернет. Т�
 
 • Контакти од именикот → Ѕвони (стандардно)
 • Вашата лична листа → Никогаш не занемувај (стандардно)
-• Непознати броеви → Блокирај (стандардно)
+• Броеви надвор од контактите → Блокирај (стандардно)
 
 ⭐ ЛИЧНА ЛИСТА
 
@@ -591,7 +591,7 @@ Sentinela — Bllokim offline
 **Descrição curta**
 
 ```
-Numrat e panjohur nuk bien. 100% pa internet, pa reklama dhe pa re.
+Telefonatat jashtë kontakteve nuk bien. 100% pa internet, pa reklama.
 ```
 
 **Descrição completa**
@@ -686,7 +686,7 @@ Sentinela — блакіроўка офлайн
 **Descrição curta**
 
 ```
-Невядомыя нумары не тэлефануюць. 100% офлайн, без рэкламы і воблака.
+Званкі не з кантактаў не тэлефануюць. 100% офлайн, без рэкламы і воблака.
 ```
 
 **Descrição completa**
@@ -758,7 +758,7 @@ Sentinela. Цішыня, якую наладзілі вы.
 Першая публічная версія Sentinela.
 
 • Блакіроўка невядомых да першага гудка
-• Правілы па крыніцы: кантакты, асабісты спіс і невядомыя
+• Правілы па крыніцы: кантакты, асабісты спіс і па-за кантактамі
 • Асабісты спіс з пошукам, імпартам і экспартам
 • Гісторыя па жаданні, з фільтрам па перыядзе і па рашэнні
 • Рэжым тэлефона па жаданні, з уласным экранам выкліку
@@ -781,7 +781,7 @@ Sentinela — օֆլայն արգելում
 **Descrição curta**
 
 ```
-Անծանոթ համարները չեն զանգում։ 100% օֆլայն, առանց գովազդի և ամպի։
+Կոնտակտներից դուրս զանգերը չեն զանգում։ 100% օֆլայն, առանց գովազդի։
 ```
 
 **Descrição completa**
@@ -814,7 +814,7 @@ Sentinela-ն հրապարակվում է առանց ինտերնետի թույ�
 
 • Հեռախոսագրքի կոնտակտներ → Զանգել (կանխադրված)
 • Ձեր անձնական ցանկը → Երբեք չլռեցնել (կանխադրված)
-• Անծանոթ համարներ → Արգելափակել (կանխադրված)
+• Կոնտակտներից դուրս համարներ → Արգելափակել (կանխադրված)
 
 ⭐ ԱՆՁՆԱԿԱՆ ՑԱՆԿ
 
@@ -876,7 +876,7 @@ Sentinela — ოფლაინ ბლოკირება
 **Descrição curta**
 
 ```
-უცნობი ნომრები არ რეკავს. 100% ოფლაინ, რეკლამისა და ღრუბლის გარეშე.
+კონტაქტებს გარეშე ზარები არ რეკავს. 100% ოფლაინ, რეკლამის გარეშე.
 ```
 
 **Descrição completa**
@@ -909,7 +909,7 @@ Sentinela ქვეყნდება ინტერნეტის ნებ�
 
 • წიგნაკის კონტაქტები → დარეკოს (ნაგულისხმევი)
 • თქვენი პირადი სია → არასოდეს დაადუმოს (ნაგულისხმევი)
-• უცნობი ნომრები → დაბლოკოს (ნაგულისხმევი)
+• კონტაქტებს გარეშე ნომრები → დაბლოკოს (ნაგულისხმევი)
 
 ⭐ პირადი სია
 
@@ -948,7 +948,7 @@ Sentinela. სიჩუმე, რომელიც თქვენ თვი�
 Sentinela-ს პირველი საჯარო ვერსია.
 
 • უცნობების ბლოკირება პირველ ზარამდე
-• წესები წყაროს მიხედვით: კონტაქტები, პირადი სია და უცნობები
+• წესები წყაროს მიხედვით: კონტაქტები, პირადი სია და კონტაქტებს გარეშე
 • პირადი სია ძიებით, იმპორტითა და ექსპორტით
 • არჩევითი ისტორია, ფილტრით პერიოდისა და გადაწყვეტილების მიხედვით
 • არჩევითი ტელეფონის რეჟიმი, საკუთარი ზარის ეკრანით

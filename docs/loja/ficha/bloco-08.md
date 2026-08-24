@@ -21,7 +21,7 @@ Sentinela — Vanlyn blokkering
 **Descrição curta**
 
 ```
-Onbekende nommers lui nie. 100% vanlyn, sonder advertensies of wolk.
+Oproepe buite kontakte lui nie. 100% vanlyn, sonder advertensies.
 ```
 
 **Descrição completa**
@@ -54,7 +54,7 @@ Geen strooidatabasis in die wolk kies namens jou nie. Jy stel die reël vir elke
 
 • Kontakte in jou adresboek → Lui (verstek)
 • Jou persoonlike lys → Moet nooit demp nie (verstek)
-• Onbekende nommers → Blokkeer (verstek)
+• Nommers buite kontakte → Blokkeer (verstek)
 
 ⭐ PERSOONLIKE LYS
 
@@ -92,8 +92,8 @@ Sentinela. Die stilte wat jy self opgestel het.
 ```
 Eerste openbare weergawe van Sentinela.
 
-• Onbekendes geblokkeer voor die eerste lui
-• Reëls per oorsprong: kontakte, persoonlike lys en onbekendes
+• Nommers buite kontakte geblokkeer voor die eerste lui
+• Reëls per oorsprong: kontakte, persoonlike lys en buite kontakte
 • Persoonlike lys met soek, invoer en uitvoer
 • Opsionele geskiedenis, filterbaar volgens tydperk en besluit
 • Opsionele foonmodus, met sy eie oproepskerm
@@ -116,7 +116,7 @@ Sentinela — Ukuvimba Offline
 **Descrição curta**
 
 ```
-Izinombolo ezingaziwa aziKhali. 100% i-offline, azikho izikhangiso.
+Amakholi angaphandle koxhumana nabo awakhali. 100% i-offline.
 ```
 
 **Descrição completa**
@@ -149,7 +149,7 @@ Ayikho idathabhesi yogaxekile esemafini ekhethela wena. Nguwe obeka umthetho wom
 
 • Othintana nabo abasebhukwini → Makakhale (okumisiwe)
 • Uhlu lwakho lomuntu siqu → Ungathulisi nanini (okumisiwe)
-• Izinombolo ezingaziwa → Vimba (okumisiwe)
+• Izinombolo ezingaphandle koxhumana nabo → Vimba (okumisiwe)
 
 ⭐ UHLU LOMUNTU SIQU
 
@@ -187,8 +187,8 @@ I-Sentinela. Ukuthula okuzilungiselele wena ngokwakho.
 ```
 Inguqulo yokuqala yomphakathi ye-Sentinela.
 
-• Ukuvimba abangaziwa ngaphambi kokukhala kokuqala
-• Imithetho ngomthombo: othintana nabo, uhlu lomuntu siqu, abangaziwa
+• Ukuvimba ezingaphandle koxhumana nabo ngaphambi kokukhala kokuqala
+• Imithetho ngomthombo: othintana nabo, uhlu lomuntu siqu, abangaphandle koxhumana nabo
 • Uhlu lomuntu siqu olunosesho, ukungenisa nokukhipha
 • Umlando ozikhethelayo, ohlungwa ngesikhathi nangesinqumo
 • Imodi yefoni ozikhethelayo, enesikrini sayo socingo
@@ -211,7 +211,7 @@ Sentinela — ከመስመር ውጭ ማገጃ
 **Descrição curta**
 
 ```
-ያልታወቁ ቁጥሮች አይጠሩም። 100% ከመስመር ውጭ፣ ማስታወቂያ የለም፣ ደመና የለም።
+ከእውቂያዎች ውጭ ያሉ ጥሪዎች አይጠሩም። 100% ከመስመር ውጭ፣ ማስታወቂያ የለም።
 ```
 
 **Descrição completa**
@@ -244,7 +244,7 @@ Sentinela የሚታተመው የበይነመረብ ፈቃድ ሳይኖረው ነ
 
 • በስልክ ደብተር ያሉ እውቂያዎች → ይጥራ (ነባሪ)
 • የግል ዝርዝርህ → ፈጽሞ ድምጽ አታጥፋ (ነባሪ)
-• ያልታወቁ ቁጥሮች → አግድ (ነባሪ)
+• ከእውቂያዎች ውጭ ያሉ ቁጥሮች → አግድ (ነባሪ)
 
 ⭐ የግል ዝርዝር
 
@@ -282,8 +282,8 @@ Sentinela። አንተው ራስህ ያዘጋጀኸው ጸጥታ።
 ```
 የSentinela የመጀመሪያው የሕዝብ ስሪት።
 
-• ያልታወቁ ቁጥሮችን ከመጀመሪያው ጥሪ በፊት ማገድ
-• በምንጭ መሠረት ሕጎች፦ እውቂያዎች፣ የግል ዝርዝርና ያልታወቁ
+• ከእውቂያዎች ውጭ ያሉ ቁጥሮችን ከመጀመሪያው ጥሪ በፊት ማገድ
+• በምንጭ መሠረት ሕጎች፦ እውቂያዎች፣ የግል ዝርዝርና ከእውቂያዎች ውጭ
 • ፍለጋ፣ ማስገባትና ማውጣት ያለው የግል ዝርዝር
 • አማራጭ ታሪክ፣ በጊዜና በውሳኔ ማጣራት ይቻላል
 • አማራጭ የስልክ ሁነታ፣ በራሱ የጥሪ ማያ ገጽ
@@ -306,7 +306,7 @@ Sentinela — Bloccada offline
 **Descrição curta**
 
 ```
-Numers nunenconuschents na sunan betg. 100% offline, senza reclama.
+Clamadas orda dals contacts na sunan betg. 100% offline, senza reclama.
 ```
 
 **Descrição completa**
@@ -339,7 +339,7 @@ Nagina banca da datas da spam en il cloud tscherna per tai. Ti fixeschas la regl
 
 • Contacts da tes cudesch da telefon → Sunar (standard)
 • Tia glista persunala → Mai zuppentar (standard)
-• Numers nunenconuschents → Bloccar (standard)
+• Numers orda dals contacts → Bloccar (standard)
 
 ⭐ GLISTA PERSUNALA
 
@@ -377,8 +377,8 @@ Sentinela. Il silenzi che ti has configurà sez.
 ```
 Emprima versiun publica da Sentinela.
 
-• Bloccada da nunenconuschents avant la emprima sunada
-• Reglas tenor origin: contacts, glista persunala e nunenconuschents
+• Bloccada da numers orda dals contacts avant la emprima sunada
+• Reglas tenor origin: contacts, glista persunala e orda dals contacts
 • Glista persunala cun tschertga, import ed export
 • Istorgia facultativa, filtrabla tenor perioda e tenor decisiun
 • Modus telefon facultativ, cun sia atgna fanestra da clamada

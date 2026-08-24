@@ -1,14 +1,14 @@
 # Sentinela — contexto técnico para agentes
 
-> Guia compacto do Sentinela, bloqueador local de chamadas desconhecidas para Android.
+> Guia compacto do Sentinela, bloqueador local de chamadas fora dos contatos para Android.
 > Aqui ficam só os invariantes que todo agente precisa carregar. Produto, arquitetura,
 > permissões e roadmap vivem em [`docs/`](docs/INDEX.md) e `.planning/` — leia sob demanda.
 
-Este arquivo e o `AGENTS.md` têm o mesmo conteúdo. Ao mudar um, replique no outro no mesmo commit.
+Este arquivo e o `CLAUDE.md` têm o mesmo conteúdo. Ao mudar um, replique no outro no mesmo commit.
 
 ## Produto
 
-App Android nativo e **open source** que impede chamadas de números desconhecidos de
+App Android nativo e **open source** que impede chamadas de números fora dos contatos de
 interromperem o usuário — sem propaganda, sem telemetria, sem nuvem, 100% offline.
 **Core value:** "Se não está nos contatos nem na whitelist pessoal, não interrompe o usuário."
 Dois modos: **filtro** (padrão, call screening puro) e **discador** (opcional, `ROLE_DIALER` +

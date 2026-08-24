@@ -25,7 +25,7 @@ Nada de base de spam na nuvem escolhendo por você. Você define a política de 
 
 • Contatos da agenda → Tocar (padrão)
 • Sua lista pessoal → Nunca Silenciar (padrão)
-• Desconhecidos → Bloquear (padrão)
+• Números fora dos contatos → Bloquear (padrão)
 
 ⭐ LISTA PESSOAL
 

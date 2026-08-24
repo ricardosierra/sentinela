@@ -21,7 +21,7 @@ Sentinela — Bloqueio Offline
 **Descrição curta**
 
 ```
-Chamada de número desconhecido não toca. 100% offline, sem anúncios, sem nuvem.
+Chamada de número fora dos contatos não toca. 100% offline, sem anúncios.
 ```
 
 **Descrição completa**
@@ -54,7 +54,7 @@ Nada de base de spam na nuvem escolhendo por você. Você define a política de 
 
 • Contatos da agenda → Tocar (padrão)
 • Sua lista pessoal → Nunca Silenciar (padrão)
-• Desconhecidos → Bloquear (padrão)
+• Números fora dos contatos → Bloquear (padrão)
 
 ⭐ LISTA PESSOAL
 
@@ -92,8 +92,8 @@ Sentinela. O silêncio que você configurou.
 ```
 Primeira versão pública do Sentinela.
 
-• Bloqueio de desconhecidos antes do primeiro toque
-• Políticas por origem: contatos, lista pessoal e desconhecidos
+• Bloqueio de números fora dos contatos antes do primeiro toque
+• Políticas por origem: contatos, lista pessoal e fora dos contatos
 • Lista pessoal com busca, importação e exportação
 • Histórico opcional, com filtro por período e por decisão
 • Modo discador opcional, com tela de chamada própria
@@ -118,7 +118,7 @@ Sentinela — Offline Blocker
 **Descrição curta**
 
 ```
-Unknown numbers don't ring. 100% offline, no ads, no cloud, no tracking.
+Calls outside your contacts don't ring. 100% offline, no ads, no cloud.
 ```
 
 **Descrição completa**
@@ -151,7 +151,7 @@ No cloud spam database choosing for you. You set the policy for each origin, and
 
 • Contacts in your address book → Ring (default)
 • Your personal list → Never Silence (default)
-• Unknown numbers → Block (default)
+• Numbers outside contacts → Block (default)
 
 ⭐ PERSONAL LIST
 
@@ -189,8 +189,8 @@ Sentinela. The silence you configured.
 ```
 First public release of Sentinela.
 
-• Unknown numbers blocked before the first ring
-• Per-origin policies: contacts, personal list and unknown numbers
+• Calls outside contacts blocked before the first ring
+• Per-origin policies: contacts, personal list and outside contacts
 • Personal list with search, import and export
 • Optional history, filtered by period and by decision
 • Optional dialer mode with its own in-call screen
@@ -215,7 +215,7 @@ Sentinela — Bloqueo Offline
 **Descrição curta**
 
 ```
-Los números desconocidos no suenan. 100% sin conexión, sin anuncios ni nube.
+Llamadas fuera de contactos no suenan. 100% sin conexión, sin anuncios.
 ```
 
 **Descrição completa**
@@ -248,7 +248,7 @@ Nada de una base de spam en la nube eligiendo por ti. Tú defines la política d
 
 • Contactos de tu agenda → Sonar (predeterminado)
 • Tu lista personal → Nunca Silenciar (predeterminado)
-• Desconocidos → Bloquear (predeterminado)
+• Números fuera de contactos → Bloquear (predeterminado)
 
 ⭐ LISTA PERSONAL
 
@@ -286,8 +286,8 @@ Sentinela. El silencio que tú configuraste.
 ```
 Primera versión pública de Sentinela.
 
-• Bloqueo de desconocidos antes del primer timbre
-• Políticas por origen: contactos, lista personal y desconocidos
+• Bloqueo de llamadas fuera de contactos antes del primer timbre
+• Políticas por origen: contactos, lista personal y fuera de contactos
 • Lista personal con búsqueda, importación y exportación
 • Historial opcional, con filtro por período y por decisión
 • Modo marcador opcional, con pantalla de llamada propia
@@ -310,7 +310,7 @@ Sentinela — Bloqueo Offline
 **Descrição curta**
 
 ```
-Los números desconocidos no suenan. 100% sin conexión, sin anuncios ni nube.
+Llamadas fuera de contactos no suenan. 100% sin conexión, sin anuncios.
 ```
 
 **Descrição completa**
@@ -343,7 +343,7 @@ Nada de una base de spam en la nube eligiendo por ti. Tú defines la política d
 
 • Contactos de tu agenda → Sonar (por defecto)
 • Tu lista personal → Nunca Silenciar (por defecto)
-• Desconocidos → Bloquear (por defecto)
+• Números fuera de contactos → Bloquear (por defecto)
 
 ⭐ LISTA PERSONAL
 
@@ -381,8 +381,8 @@ Sentinela. El silencio que tú configuraste.
 ```
 Primera versión pública de Sentinela.
 
-• Bloqueo de desconocidos antes del primer tono
-• Políticas por origen: contactos, lista personal y desconocidos
+• Bloqueo de llamadas fuera de contactos antes del primer tono
+• Políticas por origen: contactos, lista personal y fuera de contactos
 • Lista personal con búsqueda, importación y exportación
 • Historial opcional, con filtro por período y por decisión
 • Modo marcador opcional, con pantalla de llamada propia
@@ -405,7 +405,7 @@ Sentinela — Bloqueio Offline
 **Descrição curta**
 
 ```
-Números desconhecidos não tocam. 100% offline, sem anúncios e sem nuvem.
+Chamadas fora dos contactos não tocam. 100% offline, sem anúncios nem nuvem.
 ```
 
 **Descrição completa**
@@ -438,7 +438,7 @@ Nada de bases de spam na nuvem a escolher por si. Define a política de cada ori
 
 • Contactos da sua lista → Tocar (predefinição)
 • A sua lista pessoal → Nunca Silenciar (predefinição)
-• Desconhecidos → Bloquear (predefinição)
+• Números fora dos contactos → Bloquear (predefinição)
 
 ⭐ LISTA PESSOAL
 
@@ -476,8 +476,8 @@ Sentinela. O silêncio que configurou.
 ```
 Primeira versão pública do Sentinela.
 
-• Bloqueio de desconhecidos antes do primeiro toque
-• Políticas por origem: contactos, lista pessoal e desconhecidos
+• Bloqueio de números fora dos contactos antes do primeiro toque
+• Políticas por origem: contactos, lista pessoal e fora dos contactos
 • Lista pessoal com procura, importação e exportação
 • Histórico opcional, com filtro por período e por decisão
 • Modo telefone opcional, com ecrã de chamada próprio
@@ -502,7 +502,7 @@ Sentinela — Blocage hors ligne
 **Descrição curta**
 
 ```
-Les numéros inconnus ne sonnent pas. 100 % hors ligne, sans pub ni cloud.
+Les appels hors contacts ne sonnent pas. 100 % hors ligne, sans pub ni cloud.
 ```
 
 **Descrição completa**
@@ -535,7 +535,7 @@ Aucune base de spam dans le cloud ne choisit à votre place. Vous définissez la
 
 • Contacts de votre répertoire → Sonner (par défaut)
 • Votre liste personnelle → Ne jamais mettre en silence (par défaut)
-• Numéros inconnus → Bloquer (par défaut)
+• Numéros hors contacts → Bloquer (par défaut)
 
 ⭐ LISTE PERSONNELLE
 
@@ -573,8 +573,8 @@ Sentinela. Le silence que vous avez configuré.
 ```
 Première version publique de Sentinela.
 
-• Blocage des inconnus avant la première sonnerie
-• Règles par origine : contacts, liste personnelle et inconnus
+• Blocage des numéros hors contacts avant la première sonnerie
+• Règles par origine : contacts, liste personnelle et hors contacts
 • Liste personnelle avec recherche, import et export
 • Historique optionnel, filtrable par période et par décision
 • Mode téléphone optionnel, avec son propre écran d'appel
@@ -597,7 +597,7 @@ Sentinela — Offline-Blocker
 **Descrição curta**
 
 ```
-Unbekannte Nummern klingeln nicht. 100 % offline, ohne Werbung und Cloud.
+Anrufe außerhalb der Kontakte klingeln nicht. 100 % offline, werbefrei.
 ```
 
 **Descrição completa**
@@ -630,7 +630,7 @@ Keine Spam-Datenbank in der Cloud, die für Sie entscheidet. Sie legen die Regel
 
 • Kontakte aus Ihrem Adressbuch → Klingeln (Standard)
 • Ihre persönliche Liste → Nie stummschalten (Standard)
-• Unbekannte Nummern → Blockieren (Standard)
+• Nummern außerhalb der Kontakte → Blockieren (Standard)
 
 ⭐ PERSÖNLICHE LISTE
 
@@ -668,8 +668,8 @@ Sentinela. Die Stille, die Sie eingestellt haben.
 ```
 Erste öffentliche Version von Sentinela.
 
-• Unbekannte werden vor dem ersten Klingeln blockiert
-• Regeln je Herkunft: Kontakte, persönliche Liste und Unbekannte
+• Nummern außerhalb der Kontakte vor dem ersten Klingeln blockiert
+• Regeln je Herkunft: Kontakte, persönliche Liste und außerhalb der Kontakte
 • Persönliche Liste mit Suche, Import und Export
 • Optionaler Verlauf, filterbar nach Zeitraum und Entscheidung
 • Optionaler Telefon-Modus mit eigenem Anrufbildschirm
@@ -692,7 +692,7 @@ Sentinela — Blocco Offline
 **Descrição curta**
 
 ```
-I numeri sconosciuti non squillano. 100% offline, senza pubblicità né cloud.
+Chiamate fuori dai contatti non squillano. 100% offline, senza pubblicità.
 ```
 
 **Descrição completa**
@@ -725,7 +725,7 @@ Nessun database di spam nel cloud che sceglie per te. Definisci la regola di ogn
 
 • Contatti in rubrica → Squilla (predefinito)
 • La tua lista personale → Non silenziare mai (predefinito)
-• Numeri sconosciuti → Blocca (predefinito)
+• Numeri fuori dai contatti → Blocca (predefinito)
 
 ⭐ LISTA PERSONALE
 
@@ -763,8 +763,8 @@ Sentinela. Il silenzio che hai configurato tu.
 ```
 Prima versione pubblica di Sentinela.
 
-• Sconosciuti bloccati prima del primo squillo
-• Regole per origine: contatti, lista personale e sconosciuti
+• Numeri fuori dai contatti bloccati prima del primo squillo
+• Regole per origine: contatti, lista personale e fuori dai contatti
 • Lista personale con ricerca, importazione ed esportazione
 • Cronologia opzionale, filtrabile per periodo e per decisione
 • Modalità telefono opzionale, con schermata di chiamata propria
@@ -787,7 +787,7 @@ Sentinela — Offline blokkering
 **Descrição curta**
 
 ```
-Onbekende nummers gaan niet over. 100% offline, zonder ads en zonder cloud.
+Oproepen buiten contacten gaan niet over. 100% offline, zonder advertenties.
 ```
 
 **Descrição completa**
@@ -820,7 +820,7 @@ Geen spamdatabase in de cloud die voor jou kiest. Jij bepaalt de regel per herko
 
 • Contacten uit je adresboek → Overgaan (standaard)
 • Je persoonlijke lijst → Nooit dempen (standaard)
-• Onbekende nummers → Blokkeren (standaard)
+• Nummers buiten contacten → Blokkeren (standaard)
 
 ⭐ PERSOONLIJKE LIJST
 
@@ -859,7 +859,7 @@ Sentinela. De stilte die jij hebt ingesteld.
 Eerste openbare versie van Sentinela.
 
 • Onbekenden geblokkeerd vóór de eerste beltoon
-• Regels per herkomst: contacten, persoonlijke lijst en onbekenden
+• Regels per herkomst: contacten, persoonlijke lijst en buiten contacten
 • Persoonlijke lijst met zoeken, importeren en exporteren
 • Optionele geschiedenis, te filteren op periode en beslissing
 • Optionele telefoonmodus met een eigen belscherm
@@ -882,7 +882,7 @@ Sentinela — Blokada offline
 **Descrição curta**
 
 ```
-Nieznane numery nie dzwonią. 100% offline, bez reklam i bez chmury.
+Połączenia spoza kontaktów nie dzwonią. 100% offline, bez reklam i chmury.
 ```
 
 **Descrição completa**
@@ -915,7 +915,7 @@ Sentinela jest publikowana bez uprawnienia do internetu. To nie obietnica w styl
 
 • Kontakty z książki adresowej → Dzwoń (domyślnie)
 • Twoja lista osobista → Nigdy nie wyciszaj (domyślnie)
-• Nieznane numery → Blokuj (domyślnie)
+• Numery spoza kontaktów → Blokuj (domyślnie)
 
 ⭐ LISTA OSOBISTA
 
@@ -953,7 +953,7 @@ Sentinela. Cisza, którą sam ustawiłeś.
 ```
 Pierwsza publiczna wersja Sentineli.
 
-• Blokowanie nieznanych przed pierwszym dzwonkiem
+• Blokowanie numerów spoza kontaktów przed pierwszym dzwonkiem
 • Zasady według źródła: kontakty, lista osobista i nieznani
 • Lista osobista z wyszukiwaniem, importem i eksportem
 • Opcjonalna historia z filtrem według okresu i decyzji

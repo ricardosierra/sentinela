@@ -21,7 +21,7 @@ Sentinela — オフライン着信拒否
 **Descrição curta**
 
 ```
-知らない番号は鳴らない。100%オフライン、広告なし、クラウドなし。
+連絡先以外の番号は鳴らない。100%オフライン、広告なし、クラウドなし。
 ```
 
 **Descrição completa**
@@ -116,7 +116,7 @@ Sentinela — 오프라인 발신 차단
 **Descrição curta**
 
 ```
-모르는 번호는 울리지 않습니다. 100% 오프라인, 광고 없음, 클라우드 없음.
+연락처 외 번호는 울리지 않습니다. 100% 오프라인, 광고 없음, 클라우드 없음.
 ```
 
 **Descrição completa**
@@ -188,7 +188,7 @@ Sentinela. 당신이 직접 설정한 고요함.
 Sentinela의 첫 공개 버전입니다.
 
 • 첫 벨소리가 울리기 전에 모르는 번호를 차단
-• 출처별 규칙: 연락처, 개인 목록, 모르는 번호
+• 출처별 규칙: 연락처, 개인 목록, 연락처 외 번호
 • 검색, 가져오기, 내보내기를 지원하는 개인 목록
 • 선택 사항인 기록. 기간과 처리 결과로 필터링
 • 자체 통화 화면을 갖춘 전화 앱 모드(선택)
@@ -211,7 +211,7 @@ Sentinela — حجب دون إنترنت
 **Descrição curta**
 
 ```
-الأرقام المجهولة لا ترنّ. يعمل دون إنترنت، بلا إعلانات ولا سحابة.
+المكالمات خارج جهات اتصالك لا ترنّ. 100% دون إنترنت، بلا إعلانات ولا سحابة.
 ```
 
 **Descrição completa**
@@ -306,7 +306,7 @@ Sentinela — ऑफ़लाइन कॉल ब्लॉक
 **Descrição curta**
 
 ```
-अनजान नंबर बजते ही नहीं। 100% ऑफ़लाइन, न विज्ञापन, न क्लाउड।
+संपर्कों से बाहर के नंबर नहीं बजते। 100% ऑफ़लाइन, न विज्ञापन, न क्लाउड।
 ```
 
 **Descrição completa**
@@ -339,7 +339,7 @@ Sentinela इंटरनेट की अनुमति के बिना �
 
 • फ़ोनबुक के संपर्क → बजने दें (डिफ़ॉल्ट)
 • आपकी निजी सूची → कभी चुप न करें (डिफ़ॉल्ट)
-• अनजान नंबर → ब्लॉक करें (डिफ़ॉल्ट)
+• संपर्कों से बाहर के नंबर → ब्लॉक करें (डिफ़ॉल्ट)
 
 ⭐ निजी सूची
 
@@ -401,7 +401,7 @@ Sentinela — Pemblokir Offline
 **Descrição curta**
 
 ```
-Nomor tak dikenal tidak berdering. 100% offline, tanpa iklan dan cloud.
+Panggilan di luar kontak tidak berdering. 100% offline, tanpa iklan.
 ```
 
 **Descrição completa**
@@ -496,7 +496,7 @@ Sentinela — Chặn cuộc gọi lạ
 **Descrição curta**
 
 ```
-Số lạ không đổ chuông. 100% ngoại tuyến, không quảng cáo, không đám mây.
+Cuộc gọi ngoài danh bạ không đổ chuông. 100% ngoại tuyến, không quảng cáo.
 ```
 
 **Descrição completa**
@@ -529,7 +529,7 @@ Không có cơ sở dữ liệu spam trên đám mây nào chọn thay bạn. B�
 
 • Danh bạ trong máy → Đổ chuông (mặc định)
 • Danh sách riêng của bạn → Không bao giờ tắt tiếng (mặc định)
-• Số lạ → Chặn (mặc định)
+• Số ngoài danh bạ → Chặn (mặc định)
 
 ⭐ DANH SÁCH RIÊNG
 
@@ -567,7 +567,7 @@ Sentinela. Sự yên tĩnh do chính bạn đặt ra.
 ```
 Phiên bản công khai đầu tiên của Sentinela.
 
-• Chặn số lạ trước hồi chuông đầu tiên
+• Chặn số ngoài danh bạ trước hồi chuông đầu tiên
 • Quy tắc theo nguồn: danh bạ, danh sách riêng và số lạ
 • Danh sách riêng có tìm kiếm, nhập và xuất
 • Lịch sử tùy chọn, lọc theo khoảng thời gian và theo quyết định
@@ -591,7 +591,7 @@ Sentinela — บล็อกสายแบบออฟไลน์
 **Descrição curta**
 
 ```
-เบอร์แปลกไม่ดัง ทำงานออฟไลน์ 100% ไม่มีโฆษณา ไม่มีคลาวด์
+เบอร์นอกรายชื่อไม่ดัง ทำงานออฟไลน์ 100% ไม่มีโฆษณา ไม่มีคลาวด์
 ```
 
 **Descrição completa**
@@ -686,7 +686,7 @@ Sentinela — Sekat Luar Talian
 **Descrição curta**
 
 ```
-Nombor tak dikenali tidak berdering. 100% luar talian, tanpa iklan.
+Panggilan luar kenalan tidak berdering. 100% luar talian, tanpa iklan.
 ```
 
 **Descrição completa**
@@ -719,7 +719,7 @@ Tiada pangkalan data spam di awan yang memilih untuk anda. Anda menetapkan perat
 
 • Kenalan dalam buku telefon → Berdering (lalai)
 • Senarai peribadi anda → Jangan Sesekali Senyapkan (lalai)
-• Nombor tak dikenali → Sekat (lalai)
+• Nombor luar kenalan → Sekat (lalai)
 
 ⭐ SENARAI PERIBADI
 
@@ -781,7 +781,7 @@ Sentinela — Offline Harang
 **Descrição curta**
 
 ```
-Hindi tumutunog ang di-kilalang numero. 100% offline, walang ad o cloud.
+Hindi tutunog ang tawag mula sa labas ng contact. 100% offline, walang ad.
 ```
 
 **Descrição completa**
@@ -876,7 +876,7 @@ Sentinela — مسدودسازی آفلاین
 **Descrição curta**
 
 ```
-شماره‌های ناشناس زنگ نمی‌خورند. کاملاً آفلاین، بدون تبلیغ و بدون ابر.
+تماس‌های خارج از مخاطبین زنگ نمی‌خورند. کاملاً آفلاین، بدون تبلیغ.
 ```
 
 **Descrição completa**

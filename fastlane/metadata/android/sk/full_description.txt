@@ -25,7 +25,7 @@ Sentinela sa vydáva bez povolenia na internet. Nie je to sľub v zmysle „nepo
 
 • Kontakty v adresári → Zvoniť (predvolené)
 • Váš osobný zoznam → Nikdy nestlmiť (predvolené)
-• Neznáme čísla → Blokovať (predvolené)
+• Čísla mimo kontaktov → Blokovať (predvolené)
 
 ⭐ OSOBNÝ ZOZNAM
 

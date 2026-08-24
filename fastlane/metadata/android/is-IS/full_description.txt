@@ -25,7 +25,7 @@ Enginn ruslnúmeragrunnur í skýinu velur fyrir þig. Þú setur regluna fyrir 
 
 • Tengiliðir úr símaskránni → Hringja (sjálfgefið)
 • Þinn persónulegi listi → Aldrei þagga (sjálfgefið)
-• Óþekkt númer → Loka á (sjálfgefið)
+• Númer utan tengiliða → Loka á (sjálfgefið)
 
 ⭐ PERSÓNULEGUR LISTI
 

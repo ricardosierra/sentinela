@@ -25,7 +25,7 @@ Nagina banca da datas da spam en il cloud tscherna per tai. Ti fixeschas la regl
 
 • Contacts da tes cudesch da telefon → Sunar (standard)
 • Tia glista persunala → Mai zuppentar (standard)
-• Numers nunenconuschents → Bloccar (standard)
+• Numers orda dals contacts → Bloccar (standard)
 
 ⭐ GLISTA PERSUNALA
 

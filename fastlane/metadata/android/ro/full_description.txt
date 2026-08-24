@@ -25,7 +25,7 @@ Nicio bază de date de spam din cloud nu alege în locul dumneavoastră. Stabili
 
 • Contactele din agendă → Sună (implicit)
 • Lista dumneavoastră personală → Niciodată fără sonor (implicit)
-• Numere necunoscute → Blochează (implicit)
+• Numere din afara contactelor → Blochează (implicit)
 
 ⭐ LISTA PERSONALĂ
 

@@ -25,7 +25,7 @@ Sentinela avaldatakse ilma internetiloata. See ei ole lubadus stiilis „me ei k
 
 • Telefoniraamatu kontaktid → Helise (vaikimisi)
 • Teie isiklik loend → Ära kunagi vaigista (vaikimisi)
-• Tundmatud numbrid → Blokeeri (vaikimisi)
+• Kontaktidevälised numbrid → Blokeeri (vaikimisi)
 
 ⭐ ISIKLIK LOEND
 

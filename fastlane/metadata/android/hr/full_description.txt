@@ -25,7 +25,7 @@ Nikakva baza neželjenih brojeva u oblaku ne bira umjesto vas. Pravilo za svaki 
 
 • Kontakti iz imenika → Zvoni (zadano)
 • Vaš osobni popis → Nikad ne utišavaj (zadano)
-• Nepoznati brojevi → Blokiraj (zadano)
+• Brojevi izvan kontakata → Blokiraj (zadano)
 
 ⭐ OSOBNI POPIS
 

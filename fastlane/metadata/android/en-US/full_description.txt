@@ -25,7 +25,7 @@ No cloud spam database choosing for you. You set the policy for each origin, and
 
 • Contacts in your address book → Ring (default)
 • Your personal list → Never Silence (default)
-• Unknown numbers → Block (default)
+• Numbers outside contacts → Block (default)
 
 ⭐ PERSONAL LIST
 

@@ -25,7 +25,7 @@ Sentinela se vydává bez oprávnění k internetu. Není to slib ve smyslu „n
 
 • Kontakty v adresáři → Zvonit (výchozí)
 • Váš osobní seznam → Nikdy neztlumit (výchozí)
-• Neznámá čísla → Blokovat (výchozí)
+• Čísla mimo kontakty → Blokovat (výchozí)
 
 ⭐ OSOBNÍ SEZNAM
 

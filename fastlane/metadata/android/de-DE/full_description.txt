@@ -25,7 +25,7 @@ Keine Spam-Datenbank in der Cloud, die für Sie entscheidet. Sie legen die Regel
 
 • Kontakte aus Ihrem Adressbuch → Klingeln (Standard)
 • Ihre persönliche Liste → Nie stummschalten (Standard)
-• Unbekannte Nummern → Blockieren (Standard)
+• Nummern außerhalb der Kontakte → Blockieren (Standard)
 
 ⭐ PERSÖNLICHE LISTE
 
