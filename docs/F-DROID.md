@@ -22,14 +22,14 @@ Categories:
   - Security
 License: MIT
 AuthorName: Ricardo Sierra
-SourceCode: https://github.com/ricardosierra/sentinela
-IssueTracker: https://github.com/ricardosierra/sentinela/issues
-Changelog: https://github.com/ricardosierra/sentinela/blob/master/CHANGELOG.md
+SourceCode: https://github.com/ricasolucoes/sentinela
+IssueTracker: https://github.com/ricasolucoes/sentinela/issues
+Changelog: https://github.com/ricasolucoes/sentinela/blob/master/CHANGELOG.md
 
 AutoName: Sentinela
 
 RepoType: git
-Repo: https://github.com/ricardosierra/sentinela.git
+Repo: https://github.com/ricasolucoes/sentinela.git
 
 Builds:
   - versionName: 0.2.1
@@ -87,3 +87,9 @@ Ao abrir o Merge Request no GitLab em `https://gitlab.com/fdroid/fdroiddata/-/me
    - **Título:** `New app: Sentinela`
    - **Descrição:** Utilize o template `App inclusion` preenchido acima.
 3. Aguarde o pipeline do CI rodar. Com o repositório público e sem conflito de outros apps, o `fdroid build` validará o build com sucesso.
+
+## Erros Comuns (Invariantes Aprendidas)
+- **Commit hash vs Tag:** No arquivo YAML da receita, para a chave `commit:`, SEMPRE use o hash SHA completo do commit correspondente à versão, e NUNCA o nome da tag (ex: `v0.2.1` vai causar falha/rejeição, use `a1b2c3d...`).
+- **Reproducible Builds:** Se marcar "Enable Reproducible Builds" no Merge Request, você OBRIGATORIAMENTE precisa adicionar `Binaries:` e `AllowedAPKSigningKeys:` na receita YAML.
+- **Merge Request:** O template de "App inclusion" exige que os checkboxes obrigatórios sejam marcados. Habilite o "Squash commits" no Merge Request para facilitar para os mantenedores.
+- **Native Code / ABI Split:** Para apps com código nativo (como Flutter/Godot/etc), adicione o setup de ABI split no YAML, se solicitado.

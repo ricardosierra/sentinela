@@ -84,7 +84,7 @@ v0.1.0 saiu sem verificação. A auditoria retroativa encontrou 8 defeitos, todo
 - ~~[Bootstrap 2026-07-27]: Bloqueio de desconhecidos no modo filtro apoiado no contrato da plataforma (onScreenCall só recebe não-contatos sem discador padrão)~~ **SUPERADA POR MEDICAO 2026-07-29 (Phase 05, pesquisa na fonte do Android):** a triagem entrega **tambem contatos** enquanto a leitura da agenda estiver concedida; o sistema so dispensa a triagem de quem esta na agenda quando o app nao pode consulta-la. A decisao sobre contato e nossa desde a Fase 4 — a consulta a agenda virou obrigatoria no caminho quente
 - [Bootstrap 2026-07-27]: DI manual, sem Hilt/Koin — cold start do Service é orçamento crítico
 - [Bootstrap 2026-07-27]: AGP 9 tem Kotlin embutido — plugin `org.jetbrains.kotlin.android` NÃO deve ser aplicado (erro se aplicar)
-- [Bootstrap 2026-07-27]: Links GitHub no CHANGELOG usam `ricardosierra/sentinela` como placeholder até o remote existir
+- [Bootstrap 2026-07-27]: Links GitHub no CHANGELOG usam `ricasolucoes/sentinela` como placeholder até o remote existir
 - [Phase 01-fundacao-compilavel]: Politica de lint declarada no app/build.gradle.kts (sem lint-baseline); ObsoleteSdkInt corrigido de verdade renomeando res/mipmap-anydpi-v26 para res/mipmap
 - [Phase 01]: Permissoes verificadas por allowlist sobre o manifest MERGEADO (scripts/verify-invariants.sh); Phase 4/6 devem atualizar docs/PERMISSOES.md e a allowlist no mesmo commit
 - [Phase 01]: DarkColors passou a internal para permitir ThemeTokensTest em JVM pura (sem Robolectric)
@@ -326,7 +326,7 @@ v0.1.0 saiu sem verificação. A auditoria retroativa encontrou 8 defeitos, todo
 ## Pending Todos
 
 - Fazer o commit inicial do bootstrap (nada commitado ainda; usuário decide a hora)
-- Criar remote no GitHub e ajustar links do CHANGELOG se o slug divergir de `ricardosierra/sentinela`
+- Criar remote no GitHub e ajustar links do CHANGELOG se o slug divergir de `ricasolucoes/sentinela`
 - **Escolher licença open source** (sugestão: GPL-3.0 ou MIT) e adicionar `LICENSE` — produto será divulgado como open source
 - **Obter endereço Bitcoin real do mantenedor** para a doação (string `support_bitcoin_address` está vazia de propósito — nunca publicar com placeholder)
 - Decidir arte final do ícone (placeholder vetorial de escudo no esqueleto)

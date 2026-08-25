@@ -9,7 +9,7 @@
 - [ ] **Etapa 2 — Sincronização & Backend** — conta opcional, sync de listas, envio opcional da lista de números recebidos, backup criptografado opt-in ([backlog](docs/backlog/supabase-v2.md))
 - [ ] Bloqueio por prefixo/padrão (ex.: 0303) — candidato pós-MVP
 
-## [Unreleased](https://github.com/ricardosierra/sentinela/compare/v0.2.4...master)
+## [Unreleased](https://github.com/ricasolucoes/sentinela/compare/v0.2.4...master)
 
 ### 🎨 Melhorias
 
@@ -32,13 +32,13 @@
 - [x] **Suite instrumentada em job separado e manual** — os 18 arquivos de `androidTest` sobem emulador só quando alguém pede (Actions → CI → *Run workflow* com `instrumented` marcado), reaproveitando `scripts/run-instrumented-tests.sh`. Emulador leva dezenas de minutos e não pode travar revisão de código
 - [x] **Raiz do repositório limpa** — saíram um heap dump de OOM de 370 MB (`java_pid96271.hprof`, de antes do `forkEvery(1)` que resolveu o caso), `dialer_fail.log`, `test_output.log`, o APK de depuração e o zip de design já extraído em `docs/design/telas`; o AAB e o APK da v0.2.0 foram para `releases/`, junto do mapping da mesma versão. Nenhum dos sete estava rastreado pelo Git e todos já caíam nos padrões do `.gitignore`, que agora traz a lista nominal para evitar regra duplicada
 
-## [v0.2.4 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.3...v0.2.4)
+## [v0.2.4 (2026-08-22)](https://github.com/ricasolucoes/sentinela/compare/v0.2.3...v0.2.4)
 
 ### 🐛 Correções
 
 - [x] **Bloco de metadados de dependências removido do APK** — o AGP embute no bloco de assinatura um blob assinado com a árvore de dependências, feito para a Play Store; o scanner do F-Droid reprova qualquer bloco extra de assinatura (`Found extra signing block 'Dependency metadata'`) porque é conteúdo opaco que não deriva do código-fonte e não pode ser reproduzido nem auditado. `dependenciesInfo` desligado nas duas saídas
 
-## [v0.2.3 (2026-08-22)](https://github.com/ricardosierra/sentinela/compare/v0.2.2...v0.2.3)
+## [v0.2.3 (2026-08-22)](https://github.com/ricasolucoes/sentinela/compare/v0.2.2...v0.2.3)
 
 ### ✨ Novidades
 
@@ -60,7 +60,7 @@
 - [x] **Política de segurança e templates de issue** — `SECURITY.md` define o canal privado (Security Advisory do GitHub), o escopo e o prazo pretendido de resposta; os formulários de bug e de feature pedem relatório sem número, contato ou dump, e a issue em branco foi desligada para empurrar vulnerabilidade ao canal privado
 - [x] **Credenciais da Google Play fora do repositório** — o `.gitignore` passa a barrar `.secrets/` e qualquer JSON de service account, e o guia de publicação injeta o segredo pelo ambiente a partir de um caminho externo ao projeto
 
-## [v0.2.2 (2026-08-20)](https://github.com/ricardosierra/sentinela/compare/v0.2.1...v0.2.2)
+## [v0.2.2 (2026-08-20)](https://github.com/ricasolucoes/sentinela/compare/v0.2.1...v0.2.2)
 
 ### ✨ Novidades
 
@@ -76,7 +76,7 @@
 - [x] **Metadados legíveis pelo scanner do F-Droid** — `applicationId`, `namespace`, `versionCode` e `versionName` voltaram a ser literais entre aspas, que é o que o leitor de metadados do F-Droid consegue extrair, e a toolchain rígida deu lugar a `compileOptions` Java 17 para o build subir com o JDK do buildserver
 - [x] **Publicação da Google Play automatizada** — tags SemVer validam qualidade, assinam AAB, verificam o APK release sem `INTERNET`, geram os 74 listings e publicam pelo Play Developer API; promoções entre tracks e rollout gradual usam a mesma automação, com Environment obrigatório antes de produção
 
-## [v0.2.1 (2026-08-12)](https://github.com/ricardosierra/sentinela/compare/v0.2.0...v0.2.1)
+## [v0.2.1 (2026-08-12)](https://github.com/ricasolucoes/sentinela/compare/v0.2.0...v0.2.1)
 
 ### ✨ Novidades
 
@@ -99,7 +99,7 @@
 - [x] **Ficha da Google Play em `docs/loja/`** — nome, descrição curta, descrição completa e novidades em 74 idiomas (8 blocos), mais ícone, banner e capturas geradas por script (`build-store-assets.py`, `capture-store-screenshots.sh`) a partir da mesma arte do launcher
 - [x] Locale dos testes fixado em `pt-BR` no `build.gradle.kts` — a JVM do desenvolvedor podia rodar a suíte em outro idioma e trocar formatação de número e data sem nenhum aviso
 
-## [v0.2.0 (2026-08-06)](https://github.com/ricardosierra/sentinela/compare/v0.1.0...v0.2.0)
+## [v0.2.0 (2026-08-06)](https://github.com/ricasolucoes/sentinela/compare/v0.1.0...v0.2.0)
 
 ### ✨ Novidades
 
@@ -131,7 +131,7 @@ dois abaixo — e produziu os artefatos de verificação que faltavam.
 - [x] Strings de interface que tinham ficado embutidas em Kotlin (whitelist, histórico e tela Sobre) foram para `strings.xml`
 - [x] Testes novos: resposta única sob falha posterior, avisos de duplicado/inválido, ligação real do export/import, filtro por decisão e formatação de tempo e motivo
 
-## [v0.1.0 (2026-08-04)](https://github.com/ricardosierra/sentinela/releases/tag/v0.1.0)
+## [v0.1.0 (2026-08-04)](https://github.com/ricasolucoes/sentinela/releases/tag/v0.1.0)
 
 ### ✨ Novidades
 

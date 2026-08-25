@@ -5,7 +5,7 @@ números de telefone, nomes de contatos, dumps de banco ou qualquer outro dado p
 
 ## Reporte privado
 
-Use um [Security Advisory privado no GitHub](https://github.com/ricardosierra/sentinela/security/advisories/new).
+Use um [Security Advisory privado no GitHub](https://github.com/ricasolucoes/sentinela/security/advisories/new).
 Se o formulário não estiver disponível, abra uma issue sem dados sensíveis pedindo um canal
 privado. Não publique a vulnerabilidade antes de combinarmos a correção.
 

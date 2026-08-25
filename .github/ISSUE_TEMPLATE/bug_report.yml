@@ -8,7 +8,7 @@ body:
     attributes:
       value: |
         Não inclua números de telefone, nomes de contatos, tokens ou dumps. Para vulnerabilidades,
-        use o [reporte privado](https://github.com/ricardosierra/sentinela/security/advisories/new).
+        use o [reporte privado](https://github.com/ricasolucoes/sentinela/security/advisories/new).
   - type: input
     id: version
     attributes:

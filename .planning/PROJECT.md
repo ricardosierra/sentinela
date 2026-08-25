@@ -152,7 +152,7 @@ adendos de 2026-07-28 no topo** (contatos, modo discador, apoio/avaliação, off
 | minSdk 29 | ROLE_CALL_SCREENING existe a partir do Android 10 | — Confirmado |
 | DI manual, sem Hilt/Koin | Cold start mínimo e previsível no CallScreeningService | — Confirmado |
 | AGP 9.3.0 + Kotlin embutido + compileSdk 37 | Estáveis mais recentes; build validado (não aplicar plugin kotlin-android) | ✓ Good — validado no build 2026-07-27 |
-| Links GitHub `ricardosierra/sentinela` | Repo ainda sem remote; convenção de compare-links exige URL | — Pending criação do remote |
+| Links GitHub `ricasolucoes/sentinela` | Repo ainda sem remote; convenção de compare-links exige URL | — Pending criação do remote |
 
 ---
 *Last updated: 2026-08-06 — após o milestone v0.1: 81 requisitos validados, auditoria retroativa das fases 8 e 9, release v0.2.0*
